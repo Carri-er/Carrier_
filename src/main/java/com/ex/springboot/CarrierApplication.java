@@ -8,6 +8,7 @@ public class CarrierApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CarrierApplication.class, args);
+		
 	}
 
 }
