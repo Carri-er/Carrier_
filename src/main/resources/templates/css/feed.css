@@ -70,3 +70,9 @@
   left: 0;
   top:0;
 }
+
+/*--------------------------------- 미디어쿼리 ----------------------------------*/
+@media (min-width: 1600px)
+.justify-content-xl-start {
+  justify-content: flex-start!important;
+}
