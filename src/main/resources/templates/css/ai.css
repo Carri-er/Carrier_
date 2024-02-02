@@ -1,0 +1,55 @@
+#ai {
+    width: 100%;
+    height: calc(100vh - 50px);
+    background: var(--beige); /* 임시 지정 */
+    padding: 50px;
+}
+
+
+#ai .ai-filter-box{
+    height: 500px;
+
+    box-shadow: 0 8px 32px 0 rgba( 255, 255, 255, 0.37 );
+    background: rgba( 255, 255, 255, 0.25 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+/* carousel 속성 변경 */
+#ai .carousel-item{
+    padding: 60px;
+    color: white;
+    text-shadow: 2px 2px 8px var(--brown);
+}
+
+#ai .carousel-indicators button{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* 나이  in carousel */
+.age-box{
+    color: var(--brown);
+    text-shadow: none;
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+
+    background: rgba( 255, 255, 255, 0.25 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 12px;
+}
+
+/* 날씨  in carousel */
+#ai .weather{
+    width: 100%;
+}
+
+#ai .weather img{
+    width: 36px;
+    height: 36px;
+}
