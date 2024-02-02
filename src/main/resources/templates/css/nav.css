@@ -1,38 +1,4 @@
-/* NAV ------------------------------*/
-.nav-right-btn {
-  display: block;
-  width: 31px;
-  height: 31px;
-  text-indent: -99999px;
-  border: none;
-}
-
-/* nav btn img */
-.navbar-search-md {
-  background: url("/img/nav/btn_header_search01.png") center/contain no-repeat;
-}
-
-.navbar-search-lg {
-  width: 24px;
-  height: 24px;
-  background: url("/img/nav/btn_header_search.png") center/contain no-repeat;
-}
-
-.navbar-user {
-  background: url("/img/nav/icon_header_profile1.png") center/contain no-repeat;
-}
-
-
-/* HOVER STYLE */
-/*no-fix*/
-#gnbCommon .depth1 ul li.swiper-slide.on > a:after, #gnbCommon .depth1 ul li.swiper-slide:hover > a:after {
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  background: #000;
-  border-radius: 100%;
-  position: absolute;
-  right: -11px;
-  top: 33px;
+* {
+  padding: 0;
+  margin: 0;
 }
