@@ -9,9 +9,11 @@
 
 /* color palette*/
 :root{
-    --black : #fffff;
-    --deepgray : #f0f0f0;
+    --white : #ffffff;
+    --beige : #DDCBBE;
     --gray : #f7f7f7;
+    --deepgray : #f0f0f0;
+    --black : #000000;
 }
 
 /* font size */
