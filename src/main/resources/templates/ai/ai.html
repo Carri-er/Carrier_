@@ -28,61 +28,108 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <h5>연령을 선택해주세요</h5>
-                        <div class="row">
-                            <div class="age-box m-2 float-start">
-                                19세 이하
+                        <!-- 나이 선택 -->
+                        <div class="row px-5 gap-4 mx-0 my-5">
+                            <div class="col age-box-parent">
+                                <div class="age-box">
+                                    <img src="../img/ai/ico_age_4.png" class="d-block w-75 rounded-circle mb-2"
+                                         alt="19세 이하">
+                                    <span>19세 이하</span>
+                                </div>
                             </div>
-                            <div class="age-box m-2">
-                                <span>20대</span>
+                            <div class="col age-box-parent">
+                                <div class="age-box">
+                                    <img src="../img/ai/ico_age_5.png" class="d-block w-75 rounded-circle mb-2"
+                                         alt="20대">
+                                    <span>20대</span>
+                                </div>
                             </div>
-                            <div class="age-box m-2">
-                                <span>30대</span>
+                            <div class="col age-box-parent">
+                                <div class="age-box">
+                                    <img src="../img/ai/ico_age_6.png" class="d-block w-75 rounded-circle mb-2"
+                                         alt="30대">
+                                    <span>30대</span>
+                                </div>
                             </div>
-                            <div class="age-box m-2">
-                                <span>40대</span>
+                            <div class="col age-box-parent">
+                                <div class="age-box">
+                                    <img src="../img/ai/ico_age_7.png" class="d-block w-75 rounded-circle mb-2"
+                                         alt="40대">
+                                    <span>40대</span>
+                                </div>
                             </div>
-                            <div class="age-box m-2">
-                                <span>40대 이상</span>
+                            <div class="col age-box-parent">
+                                <div class="age-box">
+                                    <img src="../img/ai/ico_age_8.png" class="d-block w-75 rounded-circle mb-2"
+                                         alt="40대 이상">
+                                    <span>40대 이상</span>
+                                </div>
                             </div>
-                            <img src="..." class="d-block w-100" alt="">
                         </div>
+                        <img src="..." class="d-block w-100" alt="">
                     </div>
                     <div class="carousel-item">
                         <h5>언제 여행을 떠날까요?</h5>
                         <!-- 날씨(달력 클릭 시 show) -->
-                        <div class="weather mt-5 hstack justify-content-center"> <!-- d-none -->
-                            <span class="me-2">선택하신 날짜의 날씨는!</span>
-                            <img src="../img/ai/sunny.png" class="d-block" alt="...">
+                        <div class="row">
+                            <div class="weather mt-5 hstack d-none justify-content-center"> <!-- d-none -->
+                                <span class="me-2">선택하신 날짜의 날씨는!</span>
+                                <img src="../img/ai/sunny.png" class="d-block" alt="...">
+                            </div>
+                            <!-- 달력 -->
+                            <div class="mt-5 p-5">
+                            </div>
                         </div>
-                        <!-- 달력 -->
-                        <div class="mt-5 p-5">
-
-                            <span>달력달력달력달력달력달력달력달력달력달력</span>
-                        </div>
-                        <img src="..." class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
                         <h5>어떤 여행을 원하세요?</h5>
-
-                        <div>
-
+                        <!-- 테마 선택(달력 클릭 시 show) -->
+                        <div class="row my-5">
+                            <div class="col">
+                                <img src="../img/ai/img_theme_1.jpg"
+                                     class="d-block rounded-circle img-fluid m-auto mb-2" alt="산">
+                                <span>산</span>
+                            </div>
+                            <div class="col">
+                                <img src="../img/ai/img_theme_3.jpg"
+                                     class="d-block rounded-circle img-fluid m-auto mb-2" alt="산">
+                                <span>실내 여행지</span>
+                            </div>
+                            <div class="col">
+                                <img src="../img/ai/img_theme_4.jpg"
+                                     class="d-block rounded-circle img-fluid m-auto mb-2" alt="산">
+                                <span>액티비티</span>
+                            </div>
+                            <div class="col">
+                                <img src="../img/ai/img_theme_5.jpg"
+                                     class="d-block rounded-circle img-fluid m-auto mb-2" alt="산">
+                                <span>문화 역사</span>
+                            </div>
+                            <div class="col">
+                                <img src="../img/ai/img_theme_6.jpg"
+                                     class="d-block rounded-circle img-fluid m-auto mb-2" alt="산">
+                                <span>테마파크</span>
+                            </div>
                         </div>
-                        <img src="..." class="d-block w-100" alt="...">
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#aiCarousel"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#aiCarousel"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+
+                <!--다음에 하기-->
+                <button type="button" class="btn rounded-pill btn-outline-light next-btn">여기까지만 선택하기</button>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#aiCarousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#aiCarousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
