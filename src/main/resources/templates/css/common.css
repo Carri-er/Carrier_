@@ -1,59 +1,41 @@
 /* font */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
-* {
+*{
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
     margin: 0;
     padding: 0;
-    list-style: none;
-    box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
-    color: #ffffff;
-}
-a.indent{
-    text-indent: -9999px;
-    font-size: 0;
-}
 /* color palette*/
-:root {
-    --black: #fffff;
-    --deepgray: #f0f0f0;
-    --gray: #f7f7f7;
-    --vh: 9.59px;
+:root{
+    --black : #fffff;
+    --deepgray : #f0f0f0;
+    --gray : #f7f7f7;
 }
 
 /* font size */
-.f14 {
+.f14{
     font-size: 14px;
 }
-
-.f13 {
+.f13{
     font-size: 13px;
 }
-
-.f12 {
+.f12{
     font-size: 12px;
 }
-
-.f11 {
+.f11{
     font-size: 11px;
 }
-
-.f16 {
+.f16{
     font-size: 16px;
 }
-
-.f17 {
+.f17{
     font-size: 17px;
 }
-
-.f20 {
+.f20{
     font-size: 20px;
 }
-
-.f22 {
+.f22{
     font-size: 22px;
 }
