@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.blue-text{
+    color: var(--brown);
+}
+
+*{
+    font-family: unset;
+}
+
+#info{
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+#info .board{
+    font-family: 'GmarketSansMedium', sans-serif
+}
+
+.text-end{
+    color: #797979;
+}
+
+.text-end .active{
+    color: var(--black);
+    font-weight: bold;
+}
+
+/* 순서 정렬 칸막이 */
+.text-end>span:not(:last-child):after{
+    content: "|";
+    color: #797979;
+    margin: 3px 8px 3px 10px;
+}
+
+
+
+/*------------------------ board ---------------------*/
+.board-left{
+    position: relative;
+}
+
+.board-left .text-white{
+    font-weight: 300;
+    position: absolute;
+    left: 20px;
+    bottom: 0;
+    z-index: 1;
+}
+.board-left img{
+}
+
+
+/*---------- board 우측 >>>> ----------*/
+.btn-refresh{
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url("../img/info/btn_refresh_mtag.png") center/contain;
+}
