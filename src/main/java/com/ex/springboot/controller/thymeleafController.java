@@ -15,4 +15,12 @@ public class thymeleafController {
 	public String board() {
 		return "thymeleaf/board";
 	}
+	@GetMapping("/feed")
+	public String feed() {
+		return "feed/feed";
+	}
+	@GetMapping("/inner")
+	public String inner() {
+		return "inner/inner";
+	}
 }
