@@ -1,0 +1,403 @@
+@charset "UTF-8";
+
+/* bootstrap reset */
+#ai p{
+    margin: 0;
+}
+
+#ai em, a{
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+/* ai 전체 틀 */
+#ai {
+    width: 100%;
+    /*height: 100%;*/
+    height: calc(100vh - 55px); /* 전체 - nav height */
+    background: #618BF2; /* 임시 지정 */
+}
+
+/* 캐로셀 안 Box 틀 */
+#ai .ai-box {
+    margin: 100px auto 200px;
+    width: 55%;
+    height: 500px;
+    text-align: center;
+    padding: 50px 50px 130px;
+}
+
+#ai .ai-filter-box {
+    height: 100%;
+    margin-bottom: 150px;
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+/* 개별 효과 */
+#ai .welcome-big{
+    font-size: 40px;
+    line-height: 50px;
+}
+
+.text-shadow{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+}
+
+
+/* carousel 속성 변경 */
+#ai .carousel-item {
+    color: white;
+}
+
+#ai .carousel-indicators{
+    bottom: 70px;
+}
+
+/* carousel 인디케이터 버튼 둥글게 변경 */
+#ai .carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 50px;
+}
+
+/* 캐로셀 <> 버튼 모이게 */
+.carousel-control-next, .carousel-control-prev {
+    width: 30%;
+}
+
+/* ------------------- 1번째 화면 -------------------- */
+.carousel-inner .carousel-item{
+    background: url("../img/ai/bg_fist_top.png") no-repeat;
+}
+
+.carousel-inner .ai-box > em {
+    padding: 35px 0 15px;
+    font-size: 28px;
+    letter-spacing: -1.5px;
+    line-height: 31px;
+    animation-name: cosStart;
+    animation-duration: 2s;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.carousel-inner .ai-box > em:after {
+    content: '';
+    display: block;
+    height: 1px;
+    margin: 2px 0 0;
+    background: #fff;
+}
+
+.carousel-inner .ai-box h3 {
+    animation-name: cosStart;
+    animation-duration: 2.5s;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 56px;
+    letter-spacing: -3px;
+}
+
+.carousel-inner .ai-box p {
+    animation-name: cosStart;
+    animation-duration: 3s;
+    padding: 20px 0;
+    line-height: 28px;
+    letter-spacing: -1px;
+}
+
+/* START btn*/
+.carousel-inner .ai-box .btn {
+    position: absolute;
+    animation-name: cosStart;
+    animation-duration: 3s;
+}
+
+.btn_start{
+    margin-left: -120px;
+}
+
+.carousel-inner .ai-box .btn .btn_start {
+    overflow: hidden;
+    display: inline-block;
+    width: 333px;
+    text-align: left;
+    padding-left: 125px;
+    background: #416ce6;
+    box-sizing: border-box;
+    height: 68px;
+    line-height: 68px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -1.3px;
+    position: relative;
+    z-index: 2;
+}
+
+.carousel-inner .ai-box .btn .btn_start:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #315dd9;
+    z-index: 1;
+    transition: transform 500ms ease;
+    border-radius: 50px;
+}
+
+.carousel-inner .ai-box .btn .btn_start em {
+    z-index: 2;
+    position: relative;
+}
+
+.carousel-inner .ai-box .btn .btn_start .arw_wrap {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    z-index: 2;
+    position: relative;
+    margin-left: 10px;
+    transition: transform 500ms ease;
+}
+
+.carousel-inner .ai-box .btn .btn_start .arw_wrap span {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 20px;
+    transition: transform 500ms ease, opacity 250ms ease;
+    background: url(../img/ai/btn_planner_cos1.png);
+}
+
+/* START BTN - animation */
+.carousel-inner .ai-box .btn .btn_start .left {
+    transform: translateX(-200%);
+    opacity: 0;
+}
+
+.carousel-inner .ai-box .btn .btn_start:hover .left {
+    transform: translateX(240%);
+    opacity: 1;
+}
+
+.carousel-inner .ai-box .btn .btn_start:hover .right {
+    transform: translateX(200%);
+    opacity: 0;
+}
+
+.carousel-inner .ai-box .btn .btn_start:hover:after {
+    transform: translateX(80%);
+}
+
+@keyframes cosStart {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes cosRobot {
+    0% {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Robot */
+.carousel-inner .carousel-item:first-child::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100px;
+    background: url("../img/ai/bg_fist_btm.jpg") no-repeat center;
+}
+
+/*--------------------- 나이 선택  in carousel ----------------------*/
+.age-box-parent {
+    display: flex;
+    justify-content: center;
+}
+
+.age-box, .period-box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    padding: 10px;
+    color: #444444;
+    /*color: var(--black);*/
+    width: 125px;
+
+    /*background: var(--white);*/
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 12px;
+
+    cursor: pointer;
+}
+
+.age-box span {
+    display: block;
+    width: 100%;
+}
+
+.age-box .bg-light {
+    width: 75%;
+    height: 78.25px;
+}
+.age-box div img{
+    width: 100%;
+}
+
+/* 날씨  in carousel */
+#ai .weather {
+    width: 100%;
+}
+
+#ai .weather img {
+    width: 36px;
+    height: 36px;
+}
+
+/*다음에하기 버튼*/
+.next-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    margin-left: -75px;
+    margin-bottom: 223px;
+    /*backdrop-filter: blur( 1px );*/
+}
+
+/* Content 3 | 기간 선택 */
+
+.period-box-parent{
+    width: 100%;
+}
+.period-box{
+    width: unset;
+    flex-direction: column;
+}
+
+.period-box>div{
+    box-sizing: border-box;
+    width: 140px;
+    height: 140px;
+    scale: 70%;
+}
+
+.period-box-parent>div:nth-of-type(2) .period-box>div{
+    background: url("../img/ai/icon_travel_period.png") no-repeat;
+}
+.period-box-parent>div:nth-of-type(3) .period-box>div{
+    background: url("../img/ai/icon_travel_period.png") no-repeat;
+    background-position-y: -140px;
+}
+.period-box-parent>div:nth-of-type(4) .period-box>div{
+    background: url("../img/ai/icon_travel_period.png") no-repeat;
+    background-position-y: -280px;
+}
+
+/*-------------- theme 선택 ---------------*/
+.theme-box-parent>div{
+    position: relative;
+    /*filter: blur(1px);*/
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* theme 이미지 안 글씨 효과 */
+.theme-box-parent>div>span{
+    display: block;
+    width: 100%;
+    position: absolute;
+    margin-top: 40px;
+
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+    z-index: 1;
+}
+
+
+/* 이미지 효과 */
+.theme-box-parent>div>div{
+    cursor: pointer;
+    filter: blur(1px) brightness(70%);
+}
+
+/* 이미지 호버시 효과 */
+.theme-box-parent>div>div:hover{
+    filter: blur(0px);
+    /*filter: brightness(100%);*/
+}
+
+
+/* 이미지 삽입 */
+.theme-box-parent>div:nth-of-type(2)>div{
+    background: url("../img/ai/theme-1.jpg") no-repeat center/cover;
+    height: 100px;
+}
+.theme-box-parent>div:nth-of-type(3)>div{
+    background: url("../img/ai/theme-2.jpg") no-repeat center/cover;
+    height: 100px;
+}
+.theme-box-parent>div:nth-of-type(4)>div{
+    background: url("../img/ai/theme-3.jpg") no-repeat center/cover;
+    height: 100px;
+}
+.theme-box-parent>div:nth-of-type(5)>div{
+    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    height: 100px;
+}
+.theme-box-parent>div:nth-of-type(6)>div{
+    background: url("../img/ai/theme-cafe.jpg") no-repeat center/cover;
+    height: 100px;
+}
+.theme-box-parent>div:nth-of-type(7)>div{
+    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    height: 100px;
+}
+.theme-box-parent>div:nth-of-type(8)>div{
+    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    height: 100px;
+}
+.theme-box-parent>div:nth-of-type(9)>div{
+    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    height: 100px;
+}
+.theme-box-parent>div:nth-of-type(10)>div{
+    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    height: 100px;
+}
+
+
+/*--------------------------------- 미디어쿼리 ----------------------------------*/
+@media (min-width: 700px){
+	.age-box {
+	    width: 10px;
+	}
+}
