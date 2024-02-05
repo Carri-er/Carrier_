@@ -39,7 +39,6 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-
 /* 개별 효과 */
 #ai .welcome-big{
     font-size: 40px;
@@ -49,7 +48,6 @@
 .text-shadow{
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
 }
-
 
 /* carousel 속성 변경 */
 #ai .carousel-item {
