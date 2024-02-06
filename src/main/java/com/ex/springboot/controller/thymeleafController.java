@@ -17,7 +17,7 @@ public class thymeleafController {
 	}
 	@GetMapping("/feed")
 	public String feed() {
-		return "feed/feed";
+		return "feed/feed2";
 	}
 	@GetMapping("/inner")
 	public String inner() {
