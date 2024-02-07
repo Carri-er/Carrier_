@@ -17,10 +17,14 @@ public class thymeleafController {
 	}
 	@GetMapping("/feed")
 	public String feed() {
-		return "feed/feed";
+		return "feed/feed2";
 	}
 	@GetMapping("/inner")
 	public String inner() {
 		return "inner/inner";
+	}
+	@GetMapping("/band")
+	public String band() {
+		return "band/band";
 	}
 }
