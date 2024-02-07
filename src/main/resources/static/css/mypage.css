@@ -1,0 +1,128 @@
+.mypage-bg{
+    margin-top: 100px;
+    width: 100%;
+    height: 100%;
+    background: url("../img/mypage/waves.jpg") no-repeat center/cover;
+    filter: blur(80px);
+}
+
+/*<<<<<<<<<<<<<<<<<<<<<<<<<< [좌] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+/* sticky 상단 영역 */
+#mypage-L.sticky-md-top{
+    top: 20px;
+}
+
+/* 메뉴 아이콘 */
+.my-menu-ico-parent{
+    color: #555555;
+}
+
+.my-menu-ico{
+    cursor: pointer;
+}
+
+.my-menu-ico span{
+    display: block;
+    width: 100%;
+}
+
+/* AD 영역 */
+.my-ad-img{
+    height: 260px;
+    overflow: hidden;
+}
+
+.my-ad-img-caption{
+    left:0;
+    margin-left: 15px;
+    margin-top: -2em;
+    color: white;
+    text-shadow: 1px 1px 4px black;
+}
+
+/*>>>>>>>>>>>>>>>>>>>>>>>>>> [우] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+
+/* History - ai cokcok swiper */
+.my-history-wrap{
+    letter-spacing: -1.3px;
+}
+
+.my-history-content-card {
+    margin-bottom: 15px;
+}
+
+/*content*/
+.my-history-title-wrap {
+    padding: 50px 0;
+}
+
+.swiper-slide {
+    padding: 0 0 0 20px;
+}
+
+/* history 삭제 버튼 */
+.my-del-btn{
+    top: 5px;
+    right: 5px;
+}
+
+
+/* follow */
+.my-follow{
+    padding: 0;
+    margin: 0;
+    max-width: 64px;
+}
+
+.my-follow span, .my-scrap-box span{
+    display: block;
+    width: 100%;
+}
+
+/* 좋아요 영역 */
+.my-like-box{
+    padding: 0.15rem;
+}
+
+.my-like-box img{
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+/* 스크랩 */
+.my-scrap-box-img{
+    height: 150px;
+    overflow: hidden;
+}
+
+.my-scrap-box-img img{
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*swiper*/
+.next-btn {
+    width: 36px;
+    height: 36px;
+    position: relative;
+    top: 5%;
+    right: -95%;
+    background: url("../img/btn_cockcock_slide.png") 0 -72px;
+}
+
+.prev-btn {
+    width: 36px;
+    height: 36px;
+    position: relative;
+    top: 5%;
+    right: -87%;
+    background: url("../img/btn_cockcock_slide.png") 0 -36px;
+}
+
+.swiper-pagination {
+    display: none;
+}
