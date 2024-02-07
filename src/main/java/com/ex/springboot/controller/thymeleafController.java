@@ -23,4 +23,8 @@ public class thymeleafController {
 	public String inner() {
 		return "inner/inner";
 	}
+	@GetMapping("/band")
+	public String band() {
+		return "band/band";
+	}
 }
