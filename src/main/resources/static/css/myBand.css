@@ -1,0 +1,100 @@
+div.myBand_wrapper{
+    width: 100%;
+    position : relative;
+}
+/* myBand lnb 스타일 */
+div.myBand_lnb{
+    width: 100%;
+    background-color: #4796f0;
+}
+ul.myBand_lnb_ul>li{
+    padding: 10px 20px;
+}
+
+/* myBand content 스타일 */
+div.myBand_content{
+    width: 100%;
+    position : relative;
+}
+
+/* col1 밴드 이미지, 제목 정보 영역 스타일 */
+div.myBand_content_col_title{
+    width: 24%;
+    position : relative;
+}
+div.myBand_title_img{
+    width: 100%;
+}
+div.myBand_title_img>img{
+    width: 100%;
+    margin-bottom: 20px;
+}
+/* 밴드 멤버 수 스타일 */
+div.myBand_member_count{
+    margin-bottom: 10px;;
+}
+div.myBand_info{
+    margin-bottom: 20px;
+}
+/* 밴드 글쓰기 버튼 스타일 */
+div.myBand_write_btn{
+    width: 100%;
+    height: 50px;
+    background-color: #4796f0;
+}
+div.myBand_write_btn>span{
+    display: block;
+    color : white;
+    font-size: 22px;
+    text-align: center;
+    line-height: 50px;;
+}
+
+/* col2 밴드 게시글 영역 */
+div.myBand_content_col_content{
+    display: inline-block;
+    width: 48%;
+    position : relative;
+}
+/* 글 내용 검색 스타일 */
+div.myBand_content_search{
+    width: 100%;
+    height: 40px;
+    background-color: #dddddd;
+    margin-bottom: 20px;
+}
+div.myBand_content_search>span{
+    display: inline-block;
+    line-height: 40px;
+    padding-left : 20px;
+    /* color : black; */
+}
+div.myBand_content_search>span+img{
+    float: right;
+    padding: 10px;
+    padding-right : 20px;
+}
+/* 밴드 글 게시글  */
+div.myBand_content_item{
+    padding: 20px;
+    box-shadow: 4px 7px 15px 0px rgba(51, 51, 51, 0.08);
+}
+div.myBand_content_item_writer{
+    width: 100%;
+    position : relative;
+    display: flex;
+}
+div.myBand_content_item_writer>img.myBand_content_item_writer_profile {
+    border-radius: 20px;
+    margin-right: 15px;
+}
+div.myBand_content_item_writer_info>strong{
+    font-size: 20px;
+}
+div.myBand_content_item_writer_info>span{
+    display: inline-block;
+    position : absolute;
+    left : 80px;
+    bottom : 0px;
+    font-size: 15px;
+}
