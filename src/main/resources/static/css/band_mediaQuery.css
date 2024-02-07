@@ -1,0 +1,75 @@
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	       미디어 쿼리 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+/*화면 width 1200px 미만일 때 */
+@media screen and (max-width : 1200px){
+    /* 가입한 밴드 스타일  */
+    div.join_band_wapper{
+        width: 100%;
+    }
+    div.join_band_item{
+        width: 17.9% ;
+        height: 170px;
+    }
+    /* 밴드 만들기 스타일 */
+    div.create_buttonBox{
+        width: 19px;
+        height: 19px;
+    }
+    /* 밴드 추천 창 - 이미지*/
+    div.band_recomand_img{   
+        margin-left : 10px;
+    }
+}
+
+/*화면 width 990px 미만일 때 */
+@media screen and (max-width : 990px){
+    /* 가입한 밴드 스타일  */
+    div.join_band_item{
+        width: 22% ;
+    }
+    div.join_band_item_text>strong{
+        font-size: 15px;
+        margin-top : -5px;
+    } 
+    div.join_band_item_text>span{
+        font-size: 12px;
+    }
+
+}
+
+
+/*화면 width 770px 미만일 때 */
+@media screen and (max-width : 770px){
+    /* 가입한 밴드 스타일  */
+    div.join_band_wapper{
+        width: 100%;
+        padding: 0px !important;
+    }
+    div.join_band_item{
+        width: 20%;
+        height: 130px;
+    }
+    div.join_band_item_text>strong{
+        font-size: 13px;
+        margin-top : -10px;
+    } 
+    div.join_band_item_text>span{
+        font-size: 10px;
+        margin-bottom: 30px;
+    }
+
+}
+/*화면 width 500px 미만일 때 */
+@media screen and (max-width : 500px){
+    /* 가입한 밴드 스타일  */
+    div.join_band_item{
+        width: 28%;
+    }
+
+    /* 밴드 추천 창 - 이미지*/
+    div.band_recomand_img{
+        width: 100px;
+    }
+}
