@@ -1,11 +1,9 @@
+.container{
+    min-width: 400px;
+}
 /* 밴드 지역 네브바 lnb 스타일 */
 div.band_lnb{
     width: 100%;
-    height: 70px;
-    border : 1px solid red;
-}
-div.band_lnb_box {
-    border : 1px solid blue;
 }
 div.band_lnb li.band_lnb_item {
     height: 100%;
@@ -35,19 +33,18 @@ div.join_myBand{
     display : flex; 
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
+    justify-content: space-between;
 }
 div.join_band_item{
-    box-shadow: 4px 7px 15px 0px rgba(51, 51, 51, 0.08);
+    box-shadow: 4px 7px 15px 0px rgba(51, 51, 51, 0.18);
     width: 18%;
     height: 250px;
-    margin-left: 10px;
-    margin-right : 10px;
-    margin-bottom: 30px;
+    margin : 10px;
     border-radius: 20px;
     position : relative;
     padding : 0px;
     overflow: hidden;
+    box-sizing: border-box;
 }
 /* 밴드 만들기 스타일 */
 div.create_band{
@@ -72,26 +69,30 @@ div.create_buttonBox+strong{
 }
 /* 가입한 밴드 스타일  */
 div.join_band_item>img {
-    height: 160px;
-}
-div.join_band_item_text{
-    padding: 5px;
+    width: 100%;
+    height: 65%;
 }
 div.join_band_item_text{
     padding: 15px;
 }
+
 div.join_band_item_text>strong{
     display: block;
     font-weight: normal;
-    font-size: larger;
+    font-size: 1.2vw;
     text-overflow: ellipsis;
 }
 div.join_band_item_text>span{
-    font-size: medium;
+    font-size: 1vw;
     color : #b3b3b3dd;
 }
 
 /* 밴드 추천 창 */
+div.band_recomand_wrapper{
+    width: 100%;
+    padding: 40px 0px;
+    background-color: #f3f2f2;
+}
 div.band_recomand_item{
     margin-top : 15px;
     margin-bottom : 15px;
@@ -100,8 +101,9 @@ div.band_recomand_item{
     height: 100px;;
     display: flex;
 }
+/* 밴드 추천 창 - 이미지*/
 div.band_recomand_img{
-    width: 100px;
+    width: 120px;
     height: 100px;
     margin-right: 10px;
     
@@ -112,11 +114,29 @@ div.band_recomand_img>img{
     background-size: 100%;
     border-radius: 20px;
 }
+div.band_recomand_text{
+    width: 70%;
+}
+div.band_recomand_text>h3{
+    font-size: 18px;
+}
+div.band_recomand_text>span{
+    display : block;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 /* 테마 밴드 더보기 스타일 */
 div.band_more_view{
     display: inline-block;
-    border : 1px solid lightpink;
-
+    padding : 2px 5px;
+    border : 1px solid rgb(255, 255, 255);
+    background-color: white;
+    border-radius: 20px;
+    position : relative;
+    bottom : 0px;
+    margin-top : 10px;
 }
 
 /* 오늘의 인기글 */
@@ -127,8 +147,7 @@ div.band_today_best_list{
     justify-content: space-between;
 }
 div.band_today_best_item{
-    width: 49%;
-    box-shadow: 4px 7px 15px 0px rgba(51, 51, 51, 0.08);
+    box-shadow: 4px 7px 15px 0px rgba(51, 51, 51, 0.28);
     border-radius: 15px;
     margin-bottom: 20px;
     padding: 20px;
@@ -146,7 +165,6 @@ div.best_item_content{
 div.best_item_content>span {
     display: inline-block;
     width: 80%;
-    border : 1px solid red;
     padding: 10px;;
 }
 div.best_item_content_img{
