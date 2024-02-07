@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,8 +15,8 @@
   <div class="navbar">
     <div class="carrier-logo">
       <a href="">
-        <img src="img/logo2-white.svg" alt="" class="logo-img-white">
-        <img src="img/logo2.svg" alt="" class="logo-img-black cs-dnone">
+        <img th:src="@{/img/nav/logo2-white.svg}" alt="" class="logo-img-white">
+        <img th:src="@{/img/nav/logo2.svg}" alt="" class="logo-img-black cs-dnone">
       </a>
     </div>
     <ul class="links">
