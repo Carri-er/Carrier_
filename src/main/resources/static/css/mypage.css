@@ -6,10 +6,15 @@
     filter: blur(80px);
 }
 
+/* 색상 팔레트 */
+.gg-dim-txt{
+    color: var(--dimgray);
+}
+
 /*<<<<<<<<<<<<<<<<<<<<<<<<<< [좌] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 /* sticky 상단 영역 */
 #mypage-L.sticky-md-top{
-    top: 20px;
+    top: 11px;
 }
 
 /* 메뉴 아이콘 */
@@ -28,7 +33,7 @@
 
 /* AD 영역 */
 .my-ad-img{
-    height: 260px;
+    /*height: 260px;*/
     overflow: hidden;
 }
 
