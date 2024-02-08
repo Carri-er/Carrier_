@@ -1,13 +1,14 @@
+/* myband 전체를 감싸는 block 스타일 */
 div.myBand_wrapper{
     width: 100%;
     position : relative;
 }
-/* myBand lnb 스타일 */
-div.myBand_lnb{
+/* myBand pc버전 lnb 스타일 */
+div.myBand_pc_lnb{
     width: 100%;
     background-color: #4796f0;
 }
-ul.myBand_lnb_ul>li{
+ul.myBand_pc_lnb_ul>li{
     padding: 10px 20px;
 }
 
