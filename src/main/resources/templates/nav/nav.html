@@ -4,68 +4,73 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nav</title>
-  <!--<link rel="stylesheet" href="../css/bootstrap.css">-->
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/header.css">
-  <script src="https://unpkg.com/feather-icons"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
-<header id="header" class="main">
-  <div class="header-inner">
-    <div class="header-topMenu">
-      <a href="#" class="indent">logo<h1 class="logo-img"></h1></a>
-      <div class="header-leftBox">
-        <a class="icon-text" href="#"><i data-feather="sun">sun</i>날씨</a>
-        <a class="icon-text" href="#"><i data-feather="map-pin">map-pin</i>지도</a>
-        <!--<a class="icon-text" href="#"><i data-feather="sunset">sunset</i>날씨</a>-->
-        <!--<a class="icon-text" href="#"><i data-feather="sunrise">sunrise</i>날씨</a>-->
-        <!--<a class="icon-text" href="#"><i data-feather="wind">wind</i>날씨</a>-->
-        <!--<a class="icon-text" href="#"><i data-feather="cloud">cloud</i>날씨</a>-->
-        <!--<a class="icon-text" href="#"><i data-feather="cloud-snow">cloud-snow</i>날씨</a>-->
-        <!--<a class="icon-text" href="#"><i data-feather="cloud-rain">cloud-rain</i>날씨</a>-->
-        <!--<a class="icon-text" href="#"><i data-feather="cloud-lightning">cloud-lightning</i>날씨</a>-->
+<nav class="mt-3 mb-0 navbar navbar-expand-md d-flex justify-content-center">
+  <div class="row container-fluid">
+    <!-- Logo 좌측 -->
+    <a class="col navbar-brand" href="#">CarrierLogo</a>
+    <!--M nav btn-->
+    <button class="col-2 ml-auto navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- nav content -->
+    <div class="col-10 d-flex justify-content-between justify-content-lg-end mx-auto collapse navbar-collapse"
+         id="navbarSupportedContent">
+      <!-- nav 중앙 -->
+      <div class="col px-md-4">
+        <ul class="px-5 mb-0 navbar-nav justify-content-around mb-lg-0 f17">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="#">홈</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">피드</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">AI콕콕</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">홍보관</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">여행정보</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">지도</a>
+          </li>
+        </ul>
       </div>
-      <div class="header-rightBox">
-        <a class="icon-text" href="#"><i data-feather="search">search</i>검색</a>
-        <a class="icon-text" href="#"><i data-feather="log-in">login</i>로그인</a>
-        <!--<a class="icon-text" href="#"><i data-feather="log-out">logout</i>로그아웃</a>-->
+      <!-- nav 우측 -->
+      <div class="col-lg-4 nav-right me-3 d-flex align-items-center">
+        <!-- lg 화면 이상에서 보일 영역 -->
+        <div class="col d-none d-lg-block d-flex align-items-center">
+          <a href="#" class="float-end nav-right-btn navbar-user mt-1">user</a>
+          <!-- 서치 영역-->
+          <div class="col-10 float-end nav-search-form">
+            <form class="d-flex align-items-center" role="search">
+              <input class="form-control me-2" type="search" placeholder="어디로, 어떤 여행을 떠날 예정인가요?" aria-label="Search">
+              <button class="nav-right-btn navbar-search-lg" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+        <!-- md 화면에서만 보일 영역 -->
+        <div class="col d-none d-md-block d-lg-none">
+          <a href="#" class="float-end nav-right-btn navbar-user">user</a>
+          <a href="#" class="float-end nav-right-btn navbar-search-md">search</a>
+        </div>
       </div>
     </div>
   </div>
-</header>
-<nav class="nav-menu">
-  <ul>
-    <li><a href="">HOME</a></li>
-    <li><a href="">피드</a></li>
-    <li><a href="">정보</a></li>
-    <li><a href="">AI 추천</a></li>
-    <li><a href="">소모임</a></li>
-  </ul>
 </nav>
 
-<div class="main-container">
-  <div class="inner">
-    <section class="section01">
-
-      <div class="bottom-menu">
-        <ul>
-          <li><span>피드</span></li>
-          <li><span>정보</span></li>
-          <li><span>AI 추천</span></li>
-          <li><span>소모임</span></li>
-        </ul>
-      </div>
-
-      <div class="bg-video-section">
-        <video autoplay loop muted playsinline src="../video/main1.mov" class="bg-video"></video>
-      </div>
-    </section>
-  </div>
-</div>
-
-
-<script>
-  feather.replace()
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
 </body>
 </html>
