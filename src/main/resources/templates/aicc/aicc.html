@@ -1,223 +1,231 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ai</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/ai.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ai</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/ai.css">
 </head>
 <body>
-<h1>nav 구역이지롱</h1>
+	<h1>nav 구역이지롱</h1>
 
-<div id="ai" class="container-fluid">
-    <div class="row">
-        <div class=" px-0">
-            <div id="ai-cok-carousel" class="carousel slide" data-bs-ride="false"
-                 data-bs-wrap="false" data-bs-touch="true">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#ai-cok-carousel" data-bs-slide-to="0" class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#ai-cok-carousel" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#ai-cok-carousel" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#ai-cok-carousel" data-bs-slide-to="3"
-                            aria-label="Slide 4"></button>
-                </div>
-                <!-- AI contents Start -->
-                <div class="carousel-inner">
-                    <!-- Content1 | Welcome-->
-                    <div class="carousel-item">
-                        <div class="ai-box text-center">
-                            <img src="../img/ai/cos_start_welcome.png" class="img-fluid" alt="환영합니다!">
-                            <p class="f22 text-shadow"><span>username</span>님! 안녕하세요.</p>
-                            <p class="fw-bold text-shadow welcome-big">
-                                AI 플래너에 <br>
-                                오신 것을 환영합니다.
-                            </p>
-                            <p class="f17 mb-3">
-                                국내 여행을 계획 중이신가요?<br>
-                                여행을 떠날 지역, 기간, 테마만 알려주시면<br>
-                                자동으로 맞춤형 코스를 만들어 드립니다.
-                            </p>
-                            <!--Start Btn-->
-                            <div class="btn">
-                                <div class="btn_start" data-bs-target="#ai-cok-carousel"
-                                     data-bs-slide="next">
-                                    <div>
-                                        <em>START</em>
-                                        <span class="arw_wrap">
-                                            <span
-                                                    class="left"></span>
-                                            <span class="right"></span>
-                                        </span>
-                                    </div>
-                                    <img src="../img/ai/btn_planner_m_cos1.png" class="mo" alt="">
-                                </div>
-                            </div>
-                            <img src="../img/ai/img_robot1.png" alt="" class="mt-5 pt-5">
-                        </div>
-                    </div>
-                    <!-- Content2 | 나이 선택 -->
-                    <div class="carousel-item">
-                        <div class="ai-box ai-filter-box">
-                            <div class="row f14 px-lg-5 d-flex justify-content-center gap-4">
-                                <div class="col-12">
-                                    <p class="f22 text-shadow p-0"><b>연령</b>을 선택해주세요</p>
-                                </div>
-                                <div class="col-12 px-0">
-                                    <div class="age-box m-auto">
-                                        <img src="../img/ai/ico_age_4.png" class="d-block w-75 rounded-circle mb-2"
-                                             alt="19세 이하">
-                                        <span>19세 이하</span>
-                                    </div>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <div class="age-box ms-auto">
-                                        <img src="../img/ai/ico_age_5.png" class="d-block w-75 rounded-circle mb-2"
-                                             alt="20대">
-                                        <span>20대</span>
-                                    </div>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <div class="age-box me-auto">
-                                        <img src="../img/ai/ico_age_6.png" class="d-block w-75 rounded-circle mb-2"
-                                             alt="30대">
-                                        <span>30대</span>
-                                    </div>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <div class="age-box ms-auto">
-                                        <img src="../img/ai/ico_age_7.png" class="d-block w-75 rounded-circle mb-2"
-                                             alt="40대">
-                                        <span>40대</span>
-                                    </div>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <div class="age-box me-auto">
-                                        <div class="bg-light rounded-circle mb-2">
-                                            <img src="../img/ai/ico_age_8.png" class="d-block rounded-circle mb-2"
-                                                 alt="40대 이상">
-                                        </div>
-                                        <span>40대 이상</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--다음에 하기 btn -->
-                        <div class="py-4">
-                            <button type="button" class="btn rounded-pill btn-outline-light next-btn">여기까지만 선택하기
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Content3 | 기간 선택 -->
-                    <div class="carousel-item">
-                        <div class="ai-box ai-filter-box text-center">
-                            <div class="row f14 mx-0 period-box-parent gap-5">
-                                <div class="col-12">
-                                    <p class="f22 text-shadow p-0">얼마동안 여행을 떠날까요?</p>
-                                </div>
-                                <div class="col px-0">
-                                    <div class="period-box m-auto mb-2">
-                                        <div class="m-auto"></div>
-                                        <span>당일 여행</span>
-                                    </div>
-                                </div>
-                                <div class="col px-0">
-                                    <div class="period-box m-auto mb-2">
-                                        <div class="m-auto"></div>
-                                        <span>1박 2일</span>
-                                    </div>
-                                </div>
-                                <div class="col px-0">
-                                    <div class="period-box m-auto mb-2">
-                                        <div class="m-auto"></div>
-                                        <span>2박 3일</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--다음에 하기 btn -->
-                        <div class="py-4">
-                            <button type="button" class="btn rounded-pill btn-outline-light next-btn">여기까지만 선택하기
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Content4 | 테마 선택 -->
-                    <div class="carousel-item active">
-                        <div class="ai-box ai-filter-box text-center">
-                            <div class="row theme-box-parent f14 mx-0 d-flex justify-content-center gap-5">
-                                <div class="col-12">
-                                    <p class="f22 text-shadow p-0">마음에 드는 <b>여행</b>이 있나요?</p>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">산</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">실내</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">액티비티</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">테마파크</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">카페</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">테마파크</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">테마파크</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">테마파크</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                                <div class="col-3 px-0">
-                                    <span class="text-center">테마파크</span>
-                                    <div class="m-auto"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--다음에 하기 btn -->
-                        <div class="py-4">
-                            <button type="button" class="btn rounded-pill btn-outline-light next-btn">여기까지만 선택하기
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Carousel <btn> -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#ai-cok-carousel"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#ai-cok-carousel"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </div>
+	<div id="ai" class="container-fluid">
+		<div class="row">
+			<div class=" px-0">
+				<div id="ai-cok-carousel" class="carousel slide"
+					data-bs-ride="false" data-bs-wrap="false" data-bs-touch="true">
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#ai-cok-carousel"
+							data-bs-slide-to="0" class="active" aria-current="true"
+							aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#ai-cok-carousel"
+							data-bs-slide-to="1" aria-label="Slide 2"></button>
+						<button type="button" data-bs-target="#ai-cok-carousel"
+							data-bs-slide-to="2" aria-label="Slide 3"></button>
+						<button type="button" data-bs-target="#ai-cok-carousel"
+							data-bs-slide-to="3" aria-label="Slide 4"></button>
+					</div>
+					<!-- AI contents Start -->
+					<div class="carousel-inner">
+						<!-- Content1 | Welcome-->
+						<div class="carousel-item">
+							<div class="ai-box text-center">
+								<img src="../img/ai/cos_start_welcome.png" class="img-fluid"
+									alt="환영합니다!">
+								<p class="f22 text-shadow">
+									<span>username</span>님! 안녕하세요.
+								</p>
+								<p class="fw-bold text-shadow welcome-big">
+									AI 플래너에 <br> 오신 것을 환영합니다.
+								</p>
+								<p class="f17 mb-3">
+									국내 여행을 계획 중이신가요?<br> 여행을 떠날 지역, 기간, 테마만 알려주시면<br>
+									자동으로 맞춤형 코스를 만들어 드립니다.
+								</p>
+								<!--Start Btn-->
+								<div class="btn">
+									<div class="btn_start" data-bs-target="#ai-cok-carousel"
+										data-bs-slide="next">
+										<div>
+											<em>START</em> <span class="arw_wrap"> <span
+												class="left"></span> <span class="right"></span>
+											</span>
+										</div>
+										<img src="../img/ai/btn_planner_m_cos1.png" class="mo" alt="">
+									</div>
+								</div>
+								<img src="../img/ai/img_robot1.png" alt="" class="mt-5 pt-5">
+							</div>
+						</div>
+						<!-- Content2 | 나이 선택 -->
+						<div class="carousel-item">
+							<div class="ai-box ai-filter-box">
+								<div class="row f14 px-lg-5 d-flex justify-content-center gap-4">
+									<div class="col-12">
+										<p class="f22 text-shadow p-0">
+											<b>연령</b>을 선택해주세요
+										</p>
+									</div>
+									<div class="col-12 px-0">
+										<div class="age-box m-auto">
+											<img src="../img/ai/ico_age_4.png"
+												class="d-block w-75 rounded-circle mb-2" alt="19세 이하">
+											<span>19세 이하</span>
+										</div>
+									</div>
+									<div class="col-4 px-0">
+										<div class="age-box ms-auto">
+											<img src="../img/ai/ico_age_5.png"
+												class="d-block w-75 rounded-circle mb-2" alt="20대"> <span>20대</span>
+										</div>
+									</div>
+									<div class="col-4 px-0">
+										<div class="age-box me-auto">
+											<img src="../img/ai/ico_age_6.png"
+												class="d-block w-75 rounded-circle mb-2" alt="30대"> <span>30대</span>
+										</div>
+									</div>
+									<div class="col-4 px-0">
+										<div class="age-box ms-auto">
+											<img src="../img/ai/ico_age_7.png"
+												class="d-block w-75 rounded-circle mb-2" alt="40대"> <span>40대</span>
+										</div>
+									</div>
+									<div class="col-4 px-0">
+										<div class="age-box me-auto">
+											<div class="bg-light rounded-circle mb-2">
+												<img src="../img/ai/ico_age_8.png"
+													class="d-block rounded-circle mb-2" alt="40대 이상">
+											</div>
+											<span>40대 이상</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--다음에 하기 btn -->
+							<div class="py-4">
+								<button type="button"
+									class="btn rounded-pill btn-outline-light next-btn">여기까지만
+									선택하기</button>
+							</div>
+						</div>
+						<!-- Content3 | 기간 선택 -->
+						<div class="carousel-item">
+							<div class="ai-box ai-filter-box text-center">
+								<div class="row f14 mx-0 period-box-parent gap-5">
+									<div class="col-12">
+										<p class="f22 text-shadow p-0">얼마동안 여행을 떠날까요?</p>
+									</div>
+									<div class="col px-0">
+										<div class="period-box m-auto mb-2">
+											<div class="m-auto"></div>
+											<span>당일 여행</span>
+										</div>
+									</div>
+									<div class="col px-0">
+										<div class="period-box m-auto mb-2">
+											<div class="m-auto"></div>
+											<span>1박 2일</span>
+										</div>
+									</div>
+									<div class="col px-0">
+										<div class="period-box m-auto mb-2">
+											<div class="m-auto"></div>
+											<span>2박 3일</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--다음에 하기 btn -->
+							<div class="py-4">
+								<button type="button"
+									class="btn rounded-pill btn-outline-light next-btn">여기까지만
+									선택하기</button>
+							</div>
+						</div>
+						<!-- Content4 | 테마 선택 -->
+						<div class="carousel-item active">
+							<div class="ai-box ai-filter-box text-center">
+								<div
+									class="row theme-box-parent f14 mx-0 d-flex justify-content-center gap-5">
+									<div class="col-12">
+										<p class="f22 text-shadow p-0">
+											마음에 드는 <b>여행</b>이 있나요?
+										</p>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">산</span>
+										<div class="m-auto"></div>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">실내</span>
+										<div class="m-auto"></div>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">액티비티</span>
+										<div class="m-auto"></div>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">테마파크</span>
+										<div class="m-auto"></div>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">카페</span>
+										<div class="m-auto"></div>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">테마파크</span>
+										<div class="m-auto"></div>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">테마파크</span>
+										<div class="m-auto"></div>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">테마파크</span>
+										<div class="m-auto"></div>
+									</div>
+									<div class="col-3 px-0">
+										<span class="text-center">테마파크</span>
+										<div class="m-auto"></div>
+									</div>
+								</div>
+							</div>
+							<!--다음에 하기 btn -->
+							<div class="py-4">
+								<button type="button"
+									class="btn rounded-pill btn-outline-light next-btn">여기까지만
+									선택하기</button>
+							</div>
+						</div>
+					</div>
+					<!-- Carousel <btn> -->
+					<button class="carousel-control-prev" type="button"
+						data-bs-target="#ai-cok-carousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button"
+						data-bs-target="#ai-cok-carousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+		</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-            crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+			crossorigin="anonymous"></script>
 
-    <script>
+		<script>
         var myCarousel = document.querySelector('#myCarousel')
         var carousel = new bootstrap.Carousel(myCarousel, {
             interval: 2000,
@@ -225,6 +233,5 @@
         })
 
     </script>
-
 </body>
 </html>

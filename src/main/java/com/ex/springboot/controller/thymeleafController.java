@@ -27,4 +27,36 @@ public class thymeleafController {
 	public String band() {
 		return "band/band";
 	}
+	@GetMapping("/aicc")
+	public String aicc() {
+		return "aicc/aicc";
+	}
+	@GetMapping("/info")
+	public String info() {
+		return "info/info";
+	}
+	@GetMapping("/home")
+	public String home() {
+		return "home/home";
+	}
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "mypage/mypage";
+	}
+	@GetMapping("/addMember")
+	public String addMember() {
+		return "Member/addMember";
+	}
+	@GetMapping("/login")
+	public String login() {
+		return "Member/login";
+	}
+	@GetMapping("/FindId")
+	public String FindId() {
+		return "Member/FindId";
+	}
+	@GetMapping("/FindPw")
+	public String FindPw() {
+		return "Member/FindPw";
+	}
 }
