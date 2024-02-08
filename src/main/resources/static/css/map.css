@@ -1,6 +1,134 @@
+/* 맵 컨텐츠 전체를 감싸는 영역 스타일 */
+div.map_all_contentBox{
+    width: 100%;
+    display: flex; 
+    flex-direction: row;
+
+}
 /* map guide 영역 */
+div.map_guide{
+    width: 350px;
+}
 div.map_curr_locationBox{
-    width: 30%;
-    border : 1px solid red;
-    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* map_guide_iconBox 스타일 */
+ul.map_guide_icon_list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+li.map_guide_icon_item{
+    width: 19.5%;
+    box-sizing: border-box;
+    font-size: small;
+    text-align: center;
+}
+li.map_icon_electric_charg{
+    font-size: 12px;
+}
+/* map_icon 이미지 설정 */
+li.map_icon_near_trip::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+}
+li.map_icon_food::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -36px;
+}
+li.map_icon_cafe::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -72px;
+}
+li.map_icon_hotel::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -108px;
+}
+li.map_icon_park::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -144px;
+}
+li.map_icon_electric_charg::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -180px;
+}
+li.map_icon_recomand_thema::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -216px;
+}
+li.map_icon_trip_course::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -252px;
+}
+li.map_icon_myTrip::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -288px;
+}
+li.map_icon_set::before{
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background: url('../img/map/icon_depth1_menu.png') no-repeat;
+    background-position-y: -324px;
+}
+/* 카카오 맵 스타일 */
+div#map{
+    width: 100%;
+    height: 100vh;
+}
+
+/* map_mapSection sytle */
+div.map_mapSection{
+    width: calc(100% - 350px);
 }
