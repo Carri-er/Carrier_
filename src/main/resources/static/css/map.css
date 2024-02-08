@@ -1,0 +1,6 @@
+/* map guide 영역 */
+div.map_curr_locationBox{
+    width: 30%;
+    border : 1px solid red;
+    height: 100%;
+}
