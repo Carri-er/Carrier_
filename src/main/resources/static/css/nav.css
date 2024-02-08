@@ -9,18 +9,18 @@
 
 /* nav btn img */
 .navbar-search-md {
-  background: url("/img/nav/btn_header_search01.png") center/contain no-repeat;
+  background: url("../img/nav/btn_header_search01.png") center/contain no-repeat;
 }
 
 .navbar-search-lg {
   width: 24px;
   height: 24px;
-  background: url("/img/nav/btn_header_search.png") center/contain no-repeat;
+  background: url("../img/nav/btn_header_search.png") center/contain no-repeat;
 }
 
 .navbar-user {
   margin-left: 10px;
-  background: url("/img/nav/icon_header_profile1.png") center/contain no-repeat;
+  background: url("../img/nav/icon_header_profile1.png") center/contain no-repeat;
 }
 
 /* 우측 */

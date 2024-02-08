@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,9 +11,10 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/common.css">
 <link rel="stylesheet" href="../css/ai.css">
+ <link rel="stylesheet" href="../css/nav.css">
 </head>
 <body>
-	<h1>nav 구역이지롱</h1>
+	<div th:replace="nav/nav::nav"></div>
 
 	<div id="ai" class="container-fluid">
 		<div class="row">
