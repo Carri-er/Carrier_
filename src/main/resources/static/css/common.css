@@ -19,7 +19,7 @@ a.indent{
 }
 /* color palette*/
 :root {
-  --black: #fffff;
+  --black: #000000;
   --deepgray: #f0f0f0;
   --gray: #f7f7f7;
   --vh: 9.59px;

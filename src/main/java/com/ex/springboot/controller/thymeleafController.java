@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping
 public class thymeleafController {
-	@GetMapping("/layout")
+	@GetMapping("/")
 	public String main() {
-		return "layout/layout";
+		return "home/home";
 	}
 	@GetMapping("/board")
 	public String board() {
@@ -58,5 +58,9 @@ public class thymeleafController {
 	@GetMapping("/FindPw")
 	public String FindPw() {
 		return "Member/FindPw";
+	}
+	@GetMapping("/nav")
+	public String nav() {
+		return "nav/nav";
 	}
 }
