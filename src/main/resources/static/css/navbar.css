@@ -1,0 +1,226 @@
+/*custom, script 에 필요함*/
+.cs-dnone {
+  display: none;
+}
+
+.cs-dblock {
+  display: block;
+}
+
+.cs-text-black {
+  color: #30588a !important;
+}
+
+.cs-text-white {
+  color: #ffffff !important;
+}
+
+.nav-fixed {
+  transition: all 0.5s;
+  position: fixed !important;
+  background: #ffffff;
+}
+
+/*nav*/
+header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 30px 20px 0 20px;
+  z-index: 10;
+  border-bottom: 1px solid #30588a;
+  background-color: #30588a;
+}
+
+.navbar {
+  width: 100%;
+  height: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.carrier-logo a img {
+  width: 2.1rem;
+  position: absolute;
+  top: 10px;
+}
+
+.navbar .links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar .links li {
+  margin: 0 15px;
+}
+
+.navbar .links li:first-child {
+  margin-left: 90px;
+}
+
+.navbar .sub-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar .links a,
+.navbar .sub-links a {
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+.navbar .toggle-btn {
+  display: none;
+  color: #ffffff;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.navbar .toggle-btn i {
+  font-size: 1.3rem;
+}
+
+.navbar .icon-text {
+  transition: scale 1s ease;
+}
+
+/*==========
+=========== dropdown-menu
+==========*/
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  width: 105%;
+  left: -5%;
+  height: 0;
+  overflow: hidden;
+  transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 40;
+}
+
+.nav-dropdown-menu.open {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.nav-dropdown-menu.open a {
+  color: #ffffff;
+}
+
+.nav-dropdown-menu ul li {
+  position: relative;
+  top: 90px;
+  padding: 0.7em;
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  z-index: 50;
+}
+
+.nav-dropdown-menu ul li span {
+  margin-left: 10px;
+}
+
+/*==========
+=========== dropdown-menu
+==========*/
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  width: 105%;
+  left: -5%;
+  height: 0;
+  overflow: hidden;
+  transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 40;
+}
+
+.nav-dropdown-menu.open {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.nav-dropdown-menu.open a {
+  color: #ffffff;
+}
+
+.nav-dropdown-menu ul li {
+  position: relative;
+  top: 90px;
+  padding: 0.7em;
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  z-index: 50;
+}
+
+.nav-dropdown-menu ul li span {
+  margin-left: 10px;
+}
+
+@media (max-width: 1400px) {
+
+}
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 992px) {
+  /*========== navbar ==========*/
+  .carrier-logo a img {
+    width: 1.9rem;
+    top: 17px;
+  }
+
+  .navbar .links,
+  .navbar .sub-links {
+    display: none;
+  }
+
+  .navbar .toggle-btn {
+    display: block;
+    cursor: pointer;
+    z-index: 9999;
+  }
+
+  .nav-dropdown-menu {
+    display: block;
+  }
+
+  .nav-dropdown-menu li {
+    top: 50px;
+    font-size: 23px;
+  }
+
+}
+
+/*==========
+=========== mobile 반응형
+==========*/
+@media (max-width: 576px) {
+
+  /*========== navbar ==========*/
+  .carrier-logo a img {
+    width: 1.7rem;
+    top: 20px;
+  }
+
+  .nav-dropdown-menu li {
+    top: 50px;
+    font-size: 20px;
+  }
+}
+

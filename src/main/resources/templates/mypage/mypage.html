@@ -6,72 +6,94 @@
     <title>mypage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/mypage.css">
-    <link rel="stylesheet" href="../css/swiper.css">
+    <link rel="stylesheet" href="../../static/css/common.css">
+    <link rel="stylesheet" href="../../static/css/mypage.css">
+    <link rel="stylesheet" href="../../static/css/swiper.css">
 
+    <!-- fontawesome icon -->
+    <script src="https://kit.fontawesome.com/ebccd8f794.js" crossorigin="anonymous"></script>
+    <!-- swiper -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
-<div id="mypage" class="container-fluid mt-5 px-0">
-    <h1 class="ms-3">마이페이지</h1>
+<h1>네비이이이이이이이ㅣㅇ이이이</h1>
+<div id="mypage" class="container mt-5 px-0">
     <div class="row text-center mt-5 m-3 mx-xl-5 d-flex justify-content-between">
-        <!--(좌)모바일 화면-->
-        <div class="col-12 col-md-4 col-xl-3 p-5 px-md-3 px-xl-4 bg-light rounded-4 border h-100 sticky-md-top">
-            <div class="col-12">
-                <img src="../img/mypage/user_rabbit.jpg" class="w-25 rounded-circle img-fluid" alt="...">
+        <!-- <<<<<<<<<<<<<<< (좌) <<<<<<<<<<<<<<<< -->
+        <aside id="mypage-L" class="col-12 col-md-4 col-xl-3 h-100 sticky-md-top">
+            <!-- [<] 내정보란 -->
+            <div class="row bg-light border rounded-4 p-5 px-md-3 px-xl-4">
+                <div class="col-12">
+                    <img src="../../static/img/mypage/user_rabbit.jpg" class="w-25 rounded-circle img-fluid"
+                         alt="...">
+                </div>
+                <div class="col-12 p-3 mb-4">
+                    <p class="f22"><span class="fw-bold">톢이</span> 님</p>
+                    <a href="#" class="text-dark d-block p-3">
+                        <button type="button" class="btn btn-outline-dark rounded-pill">내 정보 수정 ></button>
+                    </a>
+                </div>
+                <!-- 해당 메뉴 아이콘 -->
+                <div class="col-12 text-center my-menu-ico-parent d-flex justify-content-around f13">
+                    <div class="my-menu-ico">
+                        <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
+                            <img src="../../static/img/mypage/menu_ico_1.png" class="img-fluid p-2"
+                                 alt="...">
+                        </div>
+                        <span>예약</span>
+                    </div>
+                    <div class="my-menu-ico">
+                        <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
+                            <img src="../../static/img/mypage/menu_ico_2.png" class="img-fluid p-2"
+                                 alt="...">
+                        </div>
+                        <span>소모임</span>
+                    </div>
+                    <div class="my-menu-ico">
+                        <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
+                            <img src="../../static/img/mypage/menu_ico_3.png" class="img-fluid p-2"
+                                 alt="...">
+                        </div>
+                        <span>피드</span>
+                    </div>
+                    <div class="my-menu-ico">
+                        <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
+                            <img src="../../static/img/mypage/menu_ico_4.png" class="img-fluid p-2"
+                                 alt="...">
+                        </div>
+                        <span>코스</span>
+                    </div>
+                </div>
             </div>
-            <div class="col-12 p-3 mb-4">
-                <h3><span class="nickname">톡기</span> 님</h3>
-                <a href="#" class="text-dark d-block p-3">
-                    <button type="button" class="btn rounded-pill btn-outline-dark">내 정보 수정 ></button>
-                </a>
-            </div>
-            <!-- 해당 메뉴 아이콘 -->
-            <div class="col-12 text-center menu-ico-parent d-flex justify-content-around f13">
-                <div class="menu-ico">
-                    <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
-                        <img src="../img/mypage/menu_ico_1.png" class="img-fluid p-2"
-                             alt="...">
+            <!-- [<] AD 영역 -->
+            <div class="d-none d-md-block row border rounded-4 mt-4 pt-4 p-3 text-start">
+                <div class="col">
+                    <strong class="d-block py-3 text-center">원하는 여행지를 찾지 못하셨나요?</strong>
+                    <span class="badge rounded-pill text-bg-info text-white mb-1">AD</span>
+                    <!--AD 이미지-->
+                    <div class="my-ad-img rounded-4 h-100">
+                        <img src="../../static/img/feed/oedo.jpg" class="img-fluid" alt="">
                     </div>
-                    <span>예약</span>
-                </div>
-                <div class="menu-ico">
-                    <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
-                        <img src="../img/mypage/menu_ico_2.png" class="img-fluid p-2"
-                             alt="...">
+                    <div class="d-flex align-items-center my-ad-img-caption mb-4">
+                        <i class="fa-solid fa-location-dot float-start me-2"></i>
+                        <span class="float-start f13">외도 보타니아</span>
                     </div>
-                    <span>소모임</span>
-                </div>
-                <div class="menu-ico">
-                    <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
-                        <img src="../img/mypage/menu_ico_3.png" class="img-fluid p-2"
-                             alt="...">
-                    </div>
-                    <span>피드</span>
-                </div>
-                <div class="menu-ico">
-                    <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
-                        <img src="../img/mypage/menu_ico_4.png" class="img-fluid p-2"
-                             alt="...">
-                    </div>
-                    <span>코스</span>
                 </div>
             </div>
-        </div>
-        <!--(우)PC화면-->
-        <div class="col-12 col-md-8 col-xl-9">
+        </aside><!-- [<]좌 col -->
+        <!-- >>>>>>>>>>>>>>> (우) >>>>>>>>>>>>>>>> -->
+        <section class="col-12 col-md-8 col-xl-9 ps-md-5">
             <!-- History 영역 -->
-            <div class="row mt-5 mt-md-0 ms-md-2 border rounded-4">
+            <div class="row mt-5 mt-md-0  border rounded-4">
                 <!-- History | Title -->
                 <div class="col-12 d-flex justify-content-between align-items-center p-4">
                     <h5>History</h5>
-                    <span class="text-muted f13">전체 삭제</span>
+                    <a href="#" class="gg-dim-txt f13">전체삭제</a>
                 </div>
                 <!-- History | Content -->
                 <div class="col-12">
-                    <div class="row aicc-section01-wrap">
-                        <div class="d-none d-lg-block col-2 f22 m-auto pb-5">
+                    <div class="row my-history-wrap">
+                        <div class="d-none d-lg-block col-2 f20 m-auto pb-5">
                             최근 본 여행지
                         </div>
                         <div class="col-12 col-lg-9 me-auto">
@@ -79,62 +101,62 @@
                             <div class="swiper mySwiper">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <div class="card border-0 aicc-content-card text-center">
-                                            <img src="../img/feed/beer.jpg" class="mb-3" alt="">
+                                        <div class="card border-0 my-history-content-card text-center">
+                                            <img src="../../static/img/feed/beer.jpg" class="mb-3" alt="">
                                             <span class="text-tourist">관광지이름 1</span>
                                             <span class="f13 text-muted">지역 1</span>
                                         </div>
-                                        <img src="../img/mypage/del.png"
+                                        <img src="../../static/img/mypage/del.png"
                                              class="my-del-btn shadow-sm position-absolute" width="24" height="24"
                                              alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <div class="card border-0 aicc-content-card text-center">
-                                            <img src="../img/feed/cebu.jpg" class="mb-3" alt="">
+                                        <div class="card border-0 my-history-content-card text-center">
+                                            <img src="../../static/img/feed/cebu.jpg" class="mb-3" alt="">
                                             <span class="text-tourist">관광지이름 1</span>
                                             <span class="f13 text-muted">지역 1</span>
                                         </div>
-                                        <img src="../img/mypage/del.png"
+                                        <img src="../../static/img/mypage/del.png"
                                              class="my-del-btn shadow-sm position-absolute" width="24" height="24"
                                              alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <div class="card border-0 aicc-content-card text-center">
-                                            <img src="../img/feed/oedo.jpg" class="mb-3" alt="">
+                                        <div class="card border-0 my-history-content-card text-center">
+                                            <img src="../../static/img/feed/oedo.jpg" class="mb-3" alt="">
                                             <span class="text-tourist">관광지이름 1</span>
                                             <span class="f13 text-muted">지역 1</span>
                                         </div>
-                                        <img src="../img/mypage/del.png"
+                                        <img src="../../static/img/mypage/del.png"
                                              class="my-del-btn shadow-sm position-absolute" width="24" height="24"
                                              alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <div class="card border-0 aicc-content-card text-center">
-                                            <img src="../img/feed/beer.jpg" class="mb-3" alt="">
+                                        <div class="card border-0 my-history-content-card text-center">
+                                            <img src="../../static/img/feed/beer.jpg" class="mb-3" alt="">
                                             <span class="text-tourist">관광지이름 1</span>
                                             <span class="f13 text-muted">지역 1</span>
                                         </div>
-                                        <img src="../img/mypage/del.png"
+                                        <img src="../../static/img/mypage/del.png"
                                              class="my-del-btn shadow-sm position-absolute" width="24" height="24"
                                              alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <div class="card border-0 aicc-content-card text-center">
-                                            <img src="../img/feed/cebu.jpg" class="mb-3" alt="">
+                                        <div class="card border-0 my-history-content-card text-center">
+                                            <img src="../../static/img/feed/cebu.jpg" class="mb-3" alt="">
                                             <span class="text-tourist">관광지이름 1</span>
                                             <span class="f13 text-muted">지역 1</span>
                                         </div>
-                                        <img src="../img/mypage/del.png"
+                                        <img src="../../static/img/mypage/del.png"
                                              class="my-del-btn shadow-sm position-absolute" width="24" height="24"
                                              alt="">
                                     </div>
                                     <div class="swiper-slide">
-                                        <div class="card border-0 aicc-content-card text-center">
-                                            <img src="../img/feed/oedo.jpg" class="mb-3" alt="">
+                                        <div class="card border-0 my-history-content-card text-center">
+                                            <img src="../../static/img/feed/oedo.jpg" class="mb-3" alt="">
                                             <span class="text-tourist">관광지이름 1</span>
                                             <span class="f13 text-muted">지역 1</span>
                                         </div>
-                                        <img src="../img/mypage/del.png"
+                                        <img src="../../static/img/mypage/del.png"
                                              class="my-del-btn shadow-sm position-absolute" width="24" height="24"
                                              alt="">
                                     </div>
@@ -150,82 +172,175 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5 mt-md-3 ms-md-2 text-start gap-lg-3">
+            <div class="row mt-5 mt-md-4  text-start gap-lg-4">
                 <!-- 즐겨찾기 좋아요/팔로잉 -->
-                <div class="col-12 col-lg border rounded-4 p-4 h-100">
-                    <h5>팔로잉</h5>
-                    <!-- 해당 메뉴 아이콘 -->
-                    <div class="col-12 text-center menu-ico-parent d-flex justify-content-around f13">
-                        <div class="menu-ico">
-                            <div class="rounded-circle overflow-hidden m-1 mb-0 bg-white">
-                                <img src="../img/feed/user_rabbit.jpg" class="img-fluid"
-                                     alt="...">
+                <div class="col-12 col-lg">
+                    <div class="row">
+                        <!-- 팔로잉 영역 -->
+                        <div class="col-12 border rounded-4 p-4 pb-3">
+                            <h5 class="text-start">팔로잉</h5>
+                            <!-- 팔로잉 목록 | max5 -->
+                            <div class="row mt-3 text-center d-flex f12">
+                                <div class="col my-follow align-items-center">
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
+                                         alt="">
+                                    <span>검데렐라</span>
+                                </div>
+                                <div class="col my-follow align-items-center">
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
+                                         alt="">
+                                    <span>이지후</span>
+                                </div>
+                                <div class="col my-follow align-items-center">
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
+                                         alt="">
+                                    <span>권광호</span>
+                                </div>
+                                <div class="col my-follow align-items-center">
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
+                                         alt="">
+                                    <span>장창엽</span>
+                                </div>
+                                <div class="col my-follow align-items-center">
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
+                                         alt="">
+                                    <span>계모</span>
+                                </div>
                             </div>
-                            <span>검데렐라</span>
-                        </div>
-                        <div class="menu-ico">
-                            <div class="rounded-circle overflow-hidden m-1 mb-0 bg-white">
-                                <img src="../img/feed/user_rabbit1.jpg" class="img-fluid"
-                                     alt="...">
+                            <hr>
+                            <a href="#" class="gg-dim-txt d-block text-center f14">
+                                전체 보기
+                            </a>
+                        </div> <!-- 좋아요 col -->
+                        <div class="col-12 mt-5 mt-md-4 f13 border rounded-4 p-4">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="text-start">좋아요</h5>
+                                <a href="#" class="gg-dim-txt f13">전체보기</a>
                             </div>
-                            <span>권광호 언니</span>
-                        </div>
-                        <div class="menu-ico">
-                            <div class="rounded-circle overflow-hidden m-1 mb-0 bg-white">
-                                <img src="../img/feed/user_rabbit1.jpg" class="img-fluid"
-                                     alt="...">
+                            <div class="row mx-auto mt-3">
+                                <!--todo / 이미지 정사각형 만들기-->
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/cebu.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/oedo.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-4 text-center my-like-box">
+                                    <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                </div>
                             </div>
-                            <span>장창엽 언니</span>
-                        </div>
-                        <div class="menu-ico">
-                            <div class="rounded-circle overflow-hidden m-1 mb-0 bg-white">
-                                <img src="../img/feed/user_rabbit1.jpg" class="img-fluid"
-                                     alt="...">
-                            </div>
-                            <span>이지후 언니</span>
-                        </div>
-                        <div class="menu-ico">
-                            <div class="rounded-circle overflow-hidden m-1 mb-0 bg-white">
-                                <img src="../img/feed/user_rabbit1.jpg" class="img-fluid"
-                                     alt="...">
-                            </div>
-                            <span>계모</span>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="text-center f14">
-                        전체 보기
+                        </div><!--좋아요 col-->
                     </div>
                 </div>
-                <div class="col-12 col-lg mt-5 mt-md-3 mt-lg-0 border rounded-4 p-4">
-                    <h5>좋아요</h5>
+                <!-- 보관함 | 우측의 우측 -->
+                <div class="col-12 col-lg-6">
                     <div class="row">
-                        <div class="col-6 h-50 text-center like-box overflow-hidden">
-                            <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                            <span>sadfasdf</span>
-                        </div>
-                        <div class="col-6 h-50 text-center like-box overflow-hidden">
-                            <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                            <span>sadfasdf</span>
-                        </div>
-                        <div class="col-6 h-50 text-center like-box overflow-hidden">
-                            <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                            <span>sadfasdf</span>
-                        </div>
-                        <div class="col-6 h-50 text-center like-box overflow-hidden">
-                            <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                            <span>sadfasdf</span>
-                        </div>
-                        <div class="col-6 h-50 text-center like-box overflow-hidden">
-                            <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                            <span>sadfasdf</span>
+                        <!--보관함-->
+                        <div class="col-12 border rounded-4 p-4 mt-5 mt-md-0">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="text-start">보관함</h5>
+                                <a href="#" class="gg-dim-txt f13">전체보기</a>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6 text-start my-scrap-box  mb-4">
+                                    <div class="my-scrap-box-img rounded-2">
+                                        <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <span class="f12 text-muted mt-2">사용자지정태그</span>
+                                    <span class="f14">맥주여행! 이렇게만 하세요🍺</span>
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="19"
+                                         alt="">
+                                    <span class="d-inline f12 text-muted">핑거프린세스</span>
+                                </div>
+                                <div class="col-6 text-start my-scrap-box mb-4">
+                                    <div class="my-scrap-box-img rounded-2">
+                                        <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <span class="f12 text-muted mt-2">사용자지정태그</span>
+                                    <span class="f14">맥주여행! 이렇게만 하세요🍺</span>
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="19"
+                                         alt="">
+                                    <span class="d-inline f12 text-muted">userName</span>
+                                </div>
+                                <div class="col-6 text-start my-scrap-box mb-4">
+                                    <div class="my-scrap-box-img rounded-2">
+                                        <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <span class="f12 text-muted mt-2">사용자지정태그</span>
+                                    <span class="f14">맥주여행! 이렇게만 하세요🍺</span>
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="19"
+                                         alt="">
+                                    <span class="d-inline f12 text-muted">userName</span>
+                                </div>
+                                <div class="col-6 text-start my-scrap-box mb-4">
+                                    <div class="my-scrap-box-img rounded-2">
+                                        <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <span class="f12 text-muted mt-2">사용자지정태그</span>
+                                    <span class="f14">맥주여행! 이렇게만 하세요🍺</span>
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="19"
+                                         alt="">
+                                    <span class="d-inline f12 text-muted">userName</span>
+                                </div>
+                                <div class="col-6 text-start my-scrap-box mb-4">
+                                    <div class="my-scrap-box-img rounded-2">
+                                        <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <span class="f12 text-muted mt-2">사용자지정태그</span>
+                                    <span class="f14">맥주여행! 이렇게만 하세요🍺</span>
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="19"
+                                         alt="">
+                                    <span class="d-inline f12 text-muted">userName</span>
+                                </div>
+                                <div class="col-6 text-start my-scrap-box mb-4">
+                                    <div class="my-scrap-box-img rounded-2">
+                                        <img src="../../static/img/feed/beer.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <span class="f12 text-muted mt-2">사용자지정태그</span>
+                                    <span class="f14">맥주여행! 이렇게만 하세요🍺</span>
+                                    <img src="../../static/img/mypage/user_rabbit.jpg" class="rounded-circle" width="19"
+                                         alt="">
+                                    <span class="d-inline f12 text-muted">userName</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div><!--좋아요 col-->
-
+                </div>
+            </div>
+        </section>
+        <!-- [M] AD 영역 -->
+        <div class="d-md-none mx-auto row border rounded-4 my-5 pt-5 p-3 my-ad-parent">
+            <div class="col h-100">
+                <strong class="d-block mb-3">원하는 여행지를 찾지 못하셨나요?</strong>
+                <span class="badge rounded-pill text-bg-info text-white mb-1">AD</span>
+                <!--AD 이미지-->
+                <img src="../../static/img/feed/oedo.jpg" class="img-fluid rounded-4" alt="">
+                <div class="d-flex align-items-center my-ad-img my-3">
+                    <i class="fa-solid fa-location-dot float-start me-2"></i>
+                    <span class="float-start f13">외도 보타니아</span>
+                </div>
             </div>
         </div>
-    </div><!--우측 row-->
+    </div>
+</div>
 </div><!--container-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
