@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/home">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/band.css">
     <link rel="stylesheet" href="../css/band_mediaQuery.css">
-
+	<link rel="stylesheet" href="../css/nav.css">
 </head>
 <body>
+	<div th:replace="nav/nav::nav"></div>
     <div class="band_wrapper container-fluid px-0">
 
         <!-- 밴드 지역 네브바 -->
