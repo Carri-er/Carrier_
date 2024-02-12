@@ -36,6 +36,14 @@ dependencies {
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
 		// https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect
 	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', 	version: '3.0.0'
+	
+	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl'
+	//jstl을 사용하기 위한 라이브러리 jakarta ${} el태그 사용하기위한 의존성 주입
+	implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'
+	//jsp를 사용하려면 필요한 라이브러리 jasper 설치 사용을 위한 의존성 주입
+	implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api'
+	//c태그를 사용하기 위한 의존성 주입
+	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
 }
 
 tasks.named('test') {
