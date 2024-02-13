@@ -14,6 +14,6 @@ public interface IMemberDAO {
 			String Member_Phone,
 			String Member_Pw,
 			String Member_Area,
-			String Member_Thema,
-			String Member_profileimage );
+			String Member_Thema
+			);
 }

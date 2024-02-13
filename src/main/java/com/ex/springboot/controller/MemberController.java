@@ -1,57 +1,54 @@
 package com.ex.springboot.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ex.springboot.dto.MemberDTO;
 import com.ex.springboot.dao.IMemberDAO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+
 @Controller
+@RequestMapping
 public class MemberController {
-	
+
 	@Autowired
-	IMemberDAO dao;
-	
-	
-	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
-	
+	IMemberDAO member_dao;
 	
 	@GetMapping("/addMember")
-	public String addMember(Model model) {
-			
-		model.addAttribute("title", "회원가입");
-		
+	public String addMember() {
 		return "thymeleaf/Member/addMember";
 	}
 	
-	@PostMapping("/signup")
-	public String addMember(Model model, MemberDTO dto, HttpServletRequest request, @RequestParam("Member_profileimage") MultipartFile file) {
+	@PostMapping("/addMember")
+	public String signup(HttpServletRequest request, Model model) {
 		
-//		dao.addMember(
-//				request.getParameter("writer"), 
-//				request.getParameter("title"), 
-//				request.getParameter("content"),
-//				request.getParameter("content"),
-//				request.getParameter("content"),
-//				request.getParameter("content"),
-//		);
+		String Member_Email = request.getParameter("mail1")+request.getParameter("mail2");
+		int Member_Age = Integer.parseInt(request.getParameter("birth"));
+		String Member_Phone = request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");
 		
-		log.info("회원가입폼에서 입력받은 데이터: {}", dto);
 		
-		System.out.println("--회원가입 완--");
+		
+		
+		
+		
+		member_dao.addMember(
+				request.getParameter("Member_Name"), 
+				Member_Age, 
+				request.getParameter("Member_Id"),
+				Member_Email,
+				Member_Phone,
+				request.getParameter("Member_Pw"),
+				request.getParameter("Member_Area"),
+				request.getParameter("Member_Thema")
+		);
+		
 		
 		return "thymeleaf/Member/login";
 	}
 
 }
-
-

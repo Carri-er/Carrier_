@@ -49,12 +49,15 @@
         <div class="container join_band_wapper gx-0">
             <div class="row join_Band gx-0">
                 <!-- 밴드 만들기 영역 -->
-                <div class="col-sm-4 join_band_item create_band">
-                    <div class="create_buttonBox"></div>
-                    <strong>만들기</strong>
-                </div>
+				<div class="col-sm-4 join_band_item create_band"
+					onClick="bandCreateBtn()">
+					<a href="/bandCreate" class="create_band_link">
+						<div class="create_buttonBox"></div> 
+						<strong>만들기</strong>
+					</a>
+				</div>
 
-                <!-- 가입한 밴드 출력 영역 -->
+				<!-- 가입한 밴드 출력 영역 -->
                 <div class="col-sm-4 join_band_item ">
                     <img src="../img/band/content/강원도 탄광문화촌.jpg" class="img-fluid join_band_item_img" alt="...">
                     <div class="join_band_item_text">
@@ -63,7 +66,11 @@
                     </div> 
                 </div>
                 <div class="col-sm-4 join_band_item ">
-
+					<img src="../upload/bandThumbnail/call (21).jpg" alt="#" />
+					<div class="join_band_item_text">
+                        <strong>밴드 제목</strong>
+                        <span>멤버 </span>
+                    </div> 
                 </div>
                 <div class="col-sm-4 join_band_item ">
 
