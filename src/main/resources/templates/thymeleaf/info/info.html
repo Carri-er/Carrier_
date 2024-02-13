@@ -61,7 +61,7 @@
 								<a  th:href="@{'Event_view?id='+ ${list.getEvent_num()}}" class="row">
 									<div class="col-3 board-left">
 										<img  th:src="@{'../img/info/' + ${list.getEvent_thumbnail()}}" class="img-fluid" alt="">
-										<span class="text-white f12" th:text="${list.getEvent_category()}"></span>
+										<span class="text-white f12 " th:text="${list.getEvent_name()}"></span>
 									</div>
 									<div class="col">
 										<div class="row">
