@@ -1,8 +1,10 @@
-package com.ex.springboot.jdbc;
+package com.ex.springboot.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import com.ex.springboot.dto.EventDTO;
 
 @Mapper
 public interface IEventDAO {

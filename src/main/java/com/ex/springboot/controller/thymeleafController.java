@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ex.springboot.jdbc.EventDTO;
-import com.ex.springboot.jdbc.IEventDAO;
+import com.ex.springboot.dto.EventDTO;
+import com.ex.springboot.dao.IEventDAO;
 
 @Controller
 @RequestMapping
@@ -83,7 +83,7 @@ public class thymeleafController {
 	}
 
 	@Autowired
-	private IEventDAO eventDAO; // 다형성
+	private com.ex.springboot.dao.IEventDAO eventDAO; // 다형성
 
 	@RequestMapping("/events")
 	public String userlistPage(Model model) {
@@ -91,10 +91,12 @@ public class thymeleafController {
 		return "eventlist";
 	}
 
+	
 	@RequestMapping("/welcome")
 	public String welcome(Model model) {
 		System.out.println(eventDAO.list() + "호출");
 		model.addAttribute("list",eventDAO.list());
+		
 		return "welcome";
 	}
 

@@ -1,4 +1,4 @@
-package com.ex.springboot.jdbc;
+package com.ex.springboot.dto;
 
 import lombok.Data;
 

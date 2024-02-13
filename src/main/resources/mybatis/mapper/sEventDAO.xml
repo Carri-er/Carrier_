@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 이매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
-<mapper namespace="com.ex.springboot.jdbc.IEventDAO">
+<mapper namespace="com.ex.springboot.dao.IEventDAO">
 <!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
-	<select id="list" resultType="com.ex.springboot.jdbc.EventDTO">
+	<select id="list" resultType="com.ex.springboot.dto.EventDTO">
 		select * from Event
 	</select>
 </mapper>
