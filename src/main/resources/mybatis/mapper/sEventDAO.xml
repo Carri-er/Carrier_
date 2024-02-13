@@ -6,4 +6,7 @@
 	<select id="list" resultType="com.ex.springboot.dto.EventDTO">
 		select * from Event
 	</select>
+	  <select id="EventView" resultType="com.ex.springboot.dto.EventDTO">
+   		select * from Event where Event_num = #{param1}
+   </select>
 </mapper>
