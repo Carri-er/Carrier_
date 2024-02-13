@@ -45,6 +45,8 @@ div.join_band_item{
     padding : 0px;
     overflow: hidden;
     box-sizing: border-box;
+    cursor: pointer;
+    
 }
 /* 밴드 만들기 스타일 */
 div.create_band{
@@ -52,6 +54,14 @@ div.create_band{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+a.create_band_link{
+	position : relative;
+	border : 1px solid red;
+	width: 100%;
+	height: 100%;
+	display : block;
+	color : black;
 }
 div.create_buttonBox{
     position : relative;
@@ -63,9 +73,17 @@ div.create_buttonBox{
     background-position: 50% 50%;
     padding: 27px;
     margin-bottom: 20px;
+    top : 50%;
+    left : 50%;
+    margin-top : -38px;
+    margin-left : -26px;
 }
 div.create_buttonBox+strong{
+	display : block;
     font-size: 20px;
+    text-align: center;
+    position : relative;
+    top : 110px;
 }
 /* 가입한 밴드 스타일  */
 div.join_band_item>img {
