@@ -9,6 +9,8 @@ public class EventDTO {
 	private String Event_content;
 	private String Event_category;
 	private int hit;
+	private String Event_area;
+	private String Event_area2;
 	private String Event_uploadday;
 	private String Event_update;
 	private String Event_phone;
@@ -16,6 +18,8 @@ public class EventDTO {
 	private String Event_time;
 	private String Event_starttime;
 	private String Event_endtime;
+	private String Event_rest;
+	private String Event_parking;	
 	private String Event_host;
 	private String Event_thumbnail;
 	private String Event_img;
