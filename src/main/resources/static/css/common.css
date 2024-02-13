@@ -11,7 +11,7 @@
 
 a {
   text-decoration: none;
-  color: #ffffff;
+  color: var(--black);
 }
 a.indent{
   text-indent: -9999px;
@@ -23,6 +23,8 @@ a.indent{
   --deepgray: #f0f0f0;
   --gray: #f7f7f7;
   --vh: 9.59px;
+  --main: #fcf3eb;
+  --mainbg: #e7dbd1;
 }
 
 /* font size */
@@ -56,4 +58,10 @@ a.indent{
 
 .f22 {
   font-size: 22px;
+}
+.btn-main{
+	background-color: var(--mainbg);
+}
+.btn-main:hover{
+	background-color: var(--main);
 }

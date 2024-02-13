@@ -23,58 +23,61 @@ public class thymeleafController {
 
 	@GetMapping("/feed")
 	public String feed() {
-		return "feed/feed2";
+		return "thymeleaf/feed/feed2";
 	}
 
 	@GetMapping("/inner")
 	public String inner() {
-		return "inner/inner";
+		return "thymeleaf/inner/inner";
 	}
 
 	@GetMapping("/band")
 	public String band() {
-		return "band/band";
+		return "thymeleaf/band/band";
 	}
 
 	@GetMapping("/aicc")
 	public String aicc() {
-		return "aicc/aicc";
+		return "thymeleaf/aicc/aicc";
 	}
 
 	@GetMapping("/info")
 	public String info() {
-		return "info/info";
+		return "thymeleaf/info/info";
 	}
 
 	@GetMapping("/home")
 	public String home() {
 	
-		return "home/home";
+		return "thymeleaf/home/home";
 	}
 
 	@GetMapping("/mypage")
 	public String mypage() {
-		return "mypage/mypage";
+		return "thymeleaf/mypage/mypage";
 	}
 
 	@GetMapping("/addMember")
 	public String addMember() {
-		return "Member/addMember";
+		return "thymeleaf/Member/addMember";
 	}
-
+	@GetMapping("/map")
+	public String map() {
+		return "thymeleaf/map/map";
+	}
 	@GetMapping("/login")
 	public String login() {
-		return "Member/login";
+		return "thymeleaf/Member/login";
 	}
 
 	@GetMapping("/FindId")
 	public String FindId() {
-		return "Member/FindId";
+		return "thymeleaf/Member/FindId";
 	}
 
 	@GetMapping("/FindPw")
 	public String FindPw() {
-		return "Member/FindPw";
+		return "thymeleaf/Member/FindPw";
 	}
 
 	@GetMapping("/nav")
@@ -96,7 +99,6 @@ public class thymeleafController {
 	public String welcome(Model model) {
 		System.out.println(eventDAO.list() + "호출");
 		model.addAttribute("list",eventDAO.list());
-		
 		return "welcome";
 	}
 

@@ -8,9 +8,6 @@
     color: var(--brown);
 }
 
-*{
-    font-family: unset;
-}
 
 #info{
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';

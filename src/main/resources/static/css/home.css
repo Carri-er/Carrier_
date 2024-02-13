@@ -7,7 +7,7 @@
 
   /*메인 캐러셀 스타일*/
   div.home_carousel {
-  	background-color: rgb(231, 219, 209);
+  	background-color: var(--main);
   	position: relative;
   }
 
@@ -111,7 +111,7 @@
 
   /*Datalab nav 스타일*/
   div.home_dl_nav {
-  	background-color: #fcf3eb;
+  	background-color: var(--mainbg);
   	border: 1px solid #fcf3eb;
   	border-radius: 10px;
   }
