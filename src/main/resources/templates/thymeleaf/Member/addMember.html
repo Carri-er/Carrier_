@@ -1,68 +1,35 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html lang="en">
 
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap demo</title>
+<title>SIGN UP</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/common.css">
 <link rel="stylesheet" href="../css/nav.css">
 <link rel="stylesheet" href="../css/footer.css">
-<!--파비콘영역-->
-<link rel="apple-touch-icon" sizes="57x57"
-	href="../img/favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60"
-	href="../img/favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72"
-	href="../img/favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76"
-	href="../img/favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114"
-	href="../img/favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120"
-	href="../img/favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144"
-	href="../img/favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152"
-	href="../img/favicon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180"
-	href="../img/favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"
-	href="../img/favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32"
-	href="../img/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96"
-	href="../img/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16"
-	href="../img/favicon/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage"
-	content="../img/favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-<!--파비콘영역 끝-->
 </head>
 
 <body>
-	<!-- addMember 페이지 -->
 	<div th:replace="nav/nav::nav"></div>
+	<!-- addMember 페이지 -->
 	<div class="container addMember_wrap">
 		<div class="row mb-5">
 			<div class="col-lg-8 mx-auto">
-				<form class="row g-3 addMember_form p-3 rounded shadow my-3">
-					<h1>회원가입</h1>
+				<form class="row g-3 addMember_form p-3 rounded shadow my-3 p-5 rounded-3 gap-2">
+					<h1 class="p-0 m-0 text-center">회원가입</h1>
 					<div class="col-12">
 						<label for="name" class="form-label">이름</label> <input type="text"
-							class="form-control" id="name" name="name">
+							class="form-control" id="name" name="name" placeholder="이름">
 					</div>
 					<div class="col-12">
 						<label for="id" class="form-label">아이디</label> <input type="text"
-							class="form-control" id="id" name="id">
+							class="form-control" id="id" name="id" placeholder="아이디">
 					</div>
 					<div class="col-12">
 						<label for="password" class="form-label">비밀번호</label> <input
@@ -70,102 +37,129 @@
 							name="password">
 					</div>
 					<div class="col-12">
-						<label for="passwordCheek" class="form-label">비밀번호체크</label> <input
+						<label for="passwordCheek" class="form-label">비밀번호 확인</label> <input
 							type="text" class="form-control" id="passwordCheek"
-							placeholder="비밀번호" name="passwordCheek">
+							placeholder="비밀번호 확인" name="passwordCheek">
+					</div>
+					<div class="col-12 form-group">
+						<div class="row align-items-center">
+							<label for="mail1" class="d-block">이메일</label>
+							<div class="col-5">
+								<input type="text" class="form-control d-inline" id="mail1"
+									name="mail1" placeholder="e-mail">
+							</div>
+							@
+							<div class="col">
+								<select name="mail2" id="" class="form-select d-inline">
+									<option value="naver.com">naver.com</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="hotmail.com">hotmail.com</option>
+								</select>
+							</div>
+						</div>
 					</div>
 					<div class="form-group">
-						<label for="mail1" class="d-block">이메일</label> <input type="text"
-							class="form-control w-25 d-inline" id="mail1" name="mail1"
-							placeholder="e-mail"> @ <select name="mail2" id=""
-							class="form-select w-50 d-inline">
-							<option value="naver.com">naver.com</option>
-							<option value="gmail.com">gmail.com</option>
-							<option value="hotmail.com">hotmail.com</option>
-						</select>
+						<label for="phone" class="d-block">전화번호</label>
+						<div class="row align-items-center">
+							<div class="col">
+								<select name="phone1" id=""
+									class="form-select d-inline custom-select ">
+									<option value="">앞번호 선택</option>
+									<option value="010">010</option>
+									<option value="02">02</option>
+									<option value="031">031</option>
+								</select>
+							</div>
+							-
+							<div class="col">
+								<input type="text" class="form-control d-inline" id="phone2"
+									name="phone2" placeholder="중간번호" maxlength="4">
+							</div>
+							-
+							<div class="col">
+								<input type="text" class="form-control d-inline" id="phone3"
+									name="phone3" placeholder="뒷자리" maxlength="4">
+							</div>
+						</div>
 					</div>
-					<div class="form-group">
-						<label for="phone" class="d-block">전화번호</label> <select
-							name="phone1" id=""
-							class="form-select d-inline w-25 custom-select ">
-							<option value="">앞번호 선택</option>
-							<option value="010">010</option>
-							<option value="02">02</option>
-							<option value="031">031</option>
-
-
-						</select> <input type="text" class="form-control d-inline w-25" id="phone2"
-							name="phone2" placeholder="중간번호" maxlength="4"> <input
-							type="text" class="form-control d-inline w-25" id="phone3"
-							name="phone3" placeholder="뒷자리" maxlength="4">
-					</div>
 
 					<div class="form-group">
-						<label for="id" class="d-block">생일</label> <select name="birthyy"
-							id="" class="form-select d-inline w-25 custom-select ">
-							<option value="">년도 선택</option>
-							<option value="2024">2024년</option>
-							<option value="2023">2023년</option>
-							<option value="2022">2022년</option>
-							<option value="2021">2021년</option>
-							<option value="2020">2020년</option>
-							<option value="2019">2019년</option>
-							<option value="2018">2018년</option>
-							<option value="2017">2017년</option>
-							<option value="2016">2016년</option>
-							<option value="2015">2015년</option>
-							<option value="2014">2014년</option>
-							<option value="2013">2013년</option>
-							<option value="2012">2012년</option>
-							<option value="2011">2011년</option>
-							<option value="2010">2010년</option>
-							<option value="2009">2009년</option>
-							<option value="2008">2008년</option>
-							<option value="2007">2007년</option>
-							<option value="2006">2006년</option>
-							<option value="2005">2005년</option>
-							<option value="2004">2004년</option>
-							<option value="2003">2003년</option>
-							<option value="2002">2002년</option>
-							<option value="2001">2001년</option>
-							<option value="2000">2000년</option>
-							<option value="1999">1999년</option>
-							<option value="1998">1998년</option>
-							<option value="1997">1997년</option>
-							<option value="1996">1996년</option>
-							<option value="1995">1995년</option>
-							<option value="1994">1994년</option>
-							<option value="1993">1993년</option>
-							<option value="1992">1992년</option>
-							<option value="1991">1991년</option>
-							<option value="1990">1990년</option>
-							<option value="1989">1989년</option>
-							<option value="1988">1988년</option>
-							<option value="1987">1987년</option>
-							<option value="1986">1986년</option>
-							<option value="1985">1985년</option>
-							<option value="1984">1984년</option>
-							<option value="1983">1983년</option>
-							<option value="1982">1982년</option>
-							<option value="1981">1981년</option>
-							<option value="1980">1980년</option>
-						</select> <select name="birthmm" id=""
-							class="form-select d-inline w-25 custom-select">
-							<option value="">월</option>
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-						</select> <input type="text" class="form-control d-inline w-25"
-							id="birthdd" name="birthdd" placeholder="일" maxlength="2">
+						<label for="id" class="d-block">생일</label>
+						<div class="row">
+							<div class="col">
+								<select name="birthyy" id=""
+									class="form-select d-inline custom-select ">
+									<option value="">년도 선택</option>
+									<option value="2024">2024년</option>
+									<option value="2023">2023년</option>
+									<option value="2022">2022년</option>
+									<option value="2021">2021년</option>
+									<option value="2020">2020년</option>
+									<option value="2019">2019년</option>
+									<option value="2018">2018년</option>
+									<option value="2017">2017년</option>
+									<option value="2016">2016년</option>
+									<option value="2015">2015년</option>
+									<option value="2014">2014년</option>
+									<option value="2013">2013년</option>
+									<option value="2012">2012년</option>
+									<option value="2011">2011년</option>
+									<option value="2010">2010년</option>
+									<option value="2009">2009년</option>
+									<option value="2008">2008년</option>
+									<option value="2007">2007년</option>
+									<option value="2006">2006년</option>
+									<option value="2005">2005년</option>
+									<option value="2004">2004년</option>
+									<option value="2003">2003년</option>
+									<option value="2002">2002년</option>
+									<option value="2001">2001년</option>
+									<option value="2000">2000년</option>
+									<option value="1999">1999년</option>
+									<option value="1998">1998년</option>
+									<option value="1997">1997년</option>
+									<option value="1996">1996년</option>
+									<option value="1995">1995년</option>
+									<option value="1994">1994년</option>
+									<option value="1993">1993년</option>
+									<option value="1992">1992년</option>
+									<option value="1991">1991년</option>
+									<option value="1990">1990년</option>
+									<option value="1989">1989년</option>
+									<option value="1988">1988년</option>
+									<option value="1987">1987년</option>
+									<option value="1986">1986년</option>
+									<option value="1985">1985년</option>
+									<option value="1984">1984년</option>
+									<option value="1983">1983년</option>
+									<option value="1982">1982년</option>
+									<option value="1981">1981년</option>
+									<option value="1980">1980년</option>
+								</select>
+							</div>
+							<div class="col">
+								<select name="birthmm" id=""
+									class="form-select d-inline custom-select">
+									<option value="">월</option>
+									<option value="01">01</option>
+									<option value="02">02</option>
+									<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+									<option value="06">06</option>
+									<option value="07">07</option>
+									<option value="08">08</option>
+									<option value="09">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+							</div>
+							<div class="col">
+								<input type="text" class="form-control d-inline" id="birthdd"
+									name="birthdd" placeholder="일" maxlength="2">
+							</div>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="thema" class="d-block">선호테마</label> <select
@@ -205,15 +199,18 @@
 							<option value="17">제주</option>
 						</select>
 					</div>
-					<div class="col-12">
-						<button type="submit" class="btn btn-main">가입하기</button>
+					<!-- 제출 -->
+					<div class="col-12 mt-3">
+						<button type="submit" class="btn btn-main w-100 p-3 rounded-4">가입하기</button>
 					</div>
-
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
 	</div>
+	<!--footer-->
 	<div th:replace="footer/footer::footer"></div>
+	
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
