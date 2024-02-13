@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,25 +20,25 @@
 	<div class="container addMember_wrap">
 		<div class="row mb-5">
 			<div class="col-12 col-xl-6 mx-auto">
-				<form class="row g-3 addMember_form p-3 my-3 p-5 rounded-3 gap-2" action="/addMember" method="post">
+				<form class="row g-3 addMember_form my-3 p-5 rounded-3 gap-2" action="/signup" method="post" enctype="multipart/form-data">
 					<h3 class="p-0 m-0 text-center mb-4">회원가입</h3>
 					<div class="col-8 col-xl-6 m-auto text-center">
 						<img id="profileimage" src="../img/mypage/user_rabbit.jpg" alt="userImg" class="rounded-circle border" width="200" height="200"/>
-						<input type='file' class="form-control mt-3" onchange="readURL(this);" />
+						<input type='file' class="form-control mt-3" onchange="readURL(this);" name="Member_profileimage" />
 					</div>
 					<div class="col-12">
 						<label for="name" class="form-label">이름</label> 
-						<input type="text" class="form-control" id="name" name="name" placeholder="이름">
+						<input type="text" class="form-control" id="name" name="Member_Name" placeholder="이름">
 					</div>
 					<div class="col-12">
 						<label for="id" class="form-label">아이디</label> 
 						<input type="text"
-							class="form-control" id="id" name="id" placeholder="아이디">
+							class="form-control" id="id" name="Member_Id" placeholder="아이디">
 					</div>
 					<div class="col-12">
 						<label for="password" class="form-label">비밀번호</label> <input
 							type="text" class="form-control" id="password" placeholder="비밀번호"
-							name="password">
+							name="Member_Pw">
 					</div>
 					<div class="col-12">
 						<label for="passwordCheek" class="form-label">비밀번호 확인</label> <input
@@ -167,7 +167,7 @@
 					</div>
 					<div class="form-group">
 						<label for="thema" class="d-block form-label">선호테마</label> <select
-							class="form-select" name="thema">
+							class="form-select" name="Member_Thema">
 							<option selected>선호 테마를 골라주세요</option>
 							<option value="1">산</option>
 							<option value="2">실내 여행지</option>
@@ -182,7 +182,7 @@
 					</div>
 					<div class="form-group">
 						<label for="area" class="d-block form-label">선호지역</label> <select
-							class="form-select" name="area">
+							class="form-select" name="Member_Area">
 							<option selected>선호 지역을 골라주세요</option>
 							<option value="1">서울</option>
 							<option value="2">부산</option>
@@ -205,7 +205,7 @@
 					</div>
 					<!-- 제출 -->
 					<div class="col-12 mt-4">
-						<button type="submit" class="btn btn-main w-100 p-3 rounded-4">가입하기</button>
+						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">가입하기</button>
 					</div>
 				</div>
 			</form>
