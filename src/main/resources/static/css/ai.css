@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+/* 글자색 black -> white  */
+*{
+	color: unset;
+}
+
 /* bootstrap reset */
 #ai p{
     margin: 0;
@@ -48,6 +53,7 @@
 
 .text-shadow{
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    color: var(--white);
 }
 
 
