@@ -18,8 +18,8 @@
 		</tr>
 		<c:forEach var="listdto" items="${list}">
 		<tr>
-			<td>${listdto}</td>
-			<td>${listdto}</td>
+			<td>${listdto.getEvent_title()}</td>
+			<td>${listdto.getEvent_content()}</td>
 		</tr>
 		</c:forEach>
 	</table>

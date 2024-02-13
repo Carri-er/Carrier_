@@ -9,4 +9,5 @@ import com.ex.springboot.dto.EventDTO;
 @Mapper
 public interface IEventDAO {
 	public List<EventDTO> list();
+	public EventDTO EventView(String id);
 }
