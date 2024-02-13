@@ -43,7 +43,6 @@ dependencies {
 	//jsp를 사용하려면 필요한 라이브러리 jasper 설치 사용을 위한 의존성 주입
 	implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api'
 	//c태그를 사용하기 위한 의존성 주입
-	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
 }
 
 tasks.named('test') {

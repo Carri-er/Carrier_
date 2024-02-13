@@ -17,6 +17,7 @@ public class EventDTO {
 	private String Event_starttime;
 	private String Event_endtime;
 	private String Event_host;
+	private String Event_thumbnail;
 	private String Event_img;
 	private String Event_mapX;
 	private String Event_mapY;
