@@ -497,67 +497,10 @@
   div.dl_more_content {
   	position: absolute;
   	top: 25px;
-  	right: 20px;
+  	right: 0px;
   	cursor: pointer;
   }
-/*==========
-=========== footer
-==========*/
 
-/*footer {
-  position: relative;
-  width: 100%;
-  margin-top: 10%;
-  background: #e7dbd1;
-  min-height: 100px;
-  padding: 20px 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-footer .social-icon,
-footer .footer-menu {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-footer .social-icon li a {
-  font-size: 2rem;
-  color: black;
-  margin: 0 10px;
-  display: inline-block;
-  transition: 0.5s;
-}
-
-footer .footer-menu li a {
-  font-size: 1rem;
-  color: black;
-  margin: 0 10px;
-  display: inline-block;
-  transition: 0.5s;
-  opacity: 0.4;
-}
-
-footer .social-icon li a:hover,
-footer .footer-menu li a:hover {
-  transform: translateY(-10px);
-  opacity: 1;
-}
-
-footer p {
-  color: black;
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  opacity: 0.8;
-}*/
   /*****************************작은 모니터 크기*************/
   @media screen and (min-width:768px) and (max-width:959px) {
   	ul.hotPlace_area_map_ul {
