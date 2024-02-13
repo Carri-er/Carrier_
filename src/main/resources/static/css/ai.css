@@ -14,22 +14,22 @@
 /* ai 전체 틀 */
 #ai {
     width: 100%;
-    /*height: 100%;*/
-    height: calc(100vh - 55px); /* 전체 - nav height */
+    height: 100%;
+    /*height: calc(100vh - 55px); !* 전체 - nav height *!*/
+    /*height: calc(100vh - 55px); !* 전체 - nav height *!*/
     background: #618BF2; /* 임시 지정 */
 }
 
 /* 캐로셀 안 Box 틀 */
 #ai .ai-box {
     margin: 100px auto 200px;
-    width: 55%;
     height: 500px;
     text-align: center;
     padding: 50px 50px 130px;
 }
 
 #ai .ai-filter-box {
-    height: 100%;
+    height: 72%;
     margin-bottom: 150px;
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
     background: rgba(255, 255, 255, 0.15);
@@ -54,6 +54,7 @@
 /* carousel 속성 변경 */
 #ai .carousel-item {
     color: white;
+    height: 100vh;
 }
 
 #ai .carousel-indicators{
@@ -71,11 +72,12 @@
 /* 캐로셀 <> 버튼 모이게 */
 .carousel-control-next, .carousel-control-prev {
     width: 30%;
+    margin-bottom: 85px;
 }
 
 /* ------------------- 1번째 화면 -------------------- */
 .carousel-inner .carousel-item{
-    background: url("../img/ai/bg_fist_top.png") no-repeat;
+    background: url("../img/aicc/bg_fist_top.png") no-repeat;
 }
 
 .carousel-inner .ai-box > em {
@@ -180,7 +182,7 @@
     width: 30px;
     height: 20px;
     transition: transform 500ms ease, opacity 250ms ease;
-    background: url(../img/ai/btn_planner_cos1.png);
+    background: url(../img/aicc/btn_planner_cos1.png);
 }
 
 /* START BTN - animation */
@@ -227,13 +229,14 @@
     }
 }
 
-/* Robot */
+/* 1번째 화면 바닥 */
+
 .carousel-inner .carousel-item:first-child::after{
     content: "";
     display: block;
     width: 100%;
-    height: 100px;
-    background: url("../img/ai/bg_fist_btm.jpg") no-repeat center;
+    height: 169px;
+    background: url("../img/aicc/bg_fist_btm.jpg") no-repeat center;
 }
 
 /*--------------------- 나이 선택  in carousel ----------------------*/
@@ -289,7 +292,7 @@
     position: absolute;
     left: 50%;
     bottom: 0;
-    margin-left: -75px;
+    margin-left: -81px;
     margin-bottom: 223px;
     /*backdrop-filter: blur( 1px );*/
 }
@@ -299,28 +302,30 @@
 .period-box-parent{
     width: 100%;
 }
+
 .period-box{
     width: unset;
     flex-direction: column;
 }
 
 .period-box>div{
-    box-sizing: border-box;
-    width: 140px;
-    height: 140px;
-    scale: 70%;
+    width: 108px;
+    height: 108px;
 }
 
+.period-box-parent>div:nth-of-type(1) .period-box>div{
+    background: url("../img/aicc/icon_travel_period.png") no-repeat;
+    background-size: 108px;
+}
 .period-box-parent>div:nth-of-type(2) .period-box>div{
-    background: url("../img/ai/icon_travel_period.png") no-repeat;
+    background: url("../img/aicc/icon_travel_period.png") no-repeat;
+    background-size: 108px;
+    background-position-y: -108px;
 }
 .period-box-parent>div:nth-of-type(3) .period-box>div{
-    background: url("../img/ai/icon_travel_period.png") no-repeat;
-    background-position-y: -140px;
-}
-.period-box-parent>div:nth-of-type(4) .period-box>div{
-    background: url("../img/ai/icon_travel_period.png") no-repeat;
-    background-position-y: -280px;
+    background: url("../img/aicc/icon_travel_period.png") no-repeat;
+    background-size: 108px;
+    background-position-y: -216px;
 }
 
 /*-------------- theme 선택 ---------------*/
@@ -357,47 +362,72 @@
 
 
 /* 이미지 삽입 */
+.theme-box-parent>div:nth-of-type(1)>div{
+    background: url("../img/aicc/theme-1.jpg") no-repeat center/cover;
+    height: 100px;
+}
 .theme-box-parent>div:nth-of-type(2)>div{
-    background: url("../img/ai/theme-1.jpg") no-repeat center/cover;
+    background: url("../img/aicc/theme-2.jpg") no-repeat center/cover;
     height: 100px;
 }
 .theme-box-parent>div:nth-of-type(3)>div{
-    background: url("../img/ai/theme-2.jpg") no-repeat center/cover;
+    background: url("../img/aicc/theme-3.jpg") no-repeat center/cover;
     height: 100px;
 }
 .theme-box-parent>div:nth-of-type(4)>div{
-    background: url("../img/ai/theme-3.jpg") no-repeat center/cover;
+    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
     height: 100px;
 }
 .theme-box-parent>div:nth-of-type(5)>div{
-    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    background: url("../img/aicc/theme-cafe.jpg") no-repeat center/cover;
     height: 100px;
 }
 .theme-box-parent>div:nth-of-type(6)>div{
-    background: url("../img/ai/theme-cafe.jpg") no-repeat center/cover;
+    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
     height: 100px;
 }
 .theme-box-parent>div:nth-of-type(7)>div{
-    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
     height: 100px;
 }
 .theme-box-parent>div:nth-of-type(8)>div{
-    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
     height: 100px;
 }
 .theme-box-parent>div:nth-of-type(9)>div{
-    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
-    height: 100px;
-}
-.theme-box-parent>div:nth-of-type(10)>div{
-    background: url("../img/ai/theme-park.jpg") no-repeat center/cover;
+    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
     height: 100px;
 }
 
 
 /*--------------------------------- 미디어쿼리 ----------------------------------*/
-@media (min-width: 700px){
-	.age-box {
-	    width: 10px;
-	}
+@media (max-width: 786px){
+    /* 기간 반응형 */
+    .period-box>div{
+        width: 86px;
+        height: 86px;
+    }
+    
+    .period-box-parent>div:nth-of-type(1) .period-box>div{
+        background: url("../img/aicc/icon_travel_period.png") no-repeat;
+        background-size: 86px;
+    }
+    .period-box-parent>div:nth-of-type(2) .period-box>div{
+        background: url("../img/aicc/icon_travel_period.png") no-repeat;
+        background-size: 86px;
+        background-position-y: -86px;
+    }
+    .period-box-parent>div:nth-of-type(3) .period-box>div{
+        background: url("../img/aicc/icon_travel_period.png") no-repeat;
+        background-size: 86px;
+        background-position-y: -172px;
+    }
+}
+
+@media (max-width: 700px){
+    /* 캐로셀 화살표 너비 늘림 */
+    .carousel-control-next, .carousel-control-prev {
+        width: 10%;
+    }
+    
 }
