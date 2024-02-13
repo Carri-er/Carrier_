@@ -7,23 +7,29 @@
   padding: 0;
   list-style: none;
   box-sizing: border-box;
+  color: var(--black);
+
 }
 
 a {
   text-decoration: none;
   color: var(--black);
 }
+
 a.indent{
   text-indent: -9999px;
   font-size: 0;
 }
+
+
 /* color palette*/
 :root {
-  --black: #000000;
-  --deepgray: #f0f0f0;
-  --gray: #f7f7f7;
   --vh: 9.59px;
-  --main: #fcf3eb;
+  --black: #3c3c3c;
+  --white: #ffffff;
+  --deepgray: #a5a5a5;
+  --gray: #f0f0f0;
+  --main: #ffec9f;
   --mainbg: #e7dbd1;
 }
 
@@ -59,9 +65,19 @@ a.indent{
 .f22 {
   font-size: 22px;
 }
+
+/* BTN 버튼 색상 정의 */
 .btn-main{
-	background-color: var(--mainbg);
+	background-color: var(--main);
 }
 .btn-main:hover{
-	background-color: var(--main);
+	background-color: var(--mainbg);
+}
+
+/* form 양식 */
+.form-label{
+  color: var(--black);
+}
+input, .form-control {
+	color: var(--deepgray);
 }
