@@ -48,7 +48,6 @@ public class thymeleafController {
 
 	@GetMapping("/home")
 	public String home() {
-	
 		return "thymeleaf/home/home";
 	}
 
@@ -57,10 +56,11 @@ public class thymeleafController {
 		return "thymeleaf/mypage/mypage";
 	}
 
-	@GetMapping("/addMember")
-	public String addMember() {
-		return "thymeleaf/Member/addMember";
-	}
+//	@GetMapping("/addMember")
+//	public String addMember() {
+//		return "thymeleaf/Member/addMember";
+//	}
+	
 	@GetMapping("/map")
 	public String map() {
 		return "thymeleaf/map/map";

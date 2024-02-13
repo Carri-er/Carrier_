@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,15 +19,20 @@
 	<!-- addMember 페이지 -->
 	<div class="container addMember_wrap">
 		<div class="row mb-5">
-			<div class="col-lg-8 mx-auto">
-				<form class="row g-3 addMember_form p-3 rounded shadow my-3 p-5 rounded-3 gap-2">
-					<h1 class="p-0 m-0 text-center">회원가입</h1>
-					<div class="col-12">
-						<label for="name" class="form-label">이름</label> <input type="text"
-							class="form-control" id="name" name="name" placeholder="이름">
+			<div class="col-12 col-xl-6 mx-auto">
+				<form class="row g-3 addMember_form p-3 my-3 p-5 rounded-3 gap-2" action="/addMember" method="post">
+					<h3 class="p-0 m-0 text-center mb-4">회원가입</h3>
+					<div class="col-8 col-xl-6 m-auto text-center">
+						<img id="profileimage" src="../img/mypage/user_rabbit.jpg" alt="userImg" class="rounded-circle border" width="200" height="200"/>
+						<input type='file' class="form-control mt-3" onchange="readURL(this);" />
 					</div>
 					<div class="col-12">
-						<label for="id" class="form-label">아이디</label> <input type="text"
+						<label for="name" class="form-label">이름</label> 
+						<input type="text" class="form-control" id="name" name="name" placeholder="이름">
+					</div>
+					<div class="col-12">
+						<label for="id" class="form-label">아이디</label> 
+						<input type="text"
 							class="form-control" id="id" name="id" placeholder="아이디">
 					</div>
 					<div class="col-12">
@@ -43,7 +47,7 @@
 					</div>
 					<div class="col-12 form-group">
 						<div class="row align-items-center">
-							<label for="mail1" class="d-block">이메일</label>
+							<label for="mail1" class="d-block form-label">이메일</label>
 							<div class="col-5">
 								<input type="text" class="form-control d-inline" id="mail1"
 									name="mail1" placeholder="e-mail">
@@ -59,7 +63,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="phone" class="d-block">전화번호</label>
+						<label for="phone" class="d-block form-label">전화번호</label>
 						<div class="row align-items-center">
 							<div class="col">
 								<select name="phone1" id=""
@@ -84,7 +88,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="id" class="d-block">생일</label>
+						<label for="id" class="d-block form-label">생일</label>
 						<div class="row">
 							<div class="col">
 								<select name="birthyy" id=""
@@ -162,7 +166,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="thema" class="d-block">선호테마</label> <select
+						<label for="thema" class="d-block form-label">선호테마</label> <select
 							class="form-select" name="thema">
 							<option selected>선호 테마를 골라주세요</option>
 							<option value="1">산</option>
@@ -177,7 +181,7 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="area" class="d-block">선호지역</label> <select
+						<label for="area" class="d-block form-label">선호지역</label> <select
 							class="form-select" name="area">
 							<option selected>선호 지역을 골라주세요</option>
 							<option value="1">서울</option>
@@ -200,7 +204,7 @@
 						</select>
 					</div>
 					<!-- 제출 -->
-					<div class="col-12 mt-3">
+					<div class="col-12 mt-4">
 						<button type="submit" class="btn btn-main w-100 p-3 rounded-4">가입하기</button>
 					</div>
 				</div>
@@ -215,6 +219,23 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 		crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<script>
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	
+	            reader.onload = function (e) {
+	                $('#profileimage')
+	                    .attr('src', e.target.result);
+	            };
+	
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	</script>	
 </body>
 
 </html>
