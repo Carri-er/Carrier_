@@ -31,10 +31,10 @@ public class thymeleafController {
 		return "thymeleaf/inner/inner";
 	}
 
-	@GetMapping("/band")
-	public String band() {
-		return "thymeleaf/band/band";
-	}
+//	@GetMapping("/band")
+//	public String band() {
+//		return "thymeleaf/band/band";
+//	}
 
 	@GetMapping("/aicc")
 	public String aicc() {
