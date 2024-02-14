@@ -71,7 +71,8 @@ a.indent{
 	background-color: var(--main);
 }
 .btn-main:hover{
-	background-color: var(--mainbg);
+	border: 1px solid var(--main);
+	background-color: var(--white);
 }
 
 /* form 양식 */
