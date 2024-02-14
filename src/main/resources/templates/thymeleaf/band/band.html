@@ -46,7 +46,7 @@
         </div>
       
         <!-- 가입한 밴드 출력 영역 -->
-        <div class="container join_band_wapper gx-0">
+        <div class="container join_band_wapper gx-0 mb-5">
             <div class="row join_Band gx-0">
                 <!-- 밴드 만들기 영역 -->
 				<div class="col-sm-4 join_band_item create_band"
@@ -57,39 +57,21 @@
 					</a>
 				</div>
 
-				<!-- 가입한 밴드 출력 영역 -->
-                <div class="col-sm-4 join_band_item ">
-                    <img src="../img/band/content/강원도 탄광문화촌.jpg" class="img-fluid join_band_item_img" alt="...">
-                    <div class="join_band_item_text">
-                        <strong>밴드 제목</strong>
-                        <span>멤버 </span>
-                    </div> 
+				<!-- 가입한 밴드 출력 영역 / 반복-->
+				<div class="col-sm-4 join_band_item" th:each ="bandList:${bnadList}">
+					<a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="join_band_item_link">
+						<div class="join_band_item_imgBox">
+	                    	<img th:src="@{'/resources/band_thumnail/'+ ${bandList.getBand_thumnail()}}" class="img-fluid join_band_item_img" alt="...">
+	                    </div>
+	                    <div class="join_band_item_text">
+	                        <strong th:text="${bandList.getBand_name()}">밴드 제목</strong>
+		             	    <span>멤버 <span th:text="${bandList.getBand_memberCount()}" ></span></span>
+		                </div> 
+		            </a>
                 </div>
-                <div class="col-sm-4 join_band_item ">
-					<img src="../upload/bandThumbnail/call (21).jpg" alt="#" />
-					<div class="join_band_item_text">
-                        <strong>밴드 제목</strong>
-                        <span>멤버 </span>
-                    </div> 
-                </div>
-                <div class="col-sm-4 join_band_item ">
-
-                </div>
-                <div class="col-sm-4 join_band_item ">
-
-                </div>
-
-                <div class="col-sm-4 join_band_item ">
-
-                </div>
-                <div class="col-sm-4 join_band_item ">
-
-                </div>
-
-
 
             </div>
-        </div>
+        </div> <!-- join_band_wapper -->
 
         <!-- 밴드 추천 영역 -->
         <div class="band_recomand_wrapper">
