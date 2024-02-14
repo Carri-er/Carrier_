@@ -17,19 +17,14 @@ import com.ex.springboot.dao.IEventDAO;
 @Controller
 @RequestMapping
 public class EventController {
-
-	@GetMapping("/")
-	public String main() {
-		System.out.println(eventDAO.list());
-		return "thymeleaf/home/home";
-	}
-
+	//여행 정보
 	@GetMapping("/info")
 	public String info(Model model) {
 		System.out.println(eventDAO.list() + "호출");
 		model.addAttribute("list",eventDAO.list());
 		return "thymeleaf/info/info";
 	}
+	//여행 상세 정보
 	@GetMapping("/Event_view")
 	public String Event_view(HttpServletRequest request, Model model) {
 		String eid=request.getParameter("id");
@@ -37,8 +32,15 @@ public class EventController {
 		model.addAttribute("view",eventDAO.EventView(eid));
 		return "thymeleaf/info/Event_view";
 	}
-
-
+	//여행 글쓰기로 이동
+	@GetMapping("/Event_write")
+	public String Event_write() {
+		return "thymeleaf/info/Event_write";
+	}
+	//여행 글 업로드
+	
+	
+	
 	@Autowired
 	private com.ex.springboot.dao.IEventDAO eventDAO; // 다형성
 

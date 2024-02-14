@@ -1,0 +1,189 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGN UP</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/nav.css">
+<link rel="stylesheet" href="../css/footer.css">
+</head>
+
+<body>
+	<div th:replace="nav/nav::nav"></div>
+	<!-- addMember 페이지 -->
+	<div class="container addMember_wrap">
+		<div class="row mb-5">
+			<div class="col-12 col-xl-6 mx-auto">
+				<form class="row g-3 addMember_form p-5 rounded-3 gap-2"
+					action="/Event_write_content" method="post"
+					enctype="multipart/form-data">
+					<h3 class="p-0 m-0 text-center mb-4">여행정보 글 작성</h3>
+					<div class="col-12 col-xl-12 m-auto text-center">
+						<div class="col-12 text-start">여행정보 글 이미지</div>
+						<img id="profileimage" src="../img/mypage/user_rabbit.jpg"
+							alt="userImg" class=" border" width="200" height="200" /> <input
+							type='file' class="form-control mt-4" onchange="readURL(this);"
+							name="Event_thumbnail" />
+					</div>
+					<div class="col-12">
+						<label for="Event_name" class="form-label">여행지명</label> <input
+							type="text" class="form-control" id="Event_name"
+							name="Event_name" placeholder="여행지명">
+					</div>
+					<div class="col-12">
+						<div class="form-floating">
+							<input type="text" class="form-control" id="title" name="Event_title"
+							placeholder="글 제목">
+						<label for="Event_title" class="form-label">글 제목</label> 
+							</div>
+					</div>
+					<div class="col-12">
+						<div class="form-floating">
+							<textarea class="form-control" placeholder="Leave a comment here"
+								id="Event_content" style="height: 400px"></textarea>
+							<label for="Event_content">글 내용</label>
+						</div>
+
+					</div>
+					<div class="col-12">
+						<label for="passwordCheek" class="form-label">비밀번호 확인</label> <input
+							type="text" class="form-control" id="passwordCK"
+							placeholder="비밀번호 확인" name="passwordCK">
+					</div>
+					<div class="col-12 form-group">
+						<div class="row align-items-center">
+							<label for="mail1" class="d-block form-label">이메일</label>
+							<div class="col-5">
+								<input type="text" class="form-control d-inline" id="mail1"
+									name="mail1" placeholder="e-mail">
+							</div>
+							@
+							<div class="col">
+								<select name="mail2" id="" class="form-select d-inline">
+									<option value="naver.com">naver.com</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="hotmail.com">hotmail.com</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="phone" class="d-block form-label">전화번호</label>
+						<div class="row align-items-center">
+							<div class="col">
+								<select name="phone1" id=""
+									class="form-select d-inline custom-select ">
+									<option value="">앞번호 선택</option>
+									<option value="010">010</option>
+									<option value="02">02</option>
+									<option value="031">031</option>
+								</select>
+							</div>
+							-
+							<div class="col">
+								<input type="text" class="form-control d-inline" id="phone2"
+									name="phone2" placeholder="중간번호" maxlength="4">
+							</div>
+							-
+							<div class="col">
+								<input type="text" class="form-control d-inline" id="phone3"
+									name="phone3" placeholder="뒷자리" maxlength="4">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="age" class="d-block form-label">연령</label>
+						<div class="row">
+							<div class="col">
+								<select name="Member_Age" id="age"
+									class="form-select d-inline custom-select ">
+									<option value="">연령 선택</option>
+									<option value="19">19세 이하</option>
+									<option value="20">20대</option>
+									<option value="30">30대</option>
+									<option value="40">40대</option>
+									<option value="50">50대 이상</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="thema" class="d-block form-label">선호테마</label> <select
+							class="form-select" name="Member_Thema">
+							<option selected>선호 테마를 골라주세요</option>
+							<option value="산">산</option>
+							<option value="실내">실내 여행지</option>
+							<option value="액티비티">액티비티</option>
+							<option value="테마파크">테마파크</option>
+							<option value="문화,역사">문화 | 역사</option>
+							<option value="바다">바다</option>
+							<option value="카페">카페</option>
+							<option value="전통시장">전통시장</option>
+							<option value="축제">축제</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="area" class="d-block form-label">선호지역</label> <select
+							class="form-select" name="Member_Area">
+							<option selected>선호 지역을 골라주세요</option>
+							<option value="서울">서울</option>
+							<option value="부산">부산</option>
+							<option value="대구">대구</option>
+							<option value="인천">인천</option>
+							<option value="광주">광주</option>
+							<option value="대전">대전</option>
+							<option value="울산">울산</option>
+							<option value="세종">세종</option>
+							<option value="경기">경기</option>
+							<option value="강원">강원</option>
+							<option value="충북">충북</option>
+							<option value="충남">충남</option>
+							<option value="전북">전북</option>
+							<option value="전남">전남</option>
+							<option value="경북">경북</option>
+							<option value="경남">경남</option>
+							<option value="제주">제주</option>
+						</select>
+					</div>
+					<!-- 제출 -->
+					<div class="col-12 mt-5">
+						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">가입하기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--footer-->
+	<div th:replace="footer/footer::footer"></div>
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#profileimage').attr('src', e.target.result);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
+</body>
+
+</html>
