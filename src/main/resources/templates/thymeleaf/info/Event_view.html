@@ -37,8 +37,11 @@
       <!-- 반복 되는 형태 -->
         <div class="row mb-5">
             <div class="col text-center">
+             <h3 >
+            [<span th:text="${view.getEvent_category()}">버튼</span>]
+            <span th:text="${view.getEvent_title()}"></span>
+               </h3>
                 <img th:src="@{'../img/info/' + ${view.getEvent_thumbnail()}}" alt="" class="img-fluid mx-auto">
-                <p th:text="${view.getEvent_title()}">제목</p>
                 <!-- <img class="img-fluid" src="https://korean.visitkorea.or.kr/resources/images/sub/bg_pic_reg.jpg" alt=""> -->
               </div>
         </div>
@@ -90,7 +93,6 @@
                 	<button class="btn btn-light" th:text="${view.getEvent_tag3()}">버튼</button>
                 	<button class="btn btn-light" th:text="${view.getEvent_tag4()}">버튼</button>
                 	<button class="btn btn-light" th:text="${view.getEvent_tag5()}">버튼</button>
-                    <button class="btn btn-light" th:text="${view.getEvent_category()}">버튼</button>
                     <button class="btn btn-light" th:text="${view.getEvent_area()}">버튼</button>
                     <button class="btn btn-light" th:text="${view.getEvent_area2()}">버튼</button>
                     <button class="btn btn-light" th:text="${view.getEvent_parking()}">버튼</button>
@@ -129,8 +131,13 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	5bceb465ea8b2b4878f8bec64e4f6d05"></script>
     <script th:inline="javascript">
         var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-       /*  var mapx = [[${view.getEvent_mapX()}]]; // 이벤트의 위도 값
-        var mapy = [[${view.getEvent_mapY()}]]; // 이벤트의 경도 값 실행시 주석풀면 오류가 나도 실행은 됨*/
+        var mapContainer = document.getElementById('map'); // 맵을 표시할 div
+        var mapx = /*[[${view.getEvent_mapX()}]]*/ 0; // 이벤트의 위도 값
+        var mapy = /*[[${view.getEvent_mapY()}]]*/ 0; // 이벤트의 경도 값
+        
+        // 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
+        mapx = parseFloat(mapx);
+        mapy = parseFloat(mapy);
             mapOption = { 
                 center: new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
                 level: 4 // 지도의 확대 레벨

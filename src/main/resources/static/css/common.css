@@ -65,7 +65,10 @@ a.indent{
 .f22 {
   font-size: 22px;
 }
-
+/* background-color 버튼 색상 정의 */
+.bg-main{
+	background-color: var(--main);
+}
 /* BTN 버튼 색상 정의 */
 .btn-main{
 	background-color: var(--main);
@@ -74,6 +77,7 @@ a.indent{
 	border: 1px solid var(--main);
 	background-color: var(--white);
 }
+
 
 /* form 양식 */
 .form-label{
