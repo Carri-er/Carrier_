@@ -26,7 +26,7 @@
                 <!-- col1 밴드 이미지, 제목 정보 영역 -->
                 <div class="myBand_content_col_title">
                     <div class="myBand_title_img">
-                        <img th:src="@{'/resources/band_thumnail/'+ ${myBandList.getBand_thumnail()}}" class="img-fluid join_band_item_img" alt="...">
+                        <img th:src="@{'/resources/band_thumbnail/'+ ${myBandList.getBand_thumnail()}}" class="img-fluid join_band_item_img" alt="...">
                     </div>
                     <div class="myBand_title_name">
                         <h3 th:text="${myBandList.getBand_name()}">산림</h3>
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="myBand_write_btn">
-                    	<a th:href="@{'bandFeedWrite'}">
+                    	<a th:href="@{bandFeedWrite}">
                     		<span>글쓰기</span>
                     	</a>
                     </div>
