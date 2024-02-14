@@ -53,8 +53,8 @@
 	<!-- addMember 페이지 -->
 	<div class="container addMember_wrap my-5">
 		<div class="row my-5">
-			<div class="col-md-5 mx-auto my-5">
-				<div class="row g-3 addMember_form p-4 rounded shadow my-5">
+			<div class="col-md-8 col-lg-7 col-xl-5 mx-auto my-5">
+				<div class="row g-3 addMember_form p-4 rounded shadow my-5 px-5">
 					<h3>로그인</h3>
 					<div class="form-group">
 						<label for="id" class="form-label">아이디</label> <input type="text"
@@ -68,8 +68,8 @@
 					<div class="col-12 mt-4 text-center">
 						<button type="submit" class="btn btn-main w-100 p-3 rounded-4">로그인하기</button>
 						<div class="row mt-2">
-							<div class="col my-3">
-								<a href="addMember" class="text-decoration-none">회원 가입 </a> | <a
+							<div class="col-9 m-auto my-3 d-flex justify-content-around">
+								<a th:href="@{addMember}" class="text-decoration-none">회원 가입 </a> | <a
 									href="FindId" class="text-decoration-none text-dark">아이디 찾기</a>
 								| <a href="FindPw" class="text-decoration-none text-dark">비밀번호
 									찾기</a>

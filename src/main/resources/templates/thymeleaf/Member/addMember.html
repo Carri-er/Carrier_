@@ -20,30 +20,33 @@
 	<div class="container addMember_wrap">
 		<div class="row mb-5">
 			<div class="col-12 col-xl-6 mx-auto">
-				<form class="row g-3 addMember_form my-3 p-5 rounded-3 gap-2" action="/signup" method="post" enctype="multipart/form-data">
+				<form class="row g-3 addMember_form p-5 rounded-3 gap-2"
+					action="/signup" method="post" enctype="multipart/form-data">
 					<h3 class="p-0 m-0 text-center mb-4">회원가입</h3>
 					<div class="col-8 col-xl-6 m-auto text-center">
-						<img id="profileimage" src="../img/mypage/user_rabbit.jpg" alt="userImg" class="rounded-circle border" width="200" height="200"/>
-						<input type='file' class="form-control mt-3" onchange="readURL(this);" name="Member_profileimage" />
+						<img id="profileimage" src="../img/mypage/user_rabbit.jpg"
+							alt="userImg" class="rounded-circle border" width="200"
+							height="200" /> <input type='file' class="form-control mt-4"
+							onchange="readURL(this);" name="Member_profileimage" />
 					</div>
 					<div class="col-12">
-						<label for="name" class="form-label">이름</label> 
-						<input type="text" class="form-control" id="name" name="Member_Name" placeholder="이름">
+						<label for="name" class="form-label">이름</label> <input type="text"
+							class="form-control" id="name" name="Member_Name"
+							placeholder="이름">
 					</div>
 					<div class="col-12">
-						<label for="id" class="form-label">아이디</label> 
-						<input type="text"
+						<label for="id" class="form-label">아이디</label> <input type="text"
 							class="form-control" id="id" name="Member_Id" placeholder="아이디">
 					</div>
 					<div class="col-12">
 						<label for="password" class="form-label">비밀번호</label> <input
-							type="text" class="form-control" id="password" placeholder="비밀번호"
-							name="Member_Pw">
+							type="password" class="form-control" id="password"
+							placeholder="비밀번호" name="Member_Pw">
 					</div>
 					<div class="col-12">
 						<label for="passwordCheek" class="form-label">비밀번호 확인</label> <input
-							type="text" class="form-control" id="passwordCheek"
-							placeholder="비밀번호 확인" name="passwordCheek">
+							type="password" class="form-control" id="passwordCK"
+							placeholder="비밀번호 확인" name="passwordCK">
 					</div>
 					<div class="col-12 form-group">
 						<div class="row align-items-center">
@@ -88,80 +91,18 @@
 					</div>
 
 					<div class="form-group">
-						<label for="id" class="d-block form-label">생일</label>
+						<label for="age" class="d-block form-label">연령</label>
 						<div class="row">
 							<div class="col">
-								<select name="birthyy" id=""
+								<select name="Member_Age" id="age"
 									class="form-select d-inline custom-select ">
-									<option value="">년도 선택</option>
-									<option value="2024">2024년</option>
-									<option value="2023">2023년</option>
-									<option value="2022">2022년</option>
-									<option value="2021">2021년</option>
-									<option value="2020">2020년</option>
-									<option value="2019">2019년</option>
-									<option value="2018">2018년</option>
-									<option value="2017">2017년</option>
-									<option value="2016">2016년</option>
-									<option value="2015">2015년</option>
-									<option value="2014">2014년</option>
-									<option value="2013">2013년</option>
-									<option value="2012">2012년</option>
-									<option value="2011">2011년</option>
-									<option value="2010">2010년</option>
-									<option value="2009">2009년</option>
-									<option value="2008">2008년</option>
-									<option value="2007">2007년</option>
-									<option value="2006">2006년</option>
-									<option value="2005">2005년</option>
-									<option value="2004">2004년</option>
-									<option value="2003">2003년</option>
-									<option value="2002">2002년</option>
-									<option value="2001">2001년</option>
-									<option value="2000">2000년</option>
-									<option value="1999">1999년</option>
-									<option value="1998">1998년</option>
-									<option value="1997">1997년</option>
-									<option value="1996">1996년</option>
-									<option value="1995">1995년</option>
-									<option value="1994">1994년</option>
-									<option value="1993">1993년</option>
-									<option value="1992">1992년</option>
-									<option value="1991">1991년</option>
-									<option value="1990">1990년</option>
-									<option value="1989">1989년</option>
-									<option value="1988">1988년</option>
-									<option value="1987">1987년</option>
-									<option value="1986">1986년</option>
-									<option value="1985">1985년</option>
-									<option value="1984">1984년</option>
-									<option value="1983">1983년</option>
-									<option value="1982">1982년</option>
-									<option value="1981">1981년</option>
-									<option value="1980">1980년</option>
+									<option value="">연령 선택</option>
+									<option value="19">19세 이하</option>
+									<option value="20">20대</option>
+									<option value="30">30대</option>
+									<option value="40">40대</option>
+									<option value="50">50대 이상</option>
 								</select>
-							</div>
-							<div class="col">
-								<select name="birthmm" id=""
-									class="form-select d-inline custom-select">
-									<option value="">월</option>
-									<option value="01">01</option>
-									<option value="02">02</option>
-									<option value="03">03</option>
-									<option value="04">04</option>
-									<option value="05">05</option>
-									<option value="06">06</option>
-									<option value="07">07</option>
-									<option value="08">08</option>
-									<option value="09">09</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-								</select>
-							</div>
-							<div class="col">
-								<input type="text" class="form-control d-inline" id="birthdd"
-									name="birthdd" placeholder="일" maxlength="2">
 							</div>
 						</div>
 					</div>
@@ -169,46 +110,46 @@
 						<label for="thema" class="d-block form-label">선호테마</label> <select
 							class="form-select" name="Member_Thema">
 							<option selected>선호 테마를 골라주세요</option>
-							<option value="1">산</option>
-							<option value="2">실내 여행지</option>
-							<option value="3">액티비티</option>
-							<option value="4">테마파크</option>
-							<option value="5">문화 | 역사</option>
-							<option value="6">바다</option>
-							<option value="7">카페</option>
-							<option value="8">전통시장</option>
-							<option value="9">축제</option>
+							<option value="산">산</option>
+							<option value="실내">실내 여행지</option>
+							<option value="액티비티">액티비티</option>
+							<option value="테마파크">테마파크</option>
+							<option value="문화,역사">문화 | 역사</option>
+							<option value="바다">바다</option>
+							<option value="카페">카페</option>
+							<option value="전통시장">전통시장</option>
+							<option value="축제">축제</option>
 						</select>
 					</div>
 					<div class="form-group">
 						<label for="area" class="d-block form-label">선호지역</label> <select
 							class="form-select" name="Member_Area">
 							<option selected>선호 지역을 골라주세요</option>
-							<option value="1">서울</option>
-							<option value="2">부산</option>
-							<option value="3">대구</option>
-							<option value="4">인천</option>
-							<option value="5">광주</option>
-							<option value="6">대전</option>
-							<option value="7">울산</option>
-							<option value="8">세종</option>
-							<option value="9">경기</option>
-							<option value="10">강원</option>
-							<option value="11">충북</option>
-							<option value="12">충남</option>
-							<option value="13">전북</option>
-							<option value="14">전남</option>
-							<option value="15">경북</option>
-							<option value="16">경남</option>
-							<option value="17">제주</option>
+							<option value="서울">서울</option>
+							<option value="부산">부산</option>
+							<option value="대구">대구</option>
+							<option value="인천">인천</option>
+							<option value="광주">광주</option>
+							<option value="대전">대전</option>
+							<option value="울산">울산</option>
+							<option value="세종">세종</option>
+							<option value="경기">경기</option>
+							<option value="강원">강원</option>
+							<option value="충북">충북</option>
+							<option value="충남">충남</option>
+							<option value="전북">전북</option>
+							<option value="전남">전남</option>
+							<option value="경북">경북</option>
+							<option value="경남">경남</option>
+							<option value="제주">제주</option>
 						</select>
 					</div>
 					<!-- 제출 -->
-					<div class="col-12 mt-4">
+					<div class="col-12 mt-5">
 						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">가입하기</button>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
 	<!--footer-->

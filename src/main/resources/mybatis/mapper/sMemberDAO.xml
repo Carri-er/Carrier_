@@ -6,6 +6,9 @@
 	
 	<!-- Sign up : 회원가입 -->
 	<insert id="addMember">
-		INSERT INTO carrier_member VALUES (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, sysdate);
+		INSERT INTO carrier_member 
+			(Member_Name, Member_Age, Member_Id, Member_Email, Member_Phone, Member_Pw, Member_Area, Member_Thema, Member_profileimage, Member_joinDate)
+		VALUES 
+			(#{Member_Name}, #{Member_Age}, #{Member_Id}, #{Member_Email}, #{Member_Phone}, #{Member_Pw}, #{Member_Area}, #{Member_Thema}, #{Member_profileimage}, sysdate)
   	</insert>
 </mapper>
