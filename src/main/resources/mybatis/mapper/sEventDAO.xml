@@ -6,6 +6,20 @@
 	<select id="list" resultType="com.ex.springboot.dto.EventDTO">
 		select * from Event
 	</select>
+	<select id="getDistinctTags" resultType="java.lang.String">
+    SELECT DISTINCT tag
+    FROM (
+        SELECT Event_tag AS Tag FROM Event
+        UNION ALL
+        SELECT Event_tag2 AS Tag FROM Event
+        UNION ALL
+        SELECT Event_tag3 AS Tag FROM Event
+        UNION ALL
+        SELECT Event_tag4 AS Tag FROM Event
+        UNION ALL
+        SELECT Event_tag5 AS Tag FROM Event
+    ) all_tags
+</select>
 	  <select id="EventView" resultType="com.ex.springboot.dto.EventDTO">
    		select * from Event where Event_num = #{param1}
    </select>

@@ -99,42 +99,23 @@
 						<div class="col">
 							<hr>
 						</div>
-						<div class="col-12">
+						<div class="col-12" >
 							<button type="button"
 								class="btn rounded-pill px-3 btn-secondary f14">#전체</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#서울
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#부산
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#대구
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#인천
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#광주
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#대전
+							<button type="button"
+								class="btn rounded-pill px-3 btn-light f14"  th:each = "list:${list}">#
+								<span th:text="${list.getEvent_area()}"></span>
 							</button>
 						</div>
 						<div class="col-11 m-auto">
 							<hr>
 						</div>
 						<div class="col-12">
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#관광지
+							<button type="button" class="btn rounded-pill px-3 btn-secondary f14">#전체 태그
 							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#자연
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#문화시설
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#레포츠
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#이색체험
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#데이트
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#효도여행
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#육아
-							</button>
+						 <button type="button" class="btn rounded-pill px-3 btn-light f14" th:each="tag : ${tags}">
+        #<span th:text="${tag}"></span>
+    </button>
 						</div>
 					</div>
 				</div>

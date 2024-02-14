@@ -1,5 +1,8 @@
 package com.ex.springboot.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +51,8 @@ public class thymeleafController {
 	public String info(Model model) {
 		System.out.println(eventDAO.list() + "호출");
 		model.addAttribute("list",eventDAO.list());
+		System.out.println(eventDAO.getDistinctTags() + "호출");
+		model.addAttribute("tags",eventDAO.getDistinctTags());
 		return "thymeleaf/info/info";
 	}
 	@GetMapping("/Event_view")

@@ -129,8 +129,12 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	5bceb465ea8b2b4878f8bec64e4f6d05"></script>
     <script th:inline="javascript">
         var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-       /*  var mapx = [[${view.getEvent_mapX()}]]; // 이벤트의 위도 값
-        var mapy = [[${view.getEvent_mapY()}]]; // 이벤트의 경도 값 실행시 주석풀면 오류가 나도 실행은 됨*/
+        
+        var mapx = /*[[${view.getEvent_mapX()}]]*/ 0; // 이벤트의 위도 값
+        var mapy = /*[[${view.getEvent_mapY()}]]*/ 0; // 이벤트의 경도 값
+        mapx = parseFloat(mapx); // 문자열을 숫자로 변환
+        mapy = parseFloat(mapy); // 문자열을 숫자로 변환
+        /* alert(mapx+'+'+mapy); */
             mapOption = { 
                 center: new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
                 level: 4 // 지도의 확대 레벨
