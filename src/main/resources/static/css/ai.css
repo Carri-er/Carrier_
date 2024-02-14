@@ -5,6 +5,10 @@
 	color: unset;
 }
 
+body{
+	overflow-y: hidden;
+}
+
 /* bootstrap reset */
 #ai p{
     margin: 0;
@@ -20,14 +24,12 @@
 #ai {
     width: 100%;
     height: 100%;
-    /*height: calc(100vh - 55px); !* 전체 - nav height *!*/
-    /*height: calc(100vh - 55px); !* 전체 - nav height *!*/
     background: #618BF2; /* 임시 지정 */
 }
 
 /* 캐로셀 안 Box 틀 */
 #ai .ai-box {
-    margin: 100px auto 200px;
+    margin: 20px auto 200px;
     height: 500px;
     text-align: center;
     padding: 50px 50px 130px;
@@ -35,7 +37,7 @@
 
 #ai .ai-filter-box {
     height: 72%;
-    margin-bottom: 150px;
+    margin: 75px auto 150px;
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(4px);

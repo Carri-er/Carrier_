@@ -1,10 +1,21 @@
 package com.ex.springboot.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-import com.ex.springboot.dto.MemberDTO;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface IMemberDAO {
-	public List<MemberDTO> list();
+	
+	// 회원가입
+	public int addMember(
+		@Param("Member_Name") String Member_Name, 
+		@Param("Member_Age") int Member_Age, 
+		@Param("Member_Id") String Member_Id,
+		@Param("Member_Email") String Member_Email,
+		@Param("Member_Phone") String Member_Phone,
+		@Param("Member_Pw") String Member_Pw,
+		@Param("Member_Area") String Member_Area,
+		@Param("Member_Thema") String Member_Thema,
+		@Param("Member_profileimage") String Member_profileimage
+	);
 }
