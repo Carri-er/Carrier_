@@ -43,7 +43,7 @@ div.myBand_write_btn{
     height: 50px;
     background-color: #4796f0;
 }
-div.myBand_write_btn>span{
+div.myBand_write_btn span{
     display: block;
     color : white;
     font-size: 22px;

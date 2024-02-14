@@ -11,8 +11,8 @@
 <body>
     <div class="myBand_wrapper">
         <!-- myBand lnb 영역 -->
-        <div class="myBand_lnb">
-            <ul class="container myBand_lnb_ul d-flex justify-content-center">
+        <div class="myBand_pc_lnb">
+            <ul class="container myBand_pc_lnb_ul d-flex justify-content-center">
                 <li>게시글</li>
                 <li>사진첩</li>
                 <li>일정</li>
@@ -26,20 +26,22 @@
                 <!-- col1 밴드 이미지, 제목 정보 영역 -->
                 <div class="myBand_content_col_title">
                     <div class="myBand_title_img">
-                        <img src="../img/band/content/산림.jpg" alt="">
+                        <img th:src="@{'/resources/band_thumnail/'+ ${myBandList.getBand_thumnail()}}" class="img-fluid join_band_item_img" alt="...">
                     </div>
                     <div class="myBand_title_name">
-                        <h3>산림</h3>
+                        <h3 th:text="${myBandList.getBand_name()}">산림</h3>
                     </div>
                     <div class="myBand_member_count">
-                        <span>멤버 </span>
+                        <span >멤버 <span th:text="${myBandList.getBand_memberCount()}" ></span></span>
                     </div>
                     <div class="myBand_info">
-                        <span>밴드 정보 소개 글</span>
+                        <span th:text="${myBandList.getBand_content()}">밴드 정보 소개 글</span>
                     </div>
 
                     <div class="myBand_write_btn">
-                        <span>글쓰기</span>
+                    	<a th:href="@{'bandFeedWrite'}">
+                    		<span>글쓰기</span>
+                    	</a>
                     </div>
                 </div>
                 <!-- col2 밴드 게시글 영역 -->

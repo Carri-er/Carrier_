@@ -15,28 +15,43 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping
 public class BandController {
-	public static String UPLOAD_BAND_DIRECTORY = System.getProperty("user.dir")+"/upload/bandThumbnail";
-	
-	@GetMapping("/band")
-	public String band() {
-		return "thymeleaf/band/band";
-	}
-	
-	@RequestMapping("/bandCreate")
-	public String bandCreate(Model model) {
-		return "band_create";
-	}
+	public static String UPLOAD_BAND_DIRECTORY = System.getProperty("user.dir")+"\\src\\main\\webapp\\resources\\band_thumnail";
 	
 	@Autowired
-	private com.ex.springboot.dao.IBandDAO bnadDAO; // 다형성
+	private com.ex.springboot.dao.IBandDAO bandDao; // 다형성
 	
+	@GetMapping("/band")
+	public String band(Model model) {
+		model.addAttribute("bnadList",bandDao.bandList());
+		
+		return "thymeleaf/band/band";
+	}
+	@GetMapping("/myBand")
+	public String myBand(Model model, HttpServletRequest request) {
+		String band_code =request.getParameter("bandUrl");
+		model.addAttribute("myBandList",bandDao.myBand(band_code));
+		return "thymeleaf/band/myBand";
+	}
+
+//	밴드 만들기 페이지로 이동
+	@RequestMapping("/bandCreate")
+	public String bandCreate() {
+		return "thymeleaf/band/band_create";
+	}
+	
+
 	@RequestMapping("/band_create")
 	public String band_Create(Model model, HttpServletRequest request, @RequestParam("band_thumnail") MultipartFile file) {
 		
 		try {
-			String band_admin = request.getParameter("band_admin");
+
+			String band_admin = request.getParameter("band_admin"); //밴드 만든 사람 : 관리자
+			String band_thumnail = request.getParameter("band_thumnail"); //밴드 대표 이미지
+			String band_name = request.getParameter("band_name"); // 밴드 이름
+			String band_content = request.getParameter("band_content"); // 밴드 소개
+			//이미지 저장 
+			
 			//A mutable sequence of characters
 			StringBuilder fileNames = new StringBuilder();
 			
@@ -46,14 +61,21 @@ public class BandController {
 			byte[] fileSize = file.getBytes(); //이미지에 대한 정보 값을 바이트 배열로 가져온다.
 			Files.write(fileNameAndPath, fileSize);
 			
-			model.addAttribute("fileName", fileNames);
-		}catch(Exception e) {
+			model.addAttribute("fileName", fileNames); //밴드 대표 이미지 이름 저장.
 			
+			bandDao.bandCreateDao(band_name, band_admin, band_content, fileNames.toString());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		 
-		
 		
 		return "redirect:band";
+	}
+	
+//	밴드 피드 글쓰기 페이지로 이동
+	@RequestMapping("/bandFeedWrite")
+	public String bandFeedWrite() {
+		return "thymeleaf/band/bandFeedWrite";
 	}
 	
 }
