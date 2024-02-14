@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping
 public class MemberController {
 	
-	public static String UPLOAD_MEMBER_DIRECTORY = System.getProperty("user.dir")+"\\src\\main\\webapp\\resources\\member_thumbnail";
+	public static String UPLOAD_MEMBER_DIRECTORY = System.getProperty("user.dir")+"\\src\\main\\webapp\\resources\\member_thumnail";
 	
 	@Autowired
 	IMemberDAO member_dao;
