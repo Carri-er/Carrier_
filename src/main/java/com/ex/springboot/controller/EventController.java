@@ -24,61 +24,70 @@ import com.ex.springboot.dao.IEventDAO;
 @Controller
 @RequestMapping
 public class EventController {
-	public static String UPLOAD_EVENT_DIRECTORY = System.getProperty("user.dir")+"\\src\\main\\resources\\static\\img\\info";
+	public static String UPLOAD_EVENT_DIRECTORY = System.getProperty("user.dir")
+			+ "\\src\\main\\resources\\static\\img\\info";
 	@Autowired
 	private com.ex.springboot.dao.IEventDAO eventDAO; // 다형성
-	
-	//여행 정보
+
+	// 여행 정보
 	@GetMapping("/info")
 	public String info(Model model) {
 //		System.out.println(eventDAO.list() + "호출");
-		model.addAttribute("list",eventDAO.list());
+		model.addAttribute("list", eventDAO.list());
 //		System.out.println(eventDAO.getDistinctTags() + "호출");
-		model.addAttribute("tags",eventDAO.getDistinctTags());
+		model.addAttribute("tags", eventDAO.getDistinctTags());
 		return "thymeleaf/info/info";
 	}
-	//여행 상세 정보
+
+	// 여행 상세 정보
 	@GetMapping("/Event_view")
 	public String Event_view(HttpServletRequest request, Model model) {
-		String eid=request.getParameter("id");
+		String eid = request.getParameter("id");
 //		System.out.println(eventDAO.EventView(eid) + "호출");
-		model.addAttribute("view",eventDAO.EventView(eid));
+		model.addAttribute("view", eventDAO.EventView(eid));
 		return "thymeleaf/info/Event_view";
 	}
-	//여행 글쓰기로 이동
+
+	// 여행 글쓰기로 이동
 	@GetMapping("/Event_write_content")
 	public String Event_write_content() {
 		return "thymeleaf/info/Event_write";
 	}
-	//여행 글 업로드
+
+	// 여행 글쓰기로 이동
+	@GetMapping("/Event_write_update")
+	public String Event_write_update() {
+		return "thymeleaf/info/Event_write_update";
+	}
+
+	// 여행 글 업로드
 	@PostMapping("/Event_write")
-	public String Event_write(HttpServletRequest request, Model model, @RequestParam("Event_thumbnail") MultipartFile file) {
+
+	public String Event_write(HttpServletRequest request, Model model,
+			@RequestParam("Event_thumbnail") MultipartFile file) {
 		EventDTO dto = new EventDTO();
 		try {
-	
+
 			StringBuilder fileNames = new StringBuilder();
-			
+
 			String fileEmpty = "file_empty";
 			String thumbnail = "sss.png";
-		
-			
-			
+
 			// 사용자가 파일을 넣었을 때
-			if(!file.isEmpty()) {
-			
+			if (!file.isEmpty()) {
+
 				Path fileNameAndPath = Paths.get(UPLOAD_EVENT_DIRECTORY, file.getOriginalFilename());
 				// 설정한 디렉토리에 파일 업로드
 				fileNames.append(file.getOriginalFilename());
 				byte[] fileSize = file.getBytes(); // 이미지에 대한 정보 값을 바이트 배열로 가져온다.
 				Files.write(fileNameAndPath, fileSize);
-				
+
 				thumbnail = fileNames.toString();
-				
-			}else {
+
+			} else {
 				model.addAttribute("Member_profileimage", fileEmpty); // 이미지 이름 저장
 			}
-			
-			
+
 			dto.setEvent_address(request.getParameter("Event_address"));
 			dto.setEvent_area(request.getParameter("Event_area"));
 			dto.setEvent_area2(request.getParameter("Event_area2"));
@@ -101,15 +110,13 @@ public class EventController {
 			dto.setEvent_thumbnail(thumbnail);
 			dto.setEvent_time(request.getParameter("Event_time"));
 			dto.setEvent_title(request.getParameter("Event_title"));
-			
+
 			eventDAO.event_write(dto);
 			System.out.println("--글작성 완료--");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect:/info";
 	}
-	
-
 
 }

@@ -30,7 +30,7 @@ a.indent{
   --deepgray: #a5a5a5;
   --gray: #f0f0f0;
   --main: #ffec9f;
-  --mainbg: #e7dbd1;
+  --mainbg: #ffe576;/*좀더 진함*/
 }
 
 /* font size */
@@ -69,9 +69,15 @@ a.indent{
 .bg-main{
 	background-color: var(--main);
 }
+.bg-mainbg{
+	background: var(--mainbg);
+}
 /* BTN 버튼 색상 정의 */
 .btn-main{
 	background-color: var(--main);
+}
+.btn-mainbg{
+	background-color: var(--mainbg);
 }
 .btn-main:hover{
 	border: 1px solid var(--main);
