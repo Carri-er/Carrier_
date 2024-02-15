@@ -13,4 +13,6 @@ public interface IEventDAO {
 	public List<String> getDistinctTags();
 	public EventDTO EventView(String id);
 	public int event_write(EventDTO dto);
+	public int event_write_update(EventDTO dto);
+	public int event_delete(String id);
 }

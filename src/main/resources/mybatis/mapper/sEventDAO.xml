@@ -58,4 +58,10 @@
         #{Event_mapY}
     )
 </insert>
+<update id="event_write_update">
+	update event set Event_name=#{Event_name},Event_tag=#{Event_tag},Event_tag2=#{Event_tag2},Event_tag3=#{Event_tag3},Event_tag4=#{Event_tag4},Event_tag5=#{Event_tag5},Event_title=#{Event_title},Event_content=#{Event_content},Event_category=#{Event_category},Event_area=#{Event_area},Event_area2=#{Event_area2},Event_update=sysdate,Event_phone=#{Event_phone},Event_address=#{Event_address},Event_time=#{Event_time},Event_starttime=#{Event_starttime},Event_endtime=#{Event_endtime},Event_rest=#{Event_rest},Event_parking=#{Event_parking},Event_host=#{Event_host},Event_thumbnail=#{Event_thumbnail},Event_mapX=#{Event_mapX},Event_mapY=#{Event_mapY} where Event_num=#{Event_num}
+</update>
+ <delete id="event_delete">
+   	delete event where event_num =#{param1}
+   </delete>
 </mapper>

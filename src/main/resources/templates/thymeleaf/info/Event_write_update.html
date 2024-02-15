@@ -21,12 +21,13 @@
 		<div class="row mb-5">
 			<div class="col-12 col-xl-8 mx-auto p-sm-2 p-md-5 p-xl-0">
 				<form class="row g-3 addMember_form p-5 rounded-3"
-					action="/Event_write" method="post"
-					enctype="multipart/form-data" name="Event_write">
+				 th:action="@{'/Event_write_update_write?num='+*{Event_num}}"
+					 method="post"
+					enctype="multipart/form-data" name="Event_write" th:object="${formData}">
 					<h3 class="p-0 m-0 text-center mb-4">여행정보 글 작성</h3>
 					<div class="col-12 col-xl-12 m-auto text-center">
-						<img id="profileimage" src="../img/mypage/user_rabbit.jpg"
-							alt="userImg" class=" border" width="200" height="200" /> 
+				<img id="profileimage" th:src="@{'../img/info/' + *{Event_thumbnail}}" alt="userImg" class=" border" width="200" height="200"/>
+						
 						<div class="col-12">여행정보 글 이미지 미리보기</div>
 						<div class="form-floating mt-3">
 						<div class="col-12 text-start">이미지</div>
@@ -37,38 +38,37 @@
 					</div>
 					<div class="col-12">
 						<div class="form-floating">
-							<select class="form-select" id="Event_category"
-								aria-label="Floating label select example" name="Event_category">
-								<option selected>카테고리를 골라주세요</option>
-								<option value="공지">공지</option>
+							 <select class="form-select" id="Event_category" aria-label="Floating label select example" name="Event_category">
+								<option >카테고리를 골라주세요</option>
+								<option value="공지" >공지</option>
 								<option value="이벤트">이벤트</option>
 								<option value="여행지">여행지</option>
 							</select> <label for="Event_category">카테고리</label>
 						</div>
 					</div>
-
+	
+	
 					<div class="col-12">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_name"
-								name="Event_name" placeholder="여행지명"> <label
-								for="Event_name" class="form-label">여행지명</label>
+								name="Event_name" th:value="*{Event_name}">
+							<label for="Event_name" class="form-label">여행지명</label>
 						</div>
-
 					</div>
-					
+				
 					<div class="col-12">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_title"
-								name="Event_title" placeholder="글 제목"> <label
+								name="Event_title" placeholder="글 제목" th:value="*{Event_title}"> <label
 								for="Event_title" class="form-label">글 제목</label>
 						</div>
 					</div>
 
 					<div class="col-12">
 						<div class="form-floating">
-							<textarea class="form-control" placeholder="Leave a comment here"
-								id="Event_content" style="height: 400px" name="Event_content"></textarea>
-							<label for="Event_content">글 내용</label>
+							<textarea class="form-control"
+								id="Event_content" style="height: 400px" name="Event_content" th:text="*{Event_content}"></textarea>
+							<label for="Event_content" >글 내용</label>
 						</div>
 
 					</div>
@@ -101,7 +101,7 @@
 					<div class="col">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_area2"
-								name="Event_area2" placeholder="지역(시·군·구)"> 
+								name="Event_area2" placeholder="지역(시·군·구)" th:value="*{Event_area2}"> 
 								<label
 								for="Event_area2" class="form-label">지역(시·군·구)</label>
 						</div>
@@ -111,7 +111,7 @@
 					<div class="col-12">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_phone"
-								name="Event_phone" placeholder="여행지연락처"> <label
+								name="Event_phone" placeholder="여행지연락처" th:value="*{Event_phone}"> <label
 								for="Event_phone" class="form-label">여행지연락처</label>
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 					<div class="col-12">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_address"
-								name="Event_address" placeholder="여행지 주소"> <label
+								name="Event_address" placeholder="여행지 주소" th:value="*{Event_address}"> <label
 								for="Event_address" class="form-label">여행지 주소</label>
 						</div>
 					</div>
@@ -127,7 +127,7 @@
 					<div class="col-12">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_time"
-								name="Event_time" placeholder="여행지 이용시간"> <label
+								name="Event_time" placeholder="여행지 이용시간" th:value="*{Event_time}"> <label
 								for="Event_time" class="form-label">여행지 이용시간</label>
 						</div>
 					</div>
@@ -135,7 +135,7 @@
 					<div class="col-6 mx-auto">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_starttime"
-								name="Event_starttime" placeholder="축제 or 행사 시작일"> <label
+								name="Event_starttime" placeholder="축제 or 행사 시작일" th:value="*{Event_starttime}"> <label
 								for="Event_starttime" class="form-label">축제 or 행사 시작일</label>
 						</div>
 					</div>
@@ -143,7 +143,7 @@
 					<div class="col mx-auto">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_endtime"
-								name="Event_endtime" placeholder="축제 or 행사 종료일"> <label
+								name="Event_endtime" placeholder="축제 or 행사 종료일" th:value="*{Event_endtime}"> <label
 								for="Event_endtime" class="form-label">축제 or 행사 종료일</label>
 						</div>
 					</div>
@@ -151,7 +151,7 @@
 					<div class="col-12">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_rest"
-								name="Event_rest" placeholder="여행지 휴무일"> <label
+								name="Event_rest" placeholder="여행지 휴무일" th:value="*{Event_rest}"> <label
 								for="Event_rest" class="form-label">여행지 휴무일</label>
 						</div>
 					</div>
@@ -159,7 +159,7 @@
 					<div class="col-6">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_parking"
-								name="Event_parking" placeholder="여행지 주차정보"> <label
+								name="Event_parking" placeholder="여행지 주차정보" th:value="*{Event_parking}"> <label
 								for="Event_parking" class="form-label">여행지 주차정보</label>
 						</div>
 					</div>
@@ -167,7 +167,7 @@
 					<div class="col">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_host"
-								name="Event_host" placeholder="여행지 주최기관"> <label
+								name="Event_host" placeholder="여행지 주최기관" th:value="*{Event_host}"> <label
 								for="Event_host" class="form-label">여행지 주최기관</label>
 						</div>
 					</div>
@@ -175,7 +175,7 @@
 					<div class="col-6">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_mapX"
-								name="Event_mapX" placeholder="여행지 위도"> <label
+								name="Event_mapX" placeholder="여행지 위도" th:value="*{Event_mapX}"> <label
 								for="Event_mapX" class="form-label">여행지 위도</label>
 						</div>
 					</div>
@@ -183,7 +183,7 @@
 					<div class="col-6">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_mapY"
-								name="Event_mapY" placeholder="여행지 경도"> <label
+								name="Event_mapY" placeholder="여행지 경도" th:value="*{Event_mapY}"> <label
 								for="Event_mapY" class="form-label">여행지 경도</label>
 						</div>
 					</div>
@@ -191,7 +191,7 @@
 					<div class="col">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_tag"
-								name="Event_tag" placeholder="태그1"> <label
+								name="Event_tag" placeholder="태그1" th:value="*{Event_tag}"> <label
 								for="Event_tag" class="form-label">태그1</label>
 						</div>
 					</div>
@@ -199,7 +199,7 @@
 					<div class="col">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_tag2"
-								name="Event_tag2" placeholder="태그2"> <label
+								name="Event_tag2" placeholder="태그2" th:value="*{Event_tag2}"> <label
 								for="Event_tag2" class="form-label">태그2</label>
 						</div>
 					</div>
@@ -207,7 +207,7 @@
 					<div class="col">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_tag3"
-								name="Event_tag3" placeholder="태그3"> <label
+								name="Event_tag3" placeholder="태그3" th:value="*{Event_tag3}"> <label
 								for="Event_tag3" class="form-label">태그3</label>
 						</div>
 					</div>
@@ -215,7 +215,7 @@
 					<div class="col">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_tag4"
-								name="Event_tag4" placeholder="태그4"> <label
+								name="Event_tag4" placeholder="태그4" th:value="*{Event_tag4}"> <label
 								for="Event_tag4" class="form-label">태그4</label>
 						</div>
 					</div>
@@ -223,14 +223,14 @@
 					<div class="col">
 						<div class="form-floating">
 							<input type="text" class="form-control" id="Event_tag5"
-								name="Event_tag5" placeholder="태그5"> <label
+								name="Event_tag5" placeholder="태그5" th:value="*{Event_tag5}"> <label
 								for="Event_tag5" class="form-label">태그5</label>
 						</div>
 					</div>
 					
 					<!-- 제출 -->
 					<div class="col-12 mt-5">
-						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">작성완료</button>
+						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">수정완료</button>
 					</div>
 				</form>
 			</div>
@@ -260,6 +260,28 @@
 			}
 		}
 	</script>
+	<script th:inline="javascript">
+    /*<![CDATA[*/
+    var eventCategory = /*[[${formData.Event_category}]]*/ '';
+    $(function() {
+        init();
+
+        function init() {
+            setComboMailValue(eventCategory);
+        }
+        
+        function setComboMailValue(val) {
+            var selectEventCategory = document.getElementById('Event_category');
+            for (i = 0, j = selectEventCategory.length; i < j; i++) {
+                if (selectEventCategory.options[i].value == val) {
+                    selectEventCategory.options[i].selected = true;
+                    break;
+                }
+            }
+        }
+    });
+    /*]]>*/
+</script>
 </body>
 
 </html>

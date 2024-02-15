@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="../css/info.css">
 <link rel="stylesheet" href="../css/nav.css">
 <link rel="stylesheet" href="../css/footer.css">
-
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <!-- 파비콘 영역 -->
 <link rel="apple-touch-icon" sizes="57x57"
 	href="../img/favicon/apple-icon-57x57.png">
@@ -83,9 +84,8 @@
 									<div class="row">
 										<div class="col">
 											<h5>
-												[<span
-													th:text="${list.getEvent_category()}"></span>]
-												<span th:text="${list.getEvent_title()}"></span>
+												[<span th:text="${list.getEvent_category()}"></span>] <span
+													th:text="${list.getEvent_title()}"></span>
 											</h5>
 										</div>
 									</div>
@@ -99,12 +99,12 @@
 												th:text="${list.getEvent_area2()}"></button>
 											<button type="button"
 												class="btn rounded-pill px-3 btn-light f14"
-												th:text="${list.getEvent_category()}">#</button>
+												th:text="${list.getEvent_tag()}">#</button>
 										</div>
 									</div>
 								</div>
 								<div class="col-1 mb-1">
-									<img src="../img/info/btn_dot2.png" alt="">
+									
 								</div>
 								<hr class="mt-3 ms-3">
 							</a>

@@ -31,6 +31,7 @@ a.indent{
   --gray: #f0f0f0;
   --main: #ffec9f;
   --mainbg: #ffe576;/*좀더 진함*/
+  --nottedblue: rgb(59 130 246 / 0.5);
 }
 
 /* font size */
@@ -72,9 +73,15 @@ a.indent{
 .bg-mainbg{
 	background: var(--mainbg);
 }
+.bg-nb{
+	background-color: var(--nottedblue);
+}
 /* BTN 버튼 색상 정의 */
 .btn-main{
 	background-color: var(--main);
+}
+.btn-nb{
+	background-color: var(--nottedblue);
 }
 .btn-mainbg{
 	background-color: var(--mainbg);
