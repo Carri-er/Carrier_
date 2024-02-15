@@ -2,11 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 이매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
 <mapper namespace="com.ex.springboot.dao.IEventDAO">
-<!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
+	<!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
 	<select id="list" resultType="com.ex.springboot.dto.EventDTO">
 		select * from Event
 	</select>
-	  <select id="EventView" resultType="com.ex.springboot.dto.EventDTO">
-   		select * from Event where Event_num = #{param1}
-   </select>
+	<select id="EventView"
+		resultType="com.ex.springboot.dto.EventDTO">
+		select * from Event where Event_num = #{param1}
+	</select>
+	<select id="getDistinctTags" resultType="java.lang.String">
+		SELECT DISTINCT tag
+		FROM
+		(
+		SELECT Event_tag AS Tag FROM Event
+		UNION ALL
+		SELECT Event_tag2 AS Tag
+		FROM Event
+		UNION ALL
+		SELECT Event_tag3 AS Tag FROM Event
+		UNION ALL
+		SELECT
+		Event_tag4 AS Tag FROM Event
+		UNION ALL
+		SELECT Event_tag5 AS Tag FROM
+		Event
+		) all_tags
+	</select>
+<insert id="event_write">
+    insert into Event values (
+        Event_seq.nextval,
+        #{Event_name},
+        #{Event_tag},
+        #{Event_tag2},
+        #{Event_tag3},
+        #{Event_tag4},
+        #{Event_tag5},
+        #{Event_title},
+        #{Event_content},
+        #{Event_category},
+        0,
+        #{Event_area},
+        #{Event_area2},
+        sysdate,
+        sysdate,
+        #{Event_phone},
+        #{Event_address},
+        #{Event_time},
+        #{Event_starttime},
+        #{Event_endtime},
+        #{Event_rest},
+        #{Event_parking},
+        #{Event_host},
+        #{Event_thumbnail},
+        #{Event_mapX},
+        #{Event_mapY}
+    )
+</insert>
 </mapper>

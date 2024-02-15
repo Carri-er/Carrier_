@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ex.springboot.dao.IMemberDAO;
+import com.ex.springboot.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -22,8 +23,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping
 public class MemberController {
-	
-	public static String UPLOAD_MEMBER_DIRECTORY = System.getProperty("user.dir")+"\\src\\main\\webapp\\resources\\member_thumbnail";
+	public static String UPLOAD_MEMBER_DIRECTORY = System.getProperty("user.dir")+"\\src\\main\\resources\\static\\img\\member_thumbnail";
 	
 	@Autowired
 	IMemberDAO member_dao;
@@ -36,7 +36,7 @@ public class MemberController {
 	
 	// 회원가입 - Logic
 	@PostMapping("/signup")
-	public String signup(HttpServletRequest request, Model model, @RequestParam("Member_profileimage") MultipartFile file) throws Exception {
+	public String signup(HttpServletRequest request, Model model, @RequestParam("Member_profileimage") MultipartFile file) {
 
 		String Member_Email = request.getParameter("mail1")+"@"+request.getParameter("mail2");
 		int Member_Age = Integer.parseInt(request.getParameter("Member_Age"));
@@ -135,40 +135,69 @@ public class MemberController {
 	}
 	*/
 	// 로그인 - Logic
+	/*
 	@RequestMapping("/loginAction")
-	public String loginAction(HttpServletRequest request, Model model) {
+	public String loginAction(HttpServletRequest request, Model model, MemberDTO dto) {
 	    // 회원 정보 조회
 	    String memberId = request.getParameter("Member_Id");
 	    String memberPw = request.getParameter("Member_Pw");
-	    
-	    // 여기서는 서비스가 없으므로 DAO에서 바로 조회합니다.
-	    Member member = member_dao.login(memberId, memberPw);
-	    
+	    System.out.println(dto);
 	    System.out.println("id:" + memberId);
 	    System.out.println("pw:" + memberPw);
 	    
 	    // 로그인 성공 시
-	    if (member != null) {
+	    if (dto != null) {
 	        HttpSession session = request.getSession();
-	        session.setAttribute("loginMember", member);
+	        session.setAttribute("loginMember", dto);
 	        session.setMaxInactiveInterval(60 * 30);
-	        // 로그인 성공 시 이동할 페이지를 지정해야 합니다.
-	        return "redirect:/some-page"; // 예시: 로그인 성공 후 이동할 페이지
+
+	        return "redirect:/home"; // 로그인 성공 후 이동할 페이지
 	    } else {
 	        System.out.println("로그인 실패");
-	        // 로그인 실패 시 다시 로그인 페이지로 이동합니다.
-	        return "redirect:/login";
+
+	        return "redirect:/login";  // 로그인 실패 시 다시 로그인 페이지로 이동
 	    }
 	}
+	*/
+	@RequestMapping("/loginAction")
+	public String loginAction(HttpServletRequest request, Model model, MemberDTO dto) {
+		
+		// 회원 정보 조회
+		String memberId = request.getParameter("Member_Id");
+		String memberPw = request.getParameter("Member_Pw");
 
+		System.out.println("DAO 전 --------");
+		System.out.println("id:" + memberId);
+		System.out.println("pw:" + memberPw);
 
-	
+		MemberDTO memberdto = new MemberDTO();
+		
+		// 로그인 실패 시
+		if (member_dao.login(memberId, memberPw) == null) {
+			System.out.println("로그인 실패");
+			
+			return "redirect:/login?msg=1";  // 로그인 실패 시 다시 로그인 페이지로 이동
+		} else {
+			memberdto = member_dao.login(memberId, memberPw);
+			
+			// session 저장
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMember_id", memberId);
+			session.setMaxInactiveInterval(60 * 30);
+			
+			
+			model.addAttribute("loginMember", memberdto);
+			
+			return "redirect:/home"; // 로그인 성공 후 이동할 페이지
+		}
+	}
+
     // 로그아웃
     @PostMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        // -> Home 으로 돌아가기
-        return "redirect:/login";
+
+        return "redirect:/login"; // -> 로그인 페이지로 돌아가기
     }
 
 }

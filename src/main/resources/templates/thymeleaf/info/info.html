@@ -35,7 +35,7 @@
 </head>
 <body>
 	<div th:replace="nav/nav::nav"></div>
-	<div id="info" class="container-fluid mt-4 mb-5">
+	<div id="info" class="container-fluid mt-4 mb-3">
 		<div class="container px-0 pt-4">
 			<div class="row">
 				<div class="col-12">
@@ -61,6 +61,7 @@
 								<a  th:href="@{'Event_view?id='+ ${list.getEvent_num()}}" class="row">
 									<div class="col-3 board-left">
 										<img  th:src="@{'../img/info/' + ${list.getEvent_thumbnail()}}" class="img-fluid" alt="">
+									
 										<span class="text-white f12 " th:text="${list.getEvent_name()}"></span>
 									</div>
 									<div class="col">
@@ -99,46 +100,31 @@
 						<div class="col">
 							<hr>
 						</div>
-						<div class="col-12">
+						<div class="col-12" >
 							<button type="button"
-								class="btn rounded-pill px-3 btn-secondary f14">#전체</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#서울
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#부산
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#대구
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#인천
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#광주
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#대전
+								class="btn rounded-pill px-3 btn-secondary f14"># 전체</button>
+							<button type="button"
+								class="btn rounded-pill px-3 btn-light f14"  th:each = "list:${list}"># 
+								<span th:text="${list.getEvent_area()}"></span>
 							</button>
 						</div>
 						<div class="col-11 m-auto">
 							<hr>
 						</div>
 						<div class="col-12">
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#관광지
+							<button type="button" class="btn rounded-pill px-3 btn-secondary f14"># 전체 태그
 							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#자연
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#문화시설
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#레포츠
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#이색체험
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#데이트
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#효도여행
-							</button>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14">#육아
-							</button>
+						 <button type="button" class="btn rounded-pill px-3 btn-light f14" th:each="tag : ${tags}">
+        #
+        <span th:text="${tag}"></span>
+    </button>
 						</div>
 					</div>
 				</div>
 					</div>
+				<div class="col-12 text-end mt-3">
+					<a th:href="@{'Event_write_content'}" class="btn btn-main"> 글쓰기</a>
+				</div>
 				</div>
 				
 			</div>

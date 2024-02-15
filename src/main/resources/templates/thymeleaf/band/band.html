@@ -61,7 +61,7 @@
 				<div class="col-sm-4 join_band_item" th:each ="bandList:${bnadList}">
 					<a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="join_band_item_link">
 						<div class="join_band_item_imgBox">
-	                    	<img th:src="@{'/resources/band_thumnail/'+ ${bandList.getBand_thumnail()}}" class="img-fluid join_band_item_img" alt="...">
+	                    	<img th:src="@{'/resources/band_thumbnail/'+ ${bandList.getBand_thumnail()}}" class="img-fluid join_band_item_img" alt="...">
 	                    </div>
 	                    <div class="join_band_item_text">
 	                        <strong th:text="${bandList.getBand_name()}">밴드 제목</strong>

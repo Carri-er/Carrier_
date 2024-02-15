@@ -20,7 +20,6 @@ public class thymeleafController {
 
 	@GetMapping("/")
 	public String main() {
-		System.out.println(eventDAO.list());
 		return "thymeleaf/home/home";
 	}
 
@@ -28,7 +27,10 @@ public class thymeleafController {
 	public String feed() {
 		return "thymeleaf/feed/feed2";
 	}
-
+	@GetMapping("/feedshow")
+	public String feedshow() {
+		return "thymeleaf/feed/feed_show";
+	}
 	@GetMapping("/inner")
 	public String inner() {
 		return "thymeleaf/inner/inner";
@@ -44,19 +46,20 @@ public class thymeleafController {
 		return "thymeleaf/aicc/aicc";
 	}
 
-	@GetMapping("/info")
-	public String info(Model model) {
-		System.out.println(eventDAO.list() + "호출");
-		model.addAttribute("list",eventDAO.list());
-		return "thymeleaf/info/info";
-	}
-	@GetMapping("/Event_view")
-	public String Event_view(HttpServletRequest request, Model model) {
-		String eid=request.getParameter("id");
-		System.out.println(eventDAO.EventView(eid) + "호출");
-		model.addAttribute("view",eventDAO.EventView(eid));
-		return "thymeleaf/info/Event_view";
-	}
+//	@GetMapping("/info")
+//	public String info(Model model) {
+//		System.out.println(eventDAO.list() + "호출");
+//		model.addAttribute("list", eventDAO.list());
+//		return "thymeleaf/info/info";
+//	}
+
+//	@GetMapping("/Event_view")
+//	public String Event_view(HttpServletRequest request, Model model) {
+//		String eid = request.getParameter("id");
+//		System.out.println(eventDAO.EventView(eid) + "호출");
+//		model.addAttribute("view", eventDAO.EventView(eid));
+//		return "thymeleaf/info/Event_view";
+//	}
 
 	@GetMapping("/home")
 	public String home() {
@@ -72,11 +75,12 @@ public class thymeleafController {
 //	public String addMember() {
 //		return "thymeleaf/Member/addMember";
 //	}
-	
+
 	@GetMapping("/map")
 	public String map() {
 		return "thymeleaf/map/map";
 	}
+
 	
 //	@GetMapping("/login")
 //	public String login() {
@@ -98,21 +102,13 @@ public class thymeleafController {
 		return "nav/nav";
 	}
 
-	@Autowired
-	private com.ex.springboot.dao.IEventDAO eventDAO; // 다형성
-
-	@RequestMapping("/events")
-	public String userlistPage(Model model) {
-		model.addAttribute("events",eventDAO.list());
-		return "eventlist";
-	}
-
-	
-	@RequestMapping("/welcome")
-	public String welcome(Model model) {
-		System.out.println(eventDAO.list() + "호출");
-		model.addAttribute("list",eventDAO.list());
-		return "welcome";
-	}
+//	@Autowired
+//	private com.ex.springboot.dao.IEventDAO eventDAO; // 다형성
+//
+//	@RequestMapping("/events")
+//	public String userlistPage(Model model) {
+//		model.addAttribute("events",eventDAO.list());
+//		return "eventlist";
+//	}
 
 }
