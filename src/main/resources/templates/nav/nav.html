@@ -55,11 +55,25 @@
               <button class="nav-right-btn navbar-search-lg" type="submit">Search</button>
             </form>
           </div>
-          <a href="login" class="float-end nav-right-btn navbar-user  ms-3">user</a>
+          <!-- 로그인 / 마이페이지 영역 -->
+          <th:block th:if="${session.Member_Id == null}">
+	          <a th:href="@{login}" class="float-end nav-right-btn navbar-user ms-3 ms-auto">로그인</a>
+          </th:block>
+          <th:block th:unless="${session.Member_Id == null}">
+	          <a th:href="@{mypage}" class="float-end nav-right-btn ms-3 ms-auto">
+	          	<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="w-25 rounded-circle img-fluid"
+                         alt="...">
+	          </a>
+          </th:block>
         </div>
         <!-- md 화면에서만 보일 영역 -->
         <div class="col d-none d-md-block d-lg-none">
-          <a href="login" class="float-end nav-right-btn navbar-user">user</a>
+        	<th:block th:if="${session.Member_Id == null}">
+	          <a th:href="@{login}" class="float-end nav-right-btn navbar-user">로그인</a>
+          </th:block>
+          <th:block th:unless="${session.Member_Id == null}">
+	          <a th:href="@{mypage}" class="float-end nav-right-btn navbar-user">마이페이지</a>
+          </th:block>
           <a href="#" class="float-end nav-right-btn navbar-search-md">search</a>
         </div>
       </div>

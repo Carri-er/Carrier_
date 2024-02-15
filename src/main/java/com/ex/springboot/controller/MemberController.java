@@ -42,7 +42,6 @@ public class MemberController {
 		int Member_Age = Integer.parseInt(request.getParameter("Member_Age"));
 		String Member_Phone = request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3");
 		
-		
 		// 사용자가 파일을 안 넣었을 때
 		if(file.isEmpty()) {
 			String Member_profileimage = "user.png";
@@ -92,8 +91,7 @@ public class MemberController {
 			System.out.println(" :: 회원가입 완 :: ");
 			
 		}
-		
-		return "thymeleaf/Member/login";
+		return "redirect:/login?msg=1";
 	}
 	
 	// 로그인 - Page
@@ -102,67 +100,11 @@ public class MemberController {
 		return "thymeleaf/Member/login";
 	}
 	
-	
-	//TODO 0215 로그인 action 확인할 것
 	// 로그인 - Logic
-	/*
-	@RequestMapping("/loginAction")
-	public String loginAction(HttpServletRequest request, Model model) {
-		// 정보 조회
-		member_dao.login(
-				request.getParameter("Member_Id"),
-				request.getParameter("Member_Pw")
-		);
-		
-		MemberResponse member = memberService.login(loginId, password);
-		
-		System.out.println("id:"+request.getParameter("Member_Id"));
-		System.out.println("pw:"+request.getParameter("Member_Pw"));
-		
-		// 성공 시	
-		if(member_dao.login != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("loginMember", login);
-            session.setMaxInactiveInterval(60 * 30);
-
-            return "redirect:login";
-		}
-		
-		System.out.println("로긴 성공");
-		
-		// 실패 시 -> Home 으로 돌아가기
-		return "thymeleaf/home/home";
-	}
-	*/
-	// 로그인 - Logic
-	/*
-	@RequestMapping("/loginAction")
-	public String loginAction(HttpServletRequest request, Model model, MemberDTO dto) {
-	    // 회원 정보 조회
-	    String memberId = request.getParameter("Member_Id");
-	    String memberPw = request.getParameter("Member_Pw");
-	    System.out.println(dto);
-	    System.out.println("id:" + memberId);
-	    System.out.println("pw:" + memberPw);
-	    
-	    // 로그인 성공 시
-	    if (dto != null) {
-	        HttpSession session = request.getSession();
-	        session.setAttribute("loginMember", dto);
-	        session.setMaxInactiveInterval(60 * 30);
-
-	        return "redirect:/home"; // 로그인 성공 후 이동할 페이지
-	    } else {
-	        System.out.println("로그인 실패");
-
-	        return "redirect:/login";  // 로그인 실패 시 다시 로그인 페이지로 이동
-	    }
-	}
-	*/
 	@RequestMapping("/loginAction")
 	public String loginAction(HttpServletRequest request, Model model, MemberDTO dto) {
 		
-		// 회원 정보 조회
+		// 1. 회원 정보 조회
 		String memberId = request.getParameter("Member_Id");
 		String memberPw = request.getParameter("Member_Pw");
 
@@ -170,25 +112,26 @@ public class MemberController {
 		System.out.println("id:" + memberId);
 		System.out.println("pw:" + memberPw);
 
-		MemberDTO memberdto = new MemberDTO();
+		MemberDTO memberdto = member_dao.login(memberId, memberPw);
 		
-		// 로그인 실패 시
-		if (member_dao.login(memberId, memberPw) == null) {
-			System.out.println("로그인 실패");
-			
-			return "redirect:/login?msg=1";  // 로그인 실패 시 다시 로그인 페이지로 이동
-		} else {
-			memberdto = member_dao.login(memberId, memberPw);
-			
-			// session 저장
+		// 로그인 성공 시
+		if ( memberdto != null) {
+			// 2. 세션에 회원 정보(아이디/이름/프로필사진) 저장 & 세션 유지 시간 설정
 			HttpSession session = request.getSession();
-			session.setAttribute("loginMember_id", memberId);
+			session.setAttribute("Member_Id", memberId);
+			session.setAttribute("Member_Name", memberdto.getMember_Name());
+			session.setAttribute("Member_profileimage", memberdto.getMember_profileimage());
+//			System.out.println("사용자 이름:"+memberdto.getMember_Name());
 			session.setMaxInactiveInterval(60 * 30);
 			
-			
 			model.addAttribute("loginMember", memberdto);
+			System.out.println("로그인 성공");
 			
-			return "redirect:/home"; // 로그인 성공 후 이동할 페이지
+			return "redirect:/home?msg=1"; // 로그인 성공 후 이동할 페이지
+		} else {
+			System.out.println("로그인 실패");
+			
+			return "redirect:/login?msg=2";  // 로그인 실패 시 다시 로그인 페이지로 이동
 		}
 	}
 
@@ -199,5 +142,4 @@ public class MemberController {
 
         return "redirect:/login"; // -> 로그인 페이지로 돌아가기
     }
-
 }
