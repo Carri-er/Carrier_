@@ -92,7 +92,8 @@
 		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 		crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript">
+	<!-- 알림창 -->
+	<script type="text/javascript">
         $(document).ready(function() {
             // URL에서 msg 매개변수 가져오기
             const urlParams = new URLSearchParams(window.location.search);
@@ -101,11 +102,14 @@
             // 메시지가 존재할 경우 경고창으로 표시
             if (msg !== null && msg !== "") {
             	if(msg == 1){
-                alert("아이디 또는 비밀번호가 틀렸습니다");
+                alert("회원가입에 성공하였습니다🎉 로그인 해주세요");
+            	} else if (msg == 2) {
+                    alert("아이디 또는 비밀번호가 틀렸습니다");
             	}
             }
         });
     </script>
+
 </body>
 
 </html>
