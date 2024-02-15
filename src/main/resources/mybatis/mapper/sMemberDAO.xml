@@ -11,4 +11,9 @@
 		VALUES 
 			(#{Member_Name}, #{Member_Age}, #{Member_Id}, #{Member_Email}, #{Member_Phone}, #{Member_Pw}, #{Member_Area}, #{Member_Thema}, #{Member_profileimage}, sysdate)
   	</insert>
+  	
+  	<!-- LOGIN : 로그인 -->
+  	<select id="login" resultType="com.ex.springboot.dto.MemberDTO">
+		SELECT * FROM carrier_member WHERE Member_Id = #{Member_Id} AND Member_Pw = #{Member_Pw}
+	</select>
 </mapper>
