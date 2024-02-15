@@ -89,6 +89,6 @@ a.indent{
 .form-label{
   color: var(--black);
 }
-input, .form-control {
+/* input, .form-control {
 	color: var(--deepgray);
-}
+} */

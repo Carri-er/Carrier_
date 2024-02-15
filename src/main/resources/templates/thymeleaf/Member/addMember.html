@@ -24,125 +24,153 @@
 					action="/signup" method="post" enctype="multipart/form-data">
 					<h3 class="p-0 m-0 text-center mb-4">회원가입</h3>
 					<div class="col-8 col-xl-6 m-auto text-center">
-						<img id="profileimage" src="../img/mypage/user_rabbit.jpg"
-							alt="userImg" class="rounded-circle border" width="200"
-							height="200" /> <input type='file' class="form-control mt-4"
+						<img id="profileimage" src="../img/mypage/user.png"
+							alt="userImg" class="rounded-circle border" width="150"
+							height="150" /> <input type='file' class="form-control mt-4"
 							onchange="readURL(this);" name="Member_profileimage" />
 					</div>
 					<div class="col-12">
-						<label for="name" class="form-label">이름</label> <input type="text"
-							class="form-control" id="name" name="Member_Name"
-							placeholder="이름">
+						<div class="form-floating">
+							<input type="text"
+								class="form-control" id="name" name="Member_Name"
+								placeholder="이름">
+							<label for="name" class="form-label">이름</label>
+						</div>
 					</div>
 					<div class="col-12">
-						<label for="id" class="form-label">아이디</label> <input type="text"
-							class="form-control" id="id" name="Member_Id" placeholder="아이디">
+						<div class="form-floating">
+							<input type="text"
+								class="form-control" id="id" name="Member_Id" placeholder="아이디">
+							<label for="id" class="form-label">아이디</label> 
+						</div>
 					</div>
 					<div class="col-12">
-						<label for="password" class="form-label">비밀번호</label> <input
-							type="password" class="form-control" id="password"
-							placeholder="비밀번호" name="Member_Pw">
+						<div class="form-floating">
+							<input
+								type="password" class="form-control" id="password"
+								placeholder="비밀번호" name="Member_Pw">
+							<label for="password" class="form-label">비밀번호</label> 
+						</div>
 					</div>
 					<div class="col-12">
-						<label for="passwordCheek" class="form-label">비밀번호 확인</label> <input
-							type="password" class="form-control" id="passwordCK"
-							placeholder="비밀번호 확인" name="passwordCK">
+						<div class="form-floating">
+							<input type="password" class="form-control" id="passwordCK"
+								placeholder="비밀번호 확인" name="passwordCK"> <label
+								for="passwordCheek" class="form-label">비밀번호 확인</label>
+						</div>
 					</div>
 					<div class="col-12 form-group">
 						<div class="row align-items-center">
-							<label for="mail1" class="d-block form-label">이메일</label>
 							<div class="col-5">
-								<input type="text" class="form-control d-inline" id="mail1"
-									name="mail1" placeholder="e-mail">
+								<div class="form-floating">
+									<input type="text" class="form-control d-inline" id="mail1"
+										name="mail1" placeholder="e-mail">
+									<label for="mail1" class="d-block form-label">e-mail</label>
+								</div>
 							</div>
 							@
 							<div class="col">
-								<select name="mail2" id="" class="form-select d-inline">
-									<option value="naver.com">naver.com</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="hotmail.com">hotmail.com</option>
-								</select>
+									<select name="mail2" id="" class="form-select d-inline py-3">
+										<option value="naver.com">naver.com</option>
+										<option value="gmail.com">gmail.com</option>
+										<option value="hotmail.com">hotmail.com</option>
+									</select>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="phone" class="d-block form-label">전화번호</label>
 						<div class="row align-items-center">
 							<div class="col">
-								<select name="phone1" id=""
-									class="form-select d-inline custom-select ">
-									<option value="">앞번호 선택</option>
-									<option value="010">010</option>
-									<option value="02">02</option>
-									<option value="031">031</option>
-								</select>
+								<div class="form-floating">
+									<select name="phone1" id=""
+										class="form-select d-inline custom-select">
+										<option value="">앞번호 선택</option>
+										<option value="010">010</option>
+										<option value="02">02</option>
+										<option value="031">031</option>
+									</select>
+								<label for="phone" class="d-block form-label">전화번호</label>
+								</div>
 							</div>
 							-
 							<div class="col">
-								<input type="text" class="form-control d-inline" id="phone2"
-									name="phone2" placeholder="중간번호" maxlength="4">
+								<div class="form-floating">
+									<input type="text" class="form-control d-inline" id="phone2"
+										name="phone2" placeholder="중간번호" maxlength="4">
+									<label for="phone2" class="d-block form-label"> </label>	
+								</div>
 							</div>
 							-
 							<div class="col">
-								<input type="text" class="form-control d-inline" id="phone3"
-									name="phone3" placeholder="뒷자리" maxlength="4">
+								<div class="form-floating">
+									<input type="text" class="form-control d-inline" id="phone3"
+										name="phone3" placeholder="뒷자리" maxlength="4">
+									<label for="phone3" class="d-block form-label"> </label>
+								</div>
 							</div>
 						</div>
 					</div>
-
 					<div class="form-group">
-						<label for="age" class="d-block form-label">연령</label>
 						<div class="row">
 							<div class="col">
-								<select name="Member_Age" id="age"
-									class="form-select d-inline custom-select ">
-									<option value="">연령 선택</option>
-									<option value="19">19세 이하</option>
-									<option value="20">20대</option>
-									<option value="30">30대</option>
-									<option value="40">40대</option>
-									<option value="50">50대 이상</option>
-								</select>
+								<div class="form-floating">
+									<select name="Member_Age" id="age"
+										class="form-select d-inline custom-select">
+										<option value="">연령 선택</option>
+										<option value="19">19세 이하</option>
+										<option value="20">20대</option>
+										<option value="30">30대</option>
+										<option value="40">40대</option>
+										<option value="50">50대 이상</option>
+									</select>
+									<label for="age" class="d-block form-label">연령</label>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="thema" class="d-block form-label">선호테마</label> <select
-							class="form-select" name="Member_Thema">
-							<option selected>선호 테마를 골라주세요</option>
-							<option value="산">산</option>
-							<option value="실내">실내 여행지</option>
-							<option value="액티비티">액티비티</option>
-							<option value="테마파크">테마파크</option>
-							<option value="문화,역사">문화 | 역사</option>
-							<option value="바다">바다</option>
-							<option value="카페">카페</option>
-							<option value="전통시장">전통시장</option>
-							<option value="축제">축제</option>
-						</select>
+						<div class="form-floating">
+							<select
+								class="form-select" name="Member_Thema">
+								<option selected>선호 테마를 골라주세요</option>
+								<option value="산">산</option>
+								<option value="실내">실내 여행지</option>
+								<option value="액티비티">액티비티</option>
+								<option value="테마파크">테마파크</option>
+								<option value="문화,역사">문화 | 역사</option>
+								<option value="바다">바다</option>
+								<option value="카페">카페</option>
+								<option value="전통시장">전통시장</option>
+								<option value="축제">축제</option>
+							</select>
+							<label for="thema" class="d-block form-label">선호 테마</label> 
+						</div>
 					</div>
 					<div class="form-group">
-						<label for="area" class="d-block form-label">선호지역</label> <select
-							class="form-select" name="Member_Area">
-							<option selected>선호 지역을 골라주세요</option>
-							<option value="서울">서울</option>
-							<option value="부산">부산</option>
-							<option value="대구">대구</option>
-							<option value="인천">인천</option>
-							<option value="광주">광주</option>
-							<option value="대전">대전</option>
-							<option value="울산">울산</option>
-							<option value="세종">세종</option>
-							<option value="경기">경기</option>
-							<option value="강원">강원</option>
-							<option value="충북">충북</option>
-							<option value="충남">충남</option>
-							<option value="전북">전북</option>
-							<option value="전남">전남</option>
-							<option value="경북">경북</option>
-							<option value="경남">경남</option>
-							<option value="제주">제주</option>
-						</select>
+						<div class="form-floating">
+							<select
+								class="form-select" name="Member_Area">
+								<option selected>선호 지역을 골라주세요</option>
+								<option value="서울">서울</option>
+								<option value="부산">부산</option>
+								<option value="대구">대구</option>
+								<option value="인천">인천</option>
+								<option value="광주">광주</option>
+								<option value="대전">대전</option>
+								<option value="울산">울산</option>
+								<option value="세종">세종</option>
+								<option value="경기">경기</option>
+								<option value="강원">강원</option>
+								<option value="충북">충북</option>
+								<option value="충남">충남</option>
+								<option value="전북">전북</option>
+								<option value="전남">전남</option>
+								<option value="경북">경북</option>
+								<option value="경남">경남</option>
+								<option value="제주">제주</option>
+							</select>
+							<label for="area" class="d-block form-label">선호 지역</label> 
+						</div>
 					</div>
 					<!-- 제출 -->
 					<div class="col-12 mt-5">

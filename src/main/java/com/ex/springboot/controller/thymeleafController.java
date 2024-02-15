@@ -81,10 +81,11 @@ public class thymeleafController {
 		return "thymeleaf/map/map";
 	}
 
-	@GetMapping("/login")
-	public String login() {
-		return "thymeleaf/Member/login";
-	}
+	
+//	@GetMapping("/login")
+//	public String login() {
+//		return "thymeleaf/Member/login";
+//	}
 
 	@GetMapping("/FindId")
 	public String FindId() {
