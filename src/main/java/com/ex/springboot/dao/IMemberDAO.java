@@ -3,6 +3,8 @@ package com.ex.springboot.dao;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.ex.springboot.dto.MemberDTO;
+
 @Mapper
 public interface IMemberDAO {
 	
@@ -17,5 +19,12 @@ public interface IMemberDAO {
 		@Param("Member_Area") String Member_Area,
 		@Param("Member_Thema") String Member_Thema,
 		@Param("Member_profileimage") String Member_profileimage
+	);
+	
+	// 로그인
+		//TODO 자료형 확인할 것 0215	
+	public MemberDTO login(
+		@Param("Member_Id") String Member_Id,
+		@Param("Member_Pw") String Member_Pw
 	);
 }
