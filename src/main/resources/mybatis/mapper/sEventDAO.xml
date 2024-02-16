@@ -140,12 +140,4 @@
 FROM event
 	</select>
 	
-<select id="getPostCountTag" resultType="java.math.BigDecimal">
-    <![CDATA[
-    SELECT COUNT(*) AS Data_Count
-    FROM Event
-    WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
-    ]]>
-</select>
-
 </mapper>
