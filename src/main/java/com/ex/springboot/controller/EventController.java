@@ -50,8 +50,15 @@ public class EventController {
 	@GetMapping("/Event_view")
 	public String Event_view(HttpServletRequest request, Model model) {
 		String eid = request.getParameter("id");
+		String evnetNum = request.getParameter("Event_num");
 //		System.out.println(eventDAO.EventView(eid) + "호출");
 		model.addAttribute("view", eventDAO.EventView(eid));
+		System.out.println(eid+"잘오는지");
+		int num = Integer.parseInt(eid);
+		System.out.println(num+"sssssss");
+
+		model.addAttribute("commentlist", eventDAO.EventCommentList(num));
+		System.out.println(eventDAO.EventCommentList(num).size());
 		return "thymeleaf/info/Event_view";
 	}
 	// 여행 지역 태그 눌렀을시 지역 태그별 정보 가져오기
@@ -81,6 +88,14 @@ public class EventController {
 	@GetMapping("/Event_write_content")
 	public String Event_write_content() {
 		return "thymeleaf/info/Event_write";
+	}
+	// 여행 글쓰기로 이동
+	@PostMapping("/Event_comment")
+	public String Event_comment(HttpServletRequest request, Model model) {
+		String evnetNum = request.getParameter("Event_num");
+		model.addAttribute("commentlist", eventDAO.EventCommentList(Integer.parseInt(evnetNum)));
+		System.out.println("출력이 되는지");
+		return "thymeleaf/info/Event_view";
 	}
 
 	// 여행 글쓰기로 이동

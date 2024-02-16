@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.ex.springboot.dto.EventCommentDTO;
 import com.ex.springboot.dto.EventDTO;
 
 @Mapper
@@ -22,5 +23,5 @@ public interface IEventDAO {
 	public List<String> EventTagTag(String id);
 	public int getPostCount();
 	public int getPostCountTag();
-	
+	public List<EventCommentDTO> EventCommentList(int evnetNum);
 }

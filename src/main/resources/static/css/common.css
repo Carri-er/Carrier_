@@ -32,6 +32,8 @@ a.indent{
   --main: #ffec9f;
   --mainbg: #ffe576;/*좀더 진함*/
   --nottedblue: rgb(59 130 246 / 0.5);
+  --nottedpink: #fdfaf7;
+  --nottedskyblue: #87cefa;
 }
 
 /* font size */
@@ -76,26 +78,38 @@ a.indent{
 .bg-nb{
 	background-color: var(--nottedblue);
 }
+.bg-pink{
+	background-color: var(--nottedpink);
+}
+.bg-skyb{
+	background-color: var(--nottedskyblue);
+}
 /* BTN 버튼 색상 정의 */
 .btn-main{
-	background-color: var(--main);
+	background-color: var(--main)!important;
 }
 .btn-nb{
-	background-color: var(--nottedblue);
+	background-color: var(--nottedblue)!important;
+}
+.btn-pink{
+	background-color: var(--nottedpink)!important;
+}
+.btn-skyb{
+	background-color: var(--nottedskyblue)!important;
 }
 .btn-mainbg{
-	background-color: var(--mainbg);
+	background-color: var(--mainbg)!important;
 }
 .btn-main:hover{
-	border: 1px solid var(--main);
-	background-color: var(--white);
+	border: 1px solid var(--main)!important;
+	background-color: var(--white)!important;
 }
 .btn-main-over{
-	border: 1px solid var(--main);
-	background-color: var(--white);
+	border: 1px solid var(--main)!important;
+	background-color: var(--white)!important;
 }
 .btn-main-over:hover{
-	background-color: var(--main);
+	background-color: var(--main)!important;
 }
 
 /* form 양식 */
