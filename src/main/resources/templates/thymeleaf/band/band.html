@@ -16,7 +16,7 @@
         </div>
       
         <!-- 가입한 밴드 출력 영역 -->
-        <div class="container join_band_wapper gx-0 mb-5">
+        <div id="band" class="container join_band_wapper gx-0 mb-5">
             <div class="row join_Band gx-0">
                 <!-- 밴드 만들기 영역 -->
 				<div class="col-sm-4 join_band_item create_band"
@@ -31,7 +31,7 @@
 				<div class="col-sm-4 join_band_item" th:each ="bandList:${bandList}">
 					<a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="join_band_item_link">
 						<div class="join_band_item_imgBox">
-	                    	<img th:src="@{'img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
+	                    	<img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
 	                    </div>
 	                    <div class="join_band_item_text">
 	                        <strong th:text="${bandList.getBand_name()}">밴드 제목</strong>

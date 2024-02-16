@@ -60,6 +60,7 @@ public class EventController {
 		String area = request.getParameter("area");
 		//System.out.println(eventDAO.EventArea(area) + "호출");
 		model.addAttribute("list", eventDAO.EventArea(area));
+		model.addAttribute("getCount",eventDAO.EventArea(area).size());
 		model.addAttribute("tags", eventDAO.EventTag(area));
 		
 		return "thymeleaf/info/info";
@@ -72,8 +73,7 @@ public class EventController {
 		//System.out.println(eventDAO.EventTags(tag) + "호출");
 		model.addAttribute("list", eventDAO.EventTags(tag));
 		model.addAttribute("tags", eventDAO.EventTagTag(tag));
-		model.addAttribute("getCount", eventDAO.getPostCountTag());
-		System.out.println( eventDAO.getPostCountTag()+"개");
+		model.addAttribute("getCount", eventDAO.EventTags(tag).size());
 		return "thymeleaf/info/info";
 	}
 

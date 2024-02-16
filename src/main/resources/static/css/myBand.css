@@ -118,3 +118,6 @@ div.myBand_content_item_content img{
 	border-radius: 10px;
 	margin-bottom : 10px;
 }
+.join_band_item{
+	min-width: 220px;
+	}

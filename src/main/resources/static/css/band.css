@@ -1,4 +1,4 @@
-.container{
+#band{
     min-width: 400px;
 }
 /* 밴드 지역 네브바 lnb 스타일 */
@@ -104,11 +104,11 @@ div.join_band_item_text{
 div.join_band_item_text>strong{
     display: block;
     font-weight: normal;
-    font-size: 1.2vw;
+    font-size: 18px;
     text-overflow: ellipsis;
 }
 div.join_band_item_text>span{
-    font-size: 1vw;
+    font-size: 15px;
     color : #b3b3b3dd;
 }
 div.join_band_item_text>span>span{
