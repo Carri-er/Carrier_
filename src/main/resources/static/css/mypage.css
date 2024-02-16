@@ -49,6 +49,10 @@
 /*>>>>>>>>>>>>>>>>>>>>>>>>>> [우] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 /* History - ai cokcok swiper */
+.my-history-wrap-parent{
+	max-height: 300px;
+}
+
 .my-history-wrap{
     letter-spacing: -1.3px;
 }
