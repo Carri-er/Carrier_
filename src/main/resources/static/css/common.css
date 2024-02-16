@@ -90,7 +90,13 @@ a.indent{
 	border: 1px solid var(--main);
 	background-color: var(--white);
 }
-
+.btn-main-over{
+	border: 1px solid var(--main);
+	background-color: var(--white);
+}
+.btn-main-over:hover{
+	background-color: var(--main);
+}
 
 /* form 양식 */
 .form-label{

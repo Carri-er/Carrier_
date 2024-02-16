@@ -12,6 +12,31 @@
 			(#{Member_Name}, #{Member_Age}, #{Member_Id}, #{Member_Email}, #{Member_Phone}, #{Member_Pw}, #{Member_Area}, #{Member_Thema}, #{Member_profileimage}, sysdate)
   	</insert>
   	
+  	<!-- 회원 목록 불러오기 -->
+  	<select id="memberList" resultType="com.ex.springboot.dto.MemberDTO">
+		SELECT * FROM carrier_member WHERE Member_Id = #{Member_Id}
+	</select>
+	
+  	<!-- 회원 수정 -->
+  	<update id="editMember">
+		UPDATE carrier_member SET 
+				Member_Name = #{Member_Name}, 
+				Member_Age = #{Member_Age}, 
+				Member_Email = #{Member_Email}, 
+				Member_Phone = #{Member_Phone}, 
+				Member_Pw = #{Member_Pw}, 
+				Member_Area = #{Member_Area}, 
+				Member_Thema = #{Member_Thema}, 
+				Member_profileimage = #{Member_profileimage} 
+			WHERE 
+				Member_Id = #{Member_Id}
+	</update>
+	
+  	<!-- 회원 삭제 -->
+  	<delete id="delMember">
+		DELETE FROM carrier_member WHERE Member_Id LIKE #{param1}
+	</delete>
+
   	<!-- LOGIN : 로그인 -->
   	<select id="login" resultType="com.ex.springboot.dto.MemberDTO">
 		SELECT * FROM carrier_member WHERE Member_Id = #{Member_Id} AND Member_Pw = #{Member_Pw}
