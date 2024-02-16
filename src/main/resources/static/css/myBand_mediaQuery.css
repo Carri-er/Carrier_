@@ -10,7 +10,6 @@
 	/* myBand title 스타일 */
 	div.myBand_content_col_title{
 		width: 100%;
-		height : 150px;
 		display : flex;
 		border : 1px solid blue;
 		margin-bottom: 50px;
@@ -22,7 +21,7 @@
 		height : 150px;
 		box-sizing: border-box;
 		padding-left : 15px;
-		border : 1px solid red;
+		border : 1px solid black;
 	}
 	div.myBand_title_img{
 		width: 50%;
