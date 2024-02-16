@@ -50,7 +50,7 @@
 						<div class="form-floating">
 							<input
 								type="password" class="form-control" id="password"
-								placeholder="비밀번호" name="Member_Pw" value="*********">
+								placeholder="비밀번호" name="Member_Pw">
 							<label for="password" class="form-label">비밀번호</label> 
 						</div>
 					</div>
@@ -184,11 +184,10 @@
 					<!-- 제출 -->
 					<div class="col-12 mt-5">
 						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">수정하기</button>
-						<span class="mt-5 text-center d-block">
-						  <a th:href="@{'delMember?id='+${session.Member_Id}}" class="f12">캐리어 분해하기</a>
-						</span>
 					</div>
 				</form>
+				<a th:href="@{'delMember?memberId='+${MemberList.getMember_Id()}}"
+					class="f12">캐리어 분해하기</a>
 			</div>
 		</div>
 	</div>

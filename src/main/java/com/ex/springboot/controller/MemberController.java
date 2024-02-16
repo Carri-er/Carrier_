@@ -99,8 +99,6 @@ public class MemberController {
 	@RequestMapping("/editMember")
 	public String editMember(@ModelAttribute("memberData") MemberDTO dto, HttpServletRequest request, Model model) {
 		String Member_Id = request.getParameter("id");
-		
-		System.out.println(Member_Id);
 
 		model.addAttribute("MemberList",member_dao.memberList(Member_Id));
 		
@@ -143,10 +141,7 @@ public class MemberController {
 				Member_profile = fileNames.toString();
 			} else {
 				Member_profile = request.getParameter("Member_profileimage_old");
-				System.out.println(request.getParameter("Member_profileimage_old"));
 			}
-			
-			System.out.println("if밖 Member_profile:"+Member_profile);		
 			
 			member_dao.editMember(
 					request.getParameter("Member_Name"), 
@@ -170,7 +165,7 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			
-			System.out.println(member_dao);
+			System.out.println("dao: "+member_dao);
 			
 			System.out.println(" :: 회원수정 완 :: ");
 	
@@ -179,12 +174,15 @@ public class MemberController {
 	
 	// 회원 삭제
 	@GetMapping("/delMember")
-	public String delMember(HttpServletRequest request, Model model) {
-		member_dao.delMember(request.getParameter("id"));
+	public String delMember(HttpServletRequest request, Model model, HttpSession session) {
+		String Member_id = request.getParameter("memberId");
+		
+		member_dao.delMember(Member_id);
+        session.invalidate();
 		
 		System.out.println("회원삭제");
 		
-		return "redirect:/home?msg=4";
+		return "redirect:/login";
 	}
 	
 	
@@ -202,9 +200,9 @@ public class MemberController {
 		String memberId = request.getParameter("Member_Id");
 		String memberPw = request.getParameter("Member_Pw");
 
-		System.out.println("DAO 전 --------");
-		System.out.println("id:" + memberId);
-		System.out.println("pw:" + memberPw);
+//		System.out.println("DAO 전 --------");
+//		System.out.println("id:" + memberId);
+//		System.out.println("pw:" + memberPw);
 
 		MemberDTO memberdto = member_dao.login(memberId, memberPw);
 		

@@ -43,7 +43,7 @@ public interface IMemberDAO {
 	
 	// 회원 삭제
 	public int delMember(
-			@Param("Member_Id") String Member_Id
+			String Member_Id
 	);
 	
 	// 로그인
