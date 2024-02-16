@@ -1,5 +1,7 @@
 package com.ex.springboot.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,235 +23,266 @@ import com.ex.springboot.dto.MemberDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 @RequestMapping
 public class MemberController {
-	public static String UPLOAD_MEMBER_DIRECTORY = System.getProperty("user.dir")+"\\src\\main\\resources\\static\\img\\member_thumbnail";
-	
+	public static String UPLOAD_MEMBER_DIRECTORY = System.getProperty("user.dir")
+			+ "\\src\\main\\resources\\static\\img\\member_thumbnail";
+
 	@Autowired
 	IMemberDAO member_dao;
-	
+
 	// 회원가입 - Page
 	@GetMapping("/addMember")
 	public String addMember() {
 		return "thymeleaf/Member/addMember";
 	}
-	
+
 	// 회원가입 - Logic
 	@PostMapping("/signup")
-	public String signup(HttpServletRequest request, Model model, @RequestParam("Member_profileimage") MultipartFile file) {
-		
-		String Member_Email = request.getParameter("mail1")+"@"+request.getParameter("mail2");
+	public String signup(HttpServletRequest request, Model model,
+			@RequestParam("Member_profileimage") MultipartFile file) {
+
+		String Member_Email = request.getParameter("mail1") + "@" + request.getParameter("mail2");
 		int Member_Age = Integer.parseInt(request.getParameter("Member_Age"));
-		String Member_Phone = request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3");
-		
+		String Member_Phone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-"
+				+ request.getParameter("phone3");
+
 		// 사용자가 파일을 안 넣었을 때
-		if(file.isEmpty()) {
+		if (file.isEmpty()) {
 			String Member_profileimage = "user.png";
-			
-			member_dao.addMember(
-					request.getParameter("Member_Name"), 
-					Member_Age, 
-					request.getParameter("Member_Id"),
-					Member_Email,
-					Member_Phone,
-					request.getParameter("Member_Pw"),
-					request.getParameter("Member_Area"),
-					request.getParameter("Member_Thema"),
-					Member_profileimage
-			);
+
+			member_dao.addMember(request.getParameter("Member_Name"), Member_Age, request.getParameter("Member_Id"),
+					Member_Email, Member_Phone, request.getParameter("Member_Pw"), request.getParameter("Member_Area"),
+					request.getParameter("Member_Thema"), Member_profileimage);
 		} else {
 			// 사용자가 파일을 넣었을 때
 			try {
 				StringBuilder fileNames = new StringBuilder();
-				
-				if(!fileNames.equals(null)) {
-				
+
+				if (!fileNames.equals(null)) {
+
 					Path fileNameAndPath = Paths.get(UPLOAD_MEMBER_DIRECTORY, file.getOriginalFilename());
 					// 설정한 디렉토리에 파일 업로드
 					fileNames.append(file.getOriginalFilename());
 					byte[] fileSize = file.getBytes(); // 이미지에 대한 정보 값을 바이트 배열로 가져온다.
 					Files.write(fileNameAndPath, fileSize);
-					
+
 					model.addAttribute("fileName", fileNames); // 이미지 이름 저장
-					
-					member_dao.addMember(
-							request.getParameter("Member_Name"), 
-							Member_Age, 
-							request.getParameter("Member_Id"),
-							Member_Email,
-							Member_Phone,
-							request.getParameter("Member_Pw"),
-							request.getParameter("Member_Area"),
-							request.getParameter("Member_Thema"),
-							fileNames.toString()
-					);
+
+					member_dao.addMember(request.getParameter("Member_Name"), Member_Age,
+							request.getParameter("Member_Id"), Member_Email, Member_Phone,
+							request.getParameter("Member_Pw"), request.getParameter("Member_Area"),
+							request.getParameter("Member_Thema"), fileNames.toString());
 				}
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			System.out.println(" :: 회원가입 완 :: ");
-			
+
 		}
 		return "redirect:/login?msg=1";
 	}
-	
-	
+
 	// 회원가입 - id 중복검사 Logic
 	@RequestMapping("/idCheck")
 	@ResponseBody // JSON 형태의 응답을 반환하기 위해 사용합니다.
 	public String idCheck(HttpServletRequest request) {
-	    String id = request.getParameter("id");
-	    System.out.println("id: "+id);
-	    System.out.println("member_dao : "+member_dao.memberList(id));
-	    if (member_dao.memberList(id) == null) {
-	    	return "success";
-	    } else {
-	    	return "fail";
-	    }
+		String id = request.getParameter("id");
+		System.out.println("id: " + id);
+		System.out.println("member_dao : " + member_dao.memberList(id));
+		if (member_dao.memberList(id) == null) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
-	
-	
+
 	// 회원 수정 - Page
 	@RequestMapping("/editMember")
 	public String editMember(@ModelAttribute("memberData") MemberDTO dto, HttpServletRequest request, Model model) {
 		String Member_Id = request.getParameter("id");
 
-		model.addAttribute("MemberList",member_dao.memberList(Member_Id));
-		
+		model.addAttribute("MemberList", member_dao.memberList(Member_Id));
+
 		// 데이터 가공 [이메일/번호]
 		dto = member_dao.memberList(Member_Id);
-		
+
 		String Member_Email = dto.getMember_Email();
 		String Member_Phone = dto.getMember_Phone();
-		
-        String[] email = Member_Email.split("@");
-        model.addAttribute("mail1", email[0]);
-        model.addAttribute("mail2", email[1]);
-        
-        String[] phone = Member_Phone.split("-");
+
+		String[] email = Member_Email.split("@");
+		model.addAttribute("mail1", email[0]);
+		model.addAttribute("mail2", email[1]);
+
+		String[] phone = Member_Phone.split("-");
 		model.addAttribute("phone1", phone[0]);
 		model.addAttribute("phone2", phone[1]);
 		model.addAttribute("phone3", phone[2]);
-		
+
 		return "thymeleaf/mypage/editMember";
 	}
-	
+
 	// 회원 수정 - Logic
 	@PostMapping("/editAction")
-	public String editAction(HttpServletRequest request, Model model, @RequestParam("Member_profileimage") MultipartFile file) {
+	public String editAction(HttpServletRequest request, Model model,
+			@RequestParam("Member_profileimage") MultipartFile file) {
 
-		String Member_Email = request.getParameter("mail1")+"@"+request.getParameter("mail2");
+		String Member_Email = request.getParameter("mail1") + "@" + request.getParameter("mail2");
 		int Member_Age = Integer.parseInt(request.getParameter("Member_Age"));
-		String Member_Phone = request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3");
+		String Member_Phone = request.getParameter("phone1") + "-" + request.getParameter("phone2") + "-"
+				+ request.getParameter("phone3");
 		String Member_profile = null;
-		
+
 		try {
 			StringBuilder fileNames = new StringBuilder();
-			if(!file.isEmpty()) {
+			if (!file.isEmpty()) {
 				Path fileNameAndPath = Paths.get(UPLOAD_MEMBER_DIRECTORY, file.getOriginalFilename());
 				// 설정한 디렉토리에 파일 업로드
 				fileNames.append(file.getOriginalFilename());
 				byte[] fileSize = file.getBytes(); // 이미지에 대한 정보 값을 바이트 배열로 가져온다.
 				Files.write(fileNameAndPath, fileSize);
-					
+
 				Member_profile = fileNames.toString();
 			} else {
 				Member_profile = request.getParameter("Member_profileimage_old");
 			}
-			
+
 			member_dao.editMember(
 					request.getParameter("Member_Name"), 
 					Member_Age, 
-					Member_Email,
+					Member_Email, 
 					Member_Phone,
-					request.getParameter("Member_Pw"),
+					request.getParameter("Member_Pw"), 
 					request.getParameter("Member_Area"),
-					request.getParameter("Member_Thema"),
-					Member_profile,
+					request.getParameter("Member_Thema"), 
+					Member_profile, 
 					request.getParameter("Member_Id")
-					);
+			);
 
 			// 2. 세션에 회원 정보(아이디/이름/프로필사진) 저장 & 세션 유지 시간 설정
 			HttpSession session = request.getSession();
 			session.setAttribute("Member_Name", request.getParameter("Member_Name"));
 			session.setAttribute("Member_profileimage", Member_profile);
 			session.setMaxInactiveInterval(60 * 30);
-			
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			System.out.println("dao: "+member_dao);
-			
-			System.out.println(" :: 회원수정 완 :: ");
-	
-		return "redirect:/mypage?id="+request.getParameter("Member_Id");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("dao: " + member_dao);
+
+		System.out.println(" :: 회원수정 완 :: ");
+
+		return "redirect:/mypage?id=" + request.getParameter("Member_Id");
 	}
-	
+
 	// 회원 삭제
 	@GetMapping("/delMember")
 	public String delMember(HttpServletRequest request, Model model, HttpSession session) {
 		String Member_id = request.getParameter("memberId");
-		
+
 		member_dao.delMember(Member_id);
-        session.invalidate();
-		
+		session.invalidate();
+
 		System.out.println("회원삭제");
-		
+
 		return "redirect:/login";
 	}
-	
-	
+
 	// 로그인 - Page
 	@GetMapping("/login")
 	public String login() {
 		return "thymeleaf/Member/login";
 	}
-	
+
 	// 로그인 - Logic
 	@RequestMapping("/loginAction")
 	public String loginAction(HttpServletRequest request, Model model, MemberDTO dto) {
-		
+
 		// 1. 회원 정보 조회
 		String memberId = request.getParameter("Member_Id");
 		String memberPw = request.getParameter("Member_Pw");
 
-//		System.out.println("DAO 전 --------");
-//		System.out.println("id:" + memberId);
-//		System.out.println("pw:" + memberPw);
+		dto = member_dao.login(memberId, memberPw);
 
-		MemberDTO memberdto = member_dao.login(memberId, memberPw);
-		
 		// 로그인 성공 시
-		if ( memberdto != null) {
+		if (dto != null) {
 			// 2. 세션에 회원 정보(아이디/이름/프로필사진) 저장 & 세션 유지 시간 설정
 			HttpSession session = request.getSession();
 			session.setAttribute("Member_Id", memberId);
-			session.setAttribute("Member_Name", memberdto.getMember_Name());
-			session.setAttribute("Member_profileimage", memberdto.getMember_profileimage());
+			session.setAttribute("Member_Name", dto.getMember_Name());
+			session.setAttribute("Member_profileimage", dto.getMember_profileimage());
 			session.setMaxInactiveInterval(60 * 30);
-			
-			model.addAttribute("loginMember", memberdto);
-			
+
+			model.addAttribute("loginMember", dto);
+
 			System.out.println("로그인 성공");
-			
+
 			return "redirect:/home?msg=1"; // 로그인 성공 후 이동할 페이지
 		} else {
 			System.out.println("로그인 실패");
-			
-			return "redirect:/login?msg=2";  // 로그인 실패 시 다시 로그인 페이지로 이동
+
+			return "redirect:/login?msg=2"; // 로그인 실패 시 다시 로그인 페이지로 이동
 		}
 	}
 
-    // 로그아웃
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        System.out.println("로그아웃");
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		System.out.println("로그아웃");
 
-        return "redirect:/login"; // -> 로그인 페이지로 돌아가기
-    }
+		return "redirect:/login"; // -> 로그인 페이지로 돌아가기
+	}
+
+	// 비밀번호 찾기 - 페이지
+	@GetMapping("/FindPw")
+	public String FindPw() {
+		return "thymeleaf/Member/FindPw";
+	}
+	
+	// 비밀번호 찾기 - Logic
+	@RequestMapping("/FindPwAction")
+	public String Find_Pw(MemberDTO dto, HttpServletRequest request, Model model) {
+		String Member_Id = request.getParameter("Member_Id");
+		String Member_Name = request.getParameter("Member_Name");
+		String Member_Email = request.getParameter("Member_Email");
+
+		dto = member_dao.Find_Pw(Member_Id, Member_Name, Member_Email);
+		
+		if (dto != null) {
+			model.addAttribute("MemberList", dto);
+			
+			try {
+				String encodedMemberName = URLEncoder.encode(Member_Name, "UTF-8");
+				return "redirect:/FindPw_Result?Member_Id=" + Member_Id + "&Member_Name=" + encodedMemberName;
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		return "redirect:/Find_Pw?msg=1";
+
+	}
+	
+	// 비밀번호 찾기 - 비밀번호 재설정 페이지
+	@GetMapping("/FindPw_Result")
+	public String FindPw_Result() {
+		return "thymeleaf/Member/FindPw_Result";
+	}
+	
+	// 비밀번호 찾기 - 비밀번호 재설정 Logic
+	@PostMapping("/FindPw_Result_Action")
+	public String FindPw_Result_Action(MemberDTO dto, HttpServletRequest request, Model model) {
+		String Member_Id = request.getParameter("Member_Id");
+		String Member_Pw = request.getParameter("Member_Pw");
+		
+		member_dao.FindPw_Result_Action(Member_Id, Member_Pw);
+		
+		System.out.println("~~~~~~" + Member_Id + Member_Pw);
+
+		return "redirect:/login?msg=3";
+	}
+
 }

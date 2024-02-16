@@ -28,11 +28,10 @@
 						<div class="col-12 mt-4 text-center">
 							<button type="submit" class="btn btn-main w-100 p-3 rounded-4">로그인하기</button>
 							<div class="row mt-2">
-								<div class="col-9 m-auto my-3 d-flex justify-content-around">
-									<a th:href="@{addMember}" class="text-decoration-none">회원
-										가입 </a> | <a href="FindId" class="text-decoration-none text-dark">아이디
-										찾기</a> | <a href="FindPw" class="text-decoration-none text-dark">비밀번호
-										찾기</a>
+								<div class="col-10 col-lg-9 m-auto my-3 d-flex justify-content-around">
+									<a th:href="@{addMember}" class="text-decoration-none">회원 가입 </a> | 
+									<a href="FindId" class="text-decoration-none text-dark">아이디 찾기</a> | 
+									<a href="FindPw" class="text-decoration-none text-dark">비밀번호 찾기</a>
 								</div>
 							</div>
 						</div>
@@ -42,6 +41,7 @@
 		</div>
 	</div>
 <div th:replace="~{footer/footer::footer}"></div>
+<script src="../validate/member_validate.js"></script>
 	<!-- 알림창 -->
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -55,6 +55,8 @@
                 alert("회원가입에 성공하였습니다🎉 로그인 해주세요");
             	} else if (msg == 2) {
                     alert("아이디 또는 비밀번호가 틀렸습니다");
+            	} else if (msg == 3) {
+                    alert("재설정 완료! 다시 로그인 해주세요");
             	}
             }
         });

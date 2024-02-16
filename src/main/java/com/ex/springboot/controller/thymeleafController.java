@@ -100,10 +100,10 @@ public class thymeleafController {
 		return "thymeleaf/Member/FindId";
 	}
 
-	@GetMapping("/FindPw")
-	public String FindPw() {
-		return "thymeleaf/Member/FindPw";
-	}
+//	@GetMapping("/FindPw")
+//	public String FindPw() {
+//		return "thymeleaf/Member/FindPw";
+//	}
 
 	@GetMapping("/nav")
 	public String nav() {
