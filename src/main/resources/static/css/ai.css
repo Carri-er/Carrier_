@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+/* 글자색 black -> white  */
+*{
+	color: unset;
+}
+body{
+	overflow-y:hidden;
+}
 
 /* bootstrap reset */
 #ai p{
@@ -16,12 +23,14 @@
 #ai {
     width: 100%;
     height: 100%;
+    /*height: calc(100vh - 55px); !* 전체 - nav height *!*/
+    /*height: calc(100vh - 55px); !* 전체 - nav height *!*/
     background: #618BF2; /* 임시 지정 */
 }
 
 /* 캐로셀 안 Box 틀 */
 #ai .ai-box {
-    margin: 20px auto 200px;
+    margin: 100px auto 200px;
     height: 500px;
     text-align: center;
     padding: 50px 50px 130px;
@@ -29,7 +38,7 @@
 
 #ai .ai-filter-box {
     height: 72%;
-    margin: 75px auto 150px;
+    margin-bottom: 150px;
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(4px);
@@ -70,17 +79,17 @@
 }
 
 /* 캐로셀 <> 버튼 모이게 */
-#ai .carousel-control-next,#ai .carousel-control-prev {
+.carousel-control-next, .carousel-control-prev {
     width: 30%;
     margin-bottom: 85px;
 }
 
 /* ------------------- 1번째 화면 -------------------- */
-#ai .carousel-inner .carousel-item{
+.carousel-inner .carousel-item{
     background: url("../img/aicc/bg_fist_top.png") no-repeat;
 }
 
-#ai .carousel-inner .ai-box > em {
+.carousel-inner .ai-box > em {
     padding: 35px 0 15px;
     font-size: 28px;
     letter-spacing: -1.5px;
@@ -91,7 +100,7 @@
     text-decoration: none;
 }
 
-#ai .carousel-inner .ai-box > em:after {
+.carousel-inner .ai-box > em:after {
     content: '';
     display: block;
     height: 1px;
@@ -99,7 +108,7 @@
     background: #fff;
 }
 
- #ai .carousel-inner .ai-box h3 {
+.carousel-inner .ai-box h3 {
     animation-name: cosStart;
     animation-duration: 2.5s;
     font-weight: 700;
@@ -108,7 +117,7 @@
     letter-spacing: -3px;
 }
 
-#ai .carousel-inner .ai-box p {
+.carousel-inner .ai-box p {
     animation-name: cosStart;
     animation-duration: 3s;
     padding: 20px 0;
@@ -117,17 +126,17 @@
 }
 
 /* START btn*/
-#ai .carousel-inner .ai-box .btn {
+.carousel-inner .ai-box .btn {
     position: absolute;
     animation-name: cosStart;
     animation-duration: 3s;
 }
 
-#ai .btn_start{
+.btn_start{
     margin-left: -120px;
 }
 
-#ai .carousel-inner .ai-box .btn .btn_start {
+.carousel-inner .ai-box .btn .btn_start {
     overflow: hidden;
     display: inline-block;
     width: 333px;
@@ -146,7 +155,7 @@
     z-index: 2;
 }
 
-#ai .carousel-inner .ai-box .btn .btn_start:after {
+.carousel-inner .ai-box .btn .btn_start:after {
     content: "";
     position: absolute;
     left: 0;
@@ -159,12 +168,12 @@
     border-radius: 50px;
 }
 
-#ai .carousel-inner .ai-box .btn .btn_start em {
+.carousel-inner .ai-box .btn .btn_start em {
     z-index: 2;
     position: relative;
 }
 
-#ai .carousel-inner .ai-box .btn .btn_start .arw_wrap {
+.carousel-inner .ai-box .btn .btn_start .arw_wrap {
     display: inline-block;
     width: 30px;
     height: 20px;
@@ -186,22 +195,22 @@
 }
 
 /* START BTN - animation */
-#ai .carousel-inner .ai-box .btn .btn_start .left {
+.carousel-inner .ai-box .btn .btn_start .left {
     transform: translateX(-200%);
     opacity: 0;
 }
 
-#ai .carousel-inner .ai-box .btn .btn_start:hover .left {
+.carousel-inner .ai-box .btn .btn_start:hover .left {
     transform: translateX(240%);
     opacity: 1;
 }
 
-#ai .carousel-inner .ai-box .btn .btn_start:hover .right {
+.carousel-inner .ai-box .btn .btn_start:hover .right {
     transform: translateX(200%);
     opacity: 0;
 }
 
-#ai .carousel-inner .ai-box .btn .btn_start:hover:after {
+.carousel-inner .ai-box .btn .btn_start:hover:after {
     transform: translateX(80%);
 }
 
@@ -231,7 +240,7 @@
 
 /* 1번째 화면 바닥 */
 
-#ai .carousel-inner .carousel-item:first-child::after{
+.carousel-inner .carousel-item:first-child::after{
     content: "";
     display: block;
     width: 100%;
@@ -288,7 +297,7 @@
 }
 
 /*다음에하기 버튼*/
-#ai .next-btn {
+.next-btn {
     position: absolute;
     left: 50%;
     bottom: 0;
@@ -299,37 +308,37 @@
 
 /* Content 3 | 기간 선택 */
 
-#ai .period-box-parent{
+.period-box-parent{
     width: 100%;
 }
 
-#ai .period-box{
+.period-box{
     width: unset;
     flex-direction: column;
 }
 
-#ai .period-box>div{
+.period-box>div{
     width: 108px;
     height: 108px;
 }
 
-#ai .period-box-parent>div:nth-of-type(1) .period-box>div{
+.period-box-parent>div:nth-of-type(1) .period-box>div{
     background: url("../img/aicc/icon_travel_period.png") no-repeat;
     background-size: 108px;
 }
-#ai .period-box-parent>div:nth-of-type(2) .period-box>div{
+.period-box-parent>div:nth-of-type(2) .period-box>div{
     background: url("../img/aicc/icon_travel_period.png") no-repeat;
     background-size: 108px;
     background-position-y: -108px;
 }
-#ai .period-box-parent>div:nth-of-type(3) .period-box>div{
+.period-box-parent>div:nth-of-type(3) .period-box>div{
     background: url("../img/aicc/icon_travel_period.png") no-repeat;
     background-size: 108px;
     background-position-y: -216px;
 }
 
 /*-------------- theme 선택 ---------------*/
-#ai .theme-box-parent>div{
+.theme-box-parent>div{
     position: relative;
     /*filter: blur(1px);*/
     border-radius: 12px;
@@ -337,7 +346,7 @@
 }
 
 /* theme 이미지 안 글씨 효과 */
-#ai .theme-box-parent>div>span{
+.theme-box-parent>div>span{
     display: block;
     width: 100%;
     position: absolute;

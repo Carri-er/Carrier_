@@ -94,9 +94,11 @@
 					</div>
 				</div>
 			</div>
+			<th:block th:if="${session.Member_Id=='admin'}">
 			<div class="col-12 text-end mt-3">
 				<a th:href="@{'Event_write_content'}" class="btn btn-main"> 글쓰기</a>
 			</div>
+			</th:block>
 		</div>
 
 	</div>

@@ -36,38 +36,44 @@
 	</select>
 	<select id="EventTagTag" resultType="java.lang.String"
 		parameterType="string">
-	 SELECT DISTINCT Event
-    FROM (
-        SELECT Event_tag AS Event
-        FROM Event
-        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
-        
-        UNION ALL
-        
-        SELECT Event_tag2 AS Event
-        FROM Event
-        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
-        
-        UNION ALL
-        
-        SELECT Event_tag3 AS Event
-        FROM Event
-        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
-        
-        UNION ALL
-        
-        SELECT Event_tag4 AS Event
-        FROM Event
-        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
-        
-        UNION ALL
-        
-        SELECT Event_tag5 AS Event
-        FROM Event
-        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5))
+		SELECT DISTINCT Event
+		FROM (
+		SELECT Event_tag AS Event
+		FROM Event
+		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		Event_tag5)
+
+		UNION ALL
+
+		SELECT Event_tag2 AS Event
+		FROM Event
+		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		Event_tag5)
+
+		UNION ALL
+
+		SELECT Event_tag3 AS Event
+		FROM Event
+		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		Event_tag5)
+
+		UNION ALL
+
+		SELECT Event_tag4 AS Event
+		FROM Event
+		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		Event_tag5)
+
+		UNION ALL
+
+		SELECT Event_tag5 AS Event
+		FROM Event
+		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		Event_tag5))
 	</select>
 
-	<select id="EventTags" resultType="com.ex.springboot.dto.EventDTO">
+	<select id="EventTags"
+		resultType="com.ex.springboot.dto.EventDTO">
 		<![CDATA[
     Select * from Event where #{param1} in (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
     ]]>
@@ -77,21 +83,26 @@
 		parameterType="string">
 		SELECT Event_tag
 		FROM Event
-		WHERE Event_area LIKE '%' || #{param1} || '%'
+		WHERE Event_area LIKE '%' ||
+		#{param1} || '%'
 		UNION
 		SELECT Event_tag2
 		FROM Event
-		WHERE Event_area LIKE '%' || #{param1} || '%'
+		WHERE Event_area LIKE
+		'%' || #{param1} || '%'
 		UNION
 		SELECT Event_tag3
 		FROM Event
-		WHERE Event_area LIKE '%' || #{param1} || '%'
+		WHERE
+		Event_area LIKE '%' || #{param1} || '%'
 		UNION
 		SELECT Event_tag4
-		FROM Event
+		FROM
+		Event
 		WHERE Event_area LIKE '%' || #{param1} || '%'
 		UNION
-		SELECT Event_tag5
+		SELECT
+		Event_tag5
 		FROM Event
 		WHERE Event_area LIKE '%' || #{param1} || '%'
 	</select>
@@ -134,10 +145,29 @@
 	<delete id="event_delete">
 		delete event where event_num =#{param1}
 	</delete>
-	
+
 	<select id="getPostCount" resultType="int">
-	SELECT COUNT(*) AS Post_Count
-FROM event
+		SELECT COUNT(*) AS Post_Count
+		FROM event
 	</select>
-	
+	<select id="EventCommentList"
+		resultType="com.ex.springboot.dto.EventCommentDTO">
+		select
+		A.Member_Id,
+		A.eventcomment_num,
+		A.eventcomment_content,
+		A.eventcomment_upload,
+		A.eventcomment_update,
+		A.Event_num,
+		B.Member_profileimage
+		from
+		eventcomment A
+		right outer join
+		carrier_member B
+		on
+		A.Member_id = B.Member_id
+		where
+		A.Event_num = #{param1}
+		order by A.eventcomment_num desc
+	</select>
 </mapper>
