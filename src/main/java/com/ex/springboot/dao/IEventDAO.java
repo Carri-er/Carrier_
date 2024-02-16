@@ -24,4 +24,5 @@ public interface IEventDAO {
 	public int getPostCount();
 	public int getPostCountTag();
 	public List<EventCommentDTO> EventCommentList(int evnetNum);
+	public int EventCommentWrite(EventCommentDTO dto);
 }

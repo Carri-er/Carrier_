@@ -2,19 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 이매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
 <mapper namespace="com.ex.springboot.dao.IEventDAO">
-	<!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
+	<!-- 전체 여행 정보 list를 불러옴 -->
 	<select id="list" resultType="com.ex.springboot.dto.EventDTO">
 		select * from Event
 	</select>
+	<!-- 파라미터 값으로 여행 정보를 불러옴 -->
 	<select id="EventView"
 		resultType="com.ex.springboot.dto.EventDTO">
 		select * from Event where Event_num = #{param1}
 	</select>
+	<!-- 중복되는 태그 없이 태그 1~5의 값을 전체 불러옴 -->
 	<select id="getDistinctTags" resultType="java.lang.String">
 		SELECT DISTINCT tag
 		FROM
-		(
-		SELECT Event_tag AS Tag FROM Event
+		(SELECT Event_tag AS Tag FROM Event
 		UNION ALL
 		SELECT Event_tag2 AS Tag
 		FROM Event
@@ -25,22 +26,24 @@
 		Event_tag4 AS Tag FROM Event
 		UNION ALL
 		SELECT Event_tag5 AS Tag FROM
-		Event
-		) all_tags
+		Event) all_tags
 	</select>
+	<!-- 지역 태그 클릭시 리스트 불러옴 -->
 	<select id="EventArea"
 		resultType="com.ex.springboot.dto.EventDTO">
 		<![CDATA[
     Select * from Event where Event_area like '%' || #{param1} || '%'
     ]]>
 	</select>
+	<!-- 태그 클릭시 중복값 없이 태그들 불러옴 -->
 	<select id="EventTagTag" resultType="java.lang.String"
 		parameterType="string">
 		SELECT DISTINCT Event
 		FROM (
 		SELECT Event_tag AS Event
 		FROM Event
-		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3,
+		Event_tag4,
 		Event_tag5)
 
 		UNION ALL
@@ -54,31 +57,36 @@
 
 		SELECT Event_tag3 AS Event
 		FROM Event
-		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		WHERE
+		#{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
 		Event_tag5)
 
 		UNION ALL
 
 		SELECT Event_tag4 AS Event
 		FROM Event
-		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		WHERE
+		#{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
 		Event_tag5)
 
 		UNION ALL
 
 		SELECT Event_tag5 AS Event
 		FROM Event
-		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
+		WHERE
+		#{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
 		Event_tag5))
 	</select>
 
+	<!-- 태그 클릭시 파라미터 값으로 정보 리스트를 불러옴 -->
 	<select id="EventTags"
 		resultType="com.ex.springboot.dto.EventDTO">
 		<![CDATA[
     Select * from Event where #{param1} in (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
     ]]>
 	</select>
-
+	
+	<!-- 태그 클릭시 파라미터 값으로 중복되는 태그없이 태그들을 불러옴 -->
 	<select id="EventTag" resultType="java.lang.String"
 		parameterType="string">
 		SELECT Event_tag
@@ -106,7 +114,8 @@
 		FROM Event
 		WHERE Event_area LIKE '%' || #{param1} || '%'
 	</select>
-
+	
+	<!-- 파라미터 값들을 전송하여 여행 글 작성 -->
 	<insert id="event_write">
 		insert into Event values (
 		Event_seq.nextval,
@@ -137,19 +146,25 @@
 		#{Event_mapY}
 		)
 	</insert>
+	<!-- 파라미터 값들을 전송하여 여행 글 수정 -->
 	<update id="event_write_update">
 		update event set
 		Event_name=#{Event_name},Event_tag=#{Event_tag},Event_tag2=#{Event_tag2},Event_tag3=#{Event_tag3},Event_tag4=#{Event_tag4},Event_tag5=#{Event_tag5},Event_title=#{Event_title},Event_content=#{Event_content},Event_category=#{Event_category},Event_area=#{Event_area},Event_area2=#{Event_area2},Event_update=sysdate,Event_phone=#{Event_phone},Event_address=#{Event_address},Event_time=#{Event_time},Event_starttime=#{Event_starttime},Event_endtime=#{Event_endtime},Event_rest=#{Event_rest},Event_parking=#{Event_parking},Event_host=#{Event_host},Event_thumbnail=#{Event_thumbnail},Event_mapX=#{Event_mapX},Event_mapY=#{Event_mapY}
 		where Event_num=#{Event_num}
 	</update>
+	<!-- 파라미터 값을 전송하여 여행 글 삭제 -->
 	<delete id="event_delete">
 		delete event where event_num =#{param1}
 	</delete>
-
+	
+	<!-- 전체 글 갯수를 불러옴-->
 	<select id="getPostCount" resultType="int">
-		SELECT COUNT(*) AS Post_Count
+		SELECT COUNT(*) AS
+		Post_Count
 		FROM event
 	</select>
+	
+	<!-- 파라미터 값으로 댓글을 가져옴 -->
 	<select id="EventCommentList"
 		resultType="com.ex.springboot.dto.EventCommentDTO">
 		select
@@ -167,7 +182,12 @@
 		on
 		A.Member_id = B.Member_id
 		where
-		A.Event_num = #{param1}
+		A.Event_num =
+		#{param1}
 		order by A.eventcomment_num desc
 	</select>
+	
+	<insert id="EventCommentWrite">
+	insert  into Eventcomment values(#{Member_Id},EventComment_seq.nextval,#{eventcomment_content},sysdate,sysdate,#{Event_num})
+	</insert>
 </mapper>

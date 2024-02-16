@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ex.springboot.dto.EventCommentDTO;
 import com.ex.springboot.dto.EventDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -75,7 +76,6 @@ public class EventController {
 	// 여행 지역 태그 눌렀을시 지역 태그별 정보 가져오기
 	@GetMapping("/Event_tags")
 	public String Event_tags(HttpServletRequest request, Model model) {
-		
 		String tag = request.getParameter("tagss");
 		//System.out.println(eventDAO.EventTags(tag) + "호출");
 		model.addAttribute("list", eventDAO.EventTags(tag));
@@ -89,15 +89,30 @@ public class EventController {
 	public String Event_write_content() {
 		return "thymeleaf/info/Event_write";
 	}
-	// 여행 글쓰기로 이동
+	//여행 댓글 작성
 	@PostMapping("/Event_comment")
 	public String Event_comment(HttpServletRequest request, Model model) {
-		String evnetNum = request.getParameter("Event_num");
-		model.addAttribute("commentlist", eventDAO.EventCommentList(Integer.parseInt(evnetNum)));
-		System.out.println("출력이 되는지");
-		return "thymeleaf/info/Event_view";
+	    EventCommentDTO dto = new EventCommentDTO();
+	    String num = request.getParameter("Event_num");
+	    int number = Integer.parseInt(num);
+	    dto.setEvent_num(number);
+	    dto.setEventcomment_content(request.getParameter("Eventcomment_content"));
+	    dto.setMember_Id(request.getParameter("memberId"));
+	    eventDAO.EventCommentWrite(dto);
+	    return "redirect:/Event_view?id=" + num;
 	}
-
+	//댓글 업데이트------------------여기 수정해야함
+	@PostMapping("/Event_comment_update")
+	public String Event_comment_update(HttpServletRequest request, Model model) {
+	    EventCommentDTO dto = new EventCommentDTO();
+	    String num = request.getParameter("Event_num");
+	    int number = Integer.parseInt(num);
+	    dto.setEvent_num(number);
+	    dto.setEventcomment_content(request.getParameter("Eventcomment_content"));
+	    dto.setMember_Id(request.getParameter("memberId"));
+	    eventDAO.EventCommentWrite(dto);
+	    return "redirect:/Event_view?id=" + num;
+	}
 	// 여행 글쓰기로 이동
 	@RequestMapping(value="/Event_write_update", method = RequestMethod.GET)
 	public ModelAndView get(@ModelAttribute("formData") EventDTO eventDTO, ModelAndView mav,HttpServletRequest request) {
