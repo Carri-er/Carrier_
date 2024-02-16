@@ -580,7 +580,7 @@ footer p {
   	}
 
   	div.home_carousel {
-  		background-color: rgb(241, 239, 242);
+  		background-color: var(--mainbg);
   		position: static;
   		padding-bottom: 40px;
   	}

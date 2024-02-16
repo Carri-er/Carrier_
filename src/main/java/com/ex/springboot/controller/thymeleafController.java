@@ -13,6 +13,7 @@ import com.ex.springboot.dto.EventDTO;
 import jakarta.servlet.http.HttpServletRequest;
 
 import com.ex.springboot.dao.IEventDAO;
+import com.ex.springboot.dao.IMemberDAO;
 
 @Controller
 @RequestMapping
@@ -65,9 +66,16 @@ public class thymeleafController {
 	public String home() {
 		return "thymeleaf/home/home";
 	}
-
+	
+	@Autowired
+	IMemberDAO member_dao;
+	
 	@GetMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpServletRequest request, Model model) {
+		String id = request.getParameter("id");
+		
+		model.addAttribute("loginMember", member_dao.memberList(id));
+		
 		return "thymeleaf/mypage/mypage";
 	}
 

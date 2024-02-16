@@ -8,6 +8,7 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/mypage.css">
     <link rel="stylesheet" href="../css/swiper.css">
 
@@ -17,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
-<div th:replace="nav/nav::nav"></div>
+<div th:replace="~{nav/nav::nav}"></div>
 <div id="mypage" class="container mt-5 px-0">
     <div class="row text-center mt-5 m-3 mx-xl-5 d-flex justify-content-between">
         <!-- <<<<<<<<<<<<<<< (좌) <<<<<<<<<<<<<<<< -->
@@ -25,15 +26,19 @@
             <!-- [<] 내정보란 -->
             <div class="row bg-light border rounded-4 p-5 px-md-3 px-xl-4">
                 <div class="col-12">
-                    <img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="w-25 rounded-circle img-fluid"
+                    <img th:src="@{'../img/member_thumbnail/'+ ${loginMember.getMember_profileimage()}}" class="w-25 rounded-circle img-fluid"
                          alt="...">
                 </div>
                 <div class="col-12 p-3 mb-4">
-                    <p class="f22"><span th:text="${session.Member_Name}">사용자이름</span> 님</p>
-                    <a href="#" class="text-dark d-block p-3">
-                        <button type="button" class="btn btn-outline-dark rounded-pill">내 정보 수정 ></button>
-                    </a>
-                </div>
+						<p class="f22 m-0">
+							<span th:text="${loginMember.getMember_Name()}">사용자이름</span> 님
+						</p>
+						<a th:href="@{logout}"
+							class="text-decoration-none text-dark d-block p-2 f14">로그아웃</a>
+						<a th:href="@{'editMember?id='+${session.Member_Id}}"
+							class="btn btn-outline-dark rounded-pill f14">내 정보 수정 >
+						</a>
+				</div>
                 <!-- 해당 메뉴 아이콘 -->
                 <div class="col-12 text-center my-menu-ico-parent d-flex justify-content-around f13">
                     <div class="my-menu-ico">
@@ -75,9 +80,9 @@
                     <div class="my-ad-img rounded-4 h-100">
                         <img src="../img/feed/oedo.jpg" class="img-fluid" alt="">
                     </div>
-                    <div class="d-flex align-items-center my-ad-img-caption mb-4">
+                    <div class="d-flex align-items-center text-white my-ad-img-caption mb-4">
                         <i class="fa-solid fa-location-dot float-start me-2"></i>
-                        <span class="float-start f13">외도 보타니아</span>
+                        <span class="float-start text-white f13">외도 보타니아</span>
                     </div>
                 </div>
             </div>
@@ -343,6 +348,9 @@
     </div>
 </div>
 </div><!--container-->
+	<!--footer-->
+	<div th:replace="footer/footer::footer"></div>
+	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
