@@ -28,40 +28,124 @@
 		Event
 		) all_tags
 	</select>
-<insert id="event_write">
-    insert into Event values (
-        Event_seq.nextval,
-        #{Event_name},
-        #{Event_tag},
-        #{Event_tag2},
-        #{Event_tag3},
-        #{Event_tag4},
-        #{Event_tag5},
-        #{Event_title},
-        #{Event_content},
-        #{Event_category},
-        0,
-        #{Event_area},
-        #{Event_area2},
-        sysdate,
-        sysdate,
-        #{Event_phone},
-        #{Event_address},
-        #{Event_time},
-        #{Event_starttime},
-        #{Event_endtime},
-        #{Event_rest},
-        #{Event_parking},
-        #{Event_host},
-        #{Event_thumbnail},
-        #{Event_mapX},
-        #{Event_mapY}
-    )
-</insert>
-<update id="event_write_update">
-	update event set Event_name=#{Event_name},Event_tag=#{Event_tag},Event_tag2=#{Event_tag2},Event_tag3=#{Event_tag3},Event_tag4=#{Event_tag4},Event_tag5=#{Event_tag5},Event_title=#{Event_title},Event_content=#{Event_content},Event_category=#{Event_category},Event_area=#{Event_area},Event_area2=#{Event_area2},Event_update=sysdate,Event_phone=#{Event_phone},Event_address=#{Event_address},Event_time=#{Event_time},Event_starttime=#{Event_starttime},Event_endtime=#{Event_endtime},Event_rest=#{Event_rest},Event_parking=#{Event_parking},Event_host=#{Event_host},Event_thumbnail=#{Event_thumbnail},Event_mapX=#{Event_mapX},Event_mapY=#{Event_mapY} where Event_num=#{Event_num}
-</update>
- <delete id="event_delete">
-   	delete event where event_num =#{param1}
-   </delete>
+	<select id="EventArea"
+		resultType="com.ex.springboot.dto.EventDTO">
+		<![CDATA[
+    Select * from Event where Event_area like '%' || #{param1} || '%'
+    ]]>
+	</select>
+	<select id="EventTagTag" resultType="java.lang.String"
+		parameterType="string">
+	 SELECT DISTINCT Event
+    FROM (
+        SELECT Event_tag AS Event
+        FROM Event
+        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+        
+        UNION ALL
+        
+        SELECT Event_tag2 AS Event
+        FROM Event
+        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+        
+        UNION ALL
+        
+        SELECT Event_tag3 AS Event
+        FROM Event
+        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+        
+        UNION ALL
+        
+        SELECT Event_tag4 AS Event
+        FROM Event
+        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+        
+        UNION ALL
+        
+        SELECT Event_tag5 AS Event
+        FROM Event
+        WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5))
+	</select>
+
+	<select id="EventTags" resultType="com.ex.springboot.dto.EventDTO">
+		<![CDATA[
+    Select * from Event where #{param1} in (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+    ]]>
+	</select>
+
+	<select id="EventTag" resultType="java.lang.String"
+		parameterType="string">
+		SELECT Event_tag
+		FROM Event
+		WHERE Event_area LIKE '%' || #{param1} || '%'
+		UNION
+		SELECT Event_tag2
+		FROM Event
+		WHERE Event_area LIKE '%' || #{param1} || '%'
+		UNION
+		SELECT Event_tag3
+		FROM Event
+		WHERE Event_area LIKE '%' || #{param1} || '%'
+		UNION
+		SELECT Event_tag4
+		FROM Event
+		WHERE Event_area LIKE '%' || #{param1} || '%'
+		UNION
+		SELECT Event_tag5
+		FROM Event
+		WHERE Event_area LIKE '%' || #{param1} || '%'
+	</select>
+
+	<insert id="event_write">
+		insert into Event values (
+		Event_seq.nextval,
+		#{Event_name},
+		#{Event_tag},
+		#{Event_tag2},
+		#{Event_tag3},
+		#{Event_tag4},
+		#{Event_tag5},
+		#{Event_title},
+		#{Event_content},
+		#{Event_category},
+		0,
+		#{Event_area},
+		#{Event_area2},
+		sysdate,
+		sysdate,
+		#{Event_phone},
+		#{Event_address},
+		#{Event_time},
+		#{Event_starttime},
+		#{Event_endtime},
+		#{Event_rest},
+		#{Event_parking},
+		#{Event_host},
+		#{Event_thumbnail},
+		#{Event_mapX},
+		#{Event_mapY}
+		)
+	</insert>
+	<update id="event_write_update">
+		update event set
+		Event_name=#{Event_name},Event_tag=#{Event_tag},Event_tag2=#{Event_tag2},Event_tag3=#{Event_tag3},Event_tag4=#{Event_tag4},Event_tag5=#{Event_tag5},Event_title=#{Event_title},Event_content=#{Event_content},Event_category=#{Event_category},Event_area=#{Event_area},Event_area2=#{Event_area2},Event_update=sysdate,Event_phone=#{Event_phone},Event_address=#{Event_address},Event_time=#{Event_time},Event_starttime=#{Event_starttime},Event_endtime=#{Event_endtime},Event_rest=#{Event_rest},Event_parking=#{Event_parking},Event_host=#{Event_host},Event_thumbnail=#{Event_thumbnail},Event_mapX=#{Event_mapX},Event_mapY=#{Event_mapY}
+		where Event_num=#{Event_num}
+	</update>
+	<delete id="event_delete">
+		delete event where event_num =#{param1}
+	</delete>
+	
+	<select id="getPostCount" resultType="int">
+	SELECT COUNT(*) AS Post_Count
+FROM event
+	</select>
+	
+<select id="getPostCountTag" resultType="java.math.BigDecimal">
+    <![CDATA[
+    SELECT COUNT(*) AS Data_Count
+    FROM Event
+    WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+    ]]>
+</select>
+
 </mapper>

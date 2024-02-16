@@ -1,5 +1,6 @@
 package com.ex.springboot.controller;
 
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,6 +40,9 @@ public class EventController {
 		model.addAttribute("list", eventDAO.list());
 //		System.out.println(eventDAO.getDistinctTags() + "호출");
 		model.addAttribute("tags", eventDAO.getDistinctTags());
+		model.addAttribute("getCount", eventDAO.getPostCount());
+		System.out.println( eventDAO.getPostCount()+"개");
+		
 		return "thymeleaf/info/info";
 	}
 
@@ -49,6 +53,28 @@ public class EventController {
 //		System.out.println(eventDAO.EventView(eid) + "호출");
 		model.addAttribute("view", eventDAO.EventView(eid));
 		return "thymeleaf/info/Event_view";
+	}
+	// 여행 지역 태그 눌렀을시 지역 태그별 정보 가져오기
+	@GetMapping("/Event_area")
+	public String Event_area(HttpServletRequest request, Model model) {
+		String area = request.getParameter("area");
+		//System.out.println(eventDAO.EventArea(area) + "호출");
+		model.addAttribute("list", eventDAO.EventArea(area));
+		model.addAttribute("tags", eventDAO.EventTag(area));
+		
+		return "thymeleaf/info/info";
+	}
+	// 여행 지역 태그 눌렀을시 지역 태그별 정보 가져오기
+	@GetMapping("/Event_tags")
+	public String Event_tags(HttpServletRequest request, Model model) {
+		
+		String tag = request.getParameter("tagss");
+		//System.out.println(eventDAO.EventTags(tag) + "호출");
+		model.addAttribute("list", eventDAO.EventTags(tag));
+		model.addAttribute("tags", eventDAO.EventTagTag(tag));
+		model.addAttribute("getCount", eventDAO.getPostCountTag());
+		System.out.println( eventDAO.getPostCountTag()+"개");
+		return "thymeleaf/info/info";
 	}
 
 	// 여행 글쓰기로 이동
