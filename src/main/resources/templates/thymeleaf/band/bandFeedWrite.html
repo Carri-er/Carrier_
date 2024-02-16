@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/home">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +18,12 @@
 	<div th:replace="~{nav/nav::nav}"></div>
     <div class="bandFeedWrite_wrapper">
         <div class="bandFeedWrite_form">
-            <form method="get" action="writeFeed">
-            	<input type="hidden" value="${bandUrl}" name="bandUrl" />
-                <textarea id="summernote" name="editordata" rows="100"></textarea>
+            <form method="post" action="writeFeed">				
+            	<input name="member_id" type="hidden" th:value="${session.Member_Id}"/>
+            	<input name="bandUrl" type="hidden" th:value="${bandUrl}"  />
+                <textarea id="summernote" name="band_feed_content" ></textarea>
                 <input type="submit" name="doit" value="글쓰기" />
+               	<input type="button" value="취소" onclick="history.back()" />
             </form>
         </div>
     </div>

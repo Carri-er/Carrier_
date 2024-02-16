@@ -90,11 +90,12 @@ div.join_band_item_imgBox{
     height: 65%;
     overflow: hidden;
 }
-div.join_band_item>img {
+div.join_band_item_imgBox>img {
+	display : block;
     width: 100%;
     height: 100%;
     background-position: center;
- 	background-size: cover;   
+ 	background-size: 100%;   
 }
 div.join_band_item_text{
     padding: 8px 10px;

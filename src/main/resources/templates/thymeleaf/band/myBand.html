@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <div th:replace="~{head/head::head}"></div>
 <body>
 <div th:replace="~{nav/nav::nav}"></div>
     <div class="myBand_wrapper">
-        <!-- myBand lnb 영역 -->
+        <!-- myBand lnb 영역 
         <div class="myBand_pc_lnb">
             <ul class="container myBand_pc_lnb_ul d-flex justify-content-center">
                 <li>게시글</li>
@@ -13,61 +14,109 @@
                 <li>멤버</li>
             </ul>
         </div>
-
+		-->
+		
         <!-- myBandContent -->
         <div class="myBand_content">
-            <div class="container myBand_contentBox px-0 d-flex justify-content-between">
+            <div class="container myBand_contentBox px-0 d-flex justify-content-start">
                 <!-- col1 밴드 이미지, 제목 정보 영역 -->
-                <div class="myBand_content_col_title">
-                    <div class="myBand_title_img">
-                        <img th:src="@{'/resources/band_thumbnail/'+ ${myBandList.getBand_thumnail()}}" class="img-fluid join_band_item_img" alt="...">
-                    </div>
-                    <div class="myBand_title_name">
-                        <h3 th:text="${myBandList.getBand_name()}">산림</h3>
-                    </div>
-                    <div class="myBand_member_count">
-                        <span >멤버 <span th:text="${myBandList.getBand_memberCount()}" ></span></span>
-                    </div>
-                    <div class="myBand_info">
-                        <span th:text="${myBandList.getBand_content()}">밴드 정보 소개 글</span>
-                    </div>
+				<div class="myBand_content_col_titleBox">
+					<div class="myBand_content_col_title">
+						<div class="myBand_title_img">
+							<img
+								th:src="@{'../img/uploadBandThumnail/'+ ${myBandList.getBand_thumnail()}}"
+								class="img-fluid join_band_item_img" alt="...">
+						</div>
+						<div class="myBand_title_name">
+							<h3 th:text="${myBandList.getBand_name()}"></h3>
+						</div>
+						<div class="myBand_member_count">
+							<span>멤버 <span
+								th:text="${myBandList.getBand_memberCount()}"></span></span>
+						</div>
+						<div class="myBand_info">
+							<span th:text="${myBandList.getBand_content()}"></span>
+						</div>
 
-                    <div class="myBand_write_btn">
-                    	<a th:href="@{bandFeedWrite}">
-                    		<span>글쓰기</span>
-                    	</a>
-                    </div>
-                </div>
-                <!-- col2 밴드 게시글 영역 -->
-                <div class="myBand_content_col_content">
+						<div class="myBand_write_btn">
+							<a
+								th:href="@{'bandFeedWrite?bandUrl='+${myBandList.getBand_code()}}">
+								<span>글쓰기</span>
+							</a>
+						</div>
+					</div> <!-- myBand_content_col_title -->
+				</div> <!-- myBand_content_col_titleBox -->
+
+
+				<!-- col2 밴드 게시글 영역 -->
+                <div class="myBand_content_col_content" >
                     <div class="myBand_content_search">
                         <span>글 내용, #태그, @작성자 검색</span>
                         <img class="search_img" src="../img/common/btn_header_search.png" alt="">
+                        <!-- <span th:text="${feedwriterImg.getMember_profileimage()}"></span> -->
                     </div>
 
-                    <div class="myBand_content_item">
+                    <div class="myBand_content_item" th:each="myBandFeedList:${myBandFeedList}">
                         <div class="myBand_content_item_writer">
-                            <img class="myBand_content_item_writer_profile" src="../img/common/kakao_profile_02.png" alt="#">
+                            <img class="myBand_content_item_writer_profile" th:src="@{'../img/member_thumbnail/'+${myBandFeedList.getMember_profileimage()}}"  alt="#">
                             <div class="myBand_content_item_writer_info">
-                                <strong>작성자 닉네임</strong>
-                                <span>글 작성 시간</span>
+                                <strong th:text="${myBandFeedList.getMember_id()}">작성자 아이디</strong>
+                                <span>작성 시간 <span th:text="${myBandFeedList.getBand_feed_uploadday()}"></span></span>
                             </div>
                         </div>
                         <div class="myBand_content_item_content">
-                            
+							<div th:utext="${myBandFeedList.getBand_feed_content()}"></div> 
+                          
+                        </div>
+                        <div class="myBand_content_item">
+                        <span th:text="${myBandFeedList.getMember_id()}" ></span>
+                        <span th:text="${session.Member_Id}" ></span>
+                        	<th:block th:if="${myBandFeedList.getMember_id() == session.Member_Id}">
+                        		<form action="bandFeedUpdate" method="post">
+                        			<input type="hidden" name="bandUrl" th:value="${myBandFeedList.getBand_code()}"/>
+                        			<input type="hidden" name="bandfeednum" th:value="${myBandFeedList.getBand_feed_num()}"/>
+                        			<input type="hidden" name="member_id" th:value="${session.Member_Id}" />
+                        			<input type="hidden" name="feedcontent" th:value="${myBandFeedList.getBand_feed_content()}" />
+                        			<input type="submit" class="btn btn-info float-end" value="수정하기" />
+                        		</form>
+                        		
+                        		<form action="deleteFeed" method="post" id="deleteFeedForm">
+                        			<input type="hidden" name="bandUrl" th:value="${myBandFeedList.getBand_code()}"/>
+                        			<input type="hidden" name="bandfeednum" th:value="${myBandFeedList.getBand_feed_num()}"/>
+                        			<input type="button" class="btn btn-danger float-end bandFeedDeleteBtn" value="삭제하기" onclick="return func_deleteFeed()"/>
+                        		</form>
+                        	</th:block>
                         </div>
                     </div>
                 </div>
 
-                <div class="myBand_content_col_title">
-
-                </div>
+                
 
             </div>  <!-- myBand_contentBox -->
         </div>
 
     </div>
+<<<<<<< HEAD
     <div th:replace="~{footer/footer::footer}"></div>
+=======
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+>>>>>>> branch 'develope' of https://github.com/Carri-er/test.git
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
+    <script>
+	    function func_deleteFeed(){
+	        var del_confirm = confirm("게시글을 정말 삭제하시겠습니까?");
+	        
+	        if(del_confirm){
+	            // 확인을 클릭한 경우 form을 제출합니다.
+	            
+	        	document.getElementById('deleteFeedForm').submit();
+	        } else {
+	            // 취소를 클릭한 경우 아무 작업도 하지 않습니다.
+	            return false; // 페이지 이동 방지
+	        }
+	    }
+	    
+	</script>
 </body>
 </html>
