@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ex.springboot.dao.IMemberDAO;
@@ -38,7 +39,7 @@ public class MemberController {
 	// 회원가입 - Logic
 	@PostMapping("/signup")
 	public String signup(HttpServletRequest request, Model model, @RequestParam("Member_profileimage") MultipartFile file) {
-
+		
 		String Member_Email = request.getParameter("mail1")+"@"+request.getParameter("mail2");
 		int Member_Age = Integer.parseInt(request.getParameter("Member_Age"));
 		String Member_Phone = request.getParameter("phone1")+"-"+request.getParameter("phone2")+"-"+request.getParameter("phone3");
@@ -94,6 +95,22 @@ public class MemberController {
 		}
 		return "redirect:/login?msg=1";
 	}
+	
+	
+	// 회원가입 - id 중복검사 Logic
+	@RequestMapping("/idCheck")
+	@ResponseBody // JSON 형태의 응답을 반환하기 위해 사용합니다.
+	public String idCheck(HttpServletRequest request) {
+	    String id = request.getParameter("id");
+	    System.out.println("id: "+id);
+	    System.out.println("member_dao : "+member_dao.memberList(id));
+	    if (member_dao.memberList(id) == null) {
+	    	return "success";
+	    } else {
+	    	return "fail";
+	    }
+	}
+	
 	
 	// 회원 수정 - Page
 	@RequestMapping("/editMember")

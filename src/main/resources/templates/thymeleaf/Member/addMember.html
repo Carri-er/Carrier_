@@ -8,7 +8,7 @@
 	<div class="container addMember_wrap">
 		<div class="row mb-5">
 			<div class="col-12 col-xl-6 mx-auto">
-				<form class="row g-3 addMember_form p-5 rounded-3 gap-2"
+				<form id="addMember" name="addMember" class="row g-3 addMember_form p-5 rounded-3 gap-2"
 					action="/signup" method="post" enctype="multipart/form-data">
 					<h3 class="p-0 m-0 text-center mb-4">회원가입</h3>
 					<div class="col-8 col-xl-6 m-auto text-center">
@@ -20,8 +20,11 @@
 					<div class="col-12">
 						<div class="form-floating">
 							<input type="text"
-								class="form-control" id="name" name="Member_Name"
-								placeholder="이름">
+							    class="form-control" 
+							    id="name" 
+							    name="Member_Name"
+							    placeholder="이름" 
+							    required>
 							<label for="name" class="form-label">이름</label>
 						</div>
 					</div>
@@ -120,7 +123,7 @@
 						<div class="form-floating">
 							<select
 								class="form-select" name="Member_Thema">
-								<option selected>선호 테마를 골라주세요</option>
+								<option value="" selected>선호 테마를 골라주세요</option>
 								<option value="산">산</option>
 								<option value="실내">실내 여행지</option>
 								<option value="액티비티">액티비티</option>
@@ -138,7 +141,7 @@
 						<div class="form-floating">
 							<select
 								class="form-select" name="Member_Area">
-								<option selected>선호 지역을 골라주세요</option>
+								<option value="" selected>선호 지역을 골라주세요</option>
 								<option value="서울">서울</option>
 								<option value="부산">부산</option>
 								<option value="대구">대구</option>
@@ -162,7 +165,7 @@
 					</div>
 					<!-- 제출 -->
 					<div class="col-12 mt-5">
-						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">가입하기</button>
+						<input type="button" onClick="return check()" class="btn btn-main w-100 p-3 rounded-pill" value="가입하기">
 					</div>
 				</form>
 			</div>
@@ -170,7 +173,115 @@
 	</div>
 	<!--footer-->
 <div th:replace="~{footer/footer::footer}"></div>
-	
+
+	<script>
+		function check(){
+			var passwordValidate = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,16}$/;
+
+			/* 
+			1. 비밀번호 자릿수 (최소 8자에서 16자까지)
+			2. 최소 하나 이상의 영문자 (소문자 or 대문자)
+			3. 최소 하나 이상의 숫자
+			4. 최소 하나 이상의 특수문자 (!@#$%^&*?_)
+			*/
+			
+			
+			/* 이름 유효성 검사 */
+			if(addMember.Member_Name.value.length == 0){ 
+				alert("이름이 누락됐습니다.");
+				addMember.Member_Name.focus(); // 포커스를 이동시켜 바로 아이디를 입력할 수 있게
+				return false;
+			}
+			
+			/* 아이디 유효성 검사 */
+			if(addMember.Member_Id.value.length == 0){ 
+				alert("아이디가 누락됐습니다.");
+				addMember.Member_Id.focus(); 
+				return false;
+			}
+			
+			/* 아이디 중복 검사 */
+			var idCk = $("#id").val();
+				$.ajax({
+					url : "/idCheck?id="+idCk,
+					success : function(data) {
+						if (data == "fail") {
+							/* $("#result").text("사용가능한 번호입니다."); */
+							alert("중복된 아이디 입니다");
+							$("#id").focus();
+						} else if (data == "success") {
+							/* $("#result").text("중복된 아이디입니다."); */
+							alert("사용 가능한 아이디 입니다");
+							document.getElementById('addMember').submit();
+						}
+					},
+
+			});
+
+			/* 비번 유효성 검사 */
+			if (passwordValidate.test(addMember.Member_Pw.value)) { 
+				if (addMember.Member_Pw.value.length === addMember.passwordCK.value.length) { 
+					alert("사용하실 수 있는 비밀번호 입니다.");
+						
+				} else {
+					alert("비밀번호가 일치하지 않습니다");
+					addMember.passwordCK.focus();
+					return false;
+				}
+			} else {
+					alert("비밀번호 유효성 검사 지켜라");
+					addMember.Member_Pw.focus();
+					return false;
+			}
+			
+				
+			/* 이메일 유효성 검사 */
+			if (addMember.mail1.value.length == 0) { 
+				alert("이메일을 입력해주세요");
+				addMember.mail1.focus();
+				return false;
+			}
+
+			/* 전화번호 */
+			if (addMember.phone1.value.length == 0
+					|| addMember.phone2.value.length < 4
+					|| addMember.phone3.value.length < 4) { 
+				alert("핸드폰 번호를 다시 확인해주세요");
+
+				if (addMember.phone1.value.length == 0) {
+					addMember.phone1.focus();
+				} else if (addMember.phone2.value.length < 4) {
+					addMember.phone2.focus();
+				} else {
+					addMember.phone3.focus();
+				}
+				return false;
+			}
+
+			/* 연령 유효성 검사 */
+			if (addMember.Member_Age.value.length == 0) { 
+				alert("연령을 선택해주세요");
+				addMember.Member_Age.focus();
+				return false;
+			}
+
+			/* 테마 유효성 검사 */
+			if (addMember.Member_Thema.value == ""
+					|| addMember.Member_Thema.value == "null") {
+				alert("선호하시는 테마를 선택해주세요");
+				addMember.Member_Thema.focus();
+				return false;
+			}
+
+			/* 지역 유효성 검사 */
+			if (addMember.Member_Area.value == ""
+					|| addMember.Member_Area.value == "null") {
+				alert("선호하시는 지역을 선택해주세요");
+				addMember.Member_Area.focus();
+				return false;
+			}
+		}
+	</script>
 	<script>
 	    function readURL(input) {
 	        if (input.files && input.files[0]) {
