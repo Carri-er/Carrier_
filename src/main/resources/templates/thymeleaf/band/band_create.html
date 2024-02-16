@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/home">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
             <form action="band_create" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col">
-                    	<input name="band_admin" type="hidden" value="jjangchang" />
+                    	<input name="band_admin" type="hidden" th:value="${session.loginMember_id}"/>
                         <p class="h4 text-center">밴드 대표사진을 설정해주세요.</p>
                         <input name="band_thumnail" class="form-control" type="file" id="formFileMultiple"  onchange="readURL(this);" multiple >
 						<img id="blah" src="http://placehold.it/200" alt="#" class="border mb-3" width="200" height="200"/>
