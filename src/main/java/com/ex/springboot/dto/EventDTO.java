@@ -1,5 +1,6 @@
 package com.ex.springboot.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
