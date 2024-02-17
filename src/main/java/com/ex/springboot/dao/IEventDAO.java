@@ -13,6 +13,9 @@ import com.ex.springboot.dto.EventDTO;
 public interface IEventDAO {
 	public List<EventDTO> list();
 	public List<String> getDistinctTags();
+	public List<String> areaTag();
+	public List<String> areaTagselect(String id);
+	public List<String> areaTagselectarea(String id);
 	public EventDTO EventView(String id);
 	public int event_write(EventDTO dto);
 	public int event_write_update(EventDTO dto);
@@ -23,6 +26,14 @@ public interface IEventDAO {
 	public List<String> EventTagTag(String id);
 	public int getPostCount();
 	public int getPostCountTag();
+	// 페이징된 데이터 가져오기
+	public List<EventDTO> listWithPagination(@Param("offset") int offset, @Param("pageSize") int pageSize);
+	public List<EventDTO> listWithPaginationArea(@Param("offset") int offset, @Param("pageSize") int pageSize,@Param("area")String area);
+	public List<EventDTO> listWithPaginationTag(@Param("offset") int offset, @Param("pageSize") int pageSize,@Param("tag")String tag);
 	public List<EventCommentDTO> EventCommentList(int evnetNum);
+	public List<EventCommentDTO> EventCommentListUpdate(String evnetNum);
+	public List<EventCommentDTO> EventCommentListUpdateList(String id);
 	public int EventCommentWrite(EventCommentDTO dto);
+	public int EventCommentUpdate(EventCommentDTO dto);
+	public int EventCommentUpdateDelete(String id);
 }

@@ -10,11 +10,74 @@
 			event.stopProgation();
 		event.preventDefault();
 	}
+	function deleteComment(num,id) {
+		if (confirm("해당 댓글을 정말 삭제하시겠습니까?") == true)
+			 location.href = "/EventCommentUpdateDelete?num=" + num + "&id=" + id;
+		else
+			event.stopProgation();
+		event.preventDefault();
+	}
 </script>
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
 	<!-- inner 페이지 -->
 	<div class="container inner mt-5">
+			<div class="row">
+			<div class="col-8 p-3 mx-auto">
+				<form action="Event_comment_write_update" method="post">
+				<div class="" th:each="list:${list}">
+					
+					<textarea class="form-control my-3" id="" cols="30" rows="10" name="Eventcomment_content" th:text="${list.getEventcomment_content()}"></textarea>
+					<input type="hidden" name="eventcomment_num" th:value="${list.getEventcomment_num()}"/>					
+					
+					<input type="hidden" name="Event_num" th:value="${view.getEvent_num()}"/>
+					<input type="hidden" name="memberId" th:value="${session.Member_Id}"/>
+						<button class="btn btn-pinkD mb-3">댓글 수정하기</button>
+						<a th:href="@{'Event_view?id='+${view.getEvent_num()}}" class="btn btn-main mb-3">돌아가기</a>
+					
+				
+					<h3 >수정중인 댓글</h3>
+					<div class="rounded-4 border row my-2 ">
+					<div class="d-none d-lg-block col-2 px-2 pt-3 border-end text-center">
+						<img class="d-none d-lg-block mx-auto" th:src="@{'../img/member_thumbnail/'+${list.getMember_profileimage()}}" style="width:80px;"height="80px;"/>
+						<p th:text="${list.getMember_Id()}" class="btn btn-light my-2 d-none d-md-block"></p>
+					</div>
+					<div class="col px-4">
+					<img class="d-lg-none" th:src="@{'../img/member_thumbnail/'+${list.getMember_profileimage()}}" style="width:30px;"height="30px;"/>
+						<p th:text="${list.getMember_Id()}" class="btn my-2 d-lg-none"></p>
+					<p class="mt-lg-5" th:text="${list.getEventcomment_content()}"></p>
+					<p th:text="${list.getEventcomment_update()}"></p>
+					</div>
+					<div class="col-3 col-block-2 mt-5 text-end">
+					<th:block th:if="${session.Member_Id==list.getMember_Id()||session.Member_Id=='admin'}">
+					<a href="" class="btn btn-pink" th:onclick="'deleteComment(\'' + ${list.getEventcomment_num()} + '\', \'' + ${list.getEvent_num()} + '\')'">삭제</a>
+					</th:block>
+					</div>
+					</div>
+					
+					</div>
+					</form>
+					<!-- <h3>이글에 나의 댓글들</h3>
+					<div th:each="commentlist:${commentlist}" class="rounded-4 border row my-2 ">
+					<div class="d-none d-lg-block col-2 px-2 pt-3 border-end text-center">
+						<img class="d-none d-lg-block mx-auto" th:src="@{'../img/member_thumbnail/'+${commentlist.getMember_profileimage()}}" style="width:80px;"height="80px;"/>
+						<p th:text="${commentlist.getMember_Id()}" class="btn btn-light my-2 d-none d-md-block"></p>
+					</div>
+					<div class="col px-4">
+					<img class="d-lg-none" th:src="@{'../img/member_thumbnail/'+${commentlist.getMember_profileimage()}}" style="width:30px;"height="30px;"/>
+						<p th:text="${commentlist.getMember_Id()}" class="btn my-2 d-lg-none"></p>
+					<p class="mt-lg-5" th:text="${commentlist.getEventcomment_content()}"></p>
+					<p th:text="${commentlist.getEventcomment_upload()}"></p>
+					</div>
+					<div class="col-3 col-block-2 mt-5 text-end">
+					<th:block th:if="${session.Member_Id==commentlist.getMember_Id()||session.Member_Id=='admin'}">
+					<a th:href="@{'EventCommentUpdateDelete?num='+${commentlist.getEventcomment_num()}+'&id='+${commentlist.getEvent_num()}}" class="btn btn-pink">삭제</a>
+					</th:block>
+					</div>
+					</div> -->
+					
+			</div>
+		</div>
 		<!-- 반복 되는 형태 -->
 		<div class="row mb-5">
 			<div class="col text-center">
@@ -94,22 +157,9 @@
 				<button class="btn btn-light">좋아요버튼</button>
 				<button class="btn btn-light">별로에요버튼</button>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-8 p-3 mx-auto">
-				<b>여행톡 0</b>
-				<form action="Event_comment" method="post">
-				<div class="">
-					<textarea class="form-control my-3" id="" cols="30" rows="10" name="Eventcomment_content"></textarea>
-					<input type="hidden" name="Event_num" th:value="${view.getEvent_num()}"/>
-					<input type="hidden" name="memberId" th:value="${session.Member_Id}"/>
-					
-				</div>
-				<div class="col text-end mt-2">
-						<button class="btn btn-mainbg mb-3">댓글달기</button>
-					</div>
-					</form>
-					<div th:each="commentlist:${commentlist}" class="rounded-4 border row my-2 ">
+			<div class="row">
+				<div class="col-8 p-3 mx-auto">
+						<div th:each="commentlist:${commentlist}" class="rounded-4 border row my-2 ">
 					<div class="d-none d-lg-block col-2 px-2 pt-3 border-end text-center">
 						<img class="d-none d-lg-block mx-auto" th:src="@{'../img/member_thumbnail/'+${commentlist.getMember_profileimage()}}" style="width:80px;"height="80px;"/>
 						<p th:text="${commentlist.getMember_Id()}" class="btn btn-light my-2 d-none d-md-block"></p>
@@ -122,22 +172,25 @@
 					</div>
 					<div class="col-3 col-block-2 mt-5 text-end">
 					<th:block th:if="${session.Member_Id==commentlist.getMember_Id()||session.Member_Id=='admin'}">
-					<a th:href="@{'Event_comment_update?num='+${commentlist.getEventcomment_num()}}" class="btn btn-skyb">수정</a>
-					<a href="" class="btn btn-pink">삭제</a>
+					<a href="#" class="btn btn-pink" th:onclick="'deleteComment(\'' + ${commentlist.getEventcomment_num()} + '\', \'' + ${commentlist.getEvent_num()} + '\')'">삭제</a>
 					</th:block>
 					</div>
 					</div>
-					<div class="text-end mt-3">
+				</div>
+			</div>
+		
+			
+			<div class="text-end mt-3">
 						<th:block th:if="${session.Member_Id=='admin'}">
-						<a th:href="@{'Event_write_update?num='+${view.getEvent_num()}}" class="btn btn-pink"> 수정하기</a>
+						<a th:href="@{'Event_write_update?num='+${view.getEvent_num()}}" class="btn btn-pink">글 수정하기</a>
 						
 						<a href="#" class="btn btn-skyb" th:onclick="'deleteConfirm(\'' + ${view.getEvent_num()} + '\')'">글 삭제</a>
 						</th:block>
 						
 						
 					</div>
-			</div>
 		</div>
+	
 		
 	</div>
 	<div th:replace="~{footer/footer::footer}"></div>

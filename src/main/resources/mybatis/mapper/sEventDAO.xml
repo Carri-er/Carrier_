@@ -11,6 +11,22 @@
 		resultType="com.ex.springboot.dto.EventDTO">
 		select * from Event where Event_num = #{param1}
 	</select>
+	<!-- 중복값 제외한 지역 태그 전체 불러오기 -->
+	<select id="areaTag" resultType="java.lang.String">
+		SELECT DISTINCT Event_area
+		FROM
+		Event
+	</select>
+	<!-- 중복값 제외한 지역 태그 전체 불러오기 -->
+	<select id="areaTagselect" resultType="java.lang.String">
+		SELECT DISTINCT Event_area
+		FROM Event where Event_area like '%' || #{param1} || '%'
+	</select>
+	<select id="areaTagselectarea" resultType="java.lang.String">
+		Select DISTINCT
+		Event_area from Event where #{param1} in (Event_tag, Event_tag2,
+		Event_tag3, Event_tag4, Event_tag5)
+	</select>
 	<!-- 중복되는 태그 없이 태그 1~5의 값을 전체 불러옴 -->
 	<select id="getDistinctTags" resultType="java.lang.String">
 		SELECT DISTINCT tag
@@ -85,7 +101,7 @@
     Select * from Event where #{param1} in (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
     ]]>
 	</select>
-	
+
 	<!-- 태그 클릭시 파라미터 값으로 중복되는 태그없이 태그들을 불러옴 -->
 	<select id="EventTag" resultType="java.lang.String"
 		parameterType="string">
@@ -114,7 +130,7 @@
 		FROM Event
 		WHERE Event_area LIKE '%' || #{param1} || '%'
 	</select>
-	
+
 	<!-- 파라미터 값들을 전송하여 여행 글 작성 -->
 	<insert id="event_write">
 		insert into Event values (
@@ -156,14 +172,14 @@
 	<delete id="event_delete">
 		delete event where event_num =#{param1}
 	</delete>
-	
-	<!-- 전체 글 갯수를 불러옴-->
+
+	<!-- 전체 글 갯수를 불러옴 -->
 	<select id="getPostCount" resultType="int">
 		SELECT COUNT(*) AS
 		Post_Count
 		FROM event
 	</select>
-	
+
 	<!-- 파라미터 값으로 댓글을 가져옴 -->
 	<select id="EventCommentList"
 		resultType="com.ex.springboot.dto.EventCommentDTO">
@@ -186,8 +202,98 @@
 		#{param1}
 		order by A.eventcomment_num desc
 	</select>
-	
+
 	<insert id="EventCommentWrite">
-	insert  into Eventcomment values(#{Member_Id},EventComment_seq.nextval,#{eventcomment_content},sysdate,sysdate,#{Event_num})
+		insert into Eventcomment
+		values(#{Member_Id},Event_seq_comment.nextval,#{eventcomment_content},sysdate,sysdate,#{Event_num})
 	</insert>
+
+	<select id="EventCommentListUpdate"
+		resultType="com.ex.springboot.dto.EventCommentDTO">
+		select
+		A.Member_Id,
+		A.eventcomment_num,
+		A.eventcomment_content,
+		A.eventcomment_upload,
+		A.eventcomment_update,
+		A.Event_num,
+		B.Member_profileimage
+		from
+		eventcomment A
+		right outer join
+		carrier_member B
+		on
+		A.Member_id = B.Member_id
+		where
+		A.eventcomment_num = #{param1}
+		order by A.eventcomment_num desc
+	</select>
+
+	<select id="EventCommentListUpdateList"
+		resultType="com.ex.springboot.dto.EventCommentDTO">
+		select * from eventcomment where eventcomment_num =
+		#{param1}
+	</select>
+	<update id="EventCommentUpdate">
+		update Eventcomment set
+		eventcomment_content=#{eventcomment_content},eventcomment_update=
+		sysdate where eventcomment_num = #{eventcomment_num}
+	</update>
+
+	<delete id="EventCommentUpdateDelete">
+		delete Eventcomment where eventcomment_num =
+		#{param1}
+	</delete>
+
+	<!-- 페이징을 위한 이벤트 리스트 조회 -->
+	<select id="listWithPagination"
+		resultType="com.ex.springboot.dto.EventDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Event
+            ORDER BY Event_num DESC
+        ) e
+        WHERE rownum <= #{pageSize}
+    )
+    WHERE rnum > #{offset}
+    ]]>
+	</select>
+	<select id="listWithPaginationArea"
+		resultType="com.ex.springboot.dto.EventDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Event
+            WHERE Event_area LIKE '%' || #{area} || '%'
+            ORDER BY Event_num DESC
+        ) e
+        WHERE rownum <= #{pageSize}
+    )
+    WHERE rnum > #{offset}
+    ]]>
+	</select>
+	<select id="listWithPaginationTag"
+		resultType="com.ex.springboot.dto.EventDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Event
+            where #{tag} in (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+            ORDER BY Event_num DESC
+        ) e
+        WHERE rownum <= #{pageSize}
+    )
+    WHERE rnum > #{offset}
+    ]]>
+	</select>
 </mapper>
