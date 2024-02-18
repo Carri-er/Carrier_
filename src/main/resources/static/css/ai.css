@@ -30,15 +30,15 @@ body{
 
 /* 캐로셀 안 Box 틀 */
 #ai .ai-box {
-    margin: 100px auto 200px;
+    margin: 65px auto 200px;
     height: 500px;
     text-align: center;
     padding: 50px 50px 130px;
 }
 
 #ai .ai-filter-box {
+    margin: 95px auto 150px;
     height: 72%;
-    margin-bottom: 150px;
     box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(4px);
