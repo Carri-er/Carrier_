@@ -43,6 +43,9 @@
 	</select>
 	
 	<!-- 아이디 찾기 -->
+	<select id="Find_Id" resultType="com.ex.springboot.dto.MemberDTO">
+		SELECT * FROM carrier_member WHERE Member_Name = #{Member_Name} AND Member_Email = #{Member_Email}
+	</select>
 	
 	<!-- 비밀번호 찾기 -->
 	<select id="Find_Pw" resultType="com.ex.springboot.dto.MemberDTO">

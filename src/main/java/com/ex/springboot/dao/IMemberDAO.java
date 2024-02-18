@@ -53,7 +53,10 @@ public interface IMemberDAO {
 	);
 	
 	// 아이디 찾기
-
+	public MemberDTO Find_Id(
+			@Param("Member_Name") String Member_Name,
+			@Param("Member_Email") String Member_Email
+	);
 	
 	// 패스워드 찾기
 	public MemberDTO Find_Pw(

@@ -5,15 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.ex.springboot.dto.EventDTO;
+import com.ex.springboot.dao.IMemberDAO;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-import com.ex.springboot.dao.IEventDAO;
-import com.ex.springboot.dao.IMemberDAO;
 
 @Controller
 @RequestMapping
@@ -95,10 +90,10 @@ public class thymeleafController {
 //		return "thymeleaf/Member/login";
 //	}
 
-	@GetMapping("/FindId")
-	public String FindId() {
-		return "thymeleaf/Member/FindId";
-	}
+//	@GetMapping("/FindId")
+//	public String FindId() {
+//		return "thymeleaf/Member/FindId";
+//	}
 
 //	@GetMapping("/FindPw")
 //	public String FindPw() {

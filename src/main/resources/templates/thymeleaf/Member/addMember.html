@@ -1,5 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <div th:replace="~{head/head::head}"></div>
 
 <body>
@@ -11,11 +12,15 @@
 				<form id="addMember" name="addMember" class="row g-3 addMember_form p-5 rounded-3 gap-2"
 					action="/signup" method="post" enctype="multipart/form-data">
 					<h3 class="p-0 m-0 text-center mb-4">회원가입</h3>
-					<div class="col-8 col-xl-6 m-auto text-center">
+					<div class="member-fileUpload-wrapper col-8 col-xl-6 m-auto text-center p-0 my-3">
 						<img id="profileimage" src="../img/mypage/user.png"
 							alt="userImg" class="rounded-circle border" width="150"
-							height="150" /> <input type='file' class="form-control mt-4"
+							height="150" /> <input id="fileUpload" type='file' class="member-fileUpload-form"
 							onchange="readURL(this);" name="Member_profileimage" />
+							<label for="fileUpload" class="member-fileUpload bg-light shadow-sm hstack">
+							프로필 변경
+							<div class="member-fileUpload-btn m-auto"></div>
+						</label> 
 					</div>
 					<div class="col-12">
 						<div class="form-floating">

@@ -5,6 +5,8 @@
 
 <body>
 <div th:replace="~{nav/nav::nav}"></div>
+<!-- 토스트 -->
+<div th:replace="~{alert/toast::div}"></div>
 	<!-- addMember 페이지 -->
 	<div class="container addMember_wrap my-5">
 		<div class="row my-5">
@@ -49,15 +51,22 @@
             const urlParams = new URLSearchParams(window.location.search);
             const msg = urlParams.get('msg');
             
-            // 메시지가 존재할 경우 경고창으로 표시
+         // 메시지가 존재할 경우 toast로 표시
             if (msg !== null && msg !== "") {
-            	if(msg == 1){
-                alert("회원가입에 성공하였습니다🎉 로그인 해주세요");
-            	} else if (msg == 2) {
-                    alert("아이디 또는 비밀번호가 틀렸습니다");
-            	} else if (msg == 3) {
-                    alert("재설정 완료! 다시 로그인 해주세요");
-            	}
+                let message;
+                if(msg == 1){
+                    message = "회원가입에 성공하였습니다🎉 로그인 해주세요";
+                } else if (msg == 2) {
+                    message = "아이디 혹은 비밀번호를 다시 확인해주세요";
+                } else if (msg == 3) {
+                    message = "재설정 완료! 다시 로그인 해주세요";
+                } else if (msg == 4) {
+                    message = "로그아웃 되었습니다. 다음에 또 만나요! 🖐";
+                } 
+
+                // 부트스트랩 toast 트리거
+                $('.my-toast-body').text(message);
+                $('.my-toast').toast('show');
             }
         });
     </script>

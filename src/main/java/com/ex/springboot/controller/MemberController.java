@@ -219,13 +219,16 @@ public class MemberController {
 			model.addAttribute("loginMember", dto);
 
 			System.out.println("로그인 성공");
-
-			return "redirect:/home?msg=1"; // 로그인 성공 후 이동할 페이지
-		} else {
-			System.out.println("로그인 실패");
-
-			return "redirect:/login?msg=2"; // 로그인 실패 시 다시 로그인 페이지로 이동
+			try {
+				String encodedMemberName = URLEncoder.encode(dto.getMember_Name(), "UTF-8");
+				return "redirect:/home?msg=1&name=" + encodedMemberName; // 로그인 성공 후 이동할 페이지
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
+		System.out.println("로그인 실패");
+		
+		return "redirect:/login?msg=2"; // 로그인 실패 시 다시 로그인 페이지로 이동
 	}
 
 	// 로그아웃
@@ -234,9 +237,40 @@ public class MemberController {
 		session.invalidate();
 		System.out.println("로그아웃");
 
-		return "redirect:/login"; // -> 로그인 페이지로 돌아가기
+		return "redirect:/login?msg=4"; // -> 로그인 페이지로 돌아가기
 	}
 
+	// 아이디 찾기 - 페이지
+	@GetMapping("/FindId")
+	public String FindId() {
+		return "thymeleaf/Member/FindId";
+	}
+	
+	// 아이디 찾기 - Logic
+	@PostMapping("/FindIdAction")
+	public String FindIdAction(MemberDTO dto, HttpServletRequest request, Model model) {
+		String Member_Name = request.getParameter("Member_Name");
+		String Member_Email = request.getParameter("Member_Email");
+		
+		dto = member_dao.Find_Id(Member_Name, Member_Email);
+		
+		if(dto != null) {
+			model.addAttribute("MemberList", dto);
+			
+			System.out.println("아찾아디 : "+dto.getMember_Id());
+			System.out.println("아찾이름 : "+dto.getMember_Name());
+			return "thymeleaf/Member/FindId_Result";
+		}
+		
+		return "redirect:/Find_Id?msg=1";
+	}
+	
+	// 아이디 찾기 - 찾은 아이디 출력 페이지
+	@GetMapping("/FindId_Result")
+	public String FindId_Result() {
+		return "thymeleaf/Member/FindId_Result";
+	}
+	
 	// 비밀번호 찾기 - 페이지
 	@GetMapping("/FindPw")
 	public String FindPw() {
@@ -262,8 +296,7 @@ public class MemberController {
 				e.printStackTrace();
 			}
 		}
-		return "redirect:/Find_Pw?msg=1";
-
+		return "redirect:/FindPw?msg=1";
 	}
 	
 	// 비밀번호 찾기 - 비밀번호 재설정 페이지
