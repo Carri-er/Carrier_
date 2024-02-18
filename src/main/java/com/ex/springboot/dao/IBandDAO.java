@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ex.springboot.dto.BandDTO;
 import com.ex.springboot.dto.BandFeedDTO;
+import com.ex.springboot.dto.Band_joinMemberDTO;
 import com.ex.springboot.dto.MemberDTO;
 
 @Mapper // 인터페이스를 xml로 구현하겠다.
@@ -50,5 +51,14 @@ public interface IBandDAO {
 				@Param("band_code") int band_code,
 				@Param("band_feed_num") int band_feed_num
 			);
+	
+	//가입한 밴드 리스트 출력
+	public List<Band_joinMemberDTO> joinBandList(String member_id, String member_id2);
+	
+	//밴드 가입하기
+	public int bandJoinMember(int band_code, String membet_id);
+	
+	//가입한 밴드인지 확인
+	public Band_joinMemberDTO checkJoinMember(int band_code, String membet_id);
 	
 }

@@ -26,7 +26,7 @@
 						<strong>만들기</strong>
 					</a>
 				</div>
-
+	
 				<!-- 가입한 밴드 출력 영역 / 반복-->
 				<div class="col-sm-4 join_band_item" th:each ="bandList:${bandList}">
 					<a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="join_band_item_link">
@@ -55,58 +55,22 @@
                 <!-- 밴드 추천 리스트 -->
                 <div class="row band_recomandBox">
     
-                    <div class="col-lg-6 col-md-12 band_recomand_item ">
+                    <div class="col-lg-6 col-md-12 band_recomand_item " th:each ="bandList:${bandList}">
+                    <a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="band_recomand_link">
                         <div class="band_recomand_img">
-                            <img src="../img/band/content/핑크뮬리.bmp" alt="">
+                            <img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
                         </div>
                         <div class="band_recomand_text">
-                            <h3>월간가드닝 네이버  공식밴드</h3>
-                            <span>정원잡지 '월간가드닝'을 사랑하는 분들을 위한 공간입니다.</span>
+                            <h3 th:text="${bandList.getBand_name()}"></h3>
+                            <span th:text="${bandList.getBand_content()}"></span>
                             <div class="band_more_view">
                                 <span>'테마명'</span> 밴드 더보기 >
                             </div>
                         </div>
+                    </a>
                     </div>
     
-                    <div class="col-lg-6 col-md-12 band_recomand_item ">
-                        <div class="band_recomand_img">
-                            <img src="../img/band/content/핑크뮬리.bmp" alt="">
-                        </div>
-                        <div class="band_recomand_text">
-                            <h3>월간가드닝 네이버  공식밴드</h3>
-                            <span>정원잡지 '월간가드닝'을 사랑하는 분들을 위한 공간입니다.</span>
-                            <div class="band_more_view">
-                                <span>'테마명'</span> 밴드 더보기 >
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-lg-6 col-md-12 band_recomand_item ">
-                        <div class="band_recomand_img">
-                            <img src="../img/band/content/핑크뮬리.bmp" alt="">
-                        </div>
-                        <div class="band_recomand_text">
-                            <h3>월간가드닝 네이버  공식밴드</h3>
-                            <span>정원잡지 '월간가드닝'을 사랑하는 분들을 위한 공간입니다.</span>
-                            <div class="band_more_view">
-                                <span>'테마명'</span> 밴드 더보기 >
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-lg-6 col-md-12 band_recomand_item ">
-                        <div class="band_recomand_img">
-                            <img src="../img/band/content/핑크뮬리.bmp" alt="">
-                        </div>
-                        <div class="band_recomand_text">
-                            <h3>월간가드닝 네이버  공식밴드</h3>
-                            <span>정원잡지 '월간가드닝'을 사랑하는 분들을 위한 공간입니다.</span>
-                            <div class="band_more_view">
-                                <span>'테마명'</span> 밴드 더보기 >
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> <!-- band_recomandBox -->
             </div> 
         </div><!-- 밴드 추천 영역 끝-->
         

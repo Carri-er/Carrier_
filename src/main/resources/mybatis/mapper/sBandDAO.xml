@@ -38,12 +38,29 @@
 		select * from carrier_member where Member_id = #{Member_id}
 	</select>
 	
+	<!-- 밴드 글 수정 -->
 	<update id="bandFeedUpdate">
 		update band_feed set band_feed_content = #{band_feed_content} ,  band_feed_updateday = sysdate where member_id = #{member_id} and band_code = #{band_code} and band_feed_num = #{band_feed_num}
 	</update>
 	
+	<!-- 밴드 글 삭제 -->
 	<delete id="bandFeedDelete">
 		delete from band_feed where band_feed_num = #{band_feed_num} and band_code = #{band_code} 
 	</delete>
+	
+	<!-- 가입한 밴드 리스트 출력 -->
+	<select id="joinBandList" resultType="com.ex.springboot.dto.Band_joinMemberDTO">
+		select A.band_joinMember_num, A.band_code, A.Member_Id, B.band_name, B.band_memberCount, B.band_thumnail from band_joinMember A right outer join band B on A.band_code = B.band_code where A.Member_Id = #{param1} or B.band_admin = #{param2}
+	</select>
+	
+	<!-- 가입한 밴드인지 확인 -->
+	<select id="checkJoinMember" resultType="com.ex.springboot.dto.Band_joinMemberDTO">
+		select * from band_joinMember where band_code = #{param1} and Member_Id = #{param2}
+	</select>
+	<!-- 밴드 가입하기 -->
+	<insert id="bandJoinMember">
+		insert into band_joinMember (band_joinMember_num, band_code, Member_Id )values( band_joinMember_seq.nextval, #{param1}, #{param2})
+	</insert>
+	
 	
 </mapper>
