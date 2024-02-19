@@ -24,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ex.springboot.dto.BandFeedDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.Session;
 
 @Controller
 public class BandController {
@@ -36,9 +38,12 @@ public class BandController {
 	
 	
 	@GetMapping("/band")
-	public String band(Model model) {
+	public String band(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("Member_Id");
 		model.addAttribute("bandList",bandDao.bandList());
-		
+		model.addAttribute("joinBandList", bandDao.joinBandList(loginId, loginId));
+		System.out.println("로그인 아이디 "+loginId);
 		return "thymeleaf/band/band";
 	}
 	
@@ -47,12 +52,14 @@ public class BandController {
 	public String myBand(Model model, HttpServletRequest request) {
 		String band_code = request.getParameter("bandUrl");
 		
+		int num_band_code = Integer.parseInt(band_code);
+		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("Member_Id");
 		model.addAttribute("myBandList",bandDao.myBand(band_code));
 		model.addAttribute("myBandFeedList",bandDao.bandFeedList(band_code));
+		model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
 		
-//		model.addAttribute("feedwriterImg", bandDao.bandWriterImg(band_code));
-		
-	
 		
 		
 		model.addAttribute("bandUrl", band_code);
@@ -183,6 +190,19 @@ public class BandController {
 			return go;
 		}
 		
+		
+		//밴드 멤버로 가입하기 
+		@RequestMapping("/addBandMember")
+		public String addBandMember(Model model, HttpServletRequest request) {
+			String str_band_code = request.getParameter("bandCode");
+			String joinMemberId = request.getParameter("joinMemberId");
+			
+			int num_band_code = Integer.parseInt(str_band_code);
+			
+			bandDao.bandJoinMember(num_band_code, joinMemberId);
+			
+			return "redirect:myBand?bandUrl="+str_band_code;
+		}
 		
 		// 썸머노트 ajax
 		@PostMapping("/uploadSummernoteImageFile")
