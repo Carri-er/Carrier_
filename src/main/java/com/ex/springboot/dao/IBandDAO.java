@@ -18,7 +18,10 @@ public interface IBandDAO {
 	public List<BandDTO> bandList();
 	
 	//band_code를 가지고 myBand 페이지로 이동	
-	public BandDTO myBand(String band_code);
+	public BandDTO myBand(int band_code);
+	
+	//밴드 명을 가지고 밴드 리스트 출력
+	public BandDTO bandName_search(String band_name);
 	
 	//밴드 생성 추상메소드		
 	public int bandCreateDao(
@@ -53,12 +56,25 @@ public interface IBandDAO {
 			);
 	
 	//가입한 밴드 리스트 출력
-	public List<Band_joinMemberDTO> joinBandList(String member_id, String member_id2);
+	public List<Band_joinMemberDTO> joinBandList(String member_id);
 	
 	//밴드 가입하기
 	public int bandJoinMember(int band_code, String membet_id);
 	
 	//가입한 밴드인지 확인
 	public Band_joinMemberDTO checkJoinMember(int band_code, String membet_id);
+	
+	//밴드 정보 수정
+	public int bandInfoUpdate(
+			@Param("band_thumnail") String band_thumnail,
+			@Param("band_name") String band_name, 
+			@Param("band_content") String band_content,
+			@Param("band_code") int band_code
+			);
+	
+	//밴드 가입 시 멤버 수 증가 
+	public int bandMembercount_plus(int band_code);
+	
+	
 	
 }

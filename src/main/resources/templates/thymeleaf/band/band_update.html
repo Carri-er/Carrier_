@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<div th:replace="~{head/head::head}"></div>
+<div th:replace="~{nav/nav::nav}"></div>
+    <div class="container-fluid band_create_wrapper">
+        <div class="container py-5 band_create_Box">
+        
+            <form action="band_update" method="post" enctype="multipart/form-data" id="form_bandUpdate">
+                <div class="row my-5">
+                    <div class="col-md-8 col-lg-7 col-xl-7 mx-auto my-5">
+                    	<input name="band_admin" type="hidden" th:value="${session.Member_Id}"/>
+                    	<input name="bandUrl" type="hidden" th:value="${updateMyBand.getBand_code()}" />
+                        <p class="h4 text-center">밴드 정보 수정</p>
+                        <input name="band_thumnail" class="form-control" type="file" id="formFileMultiple"  onchange="readURL(this);" multiple th:value="${updateMyBand.getBand_thumnail()}">
+						<img id="blah" th:src="@{'../img/uploadBandThumnail/'+${updateMyBand.getBand_thumnail()}}" alt="#" class="border my-3 mx-auto d-block " width="200" height="200"/>
+						
+						<div class="form-floating mb-3">
+							<input name="band_name" type="text" class="form-control" id="input_bandName" placeholder="${updateMyBand.getBand_name()}" size="15" th:value="${updateMyBand.getBand_name()}">
+  							<label for="input_bandName" th:text="${updateMyBand.getBand_name()}">밴드 이름을 입력해주세요.</label>
+						</div>
+                        
+
+						<div class="form-floating">
+							<textarea name="band_content" class="form-control" placeholder="${updateMyBand.getBand_content()}"
+								id="textarea_bandContent" style="height: 200px" th:value="${updateMyBand.getBand_content()}"></textarea>
+							<label for="textarea_bandContent">밴드 소개글을 입력해주세요. <br />
+								<span th:text="${updateMyBand.getBand_content()}"></span>
+							</label>
+						</div>
+                        
+                        <div class="row">
+                        	<div class="col-5 mx-auto">
+                        		<input type="button" value="밴드 수정" onclick="return func_updateBand()" class="btn btn-main w-100 p-3 rounded-pill mt-5"/>
+                        <input type="button" value="밴드 삭제" onclick="return func_deleteBand()" class="btn btn-main w-100 p-3 rounded-pill mt-3"/>	
+                        	</div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+            
+        </div> <!-- band_create_Box -->
+    </div> <!-- band_create_wrapper -->
+    
+<div th:replace="~{footer/footer::footer}"></div>
+    
+    <script>
+    /* 밴드 대표 이미지 선택 시 출력하는 함수 */
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	
+	            reader.onload = function (e) {
+	                $('#blah')
+	                    .attr('src', e.target.result);
+	            };
+	
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    
+    
+    	/* 밴드 명이 작성되지 않았을 때 작동하는 함수  */
+	    function func_updateBand() {
+	 	   
+	 	  var input_bandName = $('#input_bandName').val();
+	 	  var textarea_bandContent = $('#textarea_bandContent').val();
+	 	  
+	 	   if(input_bandName.length == 0){
+	 		   alert('밴드 이름을 입력하세요.');
+	 		   
+	 		  input_bandName.focus();
+	 		 $('#label_bandName').focus();
+	 		  return false;
+	 		  
+	 	   } else if(textarea_bandContent.length == 0){
+	 		   
+	 		 alert('밴드 설명을 입력하세요.');
+	 		 
+	 		 textarea_bandContent.focus();
+	 		$('#label_bandContent').focus();
+	 		 return false; 
+	 		 
+	 	   } else {
+	 		  document.getElementById('form_bandUpdate').submit();
+	 	   }
+	 	   
+	 	   
+	 	}
+    	
+	    /* 밴드 삭제하기 */
+	    function func_deleteBand() {
+		 	   
+		 	  
+		 	document.getElementById('form_bandUpdate').submit();
+
+		 }
+    </script>
+</body>
+</html>

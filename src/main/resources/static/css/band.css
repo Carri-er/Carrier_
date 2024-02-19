@@ -124,6 +124,7 @@ div.band_recomand_wrapper{
 }
 a.band_recomand_link{
 	display : block;
+	width: 100%;
 }
 div.band_recomand_item{
     margin-top : 15px;
@@ -132,11 +133,11 @@ div.band_recomand_item{
     padding-left : 0px;
     height: 100px;;
     display: flex;
-    border : 1px solid red;
+    
 }
 /* 밴드 추천 창 - 이미지*/
 div.band_recomand_img{
-    width: 120px;
+    width: 100px;
     height: 100px;
     margin-right: 10px;
     position : relative;
@@ -147,12 +148,16 @@ div.band_recomand_img>img{
     height: 100%;
     background-size: 100%;
     border-radius: 20px;
-    border : 1px solid blue;
+    
 }
 div.band_recomand_text{
 	position : relative;
     width: 70%;
-    border : 1px solid black;
+    
+    text-overflow : ellipsis;
+    overflow: hidden;
+    white-space: nowpre
+    
 }
 div.band_recomand_text>h3{
     font-size: 18px;

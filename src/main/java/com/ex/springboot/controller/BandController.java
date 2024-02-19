@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ex.springboot.dto.BandDTO;
 import com.ex.springboot.dto.BandFeedDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,12 +39,20 @@ public class BandController {
 	
 	
 	@GetMapping("/band")
-	public String band(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String loginId = (String) session.getAttribute("Member_Id");
+	public String band(Model model, HttpServletRequest request, HttpSession session) {
+		//session = request.getSession();
+		
+		if( session.getAttribute("Member_Id") != null ) {
+			String loginId = (String) session.getAttribute("Member_Id");
+			model.addAttribute("joinBandList", bandDao.joinBandList(loginId));
+			System.out.println("로그인 아이디 "+loginId);
+		}
+		
+		
 		model.addAttribute("bandList",bandDao.bandList());
-		model.addAttribute("joinBandList", bandDao.joinBandList(loginId, loginId));
-		System.out.println("로그인 아이디 "+loginId);
+		
+		
+		
 		return "thymeleaf/band/band";
 	}
 	
@@ -56,7 +65,8 @@ public class BandController {
 		
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("Member_Id");
-		model.addAttribute("myBandList",bandDao.myBand(band_code));
+		model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+		
 		model.addAttribute("myBandFeedList",bandDao.bandFeedList(band_code));
 		model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
 		
@@ -79,7 +89,7 @@ public class BandController {
 		
 		try {
 			String band_admin = request.getParameter("band_admin"); //밴드 만든 사람 : 관리자
-			String band_thumnail = request.getParameter("band_thumnail"); //밴드 대표 이미지
+			
 			String band_name = request.getParameter("band_name"); // 밴드 이름
 			String band_content = request.getParameter("band_content"); // 밴드 소개
 			//이미지 저장 
@@ -88,19 +98,30 @@ public class BandController {
 				bandDao.bandCreateDao(band_name, band_admin, band_content, "gray_bg.png");
 				return "redirect:band";
 			}
+			UUID uuidOne = UUID.randomUUID();
 			
 			//A mutable sequence of characters
 			StringBuilder fileNames = new StringBuilder();
 			
-			Path fileNameAndPath = Paths.get(UPLOAD_BAND_DIRECTORY, file.getOriginalFilename());
-			// => Returns a {@code Path} by converting a path string : 이미지가 저장되는 경로
-			fileNames.append(file.getOriginalFilename());
+			Path fileNameAndPath = Paths.get(UPLOAD_BAND_DIRECTORY, uuidOne + file.getOriginalFilename());
+			// => Returns a {@code Path} by converting a path string => 이미지가 저장되는 경로
+			fileNames.append(uuidOne + file.getOriginalFilename());
 			byte[] fileSize = file.getBytes(); //이미지에 대한 정보 값을 바이트 배열로 가져온다.
 			Files.write(fileNameAndPath, fileSize);
 			
+			model.addAttribute("msg", fileNameAndPath);
 			model.addAttribute("fileName", fileNames); //밴드 대표 이미지 이름 저장.
 			
 			bandDao.bandCreateDao(band_name, band_admin, band_content, fileNames.toString());
+			
+			BandDTO bandDto = new BandDTO();
+			
+			bandDto = bandDao.bandName_search(band_name);
+			
+			int create_band_code = bandDto.getBand_code();
+			
+			bandDao.bandJoinMember(create_band_code, band_admin);
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -193,7 +214,7 @@ public class BandController {
 		
 		//밴드 멤버로 가입하기 
 		@RequestMapping("/addBandMember")
-		public String addBandMember(Model model, HttpServletRequest request) {
+		public String addBandMember(Model model, HttpServletRequest request, BandDTO bandDto) {
 			String str_band_code = request.getParameter("bandCode");
 			String joinMemberId = request.getParameter("joinMemberId");
 			
@@ -201,8 +222,42 @@ public class BandController {
 			
 			bandDao.bandJoinMember(num_band_code, joinMemberId);
 			
+			bandDao.myBand(num_band_code);
+			bandDao.bandMembercount_plus(num_band_code);
+			
+			
 			return "redirect:myBand?bandUrl="+str_band_code;
 		}
+		
+		//밴드 설정하기 페이지
+		@RequestMapping("/setMyBand")
+		public String setMyBand(Model model, HttpServletRequest request) {
+			String str_band_code = request.getParameter("bandUrl");
+			
+			int num_band_code = Integer.parseInt(str_band_code);
+			
+			model.addAttribute("updateMyBand", bandDao.myBand(num_band_code));
+			
+			
+			return "thymeleaf/band/band_update";
+			
+		}
+		
+		//수정 완료 시 
+		@RequestMapping("/band_update")
+		public String bandUpdate(Model model, HttpServletRequest request) {
+			String str_band_code = request.getParameter("bandUrl");
+			int num_band_code = Integer.parseInt(str_band_code);
+			String band_thumnail = request.getParameter("band_thumnail");
+			String band_name = request.getParameter("band_name");
+			String band_content = request.getParameter("band_content");
+			
+			bandDao.bandInfoUpdate(band_thumnail, band_name, band_content, num_band_code);
+			String go = "redirect:myBand?bandUrl="+str_band_code;
+			
+			return go;
+		}
+		
 		
 		// 썸머노트 ajax
 		@PostMapping("/uploadSummernoteImageFile")

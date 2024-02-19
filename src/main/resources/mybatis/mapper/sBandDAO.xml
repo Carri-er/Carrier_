@@ -13,6 +13,11 @@
 	<select id="myBand" resultType="com.ex.springboot.dto.BandDTO">
    		select * from band where band_code = #{param1} 
     </select>
+    
+    <!-- 밴드명으로 밴드DTO 출력하기 -->
+   	<select id="bandName_search" resultType="com.ex.springboot.dto.BandDTO">
+		select * from band where band_name = #{param1}
+	</select>
 	
 	<!-- resultType은 리턴되는 값의 타입을 지정, insert와 delete는 결과값이 없으므로 select와 달리 리턴 타입을 지정안함 -->
 	<!-- 밴드 생성 -->
@@ -50,17 +55,37 @@
 	
 	<!-- 가입한 밴드 리스트 출력 -->
 	<select id="joinBandList" resultType="com.ex.springboot.dto.Band_joinMemberDTO">
-		select A.band_joinMember_num, A.band_code, A.Member_Id, B.band_name, B.band_memberCount, B.band_thumnail from band_joinMember A right outer join band B on A.band_code = B.band_code where A.Member_Id = #{param1} or B.band_admin = #{param2}
+		select A.band_joinMember_num, A.band_code, A.Member_Id, B.band_name, B.band_memberCount, B.band_thumnail from band_joinMember A right outer join band B on A.band_code = B.band_code where A.Member_Id = #{param1}
 	</select>
 	
 	<!-- 가입한 밴드인지 확인 -->
 	<select id="checkJoinMember" resultType="com.ex.springboot.dto.Band_joinMemberDTO">
 		select * from band_joinMember where band_code = #{param1} and Member_Id = #{param2}
 	</select>
+	
 	<!-- 밴드 가입하기 -->
 	<insert id="bandJoinMember">
 		insert into band_joinMember (band_joinMember_num, band_code, Member_Id )values( band_joinMember_seq.nextval, #{param1}, #{param2})
 	</insert>
 	
+	<!-- 밴드 가입 시 멤버 회원 수 증가  -->
+	<update id="bandMembercount_plus">
+		update band set Band_memberCount = Band_memberCount + 1 where band_code = #{param1} 
+	</update>
+	
+	<!-- 밴드 가입 시 멤버 회원 수 감소  -->
+	<update id="bandMembercount_minus">
+		update band set Band_memberCount = Band_memberCount -1 where band_code = #{param1} 
+	</update>
+	
+	<!-- 밴드 정보 수정하기 -->
+	<update id="bandInfoUpdate">
+		update band set band_thumnail = #{band_thumnail} , band_name = #{band_name} ,band_content = #{band_content} where band_code = #{band_code};
+	</update>
+	
+	<!-- 밴드 삭제하기 -->
+	<delete id="bandInfoDelete">
+		delete from band where band_code = #{band_code};
+	</delete>
 	
 </mapper>
