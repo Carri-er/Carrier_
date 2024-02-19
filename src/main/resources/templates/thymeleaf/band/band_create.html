@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <div th:replace="~{head/head::head}"></div>
 <div th:replace="~{nav/nav::nav}"></div>
     <div class="container-fluid band_create_wrapper">
@@ -10,21 +11,21 @@
                     	<input name="band_admin" type="hidden" th:value="${session.loginMember_id}"/>
                         <p class="h4 text-center">밴드 대표사진을 설정해주세요.</p>
                         <input name="band_thumnail" class="form-control" type="file" id="formFileMultiple"  onchange="readURL(this);" multiple >
-						<img id="blah" src="http://placehold.it/200" alt="#" class="border mb-3" width="200" height="200"/>
+						<img id="blah" src="http://placehold.it/200" alt="#" class="border mb-3 mx-auto" width="200" height="200"/>
 						
 						<div class="form-floating mb-3">
-							<input name="band_name" type="text" class="form-control" id="floatingInput" placeholder="밴드 이름 입력">
-  							<label for="floatingInput">밴드 이름을 입력해주세요.</label>
+							<input name="band_name" type="text" class="form-control" id="input_bandName" placeholder="밴드 이름 입력" size="15">
+  							<label for="input_bandName">밴드 이름을 입력해주세요.</label>
 						</div>
                         
 
 						<div class="form-floating">
-							<textarea name="band_content" class="form-control" placeholder="밴드 소개말과 대표사이트 등을 입력하세요."
-								id="floatingTextarea2" style="height: 200px"></textarea>
-							<label for="floatingTextarea2">밴드 소개글을 입력해주세요.</label>
+							<textarea name="band_content" class="form-control" placeholder=""
+								id="textarea_bandContent" style="height: 200px"></textarea>
+							<label for="textarea_bandContent">밴드 소개글을 입력해주세요.</label>
 						</div>
                         
-                        <input type="submit" value="밴드 생성"/>
+                        <input type="button" value="밴드 생성" onclick="return func_createBand()"/>
                     </div>
                 </div>
             </form>
@@ -34,6 +35,7 @@
 <div th:replace="~{footer/footer::footer}"></div>
     
     <script>
+    /* 밴드 대표 이미지 선택 시 출력하는 함수 */
 	    function readURL(input) {
 	        if (input.files && input.files[0]) {
 	            var reader = new FileReader();
@@ -46,6 +48,28 @@
 	            reader.readAsDataURL(input.files[0]);
 	        }
 	    }
+	    
+    
+    	/* 밴드 명이 작성되지 않았을 때 작동하는 함수  */
+	    function func_createBand() {
+	 	   
+	 	  var input_bandName = $('#input_bandName').val();
+	 	  var textarea_bandContent = $('#textarea_bandContent').val();
+	 	  
+	 	   if(input_bandName.length == 0){
+	 		   alert('밴드 이름을 입력하세요.');
+	 		  input_bandName.focus();
+	 		  return false;
+	 	   }
+	 	   
+	 	   if(textarea_bandContent.lengh == 0){
+	 		 alert('밴드 설명을 입력하세요.');
+	 		 textarea_bandContent.focus();
+	 		 return false; 
+	 	   }
+	 	   
+	 	   return true;
+	 	}
     </script>
 </body>
 </html>
