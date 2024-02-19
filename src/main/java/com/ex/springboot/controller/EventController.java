@@ -230,7 +230,14 @@ public class EventController {
 	@GetMapping("/Event_write_delete")
 	public String Event_write_delete(HttpServletRequest request, Model model) {
 		String num = request.getParameter("num");
-		System.out.println(eventDAO.event_delete(num) + "호출");
+		eventDAO.EventCommentDelete(num);
+		return "redirect:/Event_delete?num=" + num;
+	}
+	// 여행 정보 삭제
+	@GetMapping("/Event_delete")
+	public String Event_delete(HttpServletRequest request, Model model) {
+		String num = request.getParameter("num");
+		eventDAO.event_delete(num);
 		model.addAttribute("delete", eventDAO.event_delete(num));
 		return "redirect:/info";
 	}
@@ -240,7 +247,7 @@ public class EventController {
 	public String EventCommentUpdateDelete(HttpServletRequest request, Model model) {
 		String num = request.getParameter("num");
 		String id = request.getParameter("id");
-		System.out.println(eventDAO.EventCommentUpdateDelete(num) + "호출");
+		System.out.println(eventDAO.EventCommentUpdateDelete(num) + "댓글 삭제");
 		return "redirect:/Event_view?id=" + id;
 	}
 
@@ -300,7 +307,7 @@ public class EventController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/info";
+		return "redirect:/info?msg=1";
 	}
 
 	// 여행 글 수정 업로드
