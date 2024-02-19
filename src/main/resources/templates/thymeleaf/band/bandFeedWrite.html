@@ -17,16 +17,27 @@
 <body>
     <div class="bandFeedWrite_wrapper">
         <div class="bandFeedWrite_form">
-            <form method="post" action="writeFeed">				
-            	<input name="member_id" type="hidden" th:value="${session.Member_Id}"/>
+            <form method="post" action="writeFeed" onsubmit="return func_writeBandFeed()">				
+            	<input id="bandWriter_id" name="member_id" type="hidden" th:value="${session.Member_Id}"/>
             	<input name="bandUrl" type="hidden" th:value="${bandUrl}"  />
                 <textarea id="summernote" name="band_feed_content" ></textarea>
-                <input type="submit" name="doit" value="글쓰기" />
+                <input type="submit" name="doit" value="글쓰기" onclick=""/>
                	<input type="button" value="취소" onclick="history.back()" />
             </form>
         </div>
     </div>
     <script>
+    /* 로그인을 하지 않았을 때  */
+    function func_writeBandFeed() {
+	   
+	   var bandWriter_id = $('#bandWriter_id').val();
+	   if(bandWriter_id.length == 0){
+		   alert('로그인시 이용가능합니다.');
+		   location.href = '/login';
+		   return false;
+	   }
+   }
+   
     $(document).ready(function() {
         $('#summernote').summernote({
            minHeight: 500,             // 최소 높이
@@ -59,7 +70,9 @@
            });
            
         }
-
+	
+        
+      
      });
 
         

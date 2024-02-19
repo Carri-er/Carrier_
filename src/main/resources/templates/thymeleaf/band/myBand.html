@@ -37,13 +37,26 @@
 						<div class="myBand_info">
 							<span th:text="${myBandList.getBand_content()}"></span>
 						</div>
-
-						<div class="myBand_write_btn">
-							<a
-								th:href="@{'bandFeedWrite?bandUrl='+${myBandList.getBand_code()}}">
-								<span>글쓰기</span>
-							</a>
-						</div>
+						
+						<!-- 가입한 밴드 확인 영역 -->
+						<th:block th:if="${checkMember == null}">
+							<form action="addBandMember" method="post">
+								<div class="myBand_write_btn">
+									<input name="bandCode" type="hidden" th:value="${myBandList.getBand_code()}" />
+									<input name="joinMemberId" type="hidden" th:value="${session.Member_Id}" />
+									<input type="submit" value="가입하기"/>								
+								</div>		
+							</form>
+						</th:block>
+						<th:block th:unless="${checkMember == null}">
+							<div class="myBand_write_btn">
+								<a
+									th:href="@{'bandFeedWrite?bandUrl='+${myBandList.getBand_code()}}">
+									<span>글쓰기</span>
+								</a>
+							</div>
+						</th:block>
+						
 					</div> <!-- myBand_content_col_title -->
 				</div> <!-- myBand_content_col_titleBox -->
 
