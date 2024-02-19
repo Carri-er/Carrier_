@@ -29,14 +29,14 @@
 				</div>
 	
 				<!-- 가입한 밴드 출력 영역 / 반복-->
-				<div class="col-sm-4 join_band_item" th:each ="bandList:${bandList}">
-					<a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="join_band_item_link">
+				<div class="col-sm-4 join_band_item" th:each ="joinBandList:${joinBandList}">
+					<a  th:href="@{'myBand?bandUrl='+ ${joinBandList.getBand_code()}}" class="join_band_item_link">
 						<div class="join_band_item_imgBox">
-	                    	<img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
+	                    	<img th:src="@{'../img/uploadBandThumnail/'+ ${joinBandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
 	                    </div>
 	                    <div class="join_band_item_text">
-	                        <strong th:text="${bandList.getBand_name()}">밴드 제목</strong>
-		             	    <span>멤버 <span th:text="${bandList.getBand_memberCount()}" ></span></span>
+	                        <strong th:text="${joinBandList.getBand_name()}">밴드 제목</strong>
+		             	    <span>멤버 <span th:text="${joinBandList.getBand_memberCount()}" ></span></span>
 		                </div> 
 		            </a>
                 </div>
@@ -57,18 +57,18 @@
                 <div class="row band_recomandBox">
     
                     <div class="col-lg-6 col-md-12 band_recomand_item " th:each ="bandList:${bandList}">
-                    <a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="band_recomand_link">
-                        <div class="band_recomand_img">
-                            <img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
-                        </div>
-                        <div class="band_recomand_text">
-                            <h3 th:text="${bandList.getBand_name()}"></h3>
-                            <span th:text="${bandList.getBand_content()}"></span>
-                            <div class="band_more_view">
-                                <span>'테마명'</span> 밴드 더보기 >
-                            </div>
-                        </div>
-                    </a>
+	                    <a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="band_recomand_link d-flex">
+	                        <div class="band_recomand_img">
+	                            <img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
+	                        </div>
+	                        <div class="band_recomand_text">
+	                            <h3 th:text="${bandList.getBand_name()}"></h3>
+	                            <span th:text="${bandList.getBand_content()}"></span>
+	                            <div class="band_more_view">
+	                                <span>'테마명'</span> 밴드 더보기 >
+	                            </div>
+	                        </div>
+	                    </a>
                     </div>
     
                 </div> <!-- band_recomandBox -->

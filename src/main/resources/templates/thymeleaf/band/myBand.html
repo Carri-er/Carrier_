@@ -40,11 +40,13 @@
 						
 						<!-- 가입한 밴드 확인 영역 -->
 						<th:block th:if="${checkMember == null}">
-							<form action="addBandMember" method="post">
+							<form action="addBandMember" method="post" name="addMember_band">
 								<div class="myBand_write_btn">
 									<input name="bandCode" type="hidden" th:value="${myBandList.getBand_code()}" />
 									<input name="joinMemberId" type="hidden" th:value="${session.Member_Id}" />
-									<input type="submit" value="가입하기"/>								
+									<a href="javascript:addMember_band.submit();" >
+										<span>가입하기</span>
+									</a>								
 								</div>		
 							</form>
 						</th:block>
@@ -55,6 +57,10 @@
 									<span>글쓰기</span>
 								</a>
 							</div>
+						</th:block>
+						<!-- 로그인 아이디와 밴드 관리자 아이디가 같을 때 -->
+						<th:block th:if="${ session.Member_Id eq myBandList.getBand_admin() }">
+							<a th:href="@{'setMyBand?bandUrl='+${myBandList.getBand_code()}}" class="btn btn-success">밴드 설정</a>
 						</th:block>
 						
 					</div> <!-- myBand_content_col_title -->
