@@ -57,4 +57,10 @@
 		UPDATE carrier_member SET Member_Pw = #{Member_Pw} WHERE Member_Id = #{Member_Id}
 	</update>
 	
+	<!-- member -->
+	<select id="AllMemberList" resultType="com.ex.springboot.dto.MemberDTO">
+		SELECT * FROM carrier_member
+	</select>
+	
+	
 </mapper>

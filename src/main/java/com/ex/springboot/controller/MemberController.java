@@ -121,7 +121,7 @@ public class MemberController {
 		model.addAttribute("phone2", phone[1]);
 		model.addAttribute("phone3", phone[2]);
 
-		return "thymeleaf/mypage/editMember";
+		return "thymeleaf/Member/editMember";
 	}
 
 	// 회원 수정 - Logic
@@ -178,18 +178,52 @@ public class MemberController {
 		return "redirect:/mypage?id=" + request.getParameter("Member_Id");
 	}
 
-	// 회원 삭제
+	// 회원 탈퇴 및 삭제
 	@GetMapping("/delMember")
 	public String delMember(HttpServletRequest request, Model model, HttpSession session) {
-		String Member_id = request.getParameter("memberId");
+		String Member_id;
+		// 파라미터의 이름을 id 라고 들고온다면 admin 이 요청한 값 
+		if(request.getParameterMap().containsKey("id")) {
+			Member_id = request.getParameter("id");
+			
+			member_dao.delMember(Member_id);
+			session.invalidate();
+			
+			System.out.println("회원삭제");
+			
+			try {
+				String encodedMemberName = URLEncoder.encode(Member_id, "UTF-8");
+				return "redirect:/MemberList?msg=1&name=" + encodedMemberName; // 로그인 성공 후 이동할 페이지
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// 파라미터 이름을 memberId 로 들고오면 개인이 탈퇴 요청한 id 값
+		Member_id = request.getParameter("memberId");
 
 		member_dao.delMember(Member_id);
 		session.invalidate();
 
 		System.out.println("회원삭제");
+		
 
 		return "redirect:/login";
 	}
+	
+	@GetMapping("/mypage")
+	public String mypage(HttpServletRequest request, Model model) {
+		String id = request.getParameter("id");
+		
+		if(request.getParameter("id").equals("admin")) {
+			return "redirect:/MemberList";
+		}
+		
+		model.addAttribute("loginMember", member_dao.memberList(id));
+		
+		return "thymeleaf/Member/mypage";
+	}
+	
 
 	// 로그인 - Page
 	@GetMapping("/login")
@@ -231,7 +265,7 @@ public class MemberController {
 		return "redirect:/login?msg=2"; // 로그인 실패 시 다시 로그인 페이지로 이동
 	}
 
-	// 로그아웃
+	// 로그아웃 - 로직
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -317,5 +351,13 @@ public class MemberController {
 
 		return "redirect:/login?msg=3";
 	}
+	
+	// [관리자] -- 회원 목록
+	@RequestMapping("/MemberList")
+	public String AllMemberList(MemberDTO dto, HttpServletRequest request, Model model) {
 
+		model.addAttribute("MemberList", member_dao.AllMemberList());
+
+		return "thymeleaf/Member/MemberList";
+	}
 }

@@ -71,4 +71,7 @@ public interface IMemberDAO {
 			@Param("Member_Pw") String Member_Pw
 	);
 	
+	// 전체 회원 목록 보기
+	public List<MemberDTO> AllMemberList();
+	
 }

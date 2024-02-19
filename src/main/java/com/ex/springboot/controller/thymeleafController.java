@@ -65,14 +65,14 @@ public class thymeleafController {
 	@Autowired
 	IMemberDAO member_dao;
 	
-	@GetMapping("/mypage")
-	public String mypage(HttpServletRequest request, Model model) {
-		String id = request.getParameter("id");
-		
-		model.addAttribute("loginMember", member_dao.memberList(id));
-		
-		return "thymeleaf/mypage/mypage";
-	}
+//	@GetMapping("/mypage")
+//	public String mypage(HttpServletRequest request, Model model) {
+//		String id = request.getParameter("id");
+//		
+//		model.addAttribute("loginMember", member_dao.memberList(id));
+//		
+//		return "thymeleaf/Member/mypage";
+//	}
 
 //	@GetMapping("/addMember")
 //	public String addMember() {

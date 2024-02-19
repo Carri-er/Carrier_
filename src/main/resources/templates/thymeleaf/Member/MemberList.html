@@ -1,0 +1,136 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{head/head::head}"></div>
+
+<body>
+	<div th:replace="~{nav/nav::nav}"></div>
+	<!-- 토스트 -->
+	<div th:replace="~{alert/toast::div}"></div>
+	<!-- MemberList 시작 -->
+	<div class="container-fluid p-0 p-md-5">
+	<!-- [M] -->
+	<h5 class="m-4 text-center p-3"> <span class="rounded-pill bg-pinkD p-2 px-4 f20">전체 회원 목록</span></h5>
+		<div class="d-xl-none table-responsive bg-pink border rounded-4 p-2 px-3 mx-2">
+			<table class="table table-hover">
+				<thead class="">
+					<tr>
+						<th scope="col" class="">#</th>
+						<th scope="col" class="col"></th>
+						<th scope="col" class="col">이름</th>
+						<th scope="col" class="col">정보</th>
+						<th scope="col" class="col">삭제</th>
+					</tr>
+				</thead>
+				<th:block th:each="list : ${MemberList}" class="d-flex align-items-center">
+					<tbody>
+						<tr class="">
+							<th scope="row"><span th:text="${listStat.count}" class="d-row align-self-center"></span></th>
+							<td class="justify-content-center"><img th:src="@{'../img/member_thumbnail/'+ ${list.Member_profileimage}}" alt="" class="rounded-circle" width="36" height="36"/></td>
+							<td th:text="${list.Member_Name}">이름</td>
+							<td>
+							<span class="d-block">
+								아이디 : 
+								<span th:text="${list.Member_Id}">아이디</span>
+							</span>
+							<span class="d-block">
+								연령대 : 
+								<span th:switch="${list.Member_Age}">
+									<span th:case="19">19세 이하</span>							
+									<span th:case="50">50대 이상</span>							
+									<span th:case="*" th:text="${list.Member_Age + '대'}"></span>							
+								</span>
+							</span>
+							<span class="d-block">
+								Email : 
+								<span th:text="${list.Member_Email}" >이메일</span>
+							</span>
+							<span class="d-block">
+								☎️.
+								<span th:text="${list.Member_Phone}" >핸드폰번호</span>
+							</span>
+							<span class="d-block">
+								<span th:text="${list.Member_Area}" class="btn-sm btn btn-main rounded-pill">선호 지역 </span>
+								<span th:text="${list.Member_Thema}" class="btn-sm btn btn-skyb rounded-pill">선호 테마</span>
+							</span>
+							<span class="d-block">
+								<span th:text="${list.Member_joinDate}" >가입일</span>
+							</span>
+							</td>
+							<td class="m-2">
+								<button type="button" class="btn btn-close btn-pinkD rounded-circle p-2" aria-label="Close"></button>
+							</td>
+						</tr>
+					</tbody>
+				</th:block>
+			</table>
+		</div>
+	
+		<!-- PC화면 -->
+		<div class="d-none d-xl-block table-responsive bg-pink rounded-4 p-2 px-5">
+			<table class="table table-hover">
+				<thead class="">
+					<tr>
+						<th scope="col" class="">#</th>
+						<th scope="col" class="col"></th>
+						<th scope="col" class="col">이름</th>
+						<th scope="col" class="col">아이디</th>
+						<th scope="col" class="col">연령대</th>
+						<th scope="col" class="col">이메일</th>
+						<th scope="col" class="col">핸드폰번호</th>
+						<th scope="col" class="col">선호 지역</th>
+						<th scope="col" class="col">선호 테마</th>
+						<th scope="col" class="col">가입일</th>
+						<th scope="col" class="col">삭제</th>
+					</tr>
+				</thead>
+				<th:block th:each="list : ${MemberList}" class="d-flex align-items-center">
+					<tbody>
+						<tr class="">
+							<th scope="row"><span th:text="${listStat.count}" class="d-row align-self-center"></span></th>
+							<td class="justify-content-center"><img th:src="@{'../img/member_thumbnail/'+ ${list.Member_profileimage}}" alt="" class="rounded-circle" width="36" height="36"/></td>
+							<td th:text="${list.Member_Name}">이름</td>
+							<td th:text="${list.Member_Id}">아이디</td>
+							<td th:switch="${list.Member_Age}">
+								<span th:case="19">19세 이하</span>							
+								<span th:case="50">50대 이상</span>							
+								<span th:case="*" th:text="${list.Member_Age + '대'}"></span>							
+							</td>
+							<td th:text="${list.Member_Email}">이메일</td>
+							<td th:text="${list.Member_Phone}">핸드폰번호</td>
+							<td><span class="btn-sm btn btn-main rounded-pill" th:text="${list.Member_Area}">선호 지역</span></td>
+							<td><span class="btn-sm btn btn-skyb rounded-pill" th:text="${list.Member_Thema}">선호 테마</span></td>
+							<td th:text="${list.Member_joinDate}">가입일</td>
+							<td class="m-2">
+								<a th:href="'/delMember?id='+${list.Member_Id}" class="btn btn-close btn-pinkD rounded-circle p-2" aria-label="Close"></a>
+							</td>
+						</tr>
+					</tbody>
+				</th:block>
+			</table>
+		</div>
+	</div>
+	
+	<!-- 알림창 -->
+	<script type="text/javascript">
+        $(document).ready(function() {
+            // URL에서 msg 매개변수 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            const name = urlParams.get('name');
+            
+         // 메시지가 존재할 경우 toast로 표시
+            if (msg !== null && msg !== "") {
+                let message;
+                if(msg == 1){
+                    message = name+"님의 정보가 삭제 되었습니다 🖐";
+                }
+                
+                // 부트스트랩 toast 트리거
+                $('.my-toast-body').text(message);
+                $('.my-toast').toast('show');
+            }
+        });
+    </script>
+</body>
+</html>
