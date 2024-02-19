@@ -37,7 +37,7 @@
 						<div class="myBand_info">
 							<span th:text="${myBandList.getBand_content()}"></span>
 						</div>
-						
+						<button type="button" data-bs-toggle="modal" data-bs-target="#myModal">Launch modal</button>
 						<!-- 가입한 밴드 확인 영역 -->
 						<th:block th:if="${checkMember == null}">
 							<form action="addBandMember" method="post" name="addMember_band">
@@ -57,6 +57,23 @@
 									<span>글쓰기</span>
 								</a>
 							</div>
+							<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 						</th:block>
 						<!-- 로그인 아이디와 밴드 관리자 아이디가 같을 때 -->
 						<th:block th:if="${ session.Member_Id eq myBandList.getBand_admin() }">
@@ -118,9 +135,16 @@
     </div>
 
     <div th:replace="~{footer/footer::footer}"></div>
-
+	
     
     <script>
+    const myModal = document.getElementById('myModal');
+    const myInput = document.getElementById('myInput');
+
+    myModal.addEventListener('shown.bs.modal', () => {
+      myInput.focus()
+    });
+
 	    function func_deleteFeed(){
 	        var del_confirm = confirm("게시글을 정말 삭제하시겠습니까?");
 	        
