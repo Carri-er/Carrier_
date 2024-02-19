@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 이 매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
+<mapper namespace="com.ex.springboot.dao.IFeedDAO">
+<!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
+
+	<!-- 전체 밴드 리스트 출력 -->
+	<select id="feedList" resultType="com.ex.springboot.dto.FeedDTO">
+		select * from Feed
+	</select>
+<!-- 	
+	myfeed 페이지 리스트
+	<select id="myFeed" resultType="com.ex.springboot.dto.FeedDTO">
+   		select * from feed where feed_code = #{param1} 
+    </select>
+    
+    밴드명으로 밴드DTO 출력하기
+   	<select id="feedName_search" resultType="com.ex.springboot.dto.FeedDTO">
+		select * from feed where feed_name = #{param1}
+	</select>
+	
+	피드 작성
+	<insert id="feedFeedWrite">
+		insert into feed_feed (feed_feed_num, feed_code ,Member_id, feed_feed_content, feed_feed_uploadday, feed_feed_updateday) 
+			values (feed_feed_seq.nextval, #{feed_code}, #{Member_id}, #{feed_feed_content}, sysdate, sysdate)
+	</insert>
+	
+	밴드 별 피드 전체 목록 
+	<select id="feedFeedList" resultType="com.ex.springboot.dto.FeedFeedDTO">
+		select * from feed_feed where feed_code = ${param1}
+		select A.feed_feed_num, A.feed_code, A.Member_id, A.feed_feed_content, A.feed_feed_uploadday, A.feed_feed_updateday, B.Member_profileimage from feed_feed A right outer join carrier_member B on A.Member_id = B.Member_id where A.feed_code = ${param1} order by A.feed_feed_num desc    
+	</select>
+	
+	밴드 작성한 사람의 이미지 출력 구문
+	<select id="feedWriterImg" resultType="com.ex.springboot.dto.MemberDTO">
+		select * from carrier_member where Member_id = #{Member_id}
+	</select>
+	
+	밴드 글 수정
+	<update id="feedFeedUpdate">
+		update feed_feed set feed_feed_content = #{feed_feed_content} ,  feed_feed_updateday = sysdate where member_id = #{member_id} and feed_code = #{feed_code} and feed_feed_num = #{feed_feed_num}
+	</update>
+	
+	밴드 글 삭제
+	<delete id="feedFeedDelete">
+		delete from feed_feed where feed_feed_num = #{feed_feed_num} and feed_code = #{feed_code} 
+	</delete>
+	
+	가입한 밴드 리스트 출력
+	<select id="joinFeedList" resultType="com.ex.springboot.dto.Feed_joinMemberDTO">
+		select A.feed_joinMember_num, A.feed_code, A.Member_Id, B.feed_name, B.feed_memberCount, B.feed_thumnail from feed_joinMember A right outer join feed B on A.feed_code = B.feed_code where A.Member_Id = #{param1}
+	</select>
+	
+	가입한 밴드인지 확인
+	<select id="checkJoinMember" resultType="com.ex.springboot.dto.Feed_joinMemberDTO">
+		select * from feed_joinMember where feed_code = #{param1} and Member_Id = #{param2}
+	</select>
+	
+	밴드 가입하기
+	<insert id="feedJoinMember">
+		insert into feed_joinMember (feed_joinMember_num, feed_code, Member_Id )values( feed_joinMember_seq.nextval, #{param1}, #{param2})
+	</insert>
+	
+	밴드 가입 시 멤버 회원 수 증가 
+	<update id="feedMembercount_plus">
+		update feed set Feed_memberCount = Feed_memberCount + 1 where feed_code = #{param1} 
+	</update>
+	
+	밴드 가입 시 멤버 회원 수 감소 
+	<update id="feedMembercount_minus">
+		update feed set Feed_memberCount = Feed_memberCount -1 where feed_code = #{param1} 
+	</update>
+	
+	밴드 정보 수정하기
+	<update id="feedInfoUpdate">
+		update feed set feed_thumnail = #{feed_thumnail} , feed_name = #{feed_name} ,feed_content = #{feed_content} where feed_code = #{feed_code};
+	</update>
+	
+	밴드 삭제하기
+	<delete id="feedInfoDelete">
+		delete from feed where feed_code = #{feed_code};
+	</delete> -->
+	
+</mapper>

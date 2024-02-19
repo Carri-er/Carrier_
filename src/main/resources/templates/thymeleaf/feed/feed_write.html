@@ -1,37 +1,83 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/home">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/home">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>캐리어</title>
-    <!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>캐리어</title>
+<!-- include libraries(jQuery, bootstrap) -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<!-- icon CDN -->
+<link rel='stylesheet'
+	href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+<link rel="stylesheet" href="../css/common.css">
 <link rel="stylesheet" href="../css/bandFeedWrite.css">
 </head>
 <body>
 	<!-- 토스트 -->
 	<div th:replace="~{alert/toast::div}"></div>
-	
-    <div class="bandFeedWrite_wrapper">
-        <div class="bandFeedWrite_form">
-            <form method="post" action="writeFeed" onsubmit="return func_writeBandFeed()">				
-            	<input id="bandWriter_id" name="member_id" type="hidden" th:value="${session.Member_Id}"/>
-            	<input name="bandUrl" type="hidden" th:value="${bandUrl}"  />
-                <textarea id="summernote" name="band_feed_content" ></textarea>
-                <input type="submit" name="doit" value="글쓰기" onclick=""/>
-               	<input type="button" value="취소" onclick="history.back()" />
-            </form>
-        </div>
-    </div>
-    <script>
+	<div class="bg-pink" id="feedWrite">
+		<div class="container">
+			<div class="bandFeedWrite_form">
+				<div class="row gap-3">
+					<button class="btn backBtn shadow-sm" onclick="history.back()">
+						<i class="fi fi-sr-angle-small-left f22 text-center"></i>
+					</button>
+					<form method="post" action="writeFeed"
+						onsubmit="return func_writeBandFeed()">
+						<div class="col m-auto">
+							<p class="text-center">대표 이미지</p>
+							<div
+								class="member-fileUpload-wrapper col-8 col-xl-6 m-auto text-center p-0 my-3">
+								<img id="profileimage" src="../img/mypage/add-photo.png"
+									alt="userImg" class="border rounded img-fluid" /> <input
+									id="fileUpload" type='file' class="member-fileUpload-form"
+									onchange="readURL(this);" name="Member_profileimage" /> <label
+									for="fileUpload"
+									class="member-fileUpload bg-light shadow-sm hstack">
+									프로필 변경
+									<div class="member-fileUpload-btn m-auto bg-light"></div>
+								</label>
+							</div>
+						</div>
+						<div class="col">
+							<span> 글 제목 </span> <input type="text" class="form-control">
+						</div>
+						<div class="col">
+							<span> 글 내용 </span>
+							<div class="feed-write-form-wrapper">
+								<input id="feedWriter_id" name="member_id" type="hidden"
+									th:value="${session.Member_Id}" /> <input name="bandUrl"
+									type="hidden" th:value="${bandUrl}" />
+								<textarea id="summernote" name="band_feed_content"></textarea>
+								<div class="tag-group">
+									<label class="btn btn-pinkD btn-sm"><input type="radio" name="Feed_category" value="">#아이와</label>
+	      							<label class="btn btn-pinkD-over btn-sm"><input type="radio" name="Feed_category" value="banana">#효도여행</label>		
+								</div>
+								<input type="button" name="doit" value="글쓰기" onclick=""
+									class="btn btn-main writeBtn w-100" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
     /* 로그인을 하지 않았을 때  */
-    	<!-- 알림창 -->
+    <!-- 알림창 -->
     function func_writeBandFeed() {
 	   var bandWriter_id = $('#bandWriter_id').val();
 	   if(bandWriter_id.length == 0){
@@ -43,17 +89,21 @@
    
     $(document).ready(function() {
         $('#summernote').summernote({
-           minHeight: 500,             // 최소 높이
-              maxHeight: null,             // 최대 높이
-              focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-              lang: "ko-KR",               // 한글 설정
-              spellCheck: false,
-              callbacks: {   //이미지 첨부하는 부분
+        	placeholder: '글 내용을 입력해주세요',
+        	width: '100%',
+          	minHeight: 400,             // 최소 높이
+            maxHeight: null,             // 최대 높이
+            focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+            lang: "ko-KR",               // 한글 설정
+            spellCheck: false,
+            callbacks: {   //이미지 첨부하는 부분
                  onImageUpload : function(files) {
                       uploadSummernoteImageFile(files[0],this);
                   }
               }
         });
+        
+        
 
         function uploadSummernoteImageFile(file, editor) {
            var resultUrl;
@@ -65,6 +115,7 @@
               data : data,
               type : "POST",
               url : "/uploadSummernoteImageFile",
+
               contentType : false,
               processData : false,
               success : function(data) {
@@ -75,9 +126,24 @@
         }
       
      });
-
-        
     </script>
+
+
+	<!--  이미지 프리뷰  -->
+	<script>
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	
+	            reader.onload = function (e) {
+	                $('#profileimage')
+	                    .attr('src', e.target.result);
+	            };
+	
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	</script>
 </body>
 
 </html>
