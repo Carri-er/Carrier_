@@ -2,119 +2,142 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
 * {
-  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  box-sizing: border-box;
-  color: var(--black);
-
+	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	box-sizing: border-box;
+	color: var(--black);
 }
 
 a {
-  text-decoration: none;
-  color: var(--black);
+	text-decoration: none;
+	color: var(--black);
 }
 
-a.indent{
-  text-indent: -9999px;
-  font-size: 0;
+a.indent {
+	text-indent: -9999px;
+	font-size: 0;
 }
-
 
 /* color palette*/
 :root {
-  --vh: 9.59px;
-  --black: #3c3c3c;
-  --white: #ffffff;
-  --deepgray: #a5a5a5;
-  --gray: #f0f0f0;
-  --main: #ffec9f;
-  --mainbg: #ffe576;/*좀더 진함*/
-  --nottedblue: rgb(59 130 246 / 0.5);
-  --nottedpink: #fdfaf7;
-  --nottedskyblue: #87cefa;
+	--vh: 9.59px;
+	--black: #3c3c3c;
+	--white: #ffffff;
+	--deepgray: #a5a5a5;
+	--gray: #f0f0f0;
+	--main: #ffec9f;
+	--mainbg: #ffe576; /*좀더 진함*/
+	--nottedblue: rgb(59 130 246/ 0.5);
+	--nottedskyblue: #87cefa;
+	--nottedpink: #fdfaf7;
+	--nottedpinkD: #f8c9df;
+	--nottedbrown: #EAC88f;
 }
 
 /* font size */
 .f14 {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 .f13 {
-  font-size: 13px;
+	font-size: 13px;
 }
 
 .f12 {
-  font-size: 12px;
+	font-size: 12px;
 }
 
 .f11 {
-  font-size: 11px;
+	font-size: 11px;
 }
 
 .f16 {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .f17 {
-  font-size: 17px;
+	font-size: 17px;
 }
 
 .f20 {
-  font-size: 20px;
+	font-size: 20px;
 }
 
 .f22 {
-  font-size: 22px;
+	font-size: 22px;
 }
 /* background-color 버튼 색상 정의 */
-.bg-main{
-	background-color: var(--main);
+.bg-main {
+	background-color: var(--main) !important;
 }
-.bg-mainbg{
-	background: var(--mainbg);
+
+.bg-mainbg {
+	background: var(--mainbg) !important;
 }
-.bg-nb{
-	background-color: var(--nottedblue);
-}
-.bg-pink{
-	background-color: var(--nottedpink);
-}
-.bg-skyb{
-	background-color: var(--nottedskyblue);
-}
-/* BTN 버튼 색상 정의 */
-.btn-main{
-	background-color: var(--main)!important;
-}
-.btn-nb{
+
+.bg-nb {
 	background-color: var(--nottedblue)!important;
 }
-.btn-pink{
-	background-color: var(--nottedpink)!important;
+
+.bg-pink {
+	background-color: var(--nottedpink) !important;
 }
-.btn-skyb{
-	background-color: var(--nottedskyblue)!important;
+.bg-pink {
+	background-color: var(--nottedpinkD) !important;
 }
-.btn-mainbg{
-	background-color: var(--mainbg)!important;
+
+.bg-skyb {
+	background-color: var(--nottedskyblue) !important;
 }
-.btn-main:hover{
-	border: 1px solid var(--main)!important;
-	background-color: var(--white)!important;
+.bg-brown {
+	background-color: var(--nottedbrown) !important;
 }
-.btn-main-over{
-	border: 1px solid var(--main)!important;
-	background-color: var(--white)!important;
+/* BTN 버튼 색상 정의 */
+.btn-main {
+	background-color: var(--main) !important;
 }
-.btn-main-over:hover{
-	background-color: var(--main)!important;
+
+.btn-nb {
+	background-color: var(--nottedblue) !important;
+}
+
+.btn-pink {
+	background-color: var(--nottedpink) !important;
+}
+.btn-pinkD {
+	background-color: var(--nottedpinkD) !important;
+}
+
+.btn-skyb {
+	background-color: var(--nottedskyblue) !important;
+}
+.btn-brown {
+	background-color: var(--nottedbrown) !important;
+}
+
+.btn-mainbg {
+	background-color: var(--mainbg) !important;
+}
+
+.btn-main:hover {
+	border: 1px solid var(--main) !important;
+	background-color: var(--white) !important;
+}
+
+.btn-main-over {
+	border: 1px solid var(--main) !important;
+	background-color: var(--white) !important;
+}
+
+.btn-main-over:hover {
+	background-color: var(--main) !important;
 }
 
 /* form 양식 */
-.form-label{
-  color: var(--black);
+.form-label {
+	color: var(--black);
 }
 /* input, .form-control {
 	color: var(--deepgray);
