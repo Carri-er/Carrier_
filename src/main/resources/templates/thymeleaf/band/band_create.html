@@ -5,13 +5,15 @@
 <div th:replace="~{nav/nav::nav}"></div>
     <div class="container-fluid band_create_wrapper">
         <div class="container py-5 band_create_Box">
-            <form action="band_create" method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col">
-                    	<input name="band_admin" type="hidden" th:value="${session.loginMember_id}"/>
+        
+            <form action="band_create" method="post" enctype="multipart/form-data" id="form_bandCreate">
+                <div class="row my-5">
+                    <div class="col-md-8 col-lg-7 col-xl-7 mx-auto my-5">
+                    	<input name="band_admin" type="hidden" th:value="${session.Member_Id}"/>
                         <p class="h4 text-center">밴드 대표사진을 설정해주세요.</p>
                         <input name="band_thumnail" class="form-control" type="file" id="formFileMultiple"  onchange="readURL(this);" multiple >
-						<img id="blah" src="http://placehold.it/200" alt="#" class="border mb-3 mx-auto" width="200" height="200"/>
+                        
+						<img id="blah" src="http://placehold.it/200" alt="#" class="border my-3 mx-auto d-block " width="200" height="200"/>
 						
 						<div class="form-floating mb-3">
 							<input name="band_name" type="text" class="form-control" id="input_bandName" placeholder="밴드 이름 입력" size="15">
@@ -25,10 +27,11 @@
 							<label for="textarea_bandContent">밴드 소개글을 입력해주세요.</label>
 						</div>
                         
-                        <input type="button" value="밴드 생성" onclick="return func_createBand()"/>
+                        <input type="button" value="밴드 생성" onclick="return func_createBand()" class="btn btn-main w-100 p-3 rounded-pill mt-5"/>
                     </div>
                 </div>
             </form>
+            
         </div> <!-- band_create_Box -->
     </div> <!-- band_create_wrapper -->
     
@@ -58,17 +61,24 @@
 	 	  
 	 	   if(input_bandName.length == 0){
 	 		   alert('밴드 이름을 입력하세요.');
+	 		   
 	 		  input_bandName.focus();
+	 		 $('#label_bandName').focus();
 	 		  return false;
-	 	   }
-	 	   
-	 	   if(textarea_bandContent.lengh == 0){
+	 		  
+	 	   } else if(textarea_bandContent.length == 0){
+	 		   
 	 		 alert('밴드 설명을 입력하세요.');
+	 		 
 	 		 textarea_bandContent.focus();
+	 		$('#label_bandContent').focus();
 	 		 return false; 
+	 		 
+	 	   } else {
+	 		  document.getElementById('form_bandCreate').submit();
 	 	   }
 	 	   
-	 	   return true;
+	 	   
 	 	}
     </script>
 </body>
