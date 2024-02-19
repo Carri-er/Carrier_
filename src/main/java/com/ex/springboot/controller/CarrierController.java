@@ -17,7 +17,7 @@ import com.ex.springboot.dao.IMemberDAO;
 
 @Controller
 @RequestMapping
-public class thymeleafController {
+public class CarrierController {
 
 	@GetMapping("/")
 	public String main() {

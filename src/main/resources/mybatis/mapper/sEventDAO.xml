@@ -89,7 +89,7 @@
 	<!-- 태그 클릭시 파라미터 값으로 중복되는 태그없이 태그들을 불러옴 -->
 	<select id="EventTag" resultType="java.lang.String"
 		parameterType="string">
-		SELECT Event_tag
+		SELECT DISTINCT Event_tag
 		FROM Event
 		WHERE Event_area LIKE '%' ||
 		#{param1} || '%'
