@@ -36,4 +36,5 @@ public interface IEventDAO {
 	public int EventCommentWrite(EventCommentDTO dto);
 	public int EventCommentUpdate(EventCommentDTO dto);
 	public int EventCommentUpdateDelete(String id);
+	public int EventCommentDelete(String id);
 }

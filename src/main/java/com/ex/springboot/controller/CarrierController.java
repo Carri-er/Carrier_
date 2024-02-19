@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping
-public class thymeleafController {
+public class CarrierController {
 
 	@GetMapping("/")
 	public String main() {
