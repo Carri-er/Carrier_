@@ -40,14 +40,6 @@ display:inline-block;
   color: var(--black);
 }
 
-
-/* feed-box (filter)*/
-#feed input[type="checkbox"]{
-}
-
-#feed input[type="checkbox"]+label:hover{
-}
-
 #feed input[type="checkbox"]+label{
   width: 50px;
   height: 50px;
@@ -113,4 +105,19 @@ display:inline-block;
 	flex-direction: row;
 	align-items: center;
 	align-self: stretch;
+}
+
+.feed-write-btn{
+	top: 80px;
+	margin-right: 10px;
+	width: 50px;
+	height: 50px;
+	
+	background: rgba( 255, 255, 255, 0.65 );
+	box-shadow: 0 8px 32px 0 rgba( 200, 200, 200, 0.37 );
+	backdrop-filter: blur( 17.5px );
+	-webkit-backdrop-filter: blur( 17.5px );
+	border-radius: 10px;
+	border: 1px solid rgba( 255, 255, 255, 0.18 );
+	
 }

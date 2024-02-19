@@ -84,13 +84,15 @@ a.indent {
 .bg-pink {
 	background-color: var(--nottedpink) !important;
 }
-.bg-pink {
+
+.bg-pinkD {
 	background-color: var(--nottedpinkD) !important;
 }
 
 .bg-skyb {
 	background-color: var(--nottedskyblue) !important;
 }
+
 .bg-brown {
 	background-color: var(--nottedbrown) !important;
 }
@@ -106,6 +108,7 @@ a.indent {
 .btn-pink {
 	background-color: var(--nottedpink) !important;
 }
+
 .btn-pinkD {
 	background-color: var(--nottedpinkD) !important;
 }
@@ -113,6 +116,7 @@ a.indent {
 .btn-skyb {
 	background-color: var(--nottedskyblue) !important;
 }
+
 .btn-brown {
 	background-color: var(--nottedbrown) !important;
 }
