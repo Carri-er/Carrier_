@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="mt-3 mb-0 navbar navbar-expand-md d-flex justify-content-center sticky-top bg-white shadow-sm" th:fragment="nav">
-  <div class="row container-fluid px-3">
+  <div class="row container-fluid px-0">
     <!-- Logo 좌측 -->
  <a class="col navbar-brand" href="home"> <img src="../img/nav/carrier.jpg" alt="" class="mb-2" style="width: 100px;"></a>
     <!--M nav btn-->
@@ -19,11 +19,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- nav content -->
-    <div class="col-8 d-lg-flex justify-content-between justify-content-lg-end mx-auto collapse navbar-collapse"
+    <div class="px-0 col-8 d-lg-flex justify-content-between justify-content-lg-end mx-auto collapse navbar-collapse"
          id="navbarSupportedContent">
       <!-- nav 중앙 -->
-      <div class="col-6 flex-grow-1 px-lg-5">
-        <ul class="px-lg-5 mb-0 navbar-nav justify-content-around mb-lg-0 f17">
+      <div class="col-12 col-md-6 flex-grow-1 px-lg-5">
+        <ul class="px-lg-5 mb-0 navbar-nav justify-content-around mb-lg-0 f17 px-4 bg-white rounded-bottom ">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="home">홈</a>
           </li>
@@ -40,7 +40,7 @@
             <a class="nav-link" href="info">여행정보</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="map">지도</a>
+            <a class="nav-link mb-3 mb-md-0" href="map">지도</a>
           </li>
         </ul>
       </div>

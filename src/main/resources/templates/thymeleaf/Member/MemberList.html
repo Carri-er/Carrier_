@@ -2,13 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{head/head::head}"></div>
+<style>
+@keyframes rotateBorderColors {
+  0% {
+    border-top-color: red;
+    border-right-color: blue;
+    border-bottom-color: green;
+    border-left-color: yellow;
+  }
+  25% {
+    border-top-color: yellow;
+    border-right-color: red;
+    border-bottom-color: blue;
+    border-left-color: green;
+  }
+  50% {
+    border-top-color: green;
+    border-right-color: yellow;
+    border-bottom-color: red;
+    border-left-color: blue;
+  }
+  75% {
+    border-top-color: blue;
+    border-right-color: green;
+    border-bottom-color: yellow;
+    border-left-color: red;
+  }
+  100% {
+    border-top-color: red;
+    border-right-color: blue;
+    border-bottom-color: green;
+    border-left-color: yellow;
+  }
+}
 
+.border-rotation {
+  border-width: 5px;
+  border-style: solid;
+  animation: rotateBorderColors 4s linear infinite;
+}
+</style>
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
 	<!-- 토스트 -->
 	<div th:replace="~{alert/toast::div}"></div>
+
+	
 	<!-- MemberList 시작 -->
 	<div class="container-fluid p-0 p-md-5">
+		<div class="row">
+	<div class="col d-flex justify-content-end">
+	<a th:href="@{logout}" class="text-decoration-none text-dark p-2 f14 btn btn-skyb border-rotation">로그아웃</a>
+	</div></div>
 	<!-- [M] -->
 	<h5 class="m-4 text-center p-3"> <span class="rounded-pill bg-pinkD p-2 px-4 f20">전체 회원 목록</span></h5>
 		<div class="d-xl-none table-responsive bg-pink border rounded-4 p-2 px-3 mx-2">
@@ -108,9 +153,9 @@
 					</tbody>
 				</th:block>
 			</table>
+			
 		</div>
 	</div>
-	
 	<!-- 알림창 -->
 	<script type="text/javascript">
         $(document).ready(function() {
