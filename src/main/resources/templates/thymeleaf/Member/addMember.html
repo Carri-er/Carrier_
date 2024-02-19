@@ -5,6 +5,9 @@
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
+	<!-- 토스트 -->
+	<div th:replace="~{alert/toast::div}"></div>
+	
 	<!-- addMember 페이지 -->
 	<div class="container addMember_wrap">
 		<div class="row mb-5">
@@ -170,7 +173,7 @@
 					</div>
 					<!-- 제출 -->
 					<div class="col-12 mt-5">
-						<input type="button" onClick="return check()" class="btn btn-main w-100 p-3 rounded-pill" value="가입하기">
+						<input type="button" onClick="return signUp_check()" class="btn btn-main w-100 p-3 rounded-pill" value="가입하기">
 					</div>
 				</form>
 			</div>
