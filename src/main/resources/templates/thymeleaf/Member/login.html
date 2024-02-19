@@ -5,6 +5,8 @@
 
 <body>
 <div th:replace="~{nav/nav::nav}"></div>
+<!-- 토스트 -->
+<div th:replace="~{alert/toast::div}"></div>
 	<!-- addMember 페이지 -->
 	<div class="container addMember_wrap my-5">
 		<div class="row my-5">
@@ -28,11 +30,10 @@
 						<div class="col-12 mt-4 text-center">
 							<button type="submit" class="btn btn-main w-100 p-3 rounded-4">로그인하기</button>
 							<div class="row mt-2">
-								<div class="col-9 m-auto my-3 d-flex justify-content-around">
-									<a th:href="@{addMember}" class="text-decoration-none">회원
-										가입 </a> | <a href="FindId" class="text-decoration-none text-dark">아이디
-										찾기</a> | <a href="FindPw" class="text-decoration-none text-dark">비밀번호
-										찾기</a>
+								<div class="col-10 col-lg-9 m-auto my-3 d-flex justify-content-around">
+									<a th:href="@{addMember}" class="text-decoration-none">회원 가입 </a> | 
+									<a href="FindId" class="text-decoration-none text-dark">아이디 찾기</a> | 
+									<a href="FindPw" class="text-decoration-none text-dark">비밀번호 찾기</a>
 								</div>
 							</div>
 						</div>
@@ -42,6 +43,7 @@
 		</div>
 	</div>
 <div th:replace="~{footer/footer::footer}"></div>
+<script src="../validate/member_validate.js"></script>
 	<!-- 알림창 -->
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -49,13 +51,22 @@
             const urlParams = new URLSearchParams(window.location.search);
             const msg = urlParams.get('msg');
             
-            // 메시지가 존재할 경우 경고창으로 표시
+         // 메시지가 존재할 경우 toast로 표시
             if (msg !== null && msg !== "") {
-            	if(msg == 1){
-                alert("회원가입에 성공하였습니다🎉 로그인 해주세요");
-            	} else if (msg == 2) {
-                    alert("아이디 또는 비밀번호가 틀렸습니다");
-            	}
+                let message;
+                if(msg == 1){
+                    message = "회원가입에 성공하였습니다🎉 로그인 해주세요";
+                } else if (msg == 2) {
+                    message = "아이디 혹은 비밀번호를 다시 확인해주세요";
+                } else if (msg == 3) {
+                    message = "재설정 완료! 다시 로그인 해주세요";
+                } else if (msg == 4) {
+                    message = "로그아웃 되었습니다. 다음에 또 만나요! 🖐";
+                } 
+
+                // 부트스트랩 toast 트리거
+                $('.my-toast-body').text(message);
+                $('.my-toast').toast('show');
             }
         });
     </script>

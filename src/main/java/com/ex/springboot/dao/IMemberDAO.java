@@ -23,7 +23,7 @@ public interface IMemberDAO {
 			@Param("Member_profileimage") String Member_profileimage
 	);
 	
-	// 내정보
+	// 내정보 (마이페이지 내 정보 수정)
 	public MemberDTO memberList(
 			@Param("Member_Id") String Member_Id
 	);
@@ -48,6 +48,25 @@ public interface IMemberDAO {
 	
 	// 로그인
 	public MemberDTO login(
+			@Param("Member_Id") String Member_Id,
+			@Param("Member_Pw") String Member_Pw
+	);
+	
+	// 아이디 찾기
+	public MemberDTO Find_Id(
+			@Param("Member_Name") String Member_Name,
+			@Param("Member_Email") String Member_Email
+	);
+	
+	// 패스워드 찾기
+	public MemberDTO Find_Pw(
+			@Param("Member_Id") String Member_Id,
+			@Param("Member_Name") String Member_Name,
+			@Param("Member_Email") String Member_Email
+	);
+	
+	// 패스워드 수정
+	public int FindPw_Result_Action(
 			@Param("Member_Id") String Member_Id,
 			@Param("Member_Pw") String Member_Pw
 	);

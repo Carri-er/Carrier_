@@ -1,18 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIGN UP</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="../css/common.css">
-<link rel="stylesheet" href="../css/nav.css">
-<link rel="stylesheet" href="../css/footer.css">
-</head>
+<div th:replace="~{head/head::head}"></div>
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
@@ -22,14 +10,22 @@
 			<div class="col-12 col-xl-6 mx-auto">
 				<form class="row g-3 addMember_form p-5 rounded-3 gap-2"
 					action="/editAction" method="post" enctype="multipart/form-data">
-					<h3 class="p-0 m-0 text-center mb-4">회원정보</h3>
-					<div class="col-8 col-xl-6 m-auto text-center">
-						<img id="profileimage" th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}"
-							alt="userImg" class="rounded-circle border" width="150"
-							height="150" />
-							<input type="hidden" name="Member_profileimage_old" th:value="${MemberList.getMember_profileimage()}" />
-						<input type='file' class="form-control mt-4"
-							onchange="readURL(this);" name="Member_profileimage" th:placeholder="${MemberList.getMember_profileimage()}" />
+					<h3 class="p-0 m-0 text-center my-3">회원정보</h3>
+					<div class="member-fileUpload-wrapper col-8 col-xl-6 m-auto text-center p-0 my-3">
+						<img id="profileimage" class="rounded-circle border"
+							th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}"
+							alt="userImg" width="150" height="150" /> 
+						<input type="hidden"
+							name="Member_profileimage_old"
+							th:value="${MemberList.getMember_profileimage()}" /> 
+						<label for="fileUpload" class="member-fileUpload bg-light shadow-sm hstack">
+							프로필 변경
+							<div class="member-fileUpload-btn m-auto"></div>
+						</label> 
+						<input type='file' id="fileUpload"
+							class="member-fileUpload-form form-control mt-4"
+							onchange="readURL(this);" name="Member_profileimage"
+							th:placeholder="${MemberList.getMember_profileimage()}" />
 					</div>
 					<div class="col-12">
 						<div class="form-floating">
@@ -182,12 +178,12 @@
 						</div>
 					</div>
 					<!-- 제출 -->
-					<div class="col-12 mt-5">
+					<div class="col-12 mt-5 mb-2">
 						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">수정하기</button>
 					</div>
+					<a th:href="@{'delMember?memberId='+${MemberList.getMember_Id()}}"
+						class="f12 d-block text-center">캐리어 분해하기</a>
 				</form>
-				<a th:href="@{'delMember?memberId='+${MemberList.getMember_Id()}}"
-					class="f12">캐리어 분해하기</a>
 			</div>
 		</div>
 	</div>

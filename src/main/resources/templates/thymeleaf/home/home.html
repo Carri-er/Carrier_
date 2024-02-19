@@ -5,7 +5,8 @@
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
 	<div class="home_wrapper">
-
+		<!-- 토스트 -->
+		<div th:replace="~{alert/toast::div}"></div>
 		<div class="home_carousel container-fluid px-0">
 			<div class="home_carouselBox">
 				<div class="carousel_bg_whiteBox"></div>
@@ -298,7 +299,6 @@
 						<a href="aicc">
 							<div class="col-12 d-flex text-dark">
 								<p class="fs-2">🧳 여행돋보기</p><span class="mt-3">&nbsp; | 돋보이는 여행코스 지금 보여드릴게요.</span>
-								<span th:text = "${session.Member_Id}"></span>
 							</div>
 						</a>
 					</div> <!-- home_dl_title_img -->
@@ -766,9 +766,28 @@
 	</div> <!-- home_wrapper -->
 	<!--footer-->
 	<div th:replace="~{footer/footer::footer}"></div>
-
-
-
+	
+	<!-- 알림창 -->
+	<script type="text/javascript">
+        $(document).ready(function() {
+            // URL에서 msg 매개변수 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            const name = urlParams.get('name');
+            
+         // 메시지가 존재할 경우 toast로 표시
+            if (msg !== null && msg !== "") {
+                let message;
+                if(msg == 1){
+                    message = name+"님 환영합니다 🖐";
+                }
+                
+                // 부트스트랩 toast 트리거
+                $('.my-toast-body').text(message);
+                $('.my-toast').toast('show');
+            }
+        });
+    </script>
 	
 	<script>
 		$(document).ready(function () {//시간나면 수정

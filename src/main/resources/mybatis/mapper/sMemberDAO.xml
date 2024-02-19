@@ -41,4 +41,20 @@
   	<select id="login" resultType="com.ex.springboot.dto.MemberDTO">
 		SELECT * FROM carrier_member WHERE Member_Id = #{Member_Id} AND Member_Pw = #{Member_Pw}
 	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="Find_Id" resultType="com.ex.springboot.dto.MemberDTO">
+		SELECT * FROM carrier_member WHERE Member_Name = #{Member_Name} AND Member_Email = #{Member_Email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="Find_Pw" resultType="com.ex.springboot.dto.MemberDTO">
+		SELECT * FROM carrier_member WHERE Member_Id = #{Member_Id} AND Member_Name = #{Member_Name} AND Member_Email = #{Member_Email}
+	</select>
+	
+	<!-- 비밀번호 수정 -->
+	<update id="FindPw_Result_Action">
+		UPDATE carrier_member SET Member_Pw = #{Member_Pw} WHERE Member_Id = #{Member_Id}
+	</update>
+	
 </mapper>

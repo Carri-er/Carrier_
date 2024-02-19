@@ -136,3 +136,43 @@
 .swiper-pagination {
     display: none;
 }
+
+
+/* 프로필 사진 변경 버튼 */
+.member-fileUpload-wrapper{
+	width: 150px;
+	height: 150px;
+	position: relative;
+}
+
+label.member-fileUpload{
+	z-index: 2;
+	position: absolute;
+	bottom: 0;
+	right: 10px;
+	text-indent: -9999px;
+	width: 36px;
+	height: 36px;
+	border-radius:50%;	
+}
+
+.member-fileUpload-btn{
+	width: 21px;
+	height: 21px;
+	background: url("../img/mypage/camera.png") center/contain;
+
+}
+
+.member-fileUpload-form{
+	display: none;
+}
+
+
+/* 토스트 */
+.my-toast-parent{
+	z-index: 1;
+}
+
+.my-toast.toast{
+	border:none;
+}
