@@ -1,14 +1,8 @@
 package com.ex.springboot.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.ex.springboot.dao.IMemberDAO;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping
@@ -62,17 +56,14 @@ public class CarrierController {
 		return "thymeleaf/home/home";
 	}
 	
-	@Autowired
-	IMemberDAO member_dao;
-	
-	@GetMapping("/mypage")
-	public String mypage(HttpServletRequest request, Model model) {
-		String id = request.getParameter("id");
-		
-		model.addAttribute("loginMember", member_dao.memberList(id));
-		
-		return "thymeleaf/mypage/mypage";
-	}
+//	@GetMapping("/mypage")
+//	public String mypage(HttpServletRequest request, Model model) {
+//		String id = request.getParameter("id");
+//		
+//		model.addAttribute("loginMember", member_dao.memberList(id));
+//		
+//		return "thymeleaf/mypage/mypage";
+//	}
 
 //	@GetMapping("/addMember")
 //	public String addMember() {
