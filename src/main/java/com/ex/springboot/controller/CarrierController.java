@@ -17,10 +17,12 @@ public class CarrierController {
 	public String feed() {
 		return "thymeleaf/feed/feed2";
 	}
+	
 	@GetMapping("/feedshow")
 	public String feedshow() {
 		return "thymeleaf/feed/feed_show";
 	}
+	
 	@GetMapping("/inner")
 	public String inner() {
 		return "thymeleaf/inner/inner";
