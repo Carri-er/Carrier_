@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 이 매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
+<mapper namespace="com.ex.springboot.dao.IFeedDAO">
+<!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
+	<!-- 피드 글쓰기 -->
+	<insert id="feedWrite">
+		INSERT INTO Feed 
+			(Feed_num, Member_Id, Member_profileimage, Feed_title, Feed_content, Feed_theme, Feed_area, Feed_tripday, Feed_uploadday, Feed_updateday, Feed_heart, Feed_thumbnail) 
+	    VALUES 
+	    	(Feed_num.nextval, #{Member_Id}, #{Member_profileimage}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, #{Feed_tripday}, sysdate, sysdate, 0, #{Feed_thumbnail})
+	</insert>
+	
+	<!-- 피드 리스트 가져오기 -->
+	<select id="feedList" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT * FROM Feed order by Feed_num DESC
+	</select>
+	
+	<!-- 피드 세부 가져오기 -->
+	<select id="feedShow" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT * FROM Feed WHERE Feed_num = #{Feed_num}
+	</select>
+</mapper>
