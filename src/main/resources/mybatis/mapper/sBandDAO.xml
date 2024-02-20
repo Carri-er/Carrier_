@@ -80,12 +80,12 @@
 	
 	<!-- 밴드 정보 수정하기 -->
 	<update id="bandInfoUpdate">
-		update band set band_thumnail = #{band_thumnail} , band_name = #{band_name} ,band_content = #{band_content} where band_code = #{band_code};
+		update band set band_thumnail = #{band_thumnail} , band_name = #{band_name} ,band_content = #{band_content} where band_code = #{band_code}
 	</update>
 	
 	<!-- 밴드 삭제하기 -->
 	<delete id="bandInfoDelete">
-		delete from band where band_code = #{band_code};
+		delete from band where band_code = #{band_code}
 	</delete>
 	
 </mapper>

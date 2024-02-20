@@ -1,6 +1,7 @@
 /* 밴드 글쓰기 박스 스타일 */
 #feedWrite {
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 }
 
 div.bandFeedWrite_wrapper {
@@ -15,10 +16,21 @@ div.bandFeedWrite_form {
 	padding: 20px;
 }
 
-/* BTN */
-.btn:not(.note-btn) {
+/* 여행 일자 선택 */
+.feed-write-date-form{
+	display: flex;
+	align-items: center;
+}
+.feed-write-date-form>*{
+	margin: 0 10px;
+	width: 70px;
+}
+
+
+/****************** BTN ******************/
+#feedWrite .btn:not(.note-btn) {
 	border-radius: 50px;
-	padding: 10px 15px;
+	margin-bottom: 2px;
 }
 
 .btn-sm, .btn-group-sm > .btn {
@@ -29,10 +41,12 @@ div.bandFeedWrite_form {
 }
 
 .backBtn {
-	position: absolute;
+	top: 15px;
+	left: 15px;
+	position: relative;
 	border-radius: 50%;
 	padding-top: 10px;
-	padding-right:5px;
+	padding-right:10px;
 	width: 50px;
 	height: 50px;
 	background: rgba(255, 255, 255, 0.65);
@@ -45,6 +59,22 @@ div.bandFeedWrite_form {
 .backBtn>i {
 	color: var(--nottedpinkD);
 	margin-left: -2px;
+}
+
+.writeBtn{
+	padding: 15px;
+}
+
+.btn-dark-over {
+	color: var(--black);
+	background-color: var(--white);
+	border: 1px solid var(--black);
+}
+
+/* input 스타일링 */
+.btn-dark-over:hover, [type="radio"]:checked + label{
+	background-color: var(--black);
+	color: var(--white);
 }
 
 .tag-group{
@@ -63,15 +93,16 @@ div.bandFeedWrite_form {
 
 /* 프로필 사진 변경 버튼 */
 .member-fileUpload-wrapper {
-	width: 150px;
-	height: 150px;
+	width: 350px;
+	height: 350px;
 	position: relative;
+	margin: 0 auto;
 }
 
 label.member-fileUpload {
 	z-index: 2;
 	position: absolute;
-	bottom: 0;
+	bottom: 10px;
 	right: 10px;
 	text-indent: -9999px;
 	width: 36px;
@@ -98,13 +129,18 @@ label.member-fileUpload {
 	display: none;
 }
 
-.col {
-	margin-bottom: 15px;
-}
-
 /* boot */
 .gap-3 {
 	gap: 1rem !important;
+}
+
+.mx-3 {
+  margin-right: 1rem !important;
+  margin-left: 1rem !important;
+}
+
+.w-25 {
+  width: 25% !important;
 }
 
 .rounded {
@@ -148,7 +184,11 @@ label.member-fileUpload {
 	overflow-y: hidden;
 }
 
-/* summerNote Custom */
+.p-5 {
+  padding: 3rem 0 !important;
+}
+
+/****************** summerNote Custom ******************/
 .panel-default>.panel-heading {
 	color: #333;
 	background-color: var(--white);
@@ -160,7 +200,7 @@ label.member-fileUpload {
 	border:none;
 }
 
-/* input */
+/****************** input Custom ******************/
 #feedWrite .form-control {
 	border-radius: 30px;
 	padding: 15px;
@@ -170,3 +210,4 @@ label.member-fileUpload {
 #feedWrite .panel {
 	border-radius: 13px;
 }
+
