@@ -75,6 +75,13 @@ public interface IBandDAO {
 	//밴드 가입 시 멤버 수 증가 
 	public int bandMembercount_plus(int band_code);
 	
+	//가입한 밴드 탈퇴하기 
+	public int withdrawalJoinBand(
+			@Param("band_code") int band_code,
+			@Param("member_id") String member_id
+			);
 	
+	//밴드 탈퇴 시 멤버 수 감소
+	public int bandMembercount_minus(int band_code);
 	
 }

@@ -58,17 +58,19 @@ public class BandController {
 	
 	//밴드 세부 페이지로 이동
 	@GetMapping("/myBand")
-	public String myBand(Model model, HttpServletRequest request) {
+	public String myBand(Model model, HttpServletRequest request,HttpSession session) {
 		String band_code = request.getParameter("bandUrl");
-		
 		int num_band_code = Integer.parseInt(band_code);
 		
-		HttpSession session = request.getSession();
-		String loginId = (String) session.getAttribute("Member_Id");
+		if( session.getAttribute("Member_Id") != null) {
+			String loginId = (String) session.getAttribute("Member_Id");
+			model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+		}
+		
 		model.addAttribute("myBandList",bandDao.myBand(num_band_code));
 		
 		model.addAttribute("myBandFeedList",bandDao.bandFeedList(band_code));
-		model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+		
 		
 		
 		
@@ -79,7 +81,12 @@ public class BandController {
 
 //	밴드 만들기 페이지로 이동
 	@RequestMapping("/bandCreate")
-	public String bandCreate() {
+	public String bandCreate(HttpSession session) {
+		
+		if( session.getAttribute("Member_Id") == null) {
+			return "redirect:/login?msg=5";
+		}
+		
 		return "thymeleaf/band/band_create";
 	}
 	
@@ -218,6 +225,10 @@ public class BandController {
 			String str_band_code = request.getParameter("bandCode");
 			String joinMemberId = request.getParameter("joinMemberId");
 			
+			if(joinMemberId.equals("") || joinMemberId.equals(null)) {
+				return "redirect:/login?msg=5";
+			}
+			
 			int num_band_code = Integer.parseInt(str_band_code);
 			
 			bandDao.bandJoinMember(num_band_code, joinMemberId);
@@ -257,6 +268,23 @@ public class BandController {
 			
 			return go;
 		}
+		
+		//밴드 회원탈퇴 
+		@RequestMapping("/withdrawalMyBand")
+		public String withdrawalMyBand(Model model, HttpServletRequest request, HttpSession session) {
+			String str_band_code = request.getParameter("bandUrl");
+			int num_band_code = Integer.parseInt(str_band_code);
+			String login_id = (String) session.getAttribute("Member_Id");
+			
+			bandDao.withdrawalJoinBand(num_band_code, login_id);
+			bandDao.bandMembercount_minus(num_band_code);
+			
+			
+			String go = "redirect:myBand?bandUrl="+str_band_code;
+			
+			return go;
+		}
+		
 		
 		
 		// 썸머노트 ajax
