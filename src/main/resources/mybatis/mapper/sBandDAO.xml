@@ -88,4 +88,9 @@
 		delete from band where band_code = #{band_code};
 	</delete>
 	
+	<!-- 가입한 밴드 탈퇴하기  -->
+	<delete id="withdrawalJoinBand">
+		delete from band_joinMember where band_code = #{band_code} and Member_Id = #{member_id};
+	</delete>
+	
 </mapper>
