@@ -58,6 +58,22 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="row" th:each="aicc:${aicc}">
+                    <div class="col">
+                    	<div class="row">
+                    	<div class="col" ></div>
+                    	<div class="col" >
+                    		<img th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 80px; height: 80px;">
+                    	</div>
+                    	<div class="col"  th:text="${aicc.getEvent_name()}">
+                    		
+                    	</div>
+                    	<div class="col"></div>
+                    	</div>
+                    </div>
+                    </div>
                 </div> 
 
                 <!-- 지역별 피드 출력 영역 -->

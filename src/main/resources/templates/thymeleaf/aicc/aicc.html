@@ -1,79 +1,217 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Carrier AiSearch</title>
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-            crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/ai.css">
-    <link rel="stylesheet" href="../css/nav.css">
-<link rel="stylesheet" href="../css/search.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carrier AiSearch</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/ai.css">
+<link rel="stylesheet" href="../css/nav.css">
 <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
-<div th:replace="~{nav/nav::nav}"></div>
+	<div th:replace="~{nav/nav::nav}"></div>
 
-<div id="ai" class="container-fluid px-0">
-    <div id="ai-cok-carousel" class="carousel slide"
-         data-bs-ride="false" data-bs-wrap="false" data-bs-touch="true">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#ai-cok-carousel"
-                    data-bs-slide-to="0" class="active" aria-current="true"
-                    aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#ai-cok-carousel"
-                    data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#ai-cok-carousel"
-                    data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#ai-cok-carousel"
-                    data-bs-slide-to="3" aria-label="Slide 4"></button>
-        </div>
-        <!-- AI contents Start -->
-        <div class="carousel-inner row m-0">
-            <!-- Content1 | Welcome-->
-            <div class="carousel-item active col-10 p-0">
-                <div class="ai-box text-center">
-                    <img src="../img/aicc/cos_start_welcome.png" class="img-fluid"
-                         alt="환영합니다!">
-                    <p class="f22 text-shadow">
-                        <span th:text="${session.Member_Name}">username</span>님! &nbsp;안녕하세요.
-                    </p>
-                    <p class="fw-bold text-shadow welcome-big">
-                        AI 플래너에 <br> 오신 것을 환영합니다.
-                    </p>
-                    <p class="f17 mb-3">
-                        국내 여행을 계획 중이신가요?<br> 여행을 떠날 지역, 기간, 테마만 알려주시면<br>
-                        자동으로 맞춤형 코스를 만들어 드립니다.
-                    </p>
-                    <!--Start Btn-->
-                    <div class="btn">
-                        <div class="btn_start" data-bs-target="#ai-cok-carousel"
-                             data-bs-slide="next">
-                            <div>
-                                <em>START</em> <span class="arw_wrap"> <span
-                                    class="left"></span> <span class="right"></span>
-											</span>
+	<div id="ai" class="container-fluid px-0">
+		<div id="ai-cok-carousel" class="carousel slide" data-bs-ride="false"
+			data-bs-wrap="false" data-bs-touch="true">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#ai-cok-carousel"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#ai-cok-carousel"
+					data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#ai-cok-carousel"
+					data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#ai-cok-carousel"
+					data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#ai-cok-carousel"
+					data-bs-slide-to="4" aria-label="Slide 5"></button>
+			</div>
+			<!-- AI contents Start -->
+			<div class="carousel-inner row m-0">
+				<!-- Content1 | Welcome-->
+				<div class="carousel-item col-10 p-0 active">
+					<div class="ai-box text-center">
+						<img src="../img/aicc/cos_start_welcome.png" class="img-fluid"
+							alt="환영합니다!">
+						<p class="f22 text-shadow">
+							<span th:text="${session.Member_Name}">username</span>님!
+							&nbsp;안녕하세요.
+						</p>
+						<p class="fw-bold text-shadow welcome-big">
+							AI 플래너에 <br> 오신 것을 환영합니다.
+						</p>
+						<p class="f17 mb-3">
+							국내 여행을 계획 중이신가요?<br> 여행을 떠날 지역, 기간, 테마만 알려주시면<br> 자동으로
+							맞춤형 코스를 만들어 드립니다.
+						</p>
+						<!--Start Btn-->
+						<div class="btn">
+							<div class="btn_start" data-bs-target="#ai-cok-carousel"
+								data-bs-slide="next">
+								<div>
+									<em>START</em> <span class="arw_wrap"> <span
+										class="left"></span> <span class="right"></span>
+									</span>
+								</div>
+								<img src="../img/aicc/btn_planner_m_cos1.png" class="mo" alt="">
+							</div>
+						</div>
+						<img src="../img/aicc/img_robot1.png" alt="" class="mt-5 pt-5">
+					</div>
+				</div>
+				<form action="aiccShow">
+					<!-- Content2 | 지역 선택 -->
+					<div class="carousel-item">
+						<div class="ai-box ai-filter-box col-10 col-md-7">
+							<div class="row f14 px-lg-5 d-flex justify-content-center gap-4">
+								<div class="col-12">
+									<p class="f22 text-shadow p-0">
+										떠나고 싶은 <b>지역</b>을 선택해주세요
+									</p>
+								</div>
+								<div class="row">
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk1" name="areaChk" value="서울"
+											class="text-only"> <label for="area_chk1"
+											class="btn btn-light"><span>서울</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk2" name="areaChk" value="부산">
+										<label for="area_chk2" class="btn btn-light"><span>부산</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk3" name="areaChk" value="대구">
+										<label for="area_chk3" class="btn btn-light"><span>대구</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk4" name="areaChk" value="인천">
+										<label for="area_chk4" class="btn btn-light"><span>인천</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk5" name="areaChk" value="광주">
+										<label for="area_chk5" class="btn btn-light"><span>광주</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk6" name="areaChk" value="대전">
+										<label for="area_chk6" class="btn btn-light"><span>대전</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk7" name="areaChk" value="울산">
+										<label for="area_chk7" class="btn btn-light"><span>울산</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk8" name="areaChk" value="경기">
+										<label for="area_chk8" class="btn btn-light"><span>경기</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk9" name="areaChk" value="강원">
+										<label for="area_chk9" class="btn btn-light"><span>강원</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk10" name="areaChk" value="충북">
+										<label for="area_chk10" class="btn btn-light"><span>충북</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk11" name="areaChk" value="충남">
+										<label for="area_chk11" class="btn btn-light"><span>충남</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk12" name="areaChk" value="전북">
+										<label for="area_chk12" class="btn btn-light"><span>전북</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk13" name="areaChk" value="전남">
+										<label for="area_chk13" class="btn btn-light"><span>전남</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk14" name="areaChk" value="경북">
+										<label for="area_chk14" class="btn btn-light"><span>경북</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk15" name="areaChk" value="경남">
+										<label for="area_chk15" class="btn btn-light"><span>경남</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area_chk16" name="areaChk" value="제주">
+										<label for="area_chk16" class="btn btn-light areabtn"><span>제주</span></label>
+									</div>
+								</div>
+
+								<!-- <div class="col-12 px-0">
+                            <div class="age-box m-auto">
+                                <img src="../img/aicc/ico_age_4.png"
+                                     class="d-block w-75 rounded-circle mb-2" alt="19세 이하">
+                                <span>19세 이하</span>
                             </div>
-                            <img src="../img/aicc/btn_planner_m_cos1.png" class="mo" alt="">
                         </div>
-                    </div>
-                    <img src="../img/aicc/img_robot1.png" alt="" class="mt-5 pt-5">
-                </div>
-            </div>
-            <!-- Content2 | 나이 선택 -->
-            <div class="carousel-item">
-                <div class="ai-box ai-filter-box col-10 col-md-7">
-                    <div class="row f14 px-lg-5 d-flex justify-content-center gap-4">
-                        <div class="col-12">
-                            <p class="f22 text-shadow p-0">
-                                <b>연령</b>을 선택해주세요
-                            </p>
+                        <div class="col-4 px-0">
+                            <div class="age-box ms-auto">
+                                <img src="../img/aicc/ico_age_5.png"
+                                     class="d-block w-75 rounded-circle mb-2" alt="20대"> <span>20대</span>
+                            </div>
                         </div>
-                        <div class="col-12 px-0">
+                        <div class="col-4 px-0">
+                            <div class="age-box me-auto">
+                                <img src="../img/aicc/ico_age_6.png"
+                                     class="d-block w-75 rounded-circle mb-2" alt="30대"> <span>30대</span>
+                            </div>
+                        </div>
+                        <div class="col-4 px-0">
+                            <div class="age-box ms-auto">
+                                <img src="../img/aicc/ico_age_7.png"
+                                     class="d-block w-75 rounded-circle mb-2" alt="40대"> <span>40대</span>
+                            </div>
+                        </div>
+                        <div class="col-4 px-0">
+                            <div class="age-box me-auto">
+                                <div class="bg-light rounded-circle mb-2">
+                                    <img src="../img/aicc/ico_age_8.png"
+                                         class="d-block rounded-circle mb-2" alt="40대 이상">
+                                </div>
+                                <span>40대 이상</span>
+                            </div>
+                        </div> -->
+							</div>
+							<!--다음에 하기 btn -->
+							<div class="py-4">
+								<button type="button"
+									class="btn rounded-pill btn-outline-light next-btn">여기까지만
+									선택하기</button>
+							</div>
+						</div>
+
+					</div>
+					<!-- Content2 | 지역2 선택 -->
+					<!-- <div class="carousel-item area2">
+						<div class="ai-box ai-filter-box col-10 col-md-7">
+							<div class="row f14 px-lg-5 d-flex justify-content-center gap-4">
+								<div class="col-12">
+									<p class="f22 text-shadow p-0">
+										여행을 떠나고 싶은 <b>지역</b>을 선택해주세요
+									</p>
+								</div>
+								<div class="row">
+									<div class="col-4 areabtn">
+										<input type="radio" id="area2_chk1" name="areaChk2" value="가평군"
+											class="text-only"> <label for="area2_chk1"
+											class="btn btn-light"><span>가평군</span></label>
+									</div>
+									<div class="col-4 areabtn">
+										<input type="radio" id="area2_chk2" name="areaChk2" value="동두천시"
+											class="text-only"> <label for="area2_chk2"
+											class="btn btn-light"><span>동두천시</span></label>
+									</div>
+									
+								</div>
+
+								<div class="col-12 px-0">
                             <div class="age-box m-auto">
                                 <img src="../img/aicc/ico_age_4.png"
                                      class="d-block w-75 rounded-circle mb-2" alt="19세 이하">
@@ -107,140 +245,148 @@
                                 <span>40대 이상</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!--다음에 하기 btn -->
-                <div class="py-4">
-                    <button type="button"
-                            class="btn rounded-pill btn-outline-light next-btn">여기까지만
-                        선택하기
-                    </button>
-                </div>
-            </div>
-            <!-- Content3 | 기간 선택 -->
-            <div class="carousel-item">
-                <div class="ai-box ai-filter-box col-10 col-md-7 text-center">
-                    <div class="row f14 mx-0 gap-4 gap-md-5">
-                        <div class="col-12 mb-lg-5 pb-lg-5">
-                            <p class="f22 text-shadow p-0 pb-lg-3">얼마동안 여행을 떠날까요?</p>
-                        </div>
-                        <div class="col-12 col-lg-10 m-auto">
-                            <div class="row period-box-parent gap-3 m-auto">
-                                <div class="col-9 m-auto col-md px-0">
-                                    <div class="period-box m-auto d-block">
-                                        <div class="m-auto"></div>
-                                        <span>당일 여행</span>
-                                    </div>
-                                </div>
-                                <div class="col-9 m-auto col-md px-0">
-                                    <div class="period-box m-auto d-block">
-                                        <div class="m-auto"></div>
-                                        <span>1박 2일</span>
-                                    </div>
-                                </div>
-                                <div class="col-9 m-auto col-md px-0">
-                                    <div class="period-box m-auto d-block">
-                                        <div class="m-auto"></div>
-                                        <span>2박 3일</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--다음에 하기 btn -->
-                <div class="py-4">
-                    <button type="button"
-                            class="btn rounded-pill btn-outline-light next-btn">여기까지만
-                        선택하기
-                    </button>
-                </div>
-            </div>
-            <!-- Content4 | 테마 선택 -->
-            <div class="carousel-item ">
-                <div class="ai-box ai-filter-box col-10 col-md-7 text-center">
-                    <div class="row f14 mx-0 d-flex justify-content-center gap-5">
-                        <div class="col-12">
-                            <p class="f22 text-shadow p-0">
-                                마음에 드는 <b>여행</b>이 있나요?
-                            </p>
-                        </div>
-                        <div class="theme-box-parent mt-4 mt-lg-0 gap-3 gap-xl-5 row p-0 m-auto justify-content-center">
-                            <div class="col-3 px-0">
-                                <span class="text-center">산</span>
-                                <div class="m-auto"></div>
-                            </div>
-                            <div class="col-3 px-0">
-                                <span class="text-center">실내</span>
-                                <div class="m-auto"></div>
-                            </div>
-                            <div class="col-3 px-0">
-                                <span class="text-center">액티비티</span>
-                                <div class="m-auto"></div>
-                            </div>
-                            <div class="col-3 px-0">
-                                <span class="text-center">테마파크</span>
-                                <div class="m-auto"></div>
-                            </div>
-                            <div class="col-3 px-0">
-                                <span class="text-center">카페</span>
-                                <div class="m-auto"></div>
-                            </div>
-                            <div class="col-3 px-0">
-                                <span class="text-center">테마파크</span>
-                                <div class="m-auto"></div>
-                            </div>
-                            <div class="col-3 px-0">
-                                <span class="text-center">테마파크</span>
-                                <div class="m-auto"></div>
-                            </div>
-                            <div class="col-3 px-0">
-                                <span class="text-center">테마파크</span>
-                                <div class="m-auto"></div>
-                            </div>
-                            <div class="col-3 px-0">
-                                <span class="text-center">테마파크</span>
-                                <div class="m-auto"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--다음에 하기 btn -->
-                <div class="py-4">
-                    <button type="button"
-                            class="btn rounded-pill btn-outline-light next-btn">여기까지만
-                        선택하기
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Carousel <btn> -->
-        <button class="carousel-control-prev" type="button"
-                data-bs-target="#ai-cok-carousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button"
-                data-bs-target="#ai-cok-carousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    </div>
-		<!-- footer -->
-		<div th:replace="~{footer/footer::footer}"></div>
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-            crossorigin="anonymous"></script>
+							</div>
+						</div>
+						다음에 하기 btn
+						<div class="py-4">
+							<button type="button"
+								class="btn rounded-pill btn-outline-light next-btn">여기까지만
+								선택하기</button>
+						</div>
+					</div>-->
+					<!-- Content3 | 기간 선택 -->
+					<div class="carousel-item ">
+						<div class="ai-box ai-filter-box col-10 col-md-7 text-center">
+							<div class="row f14 mx-0 gap-4 gap-md-5">
+								<div class="col-12 mb-5 pb-5">
+									<p class="f22 text-shadow p-0 pb-lg-3">얼마동안 여행을 떠날까요?</p>
+								</div>
+								<div class="col-12 col-lg-10 m-auto">
+									<div class="row period-box-parent gap-3 m-auto">
+										<div class="col m-auto col-md px-0">
+											<div class="period-box m-auto d-block">
+												<input type="radio" id="day" name="day" value="0" /> <label
+													for="day"><div class="m-auto dayimg"></div> <span>당일
+														여행</span> </label>
+											</div>
+										</div>
 
-    <script>
-        var myCarousel = document.querySelector('#myCarousel')
-        var carousel = new bootstrap.Carousel(myCarousel, {
-            interval: 2000,
-            wrap: false
-        })
+										<div class="col m-auto col-md px-0">
+											<div class="period-box m-auto d-block">
+												<input type="radio" id="day1" name="day" value="1" /> <label
+													for="day1"><div class="m-auto dayimg"></div> <span>1박2일
+														여행</span> </label>
+											</div>
+										</div>
+										<div class="col m-auto col-md px-0">
+											<div class="period-box m-auto d-block">
+												<input type="radio" id="day2" name="day" value="2" /> <label
+													for="day2"><div class="m-auto dayimg"></div> <span>2박3일
+														여행</span> </label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--다음에 하기 btn -->
+							<div class="py-4 mt-5">
+								<button type="button"
+									class="btn rounded-pill btn-outline-light next-btn mt-5">여기까지만
+									선택하기</button>
+							</div>
+						</div>
 
-    </script>
+					</div>
+					<!-- Content4 | 테마 선택 -->
+					<div class="carousel-item ">
+						<div class="ai-box ai-filter-box col-10 col-md-7 text-center">
+							<div class="row f14 mx-0 d-flex justify-content-center gap-5">
+								<div class="col-12">
+									<p class="f22 text-shadow p-0">
+										마음에 드는 <b>여행</b>이 있나요?
+									</p>
+								</div>
+								<div
+									class="theme-box-parent mt-4 mt-lg-0 gap-3 gap-xl-5 row p-0 m-auto justify-content-center">
+									<div class="col-3 px-0">
+										<input type="checkbox" id="thema1" name="thema" value="산" /> <label
+											class="text-center" for="thema1"><span>산</span>
+										<div class="m-auto rounded-4"></div></label>
+
+									</div>
+									<div class="col-3 px-0">
+										<input type="checkbox" id="thema2" name="thema1" value="실내" /> <label
+											class="text-center" for="thema2"><span>실내</span>
+										<div class="m-auto rounded-4"></div></label>
+									</div>
+									<div class="col-3 px-0">
+										<input type="checkbox" id="thema3" name="thema2" value="엑티비티" /> <label
+											class="text-center" for="thema3"><span>엑티비티</span>
+										<div class="m-auto rounded-4"></div></label>
+									</div>
+									<div class="col-3 px-0">
+										<input type="checkbox" id="thema4" name="thema3" value="테마파크" /> <label
+											class="text-center" for="thema4"><span>테마파크</span>
+										<div class="m-auto rounded-4"></div></label>
+									</div>
+									<div class="col-3 px-0">
+										<input type="checkbox" id="thema5" name="thema4" value="카페" /> <label
+											class="text-center" for="thema5"><span>카페</span>
+										<div class="m-auto rounded-4"></div></label>
+									</div>
+									<div class="col-3 px-0">
+										<input type="checkbox" id="thema6" name="thema5" value="바다" /> <label
+											class="text-center" for="thema6"><span>바다</span>
+										<div class="m-auto rounded-4"></div></label>
+									</div>
+									<div class="col-3 px-0">
+											<input type="checkbox" id="thema7" name="thema6" value="축제"/>		
+										<label class="text-center" for="thema7"><span>축제</span><div class="m-auto rounded-4"></div></label>
+									</div>
+									<div class="col-3 px-0">
+											<input type="checkbox" id="thema8" name="thema7" value="맛집"/>		
+										<label class="text-center" for="thema8"><span>맛집</span><div class="m-auto rounded-4"></div></label>
+									</div>
+									<div class="col-3 px-0">
+											<input type="checkbox" id="thema9" name="thema8" value="전통시장"/>		
+										<label class="text-center" for="thema9"><span>전통시장</span><div class="m-auto rounded-4"></div></label>
+									</div>
+								</div>
+							</div>
+							<!--다음에 하기 btn -->
+							<div class="py-4 mt-5">
+								<button type="submit"
+									class="btn rounded-pill btn-outline-light next-btn">선택 완료</button>
+							</div>
+						</div>
+					</div>
+			</form>
+			</div>
+		</div>
+		<!-- Carousel <btn> -->
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#ai-cok-carousel" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#ai-cok-carousel" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Next</span>
+		</button>
+	</div>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+
+	<script>
+		var myCarousel = document.querySelector('#myCarousel')
+		var carousel = new bootstrap.Carousel(myCarousel, {
+			interval : 2000,
+			wrap : false
+		})
+	</script>
 </body>
 </html>
