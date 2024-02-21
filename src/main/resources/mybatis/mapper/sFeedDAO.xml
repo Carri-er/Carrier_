@@ -6,9 +6,9 @@
 	<!-- 피드 글쓰기 -->
 	<insert id="feedWrite">
 		INSERT INTO Feed 
-			(Feed_num, Member_Id, Member_profileimage, Feed_title, Feed_content, Feed_theme, Feed_area, Feed_tripday, Feed_uploadday, Feed_updateday, Feed_heart, Feed_thumbnail) 
+			(Feed_num, Member_Id, Member_profileimage, Feed_title, Feed_content, Feed_theme, Feed_area, Feed_uploadday, Feed_updateday, Feed_heart, Feed_thumbnail) 
 	    VALUES 
-	    	(Feed_num.nextval, #{Member_Id}, #{Member_profileimage}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, #{Feed_tripday}, sysdate, sysdate, 0, #{Feed_thumbnail})
+	    	(Feed_num.nextval, #{Member_Id}, #{Member_profileimage}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, sysdate, sysdate, 0, #{Feed_thumbnail})
 	</insert>
 	
 	<!-- 피드 리스트 가져오기 -->
@@ -20,4 +20,11 @@
 	<select id="feedShow" resultType="com.ex.springboot.dto.FeedDTO">
 		SELECT * FROM Feed WHERE Feed_num = #{Feed_num}
 	</select>
+	
+	<!-- 피드 수정 -->
+	<update id="feedUpdate">
+		UPDATE Feed SET 
+			Feed_title = #{Feed_title}, Feed_content= #{Feed_content}, Feed_theme= #{Feed_theme}, Feed_area= #{Feed_area}, Feed_updateday = sysdate, Feed_thumbnail = #{Feed_title} 
+		WHERE Feed_num = #{Feed_num}
+	</update>
 </mapper>
