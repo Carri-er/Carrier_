@@ -60,19 +60,15 @@
                     </div>
                     <div class="row" th:each="aicc:${aicc}">
                     <div class="col">
-                    	<div class="row px-4 Event_contentRow">
-                    	<div class="col-1 count" >
-                    	<p th:text="${aiccStat.count}" class="text-center f22"></p>
-                    	</div>
-                    	<div class="col-2 count mx-2 px-0" >
+                    	<div class="row">
+                    	<div class="col" ></div>
+                    	<div class="col" >
                     		<img th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
 										class="img-fluid rounded-circle" alt=""
-										style="width: 60px; height: 60px;">
+										style="width: 80px; height: 80px;">
                     	</div>
-                    	<div class="col-8"  >
-                    		<p th:text="${aicc.getEvent_category()}" class="badge bg-nb px-2  py-2"></p>
-                    		<h5 th:text="${aicc.getEvent_name()}" class="mb-1"></h5>
-                    		<p th:text="${aicc.getEvent_content()}" class="text-truncate"></p>
+                    	<div class="col"  th:text="${aicc.getEvent_name()}">
+                    		
                     	</div>
                     	<div class="col"></div>
                     	</div>

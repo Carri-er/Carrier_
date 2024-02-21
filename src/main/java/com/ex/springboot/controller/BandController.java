@@ -90,7 +90,7 @@ public class BandController {
 		return "thymeleaf/band/band_create";
 	}
 	
-	//
+	//밴드 생성하기 
 	@RequestMapping("/band_create")
 	public String band_Create(Model model, HttpServletRequest request, @RequestParam("band_thumnail") MultipartFile file) {
 		
@@ -135,6 +135,17 @@ public class BandController {
 		}
 		
 		return "redirect:band";
+	}
+	
+	//밴드 삭제하기 
+	@RequestMapping("deleteBand")
+	public String deleteBand(Model model, HttpServletRequest request) {
+		String band_code_str = request.getParameter("bandUrl");
+		
+		int num_band_code = Integer.parseInt(band_code_str);
+		bandDao.bandInfoDelete(num_band_code);
+		
+		return "redirect:/band";
 	}
 	
 	//	밴드 피드 글쓰기 페이지로 이동
@@ -256,16 +267,38 @@ public class BandController {
 		
 		//수정 완료 시 
 		@RequestMapping("/band_update")
-		public String bandUpdate(Model model, HttpServletRequest request) {
+		public String bandUpdate(Model model, HttpServletRequest request, @RequestParam("band_thumnail") MultipartFile file) {
 			String str_band_code = request.getParameter("bandUrl");
 			int num_band_code = Integer.parseInt(str_band_code);
 			String band_thumnail = request.getParameter("band_thumnail");
 			String band_name = request.getParameter("band_name");
 			String band_content = request.getParameter("band_content");
 			
-			bandDao.bandInfoUpdate(band_thumnail, band_name, band_content, num_band_code);
-			String go = "redirect:myBand?bandUrl="+str_band_code;
+			try {
+				
+				UUID uuidOne = UUID.randomUUID();
+				
+				//A mutable sequence of characters
+				StringBuilder fileNames = new StringBuilder();
+				
+				Path fileNameAndPath = Paths.get(UPLOAD_BAND_DIRECTORY, uuidOne + file.getOriginalFilename());
+				// => Returns a {@code Path} by converting a path string => 이미지가 저장되는 경로
+				fileNames.append(uuidOne + file.getOriginalFilename());
+				byte[] fileSize = file.getBytes(); //이미지에 대한 정보 값을 바이트 배열로 가져온다.
+				Files.write(fileNameAndPath, fileSize);
+				
+				model.addAttribute("msg", fileNameAndPath);
+				model.addAttribute("fileName", fileNames); //밴드 대표 이미지 이름 저장.
+				
+				bandDao.bandInfoUpdate(fileNames.toString(), band_name, band_content, num_band_code);
+				
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 			
+			String go = "redirect:myBand?bandUrl="+str_band_code;
 			return go;
 		}
 		
@@ -279,10 +312,7 @@ public class BandController {
 			bandDao.withdrawalJoinBand(num_band_code, login_id);
 			bandDao.bandMembercount_minus(num_band_code);
 			
-			
-			String go = "redirect:myBand?bandUrl="+str_band_code;
-			
-			return go;
+			return "redirect:/band";
 		}
 		
 		

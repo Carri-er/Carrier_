@@ -31,6 +31,10 @@ public interface IBandDAO {
 			@Param("band_thumnail") String band_thumnail
 			);
 	
+	public int bandInfoDelete(
+			@Param("band_code") int band_code
+			);
+	
 	//밴드 피드 저장 추상 메소드
 	public int bandFeedWrite(
 			@Param("band_code") int band_code, 

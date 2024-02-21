@@ -8,22 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class CarrierController {
 
-	@GetMapping("/")
-	public String main() {
-		return "thymeleaf/home/home";
-	}
+   @GetMapping("/")
+   public String main() {
+      return "thymeleaf/home/home";
+   }
 
 
-	@GetMapping("/home")
-	public String home() {
-		return "thymeleaf/home/home";
-	}
+   @GetMapping("/home")
+   public String home() {
+      return "thymeleaf/home/home";
+   }
 
 
-	@GetMapping("/map")
-	public String map() {
-		return "thymeleaf/map/map";
-	}
+   @GetMapping("/map")
+   public String map() {
+      return "thymeleaf/map/map";
+   }
 
 
 
