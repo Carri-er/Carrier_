@@ -80,8 +80,6 @@ body{
 
 /* 캐로셀 <> 버튼 모이게 */
 .carousel-control-next, .carousel-control-prev {
-    width: 30%;
-    margin-bottom: 85px;
 }
 
 /* ------------------- 1번째 화면 -------------------- */
@@ -126,14 +124,14 @@ body{
 }
 
 /* START btn*/
-.carousel-inner .ai-box .btn {
+.carousel-inner .ai-box .btn_start {
     position: absolute;
     animation-name: cosStart;
     animation-duration: 3s;
 }
 
 .btn_start{
-    margin-left: -120px;
+    margin-left: 120px;
 }
 
 .carousel-inner .ai-box .btn .btn_start {
@@ -249,7 +247,7 @@ body{
 }
 
 /*--------------------- 나이 선택  in carousel ----------------------*/
-.age-box-parent {
+/* .age-box-parent {
     display: flex;
     justify-content: center;
 }
@@ -261,10 +259,10 @@ body{
 
     padding: 10px;
     color: #444444;
-    /*color: var(--black);*/
+    color: var(--black);
     width: 125px;
 
-    /*background: var(--white);*/
+    background: var(--white);
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -286,7 +284,7 @@ body{
     width: 100%;
 }
 
-/* 날씨  in carousel */
+날씨  in carousel
 #ai .weather {
     width: 100%;
 }
@@ -296,16 +294,31 @@ body{
     height: 36px;
 }
 
-/*다음에하기 버튼*/
+다음에하기 버튼
 .next-btn {
     position: absolute;
     left: 50%;
     bottom: 0;
     margin-left: -81px;
     margin-bottom: 223px;
-    /*backdrop-filter: blur( 1px );*/
+    backdrop-filter: blur( 1px );
+} */
+/* Content 1 | 지역 선택 */
+.areabtn input{
+	width: 1px;
+	height: 1px;
 }
-
+.areabtn input:checked + label{
+ background-color: #567ff2;
+ color:white;
+}
+.areabtn label{
+	width: 100%;
+}
+.areabtn label span{
+	height: 50px;
+	line-height: 50px;
+}
 /* Content 3 | 기간 선택 */
 
 .period-box-parent{
@@ -317,21 +330,33 @@ body{
     flex-direction: column;
 }
 
-.period-box>div{
+.period-box input{
+	width: 1px;
+	height: 1px;
+}
+.period-box input:checked + label > .dayimg {
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 3px white;
+    box-sizing: border-box;
+    background: url("../img/aicc/icon_travel_period_on.png") 50% 50% no-repeat !important;
+  
+}
+
+.period-box>label>.dayimg{
     width: 108px;
     height: 108px;
 }
 
-.period-box-parent>div:nth-of-type(1) .period-box>div{
+.period-box-parent>div:nth-of-type(1) .period-box>label>.dayimg{
     background: url("../img/aicc/icon_travel_period.png") no-repeat;
     background-size: 108px;
 }
-.period-box-parent>div:nth-of-type(2) .period-box>div{
+.period-box-parent>div:nth-of-type(2) .period-box>label>.dayimg{
     background: url("../img/aicc/icon_travel_period.png") no-repeat;
     background-size: 108px;
     background-position-y: -108px;
 }
-.period-box-parent>div:nth-of-type(3) .period-box>div{
+.period-box-parent>div:nth-of-type(3) .period-box>label>.dayimg{
     background: url("../img/aicc/icon_travel_period.png") no-repeat;
     background-size: 108px;
     background-position-y: -216px;
@@ -341,70 +366,89 @@ body{
 .theme-box-parent>div{
     position: relative;
     /*filter: blur(1px);*/
-    border-radius: 12px;
-    overflow: hidden;
+    border-radius: 20px;
+    cursor: pointer;
 }
-
+.theme-box-parent>div>input{
+	width: 1px;
+	height: 1px;
+}
 /* theme 이미지 안 글씨 효과 */
-.theme-box-parent>div>span{
+.theme-box-parent>div>label{
+    display: block;
+    width: 100%;
+    position: relative;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
+    z-index: 1;
+}
+.theme-box-parent>div>label>span{
     display: block;
     width: 100%;
     position: absolute;
-    margin-top: 40px;
-
+    margin-top:40px;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
     z-index: 1;
 }
 
-
 /* 이미지 효과 */
-.theme-box-parent>div>div{
+.theme-box-parent>div>label>div{
     cursor: pointer;
     filter: blur(1px) brightness(70%);
 }
-
+.theme-box-parent>div>input:checked +label>div{
+	 background: url("../img/aicc/icon_travel_period_on.png") 50% 50% no-repeat !important;
+	 position: relative;
+	 z-index: 3;
+	 background-color: white;
+	   box-shadow: 0px 0px 10px 3px white;
+    box-sizing: border-box;
+    filter: blur(0px);
+}
+.theme-box-parent>div>input:checked +label>span{
+	text-indent: -99999px;
+}
 /* 이미지 호버시 효과 */
-.theme-box-parent>div>div:hover{
+.theme-box-parent>div>label>div:hover{
     filter: blur(0px);
     /*filter: brightness(100%);*/
 }
 
 
 /* 이미지 삽입 */
-.theme-box-parent>div:nth-of-type(1)>div{
+.theme-box-parent>div:nth-of-type(1)>label>div{
     background: url("../img/aicc/theme-1.jpg") no-repeat center/cover;
     height: 100px;
 }
-.theme-box-parent>div:nth-of-type(2)>div{
+.theme-box-parent>div:nth-of-type(2)>label>div{
     background: url("../img/aicc/theme-2.jpg") no-repeat center/cover;
     height: 100px;
 }
-.theme-box-parent>div:nth-of-type(3)>div{
+.theme-box-parent>div:nth-of-type(3)>label>div{
     background: url("../img/aicc/theme-3.jpg") no-repeat center/cover;
     height: 100px;
 }
-.theme-box-parent>div:nth-of-type(4)>div{
+.theme-box-parent>div:nth-of-type(4)>label>div{
     background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
     height: 100px;
 }
-.theme-box-parent>div:nth-of-type(5)>div{
+.theme-box-parent>div:nth-of-type(5)>label>div{
     background: url("../img/aicc/theme-cafe.jpg") no-repeat center/cover;
     height: 100px;
 }
-.theme-box-parent>div:nth-of-type(6)>div{
-    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
+.theme-box-parent>div:nth-of-type(6)>label>div{
+    background: url("../img/aicc/thema-sea.jpg") no-repeat center/cover;
     height: 100px;
 }
-.theme-box-parent>div:nth-of-type(7)>div{
-    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
+.theme-box-parent>div:nth-of-type(7)>label>div{
+    background: url("../img/aicc/thema-fasti.jpg") no-repeat center/cover;
     height: 100px;
 }
-.theme-box-parent>div:nth-of-type(8)>div{
-    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
+.theme-box-parent>div:nth-of-type(8)>label>div{
+    background: url("../img/aicc/thema-foodjpg.jpg") no-repeat center/cover;
     height: 100px;
 }
-.theme-box-parent>div:nth-of-type(9)>div{
-    background: url("../img/aicc/theme-park.jpg") no-repeat center/cover;
+.theme-box-parent>div:nth-of-type(9)>label>div{
+    background: url("../img/aicc/thema-market.jpg") no-repeat center/cover;
     height: 100px;
 }
 
@@ -438,5 +482,8 @@ body{
     .carousel-control-next, .carousel-control-prev {
         width: 10%;
     }
+    .btn_start{
+    margin-left: 0px;
+}
     
 }
