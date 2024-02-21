@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<div th:replace="~{head/head::head}"></div>
+
+<body>
+<div th:replace="~{nav/nav::nav}"></div>
+    <div class="map_wrapp">
+        <!-- 맵 컨텐츠 전체를 감싸는 영역  -->
+        <div class="map_all_contentBox">
+                <!-- map 왼쪽 가이드 영역 -->
+            <div class="map_guide">
+                <!-- gps 현재 위치 출력 영역 -->
+                <div class="map_curr_locationBox">
+                    <div class="col map_curr_location d-flex justify-content-between">
+                        <div class="map_curr_location_name">
+                            <span>경기 수원시 권선구</span>
+                        </div>
+                        <div class="map_curr_location_weather d-flex">
+                            <span>현재날씨 </span>
+                            <em>최고 | 최저</em>
+                        </div>
+                    </div>
+                </div>  <!-- map_curr_locationBox -->
+
+                <!-- map guide 아이콘 영역 -->
+                <div class="map_guide_iconBox">
+                    <div class="map_guide_icon">
+                        <ul class="map_guide_icon_list px-0">
+                            <li class="map_guide_icon_item map_icon_near_trip">
+                                주변여행지
+                            </li>
+                            <li class="map_guide_icon_item map_icon_food">
+                                음식점
+                            </li>
+                            <li class="map_guide_icon_item map_icon_cafe">
+                                카페
+                            </li>
+                            <li class="map_guide_icon_item map_icon_hotel">
+                                숙소
+                            </li>
+                            <li class="map_guide_icon_item map_icon_park">
+                                주차장
+                            </li>
+                            <li class="map_guide_icon_item map_icon_electric_charg">
+                                전기차충전소
+                            </li>
+                            <li class="map_guide_icon_item map_icon_recomand_thema">
+                                추천테마
+                            </li>
+                            <li class="map_guide_icon_item map_icon_trip_course">
+                                여행코스
+                            </li>
+                            <li class="map_guide_icon_item map_icon_myTrip">
+                                나의여행
+                            </li>
+                            <li class="map_guide_icon_item map_icon_set">
+                                설정
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row" th:each="aicc:${aicc}">
+                    <div class="col">
+                    	<div class="row">
+                    	<div class="col" ></div>
+                    	<div class="col" >
+                    		<img th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 80px; height: 80px;">
+                    	</div>
+                    	<div class="col"  th:text="${aicc.getEvent_name()}">
+                    		
+                    	</div>
+                    	<div class="col"></div>
+                    	</div>
+                    </div>
+                    </div>
+                </div> 
+
+                <!-- 지역별 피드 출력 영역 -->
+                
+                <!-- trip 위치 출력 페이지  -->
+                
+                
+                
+            </div> <!-- map_guide -->
+
+            <div class="map_mapSection">
+                <!-- 지도를 표시할 div 입니다 -->
+                <div id="map"></div>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+<div th:replace="~{footer/footer::footer}"></div>
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = { 
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+        
+        // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption); 
+        
+        
+        // 
+        
+    </script>
+</body>
+
+</html>

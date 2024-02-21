@@ -66,7 +66,7 @@
 							<th:block th:if="${ session.Member_Id eq myBandList.getBand_admin() }">
 								<a th:href="@{'setMyBand?bandUrl='+${myBandList.getBand_code()}}" class="btn btn-success">밴드 설정</a>
 							</th:block>
-							<th:block th:unless="${ session.Member_Id eq myBandList.getBand_admin() and  checkMember ne null}">
+							<th:block th:if="${ session.Member_Id ne myBandList.getBand_admin() and  checkMember ne null}">
 								<a th:href="@{'withdrawalMyBand?bandUrl='+${myBandList.getBand_code()}}" class="btn btn-success" onclick="return func_bandWithdrawal() ">밴드 탈퇴하기</a>
 							</th:block>
 						</th:block>

@@ -30,14 +30,18 @@ div.myBand_content_col_title{
 }
 div.myBand_title_img{
     width: 100%;
+    height: 200px;
+    max-height: 300px;
+    overflow : hidden;
 }
 div.myBand_title_img>img{
     width: 100%;
+    height: 200px;
     margin-bottom: 20px;
 }
 /* 밴드 멤버 수 스타일 */
 div.myBand_member_count{
-    margin-bottom: 10px;;
+    margin-bottom: 10px;
 }
 div.myBand_info{
     margin-bottom: 20px;

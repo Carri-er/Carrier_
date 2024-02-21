@@ -1,0 +1,38 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 데이터 출력</title>
+</head>
+<body>
+    <div id="tourismInfo"></div>
+
+    <script>
+        // JSON 데이터를 가져와서 출력하는 함수
+        function fetchTourismData() {
+            var url = "https://apis.data.go.kr/B551011/KorService1/locationBasedList1?serviceKey=YWN2gd9zlw9%2BT%2BW7TtmhULUErs05AhCo0QbIR7ZmjC4kbdzpzc%2BlWJHU6JA43Kc2dI3LHbengnnO%2Fz4h2iUV%2BQ%3D%3D&numOfRows=1000&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&mapX=126.981611&mapY=37.568477&radius=1000";
+
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                // JSON 데이터를 HTML로 출력
+                var tourismInfoDiv = document.getElementById("tourismInfo");
+                data.response.body.items.item.forEach(item => {
+                    var itemDiv = document.createElement("div");
+                    itemDiv.innerHTML = `
+                        <h2>${item.title}</h2>
+                        <p>주소: ${item.addr1}</p>
+                        <p>거리: ${item.dist}</p>
+                        <img src="${item.firstimage}" alt="관광지 이미지">
+                        <img src="${item.firstimage2}" alt="관광지 이미지2">
+                    `;
+                    tourismInfoDiv.appendChild(itemDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching tourism data:', error));
+        }
+
+        // 페이지 로드 시 JSON 데이터 가져오기
+        window.onload = fetchTourismData;
+    </script>
+</body>
+</html>
