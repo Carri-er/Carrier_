@@ -2,109 +2,633 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <div th:replace="~{head/head::head}"></div>
 
-<body>
-<div th:replace="~{nav/nav::nav}"></div>
-    <div class="map_wrapp">
-        <!-- 맵 컨텐츠 전체를 감싸는 영역  -->
-        <div class="map_all_contentBox">
-                <!-- map 왼쪽 가이드 영역 -->
-            <div class="map_guide">
-                <!-- gps 현재 위치 출력 영역 -->
-                <div class="map_curr_locationBox">
-                    <div class="col map_curr_location d-flex justify-content-between">
-                        <div class="map_curr_location_name">
-                            <span>경기 수원시 권선구</span>
-                        </div>
-                        <div class="map_curr_location_weather d-flex">
-                            <span>현재날씨 </span>
-                            <em>최고 | 최저</em>
-                        </div>
-                    </div>
-                </div>  <!-- map_curr_locationBox -->
+<body class="overflow-hidden">
+	<div th:replace="~{nav/nav::nav}"></div>
+	<div class="map_wrapp">
+		<!-- 맵 컨텐츠 전체를 감싸는 영역  -->
+		<div class="map_all_contentBox ">
+			<!-- map 왼쪽 가이드 영역 -->
+			<div class="map_guide overflow-scroll" style="height: 100vh; ">
+				<!-- 정보값 출력 영역 day가 0일때-->
+				<th:block th:if="${day}==0">
+					<div class="map_curr_locationBox  py-4 bg-pinkD">
+					<div class="col map_curr_location">
+						<div class="map_curr_location_name1 my-3 px-3 text-white">
+							<span th:text="${session.Member_Name}" class="f22 "></span><span> 님을 위한 여행코스</span>
+							<div class="col p-3 bg-white mx-auto rounded-4 d-flex align-items-center mt-3">
+								<div class="col-2 bg-pinkD rounded-circle f14 dayCircle ">당일여행</div>
+								<div class="col-10 rounded-circle mt-3">
+								 	<p class="px-3 mb-1 pb-1"><b>여행 지역 </b> <span class="text-black mx-2 ">|</span> <span th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span></p>
+								 	<p class="px-3"><b>선택 테마 </b> <span class="text-black mx-2">|</span> 
+								 	<th:block th:if="${thema!=null and thema != ' '}"># <span th:text="${thema}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema1!=null and thema1 != ' '}"># <span th:text="${thema1}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema2!=null and thema2 != ' '}"># <span th:text="${thema2}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema3!=null and thema3 != ' '}"># <span th:text="${thema3}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema4!=null and thema4 != ' '}"># <span th:text="${thema4}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema5!=null and thema5 != ' '}"># <span th:text="${thema5}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema6!=null and thema6 != ' '}"># <span th:text="${thema6}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema7!=null and thema7 != ' '}"># <span th:text="${thema7}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema8!=null and thema8 != ' '}"># <span th:text=" ${thema8}" class="text-black "></span></th:block></p>
+								 	
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				</th:block>
+				<!-- 정보값 출력 영역 day가 1일때-->
+				<th:block th:if="${day}==1">
+					<div class="map_curr_locationBox  py-4 bg-skyb">
+					<div class="col map_curr_location">
+						<div class="map_curr_location_name1 my-3 px-3 text-white">
+							<span th:text="${session.Member_Name}" class="f22 "></span><span> 님을 위한 여행코스</span>
+							<div class="col p-3 bg-white mx-auto rounded-4 d-flex align-items-center mt-3">
+								<div class="col-2 bg-skyb rounded-circle f14 dayCircle ">1박2일</div>
+								<div class="col-10 rounded-circle mt-3">
+								 	<p class="px-3 mb-1 pb-1"><b>여행 지역 </b> <span class="text-black mx-2 ">|</span> <span th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span></p>
+								 	<p class="px-3"><b>선택 테마 </b> <span class="text-black mx-2">|</span> 
+								 	<th:block th:if="${thema!=null and thema != ' '}"># <span th:text="${thema}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema1!=null and thema1 != ' '}"># <span th:text="${thema1}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema2!=null and thema2 != ' '}"># <span th:text="${thema2}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema3!=null and thema3 != ' '}"># <span th:text="${thema3}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema4!=null and thema4 != ' '}"># <span th:text="${thema4}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema5!=null and thema5 != ' '}"># <span th:text="${thema5}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema6!=null and thema6 != ' '}"># <span th:text="${thema6}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema7!=null and thema7 != ' '}"># <span th:text="${thema7}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema8!=null and thema8 != ' '}"># <span th:text=" ${thema8}" class="text-black "></span></th:block></p>
+								 	
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				</th:block>
+				<!-- 정보값 출력 영역 day가 0일때-->
+				<th:block th:if="${day}==2">
+					<div class="map_curr_locationBox  py-4 bg-mainbg">
+					<div class="col map_curr_location">
+						<div class="map_curr_location_name1 my-3 px-3 text-white">
+							<span th:text="${session.Member_Name}" class="f22 "></span><span> 님을 위한 여행코스</span>
+							<div class="col p-3 bg-white mx-auto rounded-4 d-flex align-items-center mt-3">
+								<div class="col-2 bg-mainbg rounded-circle f14 dayCircle ">2박3일</div>
+								<div class="col-10 rounded-circle mt-3">
+								 	<p class="px-3 mb-1 pb-1"><b>여행 지역 </b> <span class="text-black mx-2 ">|</span> <span th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span></p>
+								 	<p class="px-3"><b>선택 테마 </b> <span class="text-black mx-2">|</span> 
+								 	<th:block th:if="${thema!=null and thema != ' '}"># <span th:text="${thema}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema1!=null and thema1 != ' '}"># <span th:text="${thema1}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema2!=null and thema2 != ' '}"># <span th:text="${thema2}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema3!=null and thema3 != ' '}"># <span th:text="${thema3}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema4!=null and thema4 != ' '}"># <span th:text="${thema4}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema5!=null and thema5 != ' '}"># <span th:text="${thema5}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema6!=null and thema6 != ' '}"># <span th:text="${thema6}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema7!=null and thema7 != ' '}"># <span th:text="${thema7}" class="text-black "></span></th:block>
+								 	<th:block th:if="${thema8!=null and thema8 != ' '}"># <span th:text=" ${thema8}" class="text-black "></span></th:block></p>
+								 	
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				</th:block>
+				<!-- gps 현재 위치 출력 영역 -->
+				<div class="map_curr_locationBox">
+					<div class="col map_curr_location d-flex justify-content-between ">
+						<div class="map_curr_location_name mt-3 px-3">
+							<span>경기 수원시 권선구</span>
+						</div>
+						<div class="map_curr_location_weather d-flex mt-3 px-3">
+							<span>현재날씨 </span> <em>최고 | 최저</em>
+						</div>
+					</div>
+				</div>
+				<!-- map_curr_locationBox -->
 
-                <!-- map guide 아이콘 영역 -->
-                <div class="map_guide_iconBox">
-                    <div class="map_guide_icon">
-                        <ul class="map_guide_icon_list px-0">
-                            <li class="map_guide_icon_item map_icon_near_trip">
-                                주변여행지
-                            </li>
-                            <li class="map_guide_icon_item map_icon_food">
-                                음식점
-                            </li>
-                            <li class="map_guide_icon_item map_icon_cafe">
-                                카페
-                            </li>
-                            <li class="map_guide_icon_item map_icon_hotel">
-                                숙소
-                            </li>
-                            <li class="map_guide_icon_item map_icon_park">
-                                주차장
-                            </li>
-                            <li class="map_guide_icon_item map_icon_electric_charg">
-                                전기차충전소
-                            </li>
-                            <li class="map_guide_icon_item map_icon_recomand_thema">
-                                추천테마
-                            </li>
-                            <li class="map_guide_icon_item map_icon_trip_course">
-                                여행코스
-                            </li>
-                            <li class="map_guide_icon_item map_icon_myTrip">
-                                나의여행
-                            </li>
-                            <li class="map_guide_icon_item map_icon_set">
-                                설정
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="row" th:each="aicc:${aicc}">
-                    <div class="col">
-                    	<div class="row px-4 Event_contentRow">
-                    	<div class="col-1 count" >
-                    	<p th:text="${aiccStat.count}" class="text-center f22"></p>
-                    	</div>
-                    	<div class="col-2 count mx-2 px-0" >
-                    		<img th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
+				<!-- map guide 아이콘 영역 -->
+				<div class="map_guide_iconBox mt-5">
+					<div class="map_guide_icon ">
+						<ul class="map_guide_icon_list px-0">
+							<li class="map_guide_icon_item map_icon_near_trip">주변여행지</li>
+							<li class="map_guide_icon_item map_icon_food">음식점</li>
+							<li class="map_guide_icon_item map_icon_cafe">카페</li>
+							<li class="map_guide_icon_item map_icon_hotel">숙소</li>
+							<li class="map_guide_icon_item map_icon_park">주차장</li>
+							<li class="map_guide_icon_item map_icon_electric_charg">
+								전기차충전소</li>
+							<li class="map_guide_icon_item map_icon_recomand_thema">
+								추천테마</li>
+							<li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+							<li class="map_guide_icon_item map_icon_myTrip">나의여행</li>
+							<li class="map_guide_icon_item map_icon_set">설정</li>
+						</ul>
+					</div>
+					<!-- 반복될 부분 day1 -->
+					<p class="px-3 f20 fw-bold">day 1</p>
+						<!-- 여행지 1 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aicc:${aicc}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aicc.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">1</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
 										class="img-fluid rounded-circle" alt=""
 										style="width: 60px; height: 60px;">
-                    	</div>
-                    	<div class="col-8"  >
-                    		<p th:text="${aicc.getEvent_category()}" class="badge bg-nb px-2  py-2"></p>
-                    		<h5 th:text="${aicc.getEvent_name()}" class="mb-1"></h5>
-                    		<p th:text="${aicc.getEvent_content()}" class="text-truncate"></p>
-                    	</div>
-                    	<div class="col"></div>
-                    	</div>
-                    </div>
-                    </div>
-                </div> 
+								</div>
+								<div class="col-8">
+									<p th:text="${aicc.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aicc.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aicc.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+					
+									<!-- 맛집 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aiccFood:${aiccFood}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccFood.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">2</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccFood.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccFood.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccFood.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccFood.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+						
+				<!-- 여행지 2 -->
+				<hr class="px-5 text-black-50" />
+					<div class="row" th:each="aicc2:${aicc2}">
+						<div class="col">
+							<a th:href="@{'Event_view?id='+ ${aicc2.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">3</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aicc2.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aicc2.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aicc2.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aicc2.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+					<!-- 카페 영역 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row"  th:each="aiccCafe:${aiccCafe}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccCafe.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">4</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccCafe.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccCafe.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccCafe.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccCafe.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+						</div>
+					</div>
+									<!-- 맛집2 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aiccFood2:${aiccFood2}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccFood2.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">5</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccFood2.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccFood2.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccFood2.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccFood2.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+						
+						<!-- 반복될 부분 day1 끝 -->
+						<!-- 반복될 부분 day2 -->
+						<th:block th:if="${day}==1 or ${day}==2" >
+						<p class="px-3 f20 fw-bold">day 2</p>
+						<!-- 여행지 1 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aicc:${aicc}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aicc.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">1</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aicc.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aicc.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aicc.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+					
+									<!-- 맛집 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aiccFood:${aiccFood}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccFood.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">2</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccFood.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccFood.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccFood.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccFood.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+						
+				<!-- 여행지 2 -->
+				<hr class="px-5 text-black-50" />
+					<div class="row" th:each="aicc2:${aicc2}">
+						<div class="col">
+							<a th:href="@{'Event_view?id='+ ${aicc2.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">3</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aicc2.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aicc2.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aicc2.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aicc2.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+					<!-- 카페 영역 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row"  th:each="aiccCafe:${aiccCafe}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccCafe.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">4</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccCafe.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccCafe.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccCafe.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccCafe.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+						</div>
+					</div>
+									<!-- 맛집2 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aiccFood2:${aiccFood2}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccFood2.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">5</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccFood2.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccFood2.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccFood2.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccFood2.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+						</th:block>
+						<!-- 반복될 부분 day2 끝 -->
+						<!-- 반복될 부분 day3 -->
+						<th:block th:if="${day}==2">
+						<p class="px-3 f20 fw-bold">day 3</p>
+						<!-- 여행지 1 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aicc:${aicc}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aicc.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">1</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aicc.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aicc.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aicc.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+					
+									<!-- 맛집 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aiccFood:${aiccFood}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccFood.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">2</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccFood.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccFood.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccFood.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccFood.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+						
+				<!-- 여행지 2 -->
+				<hr class="px-5 text-black-50" />
+					<div class="row" th:each="aicc2:${aicc2}">
+						<div class="col">
+							<a th:href="@{'Event_view?id='+ ${aicc2.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">3</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aicc2.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aicc2.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aicc2.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aicc2.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+					<!-- 카페 영역 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row"  th:each="aiccCafe:${aiccCafe}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccCafe.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">4</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccCafe.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccCafe.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccCafe.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccCafe.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+						</div>
+					</div>
+									<!-- 맛집2 -->
+						<hr class="px-5 text-black-50" />
+							<div class="row" th:each="aiccFood2:${aiccFood2}">
+						<div class="col">
+						<a th:href="@{'Event_view?id='+ ${aiccFood2.getEvent_num()}}">
+							<div class="row px-4 Event_contentRow">
+								<div class="col-1 count">
+									<p class="text-center f22">5</p>
+								</div>
+								<div class="col-2 count mx-2 px-0">
+									<img th:src="@{'../img/info/' + ${aiccFood2.getEvent_thumbnail()}}"
+										class="img-fluid rounded-circle" alt=""
+										style="width: 60px; height: 60px;">
+								</div>
+								<div class="col-8">
+									<p th:text="${aiccFood2.getEvent_category()}"
+										class="badge bg-nb px-2 mb-2 py-2"></p>
+									<h5 th:text="${aiccFood2.getEvent_name()}" class="mb-1"></h5>
+									<p th:text="${aiccFood2.getEvent_content()}" class="text-truncate"></p>
+								</div>
+								<div class="col"></div>
+							</div>
+							</a>
+							</div>
+						</div>
+						</th:block>
+						<!-- 반복될 부분 day3 끝 -->
+				</div>
+				<!-- 지역별 피드 출력 영역 -->
 
-                <!-- 지역별 피드 출력 영역 -->
-                
-            </div> <!-- map_guide -->
+			</div>
+			<!-- map_guide -->
 
-            <div class="map_mapSection">
-                <!-- 지도를 표시할 div 입니다 -->
-                <div id="map"></div>
-            </div>
-        </div>
-        
-    </div>
+			<div class="map_mapSection">
+				<!-- 지도를 표시할 div 입니다 -->
+				<div id="map"></div>
+			</div>
+		</div>
 
-
-
-<div th:replace="~{footer/footer::footer}"></div>
-    <script>
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	</div>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05"></script>
+	
+	<script th:inline="javascript">
+        var mapContainer = document.getElementById('map');// 지도를 표시할 div 
+    	var mapx = /*[[${aicc.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy = /*[[${aicc.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var mapx2 = /*[[${aicc2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy2 = /*[[${aicc2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var mapx3 = /*[[${aiccCafe.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy3 = /*[[${aiccCafe.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var mapx4 = /*[[${aiccFood.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy4 = /*[[${aiccFood.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var mapx5 = /*[[${aiccFood2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy5 = /*[[${aiccFood2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+		
+		// 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
+		mapx = parseFloat(mapx);
+		mapy = parseFloat(mapy);
             mapOption = { 
-                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                level: 3 // 지도의 확대 레벨
+                center: new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
+                level: 7 // 지도의 확대 레벨
             };
         
-        // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-        var map = new kakao.maps.Map(mapContainer, mapOption); 
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        
+     // 마커를 표시할 위치와 title 객체 배열입니다 
+     var positions = [
+         {
+             title: '카카오', 
+             latlng: new kakao.maps.LatLng(mapx, mapy)
+         },
+         {
+             title: '생태연못', 
+             latlng: new kakao.maps.LatLng(mapx2, mapy2)
+         },
+         {
+             title: '텃밭', 
+             latlng: new kakao.maps.LatLng(mapx3, mapy3)
+         },
+         {
+             title: '근린공원',
+             latlng: new kakao.maps.LatLng(mapx4, mapy4)
+         },
+         {
+             title: '근린공ㅁㄴㅇ원',
+             latlng: new kakao.maps.LatLng(mapx5, mapy5)
+         }
+     ];
+
+     // 마커 이미지의 이미지 주소입니다
+     var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+         
+     for (var i = 0; i < positions.length; i ++) {
+         
+         // 마커 이미지의 이미지 크기 입니다
+         var imageSize = new kakao.maps.Size(24, 35); 
+         
+         // 마커 이미지를 생성합니다    
+         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+         
+         // 마커를 생성합니다
+         var marker = new kakao.maps.Marker({
+             map: map, // 마커를 표시할 지도
+             position: positions[i].latlng, // 마커를 표시할 위치
+             title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+             image : markerImage // 마커 이미지 
+         });
+     }
     </script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    function refreshPageIfSameValues() {
+        var eventNum1 = /*[[${aicc[0].getEvent_num()}]]*/0; // 첫 번째 여행지 데이터의 이벤트 번호
+        var eventNum2 = /*[[${aicc2[0].getEvent_num()}]]*/0; // 두 번째 여행지 데이터의 이벤트 번호
+        var eventNum3 = /*[[${aiccFood[0].getEvent_num()}]]*/0; // 두 번째 여행지 데이터의 이벤트 번호
+        var eventNum4 = /*[[${aiccFood2[0].getEvent_num()}]]*/0; // 두 번째 여행지 데이터의 이벤트 번호
+        
+        if (eventNum1 === eventNum2) {
+            // 두 값이 같으면 페이지 새로고침
+            location.reload();
+        }
+        if (eventNum3 === eventNum4) {
+            // 두 값이 같으면 페이지 새로고침
+            location.reload();
+        }
+    }
+    
+    // 페이지 로드 시 함수 호출
+    window.onload = refreshPageIfSameValues;
+    /*]]>*/
+</script>
+
 </body>
 
 </html>
