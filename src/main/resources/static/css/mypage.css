@@ -163,10 +163,9 @@ label.member-fileUpload{
 
 }
 
-.member-fileUpload-form{
-	display: none;
+.member-fileUpload-form {
+    display: none;
 }
-
 
 /* 토스트 */
 .my-toast-parent{
