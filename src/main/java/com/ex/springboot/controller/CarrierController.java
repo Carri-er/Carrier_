@@ -24,7 +24,7 @@ public class CarrierController {
    public String map() {
       return "thymeleaf/map/map";
    }
-
+   
 
 
 }

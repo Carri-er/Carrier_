@@ -51,10 +51,13 @@ public class BandController {
 		
 		model.addAttribute("bandList",bandDao.bandList());
 		
+		model.addAttribute("randomBandList", bandDao.randomBandList());
 		
 		
 		return "thymeleaf/band/band";
 	}
+	
+	
 	
 	//밴드 세부 페이지로 이동
 	@GetMapping("/myBand")
@@ -78,6 +81,31 @@ public class BandController {
 		
 		return "thymeleaf/band/myBand";
 	}
+	
+	//밴드 세부 페이지로 이동
+		@GetMapping("/mybandMember")
+		public String myBandMember(Model model, HttpServletRequest request,HttpSession session) {
+			
+			
+			
+			String band_code = request.getParameter("bandUrl");
+			int num_band_code = Integer.parseInt(band_code);
+			
+			if( session.getAttribute("Member_Id") != null) {
+				String loginId = (String) session.getAttribute("Member_Id");
+				model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+			}
+			
+			model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+			
+			model.addAttribute("myBandFeedList",bandDao.bandFeedList(band_code));
+			
+			model.addAttribute("joinMemberList",bandDao.joinMemberList(num_band_code));
+			
+			model.addAttribute("bandUrl", band_code);
+			
+			return "thymeleaf/band/myBand_member";
+		}
 
 //	밴드 만들기 페이지로 이동
 	@RequestMapping("/bandCreate")
@@ -143,7 +171,9 @@ public class BandController {
 		String band_code_str = request.getParameter("bandUrl");
 		
 		int num_band_code = Integer.parseInt(band_code_str);
+		
 		bandDao.bandInfoDelete(num_band_code);
+		bandDao.bandInfoDelete_member(num_band_code);
 		
 		return "redirect:/band";
 	}
@@ -315,6 +345,31 @@ public class BandController {
 			return "redirect:/band";
 		}
 		
+		
+		//밴드 채팅
+		@RequestMapping("/bandChat")
+		public String bandchat(Model model, HttpServletRequest request, HttpSession session) {
+			String str_band_code = request.getParameter("bandUrl");
+			int num_band_code = Integer.parseInt(str_band_code);
+			String partnerId = request.getParameter("partnerId");
+			
+			String loginId = (String) session.getAttribute("Member_Id");
+			
+						
+			String chatRoom = str_band_code + partnerId + loginId;
+			
+			model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+			model.addAttribute("partnerId", partnerId);
+			model.addAttribute("chatRoom",chatRoom);
+			
+						
+			model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+			
+			
+			model.addAttribute("bandUrl", num_band_code);
+			
+			return "thymeleaf/band/bandChat";
+		}
 		
 		
 		// 썸머노트 ajax
