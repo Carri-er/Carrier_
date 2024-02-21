@@ -41,7 +41,9 @@
 						<img src="../img/aicc/cos_start_welcome.png" class="img-fluid"
 							alt="환영합니다!">
 						<p class="f22 text-shadow">
+						<th:block th:if="${session.Member_Id!=null}">
 							<span th:text="${session.Member_Name}">username</span>님!
+							</th:block>
 							&nbsp;안녕하세요.
 						</p>
 						<p class="fw-bold text-shadow welcome-big">

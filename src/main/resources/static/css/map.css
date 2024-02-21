@@ -7,7 +7,7 @@ div.map_all_contentBox{
 }
 /* map guide 영역 */
 div.map_guide{
-    width: 350px;
+    width: 400px;
 }
 div.map_curr_locationBox{
     width: 100%;
@@ -131,4 +131,9 @@ div#map{
 /* map_mapSection sytle */
 div.map_mapSection{
     width: calc(100% - 350px);
+}
+
+/*Event_contentRow 데이터 불러온 내용 스타일*/
+.Event_contentRow .count{
+	line-height: 80px;
 }
