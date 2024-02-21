@@ -137,3 +137,16 @@ div.map_mapSection{
 .Event_contentRow .count{
 	line-height: 80px;
 }
+
+.dayCircle{
+width: 60px;
+height: 60px;
+line-height: 60px;
+text-align: center;
+}
+.map_curr_location_name1 span{
+	color: white;
+}
+.map_curr_location_name1 div{
+	color: white;
+}
