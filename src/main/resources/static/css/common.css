@@ -69,9 +69,15 @@ a.indent {
 	font-size: 22px;
 }
 /* background-color 버튼 색상 정의 */
-.bg-main {
+.bg-main, .btn-main-over:hover{
 	background-color: var(--main) !important;
 }
+
+.btn-main:hover, .btn-main-over {
+	border: 1px solid var(--main) !important;
+	background-color: var(--white) !important;
+}
+
 
 .bg-mainbg {
 	background: var(--mainbg) !important;
@@ -109,8 +115,13 @@ a.indent {
 	background-color: var(--nottedpink) !important;
 }
 
-.btn-pinkD {
+.btn-pinkD, .btn-pinkD-over:hover {
 	background-color: var(--nottedpinkD) !important;
+}
+
+.btn-pinkD:hover, .btn-pinkD-over {
+	border: 1px solid var(--nottedpinkD) !important;
+	background-color: var(--white) !important;
 }
 
 .btn-skyb {
@@ -123,20 +134,6 @@ a.indent {
 
 .btn-mainbg {
 	background-color: var(--mainbg) !important;
-}
-
-.btn-main:hover {
-	border: 1px solid var(--main) !important;
-	background-color: var(--white) !important;
-}
-
-.btn-main-over {
-	border: 1px solid var(--main) !important;
-	background-color: var(--white) !important;
-}
-
-.btn-main-over:hover {
-	background-color: var(--main) !important;
 }
 
 /* form 양식 */

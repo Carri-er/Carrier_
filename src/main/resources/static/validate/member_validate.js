@@ -112,7 +112,7 @@ function signUp_check() {
 		return false;
 	}
 	
-		/* 아이디 중복 검사 */
+	/* 아이디 중복 검사 */
 	var idCk = $("#id").val();
 	$.ajax({
 		url: "/idCheck?id=" + idCk,

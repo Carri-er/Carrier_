@@ -1,12 +1,213 @@
 /* 밴드 글쓰기 박스 스타일 */
-div.bandFeedWrite_wrapper{
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+#feedWrite {
+	width: 100%;
+	height: 100%;
 }
-div.bandFeedWrite_form{
-    width: 1000px;
-    margin : 0 auto;
-    padding-top : 100px;
-    max-height: 500px;
+
+div.bandFeedWrite_wrapper {
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
 }
+
+div.bandFeedWrite_form {
+	margin: 0 auto;
+	padding-top: 100px;
+	max-height: 500px;
+	padding: 20px;
+}
+
+/* 여행 일자 선택 */
+.feed-write-date-form{
+	display: flex;
+	align-items: center;
+}
+.feed-write-date-form>*{
+	margin: 0 10px;
+	width: 70px;
+}
+
+
+/****************** BTN ******************/
+#feedWrite .btn:not(.note-btn) {
+	border-radius: 50px;
+	margin-bottom: 2px;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  --bs-btn-padding-y: 0.25rem;
+  --bs-btn-padding-x: 0.5rem;
+  --bs-btn-font-size: 0.875rem;
+  --bs-btn-border-radius: 0.25rem;
+}
+
+.backBtn {
+	top: 15px;
+	left: 15px;
+	position: relative;
+	border-radius: 50%;
+	padding-top: 10px;
+	padding-right:10px;
+	width: 50px;
+	height: 50px;
+	background: rgba(255, 255, 255, 0.65);
+	box-shadow: 0 8px 32px 0 rgba(200, 200, 200, 0.37);
+	backdrop-filter: blur(17.5px);
+	-webkit-backdrop-filter: blur(17.5px);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.backBtn>i {
+	color: var(--nottedpinkD);
+	margin-left: -2px;
+}
+
+.writeBtn{
+	padding: 15px;
+}
+
+.btn-dark-over {
+	color: var(--black);
+	background-color: var(--white);
+	border: 1px solid var(--black);
+}
+
+/* input 스타일링 */
+.btn-dark-over:hover, [type="radio"]:checked + label{
+	background-color: var(--black);
+	color: var(--white);
+}
+
+.tag-group{
+	margin-bottom: 20px;
+}
+
+.profileimage-wrapper {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.m-auto {
+	margin: auto !important;
+}
+
+/* 프로필 사진 변경 버튼 */
+.member-fileUpload-wrapper {
+	width: 350px;
+	height: 350px;
+	position: relative;
+	margin: 0 auto;
+}
+
+label.member-fileUpload {
+	z-index: 2;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	text-indent: -9999px;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+}
+
+.member-fileUpload-btn {
+	width: 21px;
+	height: 21px;
+	background: url("../img/mypage/camera.png") center/contain;
+}
+
+/* 파일 버튼 숨기기 */
+.d-none {
+	display: none !important;
+}
+
+#feedWrite input[type=file] {
+	display: none;
+}
+
+#feedWrite input[type=radio] {
+	display: none;
+}
+
+/* boot */
+.gap-3 {
+	gap: 1rem !important;
+}
+
+.mx-3 {
+  margin-right: 1rem !important;
+  margin-left: 1rem !important;
+}
+
+.w-25 {
+  width: 25% !important;
+}
+
+.rounded {
+	border-radius: 30px;
+}
+
+.border {
+	border: 1px solid #f8f9fa;
+}
+
+.bg-light {
+	--bs-bg-opacity: 1;
+	background-color: #f8f9fa;
+}
+
+.btn-light {
+	background: #f8f9fa;
+}
+
+.hstack {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	align-self: stretch;
+}
+
+.shadow-sm {
+	box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.img-fluid {
+	max-width: 100%;
+	height: auto;
+}
+
+.w-100 {
+	width: 100% !important;
+}
+
+.overflow-hidden-y {
+	overflow-y: hidden;
+}
+
+.p-5 {
+  padding: 3rem 0 !important;
+}
+
+/****************** summerNote Custom ******************/
+.panel-default>.panel-heading {
+	color: #333;
+	background-color: var(--white);
+	border: none;
+	border-radius: 30px;
+}
+
+.note-btn{
+	border:none;
+}
+
+/****************** input Custom ******************/
+#feedWrite .form-control {
+	border-radius: 30px;
+	padding: 15px;
+	height: 43px;
+}
+
+#feedWrite .panel {
+	border-radius: 13px;
+}
+
