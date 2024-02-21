@@ -17,7 +17,6 @@ public interface IFeedDAO {
 			@Param("Feed_content") String Feed_content,
 			@Param("Feed_theme") String Feed_theme,
 			@Param("Feed_area") String Feed_area,
-			@Param("Feed_tripday") String Feed_tripday,
 			@Param("Feed_thumbnail") String Feed_thumbnail
 	);
 
@@ -26,6 +25,16 @@ public interface IFeedDAO {
 	
 	//피드 세부 페이지
 	public FeedDTO feedShow(
+			@Param("Feed_num") int Feed_num
+	);
+	
+	//피드 업데이트
+	public int feedUpdate(
+			@Param("Feed_title") String Feed_title,
+			@Param("Feed_content") String Feed_content,
+			@Param("Feed_theme") String Feed_theme,
+			@Param("Feed_area") String Feed_area,
+			@Param("Feed_thumbnail") String Feed_thumbnail,
 			@Param("Feed_num") int Feed_num
 	);
 

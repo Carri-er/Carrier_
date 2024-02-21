@@ -238,7 +238,7 @@ body{
 
 /* 1번째 화면 바닥 */
 
-.carousel-inner .carousel-item:first-child::after{
+#ai-cok-carousel .carousel-inner .carousel-item:first-child::after{
     content: "";
     display: block;
     width: 100%;
