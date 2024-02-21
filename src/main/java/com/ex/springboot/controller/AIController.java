@@ -44,16 +44,19 @@ public class AIController {
 	@GetMapping("/aiccShow")
 	public String aiccShow(HttpServletRequest request, Model model) {
 		String area = request.getParameter("areaChk");
-		String thema = request.getParameter("thema");
-		String thema2 = request.getParameter("thema2");
-		String thema3 = request.getParameter("thema3");
-		String thema4 = request.getParameter("thema4");
-		String thema5 = request.getParameter("thema5");
-		String thema6 = request.getParameter("thema6");
-		String thema7 = request.getParameter("thema7");
-		String thema8 = request.getParameter("thema8");
-		String thema9 = request.getParameter("thema9");
-		
+		String day = request.getParameter("day");
+		String cafe ="카페";
+		String food ="맛집";
+		String thema = request.getParameter("thema");//산
+		String thema1 = request.getParameter("thema1");//실내
+		String thema2 = request.getParameter("thema2");//엑티비티
+		String thema3 = request.getParameter("thema3");//테마파크
+		String thema4 = request.getParameter("thema4");//카페
+		String thema5 = request.getParameter("thema5");//바다
+		String thema6 = request.getParameter("thema6");//축제
+		String thema7 = request.getParameter("thema7");//맛집
+		String thema8 = request.getParameter("thema8");//전통시장
+		model.addAttribute("day",day);
 		thema = thema != null ? thema : " ";
 		thema2 = thema2 != null ? thema2 : " ";
 		thema3 = thema3 != null ? thema3 : " ";
@@ -62,11 +65,32 @@ public class AIController {
 		thema6 = thema6 != null ? thema6 : " ";
 		thema7 = thema7 != null ? thema7 : " ";
 		thema8 = thema8 != null ? thema8 : " ";
-		thema9 = thema9 != null ? thema9 : " ";
-
+		thema1 = thema1 != null ? thema1 : " ";
+		
+		model.addAttribute("thema",thema);
+		model.addAttribute("thema",thema1);
+		model.addAttribute("thema2",thema2);
+		model.addAttribute("thema3",thema3);
+		model.addAttribute("thema4",thema4);
+		model.addAttribute("thema5",thema5);
+		model.addAttribute("thema6",thema6);
+		model.addAttribute("thema7",thema7);
+		model.addAttribute("thema8",thema8);
+		
 		System.out.println("테마값이 뭐야?"+thema);
-		System.out.println("테마값이 뭐야thema4?"+thema5);
-		model.addAttribute("aicc",AiDAO.list(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema9));
+		System.out.println("테마값이 뭐야thema5?"+thema5);
+		if(AiDAO.list(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema1).isEmpty() && AiDAO.list2(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema1).isEmpty()) {
+			model.addAttribute("aicc",AiDAO.listAll(area,cafe,food));
+			model.addAttribute("aicc2",AiDAO.listAll2(area,cafe,food));
+			
+		}else {
+			model.addAttribute("aicc",AiDAO.list(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema1));
+			model.addAttribute("aicc2",AiDAO.list2(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema1));
+		}
+		model.addAttribute("aiccCafe",AiDAO.listCafe(area,cafe));
+		model.addAttribute("aiccFood",AiDAO.listFood(area,food));
+		model.addAttribute("aiccFood2",AiDAO.listFood(area,food));
+		
 		return "thymeleaf/map/map";
 	}
 
