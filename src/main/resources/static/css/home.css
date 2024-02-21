@@ -17,10 +17,9 @@
   	bottom: 0px;
   	width: 100%;
   	height: 100px;
-
   }
 
-  div.carousel-item {
+  #carouselExampleControls div.carousel-item {
   	padding-top: 150px;
   }
 

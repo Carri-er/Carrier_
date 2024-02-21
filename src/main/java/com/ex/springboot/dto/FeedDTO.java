@@ -11,7 +11,6 @@ public class FeedDTO {
 	private String Feed_content; //피드내용
 	private String Feed_theme; //테마
 	private String Feed_area; //지역
-	private String Feed_tripday; //여행일자
 	private String Feed_uploadday; //올린날짜
 	private String Feed_updateday; //수정날짜
 	private int Feed_heart; //하트 수

@@ -134,11 +134,11 @@ input::-webkit-search-results-decoration{
   display: none;
 }
 
-input:checked + label {
+.home_search input:checked + label {
   width: 850px !important;
 }
 
-input:checked + label.description {
+.home_search input:checked + label.description {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
