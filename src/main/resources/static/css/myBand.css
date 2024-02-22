@@ -178,5 +178,8 @@ div.band_chat_startBtn{
 }
 
 div.bandChat_listContent{
+	overflow-y : scroll;
+	max-height: 500px;
 	border : 1px solid blue;
+	background-color: #f1f1f1;
 }
