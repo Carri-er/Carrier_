@@ -171,3 +171,11 @@ display:inline-block;
 	color: var(--white);
 }
 
+
+/* 드롭다운 메뉴 화살표 없애기 */
+#feed-right .dropdown-toggle::after {
+	margin-top: 2px;
+    content: "⋮";
+    height: 100%;
+    border: none;
+}

@@ -16,6 +16,16 @@
 		SELECT * FROM Feed order by Feed_num DESC
 	</select>
 	
+	<!-- 최신순 피드 리스트 -->
+	<select id="feedListRecent" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT * FROM Feed order by Feed_uploadday DESC
+	</select>
+	
+	<!-- 인기순(좋아요) 피드 리스트 -->
+	<select id="feedListHeart" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT * FROM Feed order by Feed_heart DESC
+	</select>
+	
 	<!-- 피드 세부 가져오기 -->
 	<select id="feedShow" resultType="com.ex.springboot.dto.FeedDTO">
 		SELECT * FROM Feed WHERE Feed_num = #{Feed_num}
@@ -24,7 +34,22 @@
 	<!-- 피드 수정 -->
 	<update id="feedUpdate">
 		UPDATE Feed SET 
-			Feed_title = #{Feed_title}, Feed_content= #{Feed_content}, Feed_theme= #{Feed_theme}, Feed_area= #{Feed_area}, Feed_updateday = sysdate, Feed_thumbnail = #{Feed_title} 
-		WHERE Feed_num = #{Feed_num}
+			Feed_title = #{Feed_title}, Feed_content= #{Feed_content}, Feed_theme= #{Feed_theme}, Feed_area= #{Feed_area}, Feed_updateday = sysdate, Feed_thumbnail = #{Feed_thumbnail} 
+		WHERE 
+			Feed_num = #{Feed_num}
 	</update>
+	
+	<!-- 피드 수정 -->
+	<delete id="feedDel">
+		DELETE FROM Feed WHERE Feed_num = #{Feed_num}
+	</delete>
+	
+	<!-- 댓글 -->
+	<insert id="feedCommentCreate">
+		INSERT INTO FeedComment 
+			(Feed_num, Feed_comment_num, Member_Name, Feed_comment, Feed_comment_like) 
+		VALUES 
+			(#{Feed_num}, Feed_comment_num.nextval, #{Member_Name}, #{Feed_comment}, 0)
+	</insert>
+	
 </mapper>

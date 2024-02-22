@@ -7,8 +7,8 @@
 <body>
 <div th:replace="~{nav/nav::nav}">
 </div>
-<div id="feedWrite" class="container-fluid mt-4 mb-5 p-0">
-	<form action="/feed_update" enctype="multipart/form-data">
+<div id="feedUpdate" class="container-fluid mt-4 mb-5 p-0">
+	<form id="feedUpdate" action="/feed_update_action" method="post" enctype="multipart/form-data">
 		<!-- 뒤로가기 버튼 -->
 		<button class="btn backBtn shadow-sm rounded-circle ms-4" onclick="history.back()">
 		<i class="fi fi-sr-angle-small-left f22 text-center"></i>
@@ -18,11 +18,11 @@
 		<div class="row m-auto my-2 my-lg-4 pt-md-0">
 			<div class="col-10 col-xl-7 mt-3 m-0 feed-box mx-auto">
 				<div class="row">
-					<div class="col-12 col-md-6 feed-write-left feed-box p-0 feed-box-width">
+					<div class="col-12 col-md-6 feed-write-left feed-box p-0 feed-box-width overflow-hidden">
 						<!--feed box Start-->
 						<div class="col-12 m-0 mb-3 px-0 no-gutters m-auto">
 							<!--feed box top-->
-							<div class="col-12 hstack feed-box-top pt-3 ps-3 z-3">
+							<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
 								<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border me-3" width="50" height="50" alt="">
 								<input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
 								<!--feed box text-->
@@ -31,12 +31,12 @@
 									<input type="hidden" name="Member_Id" th:value="${session.Member_Id}"/><span class="float-start text-muted f13" th:text="${#calendars.format(#calendars.createNow(), 'yyyy.MM.dd')}">현재 날짜</span>
 								</div>
 								<!-- 우측 버튼 -->
-								<div class="d-none col-4 d-sm-flex justify-content-end align-items-center pe-2">
-									<button type="submit" class="btn btn-sm btn-dark me-2">수정</button>
+								<div class="d-none col-4 d-sm-flex justify-content-end align-items-center">
+									<button type="button" class="btn btn-sm btn-dark me-2" onclick="feed_check()">업데이트</button>
 								</div>
 							</div>
 							<!-- feed box center | Carousel image -->
-							<div class="col-12 mt-3 overflow-hidden">
+							<div class="col-12 overflow-hidden">
 								<div id="feedCarousel" class="carousel slide" data-bs-ride="false">
 									<div class="carousel-indicators">
 										<button type="button" data-bs-target="#feedCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -46,21 +46,27 @@
 									<!-- carousel items loop -->
 									<div class="carousel-inner">
 											<th:block th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feedList.getFeed_thumbnail(), ',')}">
-												<div class="carousel-item active p-0">
-												    <img id="preview0" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100" alt="#">
-												    <input th:id="'fileUpload'+${thumbnailStat.index}" type='file' class="member-fileUpload-form" onchange="readURL(this);" th:name="'Feed_thumbnail' + ${thumbnailStat.index + 1}" multiple/>
-												    <label th:for="'fileUpload'+${thumbnailStat.index}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>
-												</div>
-												<div class="carousel-item p-0">
-												    <img id="preview1" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100" alt="#">
-												    <input th:id="'fileUpload'+${thumbnailStat.index + 1}" type='file' class="member-fileUpload-form" onchange="readURL(this);" th:name="'Feed_thumbnail' + ${thumbnailStat.index + 1}" multiple/>
-												    <label th:for="'fileUpload'+${thumbnailStat.index + 1}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>
-												</div>
-												<div class="carousel-item p-0">
-												    <img id="preview2" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100" alt="#">
-												    <input th:id="'fileUpload'+${thumbnailStat.index + 2}" type='file' class="member-fileUpload-form" onchange="readURL(this);" th:name="'Feed_thumbnail' + ${thumbnailStat.index + 1}" multiple/>
-												    <label th:for="'fileUpload'+${thumbnailStat.index + 2}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>
-												</div>
+											    <div th:class="${thumbnailStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
+
+											        <!-- 이미지가 있으면 해당 이미지를 사용하고, 없으면 add-photo.png 이미지를 사용 -->
+											        <img th:if="${thumbnailStat.index == 0 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview1" class="d-block w-100" alt="#">
+											        <img th:if="${thumbnailStat.index == 0 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview1" class="d-block w-100" alt="#">
+											        
+											        <img th:if="${thumbnailStat.index == 1 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview2" class="d-block w-100" alt="#">
+											        <img th:if="${thumbnailStat.index == 1 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview2" class="d-block w-100" alt="#">
+											
+											        <img th:if="${thumbnailStat.index == 2 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview3" class="d-block w-100" alt="#">
+											        <img th:if="${thumbnailStat.index == 2 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview3" class="d-block w-100" alt="#">
+											
+											        <input th:id="'fileUpload' + ${thumbnailStat.index + 1}" type='file' class="member-fileUpload-form" onchange="readURL(this);" name="Feed_thumbnail[__${thumbnailStat.index}__]}" multiple/>
+
+
+
+											        
+											        <!-- 수정 안 했으면 옛날 이미지 사용을 위함 -->
+											        <input type="hidden" name="Feed_thumbnail_old" th:value="${feedList.getFeed_thumbnail()}" /> 
+											        <label th:for="'fileUpload'+${thumbnailStat.index+1}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>
+											    </div>
 											</th:block>
 									</div>
 									<!-- Carousel Prev/Next button -->
@@ -74,6 +80,7 @@
 									</button>
 								</div>
 							</div>
+
 							<!--feed-box-bot | text-->
 							<div class="col-12 feed-box-bot p-3 d-column gap-3">
 								<span class="d-block fw-bold mb-1"><input type="text" name="Feed_title" class="form-control" th:value="${feedList.getFeed_title()}"/></span><span class="f13"><textarea class="form-control f13" name="Feed_content" rows="5" th:text="${feedList.getFeed_content()}"></textarea></span>
@@ -84,39 +91,64 @@
 					<div class="col feed-tag-box p-4 text-muted f13">
 						<p>
 							<b>Tag</b>
+							<!-- 원래 태그 확인 용도 -->
+							<!-- 
+							<span th:text="${feedList.getFeed_theme()}"></span>
+							<span th:text="${feedList.getFeed_area()}"></span>
+							-->
 						</p>
+						<!-- 테마 태그 -->
 						<div class="tag-group">
-							<input id="1" type="radio" name="Feed_theme" value="#빅데이터 맛집" th:checked="${Feed_theme=='#빅데이터 맛집'}"><label for="1" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#빅데이터 맛집</label><input id="2" type="radio" name="Feed_theme" value="#축제" th:checked="${Feed_theme=='#축제'}"><label for="2" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#축제</label>
-							<input id="3" type="radio" name="Feed_theme" value="#공연" th:checked="${Feed_theme=='#공연'}"><label for="3" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#공연</label>
-							<input id="4" type="radio" name="Feed_theme" value="#댕댕이랑" th:checked="${Feed_theme=='#댕댕이랑'}"><label for="4" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#댕댕이랑</label>
-							<input id="5" type="radio" name="Feed_theme" value="#아이와함께" th:checked="${Feed_theme=='#아이와함께'}"><label for="5" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#아이와함께</label>
-							<input id="6" type="radio" name="Feed_theme" value="#데이트" th:checked="${Feed_theme=='#데이트'}"><label for="6" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#데이트</label>
-							<input id="7" type="radio" name="Feed_theme" value="#소개팅" th:checked="${Feed_theme=='#소개팅'}"><label for="7" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#소개팅</label>
-							<input id="8" type="radio" name="Feed_theme" value="#친구와" th:checked="${Feed_theme=='#친구와'}"><label for="8" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#친구와</label>
-							<input id="9" type="radio" name="Feed_theme" value="#효도여행" th:checked="${Feed_theme=='#효도여행'}"><label for="9" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#효도여행</label>
+							<input id="1" type="radio" name="Feed_theme" value="#빅데이터 맛집" th:checked="${feedList.Feed_theme eq '#빅데이터 맛집'}">
+							<label for="1" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#빅데이터 맛집</label>
+							
+							<input id="2" type="radio" name="Feed_theme" value="#축제" th:checked="${feedList.Feed_theme eq '#축제'}">
+							<label for="2" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#축제</label>
+							
+							<input id="3" type="radio" name="Feed_theme" value="#공연" th:checked="${feedList.Feed_theme eq '#공연'}">
+							<label for="3" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#공연</label>
+							
+							<input id="4" type="radio" name="Feed_theme" value="#댕댕이랑" th:checked="${feedList.Feed_theme eq '#댕댕이랑'}">
+							<label for="4" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#댕댕이랑</label>
+							
+							<input id="5" type="radio" name="Feed_theme" value="#아이와함께" th:checked="${feedList.Feed_theme eq '#아이와함께'}">
+							<label for="5" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#아이와함께</label>
+							
+							<input id="6" type="radio" name="Feed_theme" value="#데이트" th:checked="${feedList.Feed_theme eq '#데이트'}">
+							<label for="6" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#데이트</label>
+							
+							<input id="7" type="radio" name="Feed_theme" value="#소개팅" th:checked="${feedList.Feed_theme eq '#소개팅'}">
+							<label for="7" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#소개팅</label>
+							
+							<input id="8" type="radio" name="Feed_theme" value="#친구와" th:checked="${feedList.Feed_theme eq '#친구와'}">
+							<label for="8" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#친구와</label>
+							
+							<input id="9" type="radio" name="Feed_theme" value="#효도여행" th:checked="${feedList.Feed_theme eq '#효도여행'}">
+							<label for="9" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#효도여행</label>
 						</div>
 						<hr class="my-3">
+						<!-- 지역 태그 -->
 						<div class="tag-group">
-							<input id="01" type="radio" name="Feed_area" value="#서울" th:checked="${Feed_area=='#서울'}"><label for="01" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#서울</label>
-							<input id="02" type="radio" name="Feed_area" value="#부산" th:checked="${Feed_area=='#부산'}"><label for="02" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#부산</label>
-							<input id="03" type="radio" name="Feed_area" value="#대구" th:checked="${Feed_area=='#대구'}"><label for="03" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#대구</label>
-							<input id="04" type="radio" name="Feed_area" value="#인천" th:checked="${Feed_area=='#인천'}"><label for="04" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#인천</label>
-							<input id="05" type="radio" name="Feed_area" value="#광주" th:checked="${Feed_area=='#광주'}"><label for="05" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#광주</label>
-							<input id="06" type="radio" name="Feed_area" value="#대전" th:checked="${Feed_area=='#대전'}"><label for="06" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#대전</label>
-							<input id="07" type="radio" name="Feed_area" value="#울산" th:checked="${Feed_area=='#울산'}"><label for="07" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#울산</label>
-							<input id="08" type="radio" name="Feed_area" value="#세종" th:checked="${Feed_area=='#세종'}"><label for="08" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#세종</label>
-							<input id="09" type="radio" name="Feed_area" value="#경기" th:checked="${Feed_area=='#경기'}"><label for="09" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#경기</label>
-							<input id="010" type="radio" name="Feed_area" value="#강원" th:checked="${Feed_area=='#강원'}"><label for="010" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#강원</label>
-							<input id="011" type="radio" name="Feed_area" value="#충북" th:checked="${Feed_area=='#충북'}"><label for="011" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#충북</label>
-							<input id="012" type="radio" name="Feed_area" value="#충남" th:checked="${Feed_area=='#충남'}"><label for="012" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#충남</label>
-							<input id="013" type="radio" name="Feed_area" value="#전북" th:checked="${Feed_area=='#전북'}"><label for="013" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#전북</label>
-							<input id="014" type="radio" name="Feed_area" value="#전남" th:checked="${Feed_area=='#전남'}"><label for="014" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#전남</label>
-							<input id="015" type="radio" name="Feed_area" value="#경북" th:checked="${Feed_area=='#경북'}"><label for="015" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#경북</label>
-							<input id="016" type="radio" name="Feed_area" value="#경남" th:checked="${Feed_area=='#경남'}"><label for="016" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#경남</label>
-							<input id="017" type="radio" name="Feed_area" value="#제주" th:checked="${Feed_area=='#제주'}"><label for="017" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#제주</label>
+							<input id="01" type="radio" name="Feed_area" value="#서울" th:checked="${feedList.Feed_area eq '#서울'}"><label for="01" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#서울</label>
+							<input id="02" type="radio" name="Feed_area" value="#부산" th:checked="${feedList.Feed_area eq '#부산'}"><label for="02" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#부산</label>
+							<input id="03" type="radio" name="Feed_area" value="#대구" th:checked="${feedList.Feed_area eq '#대구'}"><label for="03" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#대구</label>
+							<input id="04" type="radio" name="Feed_area" value="#인천" th:checked="${feedList.Feed_area eq '#인천'}"><label for="04" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#인천</label>
+							<input id="05" type="radio" name="Feed_area" value="#광주" th:checked="${feedList.Feed_area eq '#광주'}"><label for="05" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#광주</label>
+							<input id="06" type="radio" name="Feed_area" value="#대전" th:checked="${feedList.Feed_area eq '#대전'}"><label for="06" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#대전</label>
+							<input id="07" type="radio" name="Feed_area" value="#울산" th:checked="${feedList.Feed_area eq '#울산'}"><label for="07" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#울산</label>
+							<input id="08" type="radio" name="Feed_area" value="#세종" th:checked="${feedList.Feed_area eq '#세종'}"><label for="08" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#세종</label>
+							<input id="09" type="radio" name="Feed_area" value="#경기" th:checked="${feedList.Feed_area eq '#경기'}"><label for="09" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#경기</label>
+							<input id="010" type="radio" name="Feed_area" value="#강원" th:checked="${feedList.Feed_area eq '#강원'}"><label for="010" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#강원</label>
+							<input id="011" type="radio" name="Feed_area" value="#충북" th:checked="${feedList.Feed_area eq '#충북'}"><label for="011" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#충북</label>
+							<input id="012" type="radio" name="Feed_area" value="#충남" th:checked="${feedList.Feed_area eq '#충남'}"><label for="012" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#충남</label>
+							<input id="013" type="radio" name="Feed_area" value="#전북" th:checked="${feedList.Feed_area eq '#전북'}"><label for="013" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#전북</label>
+							<input id="014" type="radio" name="Feed_area" value="#전남" th:checked="${feedList.Feed_area eq '#전남'}"><label for="014" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#전남</label>
+							<input id="015" type="radio" name="Feed_area" value="#경북" th:checked="${feedList.Feed_area eq '#경북'}"><label for="015" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#경북</label>
+							<input id="016" type="radio" name="Feed_area" value="#경남" th:checked="${feedList.Feed_area eq '#경남'}"><label for="016" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#경남</label>
+							<input id="017" type="radio" name="Feed_area" value="#제주" th:checked="${feedList.Feed_area eq '#제주'}"><label for="017" class="btn btn-outline-dark rounded-pill btn-sm mb-1 me-1">#제주</label>
 						</div>
 						<div class="col-12 d-md-none">
-							<input type="submit" class="py-2 mt-3 btn btn-sm btn-dark me-2 w-100" value="수정하기">
+							<input type="submit" class="py-2 mt-3 btn btn-sm btn-dark me-2 w-100" value="업데이트">
 						</div>
 					</div>
 					<!-- tag row -->
@@ -132,39 +164,46 @@
 	</body>
 	<!-- 이미지 프리뷰 -->
 	<script>
-	/* 각각 input & multiple */
 	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#preview0').attr('src', e.target.result);
-			};
-			reader.readAsDataURL(input.files[0]);
-		}
-		if (input.files && input.files[1]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#preview1').attr('src', e.target.result);
-			};
-			reader.readAsDataURL(input.files[1]);
-		}
-		if (input.files && input.files[2]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#preview2').attr('src', e.target.result);
-			};
-			reader.readAsDataURL(input.files[2]);
-		}
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			var previewId = '#'
-					+ $(input).attr('id').replace('fileUpload', 'preview');
-			reader.onload = function(e) {
-				$(previewId).attr('src', e.target.result);
-			};
-			reader.readAsDataURL(input.files[0]);
-		}
+	    // 각 input 요소에서 파일이 선택되면 실행됨
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        
+	        // input 요소의 id에서 숫자를 추출하여 index를 결정
+	        var index = parseInt(input.id.replace('fileUpload', ''));
+	        
+	        reader.onload = function(e) {
+	            // 해당 index의 미리보기 이미지 엘리먼트의 src 속성을 업데이트
+	            $('#preview' + index).attr('src', e.target.result);
+	        };
+	        
+	        reader.readAsDataURL(input.files[0]);
+	    }
 	}
-
 	</script>
+	
+	<!-- input -->
+<!-- 	<script>
+	$(document).ready(function() {
+	    // 테마 태그의 라디오 버튼에 이벤트 등록
+	    $('input[name="Feed_theme"]').change(function() {
+	        var inputValue = $(this).val(); // 선택된 라디오 버튼의 값
+	        var compareValue = "'${feedList.getFeed_theme()}'"; // 비교할 값
+
+	        if (inputValue === compareValue) {
+	            $(this).prop("checked", true); // 선택된 라디오 버튼에 checked 속성 설정
+	        }
+	    });
+
+	    // 지역 태그의 라디오 버튼에 이벤트 등록
+	    $('input[name="Feed_area"]').change(function() {
+	        var inputValue = $(this).val(); // 선택된 라디오 버튼의 값
+	        var compareValue = "'${feedList.getFeed_area()}'"; // 비교할 값
+
+	        if (inputValue === compareValue) {
+	            $(this).prop("checked", true); // 선택된 라디오 버튼에 checked 속성 설정
+	        }
+	    });
+	});
+	</script> -->
 	</html>

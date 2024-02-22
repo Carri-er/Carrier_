@@ -3,20 +3,30 @@ package com.ex.springboot.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ex.springboot.dao.IFeedDAO;
 import com.ex.springboot.dto.FeedDTO;
+import com.ex.springboot.dto.Feed_commentDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping
@@ -38,7 +48,7 @@ public class FeedController {
 
 	// 피드 세부 - 페이지
 	@GetMapping("/feed_show")
-	public String feedShow(FeedDTO dto, Model model, HttpServletRequest request) {
+	public String feedShow(Model model, HttpServletRequest request) {
 		int Feed_num = Integer.parseInt(request.getParameter("num"));
 
 		model.addAttribute("feedList", feed_dao.feedShow(Feed_num));
@@ -54,53 +64,97 @@ public class FeedController {
 
 	// 피드 글쓰기 - action
 	@PostMapping("/feed_write_action")
-	public String feed_write_action(Model model, HttpServletRequest request,
+	public String feed_write_action(@Valid FeedDTO feedDto,  Model model, HttpServletRequest request, 
 			@RequestPart(value = "Feed_thumbnail1", required = false) MultipartFile file1,
 			@RequestPart(value = "Feed_thumbnail2", required = false) MultipartFile file2,
 			@RequestPart(value = "Feed_thumbnail3", required = false) MultipartFile file3) {
-
+		
 		String Member_Id = request.getParameter("Member_Id");
 		String Member_profileimage = request.getParameter("Member_profileimage");
 		String Feed_title = request.getParameter("Feed_title");
 		String Feed_content = request.getParameter("Feed_content");
 		String Feed_theme = request.getParameter("Feed_theme");
 		String Feed_area = request.getParameter("Feed_area");
-
-//		System.out.println(Member_Id + "/" + Member_profileimage + "/" + Feed_title + "/" + Feed_content + "/"
-//				+ Feed_theme + "/" + Feed_area);
+		
+		System.out.println("나는야 write 구문 : " + "Feed_title:" + Feed_title + "/ Feed_content: " + Feed_content + "/ Feed_theme: " + Feed_theme + "/ Feed_area: " + Feed_area);
+		
 		try {
+			// multiple 사용을 위함
+			List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("Feed_thumbnail1");
+			List<MultipartFile> files2 = ((MultipartHttpServletRequest) request).getFiles("Feed_thumbnail2");
+			List<MultipartFile> files3 = ((MultipartHttpServletRequest) request).getFiles("Feed_thumbnail3");
+			
 			StringBuilder fileNames = new StringBuilder();
-
-			if (file1 != null && !file1.isEmpty()) {
-				String fileName1 = saveFile(file1);
-				fileNames.append(fileName1);
+			
+			int count = 0;
+			
+			for (MultipartFile file : files) {
+	            if (!file.isEmpty()) {
+	                String fileName = saveFile(file);
+	                if (fileNames.length() > 0) {
+	                    fileNames.append(",");
+	                    count++;
+	                }
+	                fileNames.append(fileName);
+	            }
+	        }
+			
+			if (count<=3) {
+				for (MultipartFile file : files2) {
+		            if (!file.isEmpty()) {
+		                String fileName = saveFile(file);
+		                if (fileNames.length() > 0) {
+		                    fileNames.append(",");
+		                    count++;
+		                }
+		                fileNames.append(fileName);
+		            }
+		        }
 			}
+			
+			if (count<=3) {
+				for (MultipartFile file : files3) {
+		            if (!file.isEmpty()) {
+		                String fileName = saveFile(file);
+		                if (fileNames.length() > 0) {
+		                    fileNames.append(",");
+		                    count++;
+		                }
+		                fileNames.append(fileName);
+		            }
+		        }
+			}
+				
 
-			if (file2 != null && !file2.isEmpty()) {
-				String fileName2 = saveFile(file2);
-				if (fileNames.length() > 0) {
-					fileNames.append(",");
+				// 개별 input 파일일 때
+				if (file2 != null && !file2.isEmpty()) {
+					String fileName2 = saveFile(file2);
+					if (fileNames.length() > 0) {
+						fileNames.append(",");
+					}
+					System.out.println("fileName2:  "+fileName2);
+					fileNames.append(fileName2);
 				}
-				fileNames.append(fileName2);
-			}
-
-			if (file3 != null && !file3.isEmpty()) {
-				String fileName3 = saveFile(file3);
-				if (fileNames.length() > 0) {
-					fileNames.append(",");
+				
+	
+				if (file3 != null && !file3.isEmpty()) {
+					String fileName3 = saveFile(file3);
+					if (fileNames.length() > 0) {
+						fileNames.append(",");
+					}
+					System.out.println("fileName3:  "+fileName3);
+					fileNames.append(fileName3);
 				}
-				fileNames.append(fileName3);
-			}
-
-			// 파일명이 없는 경우 기본 이미지 사용
-			if (fileNames.length() == 0 || fileNames.isEmpty()) {
-				fileNames.append("user.png");
-			}
+				
 
 			// DB에 게시물 정보 저장
 			feed_dao.feedWrite(Member_Id, Member_profileimage, Feed_title, Feed_content, Feed_theme, Feed_area,
 					fileNames.toString());
+
+			
 			System.out.println("fileNames.toString():" + fileNames.toString());
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,6 +162,7 @@ public class FeedController {
 		return "redirect:/feed";
 	}
 
+	//	파일 저장
 	private String saveFile(MultipartFile file) throws Exception {
 		String fileName = file.getOriginalFilename();
 		Path fileNameAndPath = Paths.get(UPLOAD_MEMBER_DIRECTORY, fileName);
@@ -115,66 +170,112 @@ public class FeedController {
 		return fileName;
 	}
 
-	// 피드 세부 - 페이지
+	// 피드 업데이트 - 페이지
 	@GetMapping("/feed_update")
-	public String feed_update(FeedDTO dto, Model model, HttpServletRequest request) {
+	public String feed_update(@ModelAttribute FeedDTO dto, Model model, HttpServletRequest request) {
 		int Feed_num = Integer.parseInt(request.getParameter("num"));
-
+		
 		model.addAttribute("feedList", feed_dao.feedShow(Feed_num));
 
 		return "thymeleaf/feed/feed_update";
 	}
 	
-	// 피드 세부 - 페이지
+	// 피드 Update - action
 	@PostMapping("/feed_update_action")
 	public String feed_update_action(Model model, HttpServletRequest request,
 			@RequestPart(value = "Feed_thumbnail1", required = false) MultipartFile file1,
 			@RequestPart(value = "Feed_thumbnail2", required = false) MultipartFile file2,
 			@RequestPart(value = "Feed_thumbnail3", required = false) MultipartFile file3) {
 		int Feed_num = Integer.parseInt(request.getParameter("num"));
-		
+
 		String Feed_title = request.getParameter("Feed_title");
 		String Feed_content = request.getParameter("Feed_content");
 		String Feed_theme = request.getParameter("Feed_theme");
 		String Feed_area = request.getParameter("Feed_area");
+		String Feed_thumbnail_old = request.getParameter("Feed_thumbnail_old");
 		
-		System.out.println(Feed_title + "/" + Feed_content + "/"
-				+ Feed_theme + "/" + Feed_area);
+		System.out.println("나는야 업데이트 구문 : " + "Feed_title:" + Feed_title + "/ Feed_content: " + Feed_content + "/ Feed_theme: " + Feed_theme + "/ Feed_area: " + Feed_area + "/ Feed_thumbnail_old: " + Feed_thumbnail_old);
 		
 		try {
-			StringBuilder fileNames = new StringBuilder();
-
-			if (file1 != null && !file1.isEmpty()) {
-				String fileName1 = saveFile(file1);
-				fileNames.append(fileName1);
-			}
-
-			if (file2 != null && !file2.isEmpty()) {
-				String fileName2 = saveFile(file2);
-				if (fileNames.length() > 0) {
-					fileNames.append(",");
+			List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("Feed_thumbnail1");
+			List<MultipartFile> files2 = ((MultipartHttpServletRequest) request).getFiles("Feed_thumbnail2");
+			List<MultipartFile> files3 = ((MultipartHttpServletRequest) request).getFiles("Feed_thumbnail3");
+			
+			if ((file1 != null && !file1.isEmpty()) 
+				    || (file2 != null && !file2.isEmpty()) 
+				    || (file3 != null && !file3.isEmpty())
+				    || !files.isEmpty() || !files2.isEmpty() || !files3.isEmpty()) {
+			
+				StringBuilder fileNames = new StringBuilder();
+				
+				int count = 0;
+				
+				for (MultipartFile file : files) {
+		            if (!file.isEmpty()) {
+		                String fileName = saveFile(file);
+		                if (fileNames.length() > 0) {
+		                    fileNames.append(",");
+		                    count++;
+		                }
+		                fileNames.append(fileName);
+		            } else {
+		            	
+		            }
+		        }
+				
+				if (count<=3) {
+					for (MultipartFile file : files2) {
+			            if (!file.isEmpty()) {
+			                String fileName = saveFile(file);
+			                if (fileNames.length() > 0) {
+			                    fileNames.append(",");
+			                    count++;
+			                }
+			                fileNames.append(fileName);
+			            }
+			        }
 				}
-				fileNames.append(fileName2);
-			}
-
-			if (file3 != null && !file3.isEmpty()) {
-				String fileName3 = saveFile(file3);
-				if (fileNames.length() > 0) {
-					fileNames.append(",");
+				
+				if (count<=3) {
+					for (MultipartFile file : files3) {
+			            if (!file.isEmpty()) {
+			                String fileName = saveFile(file);
+			                if (fileNames.length() > 0) {
+			                    fileNames.append(",");
+			                    count++;
+			                }
+			                fileNames.append(fileName);
+			            }
+			        }
 				}
-				fileNames.append(fileName3);
-			}
-
-			// 파일명이 없는 경우 기본 이미지 사용
-			if (fileNames.length() == 0 || fileNames.isEmpty()) {
-				fileNames.append("user.png");
-			}
+			
+			/*
+			 * if (file1 != null && !file1.isEmpty()) { String fileName1 = saveFile(file1);
+			 * fileNames.append(fileName1);
+			 * 
+			 * System.out.println("fileName1 O : "+fileName1); }
+			 * 
+			 * if (file2 != null && !file2.isEmpty()) { String fileName2 = saveFile(file2);
+			 * if (fileNames.length() > 0) { fileNames.append(","); }
+			 * fileNames.append(fileName2); System.out.println("fileName2 O : "+fileName2);
+			 * }
+			 * 
+			 * if (file3 != null && !file3.isEmpty()) { String fileName3 = saveFile(file3);
+			 * if (fileNames.length() > 0) { fileNames.append(","); }
+			 * fileNames.append(fileName3); System.out.println("fileName3 O : "+fileName3);
+			 * }
+			 */
 
 			// DB에 게시물 정보 저장
+			System.out.println("fileNames.toString():" + fileNames.toString());
+
 			feed_dao.feedUpdate(Feed_title, Feed_content, Feed_theme, Feed_area,
 					fileNames.toString(), Feed_num);
 			
-			System.out.println("fileNames.toString():" + fileNames.toString());
+		} else {
+			feed_dao.feedUpdate(Feed_title, Feed_content, Feed_theme, Feed_area,
+					Feed_thumbnail_old, Feed_num);
+		}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -183,6 +284,48 @@ public class FeedController {
 		return "redirect:/feed";
 	}
 	
+	// 피드 Delete - action
+	@GetMapping("/delFeed")
+	public String delFeed(HttpServletRequest request, Model model, HttpSession session) {
+		int Feed_num = Integer.parseInt(request.getParameter("num"));
+			
+		feed_dao.feedDel(Feed_num);
+			
+		System.out.println("~피드 삭제~");
+
+		return "redirect:/feed";
+	}
 	
 	
+	/* 피드 댓글 */
+	
+	/*
+	@PostMapping("/feed_comment")
+	public String feed_comment(@Valid Feed_commentDTO dto, Errors errors, HttpServletRequest request, Model model) {
+		if (errors.hasErrors()) {
+			model.addAttribute("Feed_commentDTO", dto);
+			
+			Map<String, String> validateMap = new HashMap<>();
+			
+			for (FieldError error : errors.getFieldErrors()) {
+                String validKeyName = "valid_" + error.getField();
+                validateMap.put(validKeyName, error.getDefaultMessage());
+            }
+			return "feed_comment";
+		}
+			
+		int Feed_num = Integer.parseInt(request.getParameter("num"));
+		String Member_Id = request.getParameter("Member_Id");
+		String Member_profileimage = request.getParameter("Member_profileimage");
+		String Feed_comment = request.getParameter("Feed_comment");
+			
+		feed_dao.feedCommentCreate(Feed_num, Member_Id, Member_profileimage, Feed_comment);
+			
+		System.out.println("~댓글 달기~");
+
+		return "redirect:/feed_show";
+	}
+	*/
+	
+		
 }
