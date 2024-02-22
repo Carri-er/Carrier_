@@ -10,7 +10,7 @@
         // JSON 데이터를 가져와서 출력하는 함수
         function fetchTourismData() {
             var url = "https://apis.data.go.kr/B551011/KorService1/locationBasedList1?serviceKey=YWN2gd9zlw9%2BT%2BW7TtmhULUErs05AhCo0QbIR7ZmjC4kbdzpzc%2BlWJHU6JA43Kc2dI3LHbengnnO%2Fz4h2iUV%2BQ%3D%3D&numOfRows=1000&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&mapX=126.981611&mapY=37.568477&radius=1000";
-
+			var url2 = "https://apis.data.go.kr/B551011/KorService1/detailIntro1?serviceKey=YWN2gd9zlw9%2BT%2BW7TtmhULUErs05AhCo0QbIR7ZmjC4kbdzpzc%2BlWJHU6JA43Kc2dI3LHbengnnO%2Fz4h2iUV%2BQ%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=129898&contentTypeId=14&numOfRows=10&pageNo=1";
             fetch(url)
             .then(response => response.json())
             .then(data => {

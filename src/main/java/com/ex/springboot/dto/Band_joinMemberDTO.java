@@ -11,4 +11,6 @@ public class Band_joinMemberDTO {
 	private String band_name; 
     private int band_memberCount;
     private String band_thumnail;
+    private String Member_name;
+    private String Member_profileimage;
 }

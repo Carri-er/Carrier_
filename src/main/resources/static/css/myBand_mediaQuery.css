@@ -11,7 +11,6 @@
 	div.myBand_content_col_title{
 		width: 100%;
 		display : flex;
-		border : 1px solid blue;
 		margin-bottom: 50px;
 		overflow : hidden;
 	}
@@ -21,7 +20,6 @@
 		height : 150px;
 		box-sizing: border-box;
 		padding-left : 15px;
-		border : 1px solid black;
 	}
 	div.myBand_title_img{
 		width: 50%;
