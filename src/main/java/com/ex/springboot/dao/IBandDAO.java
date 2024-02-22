@@ -1,6 +1,6 @@
 package com.ex.springboot.dao;
 
-import java.util.List; 
+import java.util.List;  
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,6 +17,9 @@ public interface IBandDAO {
 	//전체 밴드 리스트 출력 
 	public List<BandDTO> bandList();
 	
+	//생성된 밴드 랜덤으로 6개 출력 
+	public List<BandDTO> randomBandList();
+	
 	//band_code를 가지고 myBand 페이지로 이동	
 	public BandDTO myBand(int band_code);
 	
@@ -31,7 +34,13 @@ public interface IBandDAO {
 			@Param("band_thumnail") String band_thumnail
 			);
 	
+	//밴드 삭제하기
 	public int bandInfoDelete(
+			@Param("band_code") int band_code
+			);
+	
+	//삭제한 밴드 joinmember 다 삭제하기 
+	public int bandInfoDelete_member(
 			@Param("band_code") int band_code
 			);
 	
@@ -68,6 +77,9 @@ public interface IBandDAO {
 	//가입한 밴드인지 확인
 	public Band_joinMemberDTO checkJoinMember(int band_code, String membet_id);
 	
+	//밴드에 가입한 멤버 출력
+	public List<Band_joinMemberDTO> joinMemberList(int band_code);
+	
 	//밴드 정보 수정
 	public int bandInfoUpdate(
 			@Param("band_thumnail") String band_thumnail,
@@ -87,5 +99,14 @@ public interface IBandDAO {
 	
 	//밴드 탈퇴 시 멤버 수 감소
 	public int bandMembercount_minus(int band_code);
+	
+	//밴드 채팅 데이터 생성
+	public int bandChatCreate(
+			@Param("band_chat_room") String band_chat_room,
+			@Param("band_code") int band_code,
+			@Param("chat_myId") String chat_myId,
+			@Param("chat_partnerId") String chat_partnerId,
+			@Param("chat_message") String chat_message 
+			);
 	
 }
