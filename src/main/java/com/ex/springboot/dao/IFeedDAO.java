@@ -13,7 +13,6 @@ public interface IFeedDAO {
 	//피드 글쓰기
 	public int feedWrite(
 			@Param("Member_Id") String Member_Id, 
-			@Param("Member_profileimage") String Member_profileimage, 
 			@Param("Feed_title") String Feed_title,
 			@Param("Feed_content") String Feed_content,
 			@Param("Feed_theme") String Feed_theme,

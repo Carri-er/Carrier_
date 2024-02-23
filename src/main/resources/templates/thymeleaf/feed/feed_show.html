@@ -92,11 +92,8 @@
 					<!-- 우측 | 댓글 다는 곳 -->
 					<div class="col p-4">
  					<form th:action="@{'/feed_comment_upload'}" th:object="${Feed_commentDTO}" method="post">
-						<p>
-							 댓글
-						</p>
+						<p>댓글</p>
 						<div class="d-flex align-items-center gap-2">
-						
 							<div class="col flex-grow-0 p-0">
 								<input type="hidden" name="Feed_num" th:value="${feedList.getFeed_num()}"/>
 								<input type="hidden" name="Member_Id" th:value="${session.Member_Id}"/>
@@ -112,7 +109,6 @@
 						</div>
 					</form>
 					<hr/>
-
 					<!-- 다른 유저 댓글창 -->
 					<div class="row gap-3 px-2">
 						<div class="d-flex align-items-start gap-2" th:each="comment : ${Feed_commentList}">
@@ -125,7 +121,8 @@
 								<span class="f14 d-block" th:text="${comment.getFeed_comment()}">오늘 쫌 힘드네여</span>
 							</div>
 							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
-								<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/><label for="feed-heart"><i class="fi fi-br-heart"></i></label>
+								<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/>
+								<label for="feed-heart"><i class="fi fi-br-heart"></i></label>
 							</div>
 						</div>
 					</div>
