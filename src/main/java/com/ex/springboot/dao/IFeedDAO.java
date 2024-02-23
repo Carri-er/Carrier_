@@ -53,7 +53,7 @@ public interface IFeedDAO {
 	);
 	
 	// 피드 댓글 불러오기
-	public Feed_commentDTO feedCommentList(
+	public List<Feed_commentDTO> feedCommentList(
 			@Param("Feed_num") int Feed_num
 	);
 }

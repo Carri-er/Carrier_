@@ -111,52 +111,23 @@
 							</div>
 						</div>
 					</form>
-						<hr/>
-						<!-- 
-						다른 유저 댓글창
-						<div class="row gap-3 px-2">
-							<div class="d-flex align-items-start gap-2" th:each="comment : ${Feed_commentList}">
-								<div class="col flex-grow-0 p-0 mt-1">
-									<img th:src="@{'../img/member_thumbnail/'+ ${comment.getMember_profileimage()}}" class="float-start rounded-circle border" width="36" height="36" alt="">
-								</div>
-								<div class="col flex-grow-1 p-0 f14">
-									<strong><span class="" th:text="${comment.getMember_Id()}">장창엽</span></strong>
-									<span class="ms-1 text-muted f12" th:text="${comment.get}">댓글 단 시간</span><span class="f14 d-block">오늘 쫌 힘드네여</span>
-								</div>
-								<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
-									<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/><label for="feed-heart"><i class="fi fi-br-heart"></i></label>
-								</div>
+					<hr/>
+
+					<!-- 다른 유저 댓글창 -->
+					<div class="row gap-3 px-2">
+						<div class="d-flex align-items-start gap-2" th:each="comment : ${Feed_commentList}">
+							<div class="col flex-grow-0 p-0 mt-1">
+								<img th:src="@{'../img/member_thumbnail/'+ ${comment.getMember_profileimage()}}" class="float-start rounded-circle border" width="36" height="36" alt="">
 							</div>
-							----------------------------
-							<div class="d-flex align-items-start gap-2">
-								<div class="col flex-grow-0 p-0 mt-1">
-									<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border" width="36" height="36" alt=""><input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
-								</div>
-								<div class="col flex-grow-1 p-0">
-									<strong><span class="f14 d-block">이지후</span></strong><span class="f14 d-block">저도 힘드네요</span>
-								</div>
-								<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
-									<input type="submit" id="feed-herat" class="h-100 py-2 d-none"/>
-									<label for="feed-heart"><i class="fi fi-br-heart"></i>
-									</label>
-								</div>
+							<div class="col flex-grow-1 p-0 f14">
+								<strong><span class="" th:text="${comment.getMember_Id()}">장창엽</span></strong>
+								<span class="ms-1 text-muted f12" th:text="${comment.getFeed_comment_updateday()}">댓글 단 시간</span>
+								<span class="f14 d-block" th:text="${comment.getFeed_comment()}">오늘 쫌 힘드네여</span>
 							</div>
-							----------------------------
-							<div class="d-flex align-items-start gap-2">
-								<div class="col flex-grow-0 p-0 mt-1">
-									<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border" width="36" height="36" alt="">
-									<input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
-								</div>
-								<div class="col flex-grow-1 p-0">
-									<strong><span class="f14 d-block">박검지</span></strong>
-									<span class="f14 d-block">저는 괜찮아요</span>
-								</div>
-								<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
-									<button type="button" class="btn btn-close btn-sm rounded-circle" aria-label="Close"></button>
-								</div>
-								</div>
+							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
+								<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/><label for="feed-heart"><i class="fi fi-br-heart"></i></label>
 							</div>
- -->
+						</div>
 					</div>
 				</div>
 			</div>
