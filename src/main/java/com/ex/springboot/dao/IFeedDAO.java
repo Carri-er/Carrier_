@@ -6,9 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.ex.springboot.dto.FeedDTO;
-
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.ex.springboot.dto.Feed_commentDTO;
 
 @Mapper // 인터페이스를 xml로 구현하겠다.
 public interface IFeedDAO {
@@ -50,13 +48,12 @@ public interface IFeedDAO {
 	// 피드 댓글 달기
 	public int feedCommentCreate(
 			@Param("Feed_num") int Feed_num,
-			@Param("Member_Name") String Member_Name,
-			@Param("Member_profileimage") String Member_profileimage,
+			@Param("Member_Id") String Member_Id,
 			@Param("Feed_comment") String Feed_comment
 	);
 	
-	// 패드 댓글 불러오기
-	public List<FeedDTO> feedCommentList();
-	
-	
+	// 피드 댓글 불러오기
+	public Feed_commentDTO feedCommentList(
+			@Param("Feed_num") int Feed_num
+	);
 }
