@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ex.springboot.dto.BandDTO;
 import com.ex.springboot.dto.BandFeedDTO;
+import com.ex.springboot.dto.Band_chatDTO;
 import com.ex.springboot.dto.Band_joinMemberDTO;
 import com.ex.springboot.dto.MemberDTO;
 
@@ -107,6 +108,25 @@ public interface IBandDAO {
 			@Param("chat_myId") String chat_myId,
 			@Param("chat_partnerId") String chat_partnerId,
 			@Param("chat_message") String chat_message 
+			);
+	
+	//밴드 채팅 리스트 출력
+	public List<Band_chatDTO> bandChatList(
+			@Param("band_chat_room") String band_chat_room
+			);
+	
+	//밴드 채팅 
+	public List<Band_chatDTO> bandChatRoomCheck(
+				@Param("band_chat_room") String band_chat_room
+			);
+	
+	//밴드 채팅 작성 
+	public int userbandChatWrite(
+			@Param("band_chat_room") String band_chat_room,
+			@Param("band_code") int band_code,
+			@Param("chat_Id") String chat_Id,
+			@Param("chat_message") String chat_message
+			
 			);
 	
 }

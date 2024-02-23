@@ -40,23 +40,23 @@ public class AIController {
 	public String aicc() {
 		return "thymeleaf/aicc/aicc";
 	}
-	
+
 	@GetMapping("/aiccShow")
 	public String aiccShow(HttpServletRequest request, Model model) {
 		String area = request.getParameter("areaChk");
 		String day = request.getParameter("day");
-		String cafe ="카페";
-		String food ="맛집";
-		String thema = request.getParameter("thema");//산
-		String thema1 = request.getParameter("thema1");//실내
-		String thema2 = request.getParameter("thema2");//엑티비티
-		String thema3 = request.getParameter("thema3");//테마파크
-		String thema4 = request.getParameter("thema4");//카페
-		String thema5 = request.getParameter("thema5");//바다
-		String thema6 = request.getParameter("thema6");//축제
-		String thema7 = request.getParameter("thema7");//맛집
-		String thema8 = request.getParameter("thema8");//전통시장
-		model.addAttribute("day",day);
+		String cafe = "카페";
+		String food = "맛집";
+		String thema = request.getParameter("thema");// 산
+		String thema1 = request.getParameter("thema1");// 실내
+		String thema2 = request.getParameter("thema2");// 엑티비티
+		String thema3 = request.getParameter("thema3");// 테마파크
+		String thema4 = request.getParameter("thema4");// 카페
+		String thema5 = request.getParameter("thema5");// 바다
+		String thema6 = request.getParameter("thema6");// 축제
+		String thema7 = request.getParameter("thema7");// 맛집
+		String thema8 = request.getParameter("thema8");// 전통시장
+		model.addAttribute("day", day);
 		thema = thema != null ? thema : " ";
 		thema2 = thema2 != null ? thema2 : " ";
 		thema3 = thema3 != null ? thema3 : " ";
@@ -66,38 +66,53 @@ public class AIController {
 		thema7 = thema7 != null ? thema7 : " ";
 		thema8 = thema8 != null ? thema8 : " ";
 		thema1 = thema1 != null ? thema1 : " ";
+
+		model.addAttribute("thema", thema);
+		model.addAttribute("thema", thema1);
+		model.addAttribute("thema2", thema2);
+		model.addAttribute("thema3", thema3);
+		model.addAttribute("thema4", thema4);
+		model.addAttribute("thema5", thema5);
+		model.addAttribute("thema6", thema6);
+		model.addAttribute("thema7", thema7);
+		model.addAttribute("thema8", thema8);
+
 		
-		model.addAttribute("thema",thema);
-		model.addAttribute("thema",thema1);
-		model.addAttribute("thema2",thema2);
-		model.addAttribute("thema3",thema3);
-		model.addAttribute("thema4",thema4);
-		model.addAttribute("thema5",thema5);
-		model.addAttribute("thema6",thema6);
-		model.addAttribute("thema7",thema7);
-		model.addAttribute("thema8",thema8);
-		
-		System.out.println("테마값이 뭐야?"+thema);
-		System.out.println("테마값이 뭐야thema5?"+thema5);
-		if(AiDAO.list(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema1).isEmpty() && AiDAO.list2(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema1).isEmpty()) {
-			model.addAttribute("aicc",AiDAO.listAll(area,cafe,food));
-			model.addAttribute("aicc2",AiDAO.listAll2(area,cafe,food));
+		String area2 = AiDAO.list(area, thema, thema2, thema3, thema5, thema6, thema8, thema1).get(0).getEvent_area2();
+		System.out.println("area2 : " + area2);
+		if (AiDAO.list(area, thema, thema2, thema3, thema5, thema6, thema8, thema1).isEmpty()) {
+			model.addAttribute("aicc", AiDAO.listAll(area, cafe, food));
+			System.out.println("aicc isEmpty 에서 출력");
 			
-		}else {
-			model.addAttribute("aicc",AiDAO.list(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema1));
-			model.addAttribute("aicc2",AiDAO.list2(area,thema,thema2,thema3,thema4,thema5,thema6,thema7,thema8,thema1));
+		} else {
+			model.addAttribute("aicc", AiDAO.list(area, thema, thema1, thema2, thema3, thema5, thema6, thema8));
 		}
-		model.addAttribute("aiccCafe",AiDAO.listCafe(area,cafe));
-		model.addAttribute("aiccFood",AiDAO.listFood(area,food));
-		model.addAttribute("aiccFood2",AiDAO.listFood(area,food));
-		
+		if (AiDAO.list2(area, thema, thema2, thema3, thema5, thema6, thema8, thema1, area2).isEmpty()) {
+
+			model.addAttribute("aicc2", AiDAO.listAll2(area, cafe, food));
+			System.out.println("aicc2 isEmpty 에서 출력");
+		} else {
+			model.addAttribute("aicc2",
+					AiDAO.list2(area, thema, thema1, thema2, thema3, thema5, thema6, thema8, area2));
+		}
+		if (AiDAO.listCafeArea2(area2, cafe).isEmpty()) {
+			System.out.println("aiccCafe isEmpty 에서 출력");
+			
+			model.addAttribute("aiccCafe", AiDAO.listCafe(area, cafe));
+		} else {
+			model.addAttribute("aiccCafe", AiDAO.listCafeArea2(area2, cafe));
+		}
+		if (AiDAO.listFoodArea2(area2, food).isEmpty()) {
+			System.out.println("aiccFood isEmpty 에서 출력");
+			model.addAttribute("aiccFood", AiDAO.listFood(area, food));
+			model.addAttribute("aiccFood2", AiDAO.listFood(area, food));
+		} else {
+			model.addAttribute("aiccFood", AiDAO.listFoodArea2(area2, food));
+			model.addAttribute("aiccFood2", AiDAO.listFoodArea2(area2, food));
+		}
+
 		return "thymeleaf/map/map";
 	}
-
-
-
-
-
 
 	// 여행 글 업로드
 	@PostMapping("/Event_write222")
@@ -149,7 +164,7 @@ public class AIController {
 			dto.setEvent_thumbnail(thumbnail);
 			dto.setEvent_time(request.getParameter("Event_time"));
 			dto.setEvent_title(request.getParameter("Event_title"));
-			//eventDAO.event_write(dto);
+			// eventDAO.event_write(dto);
 
 			System.out.println("--글작성 완료--");
 		} catch (Exception e) {
@@ -211,7 +226,7 @@ public class AIController {
 			dto.setEvent_time(request.getParameter("Event_time"));
 			dto.setEvent_title(request.getParameter("Event_title"));
 
-			//eventDAO.event_write_update(dto);
+			// eventDAO.event_write_update(dto);
 			System.out.println("뭐가 들어있는지 보자" + dto.getEvent_num());
 			System.out.println("--글수정 완료--");
 		} catch (Exception e) {

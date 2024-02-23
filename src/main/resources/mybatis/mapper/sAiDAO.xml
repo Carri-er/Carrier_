@@ -4,7 +4,7 @@
 <mapper namespace="com.ex.springboot.dao.IAiDAO">
 	<!-- 전체 여행 정보 list를 불러옴 -->
 	<select id="list" resultType="com.ex.springboot.dto.EventDTO">
-		 select * from Event where Event_area=#{param1} and (Event_category=#{param2} or Event_category=#{param3} or Event_category=#{param6} or Event_category=#{param7} or Event_category=#{param9}  or Event_category=#{param10}) 
+		 select * from Event where Event_area= #{param1}  and (Event_category=#{param2} or Event_category=#{param3} or Event_category=#{param4} or Event_category=#{param5} or Event_category=#{param6}  or Event_category=#{param7} or Event_category=#{param8}) 
 		 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
 		<!-- SELECT * FROM Event
@@ -23,7 +23,7 @@ FETCH FIRST 1 ROWS ONLY -->
 	<select id="list2" resultType="com.ex.springboot.dto.EventDTO">
 		<!-- select * from Event where Event_area=#{param1} and (Event_category=#{param2} or Event_category=#{param3} or Event_category=#{param4} or Event_category=#{param5} or Event_category=#{param6} or Event_category=#{param7}or Event_category=#{param8} or Event_category=#{param9})  -->
 		
-		 select * from Event where Event_area=#{param1} and (Event_category=#{param2} or Event_category=#{param3} or Event_category=#{param4} or Event_category=#{param6} or Event_category=#{param7} or Event_category=#{param9}  or Event_category=#{param10})
+		 select * from Event where Event_area=#{param1} and Event_area2= #{param8} and (Event_category=#{param2} or Event_category=#{param3} or Event_category=#{param4} or Event_category=#{param5} or Event_category=#{param6} or Event_category=#{param7}  or Event_category=#{param8})
 		 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
 	</select>
@@ -34,6 +34,16 @@ FETCH FIRST 1 ROWS ONLY
 	</select>
 	<select id="listFood" resultType="com.ex.springboot.dto.EventDTO">
 select * from Event where Event_area = #{param1} and Event_category = #{param2}
+ORDER BY DBMS_RANDOM.RANDOM() 
+FETCH FIRST 1 ROWS ONLY
+	</select>
+		<select id="listCafeArea2" resultType="com.ex.springboot.dto.EventDTO">
+select * from Event where Event_area2 = #{param1} and Event_category = #{param2}
+ORDER BY DBMS_RANDOM.RANDOM() 
+FETCH FIRST 1 ROWS ONLY
+	</select>
+	<select id="listFoodArea2" resultType="com.ex.springboot.dto.EventDTO">
+select * from Event where Event_area2 = #{param1} and Event_category = #{param2}
 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
 	</select>

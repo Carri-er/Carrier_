@@ -22,7 +22,7 @@ public class CarrierController {
 
    @GetMapping("/map")
    public String map() {
-      return "thymeleaf/map/map";
+      return "thymeleaf/map/map_0221";
    }
    
 
