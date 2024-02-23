@@ -13,4 +13,5 @@ public class BandFeedDTO {
 	private String band_feed_uploadday; // 글 작성 시간
 	private String band_feed_updateday; // 글 수정 시간
 	private String Member_profileimage; // 멤버 프로필 사진
+	private int band_feed_hit;  // 글 조회수
 }

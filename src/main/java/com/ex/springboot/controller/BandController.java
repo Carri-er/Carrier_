@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import org.json.simple.JSONObject;
 
@@ -303,40 +304,51 @@ public class BandController {
 			
 		}
 		
-		//수정 완료 시 
+		// 수정 완료 시
 		@RequestMapping("/band_update")
-		public String bandUpdate(Model model, HttpServletRequest request, @RequestParam("band_thumnail") MultipartFile file) {
+		public String bandUpdate(Model model, HttpServletRequest request,
+				@RequestParam("band_thumnail") MultipartFile file) {
+
 			String str_band_code = request.getParameter("bandUrl");
 			int num_band_code = Integer.parseInt(str_band_code);
 			String band_thumnail = request.getParameter("band_thumnail");
+			String origin_band_thumnail = request.getParameter("origin_band_thumnail");
 			String band_name = request.getParameter("band_name");
 			String band_content = request.getParameter("band_content");
-			
+			System.out.println("band_thumnail" + band_thumnail);
+			System.out.println("origin_band_thumnail" + origin_band_thumnail);
+
+			String go = "redirect:myBand?bandUrl=" + str_band_code;
+
 			try {
-				
-				UUID uuidOne = UUID.randomUUID();
-				
-				//A mutable sequence of characters
-				StringBuilder fileNames = new StringBuilder();
-				
-				Path fileNameAndPath = Paths.get(UPLOAD_BAND_DIRECTORY, uuidOne + file.getOriginalFilename());
-				// => Returns a {@code Path} by converting a path string => 이미지가 저장되는 경로
-				fileNames.append(uuidOne + file.getOriginalFilename());
-				byte[] fileSize = file.getBytes(); //이미지에 대한 정보 값을 바이트 배열로 가져온다.
-				Files.write(fileNameAndPath, fileSize);
-				
-				model.addAttribute("msg", fileNameAndPath);
-				model.addAttribute("fileName", fileNames); //밴드 대표 이미지 이름 저장.
-				
-				bandDao.bandInfoUpdate(fileNames.toString(), band_name, band_content, num_band_code);
-				
-				
-				
-			}catch(Exception e) {
+
+				if ( Objects.equals(band_thumnail, null ) ) {
+					bandDao.bandInfoUpdate(origin_band_thumnail, band_name, band_content, num_band_code);
+					return go;
+				} else {
+
+					UUID uuidOne = UUID.randomUUID();
+
+					// A mutable sequence of characters
+					StringBuilder fileNames = new StringBuilder();
+
+					Path fileNameAndPath = Paths.get(UPLOAD_BAND_DIRECTORY, uuidOne + file.getOriginalFilename());
+					// => Returns a {@code Path} by converting a path string => 이미지가 저장되는 경로
+					fileNames.append(uuidOne + file.getOriginalFilename());
+					byte[] fileSize = file.getBytes(); // 이미지에 대한 정보 값을 바이트 배열로 가져온다.
+					Files.write(fileNameAndPath, fileSize);
+
+					model.addAttribute("msg", fileNameAndPath);
+					model.addAttribute("fileName", fileNames); // 밴드 대표 이미지 이름 저장.
+
+					bandDao.bandInfoUpdate(fileNames.toString(), band_name, band_content, num_band_code);
+
+				}
+			} catch (Exception e) {
 				e.printStackTrace();
+
 			}
-			
-			String go = "redirect:myBand?bandUrl="+str_band_code;
+
 			return go;
 		}
 		
