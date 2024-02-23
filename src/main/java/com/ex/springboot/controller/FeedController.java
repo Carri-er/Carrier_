@@ -3,19 +3,16 @@ package com.ex.springboot.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -26,7 +23,6 @@ import com.ex.springboot.dto.Feed_commentDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping
@@ -40,22 +36,30 @@ public class FeedController {
 	// 피드 리스트
 	@GetMapping("/feed")
 	public String feed(Model model, HttpServletRequest request) {
-		/* List<FeedDTO> feedList = feed_dao.feedList(); */
+
 		model.addAttribute("feedList", feed_dao.feedList());
 
 		return "thymeleaf/feed/feed2";
 	}
 
-	// 피드 세부 - 페이지
+	// 피드 세부 - 페이지 & 댓글 목록 가져오기
 	@GetMapping("/feed_show")
 	public String feedShow(Model model, HttpServletRequest request) {
 		int Feed_num = Integer.parseInt(request.getParameter("num"));
-
+		
 		model.addAttribute("feedList", feed_dao.feedShow(Feed_num));
+		
+
+		/* Feed_commentDTO comment_dto = new Feed_commentDTO(); */
+
+		 model.addAttribute("Feed_commentList",feed_dao.feedCommentList(Feed_num));
+		 model.addAttribute("Feed_commentDTO", new Feed_commentDTO());
+
+		//model.addAttribute("Feed_commentDTO",feed_dao.feedCommentList(Feed_num));
 
 		return "thymeleaf/feed/feed_show";
 	}
-
+	
 	// 피드 글쓰기 - 페이지
 	@GetMapping("/feed_write")
 	public String feed_write() {
@@ -64,7 +68,7 @@ public class FeedController {
 
 	// 피드 글쓰기 - action
 	@PostMapping("/feed_write_action")
-	public String feed_write_action(@Valid FeedDTO feedDto,  Model model, HttpServletRequest request, 
+	public String feed_write_action(Model model, HttpServletRequest request, 
 			@RequestPart(value = "Feed_thumbnail1", required = false) MultipartFile file1,
 			@RequestPart(value = "Feed_thumbnail2", required = false) MultipartFile file2,
 			@RequestPart(value = "Feed_thumbnail3", required = false) MultipartFile file3) {
@@ -297,35 +301,22 @@ public class FeedController {
 	}
 	
 	
-	/* 피드 댓글 */
-	
-	/*
-	@PostMapping("/feed_comment")
-	public String feed_comment(@Valid Feed_commentDTO dto, Errors errors, HttpServletRequest request, Model model) {
-		if (errors.hasErrors()) {
-			model.addAttribute("Feed_commentDTO", dto);
-			
-			Map<String, String> validateMap = new HashMap<>();
-			
-			for (FieldError error : errors.getFieldErrors()) {
-                String validKeyName = "valid_" + error.getField();
-                validateMap.put(validKeyName, error.getDefaultMessage());
-            }
-			return "feed_comment";
-		}
-			
-		int Feed_num = Integer.parseInt(request.getParameter("num"));
+	/* 피드 댓글 */	
+	@PostMapping("/feed_comment_upload")
+	public String feed_comment(
+            @RequestParam("Feed_comment") String Feed_comment, HttpServletRequest request, Model model) {
+		int Feed_num = Integer.parseInt(request.getParameter("Feed_num"));
 		String Member_Id = request.getParameter("Member_Id");
-		String Member_profileimage = request.getParameter("Member_profileimage");
-		String Feed_comment = request.getParameter("Feed_comment");
+		
+		System.out.println("FeedComment: "+Feed_num+"/"+Member_Id+"/"+Feed_comment);
 			
-		feed_dao.feedCommentCreate(Feed_num, Member_Id, Member_profileimage, Feed_comment);
+		feed_dao.feedCommentCreate(Feed_num, Member_Id, Feed_comment);
 			
 		System.out.println("~댓글 달기~");
 
-		return "redirect:/feed_show";
+		return "redirect:/feed_show?num="+Feed_num;
 	}
-	*/
+	
 	
 		
 }
