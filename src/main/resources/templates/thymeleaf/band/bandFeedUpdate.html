@@ -19,6 +19,7 @@
         <div class="bandFeedWrite_form">
 			<form method="post" action="updateFeed" onsubmit="return func_updateBandFeed()">				
             	<input id="bandWriter_id" name="member_id" type="hidden" th:value="${session.Member_Id}"/>
+            	<input type="text" name="bandfeednum" th:value="${bandfeednum}"/>
             	<input name="bandUrl" type="hidden" th:value="${bandUrl}"  />
                 <textarea id="summernote" name="band_feed_content" ></textarea>
                 <input type="submit" name="doit" value="수정하기" onclick=""/>
