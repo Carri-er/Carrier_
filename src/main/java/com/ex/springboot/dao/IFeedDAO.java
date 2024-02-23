@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ex.springboot.dto.FeedDTO;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 @Mapper // 인터페이스를 xml로 구현하겠다.
 public interface IFeedDAO {
 	//피드 글쓰기
@@ -37,32 +40,23 @@ public interface IFeedDAO {
 			@Param("Feed_thumbnail") String Feed_thumbnail,
 			@Param("Feed_num") int Feed_num
 	);
-
 	
-	/*
-	 * //Feed_num를 가지고 Feed 상세 페이지로 이동 public BandDTO myBand(int Feed_num);
-	 * 
-	 * //작성자 feed 리스트 출력 public List<FeedDTO> bandFeedList(String Member_Id);
-	 * 
-	 * public MemberDTO bandWriterImg(@Param("Member_id") String Member_id);
-	 * 
-	 * // 피드 업데이트 public int FeedUpdate(
-	 * 
-	 * @Param("Feed_content") String Feed_content,
-	 * 
-	 * @Param("member_id") String member_id,
-	 * 
-	 * @Param("Feed_num") int Feed_num );
-	 * 
-	 * // 피드 삭제 public int FeedDelete(
-	 * 
-	 * @Param("Feed_num") int Feed_num );
-	 * 
-	 * //좋아하는 멤버 리스트 출력 public List<Band_joinMemberDTO> joinBandList(String
-	 * member_id);
-	 * 
-	 * //좋아요 public int feedHeartCount(int Feed_heart);
-	 */
-
+	 // 피드 삭제 
+	public int feedDel(
+		@Param("Feed_num") int Feed_num 
+	 );
+	
+	
+	// 피드 댓글 달기
+	public int feedCommentCreate(
+			@Param("Feed_num") int Feed_num,
+			@Param("Member_Name") String Member_Name,
+			@Param("Member_profileimage") String Member_profileimage,
+			@Param("Feed_comment") String Feed_comment
+	);
+	
+	// 패드 댓글 불러오기
+	public List<FeedDTO> feedCommentList();
+	
 	
 }
