@@ -29,7 +29,7 @@
 	</select>
 	<!-- 중복되는 태그 없이 태그 1~5의 값을 전체 불러옴 -->
 	<select id="getDistinctTags" resultType="java.lang.String">
-		SELECT DISTINCT tag
+		<!-- SELECT DISTINCT tag
 		FROM
 		(SELECT Event_tag AS Tag FROM Event
 		UNION ALL
@@ -43,6 +43,8 @@
 		UNION ALL
 		SELECT Event_tag5 AS Tag FROM
 		Event) all_tags
+		 -->
+		 SELECT DISTINCT Event_tag FROM event
 	</select>
 	<!-- 지역 태그 클릭시 리스트 불러옴 -->
 	<select id="EventArea"

@@ -222,29 +222,31 @@
 		marker.setMap(map);
 	</script>
 	<!-- 상세 정보 텍스트가 길어져서 .이 올때마다와 숫자뒤에.이 올때 enter 되도록 하는 스크립트 -->
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			var eventContent = document.querySelector('.px-lg-5'); // 이벤트 내용을 담고 있는 요소 선택
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var eventContent = document.querySelector('.textcontent'); // 이벤트 내용을 포함하는 요소 선택
+    if (eventContent) { // 요소가 존재하는 경우에만 처리
+        var content = eventContent.innerHTML; // 요소의 HTML 내용 가져오기
+        var replacedContent = content.replace(/(\[)/g, '<br>$1'); // '[' 문자열 앞에 줄 바꿈을 추가하여 대체
 
-			if (eventContent) { // 요소가 존재하는 경우에만 처리
-				var content = eventContent.innerHTML; // 요소의 HTML 내용 가져오기
-				var replacedContent = content.replace(/(\d+)\.|(?<!\d)\./g,
-						function(match, p1) {
+        eventContent.innerHTML = replacedContent; // 변경된 HTML 내용으로 업데이트
+    }
+    if (eventContent) { // 요소가 존재하는 경우에만 처리
+        var content = eventContent.innerHTML; // 요소의 HTML 내용 가져오기
+        var replacedContent = content.replace(/(\d+)\.|(?<!\d)\.|]/g, function(match, p1) {
+            if (p1) { // 숫자 뒤에 마침표가 있는 경우
+                return p1 + '.';
+            } else if (match === ']') { // ']' 문자인 경우
+                return ']<br><br>'; // ']' 다음에 줄 바꿈 추가
+            } else { // 숫자가 없는 경우 마침표가 있는 경우
+                return '.<br>';
+            }
+        }); // 숫자 뒤에 마침표가 오거나 숫자 없이 마침표가 나타날 때마다 줄 바꿈 태그 추가
 
-							if (p1) {
-								if (p1) {
-									return p1 + '.';
-								}
-
-							} else {
-								return '.<br>';
-							}
-						}); // 숫자 뒤에 마침표 또는 숫자 없이 마침표가 나타날 때마다 줄 바꿈 태그 추가
-
-				eventContent.innerHTML = replacedContent; // 변경된 HTML 내용으로 업데이트
-			}
-		});
-	</script>
+        eventContent.innerHTML = replacedContent; // 변경된 HTML 내용으로 업데이트
+    }
+});
+</script>
 
 </body>
 </html>
