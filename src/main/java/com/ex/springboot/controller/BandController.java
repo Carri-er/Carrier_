@@ -1,20 +1,27 @@
 package com.ex.springboot.controller;
 
-import java.io.File;
+import java.io.File; 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import org.json.simple.JSONObject;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ex.springboot.dto.BandDTO;
 import com.ex.springboot.dto.BandFeedDTO;
+import com.ex.springboot.dto.Band_chatDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -355,22 +363,82 @@ public class BandController {
 			
 			String loginId = (String) session.getAttribute("Member_Id");
 			
-						
 			String chatRoom = str_band_code + partnerId + loginId;
-			
-			model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
-			model.addAttribute("partnerId", partnerId);
-			model.addAttribute("chatRoom",chatRoom);
-			
-						
-			model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+			String chatRoom_reverse = str_band_code + loginId + partnerId;
 			
 			
-			model.addAttribute("bandUrl", num_band_code);
+			System.out.println("bandChat페이지 : ");
+			System.out.println("chatRoom_name : "+chatRoom);
+			System.out.println("num_band_code : "+ num_band_code);
+			System.out.println("partnerId : "+partnerId);
+			System.out.println("loginId"+loginId);
 			
-			return "thymeleaf/band/bandChat";
-		}
+			
+			if(bandDao.bandChatRoomCheck(chatRoom_reverse).size() == 0 ) {
+				model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+				model.addAttribute("partnerId", partnerId);
+				model.addAttribute("chatRoom",chatRoom);
+							
+				model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+				
+				model.addAttribute("bandChatList", bandDao.bandChatList(chatRoom));
+				model.addAttribute("bandChatListSize", bandDao.bandChatList(chatRoom).size());
+				System.out.println("bandChatListSize : " + bandDao.bandChatList(chatRoom).size());
+				model.addAttribute("bandUrl", num_band_code);
+				
+				return "thymeleaf/band/bandChat";
+			} else {
+				model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+				model.addAttribute("partnerId", partnerId);
+				model.addAttribute("chatRoom",chatRoom_reverse);
+							
+				model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+				
+				model.addAttribute("bandChatList", bandDao.bandChatList(chatRoom_reverse));
+				model.addAttribute("bandChatListSize", bandDao.bandChatList(chatRoom_reverse).size());
+				System.out.println("bandChatListSize : " + bandDao.bandChatList(chatRoom_reverse).size());
+				model.addAttribute("bandUrl", num_band_code);
+				
+				return "thymeleaf/band/bandChat";
+				
+			}
+
 		
+		}
+
+		 // AJAX 요청에 대한 핸들러
+	    @PostMapping("/sendBandChat")
+	    public String sendBandChat(@RequestBody String message1) throws ParseException {
+	        // 받은 채팅 메시지를 데이터베이스에 저장하거나 처리합니다.
+	        // 여기서는 간단히 채팅 메시지를 콘솔에 출력합니다.
+	        System.out.println("Received band chat message: " + message1);
+	       JSONParser parser = new JSONParser();
+            JSONObject jsonObjects = (JSONObject) parser.parse(message1);
+            System.out.println("jsonObjects > " + jsonObjects);
+            JSONObject jobj1 = new JSONObject(jsonObjects);
+            System.out.println("message : "+jobj1.get("message"));
+            System.out.println("band_code : "+jobj1.get("sendBandUrl"));
+            System.out.println("chatRoom : "+jobj1.get("sendchatRoom"));
+            System.out.println("loginId : "+jobj1.get("sendLoginId"));
+	        
+            String sendBandUrl_str = jobj1.get("sendBandUrl").toString();
+            int num_band_code = Integer.parseInt(sendBandUrl_str);
+            
+            bandDao.userbandChatWrite( jobj1.get("sendchatRoom").toString() , num_band_code , jobj1.get("sendLoginId").toString(), jobj1.get("message").toString());
+            
+            
+	        return "Message sent successfully"; // 클라이언트에게 응답
+	    }
+		
+		//ajax 채팅 리스트 
+		@RequestMapping("/getBandChatList")
+		@ResponseBody
+		public List<Band_chatDTO> getBandChatList( ModelMap model, HttpServletRequest request, HttpSession session){
+			String chatRoom = request.getParameter("chatRoom");
+			List<Band_chatDTO> bandChatList = bandDao.bandChatList(chatRoom);
+			
+			return bandChatList; 
+		}
 		
 		// 썸머노트 ajax
 		@PostMapping("/uploadSummernoteImageFile")
