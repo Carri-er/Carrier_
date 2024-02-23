@@ -18,13 +18,11 @@
 
 */
 
-function feed_check(){
+	
+function feed_write_check(){
 	/* 글자수 제한 */
 	var max_title = 65;
 	var max_content = 133;
-
-	var passwordValidate = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,16}$/;
-	
 	
 	/*제목*/
 	if (feedWriteForm.Feed_title.value.length == "") {
@@ -70,5 +68,58 @@ function feed_check(){
 	}
 
 	document.getElementById('feedWriteForm').submit();
+
+}
+
+
+function feed_update_check(){
+	/* 글자수 제한 */
+	var max_title = 65;
+	var max_content = 133;
+
+	/*제목*/
+	if (feedUpdateForm.Feed_title.value.length == "") {
+		alert("제목을 작성해주세요");
+		feedWriteForm.Feed_title.focus();
+		return false;
+	}
+	
+	if (feedUpdateForm.Feed_title.value.length > max_title) {
+		alert("제목은 "+max_title+"자 이내로 작성해주세요");
+		feedWriteForm.Feed_title.focus();
+		return false;
+	}
+	
+	if (feedUpdateForm.Feed_content.value.length > 133) {
+		alert("내용은 "+max_content+"자 이내로 작성해주세요");
+		feedWriteForm.Feed_content.focus();
+		return false;
+	}
+	
+	/*태그*/
+	if($("input[name='Feed_theme']:radio:checked").length < 1){
+	    alert("테마 버튼을 선택해 주세요.");
+	    return false;
+	}
+
+	if($("input[name='Feed_area']:radio:checked").length < 1){
+	    alert("지역 버튼을 선택해 주세요.");
+	    return false;
+	}
+	
+	/*이미지*/
+	var imgFile1 = $('#fileUpload1').val();
+	var imgFile2 = $('#fileUpload2').val();
+	var imgFile3 = $('#fileUpload3').val();
+	var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+	
+	//alert(imgFile1+imgFile2+imgFile3);
+	
+	if((imgFile1.match(fileForm)) && (imgFile2.match(fileForm))&& (imgFile3.match(fileForm))) {
+		alert("이미지 파일을 업로드 해주세요!");
+    	return false;
+	}
+
+	document.getElementById('feedUpdateForm').submit();
 	
 }

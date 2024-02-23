@@ -3,6 +3,7 @@
 <!-- namespace는 이 매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
 <mapper namespace="com.ex.springboot.dao.IFeedDAO">
 <!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
+
 	<!-- 피드 글쓰기 -->
 	<insert id="feedWrite">
 		INSERT INTO Feed 
@@ -13,7 +14,7 @@
 	
 	<!-- 피드 리스트 가져오기 -->
 	<select id="feedList" resultType="com.ex.springboot.dto.FeedDTO">
-		SELECT * FROM Feed order by Feed_num DESC
+		SELECT A.Feed_num, B.Member_id, B.Member_profileimage, A.Feed_title, A.Feed_content, A.Feed_theme, A.Feed_area, A.Feed_uploadday, A.Feed_updateday, A.Feed_thumbnail FROM Feed A LEFT JOIN carrier_member B ON A.Member_id = B.Member_id ORDER BY Feed_uploadday DESC
 	</select>
 	
 	<!-- 최신순 피드 리스트 -->
@@ -28,7 +29,25 @@
 	
 	<!-- 피드 세부 가져오기 -->
 	<select id="feedShow" resultType="com.ex.springboot.dto.FeedDTO">
-		SELECT * FROM Feed WHERE Feed_num = #{Feed_num}
+		SELECT 
+		    A.Feed_num,
+		    B.Member_id,
+		    B.Member_profileimage,  
+		    A.Feed_title,
+		    A.Feed_content,
+		    A.Feed_theme,
+		    A.Feed_area,
+		    A.Feed_uploadday,
+		    A.Feed_updateday,
+		    A.Feed_thumbnail
+		FROM 
+		    Feed A 
+		RIGHT OUTER JOIN 
+		    carrier_member B 
+		ON 
+		    A.Member_id = B.Member_id 
+		WHERE 
+		    A.Feed_num = #{Feed_num}
 	</select>
 	
 	<!-- 피드 수정 -->
@@ -44,12 +63,17 @@
 		DELETE FROM Feed WHERE Feed_num = #{Feed_num}
 	</delete>
 	
-	<!-- 댓글 -->
+	<!-- 댓글 달기 -->
 	<insert id="feedCommentCreate">
 		INSERT INTO FeedComment 
-			(Feed_num, Feed_comment_num, Member_Name, Feed_comment, Feed_comment_like) 
+			(Feed_num, Feed_comment_num, Member_Id, Feed_comment, Feed_comment_like, Feed_comment_updateday) 
 		VALUES 
-			(#{Feed_num}, Feed_comment_num.nextval, #{Member_Name}, #{Feed_comment}, 0)
+			(#{Feed_num}, Feed_comment_num_seq.nextval, #{Member_Id}, #{Feed_comment}, 0, sysdate)
 	</insert>
+	
+	<!-- 댓글 보기 -->
+	<select id="feedCommentList" resultType="com.ex.springboot.dto.Feed_commentDTO">
+		SELECT A.Feed_num, A.Feed_comment_num, B.Member_id, B.Member_profileimage, A.Feed_comment, A.Feed_comment_updateday FROM FeedComment A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_num = #{Feed_num} ORDER BY Feed_comment_num DESC
+	</select>
 	
 </mapper>

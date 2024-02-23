@@ -8,14 +8,14 @@
 <div th:replace="~{nav/nav::nav}">
 </div>
 <div id="feedUpdate" class="container-fluid mt-4 mb-5 p-0">
-	<form id="feedUpdate" action="/feed_update_action" method="post" enctype="multipart/form-data">
+	<form id="feedUpdateForm" action="/feed_update_action" method="post" enctype="multipart/form-data">
 		<!-- 뒤로가기 버튼 -->
-		<button class="btn backBtn shadow-sm rounded-circle ms-4" onclick="history.back()">
+		<button class="btn backBtn shadow-sm rounded-circle ms-4 position-absolute" onclick="history.back()">
 		<i class="fi fi-sr-angle-small-left f22 text-center"></i>
 		</button>
 		<input type="hidden" name="num" th:value="${feedList.Feed_num}"/>
 		<!--------------------------------------------feed box Parent------------------------------------------>
-		<div class="row m-auto my-2 my-lg-4 pt-md-0">
+		<div class="row m-auto my-2 mt-lg-0 mb-lg-4 pt-md-0">
 			<div class="col-10 col-xl-7 mt-3 m-0 feed-box mx-auto">
 				<div class="row">
 					<div class="col-12 col-md-6 feed-write-left feed-box p-0 feed-box-width overflow-hidden">
@@ -32,7 +32,7 @@
 								</div>
 								<!-- 우측 버튼 -->
 								<div class="d-none col-4 d-sm-flex justify-content-end align-items-center">
-									<button type="button" class="btn btn-sm btn-dark me-2" onclick="feed_check()">업데이트</button>
+									<button type="button" onClick="return feed_update_check()" class="btn btn-sm btn-dark me-2" >업데이트</button>
 								</div>
 							</div>
 							<!-- feed box center | Carousel image -->
@@ -45,10 +45,10 @@
 									</div>
 									<!-- carousel items loop -->
 									<div class="carousel-inner">
-											<th:block th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feedList.getFeed_thumbnail(), ',')}">
-											    <div th:class="${thumbnailStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-
-											        <!-- 이미지가 있으면 해당 이미지를 사용하고, 없으면 add-photo.png 이미지를 사용 -->
+										<th:block th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feedList.getFeed_thumbnail(), ',')}">
+										    <!-- 1번째에는 active 클래스 부여 -->
+										    <div th:class="${thumbnailStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
+										        <!-- 이미지가 있으면 해당 이미지를 사용하고, 없으면 add-photo.png 이미지를 사용 -->
 											        <img th:if="${thumbnailStat.index == 0 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview1" class="d-block w-100" alt="#">
 											        <img th:if="${thumbnailStat.index == 0 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview1" class="d-block w-100" alt="#">
 											        
@@ -59,24 +59,21 @@
 											        <img th:if="${thumbnailStat.index == 2 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview3" class="d-block w-100" alt="#">
 											
 											        <input th:id="'fileUpload' + ${thumbnailStat.index + 1}" type='file' class="member-fileUpload-form" onchange="readURL(this);" name="Feed_thumbnail[__${thumbnailStat.index}__]}" multiple/>
-
-
-
+											        <label th:for="'fileUpload'+${thumbnailStat.index+1}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>
 											        
 											        <!-- 수정 안 했으면 옛날 이미지 사용을 위함 -->
 											        <input type="hidden" name="Feed_thumbnail_old" th:value="${feedList.getFeed_thumbnail()}" /> 
-											        <label th:for="'fileUpload'+${thumbnailStat.index+1}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>
 											    </div>
 											</th:block>
 									</div>
 									<!-- Carousel Prev/Next button -->
 									<button class="carousel-control-prev" type="button" data-bs-target="#feedCarousel" data-bs-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Previous</span>
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Previous</span>
 									</button>
 									<button class="carousel-control-next" type="button" data-bs-target="#feedCarousel" data-bs-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Next</span>
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Next</span>
 									</button>
 								</div>
 							</div>
