@@ -203,7 +203,7 @@
 // 밴드 채팅 내역을 가져오는 함수
 function fetchBandChatList() {
     $.ajax({
-        url: '/getBandChatList', // Spring Controller에 매핑된 URL
+        url: '/getBandChatList?chatRoom='+chatRoom, // Spring Controller에 매핑된 URL
         type: 'GET',
         dataType: 'json',
         success: function(response) {

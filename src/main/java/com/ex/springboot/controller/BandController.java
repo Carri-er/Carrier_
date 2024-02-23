@@ -367,31 +367,43 @@ public class BandController {
 			String chatRoom_reverse = str_band_code + loginId + partnerId;
 			
 			
-			
-			if(bandDao.bandChatRoomCheck(chatRoom_reverse) == null ) {
-				
-			}
-			
-			
-			
 			System.out.println("bandChat페이지 : ");
 			System.out.println("chatRoom_name : "+chatRoom);
 			System.out.println("num_band_code : "+ num_band_code);
 			System.out.println("partnerId : "+partnerId);
 			System.out.println("loginId"+loginId);
 			
-			model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
-			model.addAttribute("partnerId", partnerId);
-			model.addAttribute("chatRoom",chatRoom);
-						
-			model.addAttribute("myBandList",bandDao.myBand(num_band_code));
 			
-			model.addAttribute("bandChatList", bandDao.bandChatList());
-			model.addAttribute("bandChatListSize", bandDao.bandChatList().size());
-			System.out.println("bandChatListSize : " + bandDao.bandChatList().size());
-			model.addAttribute("bandUrl", num_band_code);
-			
-			return "thymeleaf/band/bandChat";
+			if(bandDao.bandChatRoomCheck(chatRoom_reverse).size() == 0 ) {
+				model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+				model.addAttribute("partnerId", partnerId);
+				model.addAttribute("chatRoom",chatRoom);
+							
+				model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+				
+				model.addAttribute("bandChatList", bandDao.bandChatList(chatRoom));
+				model.addAttribute("bandChatListSize", bandDao.bandChatList(chatRoom).size());
+				System.out.println("bandChatListSize : " + bandDao.bandChatList(chatRoom).size());
+				model.addAttribute("bandUrl", num_band_code);
+				
+				return "thymeleaf/band/bandChat";
+			} else {
+				model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+				model.addAttribute("partnerId", partnerId);
+				model.addAttribute("chatRoom",chatRoom_reverse);
+							
+				model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+				
+				model.addAttribute("bandChatList", bandDao.bandChatList(chatRoom_reverse));
+				model.addAttribute("bandChatListSize", bandDao.bandChatList(chatRoom_reverse).size());
+				System.out.println("bandChatListSize : " + bandDao.bandChatList(chatRoom_reverse).size());
+				model.addAttribute("bandUrl", num_band_code);
+				
+				return "thymeleaf/band/bandChat";
+				
+			}
+
+		
 		}
 
 		 // AJAX 요청에 대한 핸들러
@@ -422,7 +434,8 @@ public class BandController {
 		@RequestMapping("/getBandChatList")
 		@ResponseBody
 		public List<Band_chatDTO> getBandChatList( ModelMap model, HttpServletRequest request, HttpSession session){
-			List<Band_chatDTO> bandChatList = bandDao.bandChatList();
+			String chatRoom = request.getParameter("chatRoom");
+			List<Band_chatDTO> bandChatList = bandDao.bandChatList(chatRoom);
 			
 			return bandChatList; 
 		}

@@ -124,9 +124,7 @@ div.myBand_content_item_content img{
 	}
 
 /* 밴드 채팅 스타일 */
-.band_chatBox, .myBand_content_col_titleBox, .myBand_content_col_content{
-	border : 1px solid red;
-}
+
 .band_chatBox{
 	position : relative;
 }
@@ -138,7 +136,6 @@ div.myBand_content_item_content img{
  
  /* 멤버 리스트 스타일 */
  div.myBand_memberListBox{
- 	border : 1px solid blue;
  }
  
  div.myBand_memberList_item{
@@ -180,6 +177,5 @@ div.band_chat_startBtn{
 div.bandChat_listContent{
 	overflow-y : scroll;
 	max-height: 500px;
-	border : 1px solid blue;
 	background-color: #f1f1f1;
 }

@@ -111,10 +111,12 @@ public interface IBandDAO {
 			);
 	
 	//밴드 채팅 리스트 출력
-	public List<Band_chatDTO> bandChatList();
+	public List<Band_chatDTO> bandChatList(
+			@Param("band_chat_room") String band_chat_room
+			);
 	
 	//밴드 채팅 
-	public Band_chatDTO bandChatRoomCheck(
+	public List<Band_chatDTO> bandChatRoomCheck(
 				@Param("band_chat_room") String band_chat_room
 			);
 	
