@@ -45,6 +45,7 @@ public class AIController {
 	public String aiccShow(HttpServletRequest request, Model model) {
 		String area = request.getParameter("areaChk");
 		String day = request.getParameter("day");
+		day = day !=null? day:"0";
 		String cafe = "카페";
 		String food = "맛집";
 		String thema = request.getParameter("thema");// 산
@@ -77,16 +78,19 @@ public class AIController {
 		model.addAttribute("thema7", thema7);
 		model.addAttribute("thema8", thema8);
 
+		String area2 = "";
 		
-		String area2 = AiDAO.list(area, thema, thema2, thema3, thema5, thema6, thema8, thema1).get(0).getEvent_area2();
-		System.out.println("area2 : " + area2);
 		if (AiDAO.list(area, thema, thema2, thema3, thema5, thema6, thema8, thema1).isEmpty()) {
 			model.addAttribute("aicc", AiDAO.listAll(area, cafe, food));
 			System.out.println("aicc isEmpty 에서 출력");
-			
+			area2 = AiDAO.listAll(area, cafe, food).get(0).getEvent_area2();
+			System.out.println("area2 isEmpty에서 출력"+area2);
 		} else {
 			model.addAttribute("aicc", AiDAO.list(area, thema, thema1, thema2, thema3, thema5, thema6, thema8));
+			area2 = AiDAO.list(area, thema, thema2, thema3, thema5, thema6, thema8, thema1).get(0).getEvent_area2();
 		}
+
+		System.out.println("area2 : " + area2);
 		if (AiDAO.list2(area, thema, thema2, thema3, thema5, thema6, thema8, thema1, area2).isEmpty()) {
 
 			model.addAttribute("aicc2", AiDAO.listAll2(area, cafe, food));
