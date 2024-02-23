@@ -7,9 +7,9 @@
 	<!-- 피드 글쓰기 -->
 	<insert id="feedWrite">
 		INSERT INTO Feed 
-			(Feed_num, Member_Id, Member_profileimage, Feed_title, Feed_content, Feed_theme, Feed_area, Feed_uploadday, Feed_updateday, Feed_heart, Feed_thumbnail) 
+			(Feed_num, Member_Id, Feed_title, Feed_content, Feed_theme, Feed_area, Feed_uploadday, Feed_updateday, Feed_heart, Feed_thumbnail) 
 	    VALUES 
-	    	(Feed_num.nextval, #{Member_Id}, #{Member_profileimage}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, sysdate, sysdate, 0, #{Feed_thumbnail})
+	    	(Feed_num.nextval, #{Member_Id}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, sysdate, sysdate, 0, #{Feed_thumbnail})
 	</insert>
 	
 	<!-- 피드 리스트 가져오기 -->

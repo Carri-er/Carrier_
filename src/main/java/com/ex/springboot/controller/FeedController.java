@@ -74,7 +74,6 @@ public class FeedController {
 			@RequestPart(value = "Feed_thumbnail3", required = false) MultipartFile file3) {
 		
 		String Member_Id = request.getParameter("Member_Id");
-		String Member_profileimage = request.getParameter("Member_profileimage");
 		String Feed_title = request.getParameter("Feed_title");
 		String Feed_content = request.getParameter("Feed_content");
 		String Feed_theme = request.getParameter("Feed_theme");
@@ -152,7 +151,7 @@ public class FeedController {
 				
 
 			// DB에 게시물 정보 저장
-			feed_dao.feedWrite(Member_Id, Member_profileimage, Feed_title, Feed_content, Feed_theme, Feed_area,
+			feed_dao.feedWrite(Member_Id, Feed_title, Feed_content, Feed_theme, Feed_area,
 					fileNames.toString());
 
 			
