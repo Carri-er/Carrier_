@@ -9,7 +9,7 @@
 		INSERT INTO Feed 
 			(Feed_num, Member_Id, Feed_title, Feed_content, Feed_theme, Feed_area, Feed_uploadday, Feed_updateday, Feed_heart, Feed_thumbnail) 
 	    VALUES 
-	    	(Feed_num.nextval, #{Member_Id}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, sysdate, sysdate, 0, #{Feed_thumbnail})
+	    	(Feed_num_seq.nextval, #{Member_Id}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, sysdate, sysdate, 0, #{Feed_thumbnail})
 	</insert>
 	
 	<!-- 피드 리스트 가져오기 -->
@@ -58,7 +58,7 @@
 			Feed_num = #{Feed_num}
 	</update>
 	
-	<!-- 피드 수정 -->
+	<!-- 피드 삭제 -->
 	<delete id="feedDel">
 		DELETE FROM Feed WHERE Feed_num = #{Feed_num}
 	</delete>
@@ -76,4 +76,13 @@
 		SELECT A.Feed_num, A.Feed_comment_num, B.Member_id, B.Member_profileimage, A.Feed_comment, A.Feed_comment_updateday FROM FeedComment A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_num = #{Feed_num} ORDER BY Feed_comment_num DESC
 	</select>
 	
+	<!-- 댓글 수정 -->
+	<update id="feedCommentUpdate">
+		UPDATE FeedComment SET Feed_comment=#{Feed_comment}, Feed_comment_updateday = sysdate WHERE Feed_num = #{Feed_num} AND Feed_comment_num = #{Feed_comment_num}
+	</update>
+	
+	<!-- 댓글 삭제-->
+	<delete id="feedCommentDel">
+		DELETE FROM FeedComment WHERE Feed_num = #{Feed_num} AND Feed_comment_num = #{Feed_comment_num}
+	</delete>
 </mapper>

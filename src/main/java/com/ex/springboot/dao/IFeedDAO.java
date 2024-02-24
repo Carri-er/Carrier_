@@ -55,4 +55,19 @@ public interface IFeedDAO {
 	public List<Feed_commentDTO> feedCommentList(
 			@Param("Feed_num") int Feed_num
 	);
+	
+	// 피드 댓글 수정
+	public int feedCommentUpdate(
+			@Param("Feed_comment") String Feed_comment,
+			@Param("Feed_num") int Feed_num,
+			@Param("Feed_comment_num") int Feed_comment_num
+	);
+	
+	// 댓글 삭제 
+	public int feedCommentDel(
+			@Param("Feed_num") int Feed_num,
+			@Param("Feed_comment_num") int Feed_comment_num
+			);
 }
+
+
