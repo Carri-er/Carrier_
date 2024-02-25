@@ -36,8 +36,15 @@ public class FeedController {
 	// 피드 리스트
 	@GetMapping("/feed")
 	public String feed(Model model, HttpServletRequest request) {
-
+		
 		model.addAttribute("feedList", feed_dao.feedList());
+		/*
+		 * model.addAttribute("feedList",
+		 * feed_dao.feedList_theme(request.getParameter("Feed_theme")));
+		 * 
+		 * model.addAttribute("feedList",
+		 * feed_dao.feedList_area(request.getParameter("Feed_area")));
+		 */
 
 		return "thymeleaf/feed/feed2";
 	}
@@ -49,11 +56,12 @@ public class FeedController {
 		
 		model.addAttribute("feedList", feed_dao.feedShow(Feed_num));
 
-		 model.addAttribute("Feed_commentList",feed_dao.feedCommentList(Feed_num));
-		 model.addAttribute("Feed_commentDTO", new Feed_commentDTO());
+		model.addAttribute("Feed_commentList",feed_dao.feedCommentList(Feed_num));
+		model.addAttribute("Feed_commentDTO", new Feed_commentDTO());
 
 		return "thymeleaf/feed/feed_show";
 	}
+	
 	
 	// 댓글 업데이트 - 페이지 & 댓글 목록 가져오기
 	@GetMapping("/feed_comment_update")
@@ -359,6 +367,19 @@ public class FeedController {
 		return "redirect:/feed_show?num="+Feed_num;
 	}
 	
+	// 피드 댓글 좋아요 - action
+	@GetMapping("/feed_comment_like")
+	public String feed_comment_like(HttpServletRequest request, Model model) {
+		int Feed_num = Integer.parseInt(request.getParameter("num"));
+		int Feed_comment_num = Integer.parseInt(request.getParameter("comment_num"));
+		int Feed_comment_like = Integer.parseInt(request.getParameter("on"));
+
+		feed_dao.feedCommentLike(Feed_comment_like, Feed_num, Feed_comment_num);
+			
+		System.out.println("~댓글 조아요~");
+
+		return "redirect:/feed_show?num="+Feed_num;
+	}
 	
 		
 }

@@ -58,7 +58,7 @@
 											        <img th:if="${thumbnailStat.index == 2 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview3" class="d-block w-100" alt="#">
 											        <img th:if="${thumbnailStat.index == 2 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview3" class="d-block w-100" alt="#">
 											
-											        <input th:id="'fileUpload' + ${thumbnailStat.index + 1}" type='file' class="member-fileUpload-form" onchange="readURL(this);" name="Feed_thumbnail[__${thumbnailStat.index}__]}" multiple/>
+											        <input th:id="'fileUpload' + ${thumbnailStat.index + 1}" type='file' class="member-fileUpload-form" onchange="readURL(this);" name="Feed_thumbnail_old" multiple/>
 											        <label th:for="'fileUpload'+${thumbnailStat.index+1}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>
 											        
 											        <!-- 수정 안 했으면 옛날 이미지 사용을 위함 -->

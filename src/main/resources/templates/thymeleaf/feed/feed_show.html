@@ -122,8 +122,18 @@
 								<span class="f14 d-block" th:text="${comment.getFeed_comment()}">오늘 쫌 힘드네여</span>
 							</div>
 							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 text-end">
+								<th:block th:if="${comment.getFeed_comment_like()}==0">
+									<a class="dropdown-item" th:href="@{'/feed_comment_like?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}+'&on=1'}">
+										<i class="fi fi-br-heart px-2"></i>
+									</a>
+								</th:block>
+								<th:block th:if="${comment.getFeed_comment_like()}==1">
+									<a class="dropdown-item" th:href="@{'/feed_comment_like?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}+'&on=0'}">
+										<i class="fi fi-sr-heart px-2"></i>
+									</a>
+								</th:block>
 								<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/>
-								<label for="feed-heart "><i class="fi fi-br-heart px-2"></i></label>
+								</label>
 								<!-- [내 댓글만] 수정 및 삭제 버튼  -->
 	                            <div th:if="${session.Member_Id == comment.getMember_Id()}">
 		                            <div class="f17 d-flex justify-content-between" id="feed-right">

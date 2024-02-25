@@ -121,7 +121,7 @@ display:inline-block;
 
 /* feed thumbnail Btn */
 .feed-fileUpload{
-position: absolute;
+	position: absolute;
     width: 80%;
     height: 90%;
     opacity: 0;
@@ -147,18 +147,16 @@ position: absolute;
     /* background-color: var(--black); */
 }
 
-[id^="feed"] .carousel-item {
-	min-height: 360px;
+#feedCarousel .carousel-item {
+	min-height: fit-content;
 }
 
-[id^="feed"] .carousel-item img{
-
-    width: 80%;
+#feedCarousel .carousel-item img{
+/*     width: 80%;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-
+    transform: translate(-50%, -50%); */
 }
 
 [id^="feedCarousel"] .carousel{

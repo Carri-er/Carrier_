@@ -17,6 +17,36 @@
 		SELECT A.Feed_num, B.Member_id, B.Member_profileimage, A.Feed_title, A.Feed_content, A.Feed_theme, A.Feed_area, A.Feed_uploadday, A.Feed_updateday, A.Feed_thumbnail FROM Feed A LEFT JOIN carrier_member B ON A.Member_id = B.Member_id ORDER BY Feed_uploadday DESC
 	</select>
 	
+	<!-- 피드 리스트[theme filter] 가져오기 -->
+	<select id="feedList_theme" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title,
+		    A.Feed_content,
+		    A.Feed_theme,
+		    A.Feed_area, 
+		    A.Feed_uploadday,
+		    A.Feed_updateday,
+		    A.Feed_thumbnail FROM Feed A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_theme = #{Feed_theme}
+	</select>
+	
+	<!-- 피드 리스트[area filter] 가져오기 -->
+	<select id="feedList_area" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title,
+		    A.Feed_content,
+		    A.Feed_theme,
+		    A.Feed_area, 
+		    A.Feed_uploadday,
+		    A.Feed_updateday,
+		    A.Feed_thumbnail FROM Feed A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_area = #{Feed_area}
+	</select>
+	
 	<!-- 최신순 피드 리스트 -->
 	<select id="feedListRecent" resultType="com.ex.springboot.dto.FeedDTO">
 		SELECT * FROM Feed order by Feed_uploadday DESC
@@ -73,7 +103,7 @@
 	
 	<!-- 댓글 보기 -->
 	<select id="feedCommentList" resultType="com.ex.springboot.dto.Feed_commentDTO">
-		SELECT A.Feed_num, A.Feed_comment_num, B.Member_id, B.Member_profileimage, A.Feed_comment, A.Feed_comment_updateday FROM FeedComment A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_num = #{Feed_num} ORDER BY Feed_comment_num DESC
+		SELECT A.Feed_num, A.Feed_comment_num, B.Member_id, B.Member_profileimage, A.Feed_comment, A.Feed_comment_like, A.Feed_comment_updateday FROM FeedComment A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_num = #{Feed_num} ORDER BY Feed_comment_num DESC
 	</select>
 	
 	<!-- 댓글 수정 -->
@@ -85,4 +115,9 @@
 	<delete id="feedCommentDel">
 		DELETE FROM FeedComment WHERE Feed_num = #{Feed_num} AND Feed_comment_num = #{Feed_comment_num}
 	</delete>
+	
+	<!-- 댓글 좋아요 -->
+	<update id="feedCommentLike">
+		UPDATE FeedComment SET Feed_comment_like = #{Feed_comment_like} WHERE Feed_num = #{Feed_num} AND Feed_comment_num = #{Feed_comment_num}
+	</update>
 </mapper>

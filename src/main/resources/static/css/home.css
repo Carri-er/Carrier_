@@ -20,7 +20,7 @@
   }
 
   #carouselExampleControls div.carousel-item {
-  	padding-top: 150px;
+  	padding-top: 100px;
   }
 
   /*캐러셀 이미지 스타일*/
@@ -90,7 +90,6 @@
 *********************************/
   section#home_data_lab {
   	width: 100%;
-  	margin-top: 100px;
   }
 
   div.home_data_labBox {

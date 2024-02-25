@@ -16,5 +16,5 @@ public class Feed_commentDTO {
 	private String Feed_comment; // 댓글
 	
 	private int Feed_comment_like; // 댓글 좋아요
-	private String Feed_comment_updateday; // 댓글
+	private String Feed_comment_updateday; // 댓글 수정 시간
 }

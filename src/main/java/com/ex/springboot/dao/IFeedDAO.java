@@ -23,6 +23,15 @@ public interface IFeedDAO {
 	//피드 전체 페이지
 	public List<FeedDTO> feedList();
 	
+	//피드 전체 페이지 - filter
+	public List<FeedDTO> feedList_theme(
+			@Param("Feed_theme") String Feed_theme
+	);
+	//피드 전체 페이지 - filter
+	public List<FeedDTO> feedList_area(
+			@Param("Feed_area") String Feed_area
+	);
+	
 	//피드 세부 페이지
 	public FeedDTO feedShow(
 			@Param("Feed_num") int Feed_num
@@ -67,7 +76,15 @@ public interface IFeedDAO {
 	public int feedCommentDel(
 			@Param("Feed_num") int Feed_num,
 			@Param("Feed_comment_num") int Feed_comment_num
-			);
+	);
+
+	// 피드 댓글 좋아요
+	public int feedCommentLike(
+			@Param("Feed_comment_like") int Feed_comment_like,
+			@Param("Feed_num") int Feed_num,
+			@Param("Feed_comment_num") int Feed_comment_num
+	);
 }
+
 
 

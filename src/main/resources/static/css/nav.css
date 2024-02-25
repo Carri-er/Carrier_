@@ -1,6 +1,5 @@
 /* NAV ------------------------------*/
 
-
 /* nav 모양 잡기 */
 .nav-radius {
 	width: 100%;
@@ -92,3 +91,7 @@ nav .nav-search-form {
 nav input[type=search] {
 	border: none;
 }
+
+nav .navbar-toggler {
+	border: none;
+}	
