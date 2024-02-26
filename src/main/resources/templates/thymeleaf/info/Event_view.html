@@ -45,8 +45,8 @@
 
 				<div class="map_mapSection w-100 my-5 ">
 					<!-- 지도를 표시할 div 입니다 -->
-					<div id="map" style="width: 500px; height: 300px"
-						class=" mx-auto rounded-4"></div>
+					<div id="map" style="height: 300px"
+						class=" mx-auto rounded-4 w-100"></div>
 				</div>
 				<div class="row d-flex my-4 justify-content-sm-center">
 					<div class="col-3 col-lg-2">
@@ -128,7 +128,8 @@
 						<textarea class="form-control my-3" id="" cols="30" rows="5"
 							name="Eventcomment_content"></textarea>
 						<input type="hidden" name="Event_num"
-							th:value="${view.getEvent_num()}" /> <input type="hidden"
+							th:value="${view.getEvent_num()}" /> 
+							<input type="hidden"
 							name="memberId" th:value="${session.Member_Id}" />
 
 					</div>

@@ -79,7 +79,7 @@ div.myBand_content_search>span{
     /* color : black; */
 }
 div.myBand_content_search>span+img{
-    float: right;
+/*     float: right; */
     padding: 10px;
     padding-right : 20px;
 }
@@ -128,7 +128,10 @@ div.myBand_content_item_content img{
 .band_chatBox{
 	position : relative;
 }
-
+.bandFeedDeleteBtn, .bandFeedUpdateBtn{
+	position: relative;
+	top: -30px;
+}
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 	mybandMember 페이지 스타일 
  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/

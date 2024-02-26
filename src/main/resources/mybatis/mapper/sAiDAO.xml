@@ -57,4 +57,7 @@ SELECT * FROM Event WHERE Event_area = #{param1} AND Event_category != all (#{pa
 ORDER BY DBMS_RANDOM.RANDOM()
 FETCH FIRST 1 ROWS ONLY
 	</select>
+	<select id="listCourse" resultType="com.ex.springboot.dto.EventDTO">
+	select * from event where Event_num = #{param1}
+	</select>
 </mapper>
