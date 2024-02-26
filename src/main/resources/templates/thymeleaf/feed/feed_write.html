@@ -14,7 +14,7 @@
 			<i class="fi fi-sr-angle-small-left f22 text-center"></i>
 		</button>
 		<!--------------------------------------------feed box Parent------------------------------------------>
-		<div class="row m-auto my-2 my-lg-4 pt-md-0">
+		<div class="row m-auto my-2 mb-lg-4 pt-md-0">
 			<div class="col-10 col-xl-7 mt-3 m-0 feed-box mx-auto">
 				<!--feed box Start-->
 				<div class="row">
@@ -22,7 +22,8 @@
 						<!--feed box top-->
 						<div class="col-12 m-0 mb-3 px-0 no-gutters m-auto">
 							<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
-								<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border me-3" width="50" height="50" alt=""><input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
+								<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border me-3" width="50" height="50" alt="">
+								<input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
 								<!--feed box text-->
 								<div class="col px-0">
 									<span class="float-start fw-bold f15" th:text="${session.Member_Id}">사용자명</span><br>
@@ -31,7 +32,7 @@
 								</div>
 								<!-- 우측 버튼 -->
 								<div class="d-none col-4 d-sm-flex justify-content-end align-items-center pe-2">
-									<button type="button" class="btn btn-sm btn-dark me-2" onClick="return feed_check()">글쓰기</button>
+									<button type="button" class="btn btn-sm btn-dark me-2" onclick="return feed_write_check()">글쓰기</button>
 								</div>
 							</div>
 						</div>

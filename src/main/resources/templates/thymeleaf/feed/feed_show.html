@@ -22,13 +22,12 @@
 		<div class="col-10 col-xl-7 mt-3 feed-box m-0 mx-auto">
 			<div class="row">
 				<!-- 좌측 | 피드 -->
-					<div class="col-12 col-md-6 feed-write-left feed-box p-0 feed-box-width overflow-hidden">
-					<form action="/feed_update_action" method="post" enctype="multipart/form-data">
+				<div class="col-12 col-md-6 feed-write-left feed-box p-0 feed-box-width overflow-hidden">
 						<!--feed box Start-->
 						<div class="col-12 m-0 mb-3 px-0 no-gutters m-auto">
 							<!--feed box top-->
 							<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
-								<img th:src="@{'../img/member_thumbnail/'+ ${feedList.getMember_profileimage()}}" class="float-start rounded-circle border me-3" width="50" height="50" alt=""><input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
+								<img th:src="@{'../img/member_thumbnail/'+ ${feedList.getMember_profileimage()}}" class="float-start rounded-circle border me-3" width="50" height="50" alt="">
 								<!--feed box text-->
 								<div class="col px-0">
 									<span class="float-start fw-bold f15" th:text="${feedList.getMember_Id()}">사용자명</span><br>
@@ -37,14 +36,14 @@
 								<!-- 우측 버튼 -->
 								<div class="col d-flex justify-content-end align-items-center">
 									<!-- session Id와 글쓴이가 일치할 때는 수정버튼 활성화 -->
-									<a th:if="${session.Member_Id==feedList.getMember_Id()}" th:href="@{'/feed_update?num='+${feedList.Feed_num}}" class="btn btn-sm btn-dark me-2">수정</a>
+									<a th:if="${session.Member_Id == feedList.getMember_Id()}" th:href="@{'/feed_update?num='+${feedList.getFeed_num()}}" class="btn btn-sm btn-dark me-2">수정</a>
 									<!-- 다른 사람이 볼 때는 공유 -->
-									<a th:unless="${session.Member_Id==feedList.getMember_Id()}" href="#" class="p-2"><i class="fi fi-br-paper-plane d-flex align-items-center"></i></a>
+									<a th:unless="${session.Member_Id == feedList.getMember_Id()}" href="#" class="p-2"><i class="fi fi-br-paper-plane d-flex align-items-center"></i></a>
 								</div>
 							</div>
 							<!-- feed box center | Carousel image -->
 							<div class="col-12 overflow-hidden">
-								<div th:id="'feedCarousel'+${feedList.Feed_num}" class="carousel slide" data-bs-ride="false">
+								<div th:id="'feedCarousel'+${feedList.getFeed_num()}" class="carousel slide" data-bs-ride="false">
 									<div th:if="${#lists.size(#strings.arraySplit(feedList.getFeed_thumbnail(), ','))>
 										 1}" class="carousel-indicators"> <button th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feedList.getFeed_thumbnail(), ',')}" type="button" th:attr="data-bs-target='#feedCarousel'+${feedList.getFeed_num()}, data-bs-slide-to=${thumbnailStat.index}, class=${thumbnailStat.index==0} ? 'active' : ''" aria-current="true"></button>
 									</div>
@@ -89,72 +88,44 @@
 						</div>
 						<!-- tag row -->
 						<!-- col -->
-					</form>
 					</div>
-					<!-- 우측 | 댓글 -->
-					<!-- <div class="col p-4">
-					<form th:action="@{'/feed_comment_upload'}" th:object="${feedComment}" method="post">
-						<p>
-							 댓글
-						</p>
+					<!-- 우측 | 댓글 다는 곳 -->
+					<div class="col p-4">
+ 					<form th:action="@{'/feed_comment_upload'}" th:object="${Feed_commentDTO}" method="post">
+						<p>댓글</p>
 						<div class="d-flex align-items-center gap-2">
 							<div class="col flex-grow-0 p-0">
+								<input type="hidden" name="Feed_num" th:value="${feedList.getFeed_num()}"/>
+								<input type="hidden" name="Member_Id" th:value="${session.Member_Id}"/>
 								<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border" width="45" height="45" alt="">
-								<input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
 							</div>
 							<div class="col flex-grow-1 p-0">
 								<input type="text" th:field="*{Feed_comment}" class="form-control"/>
-								<th:block th:if="${#fields.hasErrors('Feed_comment')}" th:errors="*{Feed_comment}">이름 에러</th:block>
+								<!-- <th:block th:if="${#fields.hasErrors('Feed_comment')}" th:errors="*{Feed_comment}">이름 에러</th:block> -->
 							</div>
 							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100">
 								<button type="submit" class="btn btn-sm btn-dark w-100 h-100 py-2">등록</button>
 							</div>
 						</div>
-						<hr/>
-						사용자 댓글
-						<div class="row gap-3 px-2">
-							<div class="d-flex align-items-start gap-2">
-								<div class="col flex-grow-0 p-0 mt-1">
-									<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border" width="36" height="36" alt=""><input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
-								</div>
-								<div class="col flex-grow-1 p-0 f14">
-									<strong><span class="">장창엽</span></strong><span class="ms-1 text-muted f12">댓글 단 시간</span><span class="f14 d-block">오늘 쫌 힘드네여</span>
-								</div>
-								<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
-									<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/><label for="feed-heart"><i class="fi fi-br-heart"></i></label>
-								</div>
+					</form>
+					<hr/>
+					<!-- 다른 유저 댓글창 -->
+					<div class="row gap-3 px-2">
+						<div class="d-flex align-items-start gap-2" th:each="comment : ${Feed_commentList}">
+							<div class="col flex-grow-0 p-0 mt-1">
+								<img th:src="@{'../img/member_thumbnail/'+ ${comment.getMember_profileimage()}}" class="float-start rounded-circle border" width="36" height="36" alt="">
 							</div>
-							----------------------------
-							<div class="d-flex align-items-start gap-2">
-								<div class="col flex-grow-0 p-0 mt-1">
-									<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border" width="36" height="36" alt=""><input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
-								</div>
-								<div class="col flex-grow-1 p-0">
-									<strong><span class="f14 d-block">이지후</span></strong><span class="f14 d-block">저도 힘드네요</span>
-								</div>
-								<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
-									<input type="submit" id="feed-herat" class="h-100 py-2 d-none"/>
-									<label for="feed-heart"><i class="fi fi-br-heart"></i>
-									</label>
-								</div>
+							<div class="col flex-grow-1 p-0 f14">
+								<strong><span class="" th:text="${comment.getMember_Id()}">장창엽</span></strong>
+								<span class="ms-1 text-muted f12" th:text="${comment.getFeed_comment_updateday()}">댓글 단 시간</span>
+								<span class="f14 d-block" th:text="${comment.getFeed_comment()}">오늘 쫌 힘드네여</span>
 							</div>
-							----------------------------
-							<div class="d-flex align-items-start gap-2">
-								<div class="col flex-grow-0 p-0 mt-1">
-									<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border" width="36" height="36" alt="">
-									<input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
-								</div>
-								<div class="col flex-grow-1 p-0">
-									<strong><span class="f14 d-block">박검지</span></strong>
-									<span class="f14 d-block">저는 괜찮아요</span>
-								</div>
-								<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
-									<button type="button" class="btn btn-close btn-sm rounded-circle" aria-label="Close"></button>
-								</div>
-								</div>
+							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
+								<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/>
+								<label for="feed-heart"><i class="fi fi-br-heart"></i></label>
 							</div>
 						</div>
-					</form> -->
+					</div>
 				</div>
 			</div>
 			<!-- row -->
