@@ -23,6 +23,18 @@ public interface IFeedDAO {
 	//피드 전체 페이지
 	public List<FeedDTO> feedList();
 	
+	//피드 전체 페이지 - 홈에서 보일 피드
+	public List<FeedDTO> feedList_random();
+	
+	//피드 전체 페이지 - filter
+	public List<FeedDTO> feedList_theme(
+			@Param("Feed_theme") String Feed_theme
+	);
+	//피드 전체 페이지 - filter
+	public List<FeedDTO> feedList_area(
+			@Param("Feed_area") String Feed_area
+	);
+	
 	//피드 세부 페이지
 	public FeedDTO feedShow(
 			@Param("Feed_num") int Feed_num
@@ -41,8 +53,16 @@ public interface IFeedDAO {
 	 // 피드 삭제 
 	public int feedDel(
 		@Param("Feed_num") int Feed_num 
-	 );
+	);
 	
+	// 피드 좋아요
+	public int feedLike(
+			@Param("Feed_num") int Feed_num,
+			@Param("Feed_heart") int Feed_heart
+	);
+	
+	
+	//////////////////////////// 피드 댓글 /////////////////////////////
 	
 	// 피드 댓글 달기
 	public int feedCommentCreate(
@@ -55,4 +75,28 @@ public interface IFeedDAO {
 	public List<Feed_commentDTO> feedCommentList(
 			@Param("Feed_num") int Feed_num
 	);
+	
+	// 피드 댓글 수정
+	public int feedCommentUpdate(
+			@Param("Feed_comment") String Feed_comment,
+			@Param("Feed_num") int Feed_num,
+			@Param("Feed_comment_num") int Feed_comment_num
+	);
+	
+	// 댓글 삭제 
+	public int feedCommentDel(
+			@Param("Feed_num") int Feed_num,
+			@Param("Feed_comment_num") int Feed_comment_num
+	);
+
+	// 피드 댓글 좋아요
+	public int feedCommentLike(
+			@Param("Feed_comment_like") int Feed_comment_like,
+			@Param("Feed_num") int Feed_num,
+			@Param("Feed_comment_num") int Feed_comment_num
+	);
+	
 }
+
+
+

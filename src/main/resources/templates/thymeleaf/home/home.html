@@ -7,13 +7,12 @@
 	<div class="home_wrapper">
 		<!-- 토스트 -->
 		<div th:replace="~{alert/toast::div}"></div>
-		<div class="home_carousel container-fluid px-0">
+		<div class="home_carousel container-fluid px-0 mb-5">
 			<div class="home_carouselBox">
 				<div class="carousel_bg_whiteBox"></div>
 				<!-- 홈 페이지 메인 캐러샐 영역 -->
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-inner">
-
 						<div class="carousel-item active">
 							<div class="container">
 								<!-- 캐러셀 화면 1 -->
@@ -289,7 +288,7 @@
 				</div>
 			</div> <!-- home_carouselBox -->
 		</div> <!-- home_carousel -->
-
+		<div class="w-100 py-5 my-5"></div><!-- 여백 박스 -->
 		<!-- home 여행 콕콕 section -->
 		<section id="home_data_lab">
 			<div class="home_data_labBox container px-0">
@@ -323,144 +322,91 @@
 							<span>1분이면 끝! 맞춤형 여행 코스 추천 받아보세요.</span>
 						</div>
 					</div>
-
 					<!-- 컨텐츠 별 이미지 영역 -->
 					<!-- 피드 컨텐츠 영역 -->
-					<div class="row justify-content-around align-items-start mt-3 m-0 row-box home_dl_img_AIcokcok">
+					<div id="feed"  class="row gap-3 justify-content-around align-items-start mt-3 m-0 row-box home_dl_img_AIcokcok overflow-hidden">
 						<!--feed box Start-->
-						<div class="col-12 col-md-5 col-lg-3 feed-box my-2 mx-2 px-0 no-gutters">
+						<div class="col feed-box m-0 my-3 px-0 no-gutters" th:each="feed, iterStat : ${feedList}" th:if="${iterStat.index < 3}">
 							<!--feed box top-->
-							<div class="col-12  hstack feed-box-top pt-3 ps-3 z-3">
-								<img src="../img/feed/user_rabbit.jpg" class="float-start rounded-circle border me-3"
-									width="50" height="50" alt="">
+							<div class="col-12  hstack feed-box-top p-3 ps-3 z-3">
+								<img th:src="@{'../img/member_thumbnail/'+${feed.Member_profileimage}}" class="float-start rounded-circle border me-3" width="50"
+                             height="50" alt="">
 								<!--feed box text-->
 								<div class="col px-0">
-									<span class="float-start fw-bold f15">박검지</span><br>
-									<span class="float-start text-muted f13">하이라이트</span>
-									<span class="float-start text-muted f13 ms-3 ">2시간 전</span>
-								</div>
-
-								<div class="col-4 d-flex justify-content-end align-items-center pe-2">
-									<button type="button" class="btn btn-sm btn-dark">전체</button>
-									<span class="mx-2 f17">⋮</span>
-								</div>
-							</div>
-							<!--feed box center | image-->
-							<div class="col-12 feed-box-center mt-3 d-flex align-items-center overflow-hidden">
-								<img src="../img/feed/beer.jpg" alt="content" class="img-fluid">
-							</div>
-							<!--feed-box-bot | text-->
-							<div class="col-12 feed-box-bot p-3">
-								<span class="fw-bold mb-1">맥주 맛집🍺✨</span>
-								<span class="f13">
-									맥주는 왜 먹어도 먹어도 맛있을까요?
-								</span>
-							</div>
-							<!--feed box bot | text-->
-							<div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13">
-								<div class="col-6 hstack justify-content-center border-end">
-									<span>담기</span>
-								</div>
-								<div class="col-6 hstack justify-content-center">
-									<i class="bi bi-heart"></i>
-									<span>좋아요</span>
-									<span class="ms-2">9999+</span>
+		                            <span class="float-start fw-bold f15" th:text="${feed.Member_Id}">박검지</span><br>
+		                            <span class="float-start text-muted f13">하이라이트</span>
+		                            <span class="float-start text-muted f13 ms-3">2시간 전</span>
+		                        </div>
+				                <!-- 우측 버튼 -->
+		                        <div class="col-3 d-flex justify-content-end align-items-center">
+		                            <a th:href="@{'/feed_show?num='+${feed.Feed_num}}" class="btn btn-sm btn-dark">
+		                            	전체
+		                            </a>
+		                            <!-- 수정 및 삭제 버튼  -->
+		                            <div th:if="${session.Member_Id == feed.Member_Id}">
+			                            <div class="f17 hstack" id="feed-right">
+											<a class="dropdown-toggle text-center m-0 ps-2 pt-1 d-block d-flex justify-content-end" href="#"
+												role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+												aria-expanded="false">
+											<i class="fi fi-rr-menu-dots-vertical">
+											</i>
+											</a>
+											<ul class="dropdown-menu dropdown-menu-dark">
+			                                    <li><a class="dropdown-item active" th:href="@{'/delFeed?num='+${feed.Feed_num}}">삭제</a></li>
+			                                    <li><a class="dropdown-item" th:href="@{'/feed_update?num='+${feed.Feed_num}}">수정</a></li>
+			                                </ul>
+			                            </div>
+		                            </div>
+		                        </div>
+		                    </div>
+							<!-- feed box center | Carousel image -->
+                    <div class="col-12 feed-box-center d-flex justify-content-center align-items-center overflow-hidden">
+                        <div th:id="'feedCarousel'+${feed.Feed_num}" class="carousel slide" data-bs-ride="false">
+                            <!-- carousel items loop -->
+                            <div class="carousel-inner">
+                                <div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}"
+                                     class="carousel-item p-0 h-100"
+                                     th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
+                                    <img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}"
+                                         class="d-block w-100" alt="#">
+                                </div>
+                            </div>
+                            <!-- Carousel Prev/Next button -->
+                            <div th:if="${#lists.size(#strings.arraySplit(feed.Feed_thumbnail, ','))>1}">
+                                <button class="carousel-control-prev" type="button"
+                                        th:attr="data-bs-target='#feedCarousel'+${feed.Feed_num}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                        th:attr="data-bs-target='#feedCarousel'+${feed.Feed_num}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--feed-box-bot | text-->
+                    <div class="col-12 feed-box-bot p-4 pt-3 pb-5">
+                        <span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span>
+                        <span class="f13" th:text="${feed.Feed_content}">맥주는 왜 먹어도 먹어도 맛있을까요? </span>
+                    </div>
+                    <!--feed box bot | text-->
+                    <div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13 d-flex hstack">
+                        <div class="col-6 hstack justify-content-center border-end">
+                            <a th:href="@{'/feed_show?num='+${feed.Feed_num}}" class="d-flex">
+                                 <span>댓글</span>
+                                 <i class="fi fi-br-comment-dots hstack px-1"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 hstack justify-content-center">
+                            <span>좋아요</span>
+                            <i class="fi fi-br-heart hstack px-1"></i>
+                            <span class="ms-2">999+</span>
 								</div>
 							</div>
 						</div>
 						<!---------------------------------------------------------------------------->
-						<div class="col-12 col-md-5 col-lg-3 feed-box my-2 mx-2 px-0 no-gutters">
-							<!--feed box top-->
-							<div class="col-12 hstack feed-box-top pt-3 ps-3 z-3 ">
-
-								<img src="../img/feed/user_rabbit1.jpg" class="float-start rounded-circle border me-3"
-									width="50" height="50" alt="">
-								<!--feed box text-->
-								<div class="col px-0">
-									<span class="float-start fw-bold f15">박검지</span><br>
-									<span class="float-start text-muted f13">하이라이트</span>
-									<span class="float-start text-muted f13 ms-3 ">2시간 전</span>
-								</div>
-
-								<div class="col-4 d-flex justify-content-end align-items-center pe-2">
-									<button type="button" class="btn btn-sm btn-dark">전체</button>
-									<span class="mx-2 f17">⋮</span>
-								</div>
-							</div>
-							<!--feed box center | image-->
-							<div class="col-12 feed-box-center mt-3 d-flex align-items-center overflow-hidden">
-								<img src="../img/feed/cebu.jpg" alt="content" class="img-fluid">
-							</div>
-							<!--feed-box-bot | text-->
-							<div class="col-12 feed-box-bot p-3">
-								<span class="fw-bold mb-1">🌺🌴 IN CEBU 🌴🌺</span>
-								<span class="f13">
-									맥주는 왜 먹어도 먹어도 맛있을까요?
-									어떤 맥주 좋아하세요? 저는 부드러운게 좋아요
-									그래서 생맥주가 좋아요 여기는 세부인데요
-									진짜 잘 찍었죠 진짜 제가 찍은 거예요 또 가고 싶어요
-									취업도 안 했는데 놀러 갈 생각하는 나 정상인가요?
-									비정상이여도 제 마음이 그런데 어떡해요
-								</span>
-							</div>
-							<!--feed box bot | text-->
-							<div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13">
-								<div class="col-6 hstack justify-content-center border-end">
-									<span>담기</span>
-								</div>
-								<div class="col-6 hstack justify-content-center">
-									<i class="bi bi-heart"></i>
-									<span>좋아요</span>
-									<span class="ms-2">9999+</span>
-								</div>
-							</div>
-						</div>
-						<!------------------------------------------------------------------------->
-						<!--feed box top-->
-						<div class="col-12 col-md-12 col-lg-3 feed-box my-2 mx-2 px-0 no-gutters">
-							<div class="col-12  hstack feed-box-top pt-3 ps-3 z-3">
-								<div class="col px-0">
-									<img src="../img/feed/user_rabbit.jpg"
-										class="float-start rounded-circle border me-3" width="50" height="50" alt="">
-									<!--feed box text-->
-									<div class="col px-0">
-										<span class="float-start fw-bold f15">박검지</span><br>
-										<span class="float-start text-muted f13">하이라이트</span>
-										<span class="float-start text-muted f13 ms-3 ">2시간 전</span>
-									</div>
-								</div>
-								<div class="col-4 d-flex justify-content-end align-items-center pe-2">
-									<button type="button" class="btn btn-sm btn-dark">전체</button>
-									<span class="mx-2 f17">⋮</span>
-								</div>
-							</div>
-							<!--feed box center | image-->
-							<div class="col-12 feed-box-center mt-3 d-flex align-items-center overflow-hidden">
-								<img src="../img/feed/beer.jpg" alt="content" class="img-fluid">
-							</div>
-							<!--feed-box-bot | text-->
-							<div class="col-12 feed-box-bot p-3">
-								<span class="fw-bold mb-1">맥주 맛집🍺✨</span>
-								<span class="f13">맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도
-									먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도
-									맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도
-									맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도
-									맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도
-									맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?맥주는 왜 먹어도 먹어도
-									맛있을까요?맥주는 왜 먹어도 먹어도 맛있을까요?</span>
-							</div>
-							<!--feed box bot | text-->
-							<div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13">
-								<div class="col-6 hstack justify-content-center border-end">
-									<span>담기</span>
-								</div>
-								<div class="col-6 hstack justify-content-center">
-									<i class="bi bi-heart"></i>
-									<span>좋아요</span>
-									<span class="ms-2">9999+</span>
-								</div>
-							</div>
-						</div>
 					</div> <!-- home_dl_img_AIcokcok -->
 					<!-- 핫플콕콕 영역 -->
 					<div class="home_dl_img_hotPlace">
@@ -671,9 +617,11 @@
 							<span>오늘의 핫플 추천</span>
 							<span>나의 코스 추천</span>
 						</div>
-						<div class="dl_more_content">
-							<span>더보기</span>
-							<img src="../img/home/main/btn_curation_more.png" alt="#">
+						<div class="dl_more_content hstack">
+							<a href="/feed">
+								<span>더보기</span>
+								<img src="../img/home/main/btn_curation_more.png" alt="#">
+							</a>
 						</div>
 					</div>
 				</div>
@@ -681,9 +629,9 @@
 
 			</div> <!-- home_dl_content -->
 
-	</div> <!-- home_data_labBox -->
-	</section> <!-- home_data_lab -->
-
+			</div> <!-- home_data_labBox -->
+		</section> <!-- home_data_lab -->
+		<div class="w-100 py-5 my-5"></div><!-- 여백 박스 -->
 	<section class="home_info_data container my-5">
 		<div class="row home_info_data_wrap text-center">
 			<div class="col-12 col-lg-6 home_info_data_img py-lg-5">
@@ -702,7 +650,7 @@
 			</div><!--home_info_data_text-->
 		</div><!--home_info_data_wrap-->
 	</section><!--home_info_data-->
-	
+	<div class="w-100 py-5 my-5"></div><!-- 여백 박스 -->
 	<!-- 검색 section -->	
 	<section class="home_search container-fluid p-0">
 	<div class="footer-radius"></div>
@@ -761,7 +709,7 @@
 		</div>
 	</div>
 	</section>
-
+	
 
 	</div> <!-- home_wrapper -->
 	<!--footer-->

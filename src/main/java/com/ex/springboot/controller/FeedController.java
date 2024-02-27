@@ -3,6 +3,7 @@ package com.ex.springboot.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,25 @@ public class FeedController {
 	// 피드 리스트
 	@GetMapping("/feed")
 	public String feed(Model model, HttpServletRequest request) {
+		String Feed_theme = "#"+request.getParameter("Feed_theme");		
+		String Feed_area = "#"+request.getParameter("Feed_area");
+		
+		System.out.println("search: " + Feed_theme + "/" + "search2: " + Feed_area);
+		
+		List<FeedDTO> feedList = new ArrayList<>();
+		
+		if (request.getParameter("Feed_theme") == null && request.getParameter("Feed_area") == null) {
+			feedList = feed_dao.feedList();
+			
+		} else if (request.getParameter("Feed_theme") != null && !request.getParameter("Feed_theme").equals("")) {
+			feedList = feed_dao.feedList_theme(Feed_theme);
+			
+		} else if (request.getParameter("Feed_area") != null && !request.getParameter("Feed_area").equals("")) {
+			feedList =  feed_dao.feedList_area(Feed_area);
+		}
 
-		model.addAttribute("feedList", feed_dao.feedList());
-
+		model.addAttribute("feedList",feedList);
+		
 		return "thymeleaf/feed/feed2";
 	}
 
@@ -48,16 +65,28 @@ public class FeedController {
 		int Feed_num = Integer.parseInt(request.getParameter("num"));
 		
 		model.addAttribute("feedList", feed_dao.feedShow(Feed_num));
-		
 
-		/* Feed_commentDTO comment_dto = new Feed_commentDTO(); */
-
-		 model.addAttribute("Feed_commentList",feed_dao.feedCommentList(Feed_num));
-		 model.addAttribute("Feed_commentDTO", new Feed_commentDTO());
-
-		//model.addAttribute("Feed_commentDTO",feed_dao.feedCommentList(Feed_num));
+		model.addAttribute("Feed_commentList",feed_dao.feedCommentList(Feed_num));
+		model.addAttribute("Feed_commentDTO", new Feed_commentDTO());
 
 		return "thymeleaf/feed/feed_show";
+	}
+	
+	
+	// 댓글 업데이트 - 페이지 & 댓글 목록 가져오기
+	@GetMapping("/feed_comment_update")
+	public String feedCommentUpdate(Model model, HttpServletRequest request) {
+		int Feed_num = Integer.parseInt(request.getParameter("num"));
+		int Feed_comment_num = Integer.parseInt(request.getParameter("comment_num"));
+		
+		System.out.println("Feed_comment_num"+Feed_comment_num);
+		
+		model.addAttribute("feedList", feed_dao.feedShow(Feed_num));
+		model.addAttribute("Feed_commentList",feed_dao.feedCommentList(Feed_num));
+		model.addAttribute("Feed_commentDTO", new Feed_commentDTO());
+		model.addAttribute("Feed_comment_num", Feed_comment_num); // input 활성화 시킬 부분
+		
+		return "thymeleaf/feed/feed_comment_update";
 	}
 	
 	// 피드 글쓰기 - 페이지
@@ -300,7 +329,7 @@ public class FeedController {
 	}
 	
 	
-	/* 피드 댓글 */	
+	/* 피드 댓글 - Logic */	
 	@PostMapping("/feed_comment_upload")
 	public String feed_comment(
             @RequestParam("Feed_comment") String Feed_comment, HttpServletRequest request, Model model) {
@@ -316,6 +345,66 @@ public class FeedController {
 		return "redirect:/feed_show?num="+Feed_num;
 	}
 	
+	/* 피드 댓글 수정 - Logic */	
+	@PostMapping("/feed_comment_update_action")
+	public String feed_comment_update_action(
+			@RequestParam("Feed_comment") String Feed_comment, HttpServletRequest request, Model model) {
+		int Feed_num = Integer.parseInt(request.getParameter("Feed_num"));
+		int Feed_comment_num = Integer.parseInt(request.getParameter("Feed_comment_num"));
+
+		String Member_Id = request.getParameter("Member_Id");
+		
+		System.out.println("FeedComment: "+Feed_num+"/"+Member_Id+"/"+Feed_comment);
+		
+		feed_dao.feedCommentUpdate(Feed_comment, Feed_num, Feed_comment_num);
+		
+		System.out.println("~댓글 달기~");
+		
+		return "redirect:/feed_show?num="+Feed_num;
+	}
+	
+	
+	// 피드 댓글 Delete - action
+	@GetMapping("/feed_comment_del")
+	public String feedCommentDel(HttpServletRequest request, Model model, HttpSession session) {
+		int Feed_num = Integer.parseInt(request.getParameter("num"));
+		int Feed_comment_num = Integer.parseInt(request.getParameter("comment_num"));
+			
+		feed_dao.feedCommentDel(Feed_num, Feed_comment_num);
+			
+		System.out.println("~댓삭~");
+
+		return "redirect:/feed_show?num="+Feed_num;
+	}
+	
+	// 피드 댓글 좋아요 - action
+	@GetMapping("/feed_comment_like")
+	public String feed_comment_like(HttpServletRequest request, Model model) {
+		int Feed_num = Integer.parseInt(request.getParameter("num"));
+		int Feed_comment_num = Integer.parseInt(request.getParameter("comment_num"));
+		int Feed_comment_like = Integer.parseInt(request.getParameter("on"));
+
+		feed_dao.feedCommentLike(Feed_comment_like, Feed_num, Feed_comment_num);
+			
+		System.out.println("~댓글 조아요~");
+
+		return "redirect:/feed_show?num="+Feed_num;
+	}
+	
+	/*
+	 * // 피드 좋아요 - action
+	 * 
+	 * @GetMapping("/feed_like") public String feed_like(HttpServletRequest request,
+	 * Model model) { int Feed_num = Integer.parseInt(request.getParameter("num"));
+	 * int Feed_comment_num = Integer.parseInt(request.getParameter("comment_num"));
+	 * int Feed_comment_like = Integer.parseInt(request.getParameter("on"));
+	 * 
+	 * feed_dao.feedCommentLike(Feed_comment_like, Feed_num, Feed_comment_num);
+	 * 
+	 * System.out.println("~댓글 조아요~");
+	 * 
+	 * return "redirect:/feed_show?num="+Feed_num; }
+	 */
 	
 		
 }

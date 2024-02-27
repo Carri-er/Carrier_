@@ -1,3 +1,21 @@
+
+.border-none{
+	border: none;
+}
+
+
+.btn-light:hover, .btn-light:active{
+	background: var(--black);
+	color: var(--white);
+}
+.btn-light:hover a, .btn-light:active a{
+	color: var(--white);
+}
+
+a:hover, a:active{
+	color: var(--white);
+}
+
 #feed{
   max-width: 1410px;
 }
@@ -10,6 +28,7 @@
 display:inline-block;
   box-sizing: border-box;
   width: 330px;
+  max-width: 380px;
   margin-bottom: 12px;
   overflow: hidden;
 }
@@ -21,7 +40,7 @@ display:inline-block;
 
 /* feed-box (center) */
 :not(#feedBox) .feed-box-center{
-  height: 250px;
+  min-height: 250px;
   object-fit: fill;
 }
 
@@ -44,7 +63,7 @@ display:inline-block;
 }
 
 #feed input[type="checkbox"]+label::after{
-  content:'dsfds✔';
+  content:'✔';
   font-size: 25px;
   width: 30px;
   height: 30px;
@@ -100,11 +119,13 @@ display:inline-block;
 }
 
 .feed-write-btn{
-	top: 80px;
 	margin-right: 10px;
+}
+
+.feed-btn{
+	top: 80px;
 	width: 50px;
 	height: 50px;
-	
 	background: rgba( 255, 255, 255, 0.65 );
 	box-shadow: 0 8px 32px 0 rgba( 200, 200, 200, 0.37 );
 	backdrop-filter: blur( 17.5px );
@@ -122,12 +143,13 @@ display:inline-block;
 /* feed thumbnail Btn */
 .feed-fileUpload{
 	position: absolute;
-	top: 50px;
-	left: 50px;
-	width: 70%;
-	height: 100%;
-	opacity: 0;
-	cursor: pointer;
+    width: 80%;
+    height: 90%;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    cursor: pointer;
 }
 
 /* #feedCarousel 으로 시작하는 것의 모든 */
@@ -144,6 +166,18 @@ display:inline-block;
 	height: 8px;
     border-radius: 50%;
     /* background-color: var(--black); */
+}
+
+#feedCarousel .carousel-item {
+	min-height: fit-content;
+}
+
+#feedCarousel .carousel-item img{
+/*     width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
 }
 
 [id^="feedCarousel"] .carousel{
@@ -164,8 +198,15 @@ display:inline-block;
 
 /* 드롭다운 메뉴 화살표 없애기 */
 #feed-right .dropdown-toggle::after {
+    margin-left: 0;
 	margin-top: 2px;
-    content: "⋮";
+/*     content: "⋮"; */
     height: 100%;
     border: none;
+}
+
+
+/*  */
+.feed-comment-update{
+	transform: scale(0.9);
 }

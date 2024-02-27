@@ -17,7 +17,7 @@ public class Time {
 		String msg = null;
 		if (diffTime < TIME_MAXIMUM.SEC) {
 			// sec
-			msg = diffTime + "초 전";
+			msg = diffTime + "방금 전";
 		} else if ((diffTime /= TIME_MAXIMUM.SEC) < TIME_MAXIMUM.MIN) {
 			// min
 			msg = diffTime + "분 전";
@@ -35,4 +35,5 @@ public class Time {
 		}
 		return msg;
 	}
+
 }

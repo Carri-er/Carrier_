@@ -77,6 +77,7 @@ function feed_update_check(){
 	var max_title = 65;
 	var max_content = 133;
 
+
 	/*제목*/
 	if (feedUpdateForm.Feed_title.value.length == "") {
 		alert("제목을 작성해주세요");
@@ -107,18 +108,6 @@ function feed_update_check(){
 	    return false;
 	}
 	
-	/*이미지*/
-	var imgFile1 = $('#fileUpload1').val();
-	var imgFile2 = $('#fileUpload2').val();
-	var imgFile3 = $('#fileUpload3').val();
-	var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
-	
-	//alert(imgFile1+imgFile2+imgFile3);
-	
-	if((imgFile1.match(fileForm)) && (imgFile2.match(fileForm))&& (imgFile3.match(fileForm))) {
-		alert("이미지 파일을 업로드 해주세요!");
-    	return false;
-	}
 
 	document.getElementById('feedUpdateForm').submit();
 	
