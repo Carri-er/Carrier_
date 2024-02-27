@@ -3,7 +3,30 @@
 <!-- namespace는 이 매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
 <mapper namespace="com.ex.springboot.dao.IFeedDAO">
 <!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
-
+	<!-- 홈에서 피드 리스트 랜덤 출력 -->
+	<select id="feedList_random" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title, --피드제목
+		    A.Feed_content, --피드내용
+		    A.Feed_theme,  --피드 테마 태그
+		    A.Feed_area,  --피드 지역 태그
+		    A.Feed_uploadday, -- 올린날짜
+		    A.Feed_updateday, --수정날짜
+		    A.Feed_thumbnail
+		FROM 
+		    Feed A 
+		LEFT JOIN 
+		    carrier_member B 
+		ON 
+		    A.Member_id = B.Member_id
+		WHERE Feed_num BETWEEN 1 AND 900 
+		ORDER BY DBMS_RANDOM.value;
+	</select>
+	
+	
 	<!-- 피드 글쓰기 -->
 	<insert id="feedWrite">
 		INSERT INTO Feed 
@@ -93,6 +116,11 @@
 		DELETE FROM Feed WHERE Feed_num = #{Feed_num}
 	</delete>
 	
+	<!-- 피드 좋아요 수정 -->
+	<update id="feedLike">
+		UPDATE Feed SET Feed_heart = #{Feed_heart} WHERE Feed_num = #{Feed_num}
+	</update>
+
 	<!-- 댓글 달기 -->
 	<insert id="feedCommentCreate">
 		INSERT INTO FeedComment 

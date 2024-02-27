@@ -11,7 +11,7 @@
 	<form id="feedUpdateForm" action="/feed_update_action" method="post" enctype="multipart/form-data">
 		<!-- 뒤로가기 버튼 -->
 		<button class="btn backBtn shadow-sm rounded-circle ms-4" onclick="history.back()">
-		<i class="fi fi-sr-angle-small-left f22 text-center"></i>
+			<i class="fi fi-sr-angle-small-left f22 text-center"></i>
 		</button>
 		<input type="hidden" name="num" th:value="${feedList.Feed_num}"/>
 		<!--------------------------------------------feed box Parent------------------------------------------>
@@ -58,7 +58,7 @@
 											        <img th:if="${thumbnailStat.index == 2 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview3" class="d-block w-100" alt="#">
 											        <img th:if="${thumbnailStat.index == 2 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview3" class="d-block w-100" alt="#">
 											
-											        <input th:id="'fileUpload' + ${thumbnailStat.index + 1}" type='file' class="member-fileUpload-form" onchange="readURL(this);" name="Feed_thumbnail_old" multiple/>
+											        <input th:id="'fileUpload' + ${thumbnailStat.index + 1}" type='file' class="member-fileUpload-form" onchange="readURL(this);" name="Feed_thumbnail" multiple/>
 											        <label th:for="'fileUpload'+${thumbnailStat.index+1}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>
 											        
 											        <!-- 수정 안 했으면 옛날 이미지 사용을 위함 -->
@@ -80,7 +80,8 @@
 
 							<!--feed-box-bot | text-->
 							<div class="col-12 feed-box-bot p-3 d-column gap-3">
-								<span class="d-block fw-bold mb-1"><input type="text" name="Feed_title" class="form-control" th:value="${feedList.getFeed_title()}"/></span><span class="f13"><textarea class="form-control f13" name="Feed_content" rows="5" th:text="${feedList.getFeed_content()}"></textarea></span>
+								<span class="d-block fw-bold mb-1"><input type="text" name="Feed_title" class="form-control" th:value="${feedList.getFeed_title()}"/></span>
+								<span class="f13"><textarea class="form-control f13" name="Feed_content" rows="5" th:text="${feedList.getFeed_content()}"></textarea></span>
 							</div>
 						</div>
 					</div>

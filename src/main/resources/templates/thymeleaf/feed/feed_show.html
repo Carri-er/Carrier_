@@ -2,20 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <div th:replace="~{head/head::head}">
 </div>
-<!-- 뒤로가기 버튼 flaticon ICON -->
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-thin-straight/css/uicons-thin-straight.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-straight/css/uicons-solid-straight.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+
 <body>
 <div th:replace="~{nav/nav::nav}">
 </div>
 <div id="feedShow" class="container-fluid mt-4 mb-5 p-0">
 	<!-- 뒤로가기 버튼 -->
-	<a href="/feed" class="position-fixed btn backBtn shadow-sm rounded-circle ms-4">
-	<i class="fi fi-sr-angle-small-left f22 text-center"></i>
+	<a href="/feed" class="sticky-top feed-btn me-auto ms-4 rounded-circle d-flex">
+		<i class="fi fi-sr-angle-small-left f22 text-center m-auto"></i>
 	</a>
 	<!--------------------------------------------feed box Parent------------------------------------------>
 	<div class="row m-auto my-2 mt-lg-1 mb-5 pt-md-0">
@@ -80,10 +74,10 @@
 						<!--feed box bot | text-->
 	                    <div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13 d-flex hstack">
 	                        <div class="col-6 hstack justify-content-center border-end d-flex hstack">
-	                            <span>담기</span>
-	                            <i class="fi fi-br-bookmark hstack px-1"></i>
+	                            <span>댓글</span>
+                                <i class="fi fi-br-comment-dots hstack px-1"></i>
 	                        </div>
-	                        <div class="col-6 hstack justify-content-center hstack">
+	                        <div class="col-6 hstack justify-content-center hstack f15">
 	                            <span>좋아요</span><i class="fi fi-br-heart hstack px-1"></i><span class="ms-2">999+</span>
 	                        </div>
 	                    </div>
@@ -134,7 +128,7 @@
 								</th:block>
 								<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/>
 								</label>
-								<!-- [내 댓글만] 수정 및 삭제 버튼  -->
+								<!-- [내 피드만] 수정 및 삭제 버튼  -->
 	                            <div th:if="${session.Member_Id == comment.getMember_Id()}">
 		                            <div class="f17 d-flex justify-content-between" id="feed-right">
 											<a class="dropdown-toggle text-center m-0 hstack" href="#"
@@ -144,10 +138,29 @@
 			                           			</i>
 											</a>
 										<ul class="dropdown-menu dropdown-menu-dark">
-		                                    <li><a class="dropdown-item active" th:href="@{'/feed_comment_del?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">삭제</a></li>
+		                                    <li data-bs-toggle="modal" data-bs-target="#feed_del_Modal"><a class="dropdown-item">삭제</a></li>
 		                                    <li><a class="dropdown-item" th:href="@{'/feed_comment_update?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">수정</a></li>
 		                                </ul>
 		                            </div>
+		                            
+									<!-- DEL Modal -->
+									<div class="modal fade" id="feed_del_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
+									  <div class="modal-dialog modal-dialog-centered">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									      </div>
+									      <div class="modal-body text-center py-3">
+									        정말 삭제하시겠습니까?
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-light text-dark rounded-pill" data-bs-dismiss="modal">취소</button>
+									        <button type="button" class="btn btn-main rounded-pill"><a class="dropdown-item active" th:href="@{'/feed_comment_del?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">삭제</a></button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+		                            
 	                            </div>
 							</div>
 						</div>

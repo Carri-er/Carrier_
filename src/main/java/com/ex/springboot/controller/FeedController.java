@@ -3,6 +3,7 @@ package com.ex.springboot.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +37,25 @@ public class FeedController {
 	// 피드 리스트
 	@GetMapping("/feed")
 	public String feed(Model model, HttpServletRequest request) {
+		String Feed_theme = "#"+request.getParameter("Feed_theme");		
+		String Feed_area = "#"+request.getParameter("Feed_area");
 		
-		model.addAttribute("feedList", feed_dao.feedList());
-		/*
-		 * model.addAttribute("feedList",
-		 * feed_dao.feedList_theme(request.getParameter("Feed_theme")));
-		 * 
-		 * model.addAttribute("feedList",
-		 * feed_dao.feedList_area(request.getParameter("Feed_area")));
-		 */
+		System.out.println("search: " + Feed_theme + "/" + "search2: " + Feed_area);
+		
+		List<FeedDTO> feedList = new ArrayList<>();
+		
+		if (request.getParameter("Feed_theme") == null && request.getParameter("Feed_area") == null) {
+			feedList = feed_dao.feedList();
+			
+		} else if (request.getParameter("Feed_theme") != null && !request.getParameter("Feed_theme").equals("")) {
+			feedList = feed_dao.feedList_theme(Feed_theme);
+			
+		} else if (request.getParameter("Feed_area") != null && !request.getParameter("Feed_area").equals("")) {
+			feedList =  feed_dao.feedList_area(Feed_area);
+		}
 
+		model.addAttribute("feedList",feedList);
+		
 		return "thymeleaf/feed/feed2";
 	}
 
@@ -380,6 +390,21 @@ public class FeedController {
 
 		return "redirect:/feed_show?num="+Feed_num;
 	}
+	
+	/*
+	 * // 피드 좋아요 - action
+	 * 
+	 * @GetMapping("/feed_like") public String feed_like(HttpServletRequest request,
+	 * Model model) { int Feed_num = Integer.parseInt(request.getParameter("num"));
+	 * int Feed_comment_num = Integer.parseInt(request.getParameter("comment_num"));
+	 * int Feed_comment_like = Integer.parseInt(request.getParameter("on"));
+	 * 
+	 * feed_dao.feedCommentLike(Feed_comment_like, Feed_num, Feed_comment_num);
+	 * 
+	 * System.out.println("~댓글 조아요~");
+	 * 
+	 * return "redirect:/feed_show?num="+Feed_num; }
+	 */
 	
 		
 }

@@ -152,7 +152,7 @@
 											</a>
 										<ul class="dropdown-menu dropdown-menu-dark">
 			                                   <li><a class="dropdown-item active" th:href="@{'/feed_comment_del?num='+${feedList.getFeed_num()}+'&Feed_comment_num'+${comment.getFeed_comment_num()}}">삭제</a></li>
-			                                   <li><a class="dropdown-item" th:href="@{'/feed_update?num='+${feedList.getFeed_num()}}">수정</a></li>
+			                                   <li><a class="dropdown-item" th:href="@{'/feed_comment_update?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">수정</a></li>
 			                            </ul>
 			                        </div>
 		                           </div>
