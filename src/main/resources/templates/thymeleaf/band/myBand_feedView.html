@@ -20,7 +20,7 @@
         <div class="myBand_content">
             <div class="container myBand_contentBox px-0 d-flex flex-md-column flex-sm-column flex-lg-row ">
                 <!-- col1 밴드 이미지, 제목 정보 영역 -->
-				<div class="col-12 col-lg-3 myBand_content_col_titleBox me-5">
+				<div class="col-12 col-lg-3 myBand_content_col_titleBox">
 					<div class="myBand_content_col_title sticky-md-top flex-column mr-md-5">
 						<div class="myBand_title_img">
 							<img
@@ -106,66 +106,63 @@
                         <img class="search_img" src="../img/common/btn_header_search.png" alt="">
                         <span th:text="${feedwriterImg.getMember_profileimage()}"></span>
                     </div> -->
-                    <div class="myBand_content_item mb-5" th:each="myBandFeedList:${myBandFeedList}" >
-                    
-                        
-                       	<div class="myBand_content_item_writer d-flex flex-row">
-                      <a th:href="@{'/bandFeedView?bandUrl='+${myBandFeedList.getBand_code()}+'&conNum='+${myBandFeedList.getBand_feed_num()}}" class="row band_feed_list_link d-block">
-                            	<img class="myBand_content_item_writer_profile" th:src="@{'../img/member_thumbnail/'+${myBandFeedList.getMember_profileimage()}}"  alt="#">
-                            	
-                            	<div class="myBand_content_item_writer_info">
-	                                <strong th:text="${myBandFeedList.getMember_id()}">작성자 아이디</strong>
-    	                            <span>작성 시간 <span th:text="${myBandFeedList.getBand_feed_uploadday()}"></span></span>
-        	                    </div>
+                    <div class="myBand_content_item " th:each="myBandFeedList:${myBandFeedList}">
+                        <div class="myBand_content_item_writer">
+                            <img class="myBand_content_item_writer_profile" th:src="@{'../img/member_thumbnail/'+${myBandFeedList.getMember_profileimage()}}"  alt="#">
+                            <div class="myBand_content_item_writer_info">
+                                <strong th:text="${myBandFeedList.getMember_id()}">작성자 아이디</strong>
+                                <span>작성 시간 <span th:text="${myBandFeedList.getBand_feed_uploadday()}"></span></span>
+                            </div>
                             
-	                            <th:block th:if="${myBandFeedList.getMember_id() == session.Member_Id}">
-	                        	
-									<div class="f17" id="bandFeed-right">
-										<a class="dropdown-toggle text-center m-0 ps-3 pe-1" href="#"
-											role="button" id="myBandDropdownMenuLink" data-bs-toggle="dropdown"
-											aria-expanded="false"></a>
-										<ul class="dropdown-menu dropdown-menu-dark myBand_dropdownList">
-											<li>
-												<form action="deleteFeed" method="post" id="deleteFeedForm">
-													<input type="hidden" name="bandUrl"
-														th:value="${myBandFeedList.getBand_code()}" /> 
-													<input
-														type="hidden" name="bandfeednum"
-														th:value="${myBandFeedList.getBand_feed_num()}" /> 
-													<input
-														type="button" class="btn float-end bandFeedDeleteBtn"
-														value="삭제하기" onclick="return func_deleteFeed()" />
-												</form>
-											</li>
-											
-											<li>
-												<form action="bandFeedUpdate" method="post">
-													<input type="hidden" name="bandUrl"
-														th:value="${myBandFeedList.getBand_code()}" /> <input
-														type="hidden" name="bandfeednum"
-														th:value="${myBandFeedList.getBand_feed_num()}" /> <input
-														type="hidden" name="member_id"
-														th:value="${session.Member_Id}" /> <input type="hidden"
-														name="feedcontent"
-														th:value="${myBandFeedList.getBand_feed_content()}" /> <input
-														type="submit" class="btn float-end" value="수정하기" />
-												</form>
-											</li>
-										</ul>
-									</div>
-	
-	                        	</th:block>
+                            <th:block th:if="${myBandFeedList.getMember_id() == session.Member_Id}">
+                        	
+								<div class="f17" id="feed-right">
+									<a class="dropdown-toggle text-center m-0 ps-3 pe-1" href="#"
+										role="button" id="myBandDropdownMenuLink" data-bs-toggle="dropdown"
+										aria-expanded="false"></a>
+									<ul class="dropdown-menu dropdown-menu-dark myBand_dropdownList">
+										<li>
+											<form action="deleteFeed" method="post" id="deleteFeedForm">
+												<input type="hidden" name="bandUrl"
+													th:value="${myBandFeedList.getBand_code()}" /> 
+												<input
+													type="hidden" name="bandfeednum"
+													th:value="${myBandFeedList.getBand_feed_num()}" /> 
+												<input
+													type="button" class="btn float-end bandFeedDeleteBtn"
+													value="삭제하기" onclick="return func_deleteFeed()" />
+											</form>
+										</li>
+										
+										<li>
+											<form action="bandFeedUpdate" method="post">
+												<input type="hidden" name="bandUrl"
+													th:value="${myBandFeedList.getBand_code()}" /> <input
+													type="hidden" name="bandfeednum"
+													th:value="${myBandFeedList.getBand_feed_num()}" /> <input
+													type="hidden" name="member_id"
+													th:value="${session.Member_Id}" /> <input type="hidden"
+													name="feedcontent"
+													th:value="${myBandFeedList.getBand_feed_content()}" /> <input
+													type="submit" class="btn float-end" value="수정하기" />
+											</form>
+										</li>
+									</ul>
+								</div>
+
+                        	</th:block>
                             
-                       </a>
-                        	</div>
-	                        <div class="myBand_content_item_content">
-								<div th:utext="${myBandFeedList.getBand_feed_content()}"></div>
-	                        </div>
-                     	
+                        </div>
+                        <div class="myBand_content_item_content">
+							<div th:utext="${myBandFeedList.getBand_feed_content()}"></div> 
+                          
+                        </div>
+                     
                     </div>
                 </div>
 					
                 
+
             </div>  <!-- myBand_contentBox -->
         </div>
 
