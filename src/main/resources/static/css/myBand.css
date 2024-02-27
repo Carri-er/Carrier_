@@ -103,7 +103,7 @@ div.myBand_content_search>span+img{
 /* 밴드 글 게시글  */
 a.band_feed_list_link{
 	display : block;
-	border : 1px solid black;
+	
 }
 div.myBand_content_item{
     padding: 20px;
@@ -130,14 +130,14 @@ ul.myBand_dropdownList input{
 	color : #FFFFFF !important;
 }
 div.myBand_content_item_writer{
-	border : 1px solid red;
+	
 }
 img.myBand_content_item_writer_profile {
 	width: 80px;
 	height: 80px;
     border-radius: 20px;
     margin-right: 20px;
-    border : 1px solid red;
+    
 }
 /* 밴드 게시글 내용 스타일 */
 div.myBand_content_item_content{
@@ -146,7 +146,7 @@ div.myBand_content_item_content{
 	overflow : hidden;
 }
 div.myBand_content_item_writer_info{
-	border: 1px solid blue;
+	
 }
 div.myBand_content_item_writer_info>strong{
 	display: block;

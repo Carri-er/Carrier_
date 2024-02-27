@@ -11,6 +11,7 @@ import com.ex.springboot.dao.IFeedDAO;
 @Controller
 @RequestMapping
 public class CarrierController {
+
    @Autowired
    private com.ex.springboot.dao.IBandDAO bandDao; // 다형성
    @Autowired
@@ -32,10 +33,7 @@ public class CarrierController {
    }
 
 
-   @GetMapping("/map")
-   public String map() {
-      return "thymeleaf/map/map_0221";
-   }
+   
    
 
 

@@ -65,7 +65,7 @@ FETCH FIRST 1 ROWS ONLY
 	</select>
 	
 	<insert id="save_course_insert">
-		insert  into Course values(#{param1},Course_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},0,#{param7})
+		insert  into Course values(#{param1},Course_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
 	</insert>
 	<select id="Course_select" resultType="com.ex.springboot.dto.CourseDTO">
 	select 

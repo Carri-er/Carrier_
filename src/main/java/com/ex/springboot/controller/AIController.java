@@ -127,6 +127,7 @@ public class AIController {
 		String cours5 = request.getParameter("cours5");
 		String cours6 = request.getParameter("cours6");
 		String memberId = request.getParameter("memberId");
+		String day = request.getParameter("day");
 		
 		model.addAttribute("aicc", AiDAO.listCourse(cours1));
 		model.addAttribute("aiccFood", AiDAO.listCourse(cours2));
@@ -135,7 +136,10 @@ public class AIController {
 		model.addAttribute("aiccCafe", AiDAO.listCourse(cours5));
 		model.addAttribute("totalDistance", cours6);
 		model.addAttribute("memberId", memberId);
-		
+		model.addAttribute("day", day);
+		if (day==null || day=="") {
+			day="0";
+		}
 		return "thymeleaf/aicc/saveCourse";
 	}
 	@GetMapping("/Course_view")
@@ -177,13 +181,17 @@ public class AIController {
 		String cours5 = request.getParameter("cours5");
 		String numder=cours1+","+cours2+","+cours3+","+cours4+","+cours5;
 		String memberId = request.getParameter("memberId");
+		String day = request.getParameter("day");
+		if (day==null || day=="") {
+			day="0";
+		}
 		String Course_name = request.getParameter("Course_name");
 		String Course_thema = request.getParameter("Course_thema");
 		String Course_Area = request.getParameter("Course_Area");
 		String Course_content = request.getParameter("Course_content");
 		String Course_distance = request.getParameter("Course_distance");
 	
-		System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,numder));
+		System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,numder));
 		model.addAttribute("memberId", memberId);
 		System.out.println("memberId : " +memberId);
 		String msg = "1";
