@@ -33,6 +33,10 @@
     margin: 3px 8px 3px 10px;
 }
 
+/* 우측 필터 부분 sticky top 영역 조절 */
+.info-filter-sticky-top{
+	top: 100px;
+}
 
 /*------------------------ board ---------------------*/
 .board-left{

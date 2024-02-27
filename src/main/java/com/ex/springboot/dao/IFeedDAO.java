@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.ex.springboot.dto.FeedDTO;
+import com.ex.springboot.dto.Feed_LikeDTO;
 import com.ex.springboot.dto.Feed_commentDTO;
 
 @Mapper // 인터페이스를 xml로 구현하겠다.
@@ -21,15 +22,24 @@ public interface IFeedDAO {
 	);
 
 	//피드 전체 페이지
-	public List<FeedDTO> feedList();
+	public List<FeedDTO> feedList(
+			@Param("Member_Id") String Member_Id
+	);
 	
+	//피드 전체 페이지 - 좋아요 개수
+	public Feed_LikeDTO feedList_like(
+			@Param("Feed_num") int Feed_num
+	);
+
 	//피드 전체 페이지 - 홈에서 보일 피드
 	public List<FeedDTO> feedList_random();
+
 	
 	//피드 전체 페이지 - filter
 	public List<FeedDTO> feedList_theme(
 			@Param("Feed_theme") String Feed_theme
 	);
+	
 	//피드 전체 페이지 - filter
 	public List<FeedDTO> feedList_area(
 			@Param("Feed_area") String Feed_area
@@ -58,12 +68,24 @@ public interface IFeedDAO {
 	// 피드 좋아요
 	public int feedLike(
 			@Param("Feed_num") int Feed_num,
-			@Param("Feed_heart") int Feed_heart
+			@Param("Member_Id") String Member_Id
 	);
 	
+	// 피드 좋아요 취소
+	public int feedHate(
+			@Param("Feed_num") int Feed_num,
+			@Param("Member_Id") String Member_Id
+			);
+	
+	
+	// 좋아요 count 개수 ++
+	public int feedLikeCount(
+			@Param("Feed_num") int Feed_num,
+			@Param("count") int count
+	);
 	
 	//////////////////////////// 피드 댓글 /////////////////////////////
-	
+
 	// 피드 댓글 달기
 	public int feedCommentCreate(
 			@Param("Feed_num") int Feed_num,
@@ -95,6 +117,8 @@ public interface IFeedDAO {
 			@Param("Feed_num") int Feed_num,
 			@Param("Feed_comment_num") int Feed_comment_num
 	);
+	
+	
 	
 }
 

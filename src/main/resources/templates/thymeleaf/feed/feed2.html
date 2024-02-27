@@ -179,12 +179,20 @@
                                  <i class="fi fi-br-comment-dots hstack px-1"></i>
                             </a>
                         </div>
-                        <div class="col-6 hstack justify-content-center">
-                            <span>좋아요</span>
-                            <i class="fi fi-br-heart hstack px-1"></i>
-                            <span class="ms-2">999+</span>
-                        </div>
-                    </div>
+						<div class="col-6 hstack justify-content-center">
+							    <th:block th:if="${feed.Feed_heart_on == 0}">
+							        <a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex">
+							            <span>좋아요</span><i class="fi fi-br-heart hstack px-1"></i>
+							        </a>
+							    </th:block>
+							    <th:block th:unless="${feed.Feed_heart_on == 0}">
+							        <a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex">
+							            <span>좋아요</span><i class="fi fi-sr-heart hstack px-1"></i>
+							        </a>
+							    </th:block>
+							<span class="ms-2" th:text="${feed.getFeed_heart()}">999+</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -195,27 +203,27 @@
 </div>
 
 <script>
-    // 페이지가 로드될 때 실행되는 함수
-    window.onload = function() {
-        // 모든 링크 요소를 가져옴
-        var links = document.querySelectorAll('.btn[data-bs-toggle="list"]');
+	// 페이지가 로드될 때 실행되는 함수
+	window.onload = function() {
+		// 모든 링크 요소를 가져옴
+		var links = document.querySelectorAll('.btn[data-bs-toggle="list"]');
 
-        // 각 링크에 대해 이벤트 리스너를 추가
-        links.forEach(function(link) {
-            link.addEventListener('click', function() {
-                // 현재 클릭된 링크의 href 속성 값으로 리디렉션
-                window.location.href = this.getAttribute('href');
+		// 각 링크에 대해 이벤트 리스너를 추가
+		links.forEach(function(link) {
+			link.addEventListener('click', function() {
+				// 현재 클릭된 링크의 href 속성 값으로 리디렉션
+				window.location.href = this.getAttribute('href');
 
-                // 모든 링크의 부모 요소에서 'active' 클래스 제거
-                links.forEach(function(l) {
-                    l.parentNode.classList.remove('active');
-                });
+				// 모든 링크의 부모 요소에서 'active' 클래스 제거
+				links.forEach(function(l) {
+					l.parentNode.classList.remove('active');
+				});
 
-                // 현재 클릭된 링크의 부모 요소에 'active' 클래스 추가
-                this.parentNode.classList.add('active');
-            });
-        });
-    };
+				// 현재 클릭된 링크의 부모 요소에 'active' 클래스 추가
+				this.parentNode.classList.add('active');
+			});
+		});
+	};
 </script>
 
 </body>

@@ -15,6 +15,7 @@ a {
 	color: var(--black);
 }
 
+
 a.indent {
 	text-indent: -9999px;
 	font-size: 0;
@@ -68,7 +69,14 @@ a.indent {
 .f22 {
 	font-size: 22px;
 }
+
+
 /* background-color 버튼 색상 정의 */
+.btn-outline-dark:hover span, .btn-outline-dark:hover a {
+	text-decoration: none;
+	color: var(--white);
+}
+
 .bg-main, .btn-main-over:hover{
 	background-color: var(--main) !important;
 }
@@ -77,7 +85,6 @@ a.indent {
 	border: 1px solid var(--main) !important;
 	background-color: var(--white) !important;
 }
-
 
 .bg-mainbg {
 	background: var(--mainbg) !important;

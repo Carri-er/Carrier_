@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import com.ex.springboot.dto.Feed_commentDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping
@@ -36,16 +38,19 @@ public class FeedController {
 
 	// 피드 리스트
 	@GetMapping("/feed")
-	public String feed(Model model, HttpServletRequest request) {
+	public String feed(Model model, HttpServletRequest request, FeedDTO feedDTO, HttpSession session) {
 		String Feed_theme = "#"+request.getParameter("Feed_theme");		
 		String Feed_area = "#"+request.getParameter("Feed_area");
+		
+		//로그인한 아이디 불러오기
+		String Member_Id = (String) session.getAttribute("Member_Id");
 		
 		System.out.println("search: " + Feed_theme + "/" + "search2: " + Feed_area);
 		
 		List<FeedDTO> feedList = new ArrayList<>();
 		
 		if (request.getParameter("Feed_theme") == null && request.getParameter("Feed_area") == null) {
-			feedList = feed_dao.feedList();
+			feedList = feed_dao.feedList(Member_Id);
 			
 		} else if (request.getParameter("Feed_theme") != null && !request.getParameter("Feed_theme").equals("")) {
 			feedList = feed_dao.feedList_theme(Feed_theme);
@@ -55,7 +60,7 @@ public class FeedController {
 		}
 
 		model.addAttribute("feedList",feedList);
-		
+
 		return "thymeleaf/feed/feed2";
 	}
 
@@ -64,10 +69,15 @@ public class FeedController {
 	public String feedShow(Model model, HttpServletRequest request) {
 		int Feed_num = Integer.parseInt(request.getParameter("num"));
 		
+		// 피드 리스트
 		model.addAttribute("feedList", feed_dao.feedShow(Feed_num));
-
-		model.addAttribute("Feed_commentList",feed_dao.feedCommentList(Feed_num));
+		// 피드 코멘트 리스트
+		model.addAttribute("Feed_commentList", feed_dao.feedCommentList(Feed_num));
 		model.addAttribute("Feed_commentDTO", new Feed_commentDTO());
+
+		model.addAttribute("feedList_heart", feed_dao.feedCommentList(Feed_num));
+		
+
 
 		return "thymeleaf/feed/feed_show";
 	}
@@ -331,18 +341,30 @@ public class FeedController {
 	
 	/* 피드 댓글 - Logic */	
 	@PostMapping("/feed_comment_upload")
-	public String feed_comment(
-            @RequestParam("Feed_comment") String Feed_comment, HttpServletRequest request, Model model) {
+	public String feed_comment(@Valid @ModelAttribute("Feed_commentDTO") Feed_commentDTO commentDTO, BindingResult result,
+           @RequestParam("Feed_comment") String Feed_comment, HttpServletRequest request, Model model) {
 		int Feed_num = Integer.parseInt(request.getParameter("Feed_num"));
 		String Member_Id = request.getParameter("Member_Id");
-		
+		String msg = "";
 		System.out.println("FeedComment: "+Feed_num+"/"+Member_Id+"/"+Feed_comment);
-			
-		feed_dao.feedCommentCreate(Feed_num, Member_Id, Feed_comment);
-			
-		System.out.println("~댓글 달기~");
+		// 입력 데이터 검증
+		if (Feed_comment == null || Feed_comment.trim().isEmpty()) {
+			result.rejectValue("Feed_comment", "NotEmpty", "댓글은 비어있을 수 없습니다");
+			msg = "1";
+		} else if (Feed_comment.length() > 65) {
+			result.rejectValue("Feed_comment", "Size", "댓글은 65자 이내여야 합니다");
+			msg = "2";
+		}
 
-		return "redirect:/feed_show?num="+Feed_num;
+		if (result.hasErrors()) {
+	        // 유효성 검사 실패 시 처리
+			return "redirect:/feed_show?num="+ Feed_num +"&msg="+msg;
+	    } else {
+	    	feed_dao.feedCommentCreate(Feed_num, Member_Id, Feed_comment);
+	    	System.out.println("~댓글 달기~");
+	    	return "redirect:/feed_show?num="+Feed_num;
+	    }
+
 	}
 	
 	/* 피드 댓글 수정 - Logic */	
@@ -391,20 +413,30 @@ public class FeedController {
 		return "redirect:/feed_show?num="+Feed_num;
 	}
 	
-	/*
-	 * // 피드 좋아요 - action
-	 * 
-	 * @GetMapping("/feed_like") public String feed_like(HttpServletRequest request,
-	 * Model model) { int Feed_num = Integer.parseInt(request.getParameter("num"));
-	 * int Feed_comment_num = Integer.parseInt(request.getParameter("comment_num"));
-	 * int Feed_comment_like = Integer.parseInt(request.getParameter("on"));
-	 * 
-	 * feed_dao.feedCommentLike(Feed_comment_like, Feed_num, Feed_comment_num);
-	 * 
-	 * System.out.println("~댓글 조아요~");
-	 * 
-	 * return "redirect:/feed_show?num="+Feed_num; }
-	 */
-	
+	// 피드 좋아요 - action
+	@GetMapping("/feed_like")
+	public String feed_like(HttpServletRequest request, Model model) {
+		int Feed_num = Integer.parseInt(request.getParameter("num"));
+		String Member_Id = request.getParameter("id");
+		int Feed_heart = Integer.parseInt(request.getParameter("on"));
+		int count = 0 ;
 		
+		
+		System.out.println(Feed_heart);
+		
+		
+		if(Feed_heart == 1) {
+			feed_dao.feedLike(Feed_num, Member_Id);
+			count = 1;
+		} else if (Feed_heart == 0) {
+			feed_dao.feedHate(Feed_num, Member_Id);
+			count = -1;
+		}
+		feed_dao.feedLikeCount(Feed_num, count);
+		
+		System.out.println("~댓글 조아요~");
+		
+		return "redirect:/feed_show?num="+Feed_num;
+	}
+
 }
