@@ -9,12 +9,12 @@
 		    A.Feed_num,
 		    B.Member_Id,
 		    B.Member_profileimage,  
-		    A.Feed_title, --피드제목
-		    A.Feed_content, --피드내용
-		    A.Feed_theme,  --피드 테마 태그
-		    A.Feed_area,  --피드 지역 태그
-		    A.Feed_uploadday, -- 올린날짜
-		    A.Feed_updateday, --수정날짜
+		    A.Feed_title, 
+		    A.Feed_content,
+		    A.Feed_theme,  
+		    A.Feed_area,  
+		    A.Feed_uploadday, 
+		    A.Feed_updateday, 
 		    A.Feed_thumbnail
 		FROM 
 		    Feed A 
@@ -23,7 +23,7 @@
 		ON 
 		    A.Member_id = B.Member_id
 		WHERE Feed_num BETWEEN 1 AND 900 
-		ORDER BY DBMS_RANDOM.value;
+		ORDER BY DBMS_RANDOM.value
 	</select>
 	
 	
