@@ -28,14 +28,14 @@
 	
 	<!-- 밴드 피드 작성 -->
 	<insert id="bandFeedWrite">
-		insert into band_feed (band_feed_num, band_code ,Member_id, band_feed_content, band_feed_uploadday, band_feed_updateday) 
-			values (band_feed_seq.nextval, #{band_code}, #{Member_id}, #{band_feed_content}, sysdate, sysdate)
+		insert into band_feed (band_feed_num, band_code ,Member_id, band_feed_content, band_feed_uploadday, band_feed_updateday, band_feed_hit) 
+			values (band_feed_seq.nextval, #{band_code}, #{Member_id}, #{band_feed_content}, sysdate, sysdate , 0)
 	</insert>
 	
 	<!-- 밴드 별 피드 전체 목록  -->
 	<select id="bandFeedList" resultType="com.ex.springboot.dto.BandFeedDTO">
 		<!-- select * from band_feed where band_code = ${param1} -->
-		select A.band_feed_num, A.band_code, A.Member_id, A.band_feed_content, A.band_feed_uploadday, A.band_feed_updateday, B.Member_profileimage from band_feed A right outer join carrier_member B on A.Member_id = B.Member_id where A.band_code = ${param1} order by A.band_feed_num desc    
+		select A.band_feed_num, A.band_code, A.Member_id, A.band_feed_content, A.band_feed_uploadday, A.band_feed_updateday, A.band_feed_hit ,B.Member_profileimage from band_feed A right outer join carrier_member B on A.Member_id = B.Member_id where A.band_code = ${param1} order by A.band_feed_num desc    
 	</select>
 	
 	<!-- 밴드 작성한 사람의 이미지 출력 구문 -->
@@ -109,6 +109,11 @@
 			select * from ( select * from band order by dbms_random.value )where ROWNUM <=  6
 		]]>
 	</select>
+	<select id="randomBandList_home" resultType="com.ex.springboot.dto.BandDTO">
+		<![CDATA[
+			select * from ( select * from band order by dbms_random.value )where ROWNUM <=  3
+		]]>
+	</select>
 	
 	<!-- 밴드 채팅 전체 리스트 출력 -->
 	<select id="bandChatList" resultType="com.ex.springboot.dto.Band_chatDTO">
@@ -126,5 +131,11 @@
 		insert into band_chat values ( #{band_chat_room}, #{band_code} , #{chat_Id} , #{chat_message} , sysdate) 
 	</insert>
 	
+	<!-- 밴드 피드 별 댓글 수 -->
+	<select id="bandFeedCommentCount" resultType='java.lang.Integer'>
+		<![CDATA[
+			select COUNT(*) from band_feedComment where band_feed_num = #{param1}
+		]]>
+	</select>
 	
 </mapper>
