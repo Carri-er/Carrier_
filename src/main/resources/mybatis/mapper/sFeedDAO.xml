@@ -23,7 +23,7 @@
 		ON 
 		    A.Member_id = B.Member_id
 		WHERE Feed_num BETWEEN 1 AND 900 
-		ORDER BY DBMS_RANDOM.value;
+		ORDER BY DBMS_RANDOM.value
 	</select>
 	
 	

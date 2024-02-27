@@ -6,7 +6,7 @@
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
 	<div class="container">
-	<h4 class="text-center mt-3">코스 저장하기</h4>
+	<h4 class="text-center mt-3">코스 상세 보기</h4>
 		<div class="row mx-0 justify-content-center">
 			<div class="row">
 			<div class="col">
@@ -78,35 +78,35 @@
 
 
 			</div>
-			<form action="cours_Save_insert" method="post" id="myForm">
-			<div class="row">
-			<div class="col-4">
-				<div class="col-12 mx-auto mt-4">
-					<div class="form-floating">
-						<input type="text" class="form-control" id="Course_name"
-							name="Course_name" placeholder="코스 명"> <label
+			<form action="cours_Save_update_result" method="post">
+				<div class="row">
+				<div class="col">
+				<div class="col mx-auto mt-4">
+					<div class="form-floating" >
+						<input type="text" class="form-control text-truncate" id="Course_name"
+							name="Course_name" placeholder="코스 명" th:value="${list.get(0).getCourse_Name()}"> <label
 							for="Course_name" class="form-label">코스 명</label>
 					</div>
 				</div>
-				<div class="col-12 mx-auto mt-4">
+				<div class="col mx-auto mt-4">
 					<div class="form-floating">
 						<input type="text" class="form-control" id="Course_thema"
-							name="Course_thema" placeholder="코스 테마" th:value="${aicc.get(0).getEvent_category()}"> <label
+							name="Course_thema" placeholder="코스 테마" th:value="${aicc.get(0).getEvent_category()}" readonly="readonly"> <label
 							for="Course_thema" class="form-label">코스 테마</label>
 					</div>
 				</div>
-				<div class="col-12 mx-auto mt-4">
+				<div class="col mx-auto mt-4">
 					<div class="form-floating">
 						<input type="text" class="form-control" id="Course_Area"
-							name="Course_Area" placeholder="코스 지역" th:value="${aicc.get(0).getEvent_area()}"> <label
+							name="Course_Area" placeholder="코스 지역" th:value="${aicc.get(0).getEvent_area()}" readonly="readonly"> <label
 							for="Course_Area" class="form-label">코스 지역</label>
 					</div>
 				</div>
-				
-				<div class="col-12 mx-auto mt-4">
+
+				<div class="col mx-auto mt-4">
 					<div class="form-floating">
 						<input type="text" class="form-control" id="Course_distance"
-							name="Course_distance" placeholder="코스 길이" readonly="readonly" th:value="|${totalDistance} km|">
+							name="Course_distance" placeholder="코스 길이" readonly="readonly" th:value="${totalDistance}">
 						<label for="Course_distance" class="form-label">코스 길이</label>
 					</div>
 				</div>
@@ -114,12 +114,11 @@
 				<div class="col-8 mx-auto mt-4">
 					<div class="form-floating">
 						<textarea class="form-control" placeholder="Leave a comment here"
-							id="Course_content" style="height: 300px" name="Course_content"></textarea>
+							id="Course_content" style="height: 300px" name="Course_content" th:text="${list.get(0).getCourse_content()}"></textarea>
 						<label for="Course_content">코스 내용</label>
 					</div>
 
 				</div>
-
 				<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
 					<input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>
 					<input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="cours3"/>
@@ -127,8 +126,9 @@
 					<input type="hidden" th:value="${aiccFood2.get(0).getEvent_num()}" name="cours5"/>
 					<input type="hidden" class="totalDistanceValue" value="" name="cours6"/>
 					<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
+					<input type="hidden" name="num" th:value="${list.get(0).getCourse_num()}" />
 					<div class="col-12 mx-auto mt-4 text-end">
-						<button type="submit" class="btn btn-main "> 코스 등록</button>
+						<button type="submit" class="btn btn-main ">수정 완료</button>
 					</div>
 					</div>
 			</form>
@@ -227,7 +227,7 @@
                  map : map, // 선을 표시할 지도입니다 
                  path : linePath,
                  strokeWeight : 3, // 선의 두께입니다 
-                 strokeColor : '#ffe576', // 선의 색깔입니다
+                 strokeColor : '#db4040', // 선의 색깔입니다
                  strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
                  strokeStyle : 'solid' // 선의 스타일입니다
              });
@@ -260,38 +260,5 @@
 
          
     </script>
-    <script th:inline="javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('myForm').addEventListener('submit', function(event) {
-            var courseName = document.getElementById('Course_name').value.trim();
-            var courseThema = document.getElementById('Course_thema').value.trim();
-            var courseArea = document.getElementById('Course_Area').value.trim();
-            var courseContent = document.getElementById('Course_content').value.trim();
-
-            var errors = [];
-
-            if (courseName === '') {
-                errors.push('코스 명을 입력하세요.');
-            }
-
-            if (courseThema === '') {
-                errors.push('코스 테마를 입력하세요.');
-            }
-
-            if (courseArea === '') {
-                errors.push('코스 지역을 입력하세요.');
-            }
-
-            if (courseContent === '') {
-                errors.push('코스 내용을 입력하세요.');
-            }
-
-            if (errors.length > 0) {
-                event.preventDefault(); // 폼 제출 중지
-                alert(errors.join('\n')); // 에러 메시지 표시
-            }
-        });
-    });
-</script>
 </body>
 </html>

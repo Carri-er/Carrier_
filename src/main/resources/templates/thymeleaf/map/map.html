@@ -146,7 +146,7 @@
 					</div>
 					
 					<!-- 코스 저장 버튼 -->
-					<form action="cours_Save" name="saveBtn">
+					<form action="cours_Save" name="saveBtn" method="post">
 					<button class="btn saveBtn" type="button">코스 저장하기</button>
 					<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
 					<input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>

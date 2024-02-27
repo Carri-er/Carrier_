@@ -31,7 +31,9 @@ public class MemberController {
 
 	@Autowired
 	IMemberDAO member_dao;
-
+	
+	@Autowired
+	private com.ex.springboot.dao.IAiDAO AiDAO;
 	// 회원가입 - Page
 	@GetMapping("/addMember")
 	public String addMember() {
@@ -220,6 +222,20 @@ public class MemberController {
 		}
 		
 		model.addAttribute("loginMember", member_dao.memberList(id));
+		model.addAttribute("course", AiDAO.Course_select4(id));
+		
+		return "thymeleaf/Member/mypage";
+	}
+	@GetMapping("/mypageCourseAll")
+	public String mypageCourseAll(HttpServletRequest request, Model model) {
+		String id = request.getParameter("id");
+		
+		if(request.getParameter("id").equals("admin")) {
+			return "redirect:/MemberList";
+		}
+		
+		model.addAttribute("loginMember", member_dao.memberList(id));
+		model.addAttribute("course", AiDAO.Course_select(id));
 		
 		return "thymeleaf/Member/mypage";
 	}

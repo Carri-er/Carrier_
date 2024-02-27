@@ -770,6 +770,13 @@
 			Autoplay
 		});
 	</script>
+	<script th:if="${confirmMessage != null}">
+    var confirmResult = confirm("[[${confirmMessage}]]");
+    if (confirmResult) {
+        var id = document.querySelector('.hiddenId').value;
+        window.location.href = "/mypage?id="+id;
+    }
+</script>
 	
 </body>
 

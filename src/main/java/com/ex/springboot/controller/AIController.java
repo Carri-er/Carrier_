@@ -118,7 +118,7 @@ public class AIController {
 		return "thymeleaf/map/map";
 	}
 
-	@GetMapping("/cours_Save")
+	@PostMapping("/cours_Save")
 	public String cours_Save(HttpServletRequest request, Model model) {
 		String cours1 = request.getParameter("cours1");
 		String cours2 = request.getParameter("cours2");
@@ -138,6 +138,104 @@ public class AIController {
 		
 		return "thymeleaf/aicc/saveCourse";
 	}
+	@GetMapping("/Course_view")
+	public String Course_view(HttpServletRequest request, Model model) {
+		
+		String num = request.getParameter("num");
+		model.addAttribute("list",AiDAO.Course_view_list(num));
+		String number = AiDAO.Course_view_list(num).get(0).getCourse_number();
+		System.out.println("number"+number);
+		String[] values = number.split(",");
+		model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+		model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+		model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+		model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+		model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+		model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+		
+		return "thymeleaf/aicc/Course_view";
+	}
+	@GetMapping("/Course_delete")
+	public String Course_delete(HttpServletRequest request, Model model) {
+		
+		String num = request.getParameter("num");
+		model.addAttribute("list",AiDAO.Course_delete(num));
+		String msg = "1";
+	    if (msg != null && msg.equals("1")) {
+	        model.addAttribute("confirmMessage", "코스 삭제가 완료되었습니다.");
+	    }
+		
+		return "thymeleaf/home/home";
+	}
+	@PostMapping("/cours_Save_insert")
+	public String cours_Save_insert(HttpServletRequest request, Model model) {
+		String cours1 = request.getParameter("cours1");
+		String cours2 = request.getParameter("cours2");
+		String cours3 = request.getParameter("cours3");
+		String cours4 = request.getParameter("cours4");
+		String cours5 = request.getParameter("cours5");
+		String numder=cours1+","+cours2+","+cours3+","+cours4+","+cours5;
+		String memberId = request.getParameter("memberId");
+		String Course_name = request.getParameter("Course_name");
+		String Course_thema = request.getParameter("Course_thema");
+		String Course_Area = request.getParameter("Course_Area");
+		String Course_content = request.getParameter("Course_content");
+		String Course_distance = request.getParameter("Course_distance");
+	
+		System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,numder));
+		model.addAttribute("memberId", memberId);
+		System.out.println("memberId : " +memberId);
+		String msg = "1";
+	    if (msg != null && msg.equals("1")) {
+	        model.addAttribute("confirmMessage", "코스를 확인하러 마이페이지로 이동하시겠습니까?");
+	    }
+		
+		return "thymeleaf/aicc/aicc";
+	}
+	
+	@PostMapping("/cours_Save_update")
+	public String cours_Save_update(HttpServletRequest request, Model model) {
+		
+		String num = request.getParameter("num");
+		model.addAttribute("list",AiDAO.Course_view_list(num));
+		String number = AiDAO.Course_view_list(num).get(0).getCourse_number();
+		System.out.println("number"+number);
+		String[] values = number.split(",");
+		model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+		model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+		model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+		model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+		model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+		model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+		
+		return "thymeleaf/aicc/Course_update";
+	}
+	@PostMapping("/cours_Save_update_result")
+	public String cours_Save_update_result(HttpServletRequest request, Model model) {
+		
+		String num = request.getParameter("num");
+		String Course_name = request.getParameter("Course_name");
+		String Course_content = request.getParameter("Course_content");
+		
+		model.addAttribute("update",AiDAO.Course_update(Course_name,Course_content,num));
+		model.addAttribute("list",AiDAO.Course_view_list(num));
+		
+		String number = AiDAO.Course_view_list(num).get(0).getCourse_number();
+		System.out.println("number"+number);
+		String[] values = number.split(",");
+		model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+		model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+		model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+		model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+		model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+		model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+		
+		return "redirect:/Course_view?num="+num;
+	}
+	
 	
 	
 	
