@@ -6,27 +6,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ex.springboot.dao.IFeedDAO;
-
-import jakarta.servlet.http.HttpServletRequest;
-
 @Controller
 @RequestMapping
 public class CarrierController {
-	
 	@Autowired
-	IFeedDAO feed_dao;
-
-   @GetMapping("/")
+	private com.ex.springboot.dao.IBandDAO bandDao; // 다형성
+	
+   @GetMapping("/")	
    public String main() {
       return "thymeleaf/home/home";
    }
 
 
    @GetMapping("/home")
-   public String home(Model model, HttpServletRequest request) {
-	   model.addAttribute("feedList", feed_dao.feedList());
-      return "thymeleaf/home/home";
+   public String home(Model model) {
+	   
+	  model.addAttribute("randomBandList_home", bandDao.randomBandList_home());
+	   
+      return "thymeleaf/home/home2";
    }
 
 

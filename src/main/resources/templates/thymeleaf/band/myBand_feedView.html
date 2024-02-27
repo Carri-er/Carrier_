@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<div th:replace="~{head/head::head}"></div>
+<body>
+<div th:replace="~{nav/nav::nav}"></div>
+    <div class="myBand_wrapper">
+        <!-- myBand lnb 영역 
+        <div class="myBand_pc_lnb">
+            <ul class="container myBand_pc_lnb_ul d-flex justify-content-center">
+                <li>게시글</li>
+                <li>사진첩</li>
+                <li>일정</li>
+                <li>멤버</li>
+            </ul>
+        </div>
+		-->
+		
+        <!-- myBandContent -->
+        <div class="myBand_content">
+            <div class="container myBand_contentBox px-0 d-flex flex-md-column flex-sm-column flex-lg-row ">
+                <!-- col1 밴드 이미지, 제목 정보 영역 -->
+				<div class="col-12 col-lg-3 myBand_content_col_titleBox">
+					<div class="myBand_content_col_title sticky-md-top flex-column mr-md-5">
+						<div class="myBand_title_img">
+							<img
+								th:src="@{'../img/uploadBandThumnail/'+ ${myBandList.getBand_thumnail()}}"
+								class="img-fluid join_band_item_img" alt="...">
+						</div>
+						<div class="myBand_title_name d-flex justify-content-between">
+							<h3 th:text="${myBandList.getBand_name()}"></h3>
+
+							<!-- 로그인 아이디와 밴드 관리자 아이디가 같을 때 -->
+							<th:block th:if="${session.Member_Id ne null}">
+								<th:block
+									th:if="${ session.Member_Id eq myBandList.getBand_admin() }">
+									<a
+										th:href="@{'setMyBand?bandUrl='+${myBandList.getBand_code()}}"
+										class="myBand_adminBandSet py-1">밴드 설정</a>
+								</th:block>
+								<th:block
+									th:if="${ session.Member_Id ne myBandList.getBand_admin() and  checkMember ne null}">
+									<a
+										th:href="@{'withdrawalMyBand?bandUrl='+${myBandList.getBand_code()}}"
+										class="myBand_memberBandSet py-1"
+										onclick="return func_bandWithdrawal() ">밴드 탈퇴하기</a>
+								</th:block>
+							</th:block>
+						</div>
+						<div id="myBand_member_countBtn" class="myBand_member_count" onclick="return func_bandMember()">
+							<a class="myBandLink" th:href="@{'/mybandMember?bandUrl='+${myBandList.getBand_code()}}">
+								<span th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
+							</a>
+						</div>
+						
+						<div class="myBand_info">
+							<span th:text="${myBandList.getBand_content()}"></span>
+						</div>
+						
+						
+						
+						<!-- 가입한 밴드 확인 영역 -->
+						<th:block th:if="${checkMember == null}">
+							<form action="addBandMember" method="post" name="addMember_band">
+								<div class="myBand_write_btn">
+									<input name="bandCode" type="hidden" th:value="${myBandList.getBand_code()}" />
+									<input name="joinMemberId" type="hidden" th:value="${session.Member_Id}" />
+									<a href="javascript:addMember_band.submit();" >
+										<span>가입하기</span>
+									</a>								
+								</div>		
+							</form>
+						</th:block>
+						<th:block th:unless="${checkMember == null}">
+							<div class="myBand_write_btn btn-main">
+								<a
+									th:href="@{'bandFeedWrite?bandUrl='+${myBandList.getBand_code()}}">
+									<span>글쓰기</span>
+								</a>
+							</div>
+						</th:block>
+						
+						
+						
+						<!-- 밴드 채팅 리스트 영역 -->
+						<!-- <th:block th:if="${session.Member_Id ne null}">
+							<div class="band_chatBox px-1 mt-5 w-100">
+								<div class="band_chat col-12">
+									<p class="fw-bold pb-0 mb-0">채팅</p>
+									<hr class="m-0" />
+									채팅 내역이 올 영역
+									
+									
+								</div>
+							</div> band_chatBox
+						</th:block> -->
+						
+					</div> <!-- myBand_content_col_title -->
+				</div> <!-- myBand_content_col_titleBox : 밴드 정보 -->
+
+
+				<!-- col2 밴드 게시글 영역 -->
+                <div class="col-12 col-lg-7 myBand_content_col_content mt-5" >
+                   <!--  <div class="myBand_content_search">
+                        <span>글 내용, #태그, @작성자 검색</span>
+                        <img class="search_img" src="../img/common/btn_header_search.png" alt="">
+                        <span th:text="${feedwriterImg.getMember_profileimage()}"></span>
+                    </div> -->
+                    <div class="myBand_content_item " th:each="myBandFeedList:${myBandFeedList}">
+                        <div class="myBand_content_item_writer">
+                            <img class="myBand_content_item_writer_profile" th:src="@{'../img/member_thumbnail/'+${myBandFeedList.getMember_profileimage()}}"  alt="#">
+                            <div class="myBand_content_item_writer_info">
+                                <strong th:text="${myBandFeedList.getMember_id()}">작성자 아이디</strong>
+                                <span>작성 시간 <span th:text="${myBandFeedList.getBand_feed_uploadday()}"></span></span>
+                            </div>
+                            
+                            <th:block th:if="${myBandFeedList.getMember_id() == session.Member_Id}">
+                        	
+								<div class="f17" id="feed-right">
+									<a class="dropdown-toggle text-center m-0 ps-3 pe-1" href="#"
+										role="button" id="myBandDropdownMenuLink" data-bs-toggle="dropdown"
+										aria-expanded="false"></a>
+									<ul class="dropdown-menu dropdown-menu-dark myBand_dropdownList">
+										<li>
+											<form action="deleteFeed" method="post" id="deleteFeedForm">
+												<input type="hidden" name="bandUrl"
+													th:value="${myBandFeedList.getBand_code()}" /> 
+												<input
+													type="hidden" name="bandfeednum"
+													th:value="${myBandFeedList.getBand_feed_num()}" /> 
+												<input
+													type="button" class="btn float-end bandFeedDeleteBtn"
+													value="삭제하기" onclick="return func_deleteFeed()" />
+											</form>
+										</li>
+										
+										<li>
+											<form action="bandFeedUpdate" method="post">
+												<input type="hidden" name="bandUrl"
+													th:value="${myBandFeedList.getBand_code()}" /> <input
+													type="hidden" name="bandfeednum"
+													th:value="${myBandFeedList.getBand_feed_num()}" /> <input
+													type="hidden" name="member_id"
+													th:value="${session.Member_Id}" /> <input type="hidden"
+													name="feedcontent"
+													th:value="${myBandFeedList.getBand_feed_content()}" /> <input
+													type="submit" class="btn float-end" value="수정하기" />
+											</form>
+										</li>
+									</ul>
+								</div>
+
+                        	</th:block>
+                            
+                        </div>
+                        <div class="myBand_content_item_content">
+							<div th:utext="${myBandFeedList.getBand_feed_content()}"></div> 
+                          
+                        </div>
+                     
+                    </div>
+                </div>
+					
+                
+
+            </div>  <!-- myBand_contentBox -->
+        </div>
+
+
+    </div>
+
+    <div th:replace="~{footer/footer::footer}"></div>
+	
+    
+    <script>
+
+	    function func_deleteFeed(){
+	        var del_confirm = confirm("게시글을 정말 삭제하시겠습니까?");
+	        
+	        if(del_confirm){
+	            // 확인을 클릭한 경우 form을 제출합니다.
+	            
+	        	document.getElementById('deleteFeedForm').submit();
+	        } else {
+	            // 취소를 클릭한 경우 아무 작업도 하지 않습니다.
+	            return false; // 페이지 이동 방지
+	        }
+	    }
+	    
+	    function func_bandWithdrawal(){
+	    	var result = confirm('정말 탈퇴하시겠습니까?');
+	    	
+	    	if(result){
+	    		return true;
+	    	} else {
+	    		return false;
+	    	}
+	    }
+	    
+	    function func_bandMember(){
+	    	
+	    }
+	    
+	</script>
+</body>
+</html>
