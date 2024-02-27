@@ -110,7 +110,7 @@
                     
                         
                           <div class="myBand_content_item_writer d-flex flex-row">
-                      <a th:href="@{'/bandFeedView?bandUrl='+${myBandFeedList.getBand_code()}+'&conNum='+${myBandFeedList.getBand_feed_num()}}" class="row band_feed_list_link d-block">
+                     <!--  <a th:href="@{'/bandFeedView?bandUrl='+${myBandFeedList.getBand_code()}+'&conNum='+${myBandFeedList.getBand_feed_num()}}" class="row band_feed_list_link d-block"> -->
                                <img class="myBand_content_item_writer_profile" th:src="@{'../img/member_thumbnail/'+${myBandFeedList.getMember_profileimage()}}"  alt="#">
                                
                                <div class="myBand_content_item_writer_info">
@@ -156,7 +156,7 @@
    
                               </th:block>
                             
-                       </a>
+                       <!-- </a> -->
                            </div>
                            <div class="myBand_content_item_content">
                         <div th:utext="${myBandFeedList.getBand_feed_content()}"></div>
