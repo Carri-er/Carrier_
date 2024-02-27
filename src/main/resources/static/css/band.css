@@ -179,6 +179,7 @@ div.band_more_view{
     position : relative;
     bottom : 0px;
     margin-top : 10px;
+    width: 100%;
 }
 
 /* 오늘의 인기글 */
