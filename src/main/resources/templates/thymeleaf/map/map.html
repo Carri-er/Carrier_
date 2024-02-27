@@ -4,6 +4,9 @@
 
 <body class="overflow-hidden">
 	<div th:replace="~{nav/nav::nav}"></div>
+	<div class="loading-screen">
+        <div class="loading-message">로딩 중...</div>
+    </div>
 	<div class="map_wrapp">
 		<!-- 맵 컨텐츠 전체를 감싸는 영역  -->
 		<div class="map_all_contentBox ">
@@ -12,7 +15,7 @@
 				<!-- 정보값 출력 영역 day가 0일때-->
 				<th:block th:if="${day}==0">
 					<div class="map_curr_locationBox  py-4 bg-pinkD">
-					<div class="col map_curr_location">
+					<div class="col map_curr_location ">
 						<div class="map_curr_location_name1 my-3 px-3 text-white">
 							<th:block th:if="${session.Member_Name eq null}">
 								<span>사용자님을 위한 여행코스</span></th:block>
@@ -23,7 +26,8 @@
 								<div class="col-2 bg-pinkD rounded-circle f14 dayCircle ">당일여행</div>
 								<div class="col-10 rounded-circle mt-3">
 								 	<p class="px-3 mb-1 pb-1"><b>여행 지역 </b> <span class="text-black mx-2 ">|</span> <span th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span></p>
-								 	<p class="px-3"><b>선택 테마 </b> <span class="text-black mx-2">|</span> 
+								 	<p class="px-3 mb-1 pb-1 text-black"><b>총 거리</b> <span class="text-black mx-2">|</span> <span class="totalDistance text-black"></span> </p>
+								 	<p class="px-3">
 								 	<th:block th:if="${thema!=null and thema != ' '}"># <span th:text="${thema}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema1!=null and thema1 != ' '}"># <span th:text="${thema1}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema2!=null and thema2 != ' '}"># <span th:text="${thema2}" class="text-black "></span></th:block>
@@ -33,7 +37,6 @@
 								 	<th:block th:if="${thema6!=null and thema6 != ' '}"># <span th:text="${thema6}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema7!=null and thema7 != ' '}"># <span th:text="${thema7}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema8!=null and thema8 != ' '}"># <span th:text=" ${thema8}" class="text-black "></span></th:block></p>
-								 	
 								</div>
 							</div>
 						</div>
@@ -41,6 +44,7 @@
 					</div>
 				</div>
 				</th:block>
+				
 				
 				<!-- 정보값 출력 영역 day가 1일때-->
 				<th:block th:if="${day}==1">
@@ -56,7 +60,8 @@
 								<div class="col-2 bg-skyb rounded-circle f14 dayCircle ">1박2일</div>
 								<div class="col-10 rounded-circle mt-3">
 								 	<p class="px-3 mb-1 pb-1"><b>여행 지역 </b> <span class="text-black mx-2 ">|</span> <span th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span></p>
-								 	<p class="px-3"><b>선택 테마 </b> <span class="text-black mx-2">|</span> 
+								 	<p class="px-3 mb-1 pb-1 text-black"><b>총 거리</b> <span class="text-black mx-2">|</span> <span class="totalDistance text-black"></span> </p>
+								 	<p class="px-3">
 								 	<th:block th:if="${thema!=null and thema != ' '}"># <span th:text="${thema}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema1!=null and thema1 != ' '}"># <span th:text="${thema1}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema2!=null and thema2 != ' '}"># <span th:text="${thema2}" class="text-black "></span></th:block>
@@ -88,7 +93,8 @@
 								<div class="col-2 bg-mainbg rounded-circle f14 dayCircle text-black">2박3일</div>
 								<div class="col-10 rounded-circle mt-3">
 								 	<p class="px-3 mb-1 pb-1"><b>여행 지역 </b> <span class="mx-2 ">|</span> <span th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span></p>
-								 	<p class="px-3"><b>선택 테마 </b> <span class="text-black mx-2">|</span> 
+								 	<p class="px-3 mb-1 pb-1 text-black"><b>총 거리</b> <span class="text-black mx-2">|</span> <span class="totalDistance text-black"></span> </p>
+								 	<p class="px-3">
 								 	<th:block th:if="${thema!=null and thema != ' '}"># <span th:text="${thema}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema1!=null and thema1 != ' '}"># <span th:text="${thema1}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema2!=null and thema2 != ' '}"># <span th:text="${thema2}" class="text-black "></span></th:block>
@@ -98,6 +104,7 @@
 								 	<th:block th:if="${thema6!=null and thema6 != ' '}"># <span th:text="${thema6}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema7!=null and thema7 != ' '}"># <span th:text="${thema7}" class="text-black "></span></th:block>
 								 	<th:block th:if="${thema8!=null and thema8 != ' '}"># <span th:text=" ${thema8}" class="text-black "></span></th:block></p>
+								 	
 								 	
 								</div>
 							</div>
@@ -137,6 +144,18 @@
 							<li class="map_guide_icon_item map_icon_set">설정</li>
 						</ul>
 					</div>
+					
+					<!-- 코스 저장 버튼 -->
+					<form action="cours_Save" name="saveBtn">
+					<button class="btn saveBtn" type="button">코스 저장하기</button>
+					<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
+					<input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>
+					<input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="cours3"/>
+					<input type="hidden" th:value="${aiccCafe.get(0).getEvent_num()}" name="cours4"/>
+					<input type="hidden" th:value="${aiccFood2.get(0).getEvent_num()}" name="cours5"/>
+					<input type="hidden" class="totalDistanceValue" value="" name="cours6"/>
+					<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
+					
 					<!-- 반복될 부분 day1 -->
 					<p class="px-3 f20 fw-bold">day 1</p>
 						<!-- 여행지 1 -->
@@ -266,7 +285,7 @@
 							</a>
 							</div>
 						</div>
-						
+						</form>
 						<!-- 반복될 부분 day1 끝 -->
 						<!-- 반복될 부분 day2 -->
 						<th:block th:if="${day}==1 or ${day}==2" >
@@ -588,16 +607,16 @@
                  latlng: new kakao.maps.LatLng(mapx, mapy)
              },
              {
+                 title: name2, 
+                 latlng: new kakao.maps.LatLng(mapx4, mapy4)
+             },
+             {
                  title: name3, 
                  latlng: new kakao.maps.LatLng(mapx2, mapy2)
              },
              {
-                 title: name4, 
+                 title: name4,
                  latlng: new kakao.maps.LatLng(mapx3, mapy3)
-             },
-             {
-                 title: name2,
-                 latlng: new kakao.maps.LatLng(mapx4, mapy4)
              },
              {
                  title: name5,
@@ -624,28 +643,110 @@
                  image : markerImage // 마커 이미지 
              });
          }
+         var linePath;
+         var lineLine = new daum.maps.Polyline();
+         var distance;
+         var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
+         for (var i = 0; i < positions.length; i++) {
+             if (i != 0) {
+                 linePath = [ positions[i - 1].latlng, positions[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
+             }
+             ;
+             lineLine.setPath(linePath); // 선을 그릴 라인을 세팅합니다
+      
+             var drawLine = new daum.maps.Polyline({
+                 map : map, // 선을 표시할 지도입니다 
+                 path : linePath,
+                 strokeWeight : 3, // 선의 두께입니다 
+                 strokeColor : '#ffe576', // 선의 색깔입니다
+                 strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                 strokeStyle : 'solid' // 선의 스타일입니다
+             });
+      
+             distance = Math.round(lineLine.getLength());
+             displayCircleDot(positions[i].latlng, distance);
+             totalDistance += distance;
+             document.querySelector('.totalDistance').innerText =totalDistance.toFixed(2)/1000 + "km";
+             document.querySelector('.totalDistanceValue').value = (totalDistance / 1000).toFixed(2);
+              
+         }
+      
+         function displayCircleDot(position, distance) {
+             if (distance > 0) {
+                 // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+                 var distanceOverlay = new daum.maps.CustomOverlay(
+                         {
+//                               content : '<div class="dotOverlay bg-white rounded-4 px-3 mt-5">거리 <span class="number">'
+//                                      + distance + '</span>m</div>', 
+                             position : position,
+                             yAnchor : 1,
+                             zIndex : 2
+                         });
+      
+                 // 지도에 표시합니다
+                 distanceOverlay.setMap(map);
+             }
+             
+         }
+        
+
+         
     </script>
-  <script th:inline="javascript">
+<script th:inline="javascript">
     /*<![CDATA[*/
     function refreshPageIfSameValues() {
         var eventNum1 = /*[[${aicc[0].getEvent_num()}]]*/0; // 첫 번째 여행지 데이터의 이벤트 번호
         var eventNum2 = /*[[${aicc2[0].getEvent_num()}]]*/0; // 두 번째 여행지 데이터의 이벤트 번호
-        var eventNum3 = /*[[${aiccFood[0].getEvent_num()}]]*/0; // 두 번째 여행지 데이터의 이벤트 번호
-        var eventNum4 = /*[[${aiccFood2[0].getEvent_num()}]]*/0; // 두 번째 여행지 데이터의 이벤트 번호
+        var eventNum3 = /*[[${aiccFood[0].getEvent_num()}]]*/0; // 세 번째 여행지 데이터의 이벤트 번호
+        var eventNum4 = /*[[${aiccFood2[0].getEvent_num()}]]*/0; // 네 번째 여행지 데이터의 이벤트 번호
         
         if (eventNum1 === eventNum2) {
-            // 두 값이 같으면 페이지 새로고침
-            location.reload();
+            // 두 값이 같으면 페이지 새로 고침
+            setTimeout(function() {
+                location.reload();
+            }, 0); // setTimeout을 사용하여 새로 고침을 다음 프레임으로 지연
         }
         if (eventNum3 === eventNum4) {
-            // 두 값이 같으면 페이지 새로고침
-            location.reload();
+            // 두 값이 같으면 페이지 새로 고침
+            setTimeout(function() {
+                location.reload();
+            }, 0); // setTimeout을 사용하여 새로 고침을 다음 프레임으로 지연
         }
     }
     
-    // 페이지 로드 시 함수 호출
+    // 페이지가 로드될 때 함수 호출
     window.onload = refreshPageIfSameValues;
     /*]]>*/
+</script>
+ <script>
+        // 페이지 로딩 후 로딩 화면을 5초 동안 표시한 후 자동으로 숨깁니다.
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelector('.loading-screen').style.display = 'none';
+            }, 1000); // 5초 뒤에 로딩 화면을 숨김
+        });
+    </script>
+<script>
+    // 버튼 요소를 가져옵니다.
+    var saveButton = document.querySelector('.saveBtn');
+
+    // 버튼을 클릭했을 때 실행될 함수를 정의합니다.
+    saveButton.addEventListener('click', function() {
+        // 저장 여부를 확인하는 메시지를 표시합니다.
+        var confirmMessage = "이 코스를 저장하시겠습니까?";
+        // 사용자가 "예"를 선택했을 때의 처리를 정의합니다.
+        function YesLetMeSubmit() {
+            // 저장하는 코드를 여기에 추가합니다.
+            console.log("코스를 저장합니다.");
+            alert("코스 저장 페이지로 이동합니다.");
+            document.saveBtn.submit();
+        }
+
+        // 사용자에게 확인 메시지를 표시하고, "예"를 선택했을 때 저장 함수를 호출합니다.
+        if (confirm(confirmMessage)) {
+            YesLetMeSubmit();
+        }
+    });
 </script>
 
 </body>

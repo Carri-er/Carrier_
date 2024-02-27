@@ -118,6 +118,79 @@ public class AIController {
 		return "thymeleaf/map/map";
 	}
 
+	@GetMapping("/cours_Save")
+	public String cours_Save(HttpServletRequest request, Model model) {
+		String cours1 = request.getParameter("cours1");
+		String cours2 = request.getParameter("cours2");
+		String cours3 = request.getParameter("cours3");
+		String cours4 = request.getParameter("cours4");
+		String cours5 = request.getParameter("cours5");
+		String cours6 = request.getParameter("cours6");
+		String memberId = request.getParameter("memberId");
+		
+		model.addAttribute("aicc", AiDAO.listCourse(cours1));
+		model.addAttribute("aiccFood", AiDAO.listCourse(cours2));
+		model.addAttribute("aicc2", AiDAO.listCourse(cours3));
+		model.addAttribute("aiccFood2", AiDAO.listCourse(cours4));
+		model.addAttribute("aiccCafe", AiDAO.listCourse(cours5));
+		model.addAttribute("totalDistance", cours6);
+		model.addAttribute("memberId", memberId);
+		
+		return "thymeleaf/aicc/saveCourse";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 여행 글 업로드
 	@PostMapping("/Event_write222")
 

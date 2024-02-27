@@ -36,10 +36,8 @@
 		white-space: nowrap;
 	}
 	div.myBand_write_btn{
-		display: inline-block;
-		width: auto;
-		height: auto;
-		padding: 5px 20px;
+		width: 50%;
+		/* padding: 5px 20px; */
 	}
 	div.myBand_write_btn>span{
 		font-size: 15px;
