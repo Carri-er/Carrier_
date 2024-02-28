@@ -22,12 +22,10 @@ public interface IFeedDAO {
 	);
 
 	//피드 전체 페이지
-	public List<FeedDTO> feedList(
-			@Param("Member_Id") String Member_Id
-	);
+	public List<FeedDTO> feedList();
 	
-	//피드 전체 페이지 - 좋아요 개수
-	public Feed_LikeDTO feedList_like(
+	//피드 전체 페이지 - 좋아요 개수 가져오기
+	public Feed_LikeDTO feedLikeList(
 			@Param("Feed_num") int Feed_num
 	);
 

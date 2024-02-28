@@ -337,6 +337,7 @@ public class BandController {
 			String origin_band_thumnail = request.getParameter("origin_band_thumnail");
 			String band_name = request.getParameter("band_name");
 			String band_content = request.getParameter("band_content");
+			
 			System.out.println("band_thumnail" + band_thumnail);
 			System.out.println("origin_band_thumnail" + origin_band_thumnail);
 
@@ -344,11 +345,12 @@ public class BandController {
 
 			try {
 
-				if ( Objects.equals(band_thumnail, null ) ) {
+				if ( Objects.equals(file, null ) ) {
 					bandDao.bandInfoUpdate(origin_band_thumnail, band_name, band_content, num_band_code);
+					
 					return go;
 				} else {
-
+					
 					UUID uuidOne = UUID.randomUUID();
 
 					// A mutable sequence of characters

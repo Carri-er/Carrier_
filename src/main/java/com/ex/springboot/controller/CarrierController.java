@@ -11,12 +11,13 @@ import com.ex.springboot.dao.IFeedDAO;
 @Controller
 @RequestMapping
 public class CarrierController {
-	@Autowired
-	private com.ex.springboot.dao.IBandDAO bandDao; // 다형성
-	@Autowired
-	IFeedDAO feed_dao;
 	
-   @GetMapping("/")	
+   @Autowired
+   private com.ex.springboot.dao.IBandDAO bandDao; // 다형성
+   @Autowired
+   IFeedDAO feed_dao;
+   
+   @GetMapping("/")   
    public String main() {
       return "thymeleaf/home/home";
    }
@@ -24,19 +25,11 @@ public class CarrierController {
 
    @GetMapping("/home")
    public String home(Model model) {
-	   
-	  model.addAttribute("randomBandList_home", bandDao.randomBandList_home());
-	  model.addAttribute("feedList", feed_dao.feedList_random());
-	   
+      
+     model.addAttribute("randomBandList_home", bandDao.randomBandList_home());
+     model.addAttribute("feedList", feed_dao.feedList_random());
+      
       return "thymeleaf/home/home";
    }
-
-
-   @GetMapping("/map")
-   public String map() {
-      return "thymeleaf/map/map_0221";
-   }
-   
-
 
 }

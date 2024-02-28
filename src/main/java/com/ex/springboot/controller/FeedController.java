@@ -41,16 +41,14 @@ public class FeedController {
 	public String feed(Model model, HttpServletRequest request, FeedDTO feedDTO, HttpSession session) {
 		String Feed_theme = "#"+request.getParameter("Feed_theme");		
 		String Feed_area = "#"+request.getParameter("Feed_area");
-		
-		//로그인한 아이디 불러오기
-		String Member_Id = (String) session.getAttribute("Member_Id");
+
 		
 		System.out.println("search: " + Feed_theme + "/" + "search2: " + Feed_area);
 		
 		List<FeedDTO> feedList = new ArrayList<>();
 		
 		if (request.getParameter("Feed_theme") == null && request.getParameter("Feed_area") == null) {
-			feedList = feed_dao.feedList(Member_Id);
+			feedList = feed_dao.feedList();
 			
 		} else if (request.getParameter("Feed_theme") != null && !request.getParameter("Feed_theme").equals("")) {
 			feedList = feed_dao.feedList_theme(Feed_theme);
@@ -58,8 +56,8 @@ public class FeedController {
 		} else if (request.getParameter("Feed_area") != null && !request.getParameter("Feed_area").equals("")) {
 			feedList =  feed_dao.feedList_area(Feed_area);
 		}
-
 		model.addAttribute("feedList",feedList);
+
 
 		return "thymeleaf/feed/feed2";
 	}
@@ -74,7 +72,6 @@ public class FeedController {
 		// 피드 코멘트 리스트
 		model.addAttribute("Feed_commentList", feed_dao.feedCommentList(Feed_num));
 		model.addAttribute("Feed_commentDTO", new Feed_commentDTO());
-
 		model.addAttribute("feedList_heart", feed_dao.feedCommentList(Feed_num));
 		
 
@@ -428,12 +425,14 @@ public class FeedController {
 		if(Feed_heart == 1) {
 			feed_dao.feedLike(Feed_num, Member_Id);
 			count = 1;
+			feed_dao.feedLikeCount(Feed_num, count);
+			
 		} else if (Feed_heart == 0) {
 			feed_dao.feedHate(Feed_num, Member_Id);
 			count = -1;
+			feed_dao.feedLikeCount(Feed_num, count);
 		}
-		feed_dao.feedLikeCount(Feed_num, count);
-		
+
 		System.out.println("~댓글 조아요~");
 		
 		return "redirect:/feed_show?num="+Feed_num;

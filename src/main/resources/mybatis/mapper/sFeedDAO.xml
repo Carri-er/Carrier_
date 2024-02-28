@@ -26,7 +26,6 @@
 		ORDER BY DBMS_RANDOM.value
 	</select>
 	
-	
 	<!-- 피드 글쓰기 -->
 	<insert id="feedWrite">
 		INSERT INTO Feed 
@@ -38,24 +37,23 @@
 	<!-- 피드 리스트 가져오기 -->
 	<select id="feedList" resultType="com.ex.springboot.dto.FeedDTO">
 		SELECT 
-		    f.Feed_num,
-		    f.Member_Id,
-		    f.Feed_title,
-		    f.Feed_content,
-		    f.Feed_theme,
-		    f.Feed_area,
-		    f.Feed_uploadday,
-		    f.Feed_updateday,
-		    f.Feed_heart,
-		    f.Feed_thumbnail,
-		    CASE 
-		        WHEN fh.Member_id IS NULL THEN 0
-		        ELSE 1
-		    END AS Feed_heart_on
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title, --피드제목
+		    A.Feed_content, --피드내용
+		    A.Feed_theme,  --피드 테마 태그
+		    A.Feed_area,  --피드 지역 태그
+		    A.Feed_uploadday, -- 올린날짜
+		    A.Feed_updateday, --수정날짜
+		    A.Feed_thumbnail
 		FROM 
-		    Feed f
+		    Feed A 
 		LEFT JOIN 
-		    Feedheart fh ON f.Feed_num = fh.Feed_num AND fh.Member_id = #{Member_Id}
+		    carrier_member B 
+		ON 
+		    A.Member_id = B.Member_id
+		ORDER BY Feed_uploadday DESC
 	</select>
 	
 	<!-- 피드 리스트[theme filter] 가져오기 -->
@@ -70,7 +68,6 @@
 		    A.Feed_area, 
 		    A.Feed_uploadday,
 		    A.Feed_updateday,
-		    B.Feed_heart_on
 		    A.Feed_thumbnail FROM Feed A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_theme = #{Feed_theme}
 	</select>
 	
@@ -86,7 +83,6 @@
 		    A.Feed_area, 
 		    A.Feed_uploadday,
 		    A.Feed_updateday,
-		    B.Feed_heart_on,
 		    A.Feed_thumbnail FROM Feed A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_area = #{Feed_area}
 	</select>
 	
@@ -145,7 +141,7 @@
 	
 	<!-- 피드 좋아요 누르기 -->
 	<insert id="feedLike">
-		INSERT INTO Feedheart (Feed_num, Member_Id, Feed_heart) VALUES (#{Feed_num}, #{Member_Id}, 1)
+		INSERT INTO Feedheart (Feed_num, Member_Id, Feed_heart_on) VALUES (#{Feed_num}, #{Member_Id}, 1)
 	</insert>
 	
 	<!-- 피드 좋아요 삭제 -->
@@ -155,7 +151,18 @@
 	
 	<!-- 좋아요 리스트 출력 -->
 	<select id="feedLikeList" resultType="com.ex.springboot.dto.Feed_LikeDTO">
-		SELECT * FROM Feedheart WHERE Feed_num = #{Feed_num} and Member_Id = #{Member_Id}
+		SELECT
+		    B.Feed_num,
+		    B.Member_Id,
+		    B.Feed_heart_on
+		FROM 
+		    Feed A 
+		RIGHT OUTER JOIN 
+		    Feedheart B 
+		ON 
+		    A.Feed_num = B.Feed_num    
+		WHERE 
+		    B.Feed_num = #{Feed_num}
 	</select>
 	
 	<!-- 댓글 달기 -->

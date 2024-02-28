@@ -15,5 +15,4 @@ public class FeedDTO {
 	private String Feed_updateday; //수정날짜
 	private int Feed_heart; //하트 수
 	private String Feed_thumbnail; //피드 썸네일 이미지 파일 명
-	private int Feed_heart_on; //하트 on/off
 }
