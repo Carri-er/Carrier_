@@ -3,6 +3,7 @@
 <div th:replace="~{head/head::head}"></div>
 
 <body>
+
 <div th:replace="~{nav/nav::nav}"></div>
     <div class="map_wrapp">
         <!-- 맵 컨텐츠 전체를 감싸는 영역  -->
@@ -58,27 +59,59 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="row" th:each="aicc:${aicc}">
-                    <div class="col">
-                    	<div class="row">
-                    	<div class="col" ></div>
-                    	<div class="col" >
-                    		<img th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
-										class="img-fluid rounded-circle" alt=""
-										style="width: 80px; height: 80px;">
-                    	</div>
-                    	<div class="col"  th:text="${aicc.getEvent_name()}">
-                    		
-                    	</div>
-                    	<div class="col"></div>
-                    	</div>
-                    </div>
-                    </div>
-                </div> 
-
-                <!-- 지역별 피드 출력 영역 -->
+                  
+                </div> <!-- map_guide_iconBox 끝 div--> 
                 
-                <!-- trip 위치 출력 페이지  -->
+                <!-- 페이징 -->
+                <div class="pagination">
+						<ul class="d-flex">
+							<!-- 이전 버튼 -->
+							<li th:if="${currentPage > 1}" class="mx-2"><a
+								th:href="@{'/map?page=' + ${mPage}}">&laquo;
+									이전</a></li>
+
+							<!-- 페이지 번호 -->
+							<li
+								th:each="pageNum : ${#numbers.sequence((currentPage - 2 > 0 ? currentPage - 2 : 1), 
+                        (currentPage + 2 < totalPages ? currentPage + 2 : totalPages))}"
+								class="mx-2"><a
+								th:href="@{'/map?page=' + ${pageNum}}"
+								th:text="${pageNum}"
+								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
+							</li>
+
+							<!-- 다음 버튼 -->
+							<li th:if="${currentPage < totalPages}" class="mx-2"><a
+								th:href="@{'/info?page=' + ${pPage} }">다음
+									&raquo;</a></li>
+						</ul>
+					</div>
+				<div id="mapListItemWrapper">
+				</div>					
+                <div class="mapListItemBox">
+                	<!-- 게시글 리스트 출력 -->
+	                <div class="mapListItem row" th:each="paginItemList : ${paginItemList}">
+	                	<a  class="row" th:href="@{'Event_view?id='+ ${paginItemList.getEvent_num()}}">
+		                	<div class="col-3 board-left text-center hstack justify-content-center">
+								<img th:src="@{'../img/tour/' + ${paginItemList.getEvent_thumbnail()}}"
+										class="img-fluid rounded-4" alt=""
+										style="width: 80px; height: 80px;">
+							</div>
+							<div class="col">
+								<div class="row">
+									<div class="col">
+										<h6>
+											[<span th:text="${paginItemList.getEvent_category()}"></span>] 
+											<span th:text="${paginItemList.getEvent_name()}"></span>
+										</h6>
+									</div>
+								</div>
+							</div>
+							
+						</a>
+	                </div> <!-- mapListItem 끝-->
+                </div>
+				
                 
                 
                 
@@ -95,45 +128,131 @@
 
 
 <div th:replace="~{footer/footer::footer}"></div>
-    <script>
- // 마커를 담을 배열입니다
+<script th:inline="javascript">
+/*<![CDATA[*/
+kakao.maps.load(function () {
+    // 마커를 담을 배열입니다
     var markers = [];
-    let presentPosition;
-    
-    
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = { 
-	        	center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-	            level: 5 // 지도의 확대 레벨
-            };
+    // 마커 간의 거리를 담을 배열입니다
+    var distances = [];
+
+    // event table에 저장된 데이터
+    var mapMarkerList = /*[[${mapMarkerList}]]*/ [];
+
+    // 지도를 표시할 div
+    var mapContainer = document.getElementById('map');
+
+    var mapOption = { 
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 5 // 지도의 확대 레벨
+    };
         
-        // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-        var map = new kakao.maps.Map(mapContainer, mapOption); 
-        
-     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-        if (navigator.geolocation) {
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);    
+
+    // mapMarkerList에 저장된 데이터를 반복하여 마커 생성 및 표시
+    mapMarkerList.forEach(function (markerInfo) {
+        // 마커의 위치 설정
+        var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
+        // 마커 생성
+        var marker = new kakao.maps.Marker({
+            position: markerPosition // 마커의 위치 설정
+        });
+        // 마커 지도에 표시
+        marker.setMap(map);
+        markers.push(marker);
+    }); 
+
+    // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+    if (navigator.geolocation) {
+        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude; // 위도
+            var lon = position.coords.longitude; // 경도
+            var presentPosition = new kakao.maps.LatLng(lat, lon); // geolocation으로 얻어온 좌표
             
-            // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-            navigator.geolocation.getCurrentPosition(function(position) {
+            // 현재 위치 마커 생성
+            var currentPositionMarker = new kakao.maps.Marker({
+                position: presentPosition,
+                map: map
+            });
+            markers.push(currentPositionMarker); // 마커 배열에 추가
+
+            // 현재 위치로 지도 중심 변경
+            map.setCenter(presentPosition);
+            
+            // 현재 위치와 DB에 저장된 데이터에 대한 마커 간의 거리 계산 및 저장
+            markers.forEach(function(marker, index) {
+                var distance = getDistance(presentPosition, marker.getPosition());
+                console.log("거리: " + distance + "m");
+                distances.push(distance); // 계산된 거리를 배열에 저장
                 
-                var lat = position.coords.latitude, // 위도
-                    lon = position.coords.longitude; // 경도
+                // 마커 클릭 이벤트 추가
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + mapMarkerList[index].event_name+" "+  mapMarkerList[index].event_num + " 번";
+                    alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
+                });
                 
-                var locPosition = new kakao.maps.LatLng(lat, lon) // geolocation으로 얻어온 좌표
-                presentPosition=locPosition;
-         
-                map.setCenter(locPosition);   
-                    
-              });
-            
-        } else { // HTML5의 GeoLocation을 사용할 수 없을때 
-            
-            var locPosition = new kakao.maps.LatLng(37.566826, 126.9786567)
-            alert('현재 위치를 찾을 수 없습니다!');
-        }
-        // 
-        
-    </script>
+             // 거리와 해당 인덱스를 묶어 객체로 만든 배열 생성
+                var combinedData = distances.map(function(distance, index) {
+                    return {
+                        distance: distance,
+                        event: mapMarkerList[index] // 해당 인덱스의 이벤트 정보
+                    };
+                });
+
+                // 거리가 작은 순서대로 정렬
+                combinedData.sort(function(a, b) {
+                    return a.distance - b.distance;
+                });
+				
+                var mapListItemWrapper = document.getElementById('mapListItemWrapper');
+
+             // 최대 100번 반복
+             for (var i = 0; i < Math.min(combinedData.length, 100); i++) {
+                 var data = combinedData[i];
+                 var distance = data.distance;
+                 var event = data.event;
+                 var eventName = event.event_name;
+                 var eventNum = event.event_num;
+
+                 // 출력할 HTML 요소 생성
+                 var listItem = document.createElement('div');
+                 listItem.classList.add('mapListItem');
+                 listItem.innerHTML = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
+
+                 // #mapListItemWrapper에 추가
+                 mapListItemWrapper.appendChild(listItem);
+             }
+                
+               
+            });
+
+        });
+    } else { // HTML5의 GeoLocation을 사용할 수 없을때 
+        var locPosition = new kakao.maps.LatLng(37.566826, 126.9786567);
+        alert('현재 위치를 찾을 수 없습니다');
+        map.setCenter(locPosition);
+    }
+    
+    // 두 지점 간의 직선 거리를 계산하는 함수
+    function getDistance(p1, p2) {
+        var lat1 = p1.getLat(), lon1 = p1.getLng();
+        var lat2 = p2.getLat(), lon2 = p2.getLng();
+        var R = 6371000; // 지구의 반지름 (미터 단위)
+        var dLat = (lat2-lat1) * Math.PI / 180;
+        var dLon = (lon2-lon1) * Math.PI / 180; 
+        var a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180 ) * Math.cos(lat2 * Math.PI / 180 ) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2); 
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        var d = R * c; // 거리 (미터 단위)
+        return d;
+    }
+});
+/*]]>*/
+</script>
 </body>
 
 </html>
