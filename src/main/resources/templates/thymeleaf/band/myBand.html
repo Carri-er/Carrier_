@@ -97,7 +97,7 @@
 	            </div> <!-- myBand_content_col_titleBox : 밴드 정보 -->
 				
              	<!-- col2 밴드 게시글 영역 -->
-                <div class="col-12 col-lg myBand_content_col_content mt-5 mt-md-0">
+                <div class="col-12 p-4 col-lg myBand_content_col_content">
                 		<!-- 피드목록이 비어있을 때 -->
 						<div th:if="${myBandFeedList.empty}">
 							<div class="row my-5 gap-3">
@@ -117,7 +117,7 @@
                         <img class="search_img" src="../img/common/btn_header_search.png" alt="">
                         <span th:text="${feedwriterImg.getMember_profileimage()}"></span>
                     </div> -->
-                    <div class="myBand_content_item rounded-4 shadow-s my-5 p-5" th:each="myBandFeedList:${myBandFeedList}" >
+                    <div class="myBand_content_item rounded-4 shadow-s my-5 p-4" th:each="myBandFeedList:${myBandFeedList}" >
                     
                         
                           <div class="myBand_content_item_writer d-flex flex-row">
