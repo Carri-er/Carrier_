@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 이 매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
+<mapper namespace="com.ex.springboot.dao.IMapDAO">
+
+	<!-- event 테이블에 저장된 전체 데이터에서 위도, 경도, 이름, 카테고리, num 열들을 출력하는 리스트 -->
+	<select id="mapMarkerList" resultType="com.ex.springboot.dto.EventDTO">
+		select * from event
+	</select>
+
+<!-- 페이징을 위한 이벤트 리스트 조회 -->
+	<select id="pageItemList"	resultType="com.ex.springboot.dto.EventDTO">
+    	<![CDATA[
+		    SELECT *
+		    FROM (
+		        SELECT rownum AS rnum, e.*
+		        FROM (
+		            SELECT *
+		            FROM Event
+		            ORDER BY Event_num DESC
+		        ) e
+		        WHERE rownum <= #{endItemNum}
+		    )
+		    WHERE rnum > #{startItemNum}
+    	]]>
+	</select>
+
+</mapper>
