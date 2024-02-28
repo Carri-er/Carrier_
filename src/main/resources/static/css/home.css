@@ -599,7 +599,6 @@ div.home_band_recomand_text>span {
 		margin-top: 50px;
 	}
 	div.home_carousel {
-		background-color: var(--mainbg);
 		position: static;
 		padding-bottom: 40px;
 	}

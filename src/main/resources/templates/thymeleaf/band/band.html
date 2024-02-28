@@ -8,8 +8,8 @@
 
         <!-- 밴드 지역 네브바 -->
         <div class="container-fluid band_lnb">
-            <div class="container band_lnb_box">
-                <ul class="band_lnb_ul d-flex">
+            <div class="container band_lnb_box pt-5">
+                <ul class="band_lnb_ul p-0 d-flex">
                     <li class="band_lnb_item active">내 밴드</li>
                     <li class="band_lnb_item">소모임</li>
                 </ul>
@@ -20,7 +20,7 @@
         <div id="band" class="container join_band_wapper gx-0 mb-5">
             <div class="row join_Band gx-0">
                 <!-- 밴드 만들기 영역 -->
-				<div class="col-sm-4 join_band_item create_band"
+				<div class="col-sm-4 join_band_item create_band shadow-s"
 					onClick="bandCreateBtn()">
 					
 					<a href="/bandCreate" class="create_band_link">
@@ -30,12 +30,12 @@
 				</div>
 	
 				<!-- 가입한 밴드 출력 영역 / 반복-->
-				<div class="col-sm-4 join_band_item" th:each ="joinBandList:${joinBandList}">
+				<div class="col-sm-4 join_band_item shadow-s" th:each ="joinBandList:${joinBandList}">
 					<a  th:href="@{'myBand?bandUrl='+ ${joinBandList.getBand_code()}}" class="join_band_item_link">
 						<div class="join_band_item_imgBox">
 	                    	<img th:src="@{'../img/uploadBandThumnail/'+ ${joinBandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
 	                    </div>
-	                    <div class="join_band_item_text">
+	                    <div class="join_band_item_text px-3 f14">
 	                        <strong th:text="${joinBandList.getBand_name()}">밴드 제목</strong>
 		             	    <span>멤버 <span th:text="${joinBandList.getBand_memberCount()}" ></span></span>
 		                </div> 
@@ -46,26 +46,27 @@
         </div> <!-- join_band_wapper -->
 
         <!-- 밴드 추천 영역 -->
-        <div class="band_recomand_wrapper bg-main">
-            <div class="container">
-                <div class="row py-3">
-                    <div class="col">
-                        <span class="f22 float-start">이런 밴드는 어때요</span>
-                        <span class="float-end">모두보기 > </span>
-                    </div>
-                </div>
-                <!-- 밴드 추천 리스트 -->
-                <div class="row band_recomandBox">
-    
-                    <div class="col-lg-6 col-md-12 band_recomand_item " th:each ="bandList:${randomBandList}">
+        <div class="band_recomand_wrapper bg-main p-3">
+            <div class="container pb-2">
+				<div class="row m-auto py-3 w-100 ">
+					<div class="col hstack justify-content-between">
+						<span class="f22 float-start"><b>이런 밴드 어때요</b></span> <span
+							class="f15 float-end">모두보기 > </span>
+					</div>
+				</div>
+				<!-- 밴드 추천 리스트 -->
+                <div class="row band_recomandBox gap-3 my-4 m-auto justify-content-between px-2">
+                    <div class="col-12 col-md-5 p-0 band_recomand_item " th:each ="bandList:${randomBandList}">
 	                    <a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="band_recomand_link d-flex">
 	                        <div class="band_recomand_img">
 	                            <img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
 	                        </div>
 	                        <div class="band_recomand_text">
-	                            <h3 th:text="${bandList.getBand_name()}"></h3>
-	                            <span th:text="${bandList.getBand_content()}"></span>
-	                            <div class="band_more_view">
+	                        	<div class="ms-2">
+		                            <span class="h5 d-block" th:text="${bandList.getBand_name()}"></span>
+		                            <span th:text="${bandList.getBand_content()}"></span>
+	                        	</div>
+	                            <div class="band_more_view px-2 text-center">
 	                                <span>'테마명'</span> 밴드 더보기 >
 	                            </div>
 	                        </div>
@@ -87,19 +88,18 @@
                 </div>
             </div>
             <!-- 오늘의 인기글 영역 -->
-            <div class="band_today_best_writeBox">
+            <div class="band_today_best_writeBox pb-5">
                 <div class="band_today_best_list container">
-	                <div class="row justify-content-between">
-			                <div class="col flex-grow-1">
-								<span class="f22 ">오늘의 인기글</span>
-			                </div>
-			                <div class="col">
-			                    <span class="">모두보기 > </span>
-			                </div>
-	                </div>
-                <div class="row">
+	                <div class="row m-auto py-3 w-100">
+						<div class="col hstack justify-content-between">
+							<span class="f22 float-start"><b>오늘의 인기글</b></span>
+							<span
+								class="f15 float-end">모두보기 > </span>
+						</div>
+					</div>
+                <div class="row m-auto gap-3">
                     <!-- 오늘의 인기글 item-->
-                    <div class="col-lg-6 col-md-12 band_today_best_item me-2">
+                    <div class="col-lg-6 col-md-12 band_today_best_item shadow-s">
                         <div class="best_item_title">
                             <strong>마운틴TV 공식밴드</strong>
                         </div>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg col-md-12 band_today_best_item ms-2">
+                    <div class="col-lg col-md-12 band_today_best_item shadow-s">
                         <div class="best_item_title">
                             <strong>마운틴TV 공식밴드</strong>
                         </div>
@@ -137,7 +137,7 @@
                         </div>
                     </div>
 
-                    <div class=" col-lg-6 col-md-12 band_today_best_item me-2">
+                    <div class=" col-lg-6 col-md-12 band_today_best_item shadow-s">
                         <div class="best_item_title">
                             <strong>마운틴TV 공식밴드</strong>
                         </div>
@@ -156,7 +156,7 @@
                         </div>
                     </div>
 
-                    <div class=" col-lg col-md-12 band_today_best_item ms-2">
+                    <div class=" col-lg col-md-12 band_today_best_item shadow-s">
                         <div class="best_item_title">
                             <strong>마운틴TV 공식밴드</strong>
                         </div>

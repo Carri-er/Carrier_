@@ -318,7 +318,7 @@
 						<div class="col d-flex justify-content-center py-5 dl_ment ">
 							<img src="../img/home/main/icon_curation_txt.png" width="22" height="22" alt="#">
 							<span>다양한 취향! 다른사람들의 여행을 함께 구경해요! </span>
-							<span>빅데이터 정보로 분선한 지역별 핫한 여행지와 맛집을 소개합니다.</span>
+							<span>빅데이터 정보로 분석한 지역별 핫한 여행지와 맛집을 소개합니다.</span>
 							<span>1분이면 끝! 맞춤형 여행 코스 추천 받아보세요.</span>
 						</div>
 					</div>
@@ -330,7 +330,7 @@
 							th:each="feed, iterStat : ${feedList}"
 							th:if="${iterStat.index < 3}">
 							<!--feed box top-->
-							<div class="col-12  hstack feed-box-top p-3 ps-3 z-3">
+							<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
 								<img
 									th:src="@{'../img/member_thumbnail/'+${feed.Member_profileimage}}"
 									class="float-start rounded-circle border me-3" width="50"
