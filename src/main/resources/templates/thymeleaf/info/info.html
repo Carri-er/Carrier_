@@ -19,8 +19,8 @@
 				</div>
 			</div>
 			<!--board-->
-			<div class="row">
-				<div class="col order-2">
+			<div class="row gap-4">
+				<div class="col-12 col-lg-7 order-2">
 					<hr>
 					<div class="row">
 						<div class="col">
@@ -33,10 +33,10 @@
 					<hr>
 					<div class="board row">
 						<!--board-->
-						<div class="row " th:each="list:${list}">
+						<div class="row" th:each="list:${list}">
 							<a th:href="@{'Event_view?id='+ ${list.getEvent_num()}}"
 								class="row">
-								<div class="col-3 board-left text-center">
+								<div class="col-3 board-left text-center hstack justify-content-center">
 									<img th:src="@{'../img/info/' + ${list.getEvent_thumbnail()}}"
 										class="img-fluid rounded-4" alt=""
 										style="width: 80px; height: 80px;">
@@ -52,25 +52,24 @@
 									</div>
 									<div class="row">
 										<div class="col">
-										
+
 											<button type="button"
-												class="btn rounded-pill px-3 btn-light f14"
+												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
 												th:text="${list.getEvent_area()}"
 												th:if="${list.getEvent_area() != null}"></button>
 											<button type="button"
-												class="btn rounded-pill px-3 btn-light f14"
+												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
 												th:text="${list.getEvent_area2()}"
 												th:if="${list.getEvent_area2() != null}"></button>
 											<button type="button"
-												class="btn rounded-pill px-3 btn-light f14"
+												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
 												th:text="${list.getEvent_tag()}"
 												th:if="${list.getEvent_tag() != null}">#</button>
 										</div>
 									</div>
 								</div>
-
-								<hr class="mt-3 ms-3">
 							</a>
+							<hr class="mt-3 ms-3">
 						</div>
 						<!--------->
 
@@ -149,28 +148,25 @@
 				</div>
 				<!------------우측 (필터)------------->
 				<div
-					class="col-12 col-lg-5 order-1 order-lg-2 bg-light mt-3 p-2 ms-md-2 order-1 rounded-4">
+					class="sticky-top h-100 p-4 info-filter-sticky-top
+					col order-1 order-lg-2 border mt-3 p-2 ms-md-2 px-md-4 order-1 rounded-4">
 					<!-- 새로고침 버튼 -->
 					<!-- <a href="#" class="btn-refresh ms-auto mt-2 me-2"></a> -->
 					<div class="row">
+						<div class="col-12">
+							<a href="info" class="btn rounded-pill px-3 btn-dark f14  mx-1 mb-2 ">#
+								전체</a> <a th:href="@{'Event_area?area='+${area}}"
+								class="btn rounded-pill px-3 btn-outline-dark f14 mx-1 mb-2"
+								th:each="area:${area}"># <span th:text="${area}"></span>
+							</a>
+						</div>
 						<div class="col">
 							<hr>
 						</div>
-						<div class="col-12">
-							<a href="info" class="btn rounded-pill px-3 btn-secondary f14">#
-								전체</a> <a th:href="@{'Event_area?area='+${area}}"
-								class="btn rounded-pill px-3 btn-light f14"
-								th:each="area:${area}"># <span th:text="${area}"></span>
-							</a>
-
-						</div>
-						<div class="col-12 ">
-							<hr>
-						</div>
-						<div class="col-12">
-							<a href="info" class="btn rounded-pill px-3 btn-secondary f14">#
+						<div class="col-12 mt-1">
+							<a href="info" class="btn rounded-pill px-3 btn-dark f14 mx-1 mb-2">#
 								전체 태그</a>
-							<button type="button" class="btn rounded-pill px-3 btn-light f14"
+							<button type="button" class="btn rounded-pill px-3 btn-outline-dark f14 mx-1 mb-2"
 								th:each="tag : ${tags}">
 								<a th:href="@{'Event_tags?tagss='+${tag}}"
 									th:if="${tag != null}"># <span th:text="${tag}"></span></a>

@@ -9,12 +9,12 @@
 		    A.Feed_num,
 		    B.Member_Id,
 		    B.Member_profileimage,  
-		    A.Feed_title, 
-		    A.Feed_content,
-		    A.Feed_theme,  
-		    A.Feed_area,  
-		    A.Feed_uploadday, 
-		    A.Feed_updateday, 
+		    A.Feed_title, --피드제목
+		    A.Feed_content, --피드내용
+		    A.Feed_theme,  --피드 테마 태그
+		    A.Feed_area,  --피드 지역 태그
+		    A.Feed_uploadday, -- 올린날짜
+		    A.Feed_updateday, --수정날짜
 		    A.Feed_thumbnail
 		FROM 
 		    Feed A 
@@ -26,7 +26,6 @@
 		ORDER BY DBMS_RANDOM.value
 	</select>
 	
-	
 	<!-- 피드 글쓰기 -->
 	<insert id="feedWrite">
 		INSERT INTO Feed 
@@ -37,7 +36,24 @@
 	
 	<!-- 피드 리스트 가져오기 -->
 	<select id="feedList" resultType="com.ex.springboot.dto.FeedDTO">
-		SELECT A.Feed_num, B.Member_id, B.Member_profileimage, A.Feed_title, A.Feed_content, A.Feed_theme, A.Feed_area, A.Feed_uploadday, A.Feed_updateday, A.Feed_thumbnail FROM Feed A LEFT JOIN carrier_member B ON A.Member_id = B.Member_id ORDER BY Feed_uploadday DESC
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title, --피드제목
+		    A.Feed_content, --피드내용
+		    A.Feed_theme,  --피드 테마 태그
+		    A.Feed_area,  --피드 지역 태그
+		    A.Feed_uploadday, -- 올린날짜
+		    A.Feed_updateday, --수정날짜
+		    A.Feed_thumbnail
+		FROM 
+		    Feed A 
+		LEFT JOIN 
+		    carrier_member B 
+		ON 
+		    A.Member_id = B.Member_id
+		ORDER BY Feed_uploadday DESC
 	</select>
 	
 	<!-- 피드 리스트[theme filter] 가져오기 -->
@@ -90,6 +106,7 @@
 		    A.Feed_content,
 		    A.Feed_theme,
 		    A.Feed_area,
+		    A.Feed_heart,
 		    A.Feed_uploadday,
 		    A.Feed_updateday,
 		    A.Feed_thumbnail
@@ -116,11 +133,38 @@
 		DELETE FROM Feed WHERE Feed_num = #{Feed_num}
 	</delete>
 	
-	<!-- 피드 좋아요 수정 -->
-	<update id="feedLike">
-		UPDATE Feed SET Feed_heart = #{Feed_heart} WHERE Feed_num = #{Feed_num}
+	<!-- 좋아요 -->
+	<!-- 피드 좋아요 개수 count+N -->
+	<update id="feedLikeCount">
+		UPDATE Feed SET Feed_heart = Feed_heart+${count} WHERE Feed_num = ${Feed_num}
 	</update>
-
+	
+	<!-- 피드 좋아요 누르기 -->
+	<insert id="feedLike">
+		INSERT INTO Feedheart (Feed_num, Member_Id, Feed_heart_on) VALUES (#{Feed_num}, #{Member_Id}, 1)
+	</insert>
+	
+	<!-- 피드 좋아요 삭제 -->
+	<delete id="feedHate">
+		DELETE FROM Feedheart WHERE Feed_num = #{Feed_num} AND Member_Id =  #{Member_Id}
+	</delete>
+	
+	<!-- 좋아요 리스트 출력 -->
+	<select id="feedLikeList" resultType="com.ex.springboot.dto.Feed_LikeDTO">
+		SELECT
+		    B.Feed_num,
+		    B.Member_Id,
+		    B.Feed_heart_on
+		FROM 
+		    Feed A 
+		RIGHT OUTER JOIN 
+		    Feedheart B 
+		ON 
+		    A.Feed_num = B.Feed_num    
+		WHERE 
+		    B.Feed_num = #{Feed_num}
+	</select>
+	
 	<!-- 댓글 달기 -->
 	<insert id="feedCommentCreate">
 		INSERT INTO FeedComment 

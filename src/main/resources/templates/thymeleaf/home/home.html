@@ -365,7 +365,7 @@
                             <!-- carousel items loop -->
                             <div class="carousel-inner">
                                 <div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}"
-                                     class="carousel-item p-0 h-100"
+                                     class="carousel-item p-0 h-300"
                                      th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
                                     <img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}"
                                          class="d-block w-100" alt="#">
@@ -389,7 +389,7 @@
                     <!--feed-box-bot | text-->
                     <div class="col-12 feed-box-bot p-4 pt-3 pb-5">
                         <span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span>
-                        <span class="f13" th:text="${feed.Feed_content}">맥주는 왜 먹어도 먹어도 맛있을까요? </span>
+                        <span class="f13 text-truncate" th:text="${feed.Feed_content}">맥주는 왜 먹어도 먹어도 맛있을까요? </span>
                     </div>
                     <!--feed box bot | text-->
                     <div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13 d-flex hstack">
