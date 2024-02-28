@@ -6,6 +6,8 @@
 <body>
 <div th:replace="~{nav/nav::nav}">
 </div>
+	<!-- 토스트 -->
+	<div th:replace="~{alert/toast::div}"></div>
 <div id="feedShow" class="container-fluid mt-4 mb-5 p-0">
 	<!-- 뒤로가기 버튼 -->
 	<a href="/feed" class="sticky-top feed-btn me-auto ms-4 rounded-circle d-flex">
@@ -62,8 +64,8 @@
 							</div>
 							<!--feed-box-center | text-->
 							<div class="col-12 feed-box-bot p-4 pt-3">
-								<span class="fw-bold d-block" th:text="${feedList.getFeed_title()}">맥주 맛집🍺✨</span>
-								<span class="f13" th:text="${feedList.getFeed_content()}">맥주는 왜 먹어도 먹어도 맛있을까요? </span>
+								<span class="fw-bold d-block f17" th:text="${feedList.getFeed_title()}">맥주 맛집🍺✨</span>
+								<span class="f14" th:text="${feedList.getFeed_content()}">맥주는 왜 먹어도 먹어도 맛있을까요? </span>
 							</div>
 							<!--feed box bot | #TAG -->
 							<div class="col feed-tag-box p-4 text-muted f13 d-flex gap-1">
@@ -78,8 +80,20 @@
                                 <i class="fi fi-br-comment-dots hstack px-1"></i>
 	                        </div>
 	                        <div class="col-6 hstack justify-content-center hstack f15">
-	                            <span>좋아요</span><i class="fi fi-br-heart hstack px-1"></i><span class="ms-2">999+</span>
-	                        </div>
+							    <th:block th:each="feed : ${feedList}">
+							        <th:block th:if="${feed.getFeed_heart() == 0 && feed.getMember_Id() == session.Member_Id}">
+							            <a th:href="@{'/feed_like?num='+${feed.getFeed_num()}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex">
+							                <span>좋아요</span><i class="fi fi-br-heart hstack px-1"></i>
+							            </a>
+							        </th:block>
+							        <th:block th:unless="${feed.getFeed_heart() == 0 && feed.getMember_Id() == session.Member_Id}">
+							            <a th:href="@{'/feed_like?num='+${feed.getFeed_num()}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex">
+							                <span>좋아요</span><i class="fi fi-sr-heart hstack px-1"></i>
+							            </a>
+							        </th:block>
+							        <span class="ms-2" th:text="${feed.getFeed_heart()}">999+</span>
+							    </th:block>
+							</div>
 	                    </div>
 						<!-- tag row -->
 						<!-- col -->
@@ -96,7 +110,6 @@
 							</div>
 							<div class="col flex-grow-1 p-0">
 								<input type="text" th:field="*{Feed_comment}" class="form-control"/>
-								<!-- <th:block th:if="${#fields.hasErrors('Feed_comment')}" th:errors="*{Feed_comment}">이름 에러</th:block> -->
 							</div>
 							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100">
 								<button type="submit" class="btn btn-sm btn-dark w-100 h-100 py-2">등록</button>
@@ -147,15 +160,15 @@
 									<div class="modal fade" id="feed_del_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
 									  <div class="modal-dialog modal-dialog-centered">
 									    <div class="modal-content">
-									      <div class="modal-header">
+									      <div class="modal-header border-none">
 									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									      </div>
 									      <div class="modal-body text-center py-3">
 									        정말 삭제하시겠습니까?
 									      </div>
-									      <div class="modal-footer">
-									        <button type="button" class="btn btn-light text-dark rounded-pill" data-bs-dismiss="modal">취소</button>
-									        <button type="button" class="btn btn-main rounded-pill"><a class="dropdown-item active" th:href="@{'/feed_comment_del?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">삭제</a></button>
+									      <div class="modal-footer border-none">
+									        <button type="button" class="btn btn-light text-dark rounded-pill px-3" data-bs-dismiss="modal">취소</button>
+									        <button type="button" class="btn btn-main rounded-pill px-3"><a class="dropdown-item active" th:href="@{'/feed_comment_del?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">삭제</a></button>
 									      </div>
 									    </div>
 									  </div>
@@ -174,5 +187,31 @@
 </div>
 <div th:replace="~{footer/footer::footer}">
 </div>
+
+	<!-- 알림창 -->
+	<script type="text/javascript">
+        $(document).ready(function() {
+            // URL에서 msg 매개변수 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            
+         // 메시지가 존재할 경우 toast로 표시
+            if (msg !== null && msg !== "") {
+                let message;
+                if(msg == 1){
+                    message = "공백으로 이루어진 댓글은 작성하실 수 없습니다";
+                }
+                if(msg == 2){
+                    message = "65자 이내로 작성해주세요";
+                }
+                
+                // 부트스트랩 toast 트리거
+                $('.my-toast-body').text(message);
+                $('.my-toast').toast('show');
+            }
+        });
+    </script>
+
+    
 </body>
 </html>

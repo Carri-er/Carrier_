@@ -32,9 +32,4 @@ public class CarrierController {
       return "thymeleaf/home/home";
    }
 
-
-   
-   
-
-
 }

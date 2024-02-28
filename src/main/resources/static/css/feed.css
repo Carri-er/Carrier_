@@ -140,6 +140,11 @@ display:inline-block;
 	width: 330px;
 } */
 
+.h-300{
+	height: 300px;	
+}
+
+ 
 /* feed thumbnail Btn */
 .feed-fileUpload{
 	position: absolute;
