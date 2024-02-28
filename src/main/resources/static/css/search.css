@@ -139,3 +139,11 @@ input::-webkit-search-results-decoration{
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
+.search-btn{
+	position: relative;
+	left: -60px;
+	top:-10px;
+	border: none;
+}
+
+

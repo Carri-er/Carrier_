@@ -15,7 +15,7 @@ public class EventDTO {
 	private String Event_title;
 	private String Event_content;
 	private String Event_category;
-	private int hit;
+	private int Event_hit;
 	private String Event_area;
 	private String Event_area2;
 	private String Event_uploadday;

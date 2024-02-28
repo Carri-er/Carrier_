@@ -19,9 +19,6 @@
 	color: var(--white);
 }
 
-a:hover, a:active{
-	color: var(--white);
-}
 
 #feed{
   max-width: 1410px;

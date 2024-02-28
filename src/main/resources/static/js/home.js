@@ -7,6 +7,7 @@ $(document).ready(function() {
     let dl_refresh_button = $(".dl_refresh_button span");
     let clickEl = 0; // 초기 값은 0으로 설정
 
+
     // 클릭 이벤트 핸들러 등록
     homenavlist.click(function() {
         // 클릭된 요소에만 active 클래스 추가하고 나머지 요소에서는 제거
@@ -21,7 +22,7 @@ $(document).ready(function() {
         home_dl_img_hotPlace.hide();
         home_dl_img_AIPlaner.hide();
         dl_refresh_button.hide();
-    }
+    }t
 
     function showElementAtIndex(index) {
         hideAllElements();
@@ -78,7 +79,6 @@ $(document).ready(function() {
         }, 1000); // 스크롤 속도 (밀리초 단위)
     });
 
-    // 오늘의 핫플 추천 버튼 클릭 시 동작
     // 오늘의 핫플 추천 버튼 클릭 시 동작
 	dl_refresh_button.eq(2).on('click', function() {
 	    location.reload(); // 페이지 새로고침

@@ -23,6 +23,7 @@
 	<div th:replace="~{nav/nav::nav}"></div>
 	<!-- inner 페이지 -->
 	<div class="container inner mt-5">
+	<input type="hidden" th:value="${view.getEvent_hit()}"/>
 		<!-- 반복 되는 형태 -->
 		<div class="row mb-5">
 			<div class="col text-center">

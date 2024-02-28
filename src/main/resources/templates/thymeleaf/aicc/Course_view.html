@@ -6,7 +6,8 @@
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
 	<div class="container">
-	<h4 class="text-center my-5" th:text="|[${list.get(0).getCourse_Name()}]|">코스 상세 보기</h4>
+	
+	<h4 class="text-center my-5" ><span th:text="${list.get(0).getMember_Id()}"></span> 의 <span th:text="|[${list.get(0).getCourse_Name()}]|"></span></h4>
 		<div class="row mx-0 justify-content-center">
 			<div class="row">
 			<div class="col">
@@ -112,10 +113,13 @@
 						
 					</div>
 					<div class="col-12 mx-auto mt-4 text-end">
+						<th:block
+							th:if="${session.Member_Id==list.get(0).getMember_Id()||session.Member_Id=='admin'}">
 						<button type="submit" class="btn btn-main "> 코스 수정</button>
 						<a href="#" class="btn btn-skyb"
 						th:onclick="'deleteConfirm(\'' + ${list.get(0).getCourse_num()} + '\')'">글
 						삭제</a>
+						</th:block>
 					</div>
 				
 					</div>
