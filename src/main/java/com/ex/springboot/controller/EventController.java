@@ -81,7 +81,11 @@ public class EventController {
 		model.addAttribute("view", eventDAO.EventView(eid));
 		System.out.println(eid + "잘오는지");
 		int num = Integer.parseInt(eid);
-
+		int hit = eventDAO.EventView(eid).getHit();
+		System.out.println("현재 조회수"+hit);
+		hit+=1;
+		eventDAO.EventHiteUpdate(eid,hit);
+		System.out.println("수정후 조회수"+hit);
 		model.addAttribute("commentlist", eventDAO.EventCommentList(num));
 		model.addAttribute("commentCount", eventDAO.EventCommentList(num).size());
 		System.out.println(eventDAO.EventCommentList(num).size());
@@ -233,6 +237,7 @@ public class EventController {
 		eventDAO.EventCommentDelete(num);
 		return "redirect:/Event_delete?num=" + num;
 	}
+	
 	// 여행 정보 삭제
 	@GetMapping("/Event_delete")
 	public String Event_delete(HttpServletRequest request, Model model) {

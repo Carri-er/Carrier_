@@ -146,7 +146,7 @@
 					</div>
 					
 					<!-- 코스 저장 버튼 -->
-					<form action="cours_Save" name="saveBtn">
+					<form action="cours_Save" name="saveBtn" method="post">
 					<button class="btn saveBtn" type="button">코스 저장하기</button>
 					<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
 					<input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>
@@ -154,6 +154,7 @@
 					<input type="hidden" th:value="${aiccCafe.get(0).getEvent_num()}" name="cours4"/>
 					<input type="hidden" th:value="${aiccFood2.get(0).getEvent_num()}" name="cours5"/>
 					<input type="hidden" class="totalDistanceValue" value="" name="cours6"/>
+					<input type="hidden" class="totalDistanceValue" th:value="${day}" name="day"/>
 					<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
 					
 					<!-- 반복될 부분 day1 -->

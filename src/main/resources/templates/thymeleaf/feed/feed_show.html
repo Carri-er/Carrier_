@@ -1,13 +1,11 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
-<div th:replace="~{head/head::head}">
-</div>
-
+<div th:replace="~{head/head::head}"></div>
 <body>
 <div th:replace="~{nav/nav::nav}">
 </div>
-	<!-- 토스트 -->
-	<div th:replace="~{alert/toast::div}"></div>
+<!-- 토스트 -->
+<div th:replace="~{alert/toast::div}"></div>
 <div id="feedShow" class="container-fluid mt-4 mb-5 p-0">
 	<!-- 뒤로가기 버튼 -->
 	<a href="/feed" class="sticky-top feed-btn me-auto ms-4 rounded-circle d-flex">
@@ -79,21 +77,25 @@
 	                            <span>댓글</span>
                                 <i class="fi fi-br-comment-dots hstack px-1"></i>
 	                        </div>
-	                        <div class="col-6 hstack justify-content-center hstack f15">
-							    <th:block th:each="feed : ${feedList}">
-							        <th:block th:if="${feed.getFeed_heart() == 0 && feed.getMember_Id() == session.Member_Id}">
-							            <a th:href="@{'/feed_like?num='+${feed.getFeed_num()}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex">
-							                <span>좋아요</span><i class="fi fi-br-heart hstack px-1"></i>
-							            </a>
-							        </th:block>
-							        <th:block th:unless="${feed.getFeed_heart() == 0 && feed.getMember_Id() == session.Member_Id}">
-							            <a th:href="@{'/feed_like?num='+${feed.getFeed_num()}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex">
-							                <span>좋아요</span><i class="fi fi-sr-heart hstack px-1"></i>
-							            </a>
-							        </th:block>
-							        <span class="ms-2" th:text="${feed.getFeed_heart()}">999+</span>
-							    </th:block>
+	                        <div class="col-6 hstack justify-content-center">
+							<div th:if="${feedList.getFeed_heart_on() == 0 or session.Member_Id == null}">
+								<a
+									th:href="@{'/feed_show_like?num='+${feedList.getFeed_num()}+'&id='+${session.Member_Id}+'&on=1'}"
+									class="d-flex"> 
+									<span>좋아요</span>
+									<i
+									class="fi fi-br-heart hstack px-1"></i>
+								</a>
 							</div>
+							<div th:if="${feedList.getFeed_heart_on()} == 1">
+								<a th:href="@{'/feed_show_like?num='+${feedList.getFeed_num()}+'&id='+${session.Member_Id}+'&on=0'}"
+									class="d-flex"> 
+									<span>좋아요</span><i
+									class="fi fi-sr-heart hstack px-1"></i>
+								</a>
+							</div>
+							<span class="ms-2" th:text="${feedList.getFeed_heart()}" th:if="${session.Member_Id != null}">999+</span>
+	                    </div>
 	                    </div>
 						<!-- tag row -->
 						<!-- col -->

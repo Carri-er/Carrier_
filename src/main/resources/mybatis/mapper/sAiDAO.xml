@@ -60,4 +60,76 @@ FETCH FIRST 1 ROWS ONLY
 	<select id="listCourse" resultType="com.ex.springboot.dto.EventDTO">
 	select * from event where Event_num = #{param1}
 	</select>
+	<select id="Course_view_list" resultType="com.ex.springboot.dto.CourseDTO">
+	select * from course where Course_num =#{param1}
+	</select>
+	
+	<insert id="save_course_insert">
+		insert  into Course values(#{param1},Course_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9})
+	</insert>
+	<select id="Course_select" resultType="com.ex.springboot.dto.CourseDTO">
+	select 
+    A.Member_Id, 
+    A.Course_num, 
+    A.Course_Name, 
+    A.Course_thema, 
+    A.Course_Area,
+    A.Course_content,
+    A.Course_distance,
+     A.Course_Interest,
+    B.Member_profileimage
+from 
+    Course A 
+right outer join 
+    carrier_member B 
+on 
+    A.Member_id = B.Member_id 
+where 
+    A.Member_id = #{param1}
+    and A.Course_Name is not null
+order by A.Course_num desc
+
+	</select>
+	<select id="Course_select4" resultType="com.ex.springboot.dto.CourseDTO">
+	SELECT *
+FROM (
+    SELECT A.*, B.Member_profileimage
+    FROM Course A
+    RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id
+    WHERE A.Member_id = #{param1}
+     and A.Course_Name is not null
+    ORDER BY A.Course_num desc
+)
+WHERE ROWNUM &lt;= 4
+	</select>
+	<update id="Course_update">
+	update course set Course_Name=#{param1}, Course_content=#{param2} where Course_num =#{param3}
+	</update>
+	<delete id="Course_delete">
+	delete from course where Course_num =#{param1}
+	</delete>
+	<select id="CourseListHome" resultType="com.ex.springboot.dto.CourseDTO">
+select 
+    A.Member_Id, 
+    A.Course_num, 
+    A.Course_Name, 
+    A.Course_thema, 
+    A.Course_Area,
+    A.Course_content,
+    A.Course_distance,
+     A.Course_Interest,
+     A.Course_Number,
+     A.Course_img,
+    B.Member_profileimage
+from 
+    Course A 
+right outer join 
+    carrier_member B 
+on 
+    A.Member_id = B.Member_id 
+where 
+     A.Course_Name is not null
+ORDER BY DBMS_RANDOM.RANDOM() 
+FETCH FIRST 3 ROWS ONLY
+	</select>
 </mapper>

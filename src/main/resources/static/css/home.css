@@ -1,503 +1,464 @@
-  /*home css*/
-  div.home_wrapper {
-  	position: relative;
-  	width: 100%;
-  }
+/*home css*/
+div.home_wrapper {
+	position: relative;
+	width: 100%;
+}
 
+.home_bg{
+	background: linear-gradient(to bottom, var(--main) 90%, var(--white) 90%);
+}
 
-  /*메인 캐러셀 스타일*/
-  div.home_carousel {
-  	background-color: var(--main);
-  	position: relative;
-  }
+.mh-360{
+	min-height: 360px;
+}
+.xh-360{
+	max-height: 360px;
+}
 
-  div.carousel_bg_whiteBox {
-  	background-color: white;
-  	position: absolute;
-  	bottom: 0px;
-  	width: 100%;
-  	height: 100px;
-  }
+/*메인 캐러셀 스타일*/
+div.home_carousel {
+	position: relative;
+}
 
-  #carouselExampleControls div.carousel-item {
-  	padding-top: 100px;
-  }
+div.carousel_bg_whiteBox {
+	background-color: white;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 100px;
+}
 
-  /*캐러셀 이미지 스타일*/
-  div.carousel_img>img {
-  	display: inline-block;
-  	position: relative;
-  	/* left : 100px; */
-  	z-index: 2;
-  	min-width: 437px;
-  }
+#carouselExampleControls div.carousel-item {
+	padding-top: 100px;
+}
 
-  /*캐러셀 텍스트 영역 스타일*/
-  div.crousel_textArea {
-  	position: relative;
-  	margin-bottom: 40px;
-  }
+/*캐러셀 이미지 스타일*/
+div.carousel_img>img {
+	display: inline-block;
+	position: relative;
+	/* left : 100px; */
+	z-index: 2;
+	min-width: 437px;
+}
 
-  div.crousel_textArea>em {
-  	display: inline-block;
-  	padding: 0 15px;
-  	height: 30px;
-  	line-height: 28px;
-  	color: #fff;
-  	background: #000;
-  	border-radius: 15px 15px 15px 0;
-  	font-size: 16px;
-  	font-weight: 300;
-  	font-style: normal;
-  	margin-top: 100px;
-  }
+/*캐러셀 텍스트 영역 스타일*/
+div.crousel_textArea {
+	position: relative;
+	margin-bottom: 40px;
+}
 
-  div.crousel_textArea>strong {
-  	display: block;
-  	margin: 20px 0 23px;
-  	font-size: 30px;
-  	font-weight: 700;
-  	line-height: 50px;
-  	letter-spacing: -3px;
-  	color: #3d3d3d;
-  	overflow: hidden;
-  	max-height: 150px;
-  	display: box;
-  	word-break: keep-all;
-  	text-overflow: ellipsis;
-  	line-clamp: 3;
-  	box-orient: vertical;
-  }
+div.crousel_textArea>em {
+	display: inline-block;
+	padding: 0 15px;
+	height: 30px;
+	line-height: 28px;
+	color: #fff;
+	background: #000;
+	border-radius: 15px 15px 15px 0;
+	font-size: 16px;
+	font-weight: 300;
+	font-style: normal;
+	margin-top: 100px;
+}
 
-  div.crousel_textArea>a {
-  	display: inline-block;
-  	font-size: 15px;
-  	font-weight: 300;
-  	letter-spacing: -0.5px;
-  	color: #000;
-  	text-decoration: none;
-  }
+div.crousel_textArea>strong {
+	display: block;
+	margin: 20px 0 23px;
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 50px;
+	letter-spacing: -3px;
+	color: #3d3d3d;
+	overflow: hidden;
+	max-height: 150px;
+	display: box;
+	word-break: keep-all;
+	text-overflow: ellipsis;
+	line-clamp: 3;
+	box-orient: vertical;
+}
 
-  div.crousel_textArea>a::after {
-  	content: '';
-  	display: block;
-  	height: 1px;
-  	background: #908f8f;
-  }
+div.crousel_textArea>a {
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 300;
+	letter-spacing: -0.5px;
+	color: #000;
+	text-decoration: none;
+}
 
-  /********************************
+div.crousel_textArea>a::after {
+	content: '';
+	display: block;
+	height: 1px;
+	background: #908f8f;
+}
+
+/********************************
    두번째 섹션 Datalab 
 *********************************/
-  section#home_data_lab {
-  	width: 100%;
-  }
+section#home_data_lab {
+	width: 100%;
+}
 
-  div.home_data_labBox {
-  	/*   border : 1px solid red;*/
-  }
+div.home_data_labBox {
+	/*   border : 1px solid red;*/
+	
+}
 
-  /*Datalab 타이틀 스타일*/
-  div.home_dl_title {
-  	margin-bottom: 30px;
-  }
+/* 여행돋보기 tab style */
+.home_dl_nav_list.active {
+	background: var(--main);
+	border-radius: 14px;
+	box-shadow: 2px 5px 40px 0 rgba(0, 0, 0, .09);
+}
 
-  div.home_dl_title_img {
-  	position: relative;
-  }
+/*Datalab 타이틀 스타일*/
+div.home_dl_title_img {
+	position: relative;
+}
 
+/*Datalab nav 스타일*/
+div.home_dl_nav {
+	background-color: var(--mainbg);
+	border: 1px solid #fcf3eb;
+	border-radius: 10px;
+}
 
+ul.home_dl_nav_ul {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-content: center;
+	width: 100%;
+	/*  	position: relative;*/
+	cursor: pointer;
+}
 
-  /*Datalab nav 스타일*/
-  div.home_dl_nav {
-  	background-color: var(--mainbg);
-  	border: 1px solid #fcf3eb;
-  	border-radius: 10px;
-  }
+/*datalab list 스타일*/
+li.home_dl_nav_list {
+	width: 33.333%;
+	background-position-x: 50%;
+	position: relative;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
 
-  ul.home_dl_nav_ul {
-  	display: flex;
-  	flex-direction: row;
-  	justify-content: space-around;
-  	align-content: center;
-  	width: 100%;
-  	/*  	position: relative;*/
-  	cursor: pointer;
-  }
+/*datalab content 텍스트 스타일 .dl-ment*/
+div.dl_ment>img {
+	margin-right: 10px;
+}
 
-  /*datalab list 스타일*/
-  li.home_dl_nav_list {
-  	width: 33.333%;
-  	background-position-x: 50%;
-  	position: relative;
-  	height: 50px;
-  	line-height: 50px;
-  	text-align: center;
-  }
+/*AI콕콕 클릭 시 스타일*/
+div.home_dl_img_AIcokcok {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
 
+ul.AIcokcokList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+}
 
+ul.AIcokcokList>li {
+	width: 24%;
+	height: 330px;
+	position: relative;
+}
 
+ul.AIcokcokList>li>a {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	color: white;
+}
 
+div.AIcokcok_img {
+	width: 100%;
+	height: 100%;
+}
 
-  /*datalab content 텍스트 스타일 .dl-ment*/
-  div.dl_ment>img {
-  	margin-right: 10px;
-  }
+div.AIcokcok_img::before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 40%;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, .6));
+}
 
-  /*AI콕콕 클릭 시 스타일*/
-  div.home_dl_img_AIcokcok {
-  	width: 100%;
-  	display: flex;
-  	flex-direction: row;
-  	flex-wrap: wrap;
-  	justify-content: space-between;
-  }
+ul.AIcokcokList>li:nth-child(1) div.AIcokcok_img {
+	background: url(../img/home/AIcokcok_05.jpg) no-repeat center/cover;
+}
 
-  ul.AIcokcokList {
-  	display: flex;
-  	flex-direction: row;
-  	flex-wrap: wrap;
-  	justify-content: space-between;
-  	width: 100%;
-  }
+ul.AIcokcokList>li:nth-child(2) div.AIcokcok_img {
+	background: url(../img/home/AIcokcok_06.jpg) no-repeat center/cover;
+}
 
-  ul.AIcokcokList>li {
-  	width: 24%;
-  	height: 330px;
-  	position: relative;
-  }
+ul.AIcokcokList>li:nth-child(3) div.AIcokcok_img {
+	background: url(../img/home/AIcokcok_07.jpg) no-repeat center/cover;
+}
 
-  ul.AIcokcokList>li>a {
-  	display: inline-block;
-  	width: 100%;
-  	height: 100%;
-  	text-decoration: none;
-  	color: white;
-  }
+ul.AIcokcokList>li:nth-child(4) div.AIcokcok_img {
+	background: url(../img/home/AIcokcok_08.jpg) no-repeat center/cover;
+}
 
-  div.AIcokcok_img {
-  	width: 100%;
-  	height: 100%;
-  }
+/*datalab의 AIcokcok 이미지 안 텍스트 스타일*/
+div.AIcokcok_text {
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+	text-overflow: ellipsis;
+}
 
-  div.AIcokcok_img::before {
-  	content: '';
-  	display: block;
-  	width: 100%;
-  	height: 40%;
-  	position: absolute;
-  	left: 0px;
-  	bottom: 0px;
-  	background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, .6));
-  }
+div.AIcokcok_text>strong {
+	display: block;
+	font-weight: normal;
+}
 
-  ul.AIcokcokList>li:nth-child(1) div.AIcokcok_img {
-  	background: url(../img/home/AIcokcok_05.jpg) no-repeat center / cover;
-  }
+div.AIcokcok_text>span {
+	font-size: 12px;
+}
 
-  ul.AIcokcokList>li:nth-child(2) div.AIcokcok_img {
-  	background: url(../img/home/AIcokcok_06.jpg) no-repeat center / cover;
-  }
+div.like {
+	position: absolute;
+	right: 16px;
+	top: 14px;
+	width: 31px;
+	height: 31px;
+	background: url(../img/home/main/icon_good.png) no-repeat;
+	z-index: 1;
+}
 
-  ul.AIcokcokList>li:nth-child(3) div.AIcokcok_img {
-  	background: url(../img/home/AIcokcok_07.jpg) no-repeat center / cover;
-  }
+/*핫플 콕콕 클릭 시 스타일*/
+ul.hotPlace_area_map_ul {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 15px 0px;
+	border-top: 1px solid #D2D2D2;
+	border-bottom: 1px solid #D2D2D2;
+}
 
-  ul.AIcokcokList>li:nth-child(4) div.AIcokcok_img {
-  	background: url(../img/home/AIcokcok_08.jpg) no-repeat center / cover;
-  }
+.hotPlace_area_map_ul_mobile {
+	display: none;
+}
 
-  /*datalab의 AIcokcok 이미지 안 텍스트 스타일*/
-  div.AIcokcok_text {
-  	position: absolute;
-  	left: 20px;
-  	bottom: 20px;
-  	text-overflow: ellipsis;
-  }
+ul.hotPlace_area_map_ul>li {
+	width: 5.5555%;
+	text-align: center;
+}
 
-  div.AIcokcok_text>strong {
-  	display: block;
-  	font-weight: normal;
-  }
+/*핫플콕콕 이미지 스타일*/
+div.hp_imgBox {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
 
-  div.AIcokcok_text>span {
-  	font-size: 12px;
-  }
+div.hp_img_content {
+	height: 300px;
+	position: relative;
+	margin-bottom: 60px;
+}
 
-  div.like {
-  	position: absolute;
-  	right: 16px;
-  	top: 14px;
-  	width: 31px;
-  	height: 31px;
-  	background: url(../img/home/main/icon_good.png) no-repeat;
-  	z-index: 1;
-  }
+img.hp_img {
+	width: 100%;
+	height: 100%;
+}
 
-  /*핫플 콕콕 클릭 시 스타일*/
-  ul.hotPlace_area_map_ul {
-  	position: relative;
-  	display: flex;
-  	flex-direction: row;
-  	justify-content: space-between;
-  	padding: 15px 0px;
-  	border-top: 1px solid #D2D2D2;
-  	border-bottom: 1px solid #D2D2D2;
-  }
+/*핫플콕콕 이미지 박스 안 텍스트 title 스타일*/
+div.hp_title {
+	width: 100%;
+	padding: 10px 0px;
+	text-align: center;
+	font-size: 16px;
+}
 
-  .hotPlace_area_map_ul_mobile {
-  	display: none;
-  }
+/*AI콕콕 플래너 스타일*/
+ul.aiPlaner_list {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
 
-  ul.hotPlace_area_map_ul>li {
-  	width: 5.5555%;
-  	text-align: center;
-  }
+ul.aiPlaner_list>li {
+	width: 33.3333333333%;
+	width: 330px;
+	position: relative;
+	box-shadow: 4px 7px 15px 0px rgba(51, 51, 51, 0.08);
+	border-radius: 5px;
+}
 
-  /*핫플콕콕 이미지 스타일*/
-  div.hp_imgBox {
-  	position: relative;
-  	display: flex;
-  	flex-direction: row;
-  	justify-content: space-between;
-  	flex-wrap: wrap;
-  }
+ul.aiPlaner_list>li>a {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	color: black;
+}
 
-  div.hp_img_content {
-  	height: 300px;
-  	position: relative;
-  	margin-bottom: 60px;
-  }
+span.best {
+	position: absolute;
+	left: 15px;
+	top: 15px;
+	display: inline-block;
+	width: 42px;
+	height: 42px;
+	z-index: 10;
+	background: url(../img/home/common/icon_curation_best.png);
+}
 
-  div.hp_img {
-  	width: 100%;
-  	height: 100%;
-  }
+ul.aiPlaner_list>li div.aiPlaner_img, #myCarousel .f-carousel__slide>li .aiPlaner_img
+	{
+	width: 100%;
+	height: 214px;
+	margin: 0 auto;
+}
 
-  div.hp_img_content:nth-child(1)>div.hp_img {
-  	background-image: url('../img/home/content/해솔라이CC.jpg');
-  	background-repeat: no-repeat;
-  	background-size: cover;
+#myCarousel {
+	--f-carousel-spacing: 10px;
+	--f-carousel-slide-width: 50%;
+	--f-progress-color: #ff3520;
+}
 
-  }
+#myCarousel .f-carousel__slide {
+	padding: 50px;
+	background: #fff;
+}
 
-  div.hp_img_content:nth-child(2)>div.hp_img {
-  	background-image: url('../img/home/content/생거진천 자연휴양림.jpg');
-  	background-repeat: no-repeat;
-  	background-size: cover;
-  }
+/*AI콕콕 플래너 카드 형식 div 하단 스타일*/
+div.aiPlaner_board {
+	position: relative;
+}
 
-  div.hp_img_content:nth-child(3)>div.hp_img {
-  	background-image: url('../img/home/content/강원도 탄광문화촌.jpg');
-  	background-repeat: no-repeat;
-  	background-size: cover;
-  }
+div.aiPlaner_board>em {
+	display: inline-block;
+	position: absolute;
+	left: 30px;
+	top: -14px;
+	color: black;
+	background: #fcf3eb;
+	z-index: 10;
+	height: 30px;
+	width: 100px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 15px;
+	letter-spacing: -0.5px;
+	font-style: normal;
+	font-weight: normal;
+}
 
-  div.hp_img_content:nth-child(4)>div.hp_img {
-  	background-image: url('../img/home/content/화엄사.jpg');
-  	background-repeat: no-repeat;
-  	background-size: cover;
-  }
+div.aiPlaner_text {
+	padding-left: 30px;
+	padding-top: 30px;
+}
 
-  /*핫플콕콕 이미지 박스 안 텍스트 title 스타일*/
-  div.hp_title {
-  	width: 100%;
-  	padding: 10px 0px;
-  	text-align: center;
-  	font-size: 16px;
-  }
+div.aiPlaner_text>strong {
+	position: relative;
+	display: block;
+	margin: 0 0 6px;
+	height: 21px;
+	padding-right: 25px;
+	color: #333;
+	font-size: 18px;
+	line-height: 21px;
+	letter-spacing: -0.6px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
 
-  /*AI콕콕 플래너 스타일*/
-  ul.aiPlaner_list {
-  	position: relative;
-  	display: flex;
-  	flex-direction: row;
-  	justify-content: space-between;
-  }
+div.aiPlaner_text>p {
+	color: #666666;
+	height: 18px;
+	line-height: 16px;
+	font-size: 14px;
+	margin-bottom: 0px;
+}
 
-  ul.aiPlaner_list>li {
-  	width: 33.3333333333%;
-  	width: 330px;
-  	position: relative;
-  	box-shadow: 4px 7px 15px 0px rgba(51, 51, 51, 0.08);
-  	border-radius: 5px;
-  }
+div.aiPlaner_text>span {
+	display: inline-block;
+	color: #666;
+	height: 18px;
+	line-height: 16px;
+	font-size: 14px;
+}
 
-  ul.aiPlaner_list>li>a {
-  	display: inline-block;
-  	width: 100%;
-  	height: 100%;
-  	text-decoration: none;
-  	color: black;
-  }
+div.aiPlaner_text>span+span::before {
+	content: '';
+	display: inline-block;
+	width: 1px;
+	height: 12px;
+	margin: 0 8px;
+	vertical-align: -1px;
+	background: #bfbfbf;
+}
 
-  span.best {
-  	position: absolute;
-  	left: 15px;
-  	top: 15px;
-  	display: inline-block;
-  	width: 42px;
-  	height: 42px;
-  	z-index: 10;
-  	background: url(../img/home/common/icon_curation_best.png);
-  }
+div.aiPlaner_profile>img {
+	position: absolute;
+	right: 20px;
+	top: 34px;
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	border-radius: 100%;
+	overflow: hidden;
+}
 
-  ul.aiPlaner_list>li div.aiPlaner_img,
-  #myCarousel .f-carousel__slide>li div.aiPlaner_img {
-  	width: 100%;
-  	height: 214px;
-  }
+/*datalab 출력 데이터 새로고침 버튼 스타일*/
+div.dl_refresh_buttonBox {
+	position: relative;
+}
 
-  ul.aiPlaner_list>li:nth-child(1) div.aiPlaner_img,
-  #myCarousel .f-carousel__slide:nth-child(1)>li div.aiPlaner_img {
-  	background-image: url("../img/home/content/전주김제 2박3일 여행.jpg");
-  	background-size: cover;
-  }
+div.dl_refresh_button {
+	position: relative;
+	width: 207px;
+	height: 45px;
+	color: #333;
+	line-height: 19px;
+	border: 1px solid #333;
+	border-radius: 50px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	cursor: pointer;
+}
 
-  ul.aiPlaner_list>li:nth-child(2) div.aiPlaner_img,
-  #myCarousel .f-carousel__slide:nth-child(2)>li div.aiPlaner_img {
-  	background-image: url("../img/home/content/제주도 여행코스.jpg");
-  	background-size: cover;
-  }
+div.dl_refresh_button>img {
+	width: 20px;
+	height: 17px;
+	position: relative;
+	margin-right: 15px;
+}
 
-  ul.aiPlaner_list>li:nth-child(3) div.aiPlaner_img,
-  #myCarousel .f-carousel__slide:nth-child(3)>li div.aiPlaner_img {
-  	background-image: url("../img/home/content/부산 여행코스.jpg");
-  	background-size: cover;
-  	background-position: center;
-  }
+div.dl_refresh_button>span {
+	line-height: 45px;
+}
 
-  #myCarousel {
-  	--f-carousel-spacing: 10px;
-  	--f-carousel-slide-width: 50%;
-  	--f-progress-color: #ff3520;
-
-  }
-
-  #myCarousel .f-carousel__slide {
-  	padding: 50px;
-  	background: #fff;
-  }
-
-  /*AI콕콕 플래너 카드 형식 div 하단 스타일*/
-  div.aiPlaner_board {
-  	position: relative;
-  }
-
-  div.aiPlaner_board>em {
-  	display: inline-block;
-  	position: absolute;
-  	left: 30px;
-  	top: -14px;
-  	color: black;
-  	background: #fcf3eb;
-  	z-index: 10;
-  	height: 30px;
-  	width: 70px;
-  	line-height: 30px;
-  	text-align: center;
-  	font-size: 15px;
-  	letter-spacing: -0.5px;
-  	font-style: normal;
-  	font-weight: normal;
-  }
-
-  div.aiPlaner_text {
-  	padding-left: 30px;
-  	padding-top: 30px;
-  }
-
-  div.aiPlaner_text>strong {
-  	position: relative;
-  	display: block;
-  	margin: 0 0 6px;
-  	height: 21px;
-  	padding-right: 25px;
-  	color: #333;
-  	font-size: 18px;
-  	line-height: 21px;
-  	letter-spacing: -0.6px;
-  	font-weight: bold;
-  	text-overflow: ellipsis;
-  	white-space: nowrap;
-  	overflow: hidden;
-  }
-
-  div.aiPlaner_text>p {
-  	color: #666666;
-  	height: 18px;
-  	line-height: 16px;
-  	font-size: 14px;
-  	margin-bottom: 0px;
-  }
-
-  div.aiPlaner_text>span {
-  	display: inline-block;
-  	color: #666;
-  	height: 18px;
-  	line-height: 16px;
-  	font-size: 14px;
-  }
-
-  div.aiPlaner_text>span+span::before {
-  	content: '';
-  	display: inline-block;
-  	width: 1px;
-  	height: 12px;
-  	margin: 0 8px;
-  	vertical-align: -1px;
-  	background: #bfbfbf;
-  }
-
-  div.aiPlaner_profile>img {
-  	position: absolute;
-  	right: 20px;
-  	top: 34px;
-  	display: inline-block;
-  	width: 35px;
-  	height: 35px;
-  	border-radius: 100%;
-  	overflow: hidden;
-  }
-
-  /*datalab 출력 데이터 새로고침 버튼 스타일*/
-  div.dl_refresh_buttonBox {
-  	position: relative;
-  }
-
-  div.dl_refresh_button {
-  	position: relative;
-  	width: 260px;
-  	height: 45px;
-  	color: #333;
-  	line-height: 19px;
-  	border: 1px solid #333;
-  	border-radius: 50px;
-  	display: flex;
-  	flex-direction: row;
-  	justify-content: center;
-  	cursor: pointer;
-  }
-
-  div.dl_refresh_button>img {
-  	width: 20px;
-  	height: 17px;
-  	position: relative;
-  	top: 50%;
-  	margin-top: -8px;
-  	margin-right: 5px;
-  }
-
-  div.dl_refresh_button>span {
-  	line-height: 45px;
-  }
-
-  /*datalab more_content 더보기 스타일*/
-  div.dl_more_content {
-  	position: absolute;
-  	top: 25px;
-  	right: 20px;
-  	cursor: pointer;
-  }
+/*datalab more_content 더보기 스타일*/
+div.dl_more_content {
+	position: absolute;
+	top: 25px;
+	right: 20px;
+	cursor: pointer;
+}
 /*==========
 =========== footer
 ==========*/
@@ -557,116 +518,107 @@ footer p {
   opacity: 0.8;
 }*/
 
-  /****************************
+/****************************
    밴드 리스트 올 스타일
    ****************************/
- 
 section.home_band_data {
+	
 }
 
-div.home_band_recomandBox{
+div.home_band_recomandBox {
+	
 }
 
-a.home_band_recomand_link{
-	display : block;
+a.home_band_recomand_link {
+	display: block;
 	width: 100%;
 }
-div.home_band_recomand_item{
-    margin-top : 15px;
-    margin-bottom : 15px;
-    padding-right: 15px;
-    padding-left : 0px;
-    height: 100px;;
-    display: flex;
-    
+
+div.home_band_recomand_item {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding-right: 15px;
+	padding-left: 0px;
+	height: 100px;;
+	display: flex;
 }
 /* 밴드 추천 창 - 이미지*/
-div.home_band_recomand_img{
-    width: 150px;
-    height: 100px;
-    margin-right: 10px;
-    position : relative;
-    display : inline-block;
-}
-div.home_band_recomand_img>img{
-    width: 100%;
-    height: 100%;
-    background-size: 100%;
-    border-radius: 20px;
-    
-}
-div.home_band_recomand_text{
-	position : relative;
-    width: 100%;
-    text-overflow : ellipsis;
-    overflow: hidden;
-    white-space: nowpre
-    
-}
-div.home_band_recomand_text>h3{
-    font-size: 18px;
-    text-align: left;
-}
-div.home_band_recomand_text>span{
-    display : block;
-    font-size: 15px;
-    text-align: left;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+div.home_band_recomand_img {
+	width: 150px;
+	height: 100px;
+	margin-right: 10px;
+	position: relative;
+	display: inline-block;
 }
 
-  /*****************************작은 모니터 크기*************/
-  @media screen and (min-width:768px) and (max-width:959px) {
-  	ul.hotPlace_area_map_ul {
-  		display: none;
-  	}
+div.home_band_recomand_img>img {
+	width: 100%;
+	height: 100%;
+	background-size: 100%;
+	border-radius: 20px;
+}
 
-  	.hotPlace_area_map_ul_mobile {
-  		display: block;
-  	}
-  }
+div.home_band_recomand_text {
+	position: relative;
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowpre
+}
 
-  /*****************************스마트폰 크기*************/
-  @media screen and (max-width:767px) {
-  	div.carousel-item {
-  		padding-top: 0px;
-  	}
+div.home_band_recomand_text>h3 {
+	font-size: 18px;
+	text-align: left;
+}
 
-  	div.crousel_textArea>em {
-  		margin-top: 50px;
-  	}
+div.home_band_recomand_text>span {
+	display: block;
+	font-size: 15px;
+	text-align: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
-  	div.home_carousel {
-  		background-color: var(--mainbg);
-  		position: static;
-  		padding-bottom: 40px;
-  	}
+/*****************************작은 모니터 크기*************/
+@media screen and (min-width:768px) and (max-width:959px) {
+	ul.hotPlace_area_map_ul {
+		display: none;
+	}
+	.hotPlace_area_map_ul_mobile {
+		display: block;
+	}
+}
 
-
-  	div.crousel_textArea>strong {
-  		padding-right: 20px;
-  		font-size: 25px;
-
-  	}
-
-  	#myCarousel {
-  		--f-carousel-slide-width: 80%;
-  	}
-
-  	div.hp_imgBox {
-  		flex-direction: column;
-  		justify-content: center;
-  		align-content: center;
-  	}
-
-  	ul.hotPlace_area_map_ul {
-  		display: none;
-  	}
-
-  	.hotPlace_area_map_ul_mobile {
-  		display: block;
-  	}
-  }
-  
-  
+/*****************************스마트폰 크기*************/
+@media screen and (max-width:767px) {
+	div.carousel-item {
+		padding-top: 0px;
+	}
+	div.crousel_textArea>em {
+		margin-top: 50px;
+	}
+	div.home_carousel {
+		background-color: var(--mainbg);
+		position: static;
+		padding-bottom: 40px;
+	}
+	div.crousel_textArea>strong {
+		padding-right: 20px;
+		font-size: 25px;
+	}
+	#myCarousel {
+		--f-carousel-slide-width: 80%;
+	}
+	img.hp_imgBox {
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+	}
+	ul.hotPlace_area_map_ul {
+		display: none;
+	}
+	.hotPlace_area_map_ul_mobile {
+		display: block;
+	}
+}
