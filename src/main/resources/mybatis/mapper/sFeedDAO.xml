@@ -56,6 +56,30 @@
 		ORDER BY Feed_uploadday DESC
 	</select>
 	
+	<!-- 로그인 시 피드 리스트  -->
+	<select id="feedList_login" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    f.Feed_num,
+		    f.Member_Id,
+		    f.Feed_title,
+		    f.Feed_content,
+		    f.Feed_theme,
+		    f.Feed_area,
+		    f.Feed_uploadday,
+		    f.Feed_updateday,
+		    f.Feed_heart,
+		    f.Feed_thumbnail,
+		    CASE 
+		        WHEN fh.Member_id IS NULL THEN 0
+		        ELSE 1
+		    END AS Feed_heart_on
+		FROM 
+		    Feed f
+		LEFT JOIN 
+		    Feedheart fh ON f.Feed_num = fh.Feed_num AND fh.Member_id = ${Member_id}; 
+	</select>
+	<!--  -->
+	
 	<!-- 피드 리스트[theme filter] 가져오기 -->
 	<select id="feedList_theme" resultType="com.ex.springboot.dto.FeedDTO">
 		SELECT 

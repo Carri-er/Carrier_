@@ -41,22 +41,28 @@ public class FeedController {
 	public String feed(Model model, HttpServletRequest request, FeedDTO feedDTO, HttpSession session) {
 		String Feed_theme = "#"+request.getParameter("Feed_theme");		
 		String Feed_area = "#"+request.getParameter("Feed_area");
-
+		String Member_Id = (String)session.getAttribute("Member_Id");
 		
 		System.out.println("search: " + Feed_theme + "/" + "search2: " + Feed_area);
 		
 		List<FeedDTO> feedList = new ArrayList<>();
 		
-		if (request.getParameter("Feed_theme") == null && request.getParameter("Feed_area") == null) {
-			feedList = feed_dao.feedList();
-			
-		} else if (request.getParameter("Feed_theme") != null && !request.getParameter("Feed_theme").equals("")) {
-			feedList = feed_dao.feedList_theme(Feed_theme);
-			
-		} else if (request.getParameter("Feed_area") != null && !request.getParameter("Feed_area").equals("")) {
-			feedList =  feed_dao.feedList_area(Feed_area);
+		if (Member_Id.equals(null)) {
+			if (request.getParameter("Feed_theme") == null && request.getParameter("Feed_area") == null) {
+				feedList = feed_dao.feedList();
+				
+			} else if (request.getParameter("Feed_theme") != null && !request.getParameter("Feed_theme").equals("")) {
+				feedList = feed_dao.feedList_theme(Feed_theme);
+				
+			} else if (request.getParameter("Feed_area") != null && !request.getParameter("Feed_area").equals("")) {
+				feedList =  feed_dao.feedList_area(Feed_area);
+			}
+			model.addAttribute("feedList",feedList);
+		} else {
+			feedList = feed_dao.feedList_login(Member_Id);
 		}
-		model.addAttribute("feedList",feedList);
+		
+		
 
 
 		return "thymeleaf/feed/feed2";
