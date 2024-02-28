@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ex.springboot.dto.CourseDTO;
 import com.ex.springboot.dto.EventCommentDTO;
 import com.ex.springboot.dto.EventDTO;
 
@@ -72,6 +73,81 @@ public class EventController {
 
 		return "thymeleaf/info/info";
 	}
+	@GetMapping("/info_search")
+	public String info_search(Model model, HttpServletRequest request) {
+		String page = request.getParameter("page");
+		String key = request.getParameter("key");
+		
+		if (page == null || page.isEmpty()) {
+			page = "1";
+		}
+		int pages = Integer.parseInt(page);
+		int pageSize = 7; // 페이지당 아이템 수
+		int pageSizeR = pageSize * pages;
+		int totalCount = eventDAO.getPostCount(); // 전체 아이템 수
+		int mPage = pages - 1;
+		int pPage = pages + 1;
+		// 페이징 계산
+		int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+		int offset = (pages - 1) * pageSize; // 시작 아이템 인덱스
+		System.out.println("offset" + offset);
+		System.out.println("pageSize" + pageSize);
+		// DAO에서 페이징된 데이터 가져오기
+		List<EventDTO> events = eventDAO.listWithPaginationSearch(offset, pageSizeR,key);
+		model.addAttribute("list", events);
+		model.addAttribute("currentPage", pages);
+		model.addAttribute("mPage", mPage);
+		model.addAttribute("pPage", pPage);
+		model.addAttribute("key", key);
+		model.addAttribute("totalPages", totalPages);
+		
+//		System.out.println(eventDAO.list() + "호출");
+		// model.addAttribute("list", eventDAO.list());
+//		System.out.println(eventDAO.getDistinctTags() + "호출");
+		model.addAttribute("tags", eventDAO.getDistinctTags());
+		model.addAttribute("area", eventDAO.areaTag());
+		model.addAttribute("getCount", eventDAO.getPostCountSearch(key));
+		System.out.println(eventDAO.getPostCount() + "개");
+		
+		return "thymeleaf/info/info";
+	}
+	// 코스 여행 정보
+	@GetMapping("/infoCourse")
+	public String infoCourse(Model model, HttpServletRequest request) {
+		String page = request.getParameter("page");
+		if (page == null || page.isEmpty()) {
+			page = "1";
+		}
+		int pages = Integer.parseInt(page);
+		int pageSize = 7; // 페이지당 아이템 수
+		int pageSizeR = pageSize * pages;
+		int totalCount = eventDAO.getPostCount2(); // 전체 아이템 수
+		int mPage = pages - 1;
+		int pPage = pages + 1;
+		// 페이징 계산
+		int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+		int offset = (pages - 1) * pageSize; // 시작 아이템 인덱스
+		System.out.println("offset" + offset);
+		System.out.println("pageSize" + pageSize);
+		
+		// DAO에서 페이징된 데이터 가져오기
+		List<CourseDTO> course = eventDAO.listWithPagination2(offset, pageSizeR);
+		model.addAttribute("list", course);
+		model.addAttribute("currentPage", pages);
+		model.addAttribute("mPage", mPage);
+		model.addAttribute("pPage", pPage);
+		model.addAttribute("totalPages", totalPages);
+		
+//		System.out.println(eventDAO.list() + "호출");
+		// model.addAttribute("list", eventDAO.list());
+//		System.out.println(eventDAO.getDistinctTags() + "호출");
+	model.addAttribute("tags", eventDAO.getDistinctTags());
+	model.addAttribute("area", eventDAO.areaTag());
+		model.addAttribute("getCount", course.size());
+	System.out.println(eventDAO.getPostCount() + "개");
+		
+		return "thymeleaf/info/infoCourse";
+	}
 
 	// 여행 상세 정보
 	@GetMapping("/Event_view")
@@ -81,11 +157,12 @@ public class EventController {
 		model.addAttribute("view", eventDAO.EventView(eid));
 		System.out.println(eid + "잘오는지");
 		int num = Integer.parseInt(eid);
-		int hit = eventDAO.EventView(eid).getHit();
+		int hit = eventDAO.EventView(eid).getEvent_hit();
 		System.out.println("현재 조회수"+hit);
-		hit+=1;
-		eventDAO.EventHiteUpdate(eid,hit);
+		hit++;
+		eventDAO.EventView(eid).setEvent_hit(hit);
 		System.out.println("수정후 조회수"+hit);
+		System.out.println(eventDAO.EventHiteUpdate(eid,hit)); 
 		model.addAttribute("commentlist", eventDAO.EventCommentList(num));
 		model.addAttribute("commentCount", eventDAO.EventCommentList(num).size());
 		System.out.println(eventDAO.EventCommentList(num).size());

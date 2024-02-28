@@ -181,6 +181,16 @@
 		Post_Count
 		FROM event
 	</select>
+	<select id="getPostCount2" resultType="int">
+		SELECT COUNT(*) AS
+		Post_Count
+		FROM course
+	</select>
+	<select id="getPostCountSearch" resultType="int">
+		SELECT COUNT(*) AS
+		Post_Count
+		FROM event WHERE Event_content LIKE '%' || #{key} || '%' or Event_area = #{key} or event_title like '%' || #{key} || '%' ORDER BY event_hit DESC
+	</select>
 
 	<!-- 파라미터 값으로 댓글을 가져옴 -->
 	<select id="EventCommentList"
@@ -262,6 +272,39 @@
             SELECT *
             FROM Event
             ORDER BY Event_num DESC
+        ) e
+        WHERE rownum <= #{pageSize}
+    )
+    WHERE rnum > #{offset}
+    ]]>
+	</select>
+	<select id="listWithPagination2"
+		resultType="com.ex.springboot.dto.CourseDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Course
+            ORDER BY Course_num DESC
+        ) e
+        WHERE rownum <= #{pageSize}
+    )
+    WHERE rnum > #{offset}
+    ]]>
+	</select>
+	<select id="listWithPaginationSearch"
+		resultType="com.ex.springboot.dto.EventDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Event
+            WHERE Event_content LIKE '%' || #{key} || '%' or Event_area =#{key} or event_title like '%' || #{key} || '%'
+            ORDER BY Event_hit DESC
         ) e
         WHERE rownum <= #{pageSize}
     )

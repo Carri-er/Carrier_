@@ -58,16 +58,12 @@ $('span:contains("코스 재추천")').click(function() {
     }, 1000); // 스크롤 속도 (밀리초 단위)
 });
 
-// 오늘의 핫플 추천 버튼 클릭 시 동작
+//오늘의 핫플 추천 버튼 클릭 시 새로고침 및 스크롤 이동
 $('span:contains("오늘의 핫플 추천")').click(function() {
-    // 페이지 새로고침
-    location.reload();
-   
-    // 스크롤 이동
+    location.reload(); // 페이지 새로고침
     $('html, body').animate({
-        scrollTop: $('.hp_imgBox').offset().top // 스크롤을 hp_imgBox 위치로 이동
+        scrollTop: $('#myCarousel').offset().top // myCarousel 위치로 스크롤 이동
     }, 1000); // 스크롤 속도 (밀리초 단위)
-    
 });
 
 })

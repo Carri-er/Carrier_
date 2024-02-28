@@ -535,7 +535,9 @@
 					<div class="f-carousel home_dl_img_AIPlaner " id="myCarousel" >
 
 						<div class="f-carousel__slide" th:each="CourseListHome:${CourseListHome}">
-							<li class="pb-3"><a href="#">
+							<li class="pb-3">
+<a th:href="@{'Course_view?num='+ ${CourseListHome.getCourse_num()}}"
+								class="">
 									<span class="best"></span>
 										 <img
 								th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}"
@@ -646,13 +648,17 @@
 		<div class="row search-box-parent p-sm-4 p-md-5 me-0 m-auto justify-content-around">
 			<!-- 검색 창 -->
 			<div class="col-11 mx-auto my-5">
-				<form action="#" class="d-flex align-items-center justify-content-end">
-					<input type="search" name="" id="" class="border-0 bg-blur shadow-sm">
+				<form action="info_search" class="d-flex align-items-center justify-content-end" name="searchForm" id="searchForm">
+					
+					<input type="search" name="key" id="" class="border-0 bg-blur shadow-sm">
+				<button type="submit" class=" search-btn">
 					<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor"
-						class="bi bi-search position-absolute z-3 me-4" viewBox="0 0 16 16">
+						class="bi bi-search position-absolute z-3 me-4" viewBox="0 0 16 16" style="cursor: pointer;">
 						<path
 							d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
 					</svg>
+				</button>
+			
 				</form>
 			</div>
 			<!-- 검색 (좌) -->
@@ -768,7 +774,12 @@
  
 </script>
 
-
+<script>
+    document.getElementById('searchmove').addEventListener('click', function() {
+        // 폼으로 스크롤 이동
+        document.getElementById('searchForm').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
 	
 </body>
 

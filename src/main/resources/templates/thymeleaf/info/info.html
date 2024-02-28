@@ -76,11 +76,11 @@
 					</div>
 					<!-- 페이징 -->
 					<div class="pagination"
-						th:if="${showArea == null && showTag == null}">
+						th:if="${showArea == null && showTag == null && key==null}">
 						<ul class="d-flex">
 							<!-- 이전 버튼 -->
 							<li th:if="${currentPage > 1}" class="mx-2"><a
-								th:href="@{'/info?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}">&laquo;
+								th:href="@{'/info?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">&laquo;
 									이전</a></li>
 
 							<!-- 페이지 번호 -->
@@ -88,14 +88,38 @@
 								th:each="pageNum : ${#numbers.sequence((currentPage - 4 > 0 ? currentPage - 4 : 1), 
                         (currentPage + 4 < totalPages ? currentPage + 4 : totalPages))}"
 								class="mx-2"><a
-								th:href="@{'/info?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}"
+								th:href="@{'/info?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}"
 								th:text="${pageNum}"
 								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
 							</li>
 
 							<!-- 다음 버튼 -->
 							<li th:if="${currentPage < totalPages}" class="mx-2"><a
-								th:href="@{'/info?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}">다음
+								th:href="@{'/info?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">다음
+									&raquo;</a></li>
+						</ul>
+					</div>
+						<div class="pagination"
+						th:if="${key != null}">
+						<ul class="d-flex">
+							<!-- 이전 버튼 -->
+							<li th:if="${currentPage > 1}" class="mx-2"><a
+								th:href="@{'/info_search?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">&laquo;
+									이전</a></li>
+
+							<!-- 페이지 번호 -->
+							<li
+								th:each="pageNum : ${#numbers.sequence((currentPage - 4 > 0 ? currentPage - 4 : 1), 
+                        (currentPage + 4 < totalPages ? currentPage + 4 : totalPages))}"
+								class="mx-2"><a
+								th:href="@{'/info_search?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}"
+								th:text="${pageNum}"
+								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
+							</li>
+
+							<!-- 다음 버튼 -->
+							<li th:if="${currentPage < totalPages}" class="mx-2"><a
+								th:href="@{'/info?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">다음
 									&raquo;</a></li>
 						</ul>
 					</div>
@@ -148,7 +172,7 @@
 				</div>
 				<!------------우측 (필터)------------->
 				<div
-					class="sticky-top h-100 p-4 info-filter-sticky-top
+					class=" h-100 p-4 info-filter-sticky-top
 					col order-1 order-lg-2 border mt-3 p-2 ms-md-2 px-md-4 order-1 rounded-4">
 					<!-- 새로고침 버튼 -->
 					<!-- <a href="#" class="btn-refresh ms-auto mt-2 me-2"></a> -->
