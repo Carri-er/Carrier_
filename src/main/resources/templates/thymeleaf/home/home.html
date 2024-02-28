@@ -456,37 +456,21 @@
 						<!-- 핫플 이미지 영역 -->
 						<div class="hp_imgBox mb-3 ">
 
-							<div class="hp_img_content col-6">
+							<div class="hp_img_content col-10 col-md-6 mx-auto" th:each="infoHome:${infoHome}">
+								<a th:href="@{'Event_view?id='+ ${infoHome.getEvent_num()}}"
+								class="">
 								<div class="hp_img"></div>
-								<div class="like"></div>
+								<img
+								th:src="@{'../img/info/' + ${infoHome.getEvent_thumbnail()}}"
+								alt="" class="hp_img"
+								>
 								<div class="hp_title">
-									<span>해솔리아CC</span>
+									<span th:text="${infoHome.getEvent_name()}">해솔리아CC</span>
 								</div>
+								</a>
 							</div>
 
-							<div class="hp_img_content col-6">
-								<div class="hp_img"></div>
-								<div class="like"></div>
-								<div class="hp_title">
-									<span>생거진천 자연휴양림</span>
-								</div>
-							</div>
-
-							<div class="hp_img_content col-6">
-								<div class="hp_img"></div>
-								<div class="like"></div>
-								<div class="hp_title">
-									<span>강원도 탄광문화촌</span>
-								</div>
-							</div>
-
-							<div class="hp_img_content col-6">
-								<div class="hp_img"></div>
-								<div class="like"></div>
-								<div class="hp_title">
-									<span>화엄사</span>
-								</div>
-							</div>
+							
 						</div>
 
 					</div> <!-- home_dl_img_hotPlace -->
@@ -548,27 +532,31 @@
 						</ul>
 
 					</div>  home_dl_img_AIPlaner -->
-					<div class="f-carousel home_dl_img_AIPlaner " id="myCarousel">
+					<div class="f-carousel home_dl_img_AIPlaner " id="myCarousel" >
 
-						<div class="f-carousel__slide">
+						<div class="f-carousel__slide" th:each="CourseListHome:${CourseListHome}">
 							<li class="pb-3"><a href="#">
 									<span class="best"></span>
-									<div class="aiPlaner_img"></div>
+										 <img
+								th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}"
+								alt="" class="aiPlaner_img"
+								>
 									<div class="row aiPlaner_board">
-										<em>2박3일</em>
+										<em th:text="${CourseListHome.getCourse_Interest()}">2박3일</em>
 										<div class="col-10 aiPlaner_text">
-											<strong>전주김제 2박 3일 여행</strong>
-											<p>전북 전주시 ~ 전분 김제시</p>
-											<span>만든날짜</span>
-											<span>2023. 11. 14.</span>
+											<strong th:text="${CourseListHome.getCourse_Name()}">전주김제 2박 3일 여행</strong>
+											<p th:text="${CourseListHome.getCourse_content()}">전북 전주시 ~ 전분 김제시</p>
+											<span>코스 길이</span>
+											<span th:text="${CourseListHome.getCourse_distance()}">2023. 11. 14.</span>
 										</div>
 										<div class="col-2 aiPlaner_profile">
-											<img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
+											<img class="img-fluid"  th:src="@{'../img/member_thumbnail/'+${CourseListHome.getMember_profileimage()}}" alt="">
+											
 										</div>
 									</div>
 								</a></li>
 						</div>
-						<div class="f-carousel__slide">
+						<!-- <div class="f-carousel__slide">
 							<li><a href="#">
 									<span class="best"></span>
 									<div class="aiPlaner_img"></div>
@@ -603,7 +591,7 @@
 										</div>
 									</div>
 								</a></li>
-						</div>
+						</div> -->
 
 					</div>
 				</div> <!-- home_dl_imgBox -->
@@ -615,7 +603,7 @@
 							<img class="img-fluid" src="../img/home/main/btn_curation_refresh.png" alt="#">
 							<span>오늘의 피드 추천</span>
 							<span>오늘의 핫플 추천</span>
-							<span>나의 코스 추천</span>
+							<span>코스 재추천</span>
 						</div>
 						<div class="dl_more_content hstack">
 							<a href="/feed">
@@ -776,7 +764,11 @@
         var id = document.querySelector('.hiddenId').value;
         window.location.href = "/mypage?id="+id;
     }
+    
+ 
 </script>
+
+
 	
 </body>
 

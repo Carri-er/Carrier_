@@ -65,7 +65,7 @@ FETCH FIRST 1 ROWS ONLY
 	</select>
 	
 	<insert id="save_course_insert">
-		insert  into Course values(#{param1},Course_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
+		insert  into Course values(#{param1},Course_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9})
 	</insert>
 	<select id="Course_select" resultType="com.ex.springboot.dto.CourseDTO">
 	select 
@@ -108,4 +108,28 @@ WHERE ROWNUM &lt;= 4
 	<delete id="Course_delete">
 	delete from course where Course_num =#{param1}
 	</delete>
+	<select id="CourseListHome" resultType="com.ex.springboot.dto.CourseDTO">
+select 
+    A.Member_Id, 
+    A.Course_num, 
+    A.Course_Name, 
+    A.Course_thema, 
+    A.Course_Area,
+    A.Course_content,
+    A.Course_distance,
+     A.Course_Interest,
+     A.Course_Number,
+     A.Course_img,
+    B.Member_profileimage
+from 
+    Course A 
+right outer join 
+    carrier_member B 
+on 
+    A.Member_id = B.Member_id 
+where 
+     A.Course_Name is not null
+ORDER BY DBMS_RANDOM.RANDOM() 
+FETCH FIRST 3 ROWS ONLY
+	</select>
 </mapper>

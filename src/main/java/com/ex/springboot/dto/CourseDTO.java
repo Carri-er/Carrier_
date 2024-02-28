@@ -16,5 +16,6 @@ public class CourseDTO {
  private String Course_distance;
  private String Course_Interest;
  private String Course_number;
+ private String Course_img;
  private String Member_profileimage;
 }

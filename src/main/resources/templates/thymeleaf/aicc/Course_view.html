@@ -64,17 +64,6 @@
 						</div>
 						<div class="col-6 col-md-2 mx-auto  text-truncate px-0 mx-0 text-center">
 							<a
-								th:href="@{'Event_view?id='+ ${aiccFood2.get(0).getEvent_num()}}">
-								<img
-								th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}"
-								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
-								style="width: 100px; height: 100px;">
-								<span th:text="${aiccFood2.get(0).getEvent_name()}"
-									class="text-center mt-3 "></span>
-							</a>
-						</div>
-						<div class="col-6 col-md-2 mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
 								th:href="@{'Event_view?id='+ ${aiccCafe.get(0).getEvent_num()}}">
 								<img
 								th:src="@{'../img/info/' + ${aiccCafe.get(0).getEvent_thumbnail()}}"
@@ -82,6 +71,17 @@
 								style="width: 100px; height: 100px;">
 								<span th:text="${aiccCafe.get(0).getEvent_name()}"
 									class="text-center"></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-2 mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${aiccFood2.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aiccFood2.get(0).getEvent_name()}"
+									class="text-center mt-3 "></span>
 							</a>
 						</div>
 					</div>

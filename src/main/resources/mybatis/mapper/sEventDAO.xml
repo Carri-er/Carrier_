@@ -302,4 +302,13 @@
     WHERE rnum > #{offset}
     ]]>
 	</select>
+	<update id="EventHiteUpdate">
+	update event set Event_hit =#{param2} where Event_num=#{param1}
+	</update>
+	<select id="infoHome"
+		resultType="com.ex.springboot.dto.EventDTO">
+    SELECT * FROM Event WHERE Event_category != all ('맛집', '카페')
+ORDER BY DBMS_RANDOM.RANDOM()
+FETCH FIRST 4 ROWS ONLY
+	</select>
 </mapper>

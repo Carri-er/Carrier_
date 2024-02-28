@@ -137,9 +137,7 @@ public class AIController {
 		model.addAttribute("totalDistance", cours6);
 		model.addAttribute("memberId", memberId);
 		model.addAttribute("day", day);
-		if (day==null || day=="") {
-			day="0";
-		}
+		
 		return "thymeleaf/aicc/saveCourse";
 	}
 	@GetMapping("/Course_view")
@@ -181,17 +179,23 @@ public class AIController {
 		String cours5 = request.getParameter("cours5");
 		String numder=cours1+","+cours2+","+cours3+","+cours4+","+cours5;
 		String memberId = request.getParameter("memberId");
+		String img = request.getParameter("img");
 		String day = request.getParameter("day");
-		if (day==null || day=="") {
-			day="0";
+		if (day==null || day.equals("") || day.equals("0")) {
+			day="당일 치기";
+		}else if(day.equals("1")) {
+			day="1박2일";
+		}else if(day.equals("2")) {
+			day="2박3일";
 		}
+		System.out.println("day : 가 바로"+day);
 		String Course_name = request.getParameter("Course_name");
 		String Course_thema = request.getParameter("Course_thema");
 		String Course_Area = request.getParameter("Course_Area");
 		String Course_content = request.getParameter("Course_content");
 		String Course_distance = request.getParameter("Course_distance");
 	
-		System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,numder));
+		System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,numder,img));
 		model.addAttribute("memberId", memberId);
 		System.out.println("memberId : " +memberId);
 		String msg = "1";
@@ -244,178 +248,5 @@ public class AIController {
 		return "redirect:/Course_view?num="+num;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 여행 글 업로드
-	@PostMapping("/Event_write222")
-
-	public String Event_write(HttpServletRequest request, Model model,
-			@RequestParam("Event_thumbnail") MultipartFile file) {
-		EventDTO dto = new EventDTO();
-		try {
-
-			StringBuilder fileNames = new StringBuilder();
-
-			String fileEmpty = "file_empty";
-			String thumbnail = "user_rabbit.jpg";
-
-			// 사용자가 파일을 넣었을 때
-			if (!file.isEmpty()) {
-
-				Path fileNameAndPath = Paths.get(UPLOAD_EVENT_DIRECTORY, file.getOriginalFilename());
-				// 설정한 디렉토리에 파일 업로드
-				fileNames.append(file.getOriginalFilename());
-				byte[] fileSize = file.getBytes(); // 이미지에 대한 정보 값을 바이트 배열로 가져온다.
-				Files.write(fileNameAndPath, fileSize);
-
-				thumbnail = fileNames.toString();
-
-			} else {
-				model.addAttribute("Member_profileimage", fileEmpty); // 이미지 이름 저장
-			}
-
-			dto.setEvent_address(request.getParameter("Event_address"));
-			dto.setEvent_area(request.getParameter("Event_area"));
-			dto.setEvent_area2(request.getParameter("Event_area2"));
-			dto.setEvent_category(request.getParameter("Event_category"));
-			dto.setEvent_content(request.getParameter("Event_content"));
-			dto.setEvent_endtime(request.getParameter("Event_endtime"));
-			dto.setEvent_host(request.getParameter("Event_host"));
-			dto.setEvent_mapX(request.getParameter("Event_mapX"));
-			dto.setEvent_mapY(request.getParameter("Event_mapY"));
-			dto.setEvent_name(request.getParameter("Event_name"));
-			dto.setEvent_parking(request.getParameter("Event_parking"));
-			dto.setEvent_rest(request.getParameter("Event_rest"));
-			dto.setEvent_phone(request.getParameter("Event_phone"));
-			dto.setEvent_starttime(request.getParameter("Event_starttime"));
-			dto.setEvent_tag(request.getParameter("Event_tag"));
-			dto.setEvent_tag2(request.getParameter("Event_tag2"));
-			dto.setEvent_tag3(request.getParameter("Event_tag3"));
-			dto.setEvent_tag4(request.getParameter("Event_tag4"));
-			dto.setEvent_tag5(request.getParameter("Event_tag5"));
-			dto.setEvent_thumbnail(thumbnail);
-			dto.setEvent_time(request.getParameter("Event_time"));
-			dto.setEvent_title(request.getParameter("Event_title"));
-			// eventDAO.event_write(dto);
-
-			System.out.println("--글작성 완료--");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "redirect:/info?msg=1";
-	}
-
-	// 여행 글 수정 업로드
-	@PostMapping("/Event_write_update_write222")
-
-	public String Event_write_update_write(HttpServletRequest request, Model model,
-			@RequestParam("Event_thumbnail") MultipartFile file) {
-		EventDTO dto = new EventDTO();
-		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
-		try {
-
-			StringBuilder fileNames = new StringBuilder();
-
-			String fileEmpty = "file_empty";
-			String thumbnail = "user_rabbit.jpg";
-
-			// 사용자가 파일을 넣었을 때
-			if (!file.isEmpty()) {
-
-				Path fileNameAndPath = Paths.get(UPLOAD_EVENT_DIRECTORY, file.getOriginalFilename());
-				// 설정한 디렉토리에 파일 업로드
-				fileNames.append(file.getOriginalFilename());
-				byte[] fileSize = file.getBytes(); // 이미지에 대한 정보 값을 바이트 배열로 가져온다.
-				Files.write(fileNameAndPath, fileSize);
-
-				thumbnail = fileNames.toString();
-
-			} else {
-				model.addAttribute("Member_profileimage", fileEmpty); // 이미지 이름 저장
-			}
-			dto.setEvent_num(num);
-			dto.setEvent_address(request.getParameter("Event_address"));
-			dto.setEvent_area(request.getParameter("Event_area"));
-			dto.setEvent_area2(request.getParameter("Event_area2"));
-			dto.setEvent_category(request.getParameter("Event_category"));
-			dto.setEvent_content(request.getParameter("Event_content"));
-			dto.setEvent_endtime(request.getParameter("Event_endtime"));
-			dto.setEvent_host(request.getParameter("Event_host"));
-			dto.setEvent_mapX(request.getParameter("Event_mapX"));
-			dto.setEvent_mapY(request.getParameter("Event_mapY"));
-			dto.setEvent_name(request.getParameter("Event_name"));
-			dto.setEvent_parking(request.getParameter("Event_parking"));
-			dto.setEvent_rest(request.getParameter("Event_rest"));
-			dto.setEvent_phone(request.getParameter("Event_phone"));
-			dto.setEvent_starttime(request.getParameter("Event_starttime"));
-			dto.setEvent_tag(request.getParameter("Event_tag"));
-			dto.setEvent_tag2(request.getParameter("Event_tag2"));
-			dto.setEvent_tag3(request.getParameter("Event_tag3"));
-			dto.setEvent_tag4(request.getParameter("Event_tag4"));
-			dto.setEvent_tag5(request.getParameter("Event_tag5"));
-			dto.setEvent_thumbnail(thumbnail);
-			dto.setEvent_time(request.getParameter("Event_time"));
-			dto.setEvent_title(request.getParameter("Event_title"));
-
-			// eventDAO.event_write_update(dto);
-			System.out.println("뭐가 들어있는지 보자" + dto.getEvent_num());
-			System.out.println("--글수정 완료--");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "redirect:/info";
-	}
 
 }

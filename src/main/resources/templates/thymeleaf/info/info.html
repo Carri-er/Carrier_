@@ -46,16 +46,13 @@
 										<div class="col">
 											<h5>
 												[<span th:text="${list.getEvent_category()}"></span>] <span
-													th:text="${list.getEvent_title()}"></span>
+													th:text="${list.getEvent_name()}"></span>
 											</h5>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col">
-											<button type="button"
-												class="btn rounded-pill px-3 btn-light f14"
-												th:text="${list.getEvent_name()}"
-												th:if="${list.getEvent_name() != null}"></button>
+										
 											<button type="button"
 												class="btn rounded-pill px-3 btn-light f14"
 												th:text="${list.getEvent_area()}"

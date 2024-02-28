@@ -223,7 +223,7 @@ public class MemberController {
 		
 		model.addAttribute("loginMember", member_dao.memberList(id));
 		model.addAttribute("course", AiDAO.Course_select4(id));
-		
+		System.out.println(AiDAO.Course_select4(id).size() + " --리스트 사이즈"); 
 		return "thymeleaf/Member/mypage";
 	}
 	@GetMapping("/mypageCourseAll")
