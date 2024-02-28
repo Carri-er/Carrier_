@@ -7,6 +7,14 @@ $(document).ready(function() {
     let dl_refresh_button = $(".dl_refresh_button span");
     let clickEl;
 
+    // section 2 nav active 추가
+    homenavlist.click(function() {
+        // 클릭된 요소에만 active 클래스 추가하고 나머지 요소에서는 제거
+        homenavlist.removeClass("active");
+        $(this).addClass("active");
+    });
+
+
     function hideAllElements() {
         dlment.hide();
         homedlimgAIcokcok.hide();
@@ -14,6 +22,7 @@ $(document).ready(function() {
         home_dl_img_AIPlaner.hide();
         dl_refresh_button.hide();
     }
+    
 
     function showElementAtIndex(index) {
         hideAllElements();

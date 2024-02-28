@@ -41,6 +41,11 @@ a.indent {
 	color: var(--black);
 }
 
+.highlight{
+	padding: 0 15px;
+	box-shadow: inset 0 -12px 0 var(--main);
+}
+
 /* color palette*/
 :root {
 	--vh: 9.59px;

@@ -111,6 +111,7 @@ div.home_data_labBox {
 	background: var(--main);
 	border-radius: 14px;
 	box-shadow: 2px 5px 40px 0 rgba(0, 0, 0, .09);
+	transition: 0.5s;
 }
 
 /*Datalab 타이틀 스타일*/

@@ -55,7 +55,7 @@
 					</div>
 				</div>
 				<!-- 밴드 추천 리스트 -->
-                <div class="row band_recomandBox gap-3 my-4 m-auto justify-content-between px-2">
+                <div class="row band_recomandBox gap-3 my-4 m-auto justify-content-between px-4">
                     <div class="col-12 col-md-5 p-0 band_recomand_item " th:each ="bandList:${randomBandList}">
 	                    <a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="band_recomand_link d-flex">
 	                        <div class="band_recomand_img">

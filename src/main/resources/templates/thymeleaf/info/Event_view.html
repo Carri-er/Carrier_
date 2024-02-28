@@ -27,8 +27,9 @@
 		<!-- 반복 되는 형태 -->
 		<div class="row mb-5">
 			<div class="col text-center">
-				<h3 class="my-5">
-					[<span th:text="${view.getEvent_category()}">버튼</span>] <span
+				<h3 class="my-5 highlight d-inline-block">
+					[<span th:text="${view.getEvent_category()}">버튼</span>] 
+					<span
 						th:text="${view.getEvent_title()}"></span>
 				</h3>
 				<img th:src="@{'../img/info/' + ${view.getEvent_thumbnail()}}"
