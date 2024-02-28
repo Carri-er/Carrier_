@@ -12,6 +12,7 @@ import com.ex.springboot.dto.EventDTO;
 @Mapper
 public interface IEventDAO {
 	public List<EventDTO> list();
+	public List<EventDTO> infoHome();
 	public List<String> getDistinctTags();
 	public List<String> areaTag();
 	public List<String> areaTagselect(String id);
@@ -20,6 +21,7 @@ public interface IEventDAO {
 	public int event_write(EventDTO dto);
 	public int event_write_update(EventDTO dto);
 	public int event_delete(String id);
+	public int EventHiteUpdate(String id,int num);
 	public List<EventDTO> EventArea(String id);
 	public List<EventDTO> EventTags(String id);
 	public List<String> EventTag(String id);

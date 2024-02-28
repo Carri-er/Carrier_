@@ -6,7 +6,7 @@
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
 	<div class="container">
-	<h4 class="text-center my-5">코스 저장하기</h4>
+	<h4 class="text-center my-5" th:text="|[${list.get(0).getCourse_Name()}]|">코스 상세 보기</h4>
 		<div class="row mx-0 justify-content-center">
 			<div class="row">
 			<div class="col">
@@ -15,11 +15,23 @@
 				<div id="map" style="height: 300px"
 						class=" mx-auto rounded-4 w-100"></div>
 			</div>
+			<div class="col-12 mx-auto my-5">
+					<h5>코스 메모</h5>
+					<hr />
+					<p th:text="${list.get(0).getCourse_content()}"></p>
+
+				</div>
+				<div class="col mx-auto my-5 text-end">
+					
+						<span> 총 길이 : </span><span th:text="${totalDistance}"></span>
+					
+				</div>
+				
 			</div>
 			</div>
-			<div class="row mx-auto mx-0 px-0 bg-mainbg p-2 my-5">
+			<div class="row mx-auto mx-0 px-0 my-4">
 				<div class="col-12 px-0 mx-0">
-					<div class="row courseListRow px-0 mx-0 bg-white p-3 ">
+					<div class="row courseListRow px-0 mx-0  ">
 						<div class="col-12 col-md-2 mx-auto text-truncate px-0 mx-0 text-center">
 							<a th:href="@{'Event_view?id='+ ${aicc.get(0).getEvent_num()}}" >
 								<img
@@ -52,17 +64,6 @@
 						</div>
 						<div class="col-6 col-md-2 mx-auto  text-truncate px-0 mx-0 text-center">
 							<a
-								th:href="@{'Event_view?id='+ ${aiccFood2.get(0).getEvent_num()}}">
-								<img
-								th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}"
-								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
-								style="width: 100px; height: 100px;">
-								<span th:text="${aiccFood2.get(0).getEvent_name()}"
-									class="text-center mt-3 "></span>
-							</a>
-						</div>
-						<div class="col-6 col-md-2 mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
 								th:href="@{'Event_view?id='+ ${aiccCafe.get(0).getEvent_num()}}">
 								<img
 								th:src="@{'../img/info/' + ${aiccCafe.get(0).getEvent_thumbnail()}}"
@@ -72,54 +73,28 @@
 									class="text-center"></span>
 							</a>
 						</div>
+						<div class="col-6 col-md-2 mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${aiccFood2.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aiccFood2.get(0).getEvent_name()}"
+									class="text-center mt-3 "></span>
+							</a>
+						</div>
 					</div>
 				</div>
 
 
 
 			</div>
-			<form action="cours_Save_insert" method="post" id="myForm">
+			<form action="cours_Save_update" method="post">
+			
 			<div class="row">
-			<div class="col-4">
-				<div class="col-12 mx-auto mt-4">
-					<div class="form-floating">
-						<input type="text" class="form-control" id="Course_name"
-							name="Course_name" placeholder="코스 명"> <label
-							for="Course_name" class="form-label">코스 명</label>
-					</div>
-				</div>
-				<div class="col-12 mx-auto mt-4">
-					<div class="form-floating">
-						<input type="text" class="form-control" id="Course_thema"
-							name="Course_thema" placeholder="코스 테마" th:value="${aicc.get(0).getEvent_category()}"> <label
-							for="Course_thema" class="form-label">코스 테마</label>
-					</div>
-				</div>
-				<div class="col-12 mx-auto mt-4">
-					<div class="form-floating">
-						<input type="text" class="form-control" id="Course_Area"
-							name="Course_Area" placeholder="코스 지역" th:value="${aicc.get(0).getEvent_area()}"> <label
-							for="Course_Area" class="form-label">코스 지역</label>
-					</div>
-				</div>
+			
 				
-				<div class="col-12 mx-auto mt-4">
-					<div class="form-floating">
-						<input type="text" class="form-control" id="Course_distance"
-							name="Course_distance" placeholder="코스 길이" readonly="readonly" th:value="|${totalDistance} km|">
-						<label for="Course_distance" class="form-label">코스 길이</label>
-					</div>
-				</div>
-				</div>
-				<div class="col-8 mx-auto mt-4">
-					<div class="form-floating">
-						<textarea class="form-control" placeholder="Leave a comment here"
-							id="Course_content" style="height: 300px" name="Course_content"></textarea>
-						<label for="Course_content">코스 내용</label>
-					</div>
-
-				</div>
-
 				<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
 					<input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>
 					<input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="cours3"/>
@@ -127,17 +102,38 @@
 					<input type="hidden" th:value="${aiccFood2.get(0).getEvent_num()}" name="cours5"/>
 					<input type="hidden" class="totalDistanceValue" value="" name="cours6"/>
 					<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
-					<input type="hidden" name="day" th:value="${day}" />
-					<input type="hidden" name="img" th:value="${aicc.get(0).getEvent_thumbnail()}" />
-					<div class="col-12 mx-auto mt-4 text-end">
-						<button type="submit" class="btn btn-main "> 코스 등록</button>
+					<input type="hidden" name="num" th:value="${list.get(0).getCourse_num()}" />
+					<div class="col-12 mx-auto my-5 text-center">
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aiccCafe.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-light mx-1" th:text="|# ${aiccFood.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aicc2.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-light mx-1" th:text="|# ${aicc.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aicc.get(0).getEvent_area()}|"></button>
+						
 					</div>
+					<div class="col-12 mx-auto mt-4 text-end">
+						<button type="submit" class="btn btn-main "> 코스 수정</button>
+						<a href="#" class="btn btn-skyb"
+						th:onclick="'deleteConfirm(\'' + ${list.get(0).getCourse_num()} + '\')'">글
+						삭제</a>
+					</div>
+				
 					</div>
 			</form>
 
 		</div>
 	</div>
 	<div th:replace="~{footer/footer::footer}"></div>
+	
+<script>
+	function deleteConfirm(id) {
+		if (confirm("해당 글을 정말 삭제하시겠습니까?") == true)
+			location.href = "/Course_delete?num=" + id;
+		else
+			event.stopProgation();
+		event.preventDefault();
+	}
+</script>
 	<script th:inline="javascript">
       var loginId = /*[[${session.Member_Id}]]*/ "";
       if (loginId == null || loginId.trim() == '') {
@@ -262,38 +258,5 @@
 
          
     </script>
-    <script th:inline="javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('myForm').addEventListener('submit', function(event) {
-            var courseName = document.getElementById('Course_name').value.trim();
-            var courseThema = document.getElementById('Course_thema').value.trim();
-            var courseArea = document.getElementById('Course_Area').value.trim();
-            var courseContent = document.getElementById('Course_content').value.trim();
-
-            var errors = [];
-
-            if (courseName === '') {
-                errors.push('코스 명을 입력하세요.');
-            }
-
-            if (courseThema === '') {
-                errors.push('코스 테마를 입력하세요.');
-            }
-
-            if (courseArea === '') {
-                errors.push('코스 지역을 입력하세요.');
-            }
-
-            if (courseContent === '') {
-                errors.push('코스 내용을 입력하세요.');
-            }
-
-            if (errors.length > 0) {
-                event.preventDefault(); // 폼 제출 중지
-                alert(errors.join('\n')); // 에러 메시지 표시
-            }
-        });
-    });
-</script>
 </body>
 </html>

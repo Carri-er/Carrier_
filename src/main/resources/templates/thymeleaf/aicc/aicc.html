@@ -45,6 +45,7 @@
 							</th:block>
 							&nbsp;안녕하세요.
 						</p>
+						
 						<p class="fw-bold text-shadow welcome-big">
 							AI 플래너에 <br> 오신 것을 환영합니다.
 						</p>
@@ -369,6 +370,7 @@
 				</form>
 			</div>
 		</div>
+		<input type="hidden" th:value="${memberId}" class="hiddenId">
 		<!-- Carousel <btn> -->
 		<button class="carousel-control-prev" type="button"
 			data-bs-target="#ai-cok-carousel" data-bs-slide="prev">
@@ -439,5 +441,12 @@
 					});
 				});
 	</script>
+<script th:if="${confirmMessage != null}">
+    var confirmResult = confirm("[[${confirmMessage}]]");
+    if (confirmResult) {
+        var id = document.querySelector('.hiddenId').value;
+        window.location.href = "/mypage?id="+id;
+    }
+</script>
 </body>
 </html>

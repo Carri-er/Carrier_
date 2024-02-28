@@ -107,7 +107,7 @@
 	<!-- 태그 클릭시 파라미터 값으로 중복되는 태그없이 태그들을 불러옴 -->
 	<select id="EventTag" resultType="java.lang.String"
 		parameterType="string">
-		SELECT Event_tag
+		SELECT DISTINCT Event_tag
 		FROM Event
 		WHERE Event_area LIKE '%' ||
 		#{param1} || '%'
@@ -302,4 +302,14 @@
     WHERE rnum > #{offset}
     ]]>
 	</select>
+	<update id="EventHiteUpdate">
+	update event set Event_hit =#{param2} where Event_num=#{param1}
+	</update>
+	<select id="infoHome"
+		resultType="com.ex.springboot.dto.EventDTO">
+    SELECT * FROM Event WHERE Event_category != all ('맛집', '카페')
+ORDER BY DBMS_RANDOM.RANDOM()
+FETCH FIRST 4 ROWS ONLY
+	</select>
+
 </mapper>
