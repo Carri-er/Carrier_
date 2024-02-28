@@ -23,8 +23,13 @@ public interface IFeedDAO {
 
 	//피드 전체 페이지
 	public List<FeedDTO> feedList();
+
+	//피드 전체 페이지
+	public List<FeedDTO> feedList_login(
+			@Param("Member_Id") String Member_Id
+	);
 	
-	//피드 전체 페이지 - 좋아요 개수 가져오기
+	//피드 전체 페이지 - login 시 좋아요 개수 가져오기
 	public Feed_LikeDTO feedLikeList(
 			@Param("Feed_num") int Feed_num
 	);
@@ -38,8 +43,20 @@ public interface IFeedDAO {
 			@Param("Feed_theme") String Feed_theme
 	);
 	
+	//피드 전체 페이지 - filter - login 시 좋아요 개수 가져오기
+	public List<FeedDTO> feedList_theme_login(
+			@Param("Member_Id") String Member_Id,
+			@Param("Feed_theme") String Feed_theme
+	);
+	
 	//피드 전체 페이지 - filter
 	public List<FeedDTO> feedList_area(
+			@Param("Feed_area") String Feed_area
+	);
+	
+	//피드 전체 페이지 - filter - login 시 좋아요 개수 가져오기
+	public List<FeedDTO> feedList_area_login(
+			@Param("Member_Id") String Member_Id,
 			@Param("Feed_area") String Feed_area
 	);
 	
@@ -47,6 +64,10 @@ public interface IFeedDAO {
 	public FeedDTO feedShow(
 			@Param("Feed_num") int Feed_num
 	);
+	public FeedDTO feedShow_login(
+			@Param("Member_Id") String Member_Id,
+			@Param("Feed_num") int Feed_num
+			);
 	
 	//피드 업데이트
 	public int feedUpdate(

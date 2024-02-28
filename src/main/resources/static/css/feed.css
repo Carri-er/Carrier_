@@ -1,8 +1,15 @@
+/* 높이 조절 */
+.mh-200{
+  min-height: 200px;
+}
+.xh-200{
+  max-height: 200px;
+}
+
 
 .border-none{
 	border: none;
 }
-
 
 .btn-light:hover, .btn-light:active{
 	background: var(--black);
@@ -37,9 +44,10 @@ display:inline-block;
 
 /* feed-box (center) */
 :not(#feedBox) .feed-box-center{
-  min-height: 250px;
   object-fit: fill;
 }
+
+
 
 /* feed-box (bot) */
 .feed-box-bot{
@@ -137,10 +145,18 @@ display:inline-block;
 	width: 330px;
 } */
 
-.h-300{
-	height: 300px;	
+
+.xh-250{
+    max-height: 250px;
 }
 
+.xh-300{
+    max-height: 300px;
+}
+
+.object-fit{
+	object-fit: cover;	
+}
  
 /* feed thumbnail Btn */
 .feed-fileUpload{
@@ -175,11 +191,7 @@ display:inline-block;
 }
 
 #feedCarousel .carousel-item img{
-/*     width: 80%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
+
 }
 
 [id^="feedCarousel"] .carousel{
