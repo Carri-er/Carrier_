@@ -237,6 +237,7 @@ public class EventController {
 		eventDAO.EventCommentDelete(num);
 		return "redirect:/Event_delete?num=" + num;
 	}
+	
 	// 여행 정보 삭제
 	@GetMapping("/Event_delete")
 	public String Event_delete(HttpServletRequest request, Model model) {

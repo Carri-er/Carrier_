@@ -7,12 +7,9 @@
 }
 /* 검색 배경 색 */
 .search-box-parent{
-
-}
-
-.search-box-parent{
-	background: var(--main);
+	/* background: var(--main); */
 	border-radius: 50px;
+	box-shadow: 2px 5px 40px 0 rgba(0,0,0,.09);
 }
 
 .bg-blur{

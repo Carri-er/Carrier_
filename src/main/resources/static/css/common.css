@@ -15,6 +15,14 @@ a {
 	color: var(--black);
 }
 
+.text-muted{
+	color: var(--deepgray)!important;
+}
+
+.fw-normal{
+	font-weight: 300 !important;
+}
+
 
 a.indent {
 	text-indent: -9999px;
