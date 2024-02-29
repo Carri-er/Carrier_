@@ -1,0 +1,106 @@
+<!-- Button trigger modal -->
+<div class="m-auto m-5 p-5">
+	<button type="button" class="btn btn-main rounded-pill px-2"
+		data-bs-toggle="modal" data-bs-target="#feed_del_Modal">자세히보기</button>
+
+	<!-- DEL Modal -->
+	<div class="modal fade bg-trans" id="feed_del_Modal" tabindex="-1"
+		aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content rounded-4 border-none bg-trans overflow">
+				<!-- X btn -->
+				<img data-bs-dismiss="modal" aria-label="Close"
+					src="../img/mypage/del.png"
+					class="my-del-btn pay-del-btn shadow-sm position-absolute rounded-circle"
+					width="32" height="32" alt="">
+				<div class="rounded-4 overflow-hidden">
+					<div class="modal-header border-none bg-white"></div>
+					<!-- Modal body -->
+					<div class="modal-body text-center p-0">
+						<div class="row p-0 m-auto">
+							<div class="col p-0 text-black bg-white">
+								<div class="w-100 overflow-hidden xh-300 hstack">
+									<img src="../img/feed/user_rabbit.jpg" class="img-fluid w-100"
+										alt="" />
+								</div>
+								<span class="f22 d-block my-2">코스의 제목이 오는 곳입니다</span> <span
+									class="f17 d-block my-3">코스의 설명이 오는 곳입니다</span>
+								<div class="btn btn-sm btn-light rounded-pill my-2 f14">예약
+									가능 기간</div>
+								<span><b class="text-pink d-block f20">3,500원</b></span>
+							</div>
+							<img src="../img/mypage/bg_detail_pop.png" class="img-fluid p-0"
+								alt="" />
+						</div>
+					</div>
+					<div class="modal-footer border-none pb-5 bg-white w-100">
+						<a href="/pay"
+							class="btn btn-pinkD m-auto rounded-pill py-2 px-4">결제하기
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+	integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
+	crossorigin="anonymous"></script>
+	
+<script>
+	Kakao.init('${ce30d47bc7e81ef8da255de3a1dedbeb}'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+
+
+
+<script>
+	$("#check_module").click(function () {
+		var IMP = window.IMP; // 생략가능
+		IMP.init('가맹점식별코드'); 
+		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+		IMP.request_pay({
+			pg: 'kakao',
+			pay_method: 'card',
+			merchant_uid: 'merchant_' + new Date().getTime(),
+			/* 
+			 *  merchant_uid에 경우 
+			 *  https://docs.iamport.kr/implementation/payment
+			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+			 */
+			name: '주문명 : 아메리카노',
+			// 결제창에서 보여질 이름
+			// name: '주문명 : ${auction.a_title}',
+			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+			amount: 2000,
+			// amount: ${bid.b_bid},
+			// 가격 
+			buyer_name: '이름',
+			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+			buyer_postcode: '123-456',
+			}, function (rsp) {
+				console.log(rsp);
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				// success.submit();
+				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+			alert(msg);
+		});
+	});
+</script>
+
+
+
+<!-- 결제창 -->
+<!-- <div th:replace="~{alert/pay_modal::div}"></div> -->
