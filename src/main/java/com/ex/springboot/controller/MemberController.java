@@ -312,7 +312,7 @@ public class MemberController {
 			return "thymeleaf/Member/FindId_Result";
 		}
 		
-		return "redirect:/Find_Id?msg=1";
+		return "redirect:/FindId?msg=1";
 	}
 	
 	// 아이디 찾기 - 찾은 아이디 출력 페이지

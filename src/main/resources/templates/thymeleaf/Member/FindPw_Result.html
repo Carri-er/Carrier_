@@ -12,7 +12,7 @@
 				<div class="col-md-8 col-lg-7 col-xl-6 mx-auto my-5 gap-2">
 					<input type="hidden" name="Member_Id" th:value="${param.Member_Id}"/>
 					<div
-						class="row g-3 addMember_form p-4 rounded-5 shadow-sm my-5 p-5">
+						class="row g-3 addMember_form p-4 rounded-5 shadow-s my-5 p-5">
 						<img src="../img/mypage/lock.png" alt="" class="img-fluid w-25 m-auto mb-2"/>
 							<span class="flex-wrap text-center h4 mb-5">
 							<span th:text="${param.Member_Name}"></span>님의 비밀번호를 재설정 해드릴게요 !</span>
@@ -41,7 +41,6 @@
 		</div>
 	</div>
 	<div th:replace="~{footer/footer::footer}"></div>
-
 </body>
 
 </html>

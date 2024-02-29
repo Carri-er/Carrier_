@@ -95,9 +95,9 @@ nav input[type=search] {
 nav .navbar-toggler {
    border: none;
 }   
-.modal-backdrop {
+ .modal-backdrop {
     --bs-backdrop-zindex: 1050;
-    --bs-backdrop-bg: #000;
+    --bs-backdrop-bg: #000000;
     --bs-backdrop-opacity: 0.1;
     position: fixed;
     top: 0;
@@ -106,4 +106,4 @@ nav .navbar-toggler {
     width: 100vw;
     height: 100vh;
     background-color: var(--bs-backdrop-bg);
-}
+} 

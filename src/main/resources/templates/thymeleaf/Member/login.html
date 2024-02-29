@@ -12,7 +12,7 @@
 		<div class="row my-5">
 			<div class="col-md-8 col-lg-7 col-xl-5 mx-auto my-5">
 				<form action="/loginAction" method="post">
-					<div class="row g-3 addMember_form p-4 rounded-5 shadow-sm my-5 px-5">
+					<div class="row g-3 addMember_form p-4 rounded-5 shadow-s my-5 px-5">
 						<h3>로그인</h3>
 						<div class="form-group">
 							<div class="form-floating">
@@ -51,16 +51,20 @@
             const urlParams = new URLSearchParams(window.location.search);
             const msg = urlParams.get('msg');
             
-         // 메시지가 존재할 경우 toast로 표시
+            
+         	// 메시지가 존재할 경우 toast로 표시
             if (msg !== null && msg !== "") {
                 let message;
                 if(msg == 1){
+                	$('#warnImg').hide();
                     message = "회원가입에 성공하였습니다🎉 로그인 해주세요";
                 } else if (msg == 2) {
                     message = "아이디 혹은 비밀번호를 다시 확인해주세요";
                 } else if (msg == 3) {
+                	$('#warnImg').hide();
                     message = "재설정 완료! 다시 로그인 해주세요";
                 } else if (msg == 4) {
+                	$('#warnImg').hide();
                     message = "로그아웃 되었습니다. 다음에 또 만나요! 🖐";
                 } else if (msg == 5) {
                     message = "로그인이 필요한 서비스입니다.";
