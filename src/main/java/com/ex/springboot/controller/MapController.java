@@ -62,7 +62,7 @@ public class MapController {
 	@ResponseBody
 	public List<MapDistanceDTO> getDistance(@RequestBody MapDistanceDTO[] data) {
 	    // 클라이언트로부터 받은 데이터를 처리하여 리스트에 저장합니다.
-	    List<MapDistanceDTO> distanceList = new ArrayList<>();
+	   List<MapDistanceDTO> distanceList = new ArrayList<>();
 	    
 	    for (MapDistanceDTO mapDistanceDTO : data) {
 	    	
