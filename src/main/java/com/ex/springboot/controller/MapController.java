@@ -1,9 +1,19 @@
 package com.ex.springboot.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ex.springboot.dto.EventDTO;
+import com.ex.springboot.dto.MapDistanceDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -45,4 +55,36 @@ public class MapController {
 
 		return "thymeleaf/map/map_0221";
 	}
+	
+	
+	
+	@RequestMapping(value = "/getDistance")
+	@ResponseBody
+	public List<MapDistanceDTO> getDistance(@RequestBody MapDistanceDTO[] data) {
+	    // 클라이언트로부터 받은 데이터를 처리하여 리스트에 저장합니다.
+	    List<MapDistanceDTO> distanceList = new ArrayList<>();
+	    
+	    for (MapDistanceDTO mapDistanceDTO : data) {
+	    	
+	        EventDTO map_eventDto = mapDistanceDTO.getEvent();
+	        
+	        if (map_eventDto != null) {
+	            String distance = mapDistanceDTO.getDistance();
+	            distanceList.add(mapDistanceDTO);
+	        }
+	    }
+
+	    // 거리를 기준으로 정렬합니다.
+	    Collections.sort(distanceList);
+	    for(int i = 0 ; i < 10 ; i++) {
+	    	System.out.println(distanceList.get(i));
+	    }
+	    // 결과를 반환합니다.
+	    return distanceList;
+	}
+	
+	
+	
+	
+	
 }
