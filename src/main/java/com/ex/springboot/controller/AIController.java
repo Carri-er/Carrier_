@@ -46,6 +46,7 @@ public class AIController {
 		String area = request.getParameter("areaChk");
 		String day = request.getParameter("day");
 		day = day !=null? day:"0";
+		String hotel ="숙박";
 		String cafe = "카페";
 		String food = "맛집";
 		String thema = request.getParameter("thema");// 산
@@ -87,25 +88,102 @@ public class AIController {
 			
 			if(AiDAO.listThema(area, thema).isEmpty()) {
 				model.addAttribute("aicc", AiDAO.firstlist(area));
+				System.out.println("이지역 산이 없네");
 			}else {
 				model.addAttribute("aicc", AiDAO.listThema(area, thema));
 				area2 = AiDAO.listThema(area, thema).get(0).getEvent_area2();
 				System.out.println("산 에서 사용한 지역구는 "+area2);
 			}
-		}else if(thema2.equals("바다")) {
+		}else if(thema1.equals("실내")) {
+
+			if(AiDAO.listThema(area, thema1).isEmpty()) {
+				model.addAttribute("aicc", AiDAO.firstlist(area));
+				System.out.println("이지역 실내가 없네");
+			}else {
+				model.addAttribute("aicc", AiDAO.listThema(area, thema1));
+				area2 = AiDAO.listThema(area, thema1).get(0).getEvent_area2();
+				System.out.println("실내 에서 사용한 지역구는 "+area2);
+			}
+		}else if(thema2.equals("레포츠")) {
+
+			if(AiDAO.listThema(area, thema2).isEmpty()) {
+				model.addAttribute("aicc", AiDAO.firstlist(area));
+				System.out.println("이지역 레포츠 없네");
+			}else {
+				model.addAttribute("aicc", AiDAO.listThema(area, thema2));
+				area2 = AiDAO.listThema(area, thema2).get(0).getEvent_area2();
+				System.out.println("레포츠 에서 사용한 지역구는 "+area2);
+			}
+		}
+		else if(thema3.equals("테마파크")) {
+
+			if(AiDAO.listThema(area, thema3).isEmpty()) {
+				model.addAttribute("aicc", AiDAO.firstlist(area));
+				System.out.println("이지역 테마파크 없네");
+			}else {
+				model.addAttribute("aicc", AiDAO.listThema(area, thema3));
+				area2 = AiDAO.listThema(area, thema3).get(0).getEvent_area2();
+				System.out.println("테마파크 에서 사용한 지역구는 "+area2);
+			}
+		}
+		else if(thema4.equals("카페")) {
+			
+			
+				model.addAttribute("aicc", AiDAO.firstlist(area));
+				System.out.println("카페가 테마로 들어왔네");
+		
 			
 		}
+		else if(thema5.equals("바다")) {
+			
+			if(AiDAO.listThema(area, thema5).isEmpty()) {
+				model.addAttribute("aicc", AiDAO.firstlist(area));
+				System.out.println("이지역 바다 없네");
+			}else {
+				model.addAttribute("aicc", AiDAO.listThema(area, thema5));
+				area2 = AiDAO.listThema(area, thema5).get(0).getEvent_area2();
+				System.out.println("바다 에서 사용한 지역구는 "+area2);
+			}
+		}
+		else if(thema6.equals("축제")) {
+			
+			if(AiDAO.listThema(area, thema6).isEmpty()) {
+				model.addAttribute("aicc", AiDAO.firstlist(area));
+				System.out.println("이지역 축제 없네");
+			}else {
+				model.addAttribute("aicc", AiDAO.listThema(area, thema6));
+				area2 = AiDAO.listThema(area, thema6).get(0).getEvent_area2();
+				System.out.println("축제 에서 사용한 지역구는 "+area2);
+			}
+		}
+		else if(thema7.equals("맛집")) {
+			
+			model.addAttribute("aicc", AiDAO.firstlist(area));
+			System.out.println("맛집이 테마로 들어왔네");
+		}
+		else if(thema8.equals("전통시장")) {
+			
+			if(AiDAO.listThema(area, thema8).isEmpty()) {
+				model.addAttribute("aicc", AiDAO.firstlist(area));
+				System.out.println("이지역 전통시장 없네");
+			}else {
+				model.addAttribute("aicc", AiDAO.listThema(area, thema8));
+				area2 = AiDAO.listThema(area, thema8).get(0).getEvent_area2();
+				System.out.println("전통시장 에서 사용한 지역구는 "+area2);
+			}
+		}
+		
 		System.out.println("이번에 사용할 area2 = "+area2);
 		
-		if (AiDAO.list(area2, thema, thema2, thema3, thema5, thema6, thema8, thema1,food).isEmpty()) {
+		if (AiDAO.list(area2, thema, thema2, thema3, thema5, thema6, thema8, thema1,food,hotel).isEmpty()) {
 			System.out.println("aicc isEmpty 에서 출력");
 			System.out.println("area2 isEmpty에서 출력"+area2);
-			model.addAttribute("aicc", AiDAO.listAll(area, cafe, food));
-			model.addAttribute("aicc2", AiDAO.listAll(area, cafe, food));
+			model.addAttribute("aicc", AiDAO.listAll(area, cafe, food,hotel));
+			model.addAttribute("aicc2", AiDAO.listAll(area, cafe, food,hotel));
 		} else {
 			System.out.println("list의 area2 사용 -"+area2);
-			model.addAttribute("aicc", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food));
-			model.addAttribute("aicc2", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food));
+			model.addAttribute("aicc", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
+			model.addAttribute("aicc2", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
 		}
 
 		if (AiDAO.listCafeArea2(area,area2, cafe).isEmpty()) {
