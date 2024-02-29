@@ -9,6 +9,14 @@
 </div>
 <!-- 토스트 -->
 <div th:replace="~{alert/toast::div}"></div>
+
+<!-- 삭제 모달 -->
+<div th:replace="~{alert/del_modal::div}">
+	<div th:fragment="modalButton">
+        <a class="dropdown-item active" th:href="@{'/delFeed?num=' + ${feed.Feed_num}}">삭제</a>
+    </div>
+</div>
+
 <div id="feed" class="container-fluid mt-4 mb-5">
 	<div class="px-2 pt-3">
 		<!--filtering-->
@@ -174,7 +182,7 @@
 									<li><a class="dropdown-item" th:href="@{'/feed_update?num='+${feed.Feed_num}}">수정</a></li>
 								</ul>
 								<!-- DEL Modal -->
-								<div class="modal fade" id="feed_del_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
+								<!-- <div class="modal fade" id="feed_del_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered">
 										<div class="modal-content">
 											<div class="modal-header border-none">
@@ -191,7 +199,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>

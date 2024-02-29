@@ -20,8 +20,9 @@
 									<!-- 캐러셀 텍스트 영역 -->
 									<div class="col-12 col-lg-5 d-flex d-lg-block">
 										<div class="crousel_textArea">
-											<em th:text="${info.getEvent_name()}">긴 겨울밤 낭만적인 시간</em>
-											<strong th:text="${info.getEvent_title()}"> 겨울밤을 빛내주는 전국 야경 명소</strong>
+											<em th:text="${info.getEvent_category()}">긴 겨울밤 낭만적인 시간</em>
+											<strong th:text="${info.getEvent_name()}"> 겨울밤을 빛내주는 전국 야경 명소</strong>
+											<span class="f14" th:text="${info.getEvent_content()}"> 겨울밤을 빛내주는 전국 야경 명소</span>
 											<a th:href="@{'Event_view?id='+ ${info.getEvent_num()}}">자세히 보기</a>
 										</div>
 									</div>
