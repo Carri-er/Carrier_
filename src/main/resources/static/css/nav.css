@@ -2,96 +2,108 @@
 
 /* nav 모양 잡기 */
 .nav-radius {
-	width: 100%;
-	height: 50px;
-	background-color: var(--white);
-	border-radius: 50px 50px 0 0;
+   width: 100%;
+   height: 50px;
+   background-color: var(--white);
+   border-radius: 50px 50px 0 0;
 }
 
 .nav-right-btn {
-	display: block;
-	width: unset;
-	height: unset;
-	border: none;
-	text-indent: -99999px;
+   display: block;
+   width: unset;
+   height: unset;
+   border: none;
+   text-indent: -99999px;
 }
 
 .nav-right-btn-img {
-	width: 31px;
-	height: 31px;
+   width: 31px;
+   height: 31px;
 }
 
 /* nav btn img */
 .navbar-search-md {
 
-	display: block;
-	background: url("../img/nav/btn_header_search01.png") center/contain
-		no-repeat;
+   display: block;
+   background: url("../img/nav/btn_header_search01.png") center/contain
+      no-repeat;
 }
 
 .navbar-search-lg {
-	width: 24px;
-	height: 24px;
-	background: url("../img/nav/btn_header_search.png") center/contain
-		no-repeat;
+   width: 24px;
+   height: 24px;
+   background: url("../img/nav/btn_header_search.png") center/contain
+      no-repeat;
 }
 
 .navbar-user {
-	background: url("../img/nav/icon_header_profile1.png") center/contain
-		no-repeat;
+   background: url("../img/nav/icon_header_profile1.png") center/contain
+      no-repeat;
 }
 
 /* 우측 */
 .nav-right {
-	display: flex;
-	justify-content: flex-end;
+   display: flex;
+   justify-content: flex-end;
 }
 
 /* HOVER STYLE */
 .nav-item.active a.nav-link, .nav-item:active a.nav-link, .nav-item:hover a.nav-link
-	{
-	font-weight: bold;
+   {
+   font-weight: bold;
 }
 
 .nav-item:active .nav-item.active:after, .nav-item:hover .nav-item.active:after
-	{
-	content: '';
-	display: inline-block;
-	/*position: absolute;*/
-	width: 5px;
-	height: 5px;
-	background: var(--black);
-	border-radius: 100%;
-	margin-left: 29px;
-	margin-top: -37px;
+   {
+   content: '';
+   display: inline-block;
+   /*position: absolute;*/
+   width: 5px;
+   height: 5px;
+   background: var(--black);
+   border-radius: 100%;
+   margin-left: 29px;
+   margin-top: -37px;
 }
 
 .nav-item.active:after {
-	content: '';
-	display: inline-block;
-	position: absolute;
-	width: 5px;
-	height: 5px;
-	background: var(--black);
-	border-radius: 100%;
-	margin-left: 29px;
-	margin-top: -37px;
+   content: '';
+   display: inline-block;
+   position: absolute;
+   width: 5px;
+   height: 5px;
+   background: var(--black);
+   border-radius: 100%;
+   margin-left: 29px;
+   margin-top: -37px;
 }
 
 nav a {
-	display: block;
-	width: 100%;
-	height: 100%;
+   display: block;
+   width: 100%;
+   height: 100%;
 }
 
 nav .nav-search-form {
-	border-bottom: 1px solid var(--black);
+   border-bottom: 1px solid var(--black);
 }
 
 nav input[type=search] {
-	border: none;
+   border: none;
 }
 
 nav .navbar-toggler {
-	border: none;
-}	
+   border: none;
+}   
+.modal-backdrop {
+    --bs-backdrop-zindex: 1050;
+    --bs-backdrop-bg: #000;
+    --bs-backdrop-opacity: 0.1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bs-backdrop-bg);
+}
