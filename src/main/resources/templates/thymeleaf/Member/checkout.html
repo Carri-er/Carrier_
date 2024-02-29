@@ -1,7 +1,8 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="utf-8" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://js.tosspayments.com/v1/payment-widget"></script>
   </head>
   <body>
@@ -24,7 +25,7 @@
       // 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요.
       // 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
       const widgetClientKey = "test_ck_ex6BJGQOVDGW4j60eABB3W4w2zNb";
-      const customerKey = "aA8_VoyG7CWnrrZw3dVkG";
+      const customerKey = "AAHJMHRN1UCz07DZt_w6z";
       const paymentWidget = PaymentWidget(widgetClientKey, customerKey); // 회원 결제
       // const paymentWidget = PaymentWidget(widgetClientKey, PaymentWidget.ANONYMOUS) // 비회원 결제
 

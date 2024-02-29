@@ -28,6 +28,11 @@ public class CarrierController {
    public String main() {
       return "thymeleaf/home/home";
    }
+   
+   @GetMapping("/checkout")   
+   public String checkout() {
+	   return "thymeleaf/member/checkout";
+   }
 
 
    @GetMapping("/home")
