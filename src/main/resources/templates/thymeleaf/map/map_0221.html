@@ -93,7 +93,7 @@
 	                <div class="mapListItem row" th:each="paginItemList : ${paginItemList}">
 	                	<a  class="row" th:href="@{'Event_view?id='+ ${paginItemList.getEvent_num()}}">
 		                	<div class="col-3 board-left text-center hstack justify-content-center">
-								<img th:src="@{'../img/tour/' + ${paginItemList.getEvent_thumbnail()}}"
+								<img th:src="@{'../img/info/' + ${paginItemList.getEvent_thumbnail()}}"
 										class="img-fluid rounded-4" alt=""
 										style="width: 80px; height: 80px;">
 							</div>
@@ -128,130 +128,161 @@
 
 
 <div th:replace="~{footer/footer::footer}"></div>
-<script th:inline="javascript">
-/*<![CDATA[*/
-kakao.maps.load(function () {
-    // 마커를 담을 배열입니다
-    var markers = [];
-    // 마커 간의 거리를 담을 배열입니다
-    var distances = [];
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    kakao.maps.load(function () {
+        // 마커를 담을 배열입니다
+        var markers = [];
+        // 마커 간의 거리를 담을 배열입니다
+        var distances = [];
 
-    // event table에 저장된 데이터
-    var mapMarkerList = /*[[${mapMarkerList}]]*/ [];
-
-    // 지도를 표시할 div
-    var mapContainer = document.getElementById('map');
-
-    var mapOption = { 
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 5 // 지도의 확대 레벨
-    };
+        // event table에 저장된 데이터
+        var mapMarkerList = /*[[${mapMarkerList}]]*/ [];
+		
+        console.log(mapMarkerList);
         
-    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption);    
+     	// 현재 위치 변수 선언
+        var presentPosition;
+        
+        // 지도를 표시할 div
+        var mapContainer = document.getElementById('map');
 
-    // mapMarkerList에 저장된 데이터를 반복하여 마커 생성 및 표시
-    mapMarkerList.forEach(function (markerInfo) {
-        // 마커의 위치 설정
-        var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
-        // 마커 생성
-        var marker = new kakao.maps.Marker({
-            position: markerPosition // 마커의 위치 설정
+        var mapOption = {
+            center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+        // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // mapMarkerList에 저장된 데이터를 반복하여 마커 생성 및 표시
+        mapMarkerList.forEach(function (markerInfo) {
+            // 마커의 위치 설정
+            var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
+            // 마커 생성
+            var marker = new kakao.maps.Marker({
+                position: markerPosition // 마커의 위치 설정
+            });
+            // 마커 지도에 표시
+            marker.setMap(map);
+            markers.push(marker);
+
+            // 클릭 이벤트 핸들러 추가
+            addMarkerClickListener(marker, markers.length - 1);
         });
-        // 마커 지도에 표시
-        marker.setMap(map);
-        markers.push(marker);
-    }); 
 
-    // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-    if (navigator.geolocation) {
-        // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var lat = position.coords.latitude; // 위도
-            var lon = position.coords.longitude; // 경도
-            var presentPosition = new kakao.maps.LatLng(lat, lon); // geolocation으로 얻어온 좌표
-            
+        
+
+        // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+        if (navigator.geolocation) {
+            // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var lat = position.coords.latitude; // 위도
+                var lon = position.coords.longitude; // 경도
+                presentPosition = new kakao.maps.LatLng(lat, lon); // geolocation으로 얻어온 좌표
+
+                // 현재 위치 마커 생성
+                var currentPositionMarker = new kakao.maps.Marker({
+                    position: presentPosition,
+                    map: map
+                });
+                markers.push(currentPositionMarker); // 마커 배열에 추가
+
+                // 현재 위치로 지도 중심 변경
+                map.setCenter(presentPosition);
+
+                // 모든 마커가 생성되고 현재 위치가 설정된 후에 거리 계산
+                calculateDistances(presentPosition, markers);
+            });
+        } else { // HTML5의 GeoLocation을 사용할 수 없을때 
+            presentPosition = new kakao.maps.LatLng(37.566826, 126.9786567);
+            alert('현재 위치를 찾을 수 없습니다');
             // 현재 위치 마커 생성
             var currentPositionMarker = new kakao.maps.Marker({
                 position: presentPosition,
                 map: map
             });
             markers.push(currentPositionMarker); // 마커 배열에 추가
-
-            // 현재 위치로 지도 중심 변경
             map.setCenter(presentPosition);
             
-            // 현재 위치와 DB에 저장된 데이터에 대한 마커 간의 거리 계산 및 저장
-            markers.forEach(function(marker, index) {
+         // 모든 마커가 생성되고 현재 위치가 설정된 후에 거리 계산
+           	calculateDistances(presentPosition, markers);
+        }
+
+        // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
+        function addMarkerClickListener(marker, index) {
+            kakao.maps.event.addListener(marker, 'click', function () {
+                var event = mapMarkerList[index];
+                var markerPosition = marker.getPosition();
+                var distance = getDistance(presentPosition, markerPosition);
+                var eventName = event.event_name;
+                var eventNum = event.event_num;
+                var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
+                alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
+            });
+        }
+
+        // 모든 마커에 대해 현재 위치와의 거리 계산
+        function calculateDistances(presentPosition, markers) {
+            markers.forEach(function (marker) {
                 var distance = getDistance(presentPosition, marker.getPosition());
-                console.log("거리: " + distance + "m");
+                //console.log("거리: " + distance + "m");
                 distances.push(distance); // 계산된 거리를 배열에 저장
-                
-                // 마커 클릭 이벤트 추가
-                kakao.maps.event.addListener(marker, 'click', function() {
-                    var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + mapMarkerList[index].event_name+" "+  mapMarkerList[index].event_num + " 번";
-                    alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
-                });
-                
-             // 거리와 해당 인덱스를 묶어 객체로 만든 배열 생성
-                var combinedData = distances.map(function(distance, index) {
-                    return {
-                        distance: distance,
-                        event: mapMarkerList[index] // 해당 인덱스의 이벤트 정보
-                    };
-                });
-
-                // 거리가 작은 순서대로 정렬
-                combinedData.sort(function(a, b) {
-                    return a.distance - b.distance;
-                });
-				
-                var mapListItemWrapper = document.getElementById('mapListItemWrapper');
-
-             // 최대 100번 반복
-             for (var i = 0; i < Math.min(combinedData.length, 100); i++) {
-                 var data = combinedData[i];
-                 var distance = data.distance;
-                 var event = data.event;
-                 var eventName = event.event_name;
-                 var eventNum = event.event_num;
-
-                 // 출력할 HTML 요소 생성
-                 var listItem = document.createElement('div');
-                 listItem.classList.add('mapListItem');
-                 listItem.innerHTML = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
-
-                 // #mapListItemWrapper에 추가
-                 mapListItemWrapper.appendChild(listItem);
-             }
-                
-               
             });
 
-        });
-    } else { // HTML5의 GeoLocation을 사용할 수 없을때 
-        var locPosition = new kakao.maps.LatLng(37.566826, 126.9786567);
-        alert('현재 위치를 찾을 수 없습니다');
-        map.setCenter(locPosition);
-    }
-    
-    // 두 지점 간의 직선 거리를 계산하는 함수
-    function getDistance(p1, p2) {
-        var lat1 = p1.getLat(), lon1 = p1.getLng();
-        var lat2 = p2.getLat(), lon2 = p2.getLng();
-        var R = 6371000; // 지구의 반지름 (미터 단위)
-        var dLat = (lat2-lat1) * Math.PI / 180;
-        var dLon = (lon2-lon1) * Math.PI / 180; 
-        var a = 
-            Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(lat1 * Math.PI / 180 ) * Math.cos(lat2 * Math.PI / 180 ) * 
-            Math.sin(dLon/2) * Math.sin(dLon/2); 
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-        var d = R * c; // 거리 (미터 단위)
-        return d;
-    }
-});
-/*]]>*/
+            // 거리와 해당 인덱스를 묶어 객체로 만든 배열 생성
+            var combinedData = distances.map(function (distance, index) {
+                return {
+                    distance: distance ,
+                    event : mapMarkerList[index] // 해당 인덱스의 이벤트 정보
+                };
+            });
+            console.log(combinedData);
+			
+         	// 데이터를 서버로 전송
+            sendDataToServer(combinedData);
+           	
+        }
+
+        function sendDataToServer(data) {
+            // 데이터가 null이 아닌 경우에만 서버로 전송합니다.
+            if (data && data.length > 0) {
+                $.ajax({
+                    url: '/getDistance', // 서버 엔드포인트 URL
+                    type: 'POST', // 데이터를 보내기 때문에 POST 방식을 사용합니다.
+                    contentType: 'application/json',
+                    data: JSON.stringify(data), // JSON 형태로 데이터를 변환하여 전송합니다.
+                    success: function(response) {
+                        // 성공적으로 서버에서 응답을 받았을 때 실행할 코드를 작성합니다.
+                        console.log('서버 응답:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        // 서버 요청이 실패했을 때 실행할 코드를 작성합니다.
+                        console.error('서버 요청 실패:', error);
+                    }
+                });
+            } else {
+                console.log('전송할 데이터가 없습니다.');
+            }
+        }
+        
+        // 두 지점 간의 직선 거리를 계산하는 함수
+        function getDistance(p1, p2) {
+            var lat1 = p1.getLat(), lon1 = p1.getLng();
+            var lat2 = p2.getLat(), lon2 = p2.getLng();
+            var R = 6371000; // 지구의 반지름 (미터 단위)
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c; // 거리 (미터 단위)
+            return d;
+        }
+    });
+    /*]]>*/
 </script>
 </body>
 
