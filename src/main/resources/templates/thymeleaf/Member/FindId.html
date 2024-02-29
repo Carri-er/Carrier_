@@ -5,13 +5,15 @@
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
-	<!-- addMember 페이지 -->
+	<!-- 토스트 -->
+	<div th:replace="~{alert/toast::div}"></div>
+
 	<div class="container addMember_wrap">
 		<div class="row my-5">
 			<form action="/FindIdAction" method="post">
 				<div class="col-md-8 col-lg-7 col-xl-5 mx-auto my-5">
 					<div
-						class="row g-3 addMember_form p-4 rounded-5 shadow-sm my-5 px-5">
+						class="row g-3 addMember_form p-4 rounded-5 shadow-s my-5 px-5">
 						<h3>아이디 찾기</h3>
 						<div class="col-12">
 							<div class="form-floating">
@@ -31,7 +33,7 @@
 								찾기</button>
 							<div class="row mt-2">
 								<div class="col my-3 d-flex justify-content-around">
-									<a href="addMember" class="text-decoration-none">회원 가입 </a> | <a
+									<a href="addMember" class="text-decoration-none ms-3">회원 가입 </a> <span class="text-muted">|</span> <a
 										href="FindPw" class="text-decoration-none text-dark">비밀번호
 										찾기</a>
 
@@ -45,7 +47,28 @@
 	</div>
 	<!-- footer -->
 	<div th:replace="~{footer/footer::footer}"></div>
-
+	
+	<!-- 알림창 -->
+	<script type="text/javascript">
+        $(document).ready(function() {
+            // URL에서 msg 매개변수 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            
+            // 메시지가 존재할 경우 경고창으로 표시
+            if (msg !== null && msg !== "") {
+            	if(msg == 1){
+            		message = "정보를 다시 확인해주세요.";
+            	}
+            	
+            	 // 부트스트랩 toast 트리거
+                $('.my-toast-body').text(message);
+                $('.my-toast').toast('show');
+            }
+        });
+    </script>
+	
+	
 </body>
 
 </html>

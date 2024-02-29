@@ -7,13 +7,15 @@
 <body>
 <div th:replace="~{nav/nav::nav}">
 </div>
+<!-- 토스트 -->
+<div th:replace="~{alert/toast::div}"></div>
 <div id="feed" class="container-fluid mt-4 mb-5">
 	<div class="px-2 pt-3">
 		<!--filtering-->
 		<div class="row px-0 hstack">
 			<div class="feed-filter col-8">
 				<div class="" id="list-tab" role="tablist">
-					<a class="btn rounded-pill px-3 active" id="feed-all-tag" data-bs-toggle="list" href="#feed-all" role="tab" aria-controls="feed-all"> 전체 </a><a class="btn rounded-pill px-3" id="feed-theme-tag" data-bs-toggle="list" href="#feed-theme" role="tab" aria-controls="feed-theme"> 테마여행 🌴 </a><a class="btn rounded-pill px-3" id="feed-area-tag" data-bs-toggle="list" href="#feed-area" role="tab" aria-controls="feed-area"> 지역 🗺️ </a>
+					<a class="btn rounded-pill px-3 active" id="feed-all-tag" data-bs-toggle="list" href="/feed" role="tab" aria-controls="feed-all"> 전체 </a><a class="btn rounded-pill px-3" id="feed-theme-tag" data-bs-toggle="list" href="#feed-theme" role="tab" aria-controls="feed-theme"> 테마여행 🌴 </a><a class="btn rounded-pill px-3" id="feed-area-tag" data-bs-toggle="list" href="#feed-area" role="tab" aria-controls="feed-area"> 지역 🗺️ </a>
 				</div>
 			</div>
 			<!--상단 우측 드롭다운-->
@@ -229,13 +231,22 @@
 						</a>
 					</div>
 					<div class="col-6 hstack justify-content-center">
-						<div th:if="${feed.getFeed_heart_on()==0 or session.Member_Id==null}">
+						<!-- 비로그인 시 -->
+						<div th:if="${session.Member_Id}==null">
+							<a th:href="@{'/feed?msg=1'}" class="d-flex">
+							<span>좋아요</span>
+							<i class="fi fi-br-heart hstack px-1"></i>
+							</a>
+						</div>
+						<!-- 로그인 + 좋아요 안 누른 상태 -->
+						<div th:if="${feed.getFeed_heart_on()}==0 and ${session.Member_Id}!=null">
 							<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex">
 							<span>좋아요</span>
 							<i class="fi fi-br-heart hstack px-1"></i>
 							</a>
 						</div>
-						<div th:if="${feed.getFeed_heart_on()}==1">
+						<!-- 로그인 + 좋아요 누른 상태 -->
+						<div th:if="${feed.getFeed_heart_on()}==1 and ${session.Member_Id}!=null">
 							<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex">
 							<span>좋아요</span><i class="fi fi-sr-heart hstack px-1"></i>
 							</a>
@@ -251,7 +262,30 @@
 <!--container-->
 <div th:replace="~{footer/footer::footer}">
 </div>
-<script>
+
+<!-- 알림창 -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// URL에서 msg 매개변수 가져오기
+			const urlParams = new URLSearchParams(window.location.search);
+			const msg = urlParams.get('msg');
+
+			// 메시지가 존재할 경우 toast로 표시
+			if (msg !== null && msg !== "") {
+				let message;
+				if (msg == 1) {
+					message = "로그인이 필요한 서비스입니다.";
+				}
+
+				// 부트스트랩 toast 트리거
+				$('.my-toast-body').text(message);
+				$('.my-toast').toast('show');
+			}
+		});
+	</script>
+
+
+	<script>
 		// 페이지가 로드될 때 실행되는 함수
 		window.onload = function() {
 			// 모든 링크 요소를 가져옴
