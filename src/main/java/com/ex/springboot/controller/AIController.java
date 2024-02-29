@@ -100,7 +100,7 @@ public class AIController {
          model.addAttribute("aicc", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food));
          model.addAttribute("aicc2", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food));
       }
-
+      
       if (AiDAO.listCafeArea2(area2, cafe).isEmpty()) {
          System.out.println("aiccCafe isEmpty 에서 출력 :"+area2);
          
