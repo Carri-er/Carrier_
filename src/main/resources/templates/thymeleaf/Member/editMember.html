@@ -8,7 +8,7 @@
 	<div class="container addMember_wrap">
 		<div class="row mb-5">
 			<div class="col-12 col-xl-6 mx-auto">
-				<form class="row g-3 addMember_form p-5 rounded-3 gap-2"
+				<form id="editMember" name="editMember" class="row g-3 addMember_form p-5 rounded-3 gap-2" 
 					action="/editAction" method="post" enctype="multipart/form-data">
 					<h3 class="p-0 m-0 text-center my-3">회원정보</h3>
 					<div class="member-fileUpload-wrapper col-8 col-xl-6 m-auto text-center p-0 my-3">
@@ -179,7 +179,7 @@
 					</div>
 					<!-- 제출 -->
 					<div class="col-12 mt-5 mb-2">
-						<button type="submit" class="btn btn-main w-100 p-3 rounded-pill">수정하기</button>
+						<button type="button" onClick="return edit_member_check()" class="btn btn-main w-100 p-3 rounded-pill">수정하기</button>
 					</div>
 					<a th:href="@{'delMember?memberId='+${MemberList.getMember_Id()}}"
 						class="f12 d-block text-center">캐리어 분해하기</a>
