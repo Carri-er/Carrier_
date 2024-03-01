@@ -162,14 +162,16 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-					<div class="modal-body text-center row">
-						<div class="col p-0">
-							<i class="fi fi-br-search position-absolute"></i>
+					<div class="modal-body text-center">
+						<form action="info_search" class="d-flex align-items-center"
+												role="search">
+							<button type="submit" id="submitButton" class="bg-trans border-0 h-100 position-absolute ms-4 mt-1">
+								<i class="fi fi-br-search"></i>
+							</button>
 							<input class="form-control rounded-3 py-3 ps-5 f17" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="key">
-						</div>
-						<div class="col-1 m-auto p-0">
-							<button type="submit" class="btn btn-nb">검색</button>
-						</div>
+							<button type="submit" id="submitButton" class="bg-trans border-0 h-100 position-absolute ms-4 mt-1">
+							</button>
+						</form>
 					</div>
 					<div class="modal-footer border-0 text-start pt-0 px-3 f15">
 						<p class="me-auto m-0 mb-3">추천 페이지</p>
