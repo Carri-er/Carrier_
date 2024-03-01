@@ -169,10 +169,12 @@ label.member-fileUpload{
 
 /* 토스트 */
 .my-toast-parent{
-	z-index: 1;
+	z-index: 1051;
 }
 
 .my-toast.toast{
 	border:none;
 	box-shadow: none;
+	backdrop-filter: blur( 10px );
+	-webkit-backdrop-filter: blur( 10px );
 }
