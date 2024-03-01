@@ -47,7 +47,7 @@
 						<li class="nav-item"><a class="nav-link" href="band">밴드</a></li>
 						<li class="nav-item dropdown"><a class="nav-link" href="info"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false">여행정보</a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu z-5">
 								<li><a class="dropdown-item" href="info">여행정보</a></li>
 								<li><a class="dropdown-item" href="infoCourse">여행코스</a></li>
 							</ul></li>
@@ -70,7 +70,7 @@
 						class="col-12 d-none d-xl-flex justify-content-around align-items-center p-0 me-2">
 						<!-- 서치 영역-->
 						<div class="col-10 float-end nav-search-form">
-							<form action="info_search" class="d-flex align-items-center"
+							<form action="info_search" class="d-flex align-items-center pb-0"
 								role="search">
 								<input class="form-control" type="search"
 									placeholder="어디로, 어떤 여행을 떠날 예정인가요?" aria-label="Search"
@@ -151,6 +151,7 @@
 			</div>
 		</div>
 		<div th:insert="~{alert/toast::div}"></div>
+		
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -161,9 +162,14 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-					<div class="modal-body text-center">
-						<input class="form-control rounded-3 py-3 ps-5 f17" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="key">
-						<i class="fi fi-br-search position-absolute"></i>
+					<div class="modal-body text-center row">
+						<div class="col p-0">
+							<i class="fi fi-br-search position-absolute"></i>
+							<input class="form-control rounded-3 py-3 ps-5 f17" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="key">
+						</div>
+						<div class="col-1 m-auto p-0">
+							<button type="submit" class="btn btn-nb">검색</button>
+						</div>
 					</div>
 					<div class="modal-footer border-0 text-start pt-0 px-3 f15">
 						<p class="me-auto m-0 mb-3">추천 페이지</p>
