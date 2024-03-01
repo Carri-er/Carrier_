@@ -112,13 +112,7 @@ nav .navbar-toggler {
 }
 
 /* search 모달 */
-.search-modal .modal-body .fi-br-search {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	margin-top: -10px;
-	margin-left: 39px;
-}
+/* search 전송 custom */
 
 /* icon */
 .search-modal .modal-body .fi-br-search:before{

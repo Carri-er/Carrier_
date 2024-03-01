@@ -29,12 +29,19 @@ public class CarrierController {
       return "thymeleaf/home/home";
    }
    
-   @GetMapping("/checkout")   
-   public String checkout() {
-	   return "thymeleaf/member/checkout";
-   }
-
-
+	@GetMapping("/checkout")
+	public String checkout() {
+		return "thymeleaf/member/checkout";
+	}
+	@GetMapping("/fail")
+	public String fail() {
+		return "thymeleaf/member/fail";
+	}
+	@GetMapping("/success")
+	public String success() {
+		return "thymeleaf/member/success";
+	}
+   
    @GetMapping("/home")
    public String home(Model model) {
       List<CourseDTO> courseList = AiDAO.CourseListHome();

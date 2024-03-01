@@ -1,350 +1,350 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
-
 <div th:replace="~{head/head::head}"></div>
 <body>
-<div th:replace="~{nav/nav::nav}"></div>
-<div id="mypage" class="container mt-5 px-0">
-    <div class="row text-center mt-5 m-3 mx-xl-5 d-flex justify-content-between">
-        <!-- <<<<<<<<<<<<<<< (좌) <<<<<<<<<<<<<<<< -->
-        <aside id="mypage-L" class="col-12 col-md-4 col-xl-3 h-100 sticky-md-top">
-            <!-- [<] 내정보란 -->
-            <div class="row bg-light border rounded-4 p-5 px-md-3 px-xl-4">
-                <div class="col-12">
-                    <img th:src="@{'../img/member_thumbnail/'+ ${loginMember.getMember_profileimage()}}" class="w-25 rounded-circle img-fluid"
-                         alt="...">
-                </div>
-                <div class="col-12 p-3 mb-4">
+	<div th:replace="~{nav/nav::nav}"></div>
+	<div id="mypage" class="container mt-5 px-0">
+		<div
+			class="row text-center mt-5 m-3 mx-xl-5 d-flex justify-content-between">
+			<!-- <<<<<<<<<<<<<<< (좌) <<<<<<<<<<<<<<<< -->
+			<aside id="mypage-L"
+				class="col-12 col-md-4 col-xl-3 h-100 sticky-md-top">
+				<!-- [<] 내정보란 -->
+				<div class="row bg-light border rounded-4 p-5 px-md-3 px-xl-4">
+					<div class="col-12">
+						<img
+							th:src="@{'../img/member_thumbnail/'+ ${loginMember.getMember_profileimage()}}"
+							class="w-25 rounded-circle img-fluid" alt="...">
+					</div>
+					<div class="col-12 p-3 mb-4">
 						<p class="f22 m-0">
-							<span th:text="${loginMember.getMember_Name()}">사용자이름</span> 님
+							<span class="fw-bolder" th:text="${loginMember.getMember_Name()}">사용자이름</span>
+							님
 						</p>
 						<a th:href="@{logout}"
-							class="text-decoration-none text-dark d-block p-2 f14">로그아웃</a>
-						<a th:href="@{'editMember?id='+${session.Member_Id}}"
-							class="btn btn-outline-dark rounded-pill f14">내 정보 수정 >
+							class="text-decoration-none text-dark d-block p-2 f14">로그아웃</a> <a
+							th:href="@{'editMember?id='+${session.Member_Id}}"
+							class="btn btn-outline-dark rounded-pill f14">내 정보 수정 > </a>
+					</div>
+					<!-- 해당 메뉴 아이콘 -->
+					<div
+						class="col-12 text-center my-menu-ico-parent d-flex justify-content-around f13">
+						<a href="#" class="my-menu-ico">
+							<div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
+								<img src="../img/mypage/menu_ico_1.png" class="img-fluid p-2"
+									alt="...">
+							</div>
+							<span>예약</span>
 						</a>
+						<a href="/band" class="my-menu-ico">
+							<div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
+								<img src="../img/mypage/menu_ico_2.png" class="img-fluid p-2"
+									alt="...">
+							</div>
+							<span>소모임</span>
+						</a>
+						<a href="/feed" class="my-menu-ico">
+							<div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
+								<img src="../img/mypage/menu_ico_3.png" class="img-fluid p-2"
+									alt="...">
+							</div>
+							<span>피드</span>
+						</a>
+						<a href="/infoCourse" class="my-menu-ico">
+							<div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
+								<img src="../img/mypage/menu_ico_4.png" class="img-fluid p-2"
+									alt="...">
+							</div>
+							<span>코스</span>
+						</a>
+					</div>
 				</div>
-                <!-- 해당 메뉴 아이콘 -->
-                <div class="col-12 text-center my-menu-ico-parent d-flex justify-content-around f13">
-                    <div class="my-menu-ico">
-                        <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
-                            <img src="../img/mypage/menu_ico_1.png" class="img-fluid p-2"
-                                 alt="...">
-                        </div>
-                        <span>예약</span>
-                    </div>
-                    <div class="my-menu-ico">
-                        <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
-                            <img src="../img/mypage/menu_ico_2.png" class="img-fluid p-2"
-                                 alt="...">
-                        </div>
-                        <span>소모임</span>
-                    </div>
-                    <div class="my-menu-ico">
-                        <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
-                            <img src="../img/mypage/menu_ico_3.png" class="img-fluid p-2"
-                                 alt="...">
-                        </div>
-                        <span>피드</span>
-                    </div>
-                    <div class="my-menu-ico">
-                        <div class="rounded-circle overflow-hidden m-1 p-1 mb-0 bg-white">
-                            <img src="../img/mypage/menu_ico_4.png" class="img-fluid p-2"
-                                 alt="...">
-                        </div>
-                        <span>코스</span>
-                    </div>
-                </div>
-            </div>
-            <!-- [<] AD 영역 -->
-            <div class="d-none d-md-block row border rounded-4 mt-4 pt-4 p-3 text-start">
-                <div class="col">
-                    <strong class="d-block py-3 text-center">원하는 여행지를 찾지 못하셨나요?</strong>
-                    <span class="badge rounded-pill text-bg-info text-white mb-1">AD</span>
-                    <!--AD 이미지-->
-                    <div class="my-ad-img rounded-4 h-100">
-                        <img src="../img/feed/oedo.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="d-flex align-items-center text-white my-ad-img-caption mb-4">
-                        <i class="fa-solid fa-location-dot float-start me-2"></i>
-                        <span class="float-start text-white f13">외도 보타니아</span>
-                    </div>
-                </div>
-            </div>
-        </aside><!-- [<]좌 col -->
-        <!-- >>>>>>>>>>>>>>> (우) >>>>>>>>>>>>>>>> -->
-        <section class="col-12 col-md-8 col-xl-9 ps-md-5">
-            <!-- History 영역 -->
-            <div class="row mt-5 mt-md-0  border rounded-4">
-                <!-- History | Title -->
-                <div class="col-12 d-flex justify-content-between align-items-center p-4">
-                    <h5>History</h5>
-                    <a href="#" class="gg-dim-txt f13">전체삭제</a>
-                </div>
-                <!-- History | Content -->
-                <div class="col-12">
-                    <div class="row my-history-wrap">
-                        <div class="d-none d-lg-block col-2 f20 m-auto pb-5">
-                            최근 본 여행지
-                        </div>
-                        <div class="col-12 col-lg-9 me-auto">
-                            <!-- Swiper -->
-                            <div class="swiper mySwiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="card border-0 my-history-content-card text-center">
-                                            <img src="../img/feed/beer.jpg" class="mb-3" alt="">
-                                            <span class="text-tourist">관광지이름 1</span>
-                                            <span class="f13 text-muted">지역 1</span>
-                                        </div>
-                                        <img src="../img/mypage/del.png"
-                                             class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                             alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="card border-0 my-history-content-card text-center">
-                                            <img src="../img/feed/cebu.jpg" class="mb-3" alt="">
-                                            <span class="text-tourist">관광지이름 1</span>
-                                            <span class="f13 text-muted">지역 1</span>
-                                        </div>
-                                        <img src="../img/mypage/del.png"
-                                             class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                             alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="card border-0 my-history-content-card text-center">
-                                            <img src="../img/feed/oedo.jpg" class="mb-3" alt="">
-                                            <span class="text-tourist">관광지이름 1</span>
-                                            <span class="f13 text-muted">지역 1</span>
-                                        </div>
-                                        <img src="../img/mypage/del.png"
-                                             class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                             alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="card border-0 my-history-content-card text-center">
-                                            <img src="../img/feed/beer.jpg" class="mb-3" alt="">
-                                            <span class="text-tourist">관광지이름 1</span>
-                                            <span class="f13 text-muted">지역 1</span>
-                                        </div>
-                                        <img src="../img/mypage/del.png"
-                                             class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                             alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="card border-0 my-history-content-card text-center">
-                                            <img src="../img/feed/cebu.jpg" class="mb-3" alt="">
-                                            <span class="text-tourist">관광지이름 1</span>
-                                            <span class="f13 text-muted">지역 1</span>
-                                        </div>
-                                        <img src="../img/mypage/del.png"
-                                             class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                             alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="card border-0 my-history-content-card text-center">
-                                            <img src="../img/feed/oedo.jpg" class="mb-3" alt="">
-                                            <span class="text-tourist">관광지이름 1</span>
-                                            <span class="f13 text-muted">지역 1</span>
-                                        </div>
-                                        <img src="../img/mypage/del.png"
-                                             class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                             alt="">
-                                    </div>
-                                </div>
-                                <div class="row mx-auto">
-                                    <div class="swiper-scrollbar"></div>
-                                    <div class="next-btn"></div>
-                                    <div class="prev-btn"></div>
-                                    <div class="swiper-pagination cs-d-none"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-5 mt-md-4  text-start gap-lg-4">
-                <!-- 즐겨찾기 좋아요/팔로잉 -->
-                <div class="col-12 col-lg">
-                    <div class="row">
-                        <!-- 팔로잉 영역 -->
-                        <div class="col-12 border rounded-4 p-4 pb-3">
-                            <h5 class="text-start">팔로잉</h5>
-                            <!-- 팔로잉 목록 | max5 -->
-                            <div class="row mt-3 text-center d-flex f12">
-                                <div class="col my-follow align-items-center">
-                                    <img src="../img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
-                                         alt="">
-                                    <span>검데렐라</span>
-                                </div>
-                                <div class="col my-follow align-items-center">
-                                    <img src="../img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
-                                         alt="">
-                                    <span>이지후</span>
-                                </div>
-                                <div class="col my-follow align-items-center">
-                                    <img src="../img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
-                                         alt="">
-                                    <span>권광호</span>
-                                </div>
-                                <div class="col my-follow align-items-center">
-                                    <img src="../img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
-                                         alt="">
-                                    <span>장창엽</span>
-                                </div>
-                                <div class="col my-follow align-items-center">
-                                    <img src="../img/mypage/user_rabbit.jpg" class="rounded-circle" width="52"
-                                         alt="">
-                                    <span>계모</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <a href="#" class="gg-dim-txt d-block text-center f14">
-                                전체 보기
-                            </a>
-                        </div> <!-- 좋아요 col -->
-                        <div class="col-12 mt-5 mt-md-4 f13 border rounded-4 p-4">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="text-start">좋아요</h5>
-                                <a href="#" class="gg-dim-txt f13">전체보기</a>
-                            </div>
-                            <div class="row mx-auto mt-3">
-                                <!--todo / 이미지 정사각형 만들기-->
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/cebu.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/oedo.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-4 text-center my-like-box">
-                                    <img src="../img/feed/beer.jpg" class="img-fluid" alt="">
-                                </div>
-                            </div>
-                        </div><!--좋아요 col-->
-                    </div>
-                </div>
-                <!-- 보관함 | 우측의 우측 -->
-                <div class="col-12 col-lg-6 mt-3 mt-lg-0">
-                    <div class="row">
-                        <!--보관함-->
-                        <div class="col-12 border rounded-4 p-4 mt-5 mt-md-0">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="text-start">코스 보관함</h5>
-                                 <th:block th:if="${#lists.size(course) != 0}">
-                                <a th:href="@{'mypageCourseAll?id='+${course.get(0).getMember_Id()}}" class="gg-dim-txt f13" >전체보기</a>
-                               </th:block>
-                            </div>
-                            <div class="row mt-3">
-                          
-                                <div class="col-6 text-start my-scrap-box mb-4" th:each="course:${course}">	
-                        <th:block th:if="${#lists.size(course) != 0}">
-                                <a th:href="@{'Course_view?num='+ ${course.getCourse_num()}}">
-                                    <div class="my-scrap-box-img rounded-2">
-                                        
-                                        <img
-								th:src="@{'../img/info/' + ${course.getCourse_img()}}"
-								alt="" class="img-fluid"
-								>
-                                    </div>
-                                    <span class="f12 text-muted mt-2 " th:text="${course.getCourse_Name()}">사용자지정태그</span>
-                                    <span class="f14 text-truncate"  th:text="${course.getCourse_content()}">맥주여행! 이렇게만 하세요🍺</span>
-                                    <img th:src="@{'../img/member_thumbnail/'+${course.getMember_profileimage()}}" class="rounded-circle" width="19"
-                                         alt="">
-                                    <span class="d-inline f12 text-muted px-1" th:text="${course.getMember_Id}">userName</span>
-                                    </a>
-                        </th:block >
-                        <th:block th:unless="${#lists.size(course) != 0}">
-                        	<div class="my-3 text-black">저장된 코스가 없습니다...</div>
-                        </th:block>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- [M] AD 영역 -->
-        <div class="d-md-none mx-auto row border rounded-4 my-5 pt-5 p-3 my-ad-parent">
-            <div class="col h-100">
-                <strong class="d-block mb-3">원하는 여행지를 찾지 못하셨나요?</strong>
-                <span class="badge rounded-pill text-bg-info text-white mb-1">AD</span>
-                <!--AD 이미지-->
-                <img src="../img/feed/oedo.jpg" class="img-fluid rounded-4" alt="">
-                <div class="d-flex align-items-center my-ad-img my-3">
-                    <i class="fa-solid fa-location-dot float-start me-2"></i>
-                    <span class="float-start f13">외도 보타니아</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div><!--container-->
-<!--footer-->
-<div th:replace="~{footer/footer::footer}"></div>
-	
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
+				<!-- [<] AD 영역 -->
+				<div
+					class="d-none d-md-block row border rounded-4 mt-4 pt-4 p-3 text-start">
+					<div class="col">
+						<strong class="d-block py-3 text-center">원하는 여행지를 찾지
+							못하셨나요?</strong> <span
+							class="badge rounded-pill text-bg-info text-white mb-1">AD</span>
+						<!--AD 이미지-->
+						<div class="my-ad-img rounded-4 h-100">
+							<img src="../img/feed/oedo.jpg" class="img-fluid" alt="">
+						</div>
+						<div
+							class="d-flex align-items-center text-white my-ad-img-caption mb-4">
+							<i class="fa-solid fa-location-dot float-start me-2"></i> <span
+								class="float-start text-white f13">외도 보타니아</span>
+						</div>
+					</div>
+				</div>
+			</aside>
+			<!-- [<]좌 col -->
+			<!-- >>>>>>>>>>>>>>> (우) >>>>>>>>>>>>>>>> -->
+			<section class="col-12 col-md-8 col-xl-9 ps-md-5">
+				<!-- History 영역 -->
+				<div class="row gap-4 mt-5 mt-md-0">
+					<!-- History | Title -->
+					<div
+						class="col-12 align-items-center p-4 border rounded-4 overflow-hidden">
+						<div class="col-12 d-flex justify-content-between h-5 hstack">
+							<h5>History</h5>
+							<a href="#" class="gg-dim-txt f13">전체삭제</a>
+						</div>
 
-<script>
-    var swiper = new Swiper(".mySwiper", {
-            pagination: {
-                el: ".swiper-pagination",
-                type: "fraction",
-            },
-            slidesPerView: 3,
-            breakpoints: {
-                640: {
-                    slidesPerView: 3,
-                },
-                724: {
-                    slidesPerView: 3,
-                },
-                824: {
-                    slidesPerView: 3,
-                },
-                924: {
-                    slidesPerView: 3,
-                },
-                1024: {
-                    slidesPerView: 4,
-                },
-                1700: {
-                    slidesPerView: 6,
-                },
-            },
-            scrollbar: {
-                el: ".swiper-scrollbar",
-                hide:
-                    false,
-            }
-            ,
-            navigation: {
-                nextEl: '.next-btn',
-                prevEl:
-                    '.prev-btn',
-            }
-            ,
-        })
-    ;
-</script>
+						<!-- History | Content -->
+						<div class="col-12 mt-3">
+							<div class="row my-history-wrap">
+								<div class="d-none d-lg-block col-2 f20 m-auto pb-5">최근 본
+									여행지</div>
+								<div class="col-12 col-lg-9 me-auto">
+									<!-- Swiper -->
+									<div class="swiper mySwiper">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide">
+												<div
+													class="card border-0 my-history-content-card text-center">
+													<img src="../img/feed/beer.jpg" class="mb-3" alt="">
+													<span class="text-tourist">관광지이름 1</span> <span
+														class="f13 text-muted">지역 1</span>
+												</div>
+												<img src="../img/mypage/del.png"
+													class="my-del-btn shadow-sm position-absolute" width="24"
+													height="24" alt="">
+											</div>
+											<div class="swiper-slide">
+												<div
+													class="card border-0 my-history-content-card text-center">
+													<img src="../img/feed/cebu.jpg" class="mb-3" alt="">
+													<span class="text-tourist">관광지이름 1</span> <span
+														class="f13 text-muted">지역 1</span>
+												</div>
+												<img src="../img/mypage/del.png"
+													class="my-del-btn shadow-sm position-absolute" width="24"
+													height="24" alt="">
+											</div>
+											<div class="swiper-slide">
+												<div
+													class="card border-0 my-history-content-card text-center">
+													<img src="../img/feed/oedo.jpg" class="mb-3" alt="">
+													<span class="text-tourist">관광지이름 1</span> <span
+														class="f13 text-muted">지역 1</span>
+												</div>
+												<img src="../img/mypage/del.png"
+													class="my-del-btn shadow-sm position-absolute" width="24"
+													height="24" alt="">
+											</div>
+											<div class="swiper-slide">
+												<div
+													class="card border-0 my-history-content-card text-center">
+													<img src="../img/feed/beer.jpg" class="mb-3" alt="">
+													<span class="text-tourist">관광지이름 1</span> <span
+														class="f13 text-muted">지역 1</span>
+												</div>
+												<img src="../img/mypage/del.png"
+													class="my-del-btn shadow-sm position-absolute" width="24"
+													height="24" alt="">
+											</div>
+											<div class="swiper-slide">
+												<div
+													class="card border-0 my-history-content-card text-center">
+													<img src="../img/feed/cebu.jpg" class="mb-3" alt="">
+													<span class="text-tourist">관광지이름 1</span> <span
+														class="f13 text-muted">지역 1</span>
+												</div>
+												<img src="../img/mypage/del.png"
+													class="my-del-btn shadow-sm position-absolute" width="24"
+													height="24" alt="">
+											</div>
+											<div class="swiper-slide">
+												<div
+													class="card border-0 my-history-content-card text-center">
+													<img src="../img/feed/oedo.jpg" class="mb-3" alt="">
+													<span class="text-tourist">관광지이름 1</span> <span
+														class="f13 text-muted">지역 1</span>
+												</div>
+												<img src="../img/mypage/del.png"
+													class="my-del-btn shadow-sm position-absolute" width="24"
+													height="24" alt="">
+											</div>
+										</div>
+										<div class="row mx-auto">
+											<div class="swiper-scrollbar"></div>
+											<div class="next-btn"></div>
+											<div class="prev-btn"></div>
+											<div class="swiper-pagination cs-d-none"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 즐겨찾기 좋아요/팔로잉 -->
+					<div class="col-12 col-lg">
+						<div class="row gap-4">
+							<!-- 팔로잉 영역 -->
+							<div class="col-12 border rounded-4 p-4 pb-3">
+								<h5 class="text-start">팔로잉</h5>
+								<!-- 팔로잉 목록 | max5 -->
+								<div class="col-12 mt-3 text-center d-flex f12 gap-1">
+									<div class="col my-follow align-items-center">
+										<img src="../img/mypage/user_rabbit.jpg"
+											class="rounded-circle" width="52" alt=""> <span>검데렐라</span>
+									</div>
+									<div class="col my-follow align-items-center">
+										<img src="../img/mypage/user_rabbit.jpg"
+											class="rounded-circle" width="52" alt=""> <span>이지후</span>
+									</div>
+									<div class="col my-follow align-items-center">
+										<img src="../img/mypage/user_rabbit.jpg"
+											class="rounded-circle" width="52" alt=""> <span>권광호</span>
+									</div>
+									<div class="col my-follow align-items-center">
+										<img src="../img/mypage/user_rabbit.jpg"
+											class="rounded-circle" width="52" alt=""> <span>장창엽</span>
+									</div>
+									<div class="col my-follow align-items-center">
+										<img src="../img/mypage/user_rabbit.jpg"
+											class="rounded-circle" width="52" alt=""> <span>계모</span>
+									</div>
+								</div>
+								<hr>
+								<a href="#" class="gg-dim-txt d-block text-center f14"> 전체
+									보기 </a>
+							</div>
+							<!-- 좋아요 col -->
+							<div class="col-12 f13 border rounded-4 p-4">
+								<div class="d-flex justify-content-between m-auto">
+									<h5 class="text-start">좋아요</h5>
+									<a href="/feed" class="gg-dim-txt f13">전체보기</a>
+								</div>
+								<div class="row mx-auto mt-3 gap-1" th:classappend="${#lists.size(feed) % 3 == 0} ? 'justify-content-center'">
+									<!-- Feed List의 사이즈 존재 -->
+									<th:block th:if="${#lists.size(feed) ne 0}"
+										th:each="feed:${feed}">
+										<!--todo / 이미지 정사각형 만들기-->
+										<!-- 좋아요 누른 부분만 출력 -->
+										<a th:href="@{'/feed_show?num='+${feed.getFeed_num()}}"
+											class="col-4 text-center my-like-box overflow-hidden d-flex justify-content-center p-0"
+											th:if="${feed.getFeed_heart_on() eq 1}">
+											<!-- feed_thumbnail에 들어있는 이미지를 ,로 쪼개서 1번째 이미지 추출 -->
+											<img
+												th:src="@{'../img/feed_thumbnail/' + ${#strings.arraySplit(feed.getFeed_thumbnail(), ',')[0]}}"
+												class="img-fluid" alt="">
+										</a>
+										<a class="col-4 text-center my-like-box overflow-hidden d-flex justify-content-center p-0"
+											th:unless="${feed.getFeed_heart_on() eq 1}">
+											<!-- feed_thumbnail에 들어있는 이미지를 ,로 쪼개서 1번째 이미지 추출 -->
+											좋아요 눌러라!
+										</a>
+									</th:block>
+									<!-- Feed List의 사이즈 미 존재 -->
+									<div th:if="${#lists.isEmpty(feed)}" class="my-3 text-black">좋아요 눌러주세용~</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 보관함 | 우측의 우측 -->
+					<div class="col-12 col-md w-100 d-flex align-items-stretch border rounded-4 p-4 mt-md-0">
+						<div class="row p-0">
+							<!--보관함-->
+							<div class="col-12">
+								<div class="d-flex justify-content-between">
+									<h5 class="text-start">코스 보관함</h5>
+									<th:block th:if="${#lists.size(course) !=0}">
+										<a
+											th:href="@{'mypageCourseAll?id='+${course.get(0).getMember_Id()}}"
+											class="gg-dim-txt f13">전체보기</a>
+									</th:block>
+								</div>
+							</div>
+
+									<div class="col-6 text-start my-scrap-box mb-4"
+										th:each="course:${course}">
+										<th:block th:if="${#lists.size(course) !=0}">
+											<a th:href="@{'Course_view?num='+ ${course.getCourse_num()}}">
+												<div class="my-scrap-box-img rounded-2">
+													<img th:src="@{'../img/info/' + ${course.getCourse_img()}}"
+														alt="" class="img-fluid">
+												</div> <span class="f12 text-muted mt-2 "
+												th:text="${course.getCourse_Name()}">사용자지정태그</span> <span
+												class="f14 text-truncate"
+												th:text="${course.getCourse_content()}">맥주여행! 이렇게만
+													하세요🍺</span> <img
+												th:src="@{'../img/member_thumbnail/'+${course.getMember_profileimage()}}"
+												class="rounded-circle" width="19" alt=""> <span
+												class="d-inline f12 text-muted px-1"
+												th:text="${course.getMember_Id}">userName</span>
+											</a>
+										</th:block>
+										<th:block th:unless="${#lists.size(course) !=0}">
+											<div class="my-3 text-black">저장된 코스가 없습니다...</div>
+										</th:block>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- [M] AD 영역 -->
+			<div
+				class="d-md-none mx-auto row border rounded-4 my-5 pt-5 p-3 my-ad-parent">
+				<div class="col h-100">
+					<strong class="d-block mb-3">원하는 여행지를 찾지 못하셨나요?</strong> <span
+						class="badge rounded-pill text-bg-info text-white mb-1">AD</span>
+					<!--AD 이미지-->
+					<img src="../img/feed/oedo.jpg" class="img-fluid rounded-4" alt="">
+					<div class="d-flex align-items-center my-ad-img my-3">
+						<i class="fa-solid fa-location-dot float-start me-2"></i> <span
+							class="float-start f13">외도 보타니아</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--container-->
+	<!--footer-->
+	<div th:replace="~{footer/footer::footer}"></div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+	<script>
+		var swiper = new Swiper(".mySwiper", {
+			pagination : {
+				el : ".swiper-pagination",
+				type : "fraction",
+			},
+			slidesPerView : 3,
+			breakpoints : {
+				640 : {
+					slidesPerView : 3,
+				},
+				724 : {
+					slidesPerView : 3,
+				},
+				824 : {
+					slidesPerView : 3,
+				},
+				924 : {
+					slidesPerView : 3,
+				},
+				1024 : {
+					slidesPerView : 4,
+				},
+				1700 : {
+					slidesPerView : 6,
+				},
+			},
+			scrollbar : {
+				el : ".swiper-scrollbar",
+				hide : false,
+			},
+			navigation : {
+				nextEl : '.next-btn',
+				prevEl : '.prev-btn',
+			},
+		});
+	</script>
 </body>
 </html>

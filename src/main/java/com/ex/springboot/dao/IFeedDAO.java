@@ -24,16 +24,16 @@ public interface IFeedDAO {
 	//피드 전체 페이지
 	public List<FeedDTO> feedList();
 
-	//피드 전체 페이지
+	//피드 전체 페이지 - login 했을 때
 	public List<FeedDTO> feedList_login(
 			@Param("Member_Id") String Member_Id
 	);
 	
-	//피드 전체 페이지 - login 시 좋아요 개수 가져오기
-	public Feed_LikeDTO feedLikeList(
-			@Param("Feed_num") int Feed_num
-	);
-
+	/*
+	 * //피드 전체 페이지 - login 시 좋아요 개수 가져오기 public Feed_LikeDTO feedLikeList(
+	 * 
+	 * @Param("Feed_num") int Feed_num );
+	 */
 	//피드 전체 페이지 - 홈에서 보일 피드
 	public List<FeedDTO> feedList_random();
 

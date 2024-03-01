@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ex.springboot.dao.IFeedDAO;
 import com.ex.springboot.dao.IMemberDAO;
 import com.ex.springboot.dto.MemberDTO;
 
@@ -31,6 +32,9 @@ public class MemberController {
 
 	@Autowired
 	IMemberDAO member_dao;
+
+	@Autowired
+	IFeedDAO feed_dao;
 	
 	@Autowired
 	private com.ex.springboot.dao.IAiDAO AiDAO;
@@ -213,6 +217,7 @@ public class MemberController {
 		return "redirect:/login";
 	}
 	
+	//마이페이지
 	@GetMapping("/mypage")
 	public String mypage(HttpServletRequest request, Model model) {
 		String id = request.getParameter("id");
@@ -222,6 +227,7 @@ public class MemberController {
 		}
 		
 		model.addAttribute("loginMember", member_dao.memberList(id));
+		model.addAttribute("feed", feed_dao.feedList_login(id));
 		model.addAttribute("course", AiDAO.Course_select4(id));
 		System.out.println(AiDAO.Course_select4(id).size() + " --리스트 사이즈"); 
 		return "thymeleaf/Member/mypage";
