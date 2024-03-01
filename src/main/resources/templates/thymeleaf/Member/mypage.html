@@ -255,25 +255,25 @@
                             <div class="row mt-3">
                           
                                 <div class="col-6 text-start my-scrap-box mb-4" th:each="course:${course}">	
-                        <th:block th:if="${#lists.size(course) != 0}">
-                                <a th:href="@{'Course_view?num='+ ${course.getCourse_num()}}">
-                                    <div class="my-scrap-box-img rounded-2">
-                                        
-                                        <img
-								th:src="@{'../img/info/' + ${course.getCourse_img()}}"
-								alt="" class="img-fluid"
-								>
-                                    </div>
-                                    <span class="f12 text-muted mt-2 " th:text="${course.getCourse_Name()}">사용자지정태그</span>
-                                    <span class="f14 text-truncate"  th:text="${course.getCourse_content()}">맥주여행! 이렇게만 하세요🍺</span>
-                                    <img th:src="@{'../img/member_thumbnail/'+${course.getMember_profileimage()}}" class="rounded-circle" width="19"
-                                         alt="">
-                                    <span class="d-inline f12 text-muted px-1" th:text="${course.getMember_Id}">userName</span>
-                                    </a>
-                        </th:block >
-                        <th:block th:unless="${#lists.size(course) != 0}">
-                        	<div class="my-3 text-black">저장된 코스가 없습니다...</div>
-                        </th:block>
+		                        <th:block th:if="${#lists.size(course) != 0}">
+		                                <a th:href="@{'Course_view?num='+ ${course.getCourse_num()}}">
+		                                    <div class="my-scrap-box-img rounded-2">
+		                                        
+		                                        <img
+										th:src="@{'../img/info/' + ${course.getCourse_img()}}"
+										alt="" class="img-fluid"
+										>
+		                                    </div>
+		                                    <span class="f12 text-muted mt-2 " th:text="${course.getCourse_Name()}">사용자지정태그</span>
+		                                    <span class="f14 text-truncate"  th:text="${course.getCourse_content()}">맥주여행! 이렇게만 하세요🍺</span>
+		                                    <img th:src="@{'../img/member_thumbnail/'+${course.getMember_profileimage()}}" class="rounded-circle" width="19"
+		                                         alt="">
+		                                    <span class="d-inline f12 text-muted px-1" th:text="${course.getMember_Id}">userName</span>
+		                                    </a>
+		                        </th:block >
+		                        <th:block th:unless="${#lists.size(course) != 0}">
+		                        	<div class="my-3 text-black">저장된 코스가 없습니다...</div>
+		                        </th:block>
                                 </div>
                             </div>
                         </div>
