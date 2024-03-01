@@ -265,6 +265,7 @@
 								</div>
 							</div>
 							<!-- Carousel Prev/Next button -->
+							<!-- , 가 포함되어 있을 때(사진의 개수가 여러개) 보이는 좌우 button -->
 							<div
 								th:if="${#lists.size(#strings.arraySplit(feed.Feed_thumbnail, ','))>
 							1}">

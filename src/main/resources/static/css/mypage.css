@@ -1,151 +1,161 @@
-.mypage-bg{
-    margin-top: 100px;
-    width: 100%;
-    height: 100%;
-    background: url("../img/mypage/waves.jpg") no-repeat center/cover;
-    filter: blur(80px);
+.mypage-bg {
+	margin-top: 100px;
+	width: 100%;
+	height: 100%;
+	background: url("../img/mypage/waves.jpg") no-repeat center/cover;
+	filter: blur(80px);
 }
 
 /* 색상 팔레트 */
-.gg-dim-txt{
-    color: var(--dimgray);
+.gg-dim-txt {
+	color: var(--dimgray);
 }
 
 /*<<<<<<<<<<<<<<<<<<<<<<<<<< [좌] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 /* sticky 상단 영역 */
-#mypage-L.sticky-md-top{
-    top: 82px;
-    z-index: 0;
+#mypage-L.sticky-md-top {
+	top: 82px;
+	z-index: 0;
 }
 
 /* 메뉴 아이콘 */
-.my-menu-ico-parent{
-    color: #555555;
+.my-menu-ico-parent {
+	color: #555555;
 }
 
-.my-menu-ico{
-    cursor: pointer;
+.my-menu-ico {
+	cursor: pointer;
 }
 
-.my-menu-ico span{
-    display: block;
-    width: 100%;
+.my-menu-ico span {
+	display: block;
+	width: 100%;
 }
 
 /* AD 영역 */
-.my-ad-img{
-    /*height: 260px;*/
-    overflow: hidden;
+.my-ad-img {
+	/*height: 260px;*/
+	overflow: hidden;
 }
 
-.my-ad-img-caption{
-    left:0;
-    margin-left: 15px;
-    margin-top: -2em;
-    color: white;
-    text-shadow: 1px 1px 4px black;
+.my-ad-img-caption {
+	left: 0;
+	margin-left: 15px;
+	margin-top: -2em;
+	color: white;
+	text-shadow: 1px 1px 4px black;
 }
 
 /*>>>>>>>>>>>>>>>>>>>>>>>>>> [우] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 /* History - ai cokcok swiper */
-.my-history-wrap-parent{
+.my-history-wrap-parent {
 	max-height: 300px;
 }
 
-.my-history-wrap{
-    letter-spacing: -1.3px;
+.my-history-wrap {
+	letter-spacing: -1.3px;
 }
 
 .my-history-content-card {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 /*content*/
 .my-history-title-wrap {
-    padding: 50px 0;
+	padding: 50px 0;
 }
 
 .swiper-slide {
-    padding: 0 0 0 20px;
+	padding: 0 0 0 20px;
 }
 
 /* history 삭제 버튼 */
-.my-del-btn{
-    top: 5px;
-    right: 5px;
+.my-del-btn {
+	top: 5px;
+	right: 5px;
 }
-
 
 /* follow */
-.my-follow{
-    padding: 0;
-    margin: 0;
-    max-width: 64px;
+.my-follow {
+	padding: 0;
+	margin: 0;
+	max-width: 64px;
 }
 
-.my-follow span, .my-scrap-box span{
-    display: block;
-    width: 100%;
+.my-follow span, .my-scrap-box span {
+	display: block;
+	width: 100%;
 }
 
 /* 좋아요 영역 */
-.my-like-box{
-    padding: 0.15rem;
+.my-like-box {
+	/*     max-height: var(--imageSize);
+    width: var(--imageSize);
+    max-width: var(--imageSize); */
+	width: 32%;
+	position: relative;
 }
 
-.my-like-box img{
-    object-fit: cover;
+.my-like-box img {
+	object-fit: cover;
     margin: 0 auto;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.my-like-box:after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
 }
 
 /* 스크랩 */
-.my-scrap-box-img{
-    height: 150px;
-    overflow: hidden;
+.my-scrap-box-img {
+	height: 150px;
+	overflow: hidden;
 }
 
-.my-scrap-box-img img{
-    display: block;
-    margin: 0 auto;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+.my-scrap-box-img img {
+	display: block;
+	margin: 0 auto;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
 }
-
 
 /*swiper*/
 .next-btn {
-    width: 36px;
-    height: 36px;
-    position: relative;
-    top: 5%;
-    right: -95%;
-    background: url("../img/btn_cockcock_slide.png") 0 -72px;
+	width: 36px;
+	height: 36px;
+	position: relative;
+	top: 5%;
+	right: -95%;
+	background: url("../img/btn_cockcock_slide.png") 0 -72px;
 }
 
 .prev-btn {
-    width: 36px;
-    height: 36px;
-    position: relative;
-    top: 5%;
-    right: -87%;
-    background: url("../img/btn_cockcock_slide.png") 0 -36px;
+	width: 36px;
+	height: 36px;
+	position: relative;
+	top: 5%;
+	right: -87%;
+	background: url("../img/btn_cockcock_slide.png") 0 -36px;
 }
 
 .swiper-pagination {
-    display: none;
+	display: none;
 }
 
-
 /* 프로필 사진 변경 버튼 */
-.member-fileUpload-wrapper{
+.member-fileUpload-wrapper {
 	width: 150px;
 	height: 150px;
 	position: relative;
 }
 
-label.member-fileUpload{
+label.member-fileUpload {
 	z-index: 2;
 	position: absolute;
 	bottom: 0;
@@ -153,28 +163,27 @@ label.member-fileUpload{
 	text-indent: -9999px;
 	width: 36px;
 	height: 36px;
-	border-radius:50%;	
+	border-radius: 50%;
 }
 
-.member-fileUpload-btn{
+.member-fileUpload-btn {
 	width: 21px;
 	height: 21px;
 	background: url("../img/mypage/camera.png") center/contain;
-
 }
 
 .member-fileUpload-form {
-    display: none;
+	display: none;
 }
 
 /* 토스트 */
-.my-toast-parent{
+.my-toast-parent {
 	z-index: 1051;
 }
 
-.my-toast.toast{
-	border:none;
+.my-toast.toast {
+	border: none;
 	box-shadow: none;
-	backdrop-filter: blur( 10px );
-	-webkit-backdrop-filter: blur( 10px );
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
 }
