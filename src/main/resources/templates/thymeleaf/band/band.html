@@ -10,8 +10,7 @@
         <div class="container-fluid band_lnb">
             <div class="container band_lnb_box pt-5">
                 <ul class="band_lnb_ul p-0 d-flex">
-                    <li class="band_lnb_item active">내 밴드</li>
-                    <li class="band_lnb_item">소모임</li>
+                    <li class="band_lnb_item active">나의 동행</li>
                 </ul>
             </div>
         </div>
@@ -22,7 +21,6 @@
                 <!-- 밴드 만들기 영역 -->
 				<div class="col-sm-4 join_band_item create_band shadow-s"
 					onClick="bandCreateBtn()">
-					
 					<a href="/bandCreate" class="create_band_link">
 						<div class="create_buttonBox"></div> 
 						<strong>만들기</strong>
@@ -50,8 +48,7 @@
             <div class="container pb-2">
 				<div class="row m-auto py-3 w-100 ">
 					<div class="col hstack justify-content-between">
-						<span class="f22 float-start"><b>이런 밴드 어때요</b></span> <span
-							class="f15 float-end">모두보기 > </span>
+						<span class="f22 float-start band_recomand_txt">이런 동행은 어때요?</span> 
 					</div>
 				</div>
 				<!-- 밴드 추천 리스트 -->
@@ -78,7 +75,7 @@
         </div><!-- 밴드 추천 영역 끝-->
         
         
-        <!-- 오늘의 인기글 영역 -->
+        <!-- 오늘의 인기글 영역 
         <div class="band_today_best_write">
             <div class="container px-0">
                 <div class="row py-3">
@@ -87,7 +84,8 @@
                     </div>
                 </div>
             </div>
-            <!-- 오늘의 인기글 영역 -->
+            
+            
             <div class="band_today_best_writeBox pb-5">
                 <div class="band_today_best_list container">
 	                <div class="row m-auto py-3 w-100">
@@ -98,7 +96,7 @@
 						</div>
 					</div>
                 <div class="row m-auto gap-3">
-                    <!-- 오늘의 인기글 item-->
+                    
                     <div class="col-lg-6 col-md-12 band_today_best_item shadow-s">
                         <div class="best_item_title">
                             <strong>마운틴TV 공식밴드</strong>
@@ -175,10 +173,10 @@
                         </div>
                     </div>
                                     </div>
-                </div>  <!-- band_today_best_list -->
-            </div>
-        </div>
-
+                </div> 
+            </div> 
+        </div>-->
+			
     </div>  <!-- band_wrapper -->
     <div th:replace="~{footer/footer::footer}"></div>
 

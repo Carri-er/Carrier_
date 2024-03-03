@@ -116,6 +116,12 @@ a.band_recomand_link{
 	display : block;
 	width: 100%;
 }
+.band_recomand_txt{
+	font-size: 28px !important;
+	border-bottom: 3px solid var(--black);
+    color : var(--black) !important;
+    font-weight: bold;
+}
 div.band_recomand_item{
     margin-top : 15px;
     margin-bottom : 15px;

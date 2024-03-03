@@ -8,7 +8,7 @@
     <div class="map_wrapp">
         <!-- 맵 컨텐츠 전체를 감싸는 영역  -->
         <div class="map_all_contentBox">
-                <!-- map 왼쪽 가이드 영역 -->
+            <!-- map 왼쪽 가이드 영역 -->
             <div class="map_guide">
                 <!-- gps 현재 위치 출력 영역 -->
                 <div class="map_curr_locationBox">
@@ -62,59 +62,11 @@
                   
                 </div> <!-- map_guide_iconBox 끝 div--> 
                 
-                <!-- 페이징 -->
-                <div class="pagination">
-						<ul class="d-flex">
-							<!-- 이전 버튼 -->
-							<li th:if="${currentPage > 1}" class="mx-2"><a
-								th:href="@{'/map?page=' + ${mPage}}">&laquo;
-									이전</a></li>
-
-							<!-- 페이지 번호 -->
-							<li
-								th:each="pageNum : ${#numbers.sequence((currentPage - 2 > 0 ? currentPage - 2 : 1), 
-                        (currentPage + 2 < totalPages ? currentPage + 2 : totalPages))}"
-								class="mx-2"><a
-								th:href="@{'/map?page=' + ${pageNum}}"
-								th:text="${pageNum}"
-								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
-							</li>
-
-							<!-- 다음 버튼 -->
-							<li th:if="${currentPage < totalPages}" class="mx-2"><a
-								th:href="@{'/info?page=' + ${pPage} }">다음
-									&raquo;</a></li>
-						</ul>
-					</div>
-				<div id="mapListItemWrapper">
-				</div>					
+                <!-- pagination -->
+                <div class="pagination"></div>					
                 <div class="mapListItemBox">
-                	<!-- 게시글 리스트 출력 -->
-	                <div class="mapListItem row" th:each="paginItemList : ${paginItemList}">
-	                	<a  class="row" th:href="@{'Event_view?id='+ ${paginItemList.getEvent_num()}}">
-		                	<div class="col-3 board-left text-center hstack justify-content-center">
-								<img th:src="@{'../img/info/' + ${paginItemList.getEvent_thumbnail()}}"
-										class="img-fluid rounded-4" alt=""
-										style="width: 80px; height: 80px;">
-							</div>
-							<div class="col">
-								<div class="row">
-									<div class="col">
-										<h6>
-											[<span th:text="${paginItemList.getEvent_category()}"></span>] 
-											<span th:text="${paginItemList.getEvent_name()}"></span>
-										</h6>
-									</div>
-								</div>
-							</div>
-							
-						</a>
-	                </div> <!-- mapListItem 끝-->
+                	<div id="distanceListContainer"></div>	
                 </div>
-				
-                
-                
-                
             </div> <!-- map_guide -->
 
             <div class="map_mapSection">
@@ -125,91 +77,65 @@
         
     </div>
 
-
-
 <div th:replace="~{footer/footer::footer}"></div>
-    <script th:inline="javascript">
+<!-- JavaScript section -->
+<script th:inline="javascript">
+
     /*<![CDATA[*/
     kakao.maps.load(function () {
-        // 마커를 담을 배열입니다
+    	
+    	var offset = 0; // 데이터 오프셋
+        var limit = 20; // 한 번에 로드할 데이터 수
+        
+        // Initialize variables
         var markers = [];
-        // 마커 간의 거리를 담을 배열입니다
         var distances = [];
-
-        // event table에 저장된 데이터
         var mapMarkerList = /*[[${mapMarkerList}]]*/ [];
-		
-        console.log(mapMarkerList);
-        
-     	// 현재 위치 변수 선언
         var presentPosition;
-        
-        // 지도를 표시할 div
+        var combinedData = [];
+
         var mapContainer = document.getElementById('map');
-
         var mapOption = {
-            center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(37.566826, 126.9786567), // 서울
+            level: 5
         };
-
-        // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        // mapMarkerList에 저장된 데이터를 반복하여 마커 생성 및 표시
         mapMarkerList.forEach(function (markerInfo) {
-            // 마커의 위치 설정
             var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
-            // 마커 생성
             var marker = new kakao.maps.Marker({
-                position: markerPosition // 마커의 위치 설정
+                position: markerPosition
             });
-            // 마커 지도에 표시
             marker.setMap(map);
             markers.push(marker);
-
-            // 클릭 이벤트 핸들러 추가
             addMarkerClickListener(marker, markers.length - 1);
         });
 
-        
-
-        // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
-            // GeoLocation을 이용해서 접속 위치를 얻어옵니다
             navigator.geolocation.getCurrentPosition(function (position) {
-                var lat = position.coords.latitude; // 위도
-                var lon = position.coords.longitude; // 경도
-                presentPosition = new kakao.maps.LatLng(lat, lon); // geolocation으로 얻어온 좌표
-
-                // 현재 위치 마커 생성
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+                presentPosition = new kakao.maps.LatLng(lat, lon);
                 var currentPositionMarker = new kakao.maps.Marker({
                     position: presentPosition,
                     map: map
                 });
-                markers.push(currentPositionMarker); // 마커 배열에 추가
-
-                // 현재 위치로 지도 중심 변경
+                markers.push(currentPositionMarker);
                 map.setCenter(presentPosition);
-
-                // 모든 마커가 생성되고 현재 위치가 설정된 후에 거리 계산
                 calculateDistances(presentPosition, markers);
             });
-        } else { // HTML5의 GeoLocation을 사용할 수 없을때 
-            presentPosition = new kakao.maps.LatLng(37.566826, 126.9786567);
+        } else {
+            presentPosition = new kakao.maps.LatLng(37.566826, 126.9786567); // 서울
             alert('현재 위치를 찾을 수 없습니다');
-            // 현재 위치 마커 생성
             var currentPositionMarker = new kakao.maps.Marker({
                 position: presentPosition,
                 map: map
             });
-            markers.push(currentPositionMarker); // 마커 배열에 추가
+            markers.push(currentPositionMarker);
             map.setCenter(presentPosition);
-            
-         // 모든 마커가 생성되고 현재 위치가 설정된 후에 거리 계산
-           	calculateDistances(presentPosition, markers);
+            calculateDistances(presentPosition, markers);
         }
 
-        // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
         function addMarkerClickListener(marker, index) {
             kakao.maps.event.addListener(marker, 'click', function () {
                 var event = mapMarkerList[index];
@@ -218,46 +144,44 @@
                 var eventName = event.event_name;
                 var eventNum = event.event_num;
                 var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
-                alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
+                alert(info);
             });
         }
 
-        // 모든 마커에 대해 현재 위치와의 거리 계산
         function calculateDistances(presentPosition, markers) {
             markers.forEach(function (marker) {
                 var distance = getDistance(presentPosition, marker.getPosition());
-                //console.log("거리: " + distance + "m");
-                distances.push(distance); // 계산된 거리를 배열에 저장
+                distances.push(distance);
             });
 
-            // 거리와 해당 인덱스를 묶어 객체로 만든 배열 생성
             var combinedData = distances.map(function (distance, index) {
                 return {
-                    distance: distance ,
-                    event : mapMarkerList[index] // 해당 인덱스의 이벤트 정보
+                    distance: distance,
+                    event: mapMarkerList[index],
                 };
             });
             console.log(combinedData);
-			
-         	// 데이터를 서버로 전송
             sendDataToServer(combinedData);
-           	
         }
 
         function sendDataToServer(data) {
-            // 데이터가 null이 아닌 경우에만 서버로 전송합니다.
             if (data && data.length > 0) {
+            	
+            	var requestData = {
+                        data: data,
+                        offset: offset,
+                        limit: limit
+                    };
+            	
                 $.ajax({
-                    url: '/getDistance', // 서버 엔드포인트 URL
-                    type: 'POST', // 데이터를 보내기 때문에 POST 방식을 사용합니다.
+                    url: '/getDistance',
+                    type: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify(data), // JSON 형태로 데이터를 변환하여 전송합니다.
-                    success: function(response) {
-                        // 성공적으로 서버에서 응답을 받았을 때 실행할 코드를 작성합니다.
-                        console.log('서버 응답:', response);
+                    data: JSON.stringify(requestData),
+                    success: function (response) {
+                        displayDistanceList(response);
                     },
-                    error: function(xhr, status, error) {
-                        // 서버 요청이 실패했을 때 실행할 코드를 작성합니다.
+                    error: function (xhr, status, error) {
                         console.error('서버 요청 실패:', error);
                     }
                 });
@@ -265,12 +189,39 @@
                 console.log('전송할 데이터가 없습니다.');
             }
         }
-        
-        // 두 지점 간의 직선 거리를 계산하는 함수
+
+        function displayDistanceList(distanceList) {
+            var html = "<div class='mapListItem row'>";
+            var itemsPerPage = 20;
+            var startIndex = (currentPage - 1) * itemsPerPage;
+            var endIndex = Math.min(startIndex + itemsPerPage, distanceList.length);
+
+            for (var i = startIndex; i < endIndex; i++) {
+                var item = distanceList[i];
+                html += "<a class='row' href='Event_view?id=" + item.event.event_num + "'>";
+                html += "<div class='col-3 board-left text-center hstack justify-content-center'>";
+                html += "<img src='../img/info/" + item.event.event_thumbnail + "' class='img-fluid rounded-4' alt='' style='width: 80px; height: 80px;'>";
+                html += "</div>";
+                html += "<div class='col'>";
+                html += "<div class='row'>";
+                html += "<div class='col'>";
+                html += "<h6>[<span>" + item.event.event_category + "</span>] <span>" + item.event.event_name + "</span></h6>";
+                html += "</div>";
+                html += "</div>";
+                html += "</div>";
+                html += "</a>";
+            }
+            html += "</div>";
+            $('#distanceListContainer').append(html);
+
+            offset += limit;
+        }
+
+
         function getDistance(p1, p2) {
             var lat1 = p1.getLat(), lon1 = p1.getLng();
             var lat2 = p2.getLat(), lon2 = p2.getLng();
-            var R = 6371000; // 지구의 반지름 (미터 단위)
+            var R = 6371000;
             var dLat = (lat2 - lat1) * Math.PI / 180;
             var dLon = (lon2 - lon1) * Math.PI / 180;
             var a =
@@ -278,9 +229,41 @@
                 Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c; // 거리 (미터 단위)
+            var d = R * c;
             return d;
         }
+        
+        // 스크롤 이벤트 리스너
+        $('#distanceListContainer').scroll(function () {
+            // 스크롤이 맨 아래에 도달하면 추가 데이터 로드
+            if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+                var offset = $('.mapListItem').length; // 현재 로드된 아이템 수를 오프셋으로 설정
+                loadMoreData(offset, limit); 
+            }
+        });
+        
+        // 추가 데이터 로드 함수
+        function loadMoreData(offset, limit) {
+            var data = {
+                offset: offset,
+                limit: limit
+            };
+            
+            $.ajax({
+                url: '/getDistance',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    displayDistanceList(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('서버 요청 실패:', error);
+                }
+            });
+        }
+        
+        
     });
     /*]]>*/
 </script>
