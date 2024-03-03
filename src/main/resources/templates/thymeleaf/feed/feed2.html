@@ -224,7 +224,7 @@
 						<div class="col px-0">
 							<span class="float-start fw-bold f15" th:text="${feed.Member_Id}">박검지</span><br>
 							<span class="float-start text-muted f13">하이라이트</span>
-							<span class="float-start text-muted f13 ms-3 recentSort" th:text="${@com.ex.springboot.controller.Time@calculateTime(feed.getFeed_uploadday())}"></span>
+							<span class="float-start text-muted f13 ms-3 recentSort" th:text="${feed.getFeed_updateday()}"></span>
 
 
 						</div>
