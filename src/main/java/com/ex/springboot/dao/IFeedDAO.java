@@ -136,9 +136,7 @@ public interface IFeedDAO {
 			@Param("Feed_num") int Feed_num,
 			@Param("Feed_comment_num") int Feed_comment_num
 	);
-	
-	
-	
+
 }
 
 

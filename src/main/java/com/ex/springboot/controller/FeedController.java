@@ -32,13 +32,13 @@ import jakarta.validation.Valid;
 public class FeedController {
 	public static String UPLOAD_MEMBER_DIRECTORY = System.getProperty("user.dir")
 			+ "\\src\\main\\resources\\static\\img\\feed_thumbnail";
-
+	 
 	@Autowired
 	IFeedDAO feed_dao;
 
 	// 피드 리스트
 	@GetMapping("/feed")
-	public String feed(Model model, HttpServletRequest request, FeedDTO feedDTO, HttpSession session) {
+	public String feed(Model model, HttpServletRequest request, FeedDTO feedDTO, HttpSession session, Time time) {
 		String Feed_theme = "#" + request.getParameter("Feed_theme");
 		String Feed_area = "#" + request.getParameter("Feed_area");
 		String Member_Id = (String) session.getAttribute("Member_Id");
@@ -71,6 +71,11 @@ public class FeedController {
 			}
 		}
 		model.addAttribute("feedList", feedList);
+		
+		
+		// n시간 전 값 불러오기
+		model.addAttribute("time", time);
+	
 
 		return "thymeleaf/feed/feed2";
 	}
