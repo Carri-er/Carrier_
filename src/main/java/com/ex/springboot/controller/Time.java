@@ -45,32 +45,32 @@ public class Time {
 		return msg;
 	}
 	
-	@RequestMapping(value = "/memberPush", method = RequestMethod.POST)
-    @ResponseBody
-    public HashMap <String, Object> memberPush(HttpSession session, Model model) throws Exception {
-        logger.info("memberPush");
- 
-        HashMap<String, Object> result = new HashMap <String,Object>();
- 
-        TogetherMemberVO vo = (TogetherMemberVO) session.getAttribute("member");
- 
-        String memberEmail = vo.getM_email();
- 
-        List<MemberNoticeVO> notice = memberNoticeService.notiList(memberEmail);
-        
-        for(MemberNoticeVO notiVO : notice) {    // 날짜 포맷 변경
-            notiVO.setNoti_time(formatTimeString(notiVO.getComparetime()));
-        }
-        
-        if (notice.size() > 0) {
-            String size = "1";
- 
-            result.put("size", size);
-            result.put("notice", notice);
-        }
-        
-        return result;
-    }
+//	@RequestMapping(value = "/memberPush", method = RequestMethod.POST)
+//    @ResponseBody
+//    public HashMap <String, Object> memberPush(HttpSession session, Model model) throws Exception {
+//        logger.info("memberPush");
+// 
+//        HashMap<String, Object> result = new HashMap <String,Object>();
+// 
+//        TogetherMemberVO vo = (TogetherMemberVO) session.getAttribute("member");
+// 
+//        String memberEmail = vo.getM_email();
+// 
+//        List<MemberNoticeVO> notice = memberNoticeService.notiList(memberEmail);
+//        
+//        for(MemberNoticeVO notiVO : notice) {    // 날짜 포맷 변경
+//            notiVO.setNoti_time(formatTimeString(notiVO.getComparetime()));
+//        }
+//        
+//        if (notice.size() > 0) {
+//            String size = "1";
+// 
+//            result.put("size", size);
+//            result.put("notice", notice);
+//        }
+//        
+//        return result;
+//    }
 
 
 
