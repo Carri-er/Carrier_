@@ -3,18 +3,169 @@
 <!-- namespace는 이 매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
 <mapper namespace="com.ex.springboot.dao.IFeedDAO">
 <!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
-
+	<!-- 홈에서 피드 리스트 랜덤 출력 -->
+	<select id="feedList_random" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title, --피드제목
+		    A.Feed_content, --피드내용
+		    A.Feed_theme,  --피드 테마 태그
+		    A.Feed_area,  --피드 지역 태그
+		    A.Feed_uploadday, -- 올린날짜
+		    A.Feed_updateday, --수정날짜
+		    A.Feed_thumbnail
+		FROM 
+		    Feed A 
+		LEFT JOIN 
+		    carrier_member B 
+		ON 
+		    A.Member_id = B.Member_id
+		WHERE Feed_num BETWEEN 1 AND 900 
+		ORDER BY DBMS_RANDOM.value
+	</select>
+	
 	<!-- 피드 글쓰기 -->
 	<insert id="feedWrite">
 		INSERT INTO Feed 
 			(Feed_num, Member_Id, Feed_title, Feed_content, Feed_theme, Feed_area, Feed_uploadday, Feed_updateday, Feed_heart, Feed_thumbnail) 
 	    VALUES 
-	    	(Feed_num.nextval, #{Member_Id}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, sysdate, sysdate, 0, #{Feed_thumbnail})
+	    	(Feed_num_seq.nextval, #{Member_Id}, #{Feed_title}, #{Feed_content}, #{Feed_theme}, #{Feed_area}, sysdate, sysdate, 0, #{Feed_thumbnail})
 	</insert>
 	
 	<!-- 피드 리스트 가져오기 -->
 	<select id="feedList" resultType="com.ex.springboot.dto.FeedDTO">
-		SELECT A.Feed_num, B.Member_id, B.Member_profileimage, A.Feed_title, A.Feed_content, A.Feed_theme, A.Feed_area, A.Feed_uploadday, A.Feed_updateday, A.Feed_thumbnail FROM Feed A LEFT JOIN carrier_member B ON A.Member_id = B.Member_id ORDER BY Feed_uploadday DESC
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title, --피드제목
+		    A.Feed_content, --피드내용
+		    A.Feed_theme,  --피드 테마 태그
+		    A.Feed_area,  --피드 지역 태그
+		    A.Feed_uploadday, -- 올린날짜
+		    A.Feed_updateday, --수정날짜
+		    A.Feed_thumbnail
+		FROM 
+		    Feed A 
+		LEFT JOIN 
+		    carrier_member B 
+		ON 
+		    A.Member_id = B.Member_id
+		ORDER BY Feed_uploadday DESC
+	</select>
+	
+	<!-- 로그인 시 피드 리스트  -->
+	<select id="feedList_login" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    f.Feed_num,
+		    f.Member_Id,
+		    f.Feed_title,
+		    f.Feed_content,
+		    f.Feed_theme,
+		    f.Feed_area,
+		    f.Feed_uploadday,
+		    f.Feed_updateday,
+		    f.Feed_heart,
+		    f.Feed_thumbnail,
+		    cm.Member_profileimage,
+		    CASE 
+		        WHEN fh.Member_id IS NULL THEN 0
+		        ELSE 1
+		    END AS Feed_heart_on
+		FROM 
+		    Feed f
+		LEFT JOIN 
+		    carrier_member cm ON f.Member_Id = cm.Member_Id
+		LEFT JOIN 
+		    Feedheart fh 
+		ON f.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
+	</select>
+	<!--  -->
+	
+	<!-- 피드 리스트[theme filter] 가져오기 -->
+	<select id="feedList_theme" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title,
+		    A.Feed_content,
+		    A.Feed_theme,
+		    A.Feed_area, 
+		    A.Feed_uploadday,
+		    A.Feed_updateday,
+		    A.Feed_thumbnail FROM Feed A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_theme = #{Feed_theme}
+	</select>
+	
+	<!-- 피드 리스트[theme filter] 가져오기 -->
+	<select id="feedList_theme_login" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title,
+		    A.Feed_content,
+		    A.Feed_theme,
+		    A.Feed_area, 
+		    A.Feed_uploadday,
+		    A.Feed_updateday,
+		    A.Feed_thumbnail,
+		    CASE 
+		        WHEN fh.Member_id IS NULL THEN 0
+		        ELSE 1
+		    END AS Feed_heart_on
+		FROM 
+		    Feed A 
+		RIGHT OUTER JOIN 
+		    carrier_member B ON A.Member_id = B.Member_id
+		LEFT JOIN 
+		    Feedheart fh ON A.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
+		WHERE 
+		    A.Feed_theme = #{Feed_theme}
+	</select>
+	
+	<!-- 피드 리스트[area filter] 가져오기 -->
+	<select id="feedList_area" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title,
+		    A.Feed_content,
+		    A.Feed_theme,
+		    A.Feed_area, 
+		    A.Feed_uploadday,
+		    A.Feed_updateday,
+		    A.Feed_thumbnail FROM Feed A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_area = #{Feed_area}
+	</select>
+	
+		<!-- 피드 리스트[area filter] 가져오기 -->
+	<select id="feedList_area_login" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    A.Feed_num,
+		    B.Member_Id,
+		    B.Member_profileimage,  
+		    A.Feed_title,
+		    A.Feed_content,
+		    A.Feed_theme,
+		    A.Feed_area, 
+		    A.Feed_uploadday,
+		    A.Feed_updateday,
+		    A.Feed_thumbnail,
+		    CASE 
+		        WHEN fh.Member_id IS NULL THEN 0
+		        ELSE 1
+		    END AS Feed_heart_on
+		FROM 
+		    Feed A 
+		RIGHT OUTER JOIN 
+		    carrier_member B ON A.Member_id = B.Member_id
+		LEFT JOIN 
+		    Feedheart fh ON A.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
+		WHERE 
+		    A.Feed_area = #{Feed_area}
 	</select>
 	
 	<!-- 최신순 피드 리스트 -->
@@ -37,6 +188,7 @@
 		    A.Feed_content,
 		    A.Feed_theme,
 		    A.Feed_area,
+		    A.Feed_heart,
 		    A.Feed_uploadday,
 		    A.Feed_updateday,
 		    A.Feed_thumbnail
@@ -50,6 +202,38 @@
 		    A.Feed_num = #{Feed_num}
 	</select>
 	
+	<!-- 피드 세부 가져오기 -->
+	<select id="feedShow_login" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    f.Feed_num,
+		    f.Member_Id,
+		    f.Feed_title,
+		    f.Feed_content,
+		    f.Feed_theme,
+		    f.Feed_area,
+		    f.Feed_heart,
+		    f.Feed_uploadday,
+		    f.Feed_updateday,
+		    f.Feed_thumbnail,
+		    cm.Member_profileimage,
+		    CASE 
+		        WHEN fh.Member_id IS NULL THEN 0
+		        ELSE 1
+		    END AS Feed_heart_on
+		FROM 
+		    Feed f
+		RIGHT OUTER JOIN 
+		    carrier_member cm 
+		ON 
+		    f.Member_id = cm.Member_id 
+		LEFT JOIN 
+		    Feedheart fh 
+		ON 
+		    f.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
+		WHERE 
+		    f.Feed_num = #{Feed_num}
+	</select>
+	
 	<!-- 피드 수정 -->
 	<update id="feedUpdate">
 		UPDATE Feed SET 
@@ -58,10 +242,42 @@
 			Feed_num = #{Feed_num}
 	</update>
 	
-	<!-- 피드 수정 -->
+	<!-- 피드 삭제 -->
 	<delete id="feedDel">
 		DELETE FROM Feed WHERE Feed_num = #{Feed_num}
 	</delete>
+	
+	<!-- 좋아요 -->
+	<!-- 피드 좋아요 개수 count+N -->
+	<update id="feedLikeCount">
+		UPDATE Feed SET Feed_heart = Feed_heart+${count} WHERE Feed_num = ${Feed_num}
+	</update>
+	
+	<!-- 피드 좋아요 누르기 -->
+	<insert id="feedLike">
+		INSERT INTO Feedheart (Feed_num, Member_Id, Feed_heart_on) VALUES (#{Feed_num}, #{Member_Id}, 1)
+	</insert>
+	
+	<!-- 피드 좋아요 삭제 -->
+	<delete id="feedHate">
+		DELETE FROM Feedheart WHERE Feed_num = #{Feed_num} AND Member_Id =  #{Member_Id}
+	</delete>
+	
+	<!-- 좋아요 리스트 출력 -->
+	<select id="feedLikeList" resultType="com.ex.springboot.dto.Feed_LikeDTO">
+		SELECT
+		    B.Feed_num,
+		    B.Member_Id,
+		    B.Feed_heart_on
+		FROM 
+		    Feed A 
+		RIGHT OUTER JOIN 
+		    Feedheart B 
+		ON 
+		    A.Feed_num = B.Feed_num    
+		WHERE 
+		    B.Feed_num = #{Feed_num}
+	</select>
 	
 	<!-- 댓글 달기 -->
 	<insert id="feedCommentCreate">
@@ -73,7 +289,21 @@
 	
 	<!-- 댓글 보기 -->
 	<select id="feedCommentList" resultType="com.ex.springboot.dto.Feed_commentDTO">
-		SELECT A.Feed_num, A.Feed_comment_num, B.Member_id, B.Member_profileimage, A.Feed_comment, A.Feed_comment_updateday FROM FeedComment A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_num = #{Feed_num} ORDER BY Feed_comment_num DESC
+		SELECT A.Feed_num, A.Feed_comment_num, B.Member_id, B.Member_profileimage, A.Feed_comment, A.Feed_comment_like, A.Feed_comment_updateday FROM FeedComment A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_num = #{Feed_num} ORDER BY Feed_comment_num DESC
 	</select>
 	
+	<!-- 댓글 수정 -->
+	<update id="feedCommentUpdate">
+		UPDATE FeedComment SET Feed_comment=#{Feed_comment}, Feed_comment_updateday = sysdate WHERE Feed_num = #{Feed_num} AND Feed_comment_num = #{Feed_comment_num}
+	</update>
+	
+	<!-- 댓글 삭제-->
+	<delete id="feedCommentDel">
+		DELETE FROM FeedComment WHERE Feed_num = #{Feed_num} AND Feed_comment_num = #{Feed_comment_num}
+	</delete>
+	
+	<!-- 댓글 좋아요 -->
+	<update id="feedCommentLike">
+		UPDATE FeedComment SET Feed_comment_like = #{Feed_comment_like} WHERE Feed_num = #{Feed_num} AND Feed_comment_num = #{Feed_comment_num}
+	</update>
 </mapper>

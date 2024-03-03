@@ -181,6 +181,16 @@
 		Post_Count
 		FROM event
 	</select>
+	<select id="getPostCount2" resultType="int">
+		SELECT COUNT(*) AS
+		Post_Count
+		FROM course
+	</select>
+	<select id="getPostCountSearch" resultType="int">
+		SELECT COUNT(*) AS
+		Post_Count
+		FROM event WHERE Event_content LIKE '%' || #{key} || '%' or Event_area = #{key} or event_title like '%' || #{key} || '%' ORDER BY event_hit DESC
+	</select>
 
 	<!-- 파라미터 값으로 댓글을 가져옴 -->
 	<select id="EventCommentList"
@@ -268,6 +278,39 @@
     WHERE rnum > #{offset}
     ]]>
 	</select>
+	<select id="listWithPagination2"
+		resultType="com.ex.springboot.dto.CourseDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Course
+            ORDER BY Course_num DESC
+        ) e
+        WHERE rownum <= #{pageSize}
+    )
+    WHERE rnum > #{offset}
+    ]]>
+	</select>
+	<select id="listWithPaginationSearch"
+		resultType="com.ex.springboot.dto.EventDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Event
+            WHERE Event_content LIKE '%' || #{key} || '%' or Event_area =#{key} or event_title like '%' || #{key} || '%'
+            ORDER BY Event_hit DESC
+        ) e
+        WHERE rownum <= #{pageSize}
+    )
+    WHERE rnum > #{offset}
+    ]]>
+	</select>
 	<select id="listWithPaginationArea"
 		resultType="com.ex.springboot.dto.EventDTO">
     <![CDATA[
@@ -302,4 +345,14 @@
     WHERE rnum > #{offset}
     ]]>
 	</select>
+	<update id="EventHiteUpdate">
+	update event set Event_hit =#{param2} where Event_num=#{param1}
+	</update>
+	<select id="infoHome"
+		resultType="com.ex.springboot.dto.EventDTO">
+    SELECT * FROM Event WHERE Event_category != all ('맛집', '카페')
+ORDER BY DBMS_RANDOM.RANDOM()
+FETCH FIRST 4 ROWS ONLY
+	</select>
+
 </mapper>

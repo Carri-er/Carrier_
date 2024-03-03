@@ -23,12 +23,14 @@
 	<div th:replace="~{nav/nav::nav}"></div>
 	<!-- inner 페이지 -->
 	<div class="container inner mt-5">
+	<input type="hidden" th:value="${view.getEvent_hit()}"/>
 		<!-- 반복 되는 형태 -->
 		<div class="row mb-5">
 			<div class="col text-center">
-				<h3 class="my-5">
-					[<span th:text="${view.getEvent_category()}">버튼</span>] <span
-						th:text="${view.getEvent_title()}"></span>
+				<h3 class="my-5 highlight d-inline-block">
+					[<span th:text="${view.getEvent_category()}">버튼</span>] 
+					<span
+						th:text="${view.getEvent_name()}"></span>
 				</h3>
 				<img th:src="@{'../img/info/' + ${view.getEvent_thumbnail()}}"
 					alt="" class="img-fluid mx-auto rounded-4">

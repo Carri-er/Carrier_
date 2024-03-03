@@ -83,7 +83,7 @@ public class BandController {
 		
 		model.addAttribute("myBandFeedList",bandDao.bandFeedList(band_code));
 		
-		
+		//model.addAttribute(band_code, bandDao.bandFeedCommentCount());
 		
 		
 		model.addAttribute("bandUrl", band_code);
@@ -91,7 +91,29 @@ public class BandController {
 		return "thymeleaf/band/myBand";
 	}
 	
-	//밴드 세부 페이지로 이동
+	//밴드 피드 세부 페이지
+	@RequestMapping("/bandFeedView")
+	public String bandFeedView(Model model, HttpServletRequest request,HttpSession session) {
+		String band_code = request.getParameter("bandUrl");
+		int num_band_code = Integer.parseInt(band_code);
+		
+		if( session.getAttribute("Member_Id") != null) {
+			String loginId = (String) session.getAttribute("Member_Id");
+			model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+		}
+		
+		model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+		
+		
+		//model.addAttribute(band_code, bandDao.bandFeedCommentCount());
+		
+		
+		model.addAttribute("bandUrl", band_code);
+		
+		return "thymeleaf/band/myBand_feedView";
+	}
+	
+	//밴드 가입한 멤버리스트 페이지로 이동
 		@GetMapping("/mybandMember")
 		public String myBandMember(Model model, HttpServletRequest request,HttpSession session) {
 			
@@ -315,6 +337,7 @@ public class BandController {
 			String origin_band_thumnail = request.getParameter("origin_band_thumnail");
 			String band_name = request.getParameter("band_name");
 			String band_content = request.getParameter("band_content");
+			
 			System.out.println("band_thumnail" + band_thumnail);
 			System.out.println("origin_band_thumnail" + origin_band_thumnail);
 
@@ -322,11 +345,12 @@ public class BandController {
 
 			try {
 
-				if ( Objects.equals(band_thumnail, null ) ) {
+				if ( Objects.equals(file, null ) ) {
 					bandDao.bandInfoUpdate(origin_band_thumnail, band_name, band_content, num_band_code);
+					
 					return go;
 				} else {
-
+					
 					UUID uuidOne = UUID.randomUUID();
 
 					// A mutable sequence of characters

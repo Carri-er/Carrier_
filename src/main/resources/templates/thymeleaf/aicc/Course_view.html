@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/home">
+<div th:replace="~{head/head::head}"></div>
+
+<body>
+	<div th:replace="~{nav/nav::nav}"></div>
+	<div class="container">
+	
+	<h4 class="text-center my-5" ><span th:text="${list.get(0).getMember_Id()}"></span> 의 <span th:text="|[${list.get(0).getCourse_Name()}]|"></span></h4>
+		<div class="row mx-0 justify-content-center">
+			<div class="row">
+			<div class="col">
+				<div class="map_mapSection w-100 my-3 ">
+				<!-- 지도를 표시할 div 입니다 -->
+				<div id="map" style="height: 300px"
+						class=" mx-auto rounded-4 w-100"></div>
+			</div>
+			<div class="col-12 mx-auto my-5">
+					<h5>코스 메모</h5>
+					<hr />
+					<p th:text="${list.get(0).getCourse_content()}"></p>
+
+				</div>
+				<div class="col mx-auto my-5 text-end">
+					
+						<span> 총 길이 : </span><span th:text="${totalDistance}"></span>
+					
+				</div>
+				
+			</div>
+			</div>
+			<div class="row mx-auto mx-0 px-0 my-4">
+				<div class="col-12 px-0 mx-0">
+					<div class="row courseListRow px-0 mx-0  ">
+						<div class="col-12 col-md-2 mx-auto text-truncate px-0 mx-0 text-center">
+							<a th:href="@{'Event_view?id='+ ${aicc.get(0).getEvent_num()}}" >
+								<img
+								th:src="@{'../img/info/' + ${aicc.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span class="text-center mt-3" th:text="${aicc.get(0).getEvent_name()}"></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-2  mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${aiccFood.get(0).getEvent_num()}}" class="">
+								<img
+								th:src="@{'../img/info/' + ${aiccFood.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aiccFood.get(0).getEvent_name()}"
+									class=" mt-3"></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-2  mx-auto  text-truncate px-0 mx-0 text-center">
+							<a th:href="@{'Event_view?id='+ ${aicc2.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${aicc2.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aicc2.get(0).getEvent_name()}"
+									class="text-center mt-3 "></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-2 mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${aiccCafe.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${aiccCafe.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aiccCafe.get(0).getEvent_name()}"
+									class="text-center"></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-2 mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${aiccFood2.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aiccFood2.get(0).getEvent_name()}"
+									class="text-center mt-3 "></span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+			<form action="cours_Save_update" method="post">
+			
+			<div class="row">
+			
+				
+				<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
+					<input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>
+					<input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="cours3"/>
+					<input type="hidden" th:value="${aiccCafe.get(0).getEvent_num()}" name="cours4"/>
+					<input type="hidden" th:value="${aiccFood2.get(0).getEvent_num()}" name="cours5"/>
+					<input type="hidden" class="totalDistanceValue" value="" name="cours6"/>
+					<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
+					<input type="hidden" name="num" th:value="${list.get(0).getCourse_num()}" />
+					<div class="col-12 mx-auto my-5 text-center">
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aiccCafe.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-light mx-1" th:text="|# ${aiccFood.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aicc2.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-light mx-1" th:text="|# ${aicc.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aicc.get(0).getEvent_area()}|"></button>
+						
+					</div>
+					<div class="col-12 mx-auto mt-4 text-end">
+						<th:block
+							th:if="${session.Member_Id==list.get(0).getMember_Id()||session.Member_Id=='admin'}">
+						<button type="submit" class="btn btn-main "> 코스 수정</button>
+						<a href="#" class="btn btn-skyb"
+						th:onclick="'deleteConfirm(\'' + ${list.get(0).getCourse_num()} + '\')'">글
+						삭제</a>
+						</th:block>
+					</div>
+				
+					</div>
+			</form>
+
+		</div>
+	</div>
+	<div th:replace="~{footer/footer::footer}"></div>
+	
+<script>
+	function deleteConfirm(id) {
+		if (confirm("해당 글을 정말 삭제하시겠습니까?") == true)
+			location.href = "/Course_delete?num=" + id;
+		else
+			event.stopProgation();
+		event.preventDefault();
+	}
+</script>
+	<script th:inline="javascript">
+      var loginId = /*[[${session.Member_Id}]]*/ "";
+      if (loginId == null || loginId.trim() == '') {
+         window.location.href = "/login?msg=5";
+      }
+   </script>
+<script th:inline="javascript">
+	var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+    	var mapx = /*[[${aicc.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy = /*[[${aicc.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var mapx2 = /*[[${aicc2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy2 = /*[[${aicc2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var mapx3 = /*[[${aiccCafe.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy3 = /*[[${aiccCafe.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var mapx4 = /*[[${aiccFood.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy4 = /*[[${aiccFood.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var mapx5 = /*[[${aiccFood2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+		var mapy5 = /*[[${aiccFood2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+    	var name = /*[[${aicc.get(0).getEvent_name()}]]*/""; // 이벤트의 위도 값
+		var name2 = /*[[${aiccFood.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+		var name3 = /*[[${aicc2.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+		var name4 = /*[[${aiccCafe.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+		var name5 =  /*[[${aiccFood2.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+		// 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
+		mapx = parseFloat(mapx);
+		mapy = parseFloat(mapy);
+            mapOption = { 
+                center: new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
+                level: 5 // 지도의 확대 레벨
+            };
+        
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+            
+         // 마커를 표시할 위치와 title 객체 배열입니다 
+         var positions = [
+             {
+                 title: name, 
+                 latlng: new kakao.maps.LatLng(mapx, mapy)
+             },
+             {
+                 title: name2, 
+                 latlng: new kakao.maps.LatLng(mapx4, mapy4)
+             },
+             {
+                 title: name3, 
+                 latlng: new kakao.maps.LatLng(mapx2, mapy2)
+             },
+             {
+                 title: name4,
+                 latlng: new kakao.maps.LatLng(mapx3, mapy3)
+             },
+             {
+                 title: name5,
+                 latlng: new kakao.maps.LatLng(mapx5, mapy5)
+             }
+         ];
+
+         // 마커 이미지의 이미지 주소입니다
+         var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+             
+         for (var i = 0; i < positions.length; i ++) {
+             
+             // 마커 이미지의 이미지 크기 입니다
+             var imageSize = new kakao.maps.Size(24, 35); 
+             
+             // 마커 이미지를 생성합니다    
+             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+             
+             // 마커를 생성합니다
+             var marker = new kakao.maps.Marker({
+                 map: map, // 마커를 표시할 지도
+                 position: positions[i].latlng, // 마커를 표시할 위치
+                 title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                 image : markerImage // 마커 이미지 
+             });
+         }
+         var linePath;
+         var lineLine = new daum.maps.Polyline();
+         var distance;
+         var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
+         for (var i = 0; i < positions.length; i++) {
+             if (i != 0) {
+                 linePath = [ positions[i - 1].latlng, positions[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
+             }
+             ;
+             lineLine.setPath(linePath); // 선을 그릴 라인을 세팅합니다
+      
+             var drawLine = new daum.maps.Polyline({
+                 map : map, // 선을 표시할 지도입니다 
+                 path : linePath,
+                 strokeWeight : 3, // 선의 두께입니다 
+                 strokeColor : '#ffe576', // 선의 색깔입니다
+                 strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                 strokeStyle : 'solid' // 선의 스타일입니다
+             });
+      	
+             distance = Math.round(lineLine.getLength());
+             displayCircleDot(positions[i].latlng, distance);
+            
+           
+         }
+      
+         function displayCircleDot(position, distance) {
+             if (distance > 0) {
+                 // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+                 var distanceOverlay = new daum.maps.CustomOverlay(
+                         {
+//                              content : '<div class="dotOverlay bg-white rounded-4 px-3 mt-5">거리 <span class="number">'
+//                                    + distance + '</span>m</div>', 
+                             position : position,
+                             yAnchor : 1,
+                             zIndex : 2
+                         });
+      
+                 // 지도에 표시합니다
+                 distanceOverlay.setMap(map);
+             }
+            
+             
+         }
+        
+
+         
+    </script>
+</body>
+</html>

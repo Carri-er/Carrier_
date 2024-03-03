@@ -191,14 +191,13 @@
 	    
 		// 페이지가 로드될 때 밴드 채팅 내역을 가져와서 화면에 표시합니다.
 		$(document).ready(function() {
-    // 페이지 로드시 밴드 채팅 내역을 가져오는 함수 호출
-    fetchBandChatList();
+	  	  // 페이지 로드시 밴드 채팅 내역을 가져오는 함수 호출
+	 	   fetchBandChatList();
+	
+	   	 // 5초마다 밴드 채팅 내역을 업데이트하기 위해 setInterval() 함수 사용
+	  	  setInterval(fetchBandChatList, 2000); // 2초마다 업데이트
 
-    // 5초마다 밴드 채팅 내역을 업데이트하기 위해 setInterval() 함수 사용
-    setInterval(fetchBandChatList, 2000); // 2초마다 업데이트
-    
-    
-});
+		});
 
 // 밴드 채팅 내역을 가져오는 함수
 function fetchBandChatList() {

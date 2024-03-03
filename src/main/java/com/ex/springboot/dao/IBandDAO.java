@@ -1,6 +1,6 @@
 package com.ex.springboot.dao;
 
-import java.util.List;  
+import java.util.List;   
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,6 +20,9 @@ public interface IBandDAO {
 	
 	//생성된 밴드 랜덤으로 6개 출력 
 	public List<BandDTO> randomBandList();
+	
+	//생성된 밴드 랜덤으로 3개 출력
+	public List<BandDTO> randomBandList_home();	
 	
 	//band_code를 가지고 myBand 페이지로 이동	
 	public BandDTO myBand(int band_code);
@@ -128,5 +131,8 @@ public interface IBandDAO {
 			@Param("chat_message") String chat_message
 			
 			);
+	
+	//밴드 피드별 댓글 수
+	public int bandFeedCommentCount(int band_feed_num);
 	
 }

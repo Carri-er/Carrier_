@@ -1,6 +1,15 @@
 package com.ex.springboot.controller;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.servlet.http.HttpSession;
 
 public class Time {
 	private static class TIME_MAXIMUM {
@@ -17,7 +26,7 @@ public class Time {
 		String msg = null;
 		if (diffTime < TIME_MAXIMUM.SEC) {
 			// sec
-			msg = diffTime + "초 전";
+			msg = diffTime + "방금 전";
 		} else if ((diffTime /= TIME_MAXIMUM.SEC) < TIME_MAXIMUM.MIN) {
 			// min
 			msg = diffTime + "분 전";
@@ -35,4 +44,34 @@ public class Time {
 		}
 		return msg;
 	}
+	
+//	@RequestMapping(value = "/memberPush", method = RequestMethod.POST)
+//    @ResponseBody
+//    public HashMap <String, Object> memberPush(HttpSession session, Model model) throws Exception {
+//        logger.info("memberPush");
+// 
+//        HashMap<String, Object> result = new HashMap <String,Object>();
+// 
+//        TogetherMemberVO vo = (TogetherMemberVO) session.getAttribute("member");
+// 
+//        String memberEmail = vo.getM_email();
+// 
+//        List<MemberNoticeVO> notice = memberNoticeService.notiList(memberEmail);
+//        
+//        for(MemberNoticeVO notiVO : notice) {    // 날짜 포맷 변경
+//            notiVO.setNoti_time(formatTimeString(notiVO.getComparetime()));
+//        }
+//        
+//        if (notice.size() > 0) {
+//            String size = "1";
+// 
+//            result.put("size", size);
+//            result.put("notice", notice);
+//        }
+//        
+//        return result;
+//    }
+
+
+
 }

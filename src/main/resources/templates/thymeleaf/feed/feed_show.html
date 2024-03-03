@@ -1,21 +1,15 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
-<div th:replace="~{head/head::head}">
-</div>
-<!-- 뒤로가기 버튼 flaticon ICON -->
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-thin-straight/css/uicons-thin-straight.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-straight/css/uicons-solid-straight.css'>
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+<div th:replace="~{head/head::head}"></div>
 <body>
 <div th:replace="~{nav/nav::nav}">
 </div>
+<!-- 토스트 -->
+<div th:replace="~{alert/toast::div}"></div>
 <div id="feedShow" class="container-fluid mt-4 mb-5 p-0">
 	<!-- 뒤로가기 버튼 -->
-	<a href="/feed" class="btn backBtn shadow-sm rounded-circle ms-4">
-	<i class="fi fi-sr-angle-small-left f22 text-center"></i>
+	<a href="/feed" class="sticky-top feed-btn me-auto ms-4 rounded-circle d-flex">
+		<i class="fi fi-sr-angle-small-left f22 text-center m-auto"></i>
 	</a>
 	<!--------------------------------------------feed box Parent------------------------------------------>
 	<div class="row m-auto my-2 mt-lg-1 mb-5 pt-md-0">
@@ -29,12 +23,12 @@
 							<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
 								<img th:src="@{'../img/member_thumbnail/'+ ${feedList.getMember_profileimage()}}" class="float-start rounded-circle border me-3" width="50" height="50" alt="">
 								<!--feed box text-->
-								<div class="col px-0">
+								<div class="col flex-grow-1 px-0">
 									<span class="float-start fw-bold f15" th:text="${feedList.getMember_Id()}">사용자명</span><br>
 									<span class="float-start text-muted f13" th:text="${feedList.getFeed_uploadday()}">올린 날짜</span>
 								</div>
 								<!-- 우측 버튼 -->
-								<div class="col d-flex justify-content-end align-items-center">
+								<div class="col-3 flex-grow-0 d-flex justify-content-end align-items-center">
 									<!-- session Id와 글쓴이가 일치할 때는 수정버튼 활성화 -->
 									<a th:if="${session.Member_Id == feedList.getMember_Id()}" th:href="@{'/feed_update?num='+${feedList.getFeed_num()}}" class="btn btn-sm btn-dark me-2">수정</a>
 									<!-- 다른 사람이 볼 때는 공유 -->
@@ -48,8 +42,8 @@
 										 1}" class="carousel-indicators"> <button th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feedList.getFeed_thumbnail(), ',')}" type="button" th:attr="data-bs-target='#feedCarousel'+${feedList.getFeed_num()}, data-bs-slide-to=${thumbnailStat.index}, class=${thumbnailStat.index==0} ? 'active' : ''" aria-current="true"></button>
 									</div>
 									<!-- carousel items loop -->
-									<div class="carousel-inner">
-										<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feedList.getFeed_thumbnail(), ',')}" class="carousel-item p-0" th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
+									<div class="carousel-inner col-12 feed-box-center">
+										<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feedList.getFeed_thumbnail(), ',')}" class="carousel-item p-0 h-100" th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
 											<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100" alt="#">
 										</div>
 									</div>
@@ -67,9 +61,9 @@
 								</div>
 							</div>
 							<!--feed-box-center | text-->
-							<div class="col-12 feed-box-bot p-3">
-								<span class="fw-bold mb-1 d-block" th:text="${feedList.getFeed_title()}">맥주 맛집🍺✨</span>
-								<span class="f13" th:text="${feedList.getFeed_content()}">맥주는 왜 먹어도 먹어도 맛있을까요? </span>
+							<div class="col-12 feed-box-bot p-4 pt-3">
+								<span class="fw-bold d-block f17" th:text="${feedList.getFeed_title()}">맥주 맛집🍺✨</span>
+								<span class="f14" th:text="${feedList.getFeed_content()}">맥주는 왜 먹어도 먹어도 맛있을까요? </span>
 							</div>
 							<!--feed box bot | #TAG -->
 							<div class="col feed-tag-box p-4 text-muted f13 d-flex gap-1">
@@ -78,22 +72,39 @@
 							</div>
 						</div>
 						<!--feed box bot | text-->
-						<div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13">
-							<div class="col-6 hstack justify-content-center border-end">
-								<span>담기</span>
+	                    <div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13 d-flex hstack">
+	                        <div class="col-6 hstack justify-content-center border-end d-flex hstack">
+	                            <span>댓글</span>
+                                <i class="fi fi-br-comment-dots hstack px-1"></i>
+	                        </div>
+	                        <div class="col-6 hstack justify-content-center">
+							<div th:if="${feedList.getFeed_heart_on() == 0 or session.Member_Id == null}">
+								<a
+									th:href="@{'/feed_show_like?num='+${feedList.getFeed_num()}+'&id='+${session.Member_Id}+'&on=1'}"
+									class="d-flex"> 
+									<span>좋아요</span>
+									<i
+									class="fi fi-br-heart hstack px-1"></i>
+								</a>
 							</div>
-							<div class="col-6 hstack justify-content-center">
-								<i class="bi bi-heart"></i><span>좋아요</span><span class="ms-2">9999+</span>
+							<div th:if="${feedList.getFeed_heart_on()} == 1">
+								<a th:href="@{'/feed_show_like?num='+${feedList.getFeed_num()}+'&id='+${session.Member_Id}+'&on=0'}"
+									class="d-flex"> 
+									<span>좋아요</span><i
+									class="fi fi-sr-heart hstack px-1"></i>
+								</a>
 							</div>
-						</div>
+							<span class="ms-2" th:text="${feedList.getFeed_heart()}" th:if="${session.Member_Id != null}">999+</span>
+	                    </div>
+	                    </div>
 						<!-- tag row -->
 						<!-- col -->
 					</div>
 					<!-- 우측 | 댓글 다는 곳 -->
 					<div class="col p-4">
  					<form th:action="@{'/feed_comment_upload'}" th:object="${Feed_commentDTO}" method="post">
-						<p>댓글</p>
-						<div class="d-flex align-items-center gap-2">
+						<p>댓글 <b th:text="${Feed_commentList.size()}">개수</b> </p>
+						<div class="d-flex align-items-center gap-2" th:if="${session.Member_Id}!=null">
 							<div class="col flex-grow-0 p-0">
 								<input type="hidden" name="Feed_num" th:value="${feedList.getFeed_num()}"/>
 								<input type="hidden" name="Member_Id" th:value="${session.Member_Id}"/>
@@ -101,7 +112,6 @@
 							</div>
 							<div class="col flex-grow-1 p-0">
 								<input type="text" th:field="*{Feed_comment}" class="form-control"/>
-								<!-- <th:block th:if="${#fields.hasErrors('Feed_comment')}" th:errors="*{Feed_comment}">이름 에러</th:block> -->
 							</div>
 							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100">
 								<button type="submit" class="btn btn-sm btn-dark w-100 h-100 py-2">등록</button>
@@ -120,9 +130,53 @@
 								<span class="ms-1 text-muted f12" th:text="${comment.getFeed_comment_updateday()}">댓글 단 시간</span>
 								<span class="f14 d-block" th:text="${comment.getFeed_comment()}">오늘 쫌 힘드네여</span>
 							</div>
-							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 mt-1 text-end">
+							<div class="col-2 flex-shrink-0 d-sm-flex justify-content-end align-items-center p-0 h-100 text-end">
+								<th:block th:if="${comment.getFeed_comment_like()}==0">
+									<a class="dropdown-item" th:href="@{'/feed_comment_like?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}+'&on=1'}">
+										<i class="fi fi-br-heart px-2"></i>
+									</a>
+								</th:block>
+								<th:block th:if="${comment.getFeed_comment_like()}==1">
+									<a class="dropdown-item" th:href="@{'/feed_comment_like?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}+'&on=0'}">
+										<i class="fi fi-sr-heart px-2"></i>
+									</a>
+								</th:block>
 								<input type="submit" id="feed-heart" class="h-100 py-2 d-none"/>
-								<label for="feed-heart"><i class="fi fi-br-heart"></i></label>
+								</label>
+								<!-- [내 피드만] 수정 및 삭제 버튼  -->
+	                            <div th:if="${session.Member_Id == comment.getMember_Id()}">
+		                            <div class="f17 d-flex justify-content-between" id="feed-right">
+											<a class="dropdown-toggle text-center m-0 hstack" href="#"
+												role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+												aria-expanded="false">
+					                            <i class="fi fi-rr-menu-dots hstack mb-1 ms-1">
+			                           			</i>
+											</a>
+										<ul class="dropdown-menu dropdown-menu-dark">
+		                                    <li data-bs-toggle="modal" data-bs-target="#feed_del_Modal"><a class="dropdown-item">삭제</a></li>
+		                                    <li><a class="dropdown-item" th:href="@{'/feed_comment_update?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">수정</a></li>
+		                                </ul>
+		                            </div>
+		                            
+									<!-- DEL Modal -->
+									<div class="modal fade" id="feed_del_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
+									  <div class="modal-dialog modal-dialog-centered">
+									    <div class="modal-content">
+									      <div class="modal-header border-none">
+									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									      </div>
+									      <div class="modal-body text-center py-3">
+									        정말 삭제하시겠습니까?
+									      </div>
+									      <div class="modal-footer border-none">
+									        <button type="button" class="btn btn-light text-dark rounded-pill px-3" data-bs-dismiss="modal">취소</button>
+									        <button type="button" class="btn btn-main rounded-pill px-3"><a class="dropdown-item active" th:href="@{'/feed_comment_del?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">삭제</a></button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+		                            
+	                            </div>
 							</div>
 						</div>
 					</div>
@@ -135,5 +189,31 @@
 </div>
 <div th:replace="~{footer/footer::footer}">
 </div>
+
+	<!-- 알림창 -->
+	<script type="text/javascript">
+        $(document).ready(function() {
+            // URL에서 msg 매개변수 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            
+         // 메시지가 존재할 경우 toast로 표시
+            if (msg !== null && msg !== "") {
+                let message;
+                if(msg == 1){
+                    message = "공백으로 이루어진 댓글은 작성하실 수 없습니다";
+                }
+                if(msg == 2){
+                    message = "65자 이내로 작성해주세요";
+                }
+                
+                // 부트스트랩 toast 트리거
+                $('.my-toast-body').text(message);
+                $('.my-toast').toast('show');
+            }
+        });
+    </script>
+
+    
 </body>
 </html>
