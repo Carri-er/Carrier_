@@ -16,6 +16,7 @@ public interface IAiDAO {
 	public List<EventDTO> list(String area, String thema,String thema2,String thema3,String thema4,String thema5,String thema6,String thema7,String food,String hotel);
 	public List<EventDTO> listThema(String area, String thema);
 	public List<EventDTO> listCafe(String area, String thema);
+	public List<EventDTO> listHotel(String area, String thema);
 	public List<EventDTO> listFood(String area, String thema);
 	public List<EventDTO> listCafeArea2(String area, String thema,String area2);
 	public List<EventDTO> listFoodArea2(String area, String thema,String area2);

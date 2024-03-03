@@ -23,6 +23,11 @@ select * from Event where Event_area = #{param1} and Event_category = #{param2}
 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
 	</select>
+	<select id="listHotel" resultType="com.ex.springboot.dto.EventDTO">
+select * from Event where Event_area = #{param1} and Event_category = #{param2}
+ORDER BY DBMS_RANDOM.RANDOM() 
+FETCH FIRST 1 ROWS ONLY
+	</select>
 	<select id="listFood" resultType="com.ex.springboot.dto.EventDTO">
 select * from Event where Event_area = #{param1} and Event_category = #{param2}
 ORDER BY DBMS_RANDOM.RANDOM() 

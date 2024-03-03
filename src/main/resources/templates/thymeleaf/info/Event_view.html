@@ -3,13 +3,13 @@
 <div th:replace="~{head/head::head}"></div>
 
 <script>
-	function deleteConfirm(id) {
+/* 	function deleteConfirm(id) {
 		if (confirm("해당 글을 정말 삭제하시겠습니까?") == true)
 			location.href = "/Event_write_delete?num=" + id;
 		else
 			event.stopProgation();
 		event.preventDefault();
-	}
+	} */
 	function deleteComment(num, id) {
 		if (confirm("해당 댓글을 정말 삭제하시겠습니까?") == true)
 			location.href = "/EventCommentUpdateDelete?num=" + num + "&id="
@@ -19,6 +19,8 @@
 		event.preventDefault();
 	}
 </script>
+			
+
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
 	<!-- inner 페이지 -->
@@ -181,7 +183,7 @@
 					<a th:href="@{'Event_write_update?num='+${view.getEvent_num()}}"
 						class="btn btn-pink"> 수정하기</a>
 
-					<a href="#" class="btn btn-skyb"
+					<a href="#" class="btn btn-skyb" data-bs-toggle="modal" data-bs-target="#feed_del_Modal"
 						th:onclick="'deleteConfirm(\'' + ${view.getEvent_num()} + '\')'">글
 						삭제</a>
 				</th:block>
@@ -193,7 +195,12 @@
 	</div>
 	<div th:replace="~{footer/footer::footer}"></div>
 
-
+			<!-- 삭제 모달 -->
+<div th:replace="~{alert/del_modal::div}">
+	<div th:fragment="modalButton">
+		<a class="dropdown-item active" th:href="@{'/Event_write_delete?num=' + ${view.getEvent_num()}">삭제</a>
+	</div>
+</div>
 
 
 	<!-- 카카오 지도 API 활용 스크립트 -->
