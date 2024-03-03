@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,13 +71,10 @@ public class FeedController {
 				feedList = feed_dao.feedList_area_login(Member_Id, Feed_area);
 			}
 		}
+
 		model.addAttribute("feedList", feedList);
 		
 		
-		// n시간 전 값 불러오기
-		model.addAttribute("time", time);
-	
-
 		return "thymeleaf/feed/feed2";
 	}
 

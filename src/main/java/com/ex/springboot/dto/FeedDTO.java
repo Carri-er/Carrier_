@@ -22,11 +22,8 @@ public class FeedDTO {
 	private String Feed_thumbnail; //피드 썸네일 이미지 파일 명
 	
 	// n 시간 전 사용을 위함
-	public String getFeed_updateday() {
-		return Feed_updateday;
-	}
-	
 	public void setFeed_updateday(Date date) {
 		this.Feed_updateday = Time.calculateTime(date);
 	}
+
 }

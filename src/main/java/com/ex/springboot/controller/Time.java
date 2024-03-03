@@ -3,6 +3,7 @@ package com.ex.springboot.controller;
 import java.util.Date;
 
 public class Time {
+
 	private static class TIME_MAXIMUM {
 		public static final int SEC = 60;
 		public static final int MIN = 60;
@@ -10,7 +11,7 @@ public class Time {
 		public static final int DAY = 30;
 		public static final int MONTH = 12;
 	}
-	
+
 	public static String calculateTime(Date date) {
 		long curTime = System.currentTimeMillis();
 		long regTime = date.getTime();
