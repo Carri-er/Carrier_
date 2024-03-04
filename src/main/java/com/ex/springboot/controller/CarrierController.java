@@ -25,7 +25,15 @@ public class CarrierController {
    @Autowired
    private com.ex.springboot.dao.IEventDAO eventDAO;
    @GetMapping("/")   
-   public String main() {
+   public String main(Model model) {
+	   
+	    List<CourseDTO> courseList = AiDAO.CourseListHome();
+	      
+	     model.addAttribute("randomBandList_home", bandDao.randomBandList_home());
+	     model.addAttribute("feedList", feed_dao.feedList_random());
+	     
+	     model.addAttribute("CourseListHome", courseList);
+	     model.addAttribute("infoHome", eventDAO.infoHome());
       return "thymeleaf/home/home";
    }
    

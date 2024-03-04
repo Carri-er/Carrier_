@@ -4,7 +4,13 @@
 </div>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-
+<style type="text/css">
+    .css_test {
+        background-image : url('../img/feed/dogs.gif');
+        background-repeat : repeat-x;
+        height : 100px;
+    }
+</style>
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
@@ -188,6 +194,7 @@
 				src="../img/feed/edit.png" alt="" class="m-auto text-center"
 				width="21" height="21" /> </a>
 		</div>
+		
 		<!-- 피드목록이 비어있을 때 -->
 		<div th:if="${#lists.isEmpty(feedList)}">
 			<div class="row">
@@ -329,6 +336,7 @@
 		</div>
 		<!--padding-->
 	</div>
+	<div class="css_test"></div>
 	<!--container-->
 	<div th:replace="~{footer/footer::footer}"></div>
 	<!-- 좋아요 비동기 -->
@@ -441,7 +449,14 @@
 	        });
 	    });
 	</script>
+	<script type="text/javascript">
 
+    function css_test(){
+        $('.css_test').css({'background-position':'-=1'}); // 배경이미지를 왼쪽으로 1px 씩 계속 움직임
+    }
+    setInterval(css_test, 10);
+
+</script>
 
 </body>
 </html>

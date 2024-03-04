@@ -28,7 +28,7 @@
 							총 <span class="blue-text text-bold" th:text="${getCount}"></span>건
 						</div>
 						<div class="col-12 col-md-7 text-end mt-2 mt-md-0">
-							<span class="active">최신순</span> <a href="hitDESC" class="">인기순</a>
+							<a href="info">최신순</a>  <span ></span>  <a href="hitDESC" class="active">인기순</a>
 						</div>
 					</div>
 					<hr>
@@ -81,7 +81,7 @@
 						<ul class="d-flex">
 							<!-- 이전 버튼 -->
 							<li th:if="${currentPage > 1}" class="mx-2"><a
-								th:href="@{'/info?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">&laquo;
+								th:href="@{'/hitDESC?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">&laquo;
 									이전</a></li>
 
 							<!-- 페이지 번호 -->
@@ -89,14 +89,14 @@
 								th:each="pageNum : ${#numbers.sequence((currentPage - 4 > 0 ? currentPage - 4 : 1), 
                         (currentPage + 4 < totalPages ? currentPage + 4 : totalPages))}"
 								class="mx-2"><a
-								th:href="@{'/info?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}"
+								th:href="@{'/hitDESC?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}"
 								th:text="${pageNum}"
 								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
 							</li>
 
 							<!-- 다음 버튼 -->
 							<li th:if="${currentPage < totalPages}" class="mx-2"><a
-								th:href="@{'/info?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">다음
+								th:href="@{'/hitDESC?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">다음
 									&raquo;</a></li>
 						</ul>
 					</div>
