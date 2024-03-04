@@ -2,64 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 이매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
 <mapper namespace="com.ex.springboot.dao.IAiDAO">
-   <!-- 전체 여행 정보 list를 불러옴 -->
-   <select id="firstlist" resultType="com.ex.springboot.dto.EventDTO">
-    select * from Event where Event_area= #{param1} 
-    ORDER BY DBMS_RANDOM.RANDOM() 
+	<!-- 전체 여행 정보 list를 불러옴 -->
+	<select id="firstlist" resultType="com.ex.springboot.dto.EventDTO">
+	 select * from Event where Event_area= #{param1} 
+	 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
-   </select>
-   <select id="list" resultType="com.ex.springboot.dto.EventDTO">
-       select * from Event where Event_area2= #{param1} and Event_tag != #{param9}  and (Event_category=#{param2} or Event_category=#{param3} or Event_category=#{param4} or Event_category=#{param5} or Event_category=#{param6}  or Event_category=#{param7} or Event_category=#{param8}) 
-       ORDER BY DBMS_RANDOM.RANDOM() 
+	</select>
+	<select id="list" resultType="com.ex.springboot.dto.EventDTO">
+		 select * from Event where Event_area2= #{param1} and Event_tag != #{param9} and Event_tag != #{param10}  and (Event_category=#{param2} or Event_category=#{param3} or Event_category=#{param4} or Event_category=#{param5} or Event_category=#{param6}  or Event_category=#{param7} or Event_category=#{param8}) 
+		 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
-   </select>
-   <select id="listThema" resultType="com.ex.springboot.dto.EventDTO">
-        select * from Event where Event_area= #{param1} and Event_category =#{param2}
-       ORDER BY DBMS_RANDOM.RANDOM() 
+	</select>
+	<select id="listThema" resultType="com.ex.springboot.dto.EventDTO">
+		  select * from Event where Event_area= #{param1} and Event_category =#{param2}
+		 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
-   </select>
-   <select id="listCafe" resultType="com.ex.springboot.dto.EventDTO">
+	</select>
+	<select id="listCafe" resultType="com.ex.springboot.dto.EventDTO">
 select * from Event where Event_area = #{param1} and Event_category = #{param2}
 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
-   </select>
-   <select id="listFood" resultType="com.ex.springboot.dto.EventDTO">
+	</select>
+	<select id="listFood" resultType="com.ex.springboot.dto.EventDTO">
 select * from Event where Event_area = #{param1} and Event_category = #{param2}
 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
-   </select>
-      <select id="listCafeArea2" resultType="com.ex.springboot.dto.EventDTO">
-select * from Event where Event_area2 = #{param1} and Event_category = #{param2}
+	</select>
+		<select id="listCafeArea2" resultType="com.ex.springboot.dto.EventDTO">
+select * from Event where Event_area = #{param1} and Event_area2 = #{param2} and Event_category = #{param3}
 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
-   </select>
-   <select id="listFoodArea2" resultType="com.ex.springboot.dto.EventDTO">
-select * from Event where Event_area2 = #{param1} and Event_category = #{param2}
+	</select>
+	<select id="listFoodArea2" resultType="com.ex.springboot.dto.EventDTO">
+select * from Event where Event_area = #{param1} and Event_area2 = #{param2} and Event_category = #{param3}
 ORDER BY DBMS_RANDOM.RANDOM() 
 FETCH FIRST 1 ROWS ONLY
-   </select>
-   <select id="listAll" resultType="com.ex.springboot.dto.EventDTO">
-SELECT * FROM Event WHERE Event_area = #{param1} AND Event_category != all (#{param2}, #{param3})
+	</select>
+	<select id="listAll" resultType="com.ex.springboot.dto.EventDTO">
+SELECT * FROM Event WHERE Event_area = #{param1} AND Event_category != all (#{param2}, #{param3},#{param4})
 ORDER BY DBMS_RANDOM.RANDOM()
 FETCH FIRST 1 ROWS ONLY
-   </select>
-   <select id="listAll2" resultType="com.ex.springboot.dto.EventDTO">
+	</select>
+	<select id="listAll2" resultType="com.ex.springboot.dto.EventDTO">
 SELECT * FROM Event WHERE Event_area2 = #{param1} AND Event_category != all (#{param2}, #{param3})
 ORDER BY DBMS_RANDOM.RANDOM()
 FETCH FIRST 1 ROWS ONLY
-   </select>
-   <select id="listCourse" resultType="com.ex.springboot.dto.EventDTO">
-   select * from event where Event_num = #{param1}
-   </select>
-   <select id="Course_view_list" resultType="com.ex.springboot.dto.CourseDTO">
-   select * from course where Course_num =#{param1}
-   </select>
-   
-   <insert id="save_course_insert">
-      insert  into Course values(#{param1},Course_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
-   </insert>
-   <select id="Course_select" resultType="com.ex.springboot.dto.CourseDTO">
-   select 
+	</select>
+	<select id="listCourse" resultType="com.ex.springboot.dto.EventDTO">
+	select * from event where Event_num = #{param1}
+	</select>
+	<select id="Course_view_list" resultType="com.ex.springboot.dto.CourseDTO">
+	select * from course where Course_num =#{param1}
+	</select>
+	
+	<insert id="save_course_insert">
+		insert  into Course values(#{param1},Course_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9})
+	</insert>
+	<select id="Course_select" resultType="com.ex.springboot.dto.CourseDTO">
+	select 
     A.Member_Id, 
     A.Course_num, 
     A.Course_Name, 
@@ -68,6 +68,7 @@ FETCH FIRST 1 ROWS ONLY
     A.Course_content,
     A.Course_distance,
      A.Course_Interest,
+     
     B.Member_profileimage
 from 
     Course A 
@@ -80,9 +81,9 @@ where
     and A.Course_Name is not null
 order by A.Course_num desc
 
-   </select>
-   <select id="Course_select4" resultType="com.ex.springboot.dto.CourseDTO">
-   SELECT *
+	</select>
+	<select id="Course_select4" resultType="com.ex.springboot.dto.CourseDTO">
+	SELECT *
 FROM (
     SELECT A.*, B.Member_profileimage
     FROM Course A
@@ -92,15 +93,15 @@ FROM (
     ORDER BY A.Course_num desc
 )
 WHERE ROWNUM &lt;= 4
-   </select>
-   <update id="Course_update">
-   update course set Course_Name=#{param1}, Course_content=#{param2} where Course_num =#{param3}
-   </update>
-   <delete id="Course_delete">
-   delete from course where Course_num =#{param1}
-   </delete>
-   <select id="CourseListHome" resultType="com.ex.springboot.dto.CourseDTO">
-   SELECT *
+	</select>
+	<update id="Course_update">
+	update course set Course_Name=#{param1}, Course_content=#{param2} where Course_num =#{param3}
+	</update>
+	<delete id="Course_delete">
+	delete from course where Course_num =#{param1}
+	</delete>
+	<select id="CourseListHome" resultType="com.ex.springboot.dto.CourseDTO">
+	SELECT *
 FROM (
     SELECT A.*, B.Member_profileimage
     FROM Course A
@@ -109,5 +110,5 @@ FROM (
     ORDER BY A.Course_num desc
 )
 WHERE ROWNUM &lt;= 3
-   </select>
+	</select>
 </mapper>
