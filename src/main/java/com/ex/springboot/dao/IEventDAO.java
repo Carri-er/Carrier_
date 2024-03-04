@@ -13,6 +13,7 @@ import com.ex.springboot.dto.EventDTO;
 @Mapper
 public interface IEventDAO {
 	public List<EventDTO> list();
+	public List<EventDTO> hitDESC(@Param("offset") int offset, @Param("pageSize") int pageSize);
 	public List<EventDTO> infoHome();
 	public List<String> getDistinctTags();
 	public List<String> areaTag();
@@ -31,6 +32,7 @@ public interface IEventDAO {
 	public int getPostCountSearch(@Param("key")String key);
 	public int getPostCount2();
 	public int getPostCountTag();
+	public int getHitDescCount();
 	// 페이징된 데이터 가져오기
 	public List<EventDTO> listWithPagination(@Param("offset") int offset, @Param("pageSize") int pageSize);
 	public List<CourseDTO> listWithPagination2(@Param("offset") int offset, @Param("pageSize") int pageSize);

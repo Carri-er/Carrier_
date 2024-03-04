@@ -289,13 +289,15 @@ public class AIController {
 	public String Course_delete(HttpServletRequest request, Model model) {
 		
 		String num = request.getParameter("num");
+		String id = request.getParameter("id");
 		model.addAttribute("list",AiDAO.Course_delete(num));
+		
 		String msg = "1";
 	    if (msg != null && msg.equals("1")) {
 	        model.addAttribute("confirmMessage", "코스 삭제가 완료되었습니다.");
 	    }
 		
-		return "thymeleaf/home/home";
+		return "redirect:/mypage?id="+id;
 	}
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
