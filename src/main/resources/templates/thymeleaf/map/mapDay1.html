@@ -113,7 +113,7 @@
             </div>
             </th:block>
             <!-- gps 현재 위치 출력 영역 -->
-            <!-- <div class="map_curr_locationBox">
+            <div class="map_curr_locationBox">
                <div class="col map_curr_location d-flex justify-content-between ">
                   <div class="map_curr_location_name mt-3 px-3">
                      <span>경기 수원시 권선구</span>
@@ -122,12 +122,12 @@
                      <span>현재날씨 </span> <em>최고 | 최저</em>
                   </div>
                </div>
-            </div> -->
+            </div>
             <!-- map_curr_locationBox -->
 
             <!-- map guide 아이콘 영역 -->
-            <div class="map_guide_iconBox">
-               <!-- <div class="map_guide_icon ">
+            <div class="map_guide_iconBox mt-5">
+               <div class="map_guide_icon ">
                   <ul class="map_guide_icon_list px-0">
                      <li class="map_guide_icon_item map_icon_near_trip">주변여행지</li>
                      <li class="map_guide_icon_item map_icon_food">음식점</li>
@@ -142,11 +142,11 @@
                      <li class="map_guide_icon_item map_icon_myTrip">나의여행</li>
                      <li class="map_guide_icon_item map_icon_set">설정</li>
                   </ul>
-               </div> -->
+               </div>
                
                <!-- 코스 저장 버튼 -->
                <form action="cours_Save" name="saveBtn" method="post">
-               <div class="text-end me-3"><button class="btn saveBtn btn-pink ms-auto" type="button">코스 저장하기</button></div>
+               <button class="btn saveBtn" type="button">코스 저장하기</button>
                <input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
                <input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>
                <input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="cours3"/>
@@ -630,92 +630,118 @@
 </script>
    <script th:inline="javascript">
    var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
-       var aiccmapx = /*[[${aicc.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
-      var aiccmapy = /*[[${aicc.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
-       var aicc2mapx = /*[[${aicc2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
-      var aicc2mapy = /*[[${aicc2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
-       var aiccCafemapx = /*[[${aiccCafe.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
-      var aiccCafemapy = /*[[${aiccCafe.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
-       var aiccFoodmapx = /*[[${aiccFood.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
-      var aiccFoodmapy = /*[[${aiccFood.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
-       var aiccFood2mapx = /*[[${aiccFood2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
-      var aiccFood2mapy = /*[[${aiccFood2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
-       
-      var aiccname = /*[[${aicc.get(0).getEvent_name()}]]*/""; // 이벤트의 네임 값
-      var aicc2name = /*[[${aicc2.get(0).getEvent_name()}]]*/""; // 이벤트의 네임 값
-      var aiccCafename = /*[[${aiccCafe.get(0).getEvent_name()}]]*/""; // 이벤트의 네임 값
-      var aiccFoodname = /*[[${aiccFood.get(0).getEvent_name()}]]*/""; // 이벤트의 네임 값
-      var aiccFood2name =  /*[[${aiccFood2.get(0).getEvent_name()}]]*/""; // 이벤트의 네임 값
-     
-      var aiccnum = /*[[${aicc.get(0).getEvent_num()}]]*/""; // 이벤트의 넘버 값
-      var aicc2num = /*[[${aicc2.get(0).getEvent_num()}]]*/""; // 이벤트의 넘버 값
-      var aiccCafenum = /*[[${aiccCafe.get(0).getEvent_num()}]]*/""; // 이벤트의 넘버 값
-      var aiccFoodnum = /*[[${aiccFood.get(0).getEvent_num()}]]*/""; // 이벤트의 넘버 값
-      var aiccFood2num =  /*[[${aiccFood2.get(0).getEvent_num()}]]*/""; // 이벤트의 넘버 값
+       var mapx = /*[[${aicc.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy = /*[[${aicc.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+       var mapx2 = /*[[${aicc2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy2 = /*[[${aicc2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+       var mapx3 = /*[[${aiccCafe.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy3 = /*[[${aiccCafe.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+       var mapx4 = /*[[${aiccFood.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy4 = /*[[${aiccFood.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+       var mapx5 = /*[[${aiccFood2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy5 = /*[[${aiccFood2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+       var name = /*[[${aicc.get(0).getEvent_name()}]]*/""; // 이벤트의 위도 값
+      var name2 = /*[[${aicc2.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+      var name3 = /*[[${aiccCafe.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+      var name4 = /*[[${aiccFood.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+      var name5 =  /*[[${aiccFood2.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+      
+       var mapx21 = /*[[${aicc3.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy21 = /*[[${aicc3.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+      var mapx22 = /*[[${aiccFood3.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy22 = /*[[${aiccFood3.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+       var mapx23 = /*[[${aicc4.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy23 = /*[[${aicc4.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+       var mapx24 = /*[[${aiccCafe2.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy24 = /*[[${aiccCafe2.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+      var mapx25 = /*[[${aiccFood4.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy25 = /*[[${aiccFood4.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+      var mapx26 = /*[[${hotel.get(0).getEvent_mapX()}]]*/0; // 이벤트의 위도 값
+      var mapy26 = /*[[${hotel.get(0).getEvent_mapY()}]]*/0; // 이벤트의 경도 값
+       var name21 = /*[[${aicc3.get(0).getEvent_name()}]]*/""; // 이벤트의 위도 값
+       var name22 = /*[[${aiccFood3.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+       var name23 = /*[[${aicc4.get(0).getEvent_name()}]]*/""; // 이벤트의 위도 값
+      var name24 = /*[[${aiccCafe2.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+       var name25 = /*[[${aiccFood4.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
+       var name26 = /*[[${hotel.get(0).getEvent_name()}]]*/""; // 이벤트의 경도 값
       // 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
-      mapx = parseFloat(aicc2mapx);
-      mapy = parseFloat(aicc2mapy);
+      mapx = parseFloat(mapx);
+      mapy = parseFloat(mapy);
             mapOption = { 
                 center: new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
-                level: 6 // 지도의 확대 레벨
+                level: 5 // 지도의 확대 레벨
             };
         
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+          
          // 마커를 표시할 위치와 title 객체 배열입니다 
          var positions = [
              {
-                 title: aiccname, 
-                 number: aiccnum,
-                 latlng: new kakao.maps.LatLng(aiccmapx, aiccmapy)
+                 title: name, 
+                 latlng: new kakao.maps.LatLng(mapx, mapy)
              },
              {
-                 title: aiccFoodname, 
-                 number: aiccFoodnum,
-                 latlng: new kakao.maps.LatLng(aiccFoodmapx, aiccFoodmapy)
+                 title: name4, 
+                 latlng: new kakao.maps.LatLng(mapx4, mapy4)
              },
              {
-                 title: aicc2name, 
-                 number: aicc2num,
-                 latlng: new kakao.maps.LatLng(aicc2mapx, aicc2mapy)
+                 title: name2, 
+                 latlng: new kakao.maps.LatLng(mapx2, mapy2)
              },
              {
-                 title: aiccCafename,
-                 number: aiccCafenum,
-                 latlng: new kakao.maps.LatLng(aiccCafemapx, aiccCafemapy)
+                 title: name3,
+                 latlng: new kakao.maps.LatLng(mapx3, mapy3)
              },
              {
-                 title: aiccFood2name,
-                 number: aiccFood2num,
-                 latlng: new kakao.maps.LatLng(aiccFood2mapx, aiccFood2mapy)
+                 title: name5,
+                 latlng: new kakao.maps.LatLng(mapx5, mapy5)
+             },
+             {
+                 title: name26,
+                 latlng: new kakao.maps.LatLng(mapx26, mapy26)
              }
          ];
-         
-       
+         var positions2 = [
+             {
+                 title: name21, 
+                 latlng: new kakao.maps.LatLng(mapx21, mapy21)
+             },
+             {
+                 title: name22, 
+                 latlng: new kakao.maps.LatLng(mapx22, mapy22)
+             },
+             {
+                 title: name23, 
+                 latlng: new kakao.maps.LatLng(mapx23, mapy23)
+             },
+             {
+                 title: name24,
+                 latlng: new kakao.maps.LatLng(mapx24, mapy24)
+             },
+             {
+                 title: name25,
+                 latlng: new kakao.maps.LatLng(mapx25, mapy25)
+             }
+         ];
 
 
          // 마커 이미지의 이미지 주소입니다
-         var imageSrc = ["https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지1,
-        	 "https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점
-        	 "https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지2
-        	 "https://cdn-icons-png.flaticon.com/128/11020/11020485.png",//카페
-        	 "https://cdn-icons-png.flaticon.com/128/11020/11020470.png"//음식점2
-         ];//관광지2
+         var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
          for (var i = 0; i < positions.length; i ++) {
-         var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">' + 
+         var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 50px;font-size: 12px; margin:0 auto;z-index:3;">' + 
          '    <div class="info">' + 
-         '            <a href="Event_view?id='+ positions[i].number +'">'+
-         '        <div class="title">' + [i+1 ]+". "+
+         '        <div class="title">' + 
          positions[i].title + 
+         '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
          '        </div>' + 
-         '</a>' +
          '    </div>' +    
          '</div>';
              
              // 마커 이미지의 이미지 크기 입니다
-             var imageSize = new kakao.maps.Size(50, 50); 
+             var imageSize = new kakao.maps.Size(24, 35); 
              
              // 마커 이미지를 생성합니다    
-             var markerImage = new kakao.maps.MarkerImage(imageSrc[i], imageSize); 
+             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
              
              // 마커를 생성합니다
              var marker = new kakao.maps.Marker({
@@ -731,14 +757,44 @@
             	});
           
          }
-       
+         
+         for (var i = 0; i < positions2.length; i ++) {
+             var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 50px;font-size: 12px; margin:0 auto;z-index:3;">' + 
+             '    <div class="info">' + 
+             '        <div class="title">' + 
+             positions2[i].title + 
+             '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+             '        </div>' + 
+             '    </div>' +    
+             '</div>';
+                 
+                 // 마커 이미지의 이미지 크기 입니다
+                 var imageSize = new kakao.maps.Size(24, 35); 
+                 
+                 // 마커 이미지를 생성합니다    
+                 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+                 
+                 // 마커를 생성합니다
+                 var marker2 = new kakao.maps.Marker({
+                     map: map, // 마커를 표시할 지도
+                     position: positions2[i].latlng, // 마커를 표시할 위치
+                     title : positions2[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                     image : markerImage // 마커 이미지 
+                 });
+                 var overlay = new kakao.maps.CustomOverlay({
+                	 content: content,
+                	 map: map,
+                	 position: positions2[i].latlng      
+                	});
+              
+             }
          var linePath;
          var lineLine = new daum.maps.Polyline();
-      
+         var lineLine2 = new daum.maps.Polyline();
          var distance;
-      
+         var distance2;
          var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
-       
+         var totalDistance2 = 0; // 총 거리를 저장할 변수를 초기화합니다.
          var subtotalDistance =0;
          for (var i = 0; i < positions.length; i++) {
              if (i != 0) {
@@ -751,9 +807,9 @@
                  map : map, // 선을 표시할 지도입니다 
                  path : linePath,
                  strokeWeight : 3, // 선의 두께입니다 
-                 strokeColor : '#Ef564b', // 선의 색깔입니다
-                 strokeOpacity : 0.8, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-                 strokeStyle : 'longdash' // 선의 스타일입니다
+                 strokeColor : '#ff00ff', // 선의 색깔입니다
+                 strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                 strokeStyle : 'shortdash' // 선의 스타일입니다
              });
       
              distance = Math.round(lineLine.getLength());
@@ -764,7 +820,39 @@
            	
               
          }
-        
+         //alert("오류 찾기");
+         for (var i = 0; i < positions2.length; i++) {
+             if (i != 0) {
+                 linePath = [ positions2[i - 1].latlng, positions2[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
+             }
+             ;
+             lineLine2.setPath(linePath); // 선을 그릴 라인을 세팅합니다
+      
+             var drawLine = new daum.maps.Polyline({
+                 map : map, // 선을 표시할 지도입니다 
+                 path : linePath,
+                 strokeWeight : 3, // 선의 두께입니다 
+                 strokeColor : '#000000', // 선의 색깔입니다
+                 strokeOpacity : 0.5, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                 strokeStyle : 'solid' // 선의 스타일입니다
+             });
+      
+             distance2 = Math.round(lineLine2.getLength());
+             displayCircleDot(positions2[i].latlng, distance);
+             totalDistance2 += distance2+distance;
+             document.querySelector('.totalDistance').innerText =totalDistance2.toFixed(2)/1000 + "km";
+             document.querySelector('.totalDistanceValue2').value = (totalDistance2 / 1000).toFixed(2);
+              
+         }
+      // totalDistance와 totalDistance2 값을 합하여 subtotalDistance 계산
+      alert("day1 이동 거리 : "+totalDistance.toFixed(2)/ 1000);
+      alert("day2 이동 거리 : "+totalDistance2.toFixed(2)/ 1000);
+         subtotalDistance = (totalDistance + totalDistance2) / 1000; // km 단위로 변환
+         alert("총 이동 거리는 " + subtotalDistance.toFixed(2) + "km 입니다.");
+      // subtotalDistance 값을 찾고 설정하는 부분
+        // subtotalDistance 값을 찾고 설정하는 부분
+		var subtotalElement = document.querySelector('.subtotalDistance2'); 
+			subtotalElement.innerText = subtotalDistance.toFixed(2) + "km"; // innerHTML을 사용하여 요소 내용 변경
 
          
          function displayCircleDot(position, distance) {
@@ -784,7 +872,7 @@
              }
              
          }
-      
+        
 
          
     </script>
