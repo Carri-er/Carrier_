@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,13 @@ import jakarta.validation.Valid;
 public class FeedController {
 	public static String UPLOAD_MEMBER_DIRECTORY = System.getProperty("user.dir")
 			+ "\\src\\main\\resources\\static\\img\\feed_thumbnail";
-
+	 
 	@Autowired
 	IFeedDAO feed_dao;
 
 	// 피드 리스트
 	@GetMapping("/feed")
-	public String feed(Model model, HttpServletRequest request, FeedDTO feedDTO, HttpSession session) {
+	public String feed(Model model, HttpServletRequest request, FeedDTO feedDTO, HttpSession session, Time time) {
 		String Feed_theme = "#" + request.getParameter("Feed_theme");
 		String Feed_area = "#" + request.getParameter("Feed_area");
 		String Member_Id = (String) session.getAttribute("Member_Id");
@@ -70,8 +71,10 @@ public class FeedController {
 				feedList = feed_dao.feedList_area_login(Member_Id, Feed_area);
 			}
 		}
-		model.addAttribute("feedList", feedList);
 
+		model.addAttribute("feedList", feedList);
+		
+		
 		return "thymeleaf/feed/feed2";
 	}
 

@@ -300,4 +300,5 @@
 	<update id="feedCommentLike">
 		UPDATE FeedComment SET Feed_comment_like = #{Feed_comment_like} WHERE Feed_num = #{Feed_num} AND Feed_comment_num = #{Feed_comment_num}
 	</update>
+	
 </mapper>
