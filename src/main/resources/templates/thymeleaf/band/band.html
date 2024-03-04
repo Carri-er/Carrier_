@@ -34,7 +34,7 @@
 	                    	<img th:src="@{'../img/uploadBandThumnail/'+ ${joinBandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
 	                    </div>
 	                    <div class="join_band_item_text px-3 f14">
-	                        <strong th:text="${joinBandList.getBand_name()}">밴드 제목</strong>
+	                        <strong th:text="${joinBandList.getBand_name()}" class="text-truncate">밴드 제목</strong>
 		             	    <span>멤버 <span th:text="${joinBandList.getBand_memberCount()}" ></span></span>
 		                </div> 
 		            </a>
@@ -58,10 +58,10 @@
 	                        <div class="band_recomand_img">
 	                            <img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
 	                        </div>
-	                        <div class="band_recomand_text">
+	                        <div class="band_recomand_text text-truncate">
 	                        	<div class="ms-2">
-		                            <span class="h5 d-block" th:text="${bandList.getBand_name()}"></span>
-		                            <span th:text="${bandList.getBand_content()}"></span>
+		                            <span class="h5 d-block text-truncate" th:text="${bandList.getBand_name()}"></span>
+		                            <span th:text="${bandList.getBand_content()}" class="text-truncate"></span>
 	                        	</div>
 	                            <div class="band_more_view px-2 text-center">
 	                                <span>'테마명'</span> 밴드 더보기 >

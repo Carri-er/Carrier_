@@ -3,10 +3,20 @@
 <!-- namespace는 이 매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
 <mapper namespace="com.ex.springboot.dao.IBandDAO">
 <!-- id는 인터페이스에 정의된 메서드의 이름이며 resultType은 결과 타입을 지정한다. -->
-
+	
+	<!-- 로그인한 멤버 정보 -->
+	<select id="bandLoginMemberDto" resultType="com.ex.springboot.dto.MemberDTO">
+		select * from carrier_member where Member_Id = #{param1}
+	</select>
+	
 	<!-- 전체 밴드 리스트 출력 -->
 	<select id="bandList" resultType="com.ex.springboot.dto.BandDTO">
 		select * from band
+	</select>
+	
+	<!-- 밴드 피드 세부보기 -->
+	<select id="bandFeedViewItem" resultType="com.ex.springboot.dto.BandFeedDTO">
+		select A.band_feed_num, A.band_code, A.Member_id, A.band_feed_content, A.band_feed_uploadday, A.band_feed_updateday, A.band_feed_hit ,B.Member_profileimage from band_feed A right outer join carrier_member B on A.Member_id = B.Member_id where A.band_feed_num = ${param1}   
 	</select>
 	
 	<!-- myband 페이지 리스트 -->
@@ -93,7 +103,7 @@
 		delete from band where band_code = #{band_code}
 	</delete>
 	
-	<!-- 밴드 삭제하기 -->
+	<!-- 밴드 멤버 삭제하기 -->
 	<delete id="bandInfoDelete_member">
 		delete from band_joinMember where band_code = #{band_code}
 	</delete>
@@ -137,5 +147,67 @@
 			select COUNT(*) from band_feedComment where band_feed_num = #{param1}
 		]]>
 	</select>
+	
+	<!-- 밴드 댓글 전체 리스트 -->
+	<select id="bandFeedCommentAll" resultType='com.ex.springboot.dto.Band_commentDTO'>
+		<![CDATA[
+			SELECT  
+				bfc.band_feedComment_num , 
+       			bfc.band_feed_num , 
+       			bfc.Member_Id , 
+       			bfc.band_feedComment_content , 
+       			bfc.bandFeed_comment_writeTime , 
+       			cm.Member_profileimage 
+			FROM band_feedComment bfc 
+				JOIN carrier_member cm ON bfc.Member_Id = cm.Member_Id 
+			ORDER BY bfc.bandFeed_comment_writeTime DESC 
+		]]>
+	</select>
+	
+	<!-- 밴드 피드별 댓글 리스트 -->
+	<select id="bandFeedCommentList" resultType='com.ex.springboot.dto.Band_commentDTO'>
+		<![CDATA[
+			SELECT  
+				bfc.band_feedComment_num , 
+       			bfc.band_feed_num , 
+       			bfc.Member_Id , 
+       			bfc.band_feedComment_content , 
+       			bfc.bandFeed_comment_writeTime , 
+       			cm.Member_profileimage 
+			FROM band_feedComment bfc 
+				JOIN carrier_member cm ON bfc.Member_Id = cm.Member_Id 
+			where bfc.band_feed_num = #{param1}
+			ORDER BY bfc.bandFeed_comment_writeTime DESC 
+		]]>
+	</select>
+	
+	<!-- 밴드 피드별 댓글 최상단 1개 출력 -->
+	<select id="bandFeedCommentTop" resultType='com.ex.springboot.dto.Band_commentDTO'>
+		<![CDATA[
+			SELECT  
+				bfc.band_feedComment_num , 
+       			bfc.band_feed_num , 
+       			bfc.Member_Id , 
+       			bfc.band_feedComment_content , 
+       			bfc.bandFeed_comment_writeTime , 
+       			cm.Member_profileimage 
+			FROM band_feedComment bfc 
+				JOIN carrier_member cm ON bfc.Member_Id = cm.Member_Id 
+			where bfc.band_feed_num = #{param1}
+			ORDER BY bfc.bandFeed_comment_writeTime DESC  
+			FETCH FIRST 1 ROW ONLY 
+		]]>
+	</select>
+	
+	<!-- 밴드 댓글 작성 -->
+	<insert id="band_feed_commentWrite">
+		insert into band_feedComment values( 
+			band_feedComment_seq.nextval, 
+			#{band_feed_num} ,  
+			#{Member_Id} ,  
+			#{band_feedComment_content} ,  
+			sysdate  
+		)
+	</insert>
 	
 </mapper>
