@@ -60,10 +60,10 @@
                         </div>
                         <div class="col">
                            <div class="row">
-                              <div class="col">
+                              <div class="col ">
                                  <h5 style="line-height: 80px;">
-                                    [<span th:text="${list.getMember_Id()}"></span>] <span
-                                       th:text="${list.getCourse_Name()}"></span>
+                                    [<span th:text="${list.getMember_Id()}"></span>] 의 <span
+                                       th:text="|${list.getCourse_Name()} 코스|"> </span>
                                  </h5>
                               </div>
                            </div>
@@ -141,7 +141,7 @@
          
          
       </div>
-         <div class="text-end m-4">
+         <div class="text-end m-4 z-5 position-relative">
                            <a href="aicc"class="text-black ms-auto btn btn-main" >여행 코스짜러가기</a>
          </div>
          </th:block>

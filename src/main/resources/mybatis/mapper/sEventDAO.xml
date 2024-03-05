@@ -60,7 +60,7 @@
 		SELECT Event_tag5 AS Tag FROM
 		Event) all_tags
 		 -->
-		 SELECT DISTINCT Event_tag FROM event
+		 SELECT DISTINCT Event_category FROM event
 	</select>
 	<!-- 지역 태그 클릭시 리스트 불러옴 -->
 	<select id="EventArea"
@@ -116,7 +116,7 @@
 	<select id="EventTags"
 		resultType="com.ex.springboot.dto.EventDTO">
 		<![CDATA[
-    Select * from Event where #{param1} in (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+    Select * from Event where #{param1} in event_category
     ]]>
 	</select>
 
@@ -358,7 +358,7 @@
         FROM (
             SELECT *
             FROM Event
-            where #{tag} in (Event_tag, Event_tag2, Event_tag3, Event_tag4, Event_tag5)
+            where #{tag} in Event_category
             ORDER BY Event_num DESC
         ) e
         WHERE rownum <= #{pageSize}

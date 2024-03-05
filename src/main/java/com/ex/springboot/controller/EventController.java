@@ -73,7 +73,44 @@ public class EventController {
 
       return "thymeleaf/info/info";
    }
-  
+   @GetMapping("/info_search")
+   public String info_search(Model model, HttpServletRequest request) {
+      String page = request.getParameter("page");
+      String key = request.getParameter("key");
+      
+      if (page == null || page.isEmpty()) {
+         page = "1";
+      }
+      int pages = Integer.parseInt(page);
+      int pageSize = 7; // 페이지당 아이템 수
+      int pageSizeR = pageSize * pages;
+      int totalCount = eventDAO.getPostCountSearch(key); // 전체 아이템 수
+      int mPage = pages - 1;
+      int pPage = pages + 1;
+      // 페이징 계산
+      int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+      int offset = (pages - 1) * pageSize; // 시작 아이템 인덱스
+      System.out.println("offset" + offset);
+      System.out.println("pageSize" + pageSize);
+      // DAO에서 페이징된 데이터 가져오기
+      List<EventDTO> events = eventDAO.listWithPaginationSearch(offset, pageSizeR,key);
+      model.addAttribute("list", events);
+      model.addAttribute("currentPage", pages);
+      model.addAttribute("mPage", mPage);
+      model.addAttribute("pPage", pPage);
+      model.addAttribute("key", key);
+      model.addAttribute("totalPages", totalPages);
+      
+//      System.out.println(eventDAO.list() + "호출");
+      // model.addAttribute("list", eventDAO.list());
+//      System.out.println(eventDAO.getDistinctTags() + "호출");
+      model.addAttribute("tags", eventDAO.getDistinctTags());
+      model.addAttribute("area", eventDAO.areaTag());
+      model.addAttribute("getCount", eventDAO.getPostCountSearch(key));
+      System.out.println(eventDAO.getPostCount() + "개");
+      
+      return "thymeleaf/info/info";
+   }
    @GetMapping("/hitDESC")
    public String hitDesc(Model model, HttpServletRequest request) {
        // 페이지 정보 가져오기
@@ -406,7 +443,7 @@ public class EventController {
 
          String fileEmpty = "file_empty";
          String thumbnail = "user_rabbit.jpg";
-
+         String old = request.getParameter("Event_thumbnail_old");
          // 사용자가 파일을 넣었을 때
          if (!file.isEmpty()) {
 
@@ -420,6 +457,7 @@ public class EventController {
 
          } else {
             model.addAttribute("Member_profileimage", fileEmpty); // 이미지 이름 저장
+            thumbnail = old;
          }
          dto.setEvent_num(num);
          dto.setEvent_address(request.getParameter("Event_address"));
@@ -441,6 +479,7 @@ public class EventController {
          dto.setEvent_tag3(request.getParameter("Event_tag3"));
          dto.setEvent_tag4(request.getParameter("Event_tag4"));
          dto.setEvent_tag5(request.getParameter("Event_tag5"));
+         
          dto.setEvent_thumbnail(thumbnail);
          dto.setEvent_time(request.getParameter("Event_time"));
          dto.setEvent_title(request.getParameter("Event_title"));

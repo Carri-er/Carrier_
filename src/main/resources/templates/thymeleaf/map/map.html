@@ -146,7 +146,7 @@
                
                <!-- 코스 저장 버튼 -->
                <form action="cours_Save" name="saveBtn" method="post">
-               <div class="text-end me-3"><button class="btn saveBtn btn-pink ms-auto" type="button">코스 저장하기</button></div>
+               <div class="text-end me-3 d-flex"><p class="px-3 f20 fw-bold">day 1</p><button class="btn saveBtn btn-pink ms-auto" type="button">코스 저장하기</button></div>
                <input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
                <input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>
                <input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="cours3"/>
@@ -158,7 +158,7 @@
                <input type="hidden" name="memberId" th:value="${session.Member_Id}" />
                
                <!-- 반복될 부분 day1 -->
-               <p class="px-3 f20 fw-bold">day 1</p>
+               
                   <!-- 여행지 1 -->
                   <hr class="px-5 text-black-50" />
                      <div class="row" th:each="aicc:${aicc}">
@@ -176,8 +176,8 @@
                         <div class="col-8">
                            <p th:text="${aicc.getEvent_category()}"
                               class="badge bg-pinkD px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aicc.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aicc.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aicc.getEvent_name()} " class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aicc.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -186,7 +186,7 @@
                   </div>
                
                            <!-- 맛집 -->
-                  <hr class="px-5 text-black-50" />
+                  <hr class="px-5 text-black-50 my-2" />
                      <div class="row" th:each="aiccFood:${aiccFood}">
                   <div class="col">
                   <a th:href="@{'Event_view?id='+ ${aiccFood.getEvent_num()}}">
@@ -202,8 +202,8 @@
                         <div class="col-8">
                            <p th:text="${aiccFood.getEvent_category()}"
                               class="badge bg-pinkD px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccFood.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccFood.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccFood.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccFood.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -228,8 +228,8 @@
                         <div class="col-8">
                            <p th:text="${aicc2.getEvent_category()}"
                               class="badge bg-pinkD px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aicc2.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aicc2.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aicc2.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aicc2.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -253,8 +253,8 @@
                         <div class="col-8">
                            <p th:text="${aiccCafe.getEvent_category()}"
                               class="badge bg-pinkD px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccCafe.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccCafe.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccCafe.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccCafe.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -264,7 +264,7 @@
                            <!-- 맛집2 -->
                   <hr class="px-5 text-black-50" />
                      <div class="row mb-5" th:each="aiccFood2:${aiccFood2}">
-                  <div class="col">
+                  <div class="col mb-3">
                   <a th:href="@{'Event_view?id='+ ${aiccFood2.getEvent_num()}}">
                      <div class="row px-4 Event_contentRow">
                         <div class="col-1 count">
@@ -278,8 +278,8 @@
                         <div class="col-8">
                            <p th:text="${aiccFood2.getEvent_category()}"
                               class="badge bg-pinkD px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccFood2.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccFood2.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccFood2.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccFood2.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -304,8 +304,8 @@
                         <div class="col-8">
                            <p th:text="${hotel.getEvent_category()}"
                               class="badge bg-pinkD px-2 mb-2 py-2"></p>
-                           <h5 th:text="${hotel.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${hotel.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${hotel.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${hotel.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -335,8 +335,8 @@
                         <div class="col-8">
                            <p th:text="${aicc3.getEvent_category()}"
                               class="badge bg-skyb px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aicc3.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aicc3.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aicc3.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aicc3.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -361,8 +361,8 @@
                         <div class="col-8">
                            <p th:text="${aiccFood3.getEvent_category()}"
                               class="badge bg-skyb px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccFood3.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccFood3.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccFood3.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccFood3.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -387,8 +387,8 @@
                         <div class="col-8">
                            <p th:text="${aicc4.getEvent_category()}"
                               class="badge bg-skyb px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aicc4.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aicc4.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aicc4.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aicc4.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -412,8 +412,8 @@
                         <div class="col-8">
                            <p th:text="${aiccCafe2.getEvent_category()}"
                               class="badge bg-skyb px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccCafe2.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccCafe2.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccCafe2.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccCafe2.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -437,8 +437,8 @@
                         <div class="col-8">
                            <p th:text="${aiccFood4.getEvent_category()}"
                               class="badge bg-skyb px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccFood4.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccFood4.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccFood4.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccFood4.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -468,8 +468,8 @@
                         <div class="col-8">
                            <p th:text="${aicc.getEvent_category()}"
                               class="badge bg-mainbg px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aicc.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aicc.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aicc.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aicc.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -494,8 +494,8 @@
                         <div class="col-8">
                            <p th:text="${aiccFood.getEvent_category()}"
                               class="badge bg-mainbg px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccFood.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccFood.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccFood.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccFood.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -520,8 +520,8 @@
                         <div class="col-8">
                            <p th:text="${aicc2.getEvent_category()}"
                               class="badge bg-mainbg px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aicc2.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aicc2.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aicc2.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aicc2.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -545,8 +545,8 @@
                         <div class="col-8">
                            <p th:text="${aiccCafe.getEvent_category()}"
                               class="badge bg-mainbg px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccCafe.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccCafe.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccCafe.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccCafe.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -570,8 +570,8 @@
                         <div class="col-8">
                            <p th:text="${aiccFood2.getEvent_category()}"
                               class="badge bg-mainbg px-2 mb-2 py-2"></p>
-                           <h5 th:text="${aiccFood2.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${aiccFood2.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${aiccFood2.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${aiccFood2.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>
@@ -595,8 +595,8 @@
                         <div class="col-8">
                            <p th:text="${hotel.getEvent_category()}"
                               class="badge bg-mainbg px-2 mb-2 py-2"></p>
-                           <h5 th:text="${hotel.getEvent_name()}" class="mb-1"></h5>
-                           <p th:text="${hotel.getEvent_content()}" class="text-truncate"></p>
+                           <h5 th:text="${hotel.getEvent_name()}" class="mb-1 f17 text-truncate"></h5>
+                           <p th:text="${hotel.getEvent_content()}" class="text-truncate f14 mb-0"></p>
                         </div>
                         <div class="col"></div>
                      </div>

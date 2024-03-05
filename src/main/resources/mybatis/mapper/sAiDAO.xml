@@ -73,7 +73,7 @@ FETCH FIRST 1 ROWS ONLY
     A.Course_content,
     A.Course_distance,
      A.Course_Interest,
-     
+       A.Course_img,
     B.Member_profileimage
 from 
     Course A 
