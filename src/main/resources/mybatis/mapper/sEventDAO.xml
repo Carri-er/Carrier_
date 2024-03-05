@@ -375,5 +375,11 @@
 ORDER BY DBMS_RANDOM.RANDOM()
 FETCH FIRST 4 ROWS ONLY 
 	</select>
+	<select id="infoHome2"
+		resultType="com.ex.springboot.dto.EventDTO">
+    SELECT * FROM Event WHERE Event_category NOT IN ('맛집', '카페')
+ORDER BY DBMS_RANDOM.RANDOM()
+FETCH FIRST 4 ROWS ONLY 
+	</select>
 
 </mapper>

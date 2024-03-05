@@ -145,14 +145,34 @@ div.mapListItemBox{
 }
 
 /* 카카오 맵 스타일 */
-div#map {
+div#map,div#map2,div#map3 {
 	width: 100%;
 	height: 100vh;
 }
-
 /* map_mapSection sytle */
 div.map_mapSection {
 	width: calc(100% - 350px);
+}
+.mapday1,.mapday2,.mapday3{
+	position: fixed;	
+	z-index: 5;
+	right: 10px;
+}
+.mapday1{
+	top:100px;
+}
+.mapday2{
+	top:150px;
+}
+.mapday3{
+	top:200px;
+}
+h3.pgj{
+	position: absolute;
+	top:5px;
+	left:15px;
+	z-index: 5;
+	
 }
 
 /*Event_contentRow 데이터 불러온 내용 스타일*/

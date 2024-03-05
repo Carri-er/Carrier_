@@ -146,7 +146,13 @@
                
                <!-- 코스 저장 버튼 -->
                <form action="cours_Save" name="saveBtn" method="post">
-               <div class="text-end me-3 d-flex"><p class="px-3 f20 fw-bold">day 1</p><button class="btn saveBtn btn-pink ms-auto" type="button">코스 저장하기</button></div>
+               <div class="text-end me-3 d-flex"><p class="px-3 f20 fw-bold">day 1</p>
+               <button class="btn saveBtn btn-pink ms-auto" type="button">
+               <img
+									src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
+									alt="" style="width: 30px; height: 30px;" /> 
+									코스 저장하기 코스 저장하기</button>
+									</div>
                <input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="cours1"/>
                <input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="cours2"/>
                <input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="cours3"/>
@@ -606,12 +612,8 @@
                   </th:block>
                   <!-- 반복될 부분 day3 끝 -->
             </div>
-            <!-- 지역별 피드 출력 영역 -->
-           <!-- trip 위치 출력 페이지  -->
-                
-                
-                
-            </div> <!-- map_guide -->
+       
+        
 
          <div class="map_mapSection">
             <!-- 지도를 표시할 div 입니다 -->
