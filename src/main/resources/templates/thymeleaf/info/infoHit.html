@@ -1,0 +1,234 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<div th:replace="~{head/head::head}"></div>
+<body>
+	<div th:replace="~{nav/nav::nav}"></div>
+<!-- 	<div th:replace="~{alert/toast::div}"></div> -->
+<!-- 	<div th:replace="~{alert/pay_modal::div}"></div> -->
+	<div id="info" class="container-fluid mt-4 mb-3 px-4">
+		<div class="container px-4 px-sm-5 pt-4">
+			<div class="row">
+				<div class="col-12">
+					<h3 class="text-bold">
+						# <span th:text="${showTag}"></span>
+						<th:block th:if="${area.size == 1}">
+							<span th:text="${showArea}"></span>
+						</th:block>
+
+						<th:block th:unless="${area.size == 1}">전체</th:block>
+					</h3>
+				</div>
+			</div>
+			<!--board-->
+			<div class="row gap-4">
+				<div class="col-12 col-lg-7 order-2">
+					<hr>
+					<div class="row">
+						<div class="col">
+							총 <span class="blue-text text-bold" th:text="${getCount}"></span>건
+						</div>
+						<div class="col-12 col-md-7 text-end mt-2 mt-md-0">
+							<a href="info">최신순</a>  <span ></span>  <a href="hitDESC" class="active">인기순</a>
+						</div>
+					</div>
+					<hr>
+					<div class="board row">
+						<!--board-->
+						<div class="row" th:each="list:${list}">
+							<a th:href="@{'Event_view?id='+ ${list.getEvent_num()}}"
+								class="row">
+								<div class="col-3 board-left text-center hstack justify-content-center">
+									<img th:src="@{'../img/info/' + ${list.getEvent_thumbnail()}}"
+										class="img-fluid rounded-4" alt=""
+										style="width: 80px; height: 80px;">
+								</div>
+								<div class="col">
+									<div class="row">
+										<div class="col">
+											<h5>
+												[<span th:text="${list.getEvent_category()}"></span>] <span
+													th:text="${list.getEvent_name()}"></span>
+											</h5>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+
+											<button type="button"
+												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
+												th:text="${list.getEvent_area()}"
+												th:if="${list.getEvent_area() != null}"></button>
+											<button type="button"
+												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
+												th:text="${list.getEvent_area2()}"
+												th:if="${list.getEvent_area2() != null}"></button>
+											<button type="button"
+												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
+												th:text="${list.getEvent_tag()}"
+												th:if="${list.getEvent_tag() != null}">#</button>
+										</div>
+									</div>
+								</div>
+							</a>
+							<hr class="mt-3 ms-3">
+						</div>
+						<!--------->
+
+					</div>
+					<!-- 페이징 -->
+					<div class="pagination"
+						th:if="${showArea == null && showTag == null && key==null}">
+						<ul class="d-flex">
+							<!-- 이전 버튼 -->
+							<li th:if="${currentPage > 1}" class="mx-2"><a
+								th:href="@{'/hitDESC?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">&laquo;
+									이전</a></li>
+
+							<!-- 페이지 번호 -->
+							<li
+								th:each="pageNum : ${#numbers.sequence((currentPage - 4 > 0 ? currentPage - 4 : 1), 
+                        (currentPage + 4 < totalPages ? currentPage + 4 : totalPages))}"
+								class="mx-2"><a
+								th:href="@{'/hitDESC?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}"
+								th:text="${pageNum}"
+								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
+							</li>
+
+							<!-- 다음 버튼 -->
+							<li th:if="${currentPage < totalPages}" class="mx-2"><a
+								th:href="@{'/hitDESC?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">다음
+									&raquo;</a></li>
+						</ul>
+					</div>
+						<div class="pagination"
+						th:if="${key != null}">
+						<ul class="d-flex">
+							<!-- 이전 버튼 -->
+							<li th:if="${currentPage > 1}" class="mx-2"><a
+								th:href="@{'/info_search?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">&laquo;
+									이전</a></li>
+
+							<!-- 페이지 번호 -->
+							<li
+								th:each="pageNum : ${#numbers.sequence((currentPage - 4 > 0 ? currentPage - 4 : 1), 
+                        (currentPage + 4 < totalPages ? currentPage + 4 : totalPages))}"
+								class="mx-2"><a
+								th:href="@{'/info_search?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}"
+								th:text="${pageNum}"
+								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
+							</li>
+
+							<!-- 다음 버튼 -->
+							<li th:if="${currentPage < totalPages}" class="mx-2"><a
+								th:href="@{'/info?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag} + '&amp;key=' + ${key}}">다음
+									&raquo;</a></li>
+						</ul>
+					</div>
+					<div class="pagination" th:if="${showArea != null}">
+						<ul class="d-flex">
+							<!-- 이전 버튼 -->
+							<li th:if="${currentPage > 1}" class="mx-2"><a
+								th:href="@{'/Event_area?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}">&laquo;
+									이전</a></li>
+
+							<!-- 페이지 번호 -->
+							<li
+								th:each="pageNum : ${#numbers.sequence((currentPage - 4 > 0 ? currentPage - 4 : 1), 
+                        (currentPage + 4 < totalPages ? currentPage + 4 : totalPages))}"
+								class="mx-2"><a
+								th:href="@{'/Event_area?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}"
+								th:text="${pageNum}"
+								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
+							</li>
+
+							<!-- 다음 버튼 -->
+							<li th:if="${currentPage < totalPages}" class="mx-2"><a
+								th:href="@{'/Event_area?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}">다음
+									&raquo;</a></li>
+						</ul>
+					</div>
+					<div class="pagination" th:if="${showTag != null}">
+						<ul class="d-flex">
+							<!-- 이전 버튼 -->
+							<li th:if="${currentPage > 1}" class="mx-2"><a
+								th:href="@{'/Event_tags?page=' + ${mPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}">&laquo;
+									이전</a></li>
+
+							<!-- 페이지 번호 -->
+							<li
+								th:each="pageNum : ${#numbers.sequence((currentPage - 4 > 0 ? currentPage - 4 : 1), 
+                        (currentPage + 4 < totalPages ? currentPage + 4 : totalPages))}"
+								class="mx-2"><a
+								th:href="@{'/Event_tags?page=' + ${pageNum} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}"
+								th:text="${pageNum}"
+								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
+							</li>
+
+							<!-- 다음 버튼 -->
+							<li th:if="${currentPage < totalPages}" class="mx-2"><a
+								th:href="@{'/Event_tags?page=' + ${pPage} + '&amp;area=' + ${showArea} + '&amp;tagss=' + ${showTag}}">다음
+									&raquo;</a></li>
+						</ul>
+					</div>
+				</div>
+				<!------------우측 (필터)------------->
+				<div
+					class=" h-100 p-4 info-filter-sticky-top
+					col order-1 order-lg-2 border mt-3 p-2 ms-md-2 px-md-4 order-1 rounded-4">
+					<!-- 새로고침 버튼 -->
+					<!-- <a href="#" class="btn-refresh ms-auto mt-2 me-2"></a> -->
+					<div class="row">
+						<div class="col-12">
+							<a href="info" class="btn rounded-pill px-3 btn-dark f14  mx-1 mb-2 ">#
+								전체</a> <a th:href="@{'Event_area?area='+${area}}"
+								class="btn rounded-pill px-3 btn-outline-dark f14 mx-1 mb-2"
+								th:each="area:${area}"># <span th:text="${area}"></span>
+							</a>
+						</div>
+						<div class="col">
+							<hr>
+						</div>
+						<div class="col-12 mt-1">
+							<a href="info" class="btn rounded-pill px-3 btn-dark f14 mx-1 mb-2">#
+								전체 태그</a>
+							<button type="button" class="btn rounded-pill px-3 btn-outline-dark f14 mx-1 mb-2"
+								th:each="tag : ${tags}">
+								<a th:href="@{'Event_tags?tagss='+${tag}}"
+									th:if="${tag != null}"># <span th:text="${tag}"></span></a>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<th:block th:if="${session.Member_Id=='admin'}">
+				<div class="col-12 text-end mt-3">
+					<a th:href="@{'Event_write_content'}" class="btn btn-main"> 글쓰기</a>
+				</div>
+			</th:block>
+		</div>
+
+	</div>
+
+	<div th:replace="~{footer/footer::footer}"></div>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            // URL에서 msg 매개변수 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('msg');
+            const name = urlParams.get('name');
+            
+         // 메시지가 존재할 경우 toast로 표시
+            if (msg !== null && msg !== "") {
+                let message;
+                if(msg == 1){
+                    message = "글작성을 완료하였습니다. 🖐";
+                }
+                
+                // 부트스트랩 toast 트리거
+                $('.my-toast-body').text(message);
+                $('.my-toast').toast('show');
+            }
+        });
+    </script>
+</body>
+</html>

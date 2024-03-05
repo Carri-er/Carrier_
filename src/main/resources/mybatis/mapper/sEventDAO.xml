@@ -6,6 +6,22 @@
 	<select id="list" resultType="com.ex.springboot.dto.EventDTO">
 		select * from Event
 	</select>
+	<select id="hitDESC" resultType="com.ex.springboot.dto.EventDTO">
+	   <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Event
+            order by Event_hit desc
+        ) e
+        WHERE rownum <= #{pageSize}
+    )
+    WHERE rnum > #{offset}
+    
+    ]]>
+	</select>
 	<!-- 파라미터 값으로 여행 정보를 불러옴 -->
 	<select id="EventView"
 		resultType="com.ex.springboot.dto.EventDTO">
@@ -180,6 +196,11 @@
 		SELECT COUNT(*) AS
 		Post_Count
 		FROM event
+	</select>
+	<select id="getHitDescCount" resultType="int">
+		SELECT COUNT(*) AS
+		Post_Count
+		FROM event order by Event_hit desc
 	</select>
 	<select id="getPostCount2" resultType="int">
 		SELECT COUNT(*) AS

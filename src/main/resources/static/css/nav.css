@@ -137,3 +137,8 @@ nav .navbar-toggler {
 #nav {
 	z-index: 999 !important;
 }
+.navli> .dropdown-menu[data-bs-popper] {
+    top: 100%;
+    left: -50%;
+    margin-top: var(--bs-dropdown-spacer);
+}

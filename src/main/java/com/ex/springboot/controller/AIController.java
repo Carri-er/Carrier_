@@ -198,11 +198,15 @@ public class AIController {
 			System.out.println("area2 isEmpty에서 출력"+area2);
 			model.addAttribute("aicc", AiDAO.listAll(area, cafe, food,hotel));
 			model.addAttribute("aicc2", AiDAO.listAll(area, cafe, food,hotel));
+			model.addAttribute("aicc3", AiDAO.listAll(area, cafe, food,hotel));
+			model.addAttribute("aicc4", AiDAO.listAll(area, cafe, food,hotel));
 		} else {
 			System.out.println("====================");
 			System.out.println("list의 area2 사용 -"+area2);
 			model.addAttribute("aicc", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
 			model.addAttribute("aicc2", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
+			model.addAttribute("aicc3", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
+			model.addAttribute("aicc4", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
 		}
 
 		if (AiDAO.listCafeArea2(area,area2, cafe).isEmpty()) {
@@ -210,8 +214,10 @@ public class AIController {
 			System.out.println("aiccCafe isEmpty 에서 출력 :"+area2);
 			
 			model.addAttribute("aiccCafe", AiDAO.listCafe(area, cafe));
+			model.addAttribute("aiccCafe2", AiDAO.listCafe(area, cafe));
 		} else {
 			model.addAttribute("aiccCafe", AiDAO.listCafeArea2(area,area2, cafe));
+			model.addAttribute("aiccCafe2", AiDAO.listCafeArea2(area,area2, cafe));
 			System.out.println("====================");
 			System.out.println("Cafe에 사용되는 area2 : "+area2);
 		}
@@ -220,14 +226,22 @@ public class AIController {
 			System.out.println("aiccFood isEmpty 에서 출력 : "+area2);
 			model.addAttribute("aiccFood", AiDAO.listFood(area, food));
 			model.addAttribute("aiccFood2", AiDAO.listFood(area, food));
+			model.addAttribute("aiccFood3", AiDAO.listFood(area, food));
+			model.addAttribute("aiccFood4", AiDAO.listFood(area, food));
 			
 		} else {
 			model.addAttribute("aiccFood", AiDAO.listFoodArea2(area,area2, food));
 			model.addAttribute("aiccFood2", AiDAO.listFoodArea2(area,area2, food));
+			model.addAttribute("aiccFood3", AiDAO.listFoodArea2(area,area2, food));
+			model.addAttribute("aiccFood4", AiDAO.listFoodArea2(area,area2, food));
 			System.out.println("====================");
 			System.out.println("Food에 사용되는 area2 : "+area2);
 		}
-
+		if(day.equals("1")) {
+			
+			model.addAttribute("hotel",AiDAO.listHotel(area, hotel));
+		}
+		model.addAttribute("hotel",AiDAO.listHotel(area, hotel));
 		return "thymeleaf/map/map";
 	}
 
@@ -275,13 +289,15 @@ public class AIController {
 	public String Course_delete(HttpServletRequest request, Model model) {
 		
 		String num = request.getParameter("num");
+		String id = request.getParameter("id");
 		model.addAttribute("list",AiDAO.Course_delete(num));
+		
 		String msg = "1";
 	    if (msg != null && msg.equals("1")) {
 	        model.addAttribute("confirmMessage", "코스 삭제가 완료되었습니다.");
 	    }
 		
-		return "thymeleaf/home/home";
+		return "redirect:/mypage?id="+id;
 	}
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {

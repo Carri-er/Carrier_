@@ -14,6 +14,28 @@
             </div>
          </div>
          <!--board-->
+         <!-- 피드목록이 비어있을 때 -->
+         <th:block th:if="${getCount} == 0">
+		<div th:if="${#lists.isEmpty(feedList)}">
+			<div class="row">
+				<div class="col text-center py-5 my-5">
+					<img src="../img/feed/out-of-stock.png" class="mb-4" width="100"
+						height="100" alt="" /> <span class="h5 text-muted">현재 <span
+						th:if="${not #strings.isEmpty(feed_theme)}"
+						th:text="${feed_theme}"></span> <span th:if="${feed_area}!=null"
+						th:text="${feed_area}">feed_area</span> 코스 목록이 비어있어요
+					</span> <span class="text-muted"><span
+						class="d-inline-block text-muted"
+						th:text="|${session.Member_Name}님이|"
+						th:if="${session.Member_Id}!=null"></span> 먼저 작성해보세요!</span> <br />
+						<a
+						href="/aicc"
+						class="m-auto text-center btn btn-main my-4 p-2 px-5 f14"> 코스 담으러 가기 </a>
+				</div>
+			</div>
+		</div>
+		</th:block>
+		<th:block th:if="${getCount} != 0">
          <div class="row gap-4">
             <div class="col-10 col-lg-7 mx-auto order-2">
                <hr>
@@ -122,6 +144,7 @@
          <div class="text-end m-4">
                            <a href="aicc"class="text-black ms-auto btn btn-main" >여행 코스짜러가기</a>
          </div>
+         </th:block>
    </div>
 </div>
    <div th:replace="~{footer/footer::footer}"></div>

@@ -116,9 +116,9 @@
 						<th:block
 							th:if="${session.Member_Id==list.get(0).getMember_Id()||session.Member_Id=='admin'}">
 						<button type="submit" class="btn btn-main "> 코스 수정</button>
-						<a href="#" class="btn btn-skyb"
-						th:onclick="'deleteConfirm(\'' + ${list.get(0).getCourse_num()} + '\')'">글
-						삭제</a>
+						<a href="#" data-bs-toggle="modal" data-bs-target="#feed_del_Modal" class="btn btn-skyb"
+						>코스 삭제</a>
+					
 						</th:block>
 					</div>
 				
@@ -128,16 +128,23 @@
 		</div>
 	</div>
 	<div th:replace="~{footer/footer::footer}"></div>
-	
-<script>
-	function deleteConfirm(id) {
-		if (confirm("해당 글을 정말 삭제하시겠습니까?") == true)
-			location.href = "/Course_delete?num=" + id;
-		else
-			event.stopProgation();
-		event.preventDefault();
-	}
-</script>
+		<!-- 삭제 모달 -->
+	<div th:replace="~{alert/del_modal::div}">
+		<div th:fragment="modalButton">
+			<a 	th:href="@{'/Event_write_delete?num=' + ${view.getEvent_num()}}">삭제</a>
+		</div>
+	</div>
+	<form action="Course_delete" id="deleteFeedForm">
+		<input type="hidden" th:value="${list.get(0).getCourse_num()}" name="num" />
+		<input type="hidden" th:value="${list.get(0).getMember_Id()}" name="id" />
+	</form>
+
+	<script>
+		function func_delModalBtn() {
+			document.getElementById('deleteFeedForm').submit();
+		}
+	</script>
+
 	<script th:inline="javascript">
       var loginId = /*[[${session.Member_Id}]]*/ "";
       if (loginId == null || loginId.trim() == '') {

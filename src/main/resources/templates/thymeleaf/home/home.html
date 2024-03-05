@@ -11,11 +11,11 @@
         <div class="home_carouselBox">
             <div class="carousel_bg_whiteBox"></div>
             <!-- 홈 페이지 메인 캐러샐 영역 -->
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide container" data-bs-ride="carousel">
                 <div class="carousel-inner home_bg">
                     <div class="carousel-item" th:classappend="${infoStat.index==0} ? 'active' : ''"
                         th:each="info:${infoHome}">
-                        <div class="container">
+                        <div class="">
                             <!-- 캐러셀 화면 1 -->
                             <div class="row flex-column-reverse flex-lg-row m-2">
                                 <!-- 캐러셀 텍스트 영역 -->
@@ -273,7 +273,7 @@
                 </div>
 
                 <!-- 캐러셀 버튼 -->
-                <div class="d-none d-xl-block home_carousel_buttons d-flex">
+                <div class="d-none d-lg-block home_carousel_buttons d-flex">
                     <button class="carousel-control-prev justify-content-start" type="button"
                             data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 							<span class="w-100" aria-hidden="true">
@@ -291,7 +291,7 @@
                 </div>
                 <!-- 캐러셀 버튼 end -->
                 <!-- 캐러셀 버튼 [M] -->
-                <div class="d-xl-none d-flex h-100 w-100">
+                <div class="d-lg-none d-flex h-100 w-100">
                     <button class="carousel-control-prev justify-content-start" type="button"
                             data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 							<span class="w-75" aria-hidden="true">
