@@ -33,13 +33,21 @@ div.carousel_bg_whiteBox {
 }
 
 /*캐러셀 이미지 스타일*/
+div.carousel_img{
+	max-height: 400px;
+	min-height: 400px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+}
 div.carousel_img>img {
 	display: inline-block;
-	position: relative;
+	/* position: relative; */
 	/* left : 100px; */
 	z-index: 2;
-	min-width: 437px;
+	min-width: 430px;
 }
+
 
 /*캐러셀 텍스트 영역 스타일*/
 div.crousel_textArea {
@@ -64,7 +72,7 @@ div.crousel_textArea>em {
 div.crousel_textArea>strong {
 	display: block;
 	margin: 20px 0 23px;
-	font-size: 30px;
+	font-size: 34px;
 	font-weight: 700;
 	line-height: 50px;
 	letter-spacing: -3px;
@@ -92,6 +100,19 @@ div.crousel_textArea>a::after {
 	display: block;
 	height: 1px;
 	background: #908f8f;
+}
+
+
+/* 캐러셀 버튼 부분 */
+.home_carousel_buttons{
+	position: absolute;
+    margin: 0 auto;
+    width: 16%;
+    height: 20%;
+    top: 50%;
+    left: 0;
+    margin-top: 187px;
+    margin-left: 100px;
 }
 
 /********************************

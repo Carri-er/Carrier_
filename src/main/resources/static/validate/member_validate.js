@@ -123,13 +123,11 @@ function signUp_check() {
 				$("#id").focus();
 				return false;
 			} else if (data == "success") {
-				/* $("#result").text("사용가능한 번호입니다."); */
-				
+				document.getElementById('addMember').submit();
 			}
 		},
 	});
-	
-	document.getElementById('addMember').submit();
+
 }
 
 function edit_member_check() {

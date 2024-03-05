@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <div th:replace="~{head/head::head}"></div>
 <body>
-<div th:replace="~{nav/nav::nav}">
-</div>
-<!-- 토스트 -->
-<div th:replace="~{alert/toast::div}"></div>
-<div id="feedShow" class="container-fluid mt-4 mb-5 p-0">
+	<div th:replace="~{nav/nav::nav}"></div>
+	<!-- 토스트 -->
+	<div th:replace="~{alert/toast::div}"></div>
+	<!-- 삭제 모달 -->
+	<div th:replace="~{alert/del_modal::div}"></div>
+	<div id="feedShow" class="container-fluid mt-4 mb-5 p-0">
 	<!-- 뒤로가기 버튼 -->
 	<a href="/feed" class="sticky-top feed-btn me-auto ms-4 rounded-circle d-flex">
 		<i class="fi fi-sr-angle-small-left f22 text-center m-auto"></i>
@@ -31,6 +32,28 @@
 								<div class="col-3 flex-grow-0 d-flex justify-content-end align-items-center">
 									<!-- session Id와 글쓴이가 일치할 때는 수정버튼 활성화 -->
 									<a th:if="${session.Member_Id == feedList.getMember_Id()}" th:href="@{'/feed_update?num='+${feedList.getFeed_num()}}" class="btn btn-sm btn-dark me-2">수정</a>
+									
+										<!-- 수정 및 삭제 버튼  -->
+										<div th:if="${session.Member_Id==feedList.Member_Id or session.Member_Id=='admin'}">
+											<div class="f17 hstack" id="feed-right">
+												<a
+													class="dropdown-toggle text-center m-0 ps-2 pt-1 d-block d-flex justify-content-end"
+													href="#" role="button" id="dropdownMenuLink"
+													data-bs-toggle="dropdown" aria-expanded="false"><i
+													class="fi fi-rr-menu-dots-vertical"></i>
+												</a>
+												<ul class="dropdown-menu dropdown-menu-dark">
+													<li data-bs-toggle="modal" data-bs-target="#feed_del_Modal">
+														<a class="dropdown-item">삭제</a>
+													</li>
+												</ul>
+
+												<form action="/delFeed" id="deleteFeedForm">
+													<input type="hidden" name="num" th:value="${feedList.getFeed_num()}"/>
+												</form>
+											</div>
+										</div>
+									
 									<!-- 다른 사람이 볼 때는 공유 -->
 									<a th:unless="${session.Member_Id == feedList.getMember_Id()}" href="#" class="p-2"><i class="fi fi-br-paper-plane d-flex align-items-center"></i></a>
 								</div>
@@ -192,28 +215,33 @@
 
 	<!-- 알림창 -->
 	<script type="text/javascript">
-        $(document).ready(function() {
-            // URL에서 msg 매개변수 가져오기
-            const urlParams = new URLSearchParams(window.location.search);
-            const msg = urlParams.get('msg');
-            
-         // 메시지가 존재할 경우 toast로 표시
-            if (msg !== null && msg !== "") {
-                let message;
-                if(msg == 1){
-                    message = "공백으로 이루어진 댓글은 작성하실 수 없습니다";
-                }
-                if(msg == 2){
-                    message = "65자 이내로 작성해주세요";
-                }
-                
-                // 부트스트랩 toast 트리거
-                $('.my-toast-body').text(message);
-                $('.my-toast').toast('show');
-            }
-        });
-    </script>
+		$(document).ready(function() {
+			// URL에서 msg 매개변수 가져오기
+			const urlParams = new URLSearchParams(window.location.search);
+			const msg = urlParams.get('msg');
 
-    
+			// 메시지가 존재할 경우 toast로 표시
+			if (msg !== null && msg !== "") {
+				let message;
+				if (msg == 1) {
+					message = "공백으로 이루어진 댓글은 작성하실 수 없습니다";
+				}
+				if (msg == 2) {
+					message = "65자 이내로 작성해주세요";
+				}
+
+				// 부트스트랩 toast 트리거
+				$('.my-toast-body').text(message);
+				$('.my-toast').toast('show');
+			}
+		});
+	</script>
+
+	<!-- DEL모달 -->
+	<script>
+		function func_delModalBtn() {
+			document.getElementById('deleteFeedForm').submit();
+		}
+	</script>
 </body>
 </html>
