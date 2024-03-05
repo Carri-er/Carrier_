@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="col-12 col-md-6 feed-write-left feed-box overflow-hidden p-0 feed-box-width">
 						<!--feed box top-->
-						<div class="col-12 m-0 mb-3 px-0 no-gutters m-auto">
+						<div class="col-12 m-0 px-0 no-gutters m-auto">
 							<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
 								<img th:src="@{'../img/member_thumbnail/'+ ${session.Member_profileimage}}" class="float-start rounded-circle border me-3" width="50" height="50" alt="">
 								<input type="hidden" name="Member_profileimage" th:value="${session.Member_profileimage}"/>
@@ -37,7 +37,7 @@
 							</div>
 						</div>
 						<!-- feed box center -->
-						<div class="col-12 feed-box-center mt-3 d-flex justify-content-center align-items-center overflow-hidden">
+						<div class="col-12 feed-box-center d-flex justify-content-center align-items-center overflow-hidden">
 							<!-- Center : carousel -->
 							<div id="feedCarousel" class="carousel slide" data-bs-ride="false">
 								<!-- Carousel image -->

@@ -18,11 +18,12 @@
 						
 						<div class="col-12">여행정보 글 이미지 미리보기</div>
 						<div class="form-floating mt-3">
-						<div class="col-12 text-start">이미지(수정시 재등록 필수***)</div>
+						<div class="col-12 text-start"></div>
 							<input
 							type='file' class="form-control pt-3" onchange="readURL(this);"
 							name="Event_thumbnail" th:value="*{Event_thumbnail}"/>
 							</div>
+							<input type="hidden" th:value="*{Event_thumbnail}" name="Event_thumbnail_old">
 					</div>
 					<div class="col-12">
 						<div class="form-floating">
@@ -35,6 +36,7 @@
 								<option value="테마파크">테마파크</option>
 								<option value="엑티비티">엑티비티</option>
 								<option value="전통시장">전통시장</option>
+								<option value="관광지">관광지</option>
 								<option value="실내">실내</option>
 								<option value="맛집">맛집</option>
 								<option value="카페">카페</option>

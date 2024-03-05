@@ -250,9 +250,9 @@
 							<div class="col-12">
 								<div class="d-flex justify-content-between">
 									<h5 class="text-start">코스 보관함</h5>
-									<th:block th:if="${#lists.size(course) !=0}">
+									<th:block th:if="${#lists.size(course) < 5}">
 										<a
-											th:href="@{'mypageCourseAll?id='+${course.get(0).getMember_Id()}}"
+											th:href="@{'mypageCourseAll?id='+${loginMember.getMember_Id()}}"
 											class="gg-dim-txt f13">전체보기</a>
 									</th:block>
 									
