@@ -26,13 +26,14 @@
 								<!--feed box text-->
 								<div class="col flex-grow-1 px-0">
 									<span class="float-start fw-bold f15" th:text="${feedList.getMember_Id()}">사용자명</span><br>
-									<span class="float-start text-muted f13" th:text="${feedList.getFeed_uploadday()}">올린 날짜</span>
+									<span class="float-start text-muted f13" th:text="${feedList.getFeed_updateday()}">올린 날짜</span>
 								</div>
 								<!-- 우측 버튼 -->
 								<div class="col-3 flex-grow-0 d-flex justify-content-end align-items-center">
 									<!-- session Id와 글쓴이가 일치할 때는 수정버튼 활성화 -->
 									<a th:if="${session.Member_Id == feedList.getMember_Id()}" th:href="@{'/feed_update?num='+${feedList.getFeed_num()}}" class="btn btn-sm btn-dark me-2">수정</a>
-									
+										<!-- 다른 사람이 볼 때는 공유 -->
+									<a th:unless="${session.Member_Id == feedList.getMember_Id()}" href="#" class="p-2"><i class="fi fi-br-paper-plane d-flex align-items-center"></i></a>
 										<!-- 수정 및 삭제 버튼  -->
 										<div th:if="${session.Member_Id==feedList.Member_Id or session.Member_Id=='admin'}">
 											<div class="f17 hstack" id="feed-right">
@@ -53,9 +54,6 @@
 												</form>
 											</div>
 										</div>
-									
-									<!-- 다른 사람이 볼 때는 공유 -->
-									<a th:unless="${session.Member_Id == feedList.getMember_Id()}" href="#" class="p-2"><i class="fi fi-br-paper-plane d-flex align-items-center"></i></a>
 								</div>
 							</div>
 							<!-- feed box center | Carousel image -->
@@ -198,7 +196,6 @@
 									    </div>
 									  </div>
 									</div>
-		                            
 	                            </div>
 							</div>
 						</div>
