@@ -3,816 +3,844 @@
 
 <div th:replace="~{head/head::head}"></div>
 <body>
-	<div th:replace="~{nav/nav::nav}"></div>
-	<div class="home_wrapper">
-		<!-- 토스트 -->
-		<div th:replace="~{alert/toast::div}"></div>
-		<div class="home_carousel container-fluid px-0 mb-5">
-			<div class="home_carouselBox">
-				<div class="carousel_bg_whiteBox"></div>
-				<!-- 홈 페이지 메인 캐러샐 영역 -->
-				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-					<div class="carousel-inner home_bg">
-						<div class="carousel-item" th:classappend="${infoStat.index==0} ? 'active' : ''"  th:each="info:${infoHome}">
-							<div class="container">
-								<!-- 캐러셀 화면 1 -->
-								<div class="row flex-column-reverse flex-lg-row">
-									<!-- 캐러셀 텍스트 영역 -->
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em th:text="${info.getEvent_category()}">긴 겨울밤 낭만적인 시간</em>
-											<strong th:text="${info.getEvent_name()}"> 겨울밤을 빛내주는 전국 야경 명소</strong>
-											<span class="f14" th:text="${info.getEvent_content()}"> 겨울밤을 빛내주는 전국 야경 명소</span>
-											<a th:href="@{'Event_view?id='+ ${info.getEvent_num()}}">자세히 보기</a>
-										</div>
-									</div>
+<div th:replace="~{nav/nav::nav}"></div>
+<div class="home_wrapper">
+    <!-- 토스트 -->
+    <div th:replace="~{alert/toast::div}"></div>
+    <div class="home_carousel container-fluid px-0 mb-5">
+        <div class="home_carouselBox">
+            <div class="carousel_bg_whiteBox"></div>
+            <!-- 홈 페이지 메인 캐러샐 영역 -->
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner home_bg">
+                    <div class="carousel-item" th:classappend="${infoStat.index==0} ? 'active' : ''"
+                        th:each="info:${infoHome}">
+                        <div class="container">
+                            <!-- 캐러셀 화면 1 -->
+                            <div class="row flex-column-reverse flex-lg-row m-2">
+                                <!-- 캐러셀 텍스트 영역 -->
+                                <div class="col-12 col-lg-4 col-xl-5 d-flex d-lg-block p-0">
+                                    <div class="crousel_textArea">
+                                        <em th:text="${info.getEvent_name()}">긴 겨울밤 낭만적인 시간</em>
+                                        <!-- <strong th:text="${info.getEvent_name()}"> 겨울밤을 빛내주는 전국 야경 명소</strong> -->
+                                        <strong class="fs-2" th:utext="${info.getEvent_title()}"> 겨울밤을 빛내주는 전국 야경 명소</strong>
+                                        <div class="text-truncate w-75">
+                                            <!-- <span class="f14"
+                                                  th:text="${info.getEvent_content()}"> 겨울밤을 빛내주는 전국 야경 명소</span> -->
+                                        </div>
+                                        <a th:href="@{'Event_view?id='+ ${info.getEvent_num()}}">자세히 보기</a>
+                                    </div>
+                                </div>
 
-									<!-- 캐러셀 이미지 영역 -->
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100"
-											th:src="@{'../img/info/' + ${info.getEvent_thumbnail()}}"
-											alt="겨울밤을 빛내주는 전국 야경 명소">
-									</div>
-								</div><!-- row -->
-							</div>
-						</div>
-	<!-- <!-- 					
-						<div class="carousel-item">
-							<div class="container">
-								<!-- 캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>혼자와도 좋은 매력적인 안식처</em>
-											<strong>고요한 시간을 보낼 사찰 설경 명소</strong>
-											<a href="#">자세히 보기</a>
-										</div>
-									</div>
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_02.png"
-											alt="고요한 시간을 보낼 사찰 설경 명소">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                <!-- 캐러셀 이미지 영역 -->
+                                <div class="col-12 col-lg-8 col-xl-7 p-0 carousel_img shadow-sm rounded-2">
+                                    <img class="w-100"
+                                         th:src="@{'../img/info/' + ${info.getEvent_thumbnail()}}"
+                                         alt="겨울밤을 빛내주는 전국 야경 명소">
+                                </div>
+                            </div><!-- row -->
+                        </div>
+                    </div>
+                    <!-- <!--
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                <!-- 캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>혼자와도 좋은 매력적인 안식처</em>
+                                                            <strong>고요한 시간을 보낼 사찰 설경 명소</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
+                                                    </div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_02.png"
+                                                            alt="고요한 시간을 보낼 사찰 설경 명소">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>겨울 방학 아이와 가볼만한 곳</em>
-											<strong>주말에 가기 좋은 대전 근교 실내 여행지</strong>
-											<a href="#">자세히 보기</a>
-										</div>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>겨울 방학 아이와 가볼만한 곳</em>
+                                                            <strong>주말에 가기 좋은 대전 근교 실내 여행지</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_03.png"
-											alt="주말에 가기 좋은 대전 근교 실내 여행지">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_03.png"
+                                                            alt="주말에 가기 좋은 대전 근교 실내 여행지">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>디지털 관광주민증 혜택지</em>
-											<strong>겨울에도 유쾌한 남원 시간여행</strong>
-											<a href="#">자세히 보기</a>
-										</div>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>디지털 관광주민증 혜택지</em>
+                                                            <strong>겨울에도 유쾌한 남원 시간여행</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_04.png"
-											alt="겨울에도 유쾌한 남원 시간여행">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_04.png"
+                                                            alt="겨울에도 유쾌한 남원 시간여행">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>전국 추천 온천 BEST 5</em>
-											<strong>가족 여행으로 딱! 전국 온천 여행지</strong>
-											<a href="#">자세히 보기</a>
-										</div>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>전국 추천 온천 BEST 5</em>
+                                                            <strong>가족 여행으로 딱! 전국 온천 여행지</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_05.png"
-											alt="가족 여행으로 딱! 전국 온천 여행지">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_05.png"
+                                                            alt="가족 여행으로 딱! 전국 온천 여행지">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>아이동반 겨울 여행지 추천</em>
-											<strong>아이와 가기 좋은 서울,경기 실내박물관</strong>
-											<a href="#">자세히 보기</a>
-										</div>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>아이동반 겨울 여행지 추천</em>
+                                                            <strong>아이와 가기 좋은 서울,경기 실내박물관</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_06.png"
-											alt="아이와 가기 좋은 서울,경기 실내박물관">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_06.png"
+                                                            alt="아이와 가기 좋은 서울,경기 실내박물관">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>여행구독하고 매월 선물 받자!</em>
-											<strong>눈과 사진으로 담아보는 새해 여행지 특집💙</strong>
-											<a href="#">자세히 보기</a>
-										</div>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>여행구독하고 매월 선물 받자!</em>
+                                                            <strong>눈과 사진으로 담아보는 새해 여행지 특집💙</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_07.png"
-											alt="눈과 사진으로 담아보는 새해 여행지 특집">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_07.png"
+                                                            alt="눈과 사진으로 담아보는 새해 여행지 특집">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>2023 트렌드 어워드 🏆</em>
-											<strong>대한민국구석구석 데이터로 본 인기 여행지는?</strong>
-											<a href="#">자세히 보기</a>
-										</div>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>2023 트렌드 어워드 🏆</em>
+                                                            <strong>대한민국구석구석 데이터로 본 인기 여행지는?</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_08.png"
-											alt="대한민국구석구석 데이터로 본 인기 여행지는?">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_08.png"
+                                                            alt="대한민국구석구석 데이터로 본 인기 여행지는?">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>낭만이 가득한 겨울 왕국으로 떠나요!</em>
-											<strong>마음의 온도를 높이는<br>겨울 여행지 추천🎅</strong>
-											<a href="#">자세히 보기</a>
-										</div>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>낭만이 가득한 겨울 왕국으로 떠나요!</em>
+                                                            <strong>마음의 온도를 높이는<br>겨울 여행지 추천🎅</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_09.gif"
-											alt="마음의 온도를 높이는 겨울 여행지 추천">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_09.gif"
+                                                            alt="마음의 온도를 높이는 겨울 여행지 추천">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>반짝이는 야경명소</em>
-											<strong>밤이 더 아름다운 대한민국! 대한민국 밤밤곡곡 100</strong>
-											<a href="#">자세히 보기</a>
-										</div>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>반짝이는 야경명소</em>
+                                                            <strong>밤이 더 아름다운 대한민국! 대한민국 밤밤곡곡 100</strong>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_10.png"
-											alt="밤이 더 아름다운 대한민국! 대한민국 밤밤곡곡 100">
-									</div>
-								</div>row
-							</div>
-						</div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_10.png"
+                                                            alt="밤이 더 아름다운 대한민국! 대한민국 밤밤곡곡 100">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
 
-						<div class="carousel-item">
-							<div class="container">
-								캐러셀 화면 1
-								<div class="row flex-column-reverse flex-lg-row">
-									캐러셀 텍스트 영역
-									<div class="col-12 col-lg-5 d-flex d-lg-block">
-										<div class="crousel_textArea">
-											<em>새로운 Feel the Rhythm of Korea!</em>
-											<strong>한국관광 홍보영상 속 촬영지로 떠나는 여행!</strong>
+                                        <div class="carousel-item">
+                                            <div class="container">
+                                                캐러셀 화면 1
+                                                <div class="row flex-column-reverse flex-lg-row">
+                                                    캐러셀 텍스트 영역
+                                                    <div class="col-12 col-lg-5 d-flex d-lg-block">
+                                                        <div class="crousel_textArea">
+                                                            <em>새로운 Feel the Rhythm of Korea!</em>
+                                                            <strong>한국관광 홍보영상 속 촬영지로 떠나는 여행!</strong>
 
-											<a href="#">자세히 보기</a>
-										</div>
+                                                            <a href="#">자세히 보기</a>
+                                                        </div>
 
-									</div>
+                                                    </div>
 
-									캐러셀 이미지 영역
-									<div class="col-12 col-lg-7 carousel_img">
-										<img class="w-100" src="../img/home/home_carousel_11.png"
-											alt="겨울밤을 빛내주는 전국 야경 명소">
-									</div>
-								</div>row
-							</div>
-						</div>
-						 -->
-					</div>
+                                                    캐러셀 이미지 영역
+                                                    <div class="col-12 col-lg-7 carousel_img">
+                                                        <img class="w-100" src="../img/home/home_carousel_11.png"
+                                                            alt="겨울밤을 빛내주는 전국 야경 명소">
+                                                    </div>
+                                                </div>row
+                                            </div>
+                                        </div>
+                                         -->
+                </div>
 
-					<!-- 캐러셀 버튼 -->
-					<div class="home_carousel_buttons container d-flex ">
-						<button class="carousel-control-prev position-relative justify-content-start" type="button"
-							data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-							<span class="" aria-hidden="true">
+                <!-- 캐러셀 버튼 -->
+                <div class="d-none d-xl-block home_carousel_buttons d-flex">
+                    <button class="carousel-control-prev justify-content-start" type="button"
+                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							<span class="w-100" aria-hidden="true">
 								<i class="fi fi-sr-angle-left"></i>
 							</span>
-							<span class="visually-hidden ">Previous</span>
-						</button>
-						<button class="carousel-control-next position-relative text-dark justify-content-start"
-							type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-							<span class="" aria-hidden="true">
+                        <span class="visually-hidden ">Previous</span>
+                    </button>
+                    <button class="carousel-control-next text-dark justify-content-start"
+                            type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							<span class="w-100" aria-hidden="true">
 								<i class="fi fi-sr-angle-right"></i>
 							</span>
-							<span class="visually-hidden">Next</span>
-						</button>
-					</div>
-					<!-- 캐러셀 버튼 end -->
-				</div>
-			</div> <!-- home_carouselBox -->
-		</div> <!-- home_carousel -->
-		<div class="w-100 my-5 py-3"></div><!-- 여백 박스 -->
-		<!-- home 여행 콕콕 section -->
-		<section id="home_data_lab">
-			<div class="home_data_labBox container px-2">
-				<!-- 상단 타이틀 영역 -->
-				<div class="home_dl_title">
-					<div class="home_dl_title_img">
-						<a href="aicc">
-							<div class="col-12 d-flex text-dark">
-								<img src="../img/home/search.png" class="me-2" width="48" height="48" alt="" /><p class="fs-2">여행돋보기</p>
-								<span class="mt-3 text-muted fw-normal">&nbsp;&nbsp; 돋보이는 여행코스 지금 보여드릴게요</span>
-							</div>
-						</a>
-					</div> <!-- home_dl_title_img -->
-				</div> <!-- home_dl_title -->
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!-- 캐러셀 버튼 end -->
+                <!-- 캐러셀 버튼 [M] -->
+                <div class="d-xl-none d-flex h-100 w-100">
+                    <button class="carousel-control-prev justify-content-start" type="button"
+                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							<span class="w-75" aria-hidden="true">
+								<i class="fi fi-sr-angle-left f22"></i>
+							</span>
+                        <span class="visually-hidden ">Previous</span>
+                    </button>
+                    <button class="carousel-control-next text-dark justify-content-start"
+                            type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							<span class="w-75 ms-auto" aria-hidden="true">
+								<i class="fi fi-sr-angle-right f22"></i>
+							</span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!-- 캐러셀 버튼 end -->
+            </div>
+        </div> <!-- home_carouselBox -->
+    </div> <!-- home_carousel -->
+    <div class="w-100 my-5 py-3"></div><!-- 여백 박스 -->
+    <!-- home 여행 콕콕 section -->
+    <section id="home_data_lab">
+        <div class="home_data_labBox container px-2">
+            <!-- 상단 타이틀 영역 -->
+            <div class="home_dl_title">
+                <div class="home_dl_title_img">
+                    <a href="aicc">
+                        <div class="col-12 d-flex text-dark">
+                            <img src="../img/home/search.png" class="me-2" width="48" height="48" alt=""/>
+                            <p class="fs-2">여행돋보기</p>
+                            <span class="mt-3 text-muted fw-normal">&nbsp;&nbsp; 돋보이는 여행코스 지금 보여드릴게요</span>
+                        </div>
+                    </a>
+                </div> <!-- home_dl_title_img -->
+            </div> <!-- home_dl_title -->
 
-				<!-- Datalab 여행 콕콕 nav바 영역 -->
-				<div class="home_dl_nav p-0 rounded-4 overflow-hidden">
-					<ul class="home_dl_nav_ul p-0 mb-0">
-						<li class="home_dl_nav_list active">피드 돋보기</li>
-						<li class="home_dl_nav_list">추천지 돋보기</li>
-						<li class="home_dl_nav_list">여행코스 돋보기</li>
-					</ul>
-				</div>
+            <!-- Datalab 여행 콕콕 nav바 영역 -->
+            <div class="home_dl_nav p-0 rounded-4 overflow-hidden">
+                <ul class="home_dl_nav_ul p-0 mb-0">
+                    <li class="home_dl_nav_list active">피드 돋보기</li>
+                    <li class="home_dl_nav_list">추천지 돋보기</li>
+                    <li class="home_dl_nav_list">여행코스 돋보기</li>
+                </ul>
+            </div>
 
-				<div class="home_dl_content">
-					<!-- 컨텐츠 별 설명 영역 -->
-					<div class="row me-0">
-						<div class="col d-flex justify-content-center py-5 dl_ment ">
-							<img src="../img/home/main/icon_curation_txt.png" width="22" height="22" alt="#">
-							<span>다양한 취향! 다른사람들의 여행을 함께 구경해요! </span>
-							<span>빅데이터 정보로 분석한 지역별 핫한 여행지와 맛집을 소개합니다.</span>
-							<span>1분이면 끝! 맞춤형 여행 코스 추천 받아보세요.</span>
-						</div>
-					</div>
-					<!-- 컨텐츠 별 이미지 영역 -->
-					<!-- 피드 컨텐츠 영역 -->
-					<div id="feed"  class="row gap-3 justify-content-around align-items-start pb-4 m-0 row-box home_dl_img_AIcokcok overflow-hidden">
-						<!--feed box Start-->
-						<div class="col-12 col-xl-4 feed-box m-0 my-3 px-0 no-gutters"
-							th:each="feed, iterStat : ${feedList}"
-							th:if="${iterStat.index < 3}">
-							<!--feed box top-->
-							<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
-								<img
-									th:src="@{'../img/member_thumbnail/'+${feed.Member_profileimage}}"
-									class="float-start rounded-circle border me-3" width="50"
-									height="50" alt="">
-								<!--feed box text-->
-								<div class="col px-0">
+            <div class="home_dl_content">
+                <!-- 컨텐츠 별 설명 영역 -->
+                <div class="row me-0">
+                    <div class="col d-flex justify-content-center py-5 dl_ment ">
+                        <img src="../img/home/main/icon_curation_txt.png" width="22" height="22" alt="#">
+                        <span>다양한 취향! 다른사람들의 여행을 함께 구경해요! </span>
+                        <span>빅데이터 정보로 분석한 지역별 핫한 여행지와 맛집을 소개합니다.</span>
+                        <span>1분이면 끝! 맞춤형 여행 코스 추천 받아보세요.</span>
+                    </div>
+                </div>
+                <!-- 컨텐츠 별 이미지 영역 -->
+                <!-- 피드 컨텐츠 영역 -->
+                <div id="feed"
+                     class="row gap-3 justify-content-around align-items-start pb-4 m-0 row-box home_dl_img_AIcokcok overflow-hidden">
+                    <!--feed box Start-->
+                    <div class="col-12 col-xl-4 feed-box m-0 my-3 px-0 no-gutters"
+                         th:each="feed, iterStat : ${feedList}"
+                         th:if="${iterStat.index < 3}">
+                        <!--feed box top-->
+                        <div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
+                            <img
+                                    th:src="@{'../img/member_thumbnail/'+${feed.Member_profileimage}}"
+                                    class="float-start rounded-circle border me-3" width="50"
+                                    height="50" alt="">
+                            <!--feed box text-->
+                            <div class="col px-0">
 									<span class="float-start fw-bold f16"
-										th:text="${feed.Member_Id}">박검지</span><br> <span
-										class="float-start text-muted f13">하이라이트</span> <span
-										class="float-start text-muted f13 ms-3">2시간 전</span>
-								</div>
-								<!-- 우측 버튼 -->
-								<div class="col-3 d-flex justify-content-end align-items-center">
-									<a th:href="@{'/feed_show?num='+${feed.Feed_num}}"
-										class="btn btn-sm btn-dark"> 전체 </a>
-									<!-- 수정 및 삭제 버튼  -->
-									<div th:if="${session.Member_Id == feed.Member_Id}">
-										<div class="f17 hstack" id="feed-right">
-											<a
-												class="dropdown-toggle text-center m-0 ps-2 pt-1 d-block d-flex justify-content-end"
-												href="#" role="button" id="dropdownMenuLink"
-												data-bs-toggle="dropdown" aria-expanded="false"> <i
-												class="fi fi-rr-menu-dots-vertical"> </i>
-											</a>
-											<ul class="dropdown-menu dropdown-menu-dark">
-												<li><a class="dropdown-item active"
-													th:href="@{'/delFeed?num='+${feed.Feed_num}}">삭제</a></li>
-												<li><a class="dropdown-item"
-													th:href="@{'/feed_update?num='+${feed.Feed_num}}">수정</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- feed box center | Carousel image -->
-							<div
-								class="col-12 feed-box-center d-flex justify-content-center align-items-center overflow-hidden">
-								<div th:id="'feedCarousel'+${feed.Feed_num}"
-									class="carousel slide" data-bs-ride="false">
-									<!-- carousel items loop -->
-									<div class="carousel-inner">
-										<div
-											th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}"
-											class="carousel-item p-0 mh-200 xh-200 d-flex"
-											th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
-											<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}"
-												class="d-block w-100 object-fit img-center" alt="#">
-										</div>
-									</div>
-									<!-- Carousel Prev/Next button -->
-									<div
-										th:if="${#lists.size(#strings.arraySplit(feed.Feed_thumbnail, ','))>1}">
-										<button class="carousel-control-prev" type="button"
-											th:attr="data-bs-target='#feedCarousel'+${feed.Feed_num}"
-											data-bs-slide="prev">
-											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Previous</span>
-										</button>
-										<button class="carousel-control-next" type="button"
-											th:attr="data-bs-target='#feedCarousel'+${feed.Feed_num}"
-											data-bs-slide="next">
-											<span class="carousel-control-next-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Next</span>
-										</button>
-									</div>
-								</div>
-							</div>
-							<!--feed-box-bot | text-->
-							<div class="col-12 feed-box-bot p-4 pt-3 pb-5">
+                                          th:text="${feed.Member_Id}">박검지</span><br> <span
+                                    class="float-start text-muted f13">하이라이트</span> <span
+                                    class="float-start text-muted f13 ms-3">2시간 전</span>
+                            </div>
+                            <!-- 우측 버튼 -->
+                            <div class="col-3 d-flex justify-content-end align-items-center">
+                                <a th:href="@{'/feed_show?num='+${feed.Feed_num}}"
+                                   class="btn btn-sm btn-dark"> 전체 </a>
+                                <!-- 수정 및 삭제 버튼  -->
+                                <div th:if="${session.Member_Id == feed.Member_Id}">
+                                    <div class="f17 hstack" id="feed-right">
+                                        <a
+                                                class="dropdown-toggle text-center m-0 ps-2 pt-1 d-block d-flex justify-content-end"
+                                                href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                                class="fi fi-rr-menu-dots-vertical"> </i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            <li><a class="dropdown-item active"
+                                                   th:href="@{'/delFeed?num='+${feed.Feed_num}}">삭제</a></li>
+                                            <li><a class="dropdown-item"
+                                                   th:href="@{'/feed_update?num='+${feed.Feed_num}}">수정</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- feed box center | Carousel image -->
+                        <div
+                                class="col-12 feed-box-center d-flex justify-content-center align-items-center overflow-hidden">
+                            <div th:id="'feedCarousel'+${feed.Feed_num}"
+                                 class="carousel slide" data-bs-ride="false">
+                                <!-- carousel items loop -->
+                                <div class="carousel-inner">
+                                    <div
+                                            th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}"
+                                            class="carousel-item p-0 mh-200 xh-200 d-flex"
+                                            th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
+                                        <img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}"
+                                             class="d-block w-100 object-fit img-center" alt="#">
+                                    </div>
+                                </div>
+                                <!-- Carousel Prev/Next button -->
+                                <div
+                                        th:if="${#lists.size(#strings.arraySplit(feed.Feed_thumbnail, ','))>1}">
+                                    <button class="carousel-control-prev" type="button"
+                                            th:attr="data-bs-target='#feedCarousel'+${feed.Feed_num}"
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                            th:attr="data-bs-target='#feedCarousel'+${feed.Feed_num}"
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--feed-box-bot | text-->
+                        <div class="col-12 feed-box-bot p-4 pt-3 pb-5">
 								<span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주
 									맛집🍺✨</span> <span class="f13 text-truncate"><span
-									th:text="${feed.Feed_content}"></span><span
-									th:if="${feed.Feed_content}==null">&nbsp;</span></span>
-							</div>
-							<!--feed box bot | text-->
-							<div
-								class="col-12 feed-box-bot hstack p-3 border-top text-muted f13 d-flex hstack">
-								<div class="col-6 hstack justify-content-center border-end">
-									<a th:href="@{'/feed_show?num='+${feed.Feed_num}}"
-										class="d-flex"> <span>댓글</span> <i
-										class="fi fi-br-comment-dots hstack px-1"></i>
-									</a>
-								</div>
-								<div class="col-6 hstack justify-content-center">
-									<div
-										th:if="${feed.getFeed_heart_on()==0 or session.Member_Id==null}">
-										<a
-											th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}"
-											class="d-flex"> <span>좋아요</span> <i
-											class="fi fi-br-heart hstack px-1"></i>
-										</a>
-									</div>
-									<div th:if="${feed.getFeed_heart_on()}==1">
-										<a
-											th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}"
-											class="d-flex"> <span>좋아요</span><i
-											class="fi fi-sr-heart hstack px-1"></i>
-										</a>
-									</div>
-									<span class="ms-2" th:text="${feed.getFeed_heart()}"
-										th:if="${session.Member_Id !=null}">999+</span>
-								</div>
-							</div>
-						</div>
-						<!---------------------------------------------------------------------------->
-					</div> <!-- home_dl_img_AIcokcok -->
-					<!-- 핫플콕콕 영역 -->
-					<div class="home_dl_img_hotPlace">
-						<div class="hotPlace_area_map mb-1">
-							<ul class="hotPlace_area_map_ul">
-								<li>전국</li>
-								<li>서울</li>
-								<li>인천</li>
-								<li>대전</li>
-								<li>대구</li>
-								<li>광주</li>
-								<li>부산</li>
-								<li>울산</li>
-								<li>세종</li>
-								<li>경기</li>
-								<li>강원</li>
-								<li>충북</li>
-								<li>충남</li>
-								<li>경북</li>
-								<li>경남</li>
-								<li>전북</li>
-								<li>전남</li>
-								<li>제주</li>
-							</ul>
-							<ul class="hotPlace_area_map_ul_mobile">
-								<li class="btn btn-secondary m-1">전국</li>
-								<li class="btn btn-secondary m-1">서울</li>
-								<li class="btn btn-secondary m-1">인천</li>
-								<li class="btn btn-secondary m-1">대전</li>
-								<li class="btn btn-secondary m-1">대구</li>
-								<li class="btn btn-secondary m-1">광주</li>
-								<li class="btn btn-secondary m-1">부산</li>
-								<li class="btn btn-secondary m-1">울산</li>
-								<li class="btn btn-secondary m-1">세종</li>
-								<li class="btn btn-secondary m-1">경기</li>
-								<li class="btn btn-secondary m-1">강원</li>
-								<li class="btn btn-secondary m-1">충북</li>
-								<li class="btn btn-secondary m-1">충남</li>
-								<li class="btn btn-secondary m-1">경북</li>
-								<li class="btn btn-secondary m-1">경남</li>
-								<li class="btn btn-secondary m-1">전북</li>
-								<li class="btn btn-secondary m-1">전남</li>
-								<li class="btn btn-secondary m-1">제주</li>
-							</ul>
-						</div>
+                                th:text="${feed.Feed_content}"></span><span
+                                th:if="${feed.Feed_content}==null">&nbsp;</span></span>
+                        </div>
+                        <!--feed box bot | text-->
+                        <div
+                                class="col-12 feed-box-bot hstack p-3 border-top text-muted f13 d-flex hstack">
+                            <div class="col-6 hstack justify-content-center border-end">
+                                <a th:href="@{'/feed_show?num='+${feed.Feed_num}}"
+                                   class="d-flex"> <span>댓글</span> <i
+                                        class="fi fi-br-comment-dots hstack px-1"></i>
+                                </a>
+                            </div>
+                            <div class="col-6 hstack justify-content-center">
+                                <div
+                                        th:if="${feed.getFeed_heart_on()==0 or session.Member_Id==null}">
+                                    <a
+                                            th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}"
+                                            class="d-flex"> <span>좋아요</span> <i
+                                            class="fi fi-br-heart hstack px-1"></i>
+                                    </a>
+                                </div>
+                                <div th:if="${feed.getFeed_heart_on()}==1">
+                                    <a
+                                            th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}"
+                                            class="d-flex"> <span>좋아요</span><i
+                                            class="fi fi-sr-heart hstack px-1"></i>
+                                    </a>
+                                </div>
+                                <span class="ms-2" th:text="${feed.getFeed_heart()}"
+                                      th:if="${session.Member_Id !=null}">999+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!---------------------------------------------------------------------------->
+                </div> <!-- home_dl_img_AIcokcok -->
+                <!-- 핫플콕콕 영역 -->
+                <div class="home_dl_img_hotPlace">
+                    <div class="hotPlace_area_map mb-1">
+                        <ul class="hotPlace_area_map_ul">
+                            <li>전국</li>
+                            <li>서울</li>
+                            <li>인천</li>
+                            <li>대전</li>
+                            <li>대구</li>
+                            <li>광주</li>
+                            <li>부산</li>
+                            <li>울산</li>
+                            <li>세종</li>
+                            <li>경기</li>
+                            <li>강원</li>
+                            <li>충북</li>
+                            <li>충남</li>
+                            <li>경북</li>
+                            <li>경남</li>
+                            <li>전북</li>
+                            <li>전남</li>
+                            <li>제주</li>
+                        </ul>
+                        <ul class="hotPlace_area_map_ul_mobile">
+                            <li class="btn btn-secondary m-1">전국</li>
+                            <li class="btn btn-secondary m-1">서울</li>
+                            <li class="btn btn-secondary m-1">인천</li>
+                            <li class="btn btn-secondary m-1">대전</li>
+                            <li class="btn btn-secondary m-1">대구</li>
+                            <li class="btn btn-secondary m-1">광주</li>
+                            <li class="btn btn-secondary m-1">부산</li>
+                            <li class="btn btn-secondary m-1">울산</li>
+                            <li class="btn btn-secondary m-1">세종</li>
+                            <li class="btn btn-secondary m-1">경기</li>
+                            <li class="btn btn-secondary m-1">강원</li>
+                            <li class="btn btn-secondary m-1">충북</li>
+                            <li class="btn btn-secondary m-1">충남</li>
+                            <li class="btn btn-secondary m-1">경북</li>
+                            <li class="btn btn-secondary m-1">경남</li>
+                            <li class="btn btn-secondary m-1">전북</li>
+                            <li class="btn btn-secondary m-1">전남</li>
+                            <li class="btn btn-secondary m-1">제주</li>
+                        </ul>
+                    </div>
 
-						<!-- 핫플 이미지 영역 -->
-						<div class="hp_imgBox mb-3 ">
+                    <!-- 핫플 이미지 영역 -->
+                    <div class="hp_imgBox mb-3 ">
 
-							<div class="hp_img_content col-10 col-md-6 mx-auto" th:each="infoHome:${infoHome}">
-								<a th:href="@{'Event_view?id='+ ${infoHome.getEvent_num()}}"
-								class="">
-								<div class="hp_img"></div>
-								<img
-								th:src="@{'../img/info/' + ${infoHome.getEvent_thumbnail()}}"
-								alt="" class="hp_img"
-								>
-								<div class="hp_title">
-									<span th:text="${infoHome.getEvent_name()}">해솔리아CC</span>
-								</div>
-								</a>
-							</div>
-
-							
-						</div>
-
-					</div> <!-- home_dl_img_hotPlace -->
+                        <div class="hp_img_content col-10 col-md-6 mx-auto" th:each="infoHome:${infoHome}">
+                            <a th:href="@{'Event_view?id='+ ${infoHome.getEvent_num()}}"
+                               class="">
+                                <div class="hp_img"></div>
+                                <img
+                                        th:src="@{'../img/info/' + ${infoHome.getEvent_thumbnail()}}"
+                                        alt="" class="hp_img"
+                                >
+                                <div class="hp_title">
+                                    <span th:text="${infoHome.getEvent_name()}">해솔리아CC</span>
+                                </div>
+                            </a>
+                        </div>
 
 
-					<!-- AI콕콕 플래너 영역 -->
-					<!--	<div class="home_dl_img_AIPlaner">
-						<ul class="aiPlaner_list px-0 ">
-							<li class="pb-3"><a href="#">
-									<span class="best"></span>
-									<div class="aiPlaner_img"></div>
-									<div class="row aiPlaner_board">
-										<em>2박3일</em>
-										<div class="col-10 aiPlaner_text">
-											<strong>전주김제 2박 3일 여행</strong>
-											<p>전북 전주시 ~ 전분 김제시</p>
-											<span>만든날짜</span>
-											<span>2023. 11. 14.</span>
-										</div>
-										<div class="col-2 aiPlaner_profile">
-											<img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
-										</div>
-									</div>
-								</a></li>
+                    </div>
 
-							<li><a href="#">
-									<span class="best"></span>
-									<div class="aiPlaner_img"></div>
-									<div class="row aiPlaner_board">
-										<em>2박3일</em>
-										<div class="col-8 aiPlaner_text">
-											<strong>제주도 여행코스</strong>
-											<p>제주</p>
-											<span>만든날짜</span>
-											<span>2023. 11. 19.</span>
-										</div>
-										<div class="col-4 aiPlaner_profile">
-											<img class="img-fluid" src="../img/home/common/kakao_profile_02.png" alt="">
-										</div>
-									</div>
-								</a></li>
-
-							<li><a href="#">
-									<span class="best"></span>
-									<div class="aiPlaner_img"></div>
-									<div class="row aiPlaner_board">
-										<em>2박3일</em>
-										<div class="col-8 aiPlaner_text">
-											<strong>부산 여행코스</strong>
-											<p>부산</p>
-											<span>만든날짜</span>
-											<span>2023. 11. 21.</span>
-										</div>
-										<div class="col-4 aiPlaner_profile">
-											<img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
-										</div>
-									</div>
-								</a></li>
-						</ul>
-
-					</div>  home_dl_img_AIPlaner -->
-					<div class="f-carousel home_dl_img_AIPlaner " id="myCarousel" >
-
-						<div class="f-carousel__slide" th:each="CourseListHome:${CourseListHome}">
-							<li class="pb-3">
-<a th:href="@{'Course_view?num='+ ${CourseListHome.getCourse_num()}}"
-								class="">
-									<span class="best"></span>
-										 <img
-								th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}"
-								alt="" class="aiPlaner_img"
-								>
-									<div class="row aiPlaner_board">
-										<em th:text="${CourseListHome.getCourse_Interest()}">2박3일</em>
-										<div class="col-10 aiPlaner_text">
-											<strong th:text="${CourseListHome.getCourse_Name()}">전주김제 2박 3일 여행</strong>
-											<p th:text="${CourseListHome.getCourse_content()}">전북 전주시 ~ 전분 김제시</p>
-											<span>코스 길이</span>
-											<span th:text="${CourseListHome.getCourse_distance()}">2023. 11. 14.</span>
-										</div>
-										<div class="col-2 aiPlaner_profile">
-											<img class="img-fluid"  th:src="@{'../img/member_thumbnail/'+${CourseListHome.getMember_profileimage()}}" alt="">
-											
-										</div>
-									</div>
-								</a></li>
-						</div>
-						<!-- <div class="f-carousel__slide">
-							<li><a href="#">
-									<span class="best"></span>
-									<div class="aiPlaner_img"></div>
-									<div class="row aiPlaner_board">
-										<em>2박3일</em>
-										<div class="col-8 aiPlaner_text">
-											<strong>제주도 여행코스</strong>
-											<p>제주</p>
-											<span>만든날짜</span>
-											<span>2023. 11. 19.</span>
-										</div>
-										<div class="col-4 aiPlaner_profile">
-											<img class="img-fluid" src="../img/home/common/kakao_profile_02.png" alt="">
-										</div>
-									</div>
-								</a></li>
-						</div>
-						<div class="f-carousel__slide">
-							<li><a href="#">
-									<span class="best"></span>
-									<div class="aiPlaner_img"></div>
-									<div class="row aiPlaner_board">
-										<em>2박3일</em>
-										<div class="col-8 aiPlaner_text">
-											<strong>부산 여행코스</strong>
-											<p>부산</p>
-											<span>만든날짜</span>
-											<span>2023. 11. 21.</span>
-										</div>
-										<div class="col-4 aiPlaner_profile">
-											<img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
-										</div>
-									</div>
-								</a></li>
-						</div> -->
-
-					</div>
-				</div> <!-- home_dl_imgBox -->
-
-				<!-- datalab 컨텐츠 새로고침 버튼 영역 -->
-				<div class="row dl_refresh_buttonBox py-3 me-0">
-					<div class="col mt-4">
-						<div class="dl_refresh_button mx-auto hstack">
-							<img class="img-fluid" src="../img/home/main/btn_curation_refresh.png" alt="#">
-							<span>오늘의 피드 추천</span>
-							<span>오늘의 핫플 추천</span>
-							<span>코스 재추천</span>
-						</div>
-						<div class="dl_more_content hstack">
-							<a href="/feed" class="hstack">
-								<span class="me-2 f14">바로가기 <b> > </b></span>
-							</a>
-						</div>
-					</div>
-				</div>
+                </div> <!-- home_dl_img_hotPlace -->
 
 
-			</div> <!-- home_dl_content -->
+                <!-- AI콕콕 플래너 영역 -->
+                <!--	<div class="home_dl_img_AIPlaner">
+                    <ul class="aiPlaner_list px-0 ">
+                        <li class="pb-3"><a href="#">
+                                <span class="best"></span>
+                                <div class="aiPlaner_img"></div>
+                                <div class="row aiPlaner_board">
+                                    <em>2박3일</em>
+                                    <div class="col-10 aiPlaner_text">
+                                        <strong>전주김제 2박 3일 여행</strong>
+                                        <p>전북 전주시 ~ 전분 김제시</p>
+                                        <span>만든날짜</span>
+                                        <span>2023. 11. 14.</span>
+                                    </div>
+                                    <div class="col-2 aiPlaner_profile">
+                                        <img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
+                                    </div>
+                                </div>
+                            </a></li>
 
-			</div> <!-- home_data_labBox -->
-		</section> <!-- home_data_lab -->
-		<div class="w-100 py-5 my-5"></div><!-- 여백 박스 -->
-	<section class="home_info_data container my-5">
-		<div class="row justify-content-around gap-5 home_info_data_wrap text-center m-auto">
-			<div class="col-12 col-lg-5 home_info_data_img p-0 m-0 hstack ms-lg-5">
-				<img src="../img/home/main/home_info_data_img.png" class="img-fluid rounded-4 m-auto ms-lg-auto">
-			</div><!--home_info_data_img-->
-			<div class="col-11 col-lg-5 home_info_data_text text-start m-auto mt-3 mt-md-0">
-				<div class="fs-4 fw-bold"><a href="info" class="text-dark px-2 f22 highlight">오늘의 여행 소식</a></div>
-				<div class="fs-5 my-2 border-bottom py-2"><a href="" class="text-dark ps-3 f17">2024 여행 가는 달 | 대한민국 숙박 세일
-						페스타</a></div>
-				<div class="fs-5 my-2 border-bottom py-2"><a href="" class="text-dark ps-3 f17">캐리어 기자단 | '다님' 9기 모집</a>
-				</div>
-				<div class="fs-5 my-2 border-bottom py-2"><a href="" class="text-dark ps-3 f17">캐리어 대학생 기자단 | '트래블리더' 16기
-						모집</a></div>
-				<div class="fs-5 my-2 border-bottom py-2"><a href="" class="text-dark ps-3 f17">2024 제9기 영남 알프스 학교 수강생
-						모집</a></div>
-			</div><!--home_info_data_text-->
-		</div><!--home_info_data_wrap-->
-	</section><!--home_info_data-->
-	<div class="w-100 py-5 my-5"></div><!-- 여백 박스 -->
-	<!-- 검색 section -->	
-	<section class="home_search container-fluid p-0">
-	<div class="footer-radius"></div>
-	<div class="container">
-		<div class="row my-5 rounded-5 search-box-parent p-sm-4 p-md-5 me-0 m-auto justify-content-around">
-			<!-- 검색 창 -->
-			<div class="col-11 mx-auto my-5">
-				<form action="info_search" class="d-flex align-items-center justify-content-end" name="searchForm" id="searchForm">
-					
-					<input type="search" name="key" id="" class="border-0 bg-blur shadow-sm">
-				<button type="submit" class=" search-btn">
-					<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor"
-						class="bi bi-search position-absolute z-3 me-4" viewBox="0 0 16 16" style="cursor: pointer;">
-						<path
-							d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-					</svg>
-				</button>
-			
-				</form>
-			</div>
-			<!-- 검색 (좌) -->
-			<div class="col-12 col-lg-7 rounded-4 p-0">
-				<!--최근 검색-->
-				<div class="col-12 p-4 rounded-4 search-history bg-blur shadow-sm">
-					<p class="pb-3 fw-bold">최근 검색</p>
-					<div class="text-muted px-3 mb-4">
-						<button type="button" class="btn btn-light rounded-pill px-3 p-2 mb-2">제주도</button>
-						<button type="button" class="btn btn-light rounded-pill px-3 p-2 mb-2">독도</button>
-						<button type="button" class="btn btn-light rounded-pill px-3 p-2 mb-2">여수</button>
-					</div>
-					<hr>
-					<span class="text-center d-block text-muted f13">전체 삭제</span>
-				</div>
-				<!--실시간 인기순위-->
-				<div class="col-12 mt-3 mt-lg-5 p-4 rounded-4 search-history bg-blur shadow-sm">
-					<p class="fw-bold">실시간 인기 검색</p>
-					<div class="px-1 mb-3">
-						<ol>
-							<li class="p-1 py-2"><span>1.</span> 수원</li>
-							<li class="p-1 py-2"><span>2.</span> 방화수류정</li>
-							<li class="p-1 py-2"><span>3.</span> 호수</li>
-							<li class="p-1 py-2"><span>4.</span> 광교</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-			<!-- (우) -->
-			<div
-				class="col-12 mt-3 col-lg-4 mt-lg-0 search-img-parent bg-blur rounded-4 p-4 p-sm-3 p-md-4 shadow-sm">
-				<strong class="d-block mb-3">원하는 여행지를 찾지 못하셨나요?</strong>
-				<span class="badge rounded-pill text-bg-info text-white mb-1">AD</span>
-				<!--AD 이미지-->
-				<img src="../img/home/main/adimg.jpeg" class="img-fluid rounded-4" alt="">
-				<div class="d-flex align-items-center search-img mb-4">
-					<i class="fa-solid fa-location-dot float-start me-2 text-white"></i>
-					<span class="float-start text-white">외도 보타니아</span>
-				</div>
-			</div>
-		</div>
-		</div>
-	</div>
-	</section>
-	
+                        <li><a href="#">
+                                <span class="best"></span>
+                                <div class="aiPlaner_img"></div>
+                                <div class="row aiPlaner_board">
+                                    <em>2박3일</em>
+                                    <div class="col-8 aiPlaner_text">
+                                        <strong>제주도 여행코스</strong>
+                                        <p>제주</p>
+                                        <span>만든날짜</span>
+                                        <span>2023. 11. 19.</span>
+                                    </div>
+                                    <div class="col-4 aiPlaner_profile">
+                                        <img class="img-fluid" src="../img/home/common/kakao_profile_02.png" alt="">
+                                    </div>
+                                </div>
+                            </a></li>
 
-	</div> <!-- home_wrapper -->
-	<!--footer-->
-	<div th:replace="~{footer/footer::footer}"></div>
-	
-	<!-- 알림창 -->
-	<script type="text/javascript">
-        $(document).ready(function() {
-            // URL에서 msg 매개변수 가져오기
-            const urlParams = new URLSearchParams(window.location.search);
-            const msg = urlParams.get('msg');
-            const name = urlParams.get('name');
-            
-         // 메시지가 존재할 경우 toast로 표시
-            if (msg !== null && msg !== "") {
-                let message;
-                if(msg == 1){
-                	$('#warnImg').hide();
-                    message = name+"님 환영합니다 🖐";
-                }
-                
-                // 부트스트랩 toast 트리거
-                $('.my-toast-body').text(message);
-                $('.my-toast').toast('show');
+                        <li><a href="#">
+                                <span class="best"></span>
+                                <div class="aiPlaner_img"></div>
+                                <div class="row aiPlaner_board">
+                                    <em>2박3일</em>
+                                    <div class="col-8 aiPlaner_text">
+                                        <strong>부산 여행코스</strong>
+                                        <p>부산</p>
+                                        <span>만든날짜</span>
+                                        <span>2023. 11. 21.</span>
+                                    </div>
+                                    <div class="col-4 aiPlaner_profile">
+                                        <img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
+                                    </div>
+                                </div>
+                            </a></li>
+                    </ul>
+
+                </div>  home_dl_img_AIPlaner -->
+                <div class="f-carousel home_dl_img_AIPlaner " id="myCarousel">
+
+                    <div class="f-carousel__slide" th:each="CourseListHome:${CourseListHome}">
+                        <li class="pb-3">
+                            <a th:href="@{'Course_view?num='+ ${CourseListHome.getCourse_num()}}"
+                               class="">
+                                <span class="best"></span>
+                                <img
+                                        th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}"
+                                        alt="" class="aiPlaner_img"
+                                >
+                                <div class="row aiPlaner_board">
+                                    <em th:text="${CourseListHome.getCourse_Interest()}">2박3일</em>
+                                    <div class="col-10 aiPlaner_text">
+                                        <strong th:text="${CourseListHome.getCourse_Name()}">전주김제 2박 3일 여행</strong>
+                                        <p class="text-truncate" th:text="${CourseListHome.getCourse_content()}">전북 전주시 ~ 전분 김제시</p>
+                                        <span>코스 길이</span>
+                                        <span th:text="${CourseListHome.getCourse_distance()}">2023. 11. 14.</span>
+                                    </div>
+                                    <div class="col-2 aiPlaner_profile">
+                                        <img class="img-fluid"
+                                             th:src="@{'../img/member_thumbnail/'+${CourseListHome.getMember_profileimage()}}"
+                                             alt="">
+
+                                    </div>
+                                </div>
+                            </a></li>
+                    </div>
+                    <!-- <div class="f-carousel__slide">
+                        <li><a href="#">
+                                <span class="best"></span>
+                                <div class="aiPlaner_img"></div>
+                                <div class="row aiPlaner_board">
+                                    <em>2박3일</em>
+                                    <div class="col-8 aiPlaner_text">
+                                        <strong>제주도 여행코스</strong>
+                                        <p>제주</p>
+                                        <span>만든날짜</span>
+                                        <span>2023. 11. 19.</span>
+                                    </div>
+                                    <div class="col-4 aiPlaner_profile">
+                                        <img class="img-fluid" src="../img/home/common/kakao_profile_02.png" alt="">
+                                    </div>
+                                </div>
+                            </a></li>
+                    </div>
+                    <div class="f-carousel__slide">
+                        <li><a href="#">
+                                <span class="best"></span>
+                                <div class="aiPlaner_img"></div>
+                                <div class="row aiPlaner_board">
+                                    <em>2박3일</em>
+                                    <div class="col-8 aiPlaner_text">
+                                        <strong>부산 여행코스</strong>
+                                        <p>부산</p>
+                                        <span>만든날짜</span>
+                                        <span>2023. 11. 21.</span>
+                                    </div>
+                                    <div class="col-4 aiPlaner_profile">
+                                        <img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
+                                    </div>
+                                </div>
+                            </a></li>
+                    </div> -->
+
+                </div>
+            </div> <!-- home_dl_imgBox -->
+
+            <!-- datalab 컨텐츠 새로고침 버튼 영역 -->
+            <div class="row dl_refresh_buttonBox py-3 me-0">
+                <div class="col mt-4">
+                    <div class="dl_refresh_button mx-auto hstack">
+                        <img class="img-fluid" src="../img/home/main/btn_curation_refresh.png" alt="#">
+                        <span>오늘의 피드 추천</span>
+                        <span>오늘의 핫플 추천</span>
+                        <span>코스 재추천</span>
+                    </div>
+                    <div class="dl_more_content hstack">
+                        <a href="/feed" class="hstack">
+                            <span class="me-2 f14">바로가기 <b> > </b></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- home_dl_content -->
+
+    </section> <!-- home_data_lab -->
+    <div class="w-100 py-5 my-5"></div><!-- 여백 박스 -->
+    <section class="home_info_data container my-5">
+        <div class="row justify-content-around gap-5 home_info_data_wrap text-center m-auto">
+            <div class="col-12 col-lg-5 home_info_data_img p-0 m-0 hstack ms-lg-5">
+                <img src="../img/home/main/home_info_data_img.png" class="img-fluid rounded-4 m-auto ms-lg-auto">
+            </div><!--home_info_data_img-->
+            <div class="col-11 col-lg-5 home_info_data_text text-start m-auto mt-3 mt-md-0">
+                <div class="fs-4 fw-bold"><a href="info" class="text-dark px-2 f22 highlight">오늘의 여행 소식</a></div>
+                <div class="fs-5 my-2 border-bottom py-2"><a href="" class="text-dark ps-3 f17">2024 여행 가는 달 | 대한민국 숙박
+                    세일
+                    페스타</a></div>
+                <div class="fs-5 my-2 border-bottom py-2"><a href="" class="text-dark ps-3 f17">캐리어 기자단 | '다님' 9기 모집</a>
+                </div>
+                <div class="fs-5 my-2 border-bottom py-2"><a href="" class="text-dark ps-3 f17">캐리어 대학생 기자단 | '트래블리더'
+                    16기
+                    모집</a></div>
+                <div class="fs-5 my-2 border-bottom py-2"><a href="" class="text-dark ps-3 f17">2024 제9기 영남 알프스 학교 수강생
+                    모집</a></div>
+            </div><!--home_info_data_text-->
+        </div><!--home_info_data_wrap-->
+    </section><!--home_info_data-->
+    <div class="w-100 py-5 my-5"></div><!-- 여백 박스 -->
+    <!-- 검색 section -->
+    <section class="home_search container-fluid p-0">
+        <div class="container">
+            <div class="row my-5 rounded-5 search-box-parent p-sm-4 p-md-5 me-0 m-auto justify-content-around">
+                <!-- 검색 창 -->
+                <div class="col-11 mx-auto my-5">
+                    <form action="info_search" class="d-flex align-items-center justify-content-end" name="searchForm"
+                          id="searchForm">
+
+                        <input type="search" name="key" id="" class="border-0 shadow-s">
+                        <button type="submit" class=" search-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor"
+                                 class="bi bi-search position-absolute z-3 me-4" viewBox="0 0 16 16"
+                                 style="cursor: pointer;">
+                                <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                            </svg>
+                        </button>
+
+                    </form>
+                </div>
+                <!-- 검색 (좌) -->
+                <div class="col-12 col-lg-7 rounded-4 p-0">
+                    <!--최근 검색-->
+                    <!-- <div class="col-12 p-4 rounded-4 search-history bg-blur shadow-sm">
+                        <p class="pb-3 fw-bold">최근 검색</p>
+                        <div class="text-muted px-3 mb-4">
+                            <button type="button" class="btn btn-light rounded-pill px-3 p-2 mb-2">제주도</button>
+                            <button type="button" class="btn btn-light rounded-pill px-3 p-2 mb-2">독도</button>
+                            <button type="button" class="btn btn-light rounded-pill px-3 p-2 mb-2">여수</button>
+                        </div>
+                        <hr>
+                        <span class="text-center d-block text-muted f13">전체 삭제</span>
+                    </div>
+                    실시간 인기순위
+                    <div class="col-12 mt-3 mt-lg-5 p-4 rounded-4 search-history bg-blur shadow-sm">
+                        <p class="fw-bold">실시간 인기 검색</p>
+                        <div class="px-1 mb-3">
+                            <ol>
+                                <li class="p-1 py-2"><span>1.</span> 수원</li>
+                                <li class="p-1 py-2"><span>2.</span> 방화수류정</li>
+                                <li class="p-1 py-2"><span>3.</span> 호수</li>
+                                <li class="p-1 py-2"><span>4.</span> 광교</li>
+                            </ol>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- (우) -->
+                <!-- <div
+                    class="col-12 mt-3 col-lg-4 mt-lg-0 search-img-parent bg-blur rounded-4 p-4 p-sm-3 p-md-4 shadow-sm">
+                    <strong class="d-block mb-3">원하는 여행지를 찾지 못하셨나요?</strong>
+                    <span class="badge rounded-pill text-bg-info text-white mb-1">AD</span>
+                    AD 이미지
+                    <img src="../img/home/main/adimg.jpeg" class="img-fluid rounded-4" alt="">
+                    <div class="d-flex align-items-center search-img mb-4">
+                        <i class="fa-solid fa-location-dot float-start me-2 text-white"></i>
+                        <span class="float-start text-white">외도 보타니아</span>
+                    </div>
+                </div> -->
+
+
+            </div>
+        </div>
+    </section>
+</div> <!-- home_wrapper -->
+<!--footer-->
+<div th:replace="~{footer/footer::footer}"></div>
+
+<!-- 알림창 -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        // URL에서 msg 매개변수 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const msg = urlParams.get('msg');
+        const name = urlParams.get('name');
+
+        $('.warnImg').hide();
+        
+        // 메시지가 존재할 경우 toast로 표시
+        if (msg !== null && msg !== "") {
+            let message;
+            if (msg == 1) {
+                message = name + "님 환영합니다 🖐";
             }
-        });
-    </script>
-	
-	<script>
-		$(document).ready(function () {//시간나면 수정
-			$(".carousel-inner").on("mousedown", function (e) {
-				var startX = e.pageX;
-				$(this).on("mousemove", function (e) {
-					var movementX = e.pageX - startX;
-					if (Math.abs(movementX) > 10) { // Adjust this threshold as needed
-						if (movementX > 0) {
-							$(this).carousel("prev");
-						} else {
-							$(this).carousel("next");
-						}
-						$(this).off("mousemove");
-					}
-				});
-			});
-			$(document).on("mouseup", function () {
-				$(".carousel-inner").off("mousemove");
-			});
 
-		});
-	</script>
-	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.umd.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.autoplay.umd.js"></script>
-	<script>
-		new Carousel(document.getElementById("myCarousel"), {
-			Autoplay: {
-				timeout: 2000
-			}
-		}, {
-			Autoplay
-		});
-	</script>
-	<script th:if="${confirmMessage != null}">
+            // 부트스트랩 toast 트리거
+            $('.my-toast-body').text(message);
+            $('.my-toast').toast('show');
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {//시간나면 수정
+        $(".carousel-inner").on("mousedown", function (e) {
+            var startX = e.pageX;
+            $(this).on("mousemove", function (e) {
+                var movementX = e.pageX - startX;
+                if (Math.abs(movementX) > 10) { // Adjust this threshold as needed
+                    if (movementX > 0) {
+                        $(this).carousel("prev");
+                    } else {
+                        $(this).carousel("next");
+                    }
+                    $(this).off("mousemove");
+                }
+            });
+        });
+        $(document).on("mouseup", function () {
+            $(".carousel-inner").off("mousemove");
+        });
+
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.autoplay.umd.js"></script>
+<script>
+    new Carousel(document.getElementById("myCarousel"), {
+        Autoplay: {
+            timeout: 2000
+        }
+    }, {
+        Autoplay
+    });
+</script>
+<script th:if="${confirmMessage != null}">
     var confirmResult = confirm("[[${confirmMessage}]]");
     if (confirmResult) {
         var id = document.querySelector('.hiddenId').value;
-        window.location.href = "/mypage?id="+id;
+        window.location.href = "/mypage?id=" + id;
     }
-    
- 
+
+
 </script>
 
 
 <script>
-    document.getElementById('searchmove').addEventListener('click', function() {
+    document.getElementById('searchmove').addEventListener('click', function () {
         // 폼으로 스크롤 이동
-        document.getElementById('searchForm').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('searchForm').scrollIntoView({behavior: 'smooth'});
     });
 </script>
 
-	
+
 </body>
 
 </html>
