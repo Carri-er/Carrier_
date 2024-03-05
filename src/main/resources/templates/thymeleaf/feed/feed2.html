@@ -4,6 +4,7 @@
 </div>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+
 <style type="text/css">
     .css_test {
         background-image : url('../img/feed/dogs.gif');
@@ -19,27 +20,41 @@
 
 	<!-- 삭제 모달 -->
 	<div th:replace="~{alert/del_modal::div}">
-		<div th:fragment="modalButton">
-			<a class="dropdown-item active"
-				th:href="@{'/delFeed?num=' + ${feed.Feed_num}}">삭제</a>
-		</div>
+		<!-- 		
+			<a th:include="~{alert/del_modal::modalLink}" class="dropdown-item active" th:href="@{'/delFeed?num=' + ${feed.Feed_num}}">
+				삭제
+			</a> 
+		-->
 	</div>
-
+	
 	<div id="feed" class="container-fluid mt-4 mb-5">
 		<div class="px-2 pt-3">
 			<!--filtering-->
 			<div class="row px-0 hstack">
 				<div class="feed-filter col-8">
-					<div class="" id="list-tab" role="tablist">
-						<a class="btn rounded-pill px-3 active" id="feed-all-tag"
-							data-bs-toggle="list" href="/feed" role="tab"
-							aria-controls="feed-all"> 전체 </a><a class="btn rounded-pill px-3"
-							id="feed-theme-tag" data-bs-toggle="list" href="#feed-theme"
-							role="tab" aria-controls="feed-theme"> 테마여행 🌴 </a><a
-							class="btn rounded-pill px-3" id="feed-area-tag"
-							data-bs-toggle="list" href="#feed-area" role="tab"
-							aria-controls="feed-area"> 지역 🗺️ </a>
-					</div>
+					<ul class="d-flex m-0 p-0 gap-1" id="list-tab" role="tablist">
+						<li class="nav-item " role="presentation">
+							<button class="nav-link btn rounded-pill py-2 px-3 active"
+								id="pills-home-tab" data-bs-toggle="pill"
+								data-bs-target="#pills-home" type="button" role="tab"
+								aria-controls="pills-home" aria-selected="true">
+								<a href="/feed"> 전체 </a>
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link btn rounded-pill py-2 px-3" id="pills-profile-tab"
+								data-bs-toggle="pill" data-bs-target="#feed-theme"
+								type="button" role="tab" aria-controls="feed-theme"
+								aria-selected="false"> 테마여행 🌴 
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link btn rounded-pill py-2 px-3" id="pills-contact-tab"
+								data-bs-toggle="pill" data-bs-target="#feed-area"
+								type="button" role="tab" aria-controls="feed-area"
+								aria-selected="false"> 지역 🗺️ </button>
+						</li>
+					</ul>
 				</div>
 				<!--상단 우측 드롭다운-->
 				<div class="col d-flex justify-content-end align-items-center">
@@ -57,10 +72,10 @@
 			<!--hstack-->
 		</div>
 		<hr>
-		<div class="container feed-filter position-realative px-3 ms-sm-2">
+		<div class="container feed-filter position-absolute px-3 ms-sm-2">
 			<div class="row">
-				<div class="col-10 col-md-12">
-					<div class="tab-content" id="nav-tabContent">
+				<div class="col-12 col-md-12">
+					<div class="tab-content position-relative pb-2" id="nav-tabContent">
 						<!--테마 측 해시태그-->
 						<div class="tab-pane fade" id="feed-theme" role="tabpanel"
 							aria-labelledby="feed-theme-tag"
@@ -215,12 +230,15 @@
 			</div>
 		</div>
 		<!--------------------------------------------feed box Parent------------------------------------------>
-		<div class="m-auto">
+		<div class="m-auto my-5 my-md-3 pb-5">
 			<div
 				class="card-columns justify-content-center align-items-start m-0 row-box">
 				<!--feed box Start-->
 				<div class="col feed-box m-0 my-3 px-0 no-gutters"
 					th:each="feed : ${feedList}">
+						<form action="/delFeed" id="deleteFeedForm">
+							<input type="hidden" name="num" th:value="${feed.Feed_num}" />
+						</form>
 					<!--feed box top-->
 					<div class="col-12 hstack feed-box-top py-3 px-3 z-3">
 						<img
@@ -232,26 +250,28 @@
 							<span class="float-start fw-bold f15" th:text="${feed.Member_Id}">박검지</span><br>
 							<span class="float-start text-muted f13">하이라이트</span>
 							<span class="float-start text-muted f13 ms-3 recentSort" th:text="${feed.getFeed_updateday()}"></span>
-
-
 						</div>
 						<!-- 우측 버튼 -->
 						<div class="col-3 d-flex justify-content-end align-items-center">
 							<a th:href="@{'/feed_show?num='+${feed.Feed_num}}"
 								class="btn btn-sm btn-dark"> 전체 </a>
 							<!-- 수정 및 삭제 버튼  -->
-							<div th:if="${session.Member_Id==feed.Member_Id}">
+							<div th:if="${session.Member_Id==feed.Member_Id or session.Member_Id=='admin'}">
 								<div class="f17 hstack" id="feed-right">
 									<a
 										class="dropdown-toggle text-center m-0 ps-2 pt-1 d-block d-flex justify-content-end"
 										href="#" role="button" id="dropdownMenuLink"
 										data-bs-toggle="dropdown" aria-expanded="false"><i
-										class="fi fi-rr-menu-dots-vertical"></i> </a>
+										class="fi fi-rr-menu-dots-vertical"></i>
+									</a>
 									<ul class="dropdown-menu dropdown-menu-dark">
-										<li data-bs-toggle="modal" data-bs-target="#feed_del_Modal"><a
-											class="dropdown-item">삭제</a></li>
-										<li><a class="dropdown-item"
-											th:href="@{'/feed_update?num='+${feed.Feed_num}}">수정</a></li>
+										<li data-bs-toggle="modal" data-bs-target="#feed_del_Modal">
+											<a class="dropdown-item">삭제</a>
+										</li>
+										<li th:if="${session.Member_Id==feed.Member_Id}">
+											<a class="dropdown-item" 
+												th:href="@{'/feed_update?num='+${feed.getFeed_num()}}">수정</a>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -336,7 +356,7 @@
 		</div>
 		<!--padding-->
 	</div>
-	<div class="css_test"></div>
+	<!-- <div class="css_test"></div> -->
 	<!--container-->
 	<div th:replace="~{footer/footer::footer}"></div>
 	<!-- 좋아요 비동기 -->
@@ -407,7 +427,6 @@
 		};
 	</script>
 	
-	
 
 	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 	<!-- isotope sorting -->
@@ -449,14 +468,24 @@
 	        });
 	    });
 	</script>
+
+	<!-- DEL모달 -->
+	<script>
+		function func_delModalBtn(){
+	        document.getElementById('deleteFeedForm').submit();
+	     }
+	</script>
+	
+
 	<script type="text/javascript">
-
-    function css_test(){
-        $('.css_test').css({'background-position':'-=1'}); // 배경이미지를 왼쪽으로 1px 씩 계속 움직임
-    }
-    setInterval(css_test, 10);
-
-</script>
-
+	    function css_test(){
+	        $('.css_test').css({'background-position':'-=1'}); // 배경이미지를 왼쪽으로 1px 씩 계속 움직임
+	    }
+	    setInterval(css_test, 10);
+	</script>
+	
+	<script>
+	
+	</script>
 </body>
 </html>
