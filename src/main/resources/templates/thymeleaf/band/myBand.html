@@ -47,7 +47,7 @@
 	                           th:if="${ session.Member_Id ne myBandList.getBand_admin() and  checkMember ne null}">
 	                           <a
 	                              th:href="@{'withdrawalMyBand?bandUrl='+${myBandList.getBand_code()}}"
-	                              class="myBand_memberBandSet py-1"
+	                              class="myBand_memberBandSet py-1 hstack d-flex float-end"
 	                              onclick="return func_bandWithdrawal() ">밴드 탈퇴하기</a>
 	                        </th:block>
 	                     </th:block>
@@ -65,7 +65,7 @@
 	                  <!-- 가입한 밴드 확인 영역 -->
 	                  <th:block th:if="${checkMember == null}">
 	                     <form action="addBandMember" method="post" name="addMember_band">
-	                        <div class="myBand_write_btn">
+	                        <div class="myBand_write_btn rounded-3 btn-main">
 	                           <input name="bandCode" type="hidden" th:value="${myBandList.getBand_code()}" />
 	                           <input name="joinMemberId" type="hidden" th:value="${session.Member_Id}" />
 	                           <a href="javascript:addMember_band.submit();" >
@@ -210,7 +210,7 @@
 										</div>
 										<div class="ms-1 col">
 											<span class="f12" th:text="${bandLoginMemberDto.getMember_Id}"></span>
-											<span class="f12 ms-5" th:text="| 작성 일자 : ${bandFeedCommentAll.getBandFeed_comment_writeTime()} |"></span>
+											<span class="f12 ms-5" th:text="| 작성 시간 : ${bandFeedCommentAll.getBandFeed_comment_writeTime()} |"></span>
 											<div class="w-100 "></div>
 											<span class="f13 text-truncate " th:text="${bandFeedCommentAll.getBand_feedComment_content()}"></span>
 										</div>

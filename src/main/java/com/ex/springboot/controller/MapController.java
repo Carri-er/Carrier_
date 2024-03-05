@@ -61,13 +61,8 @@ public class MapController {
 	
 	@RequestMapping(value = "/getDistance")
 	@ResponseBody
-	public List<MapDistanceDTO> getDistance(@RequestBody MapDistanceDTO[] data, Model model,
-			 @RequestParam("offset") String offset,
-             @RequestParam("limit") String limit) {
+	public List<MapDistanceDTO> getDistance(@RequestBody MapDistanceDTO[] data, Model model) {
 		// 클라이언트로부터 받은 데이터를 처리하여 리스트에 저장합니다.
-		
-		System.out.println("offset"+offset);
-		System.out.println("limit"+limit);
 		List<MapDistanceDTO> distanceList = new ArrayList<>();
 
 		for (MapDistanceDTO mapDistanceDTO : data) {
@@ -79,22 +74,18 @@ public class MapController {
 				distanceList.add(mapDistanceDTO);
 			}
 		}
-		
-		List<MapDistanceDTO> paging_distanceList = new ArrayList<>();
-		
+
 		// 거리를 기준으로 정렬합니다.
 		Collections.sort(distanceList);
-		int num_offset = Integer.parseInt(offset);
-		int num_limit = Integer.parseInt(limit);
 		
-		for (int i = num_offset; i < Math.min(num_offset + num_limit, distanceList.size()); i++) {
-			paging_distanceList.add(distanceList.get(i));
-        }
 		// 결과를 반환합니다.
+		int start_indexNum = 0; 
+		int end_indexNum = 20 ;
 		
 		
-		return paging_distanceList;
+		return distanceList;
 	}
+
 	
 	
 	

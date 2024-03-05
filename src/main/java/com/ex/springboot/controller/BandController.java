@@ -92,7 +92,7 @@ public class BandController {
 		
 		return "thymeleaf/band/myBand";
 	}
-	
+
 	//밴드 피드 세부 페이지
 	@RequestMapping("/bandFeedView")
 	public String bandFeedView(Model model, HttpServletRequest request,HttpSession session) {
@@ -104,16 +104,17 @@ public class BandController {
 		if( session.getAttribute("Member_Id") != null) {
 			String loginId = (String) session.getAttribute("Member_Id");
 			model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
-			model.addAttribute("bandLoginMemberDto", loginId);
+			model.addAttribute("bandLoginMemberDto", bandDao.bandLoginMemberDto(loginId));
 		}
 		
-		model.addAttribute("myBandList",bandDao.bandFeedViewItem(num_band_feed_num));
+		model.addAttribute("myBandList",bandDao.myBand(num_band_code));
 		
+		//model.addAttribute("myBandFeedList",bandDao.bandFeedList(band_code));
 		
 		//model.addAttribute(band_code, bandDao.bandFeedCommentCount());
+		model.addAttribute("myBandFeedList",bandDao.bandFeedViewItem(num_band_feed_num));
 		
-		
-		model.addAttribute("bandUrl", num_band_code);
+		model.addAttribute("bandUrl", band_code);
 		model.addAttribute("bandFeedCommentAll", bandDao.bandFeedCommentAll());
 		
 		
@@ -144,7 +145,7 @@ public class BandController {
 			
 			return "thymeleaf/band/myBand_member";
 		}
-
+		
 //	밴드 만들기 페이지로 이동
 	@RequestMapping("/bandCreate")
 	public String bandCreate(HttpSession session, Model model) {
@@ -320,6 +321,38 @@ public class BandController {
 			return go;
 		}
 		
+		//밴드 피드 세부 에서 댓글 삭제
+		@RequestMapping("/deleteFeedViewComment")
+		public String deleteFeedViewComment(Model model, HttpServletRequest request) {
+			String bandfeedCommentnum = request.getParameter("bandfeedCommentnum");
+			String band_code = request.getParameter("bandUrl");
+			String band_feed_num = request.getParameter("feednum");
+			
+			int num_band_code = Integer.parseInt(band_code);
+			int num_band_feed_num = Integer.parseInt(band_feed_num);
+			int num_bandfeedCommentnum = Integer.parseInt(bandfeedCommentnum);
+			
+			bandDao.band_feedComment_del(num_bandfeedCommentnum);
+			
+			return "redirect:bandFeedView?bandUrl="+num_band_code+"&feednum="+num_band_feed_num;
+		}
+		
+		@RequestMapping("/updateFeedViewComment")
+		public String updateFeedViewComment(Model model, HttpServletRequest request) {
+			String bandfeedCommentnum = request.getParameter("bandfeedCommentnum");
+			String band_code = request.getParameter("bandUrl");
+			String band_feed_num = request.getParameter("feednum");
+			String bandFeed_commentContent = request.getParameter("bandFeed_commentContent");
+			
+			int num_band_code = Integer.parseInt(band_code);
+			int num_band_feed_num = Integer.parseInt(band_feed_num);
+			int num_bandfeedCommentnum = Integer.parseInt(bandfeedCommentnum);
+			
+			
+			bandDao.band_fedComment_update(bandFeed_commentContent, num_bandfeedCommentnum);
+			
+			return "redirect:bandFeedView?bandUrl="+num_band_code+"&feednum="+num_band_feed_num;
+		}
 		
 		//밴드 멤버로 가입하기 
 		@RequestMapping("/addBandMember")
@@ -360,7 +393,6 @@ public class BandController {
 		@RequestMapping("/band_update")
 		public String bandUpdate(Model model, HttpServletRequest request,
 				@RequestParam("band_thumnail") MultipartFile file) {
-
 			String str_band_code = request.getParameter("bandUrl");
 			int num_band_code = Integer.parseInt(str_band_code);
 			String band_thumnail = request.getParameter("band_thumnail");
@@ -372,10 +404,10 @@ public class BandController {
 			System.out.println("origin_band_thumnail" + origin_band_thumnail);
 
 			String go = "redirect:myBand?bandUrl=" + str_band_code;
-
+			
 			try {
 
-				if ( Objects.equals(file, null ) ) {
+				if ( file.isEmpty() ) {
 					bandDao.bandInfoUpdate(origin_band_thumnail, band_name, band_content, num_band_code);
 					
 					return go;
@@ -394,7 +426,7 @@ public class BandController {
 
 					model.addAttribute("msg", fileNameAndPath);
 					model.addAttribute("fileName", fileNames); // 밴드 대표 이미지 이름 저장.
-
+					System.out.println("밴드 수정 - 파일 이름 : "+ fileNames.toString());
 					bandDao.bandInfoUpdate(fileNames.toString(), band_name, band_content, num_band_code);
 
 				}
@@ -520,6 +552,22 @@ public class BandController {
 			bandDao.band_feed_commentWrite(num_band_feed_num, loginId, band_feedComment_content);
 			
 			return "redirect:myBand?bandUrl="+num_bandCode;
+		}
+		
+		@RequestMapping("/myband_feedView_commentWrite")
+		public String myband_feedView_commentWrite(Model model, HttpServletRequest request, HttpSession session) {
+			String loginId = (String)session.getAttribute("Member_Id");
+			String str_band_feed_num = request.getParameter("commentBandUrl");
+			String band_feedComment_content = request.getParameter("band_feedComment_content");
+			String str_bandCode = request.getParameter("bandUrl");
+			
+			int num_band_feed_num = Integer.parseInt(str_band_feed_num);
+			int num_bandCode =  Integer.parseInt(str_bandCode);
+			
+			
+			bandDao.band_feed_commentWrite(num_band_feed_num, loginId, band_feedComment_content);
+			
+			return "redirect:bandFeedView?bandUrl="+num_bandCode+"&feednum="+num_band_feed_num;
 		}
 		
 		

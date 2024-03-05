@@ -23,7 +23,7 @@ public interface IBandDAO {
 	public List<BandDTO> bandList();
 	
 	//밴드 피드 세부 보기
-	public BandFeedDTO bandFeedViewItem(int band_feed_num);
+	public List<BandFeedDTO> bandFeedViewItem(int band_feed_num);
 	
 	//생성된 밴드 랜덤으로 6개 출력 
 	public List<BandDTO> randomBandList();
@@ -157,4 +157,9 @@ public interface IBandDAO {
 				@Param("band_feedComment_content") String band_feedComment_content
 			);
 	
+	//밴드 피드 댓글 삭제
+	public int band_feedComment_del(int band_feedComment_num);
+	
+	//밴드 피드 댓글 수정
+	public int band_fedComment_update(String band_feedComment_content, int band_feedComment_num);
 }

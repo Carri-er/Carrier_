@@ -141,6 +141,7 @@ div.myBand_content_item_content{
 	max-height : 500px;
 	overflow : hidden;
 }
+
 div.myBand_content_item_writer_info{
 	
 }
@@ -239,3 +240,19 @@ div.bandFeedCommentAllBox{
 	height: 50px;
 	overflow : hidden;
 }
+
+
+/*************************
+	 밴드 세부 페이지 스타일 (bandFeedView) 
+*************************/
+/* 밴드 세부 페이지 댓글리스트 스타일 */
+div.bandFeedViewCommentAll{
+	border-bottom: 1px solid lightgray;
+}
+div.myBand_feedView_content_item_content{
+	padding : 30px 0px;
+	max-height : 1500px;
+	overflow-y : scroll;
+}
+/* 밴드 세부 페이지 댓글 점세개 스타일 */
+

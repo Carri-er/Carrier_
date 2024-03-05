@@ -18,6 +18,5 @@ public class MapDistanceDTO implements Comparable<MapDistanceDTO> {
 	        return Double.compare(distance1, distance2);
 	    }
 	 
-	 private String offset;
-	 private String limit;
+
 }
