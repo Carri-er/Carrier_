@@ -208,3 +208,7 @@ a.indent {
 .z-5{
 	z-index: 1055;
 }
+
+.letter-spacing{
+	letter-spacing: -0.8px;
+}

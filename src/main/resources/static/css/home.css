@@ -115,6 +115,11 @@ div.crousel_textArea>a::after {
 	margin-left: 100px;
 }
 
+.carousel-control-next-m, .carousel-control-prev-m{
+	z-index: 5;
+    width: 9%;
+}
+
 /********************************
    두번째 섹션 Datalab 
 *********************************/
@@ -704,15 +709,6 @@ div.home_band_recomand_text>span {
 /********* Fonts Face CSS End **********/
 
 /******* Common Element CSS Start ******/
-* {
-	margin: 0px;
-	padding: 0px;
-}
-
-body {
-	font-family: "Roboto", sans-serif;
-	font-size: 16px;
-}
 
 .clear {
 	clear: both;
@@ -738,10 +734,6 @@ a {
 a:focus, a:active, a:visited, a:hover {
 	text-decoration: none;
 	outline: none;
-}
-
-a:hover {
-	color: #e73700;
 }
 
 h2 {
@@ -800,9 +792,6 @@ button {
 	cursor: default;
 }
 
-.owl-theme .owl-nav.disabled+.owl-dots {
-	margin-top: 10px;
-}
 
 .owl-theme .owl-dots {
 	text-align: center;
@@ -872,7 +861,7 @@ button.owl-dot{
 }
 
 .game-section .owl-stage {
-	margin: 15px 0;
+	margin-top: 15px;
 	display: flex;
 	display: -webkit-flex;
 }
@@ -948,6 +937,11 @@ button.owl-dot{
 	position: relative;
 	z-index: 5;
 }
+
+.owl-carousel a:hover{
+	color: var(--main) !important;
+}
+
 /******** Middle section CSS End *******/
 
 /***** responsive css Start ******/

@@ -142,3 +142,9 @@ nav .navbar-toggler {
     left: -50%;
     margin-top: var(--bs-dropdown-spacer);
 }
+
+.nav-search-recommend > *:hover {
+	background: var(--gray);
+	border-radius: 5px;
+	color: var(--dark);
+}

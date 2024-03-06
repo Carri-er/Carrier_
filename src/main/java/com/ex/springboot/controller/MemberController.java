@@ -222,27 +222,30 @@ public class MemberController {
 	public String mypage(HttpServletRequest request, Model model) {
 		String id = request.getParameter("id");
 		
-		if(request.getParameter("id").equals("admin")) {
-			return "redirect:/MemberList";
-		}
+		/*
+		 * if(request.getParameter("id").equals("admin")) { return
+		 * "redirect:/MemberList"; }
+		 */
 		
 		model.addAttribute("loginMember", member_dao.memberList(id));
-		model.addAttribute("feed", feed_dao.feedList_login(id));
+		model.addAttribute("feed", feed_dao.feedList_mypage(id));
 		model.addAttribute("course", AiDAO.Course_select4(id));
 		System.out.println(AiDAO.Course_select4(id).size() + " --리스트 사이즈"); 
 		return "thymeleaf/Member/mypage";
 	}
+	
 	@GetMapping("/mypageCourseAll")
 	public String mypageCourseAll(HttpServletRequest request, Model model) {
 		String id = request.getParameter("id");
 		
-		if(request.getParameter("id").equals("admin")) {
-			return "redirect:/MemberList";
-		}
+		/*
+		 * if(request.getParameter("id").equals("admin")) { return
+		 * "redirect:/MemberList"; }
+		 */
 		
 		model.addAttribute("loginMember", member_dao.memberList(id));
 		model.addAttribute("course", AiDAO.Course_select(id));
-		model.addAttribute("feed", feed_dao.feedList_login(id));
+		model.addAttribute("feed", feed_dao.feedList_mypage(id));
 		System.out.println(AiDAO.Course_select(id).size() + " --리스트 사이즈"); 
 		return "thymeleaf/Member/mypage";
 	}

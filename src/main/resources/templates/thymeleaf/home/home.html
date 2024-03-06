@@ -244,26 +244,26 @@
                                         </div>
                                          -->
 					<!-- 캐러셀 버튼 -->
-					<div class="d-none d-lg-block home_carousel_buttons d-flex">
+					<div class="d-none d-lg-block home_carousel_buttons d-flex ">
 						<button class="carousel-control-prev justify-content-start" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-						<span class="w-100" aria-hidden="true"><i class="fi fi-sr-angle-left"></i>
+						<span class="w-100" aria-hidden="true"><i class="fi fi-sr-angle-left text-dark z-5"></i>
 						</span><span class="visually-hidden ">Previous</span>
 						</button>
 						<button class="carousel-control-next text-dark justify-content-start" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-						<span class="w-100" aria-hidden="true"><i class="fi fi-sr-angle-right"></i>
+						<span class="w-100" aria-hidden="true"><i class="fi fi-sr-angle-right text-dark z-5"></i>
 						</span><span class="visually-hidden">Next</span>
 						</button>
 					</div>
 				</div>
 				<!-- 캐러셀 버튼 end -->
 				<!-- 캐러셀 버튼 [M] -->
-				<div class="d-lg-none d-flex h-100 w-100">
-					<button class="carousel-control-prev justify-content-start" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-					<span class="w-75" aria-hidden="true"><i class="fi fi-sr-angle-left f22 text-dark"></i>
+				<div class="d-lg-none d-flex h-100 w-100 z-5">
+					<button class="carousel-control-prev carousel-control-prev-m justify-content-start" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+					<span class="w-75" aria-hidden="true"><i class="fi fi-sr-angle-left f22 text-dark z-5"></i>
 					</span><span class="visually-hidden ">Previous</span>
 					</button>
-					<button class="carousel-control-next text-dark justify-content-start" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-					<span class="w-75 ms-auto" aria-hidden="true"><i class="fi fi-sr-angle-right f22"></i>
+					<button class="carousel-control-next carousel-control-next-m justify-content-start" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+					<span class="w-75 ms-auto" aria-hidden="true"><i class="fi fi-sr-angle-right text-dark f22 z-5"></i>
 					</span><span class="visually-hidden">Next</span>
 					</button>
 				</div>
@@ -316,7 +316,7 @@
 				<!--feed box Start-->
 				<!-- [P] -->
 				<div class="col-12 col-xl-4 m-0 my-3 feed-box home-feed-box px-0 no-gutters" th:each="feed, iterStat : ${feedList}" th:if="${iterStat.index < 3}">
-					<div class="col-12 w-100 ">
+					<div class="col-12 w-100 position-relative">
 						<!--feed box top-->
 						<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
 							<img th:src="@{'../img/member_thumbnail/'+${feed.Member_profileimage}}" class="float-start rounded-circle border me-3" width="50" height="50" alt="">
@@ -343,11 +343,11 @@
 						</div>
 						<!-- feed box center | Carousel image -->
 						<div class="col-12 feed-box-center d-flex justify-content-center align-items-center overflow-hidden">
-							<div th:id="'feedCarousel'+${feed.Feed_num}" class="carousel slide" data-bs-ride="false">
+							<div th:id="'feedCarousel'+${feed.Feed_num}" class="carousel slide w-100 h-100" data-bs-ride="false">
 								<!-- carousel items loop -->
 								<div class="carousel-inner">
-									<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}" class="carousel-item p-0 mh-200 xh-200 d-flex" th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
-										<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100 object-fit img-center" alt="#">
+									<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}" class="w-100 h-100 carousel-item p-0 mh-200 xh-200" th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
+										<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100 object-fit img-center align-self-center" alt="#">
 									</div>
 								</div>
 								<!-- Carousel Prev/Next button -->
@@ -635,57 +635,65 @@
 			<div class="home-ad-head d-flex container">
 				<img src="../img/home/3d-speaker.png" alt="" class="me-2" width="48"
 					height="48" />
-				<p class="fs-2">광고</p>
+				<p class="fs-2">AD</p>
 				<span class="mt-3 text-muted fw-normal">&nbsp;&nbsp; 지금 핫한 여행지! 바로 확인해보세요</span>
 			</div>
 
 
-			<div class="owl-carousel custom-carousel owl-theme">
-			<div class="item active text-white" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/dota-2.jpg);">
-				<div class="item-desc">
-					<h3>Dota 2</h3>
+			<div class="owl-carousel custom-carousel owl-theme letter-spacing">
+			<div class="item active text-white fw-light" style="background-image: url(../img/home/raraland.png);">
+				<div class="item-desc w-100">
+					<h3>이월드 라라랜드</h3>
 					<p>
-						Dota 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.
+						꿈이 현실이 되는 이월드 ! <br />
+						올해 새롭게 선보이는 이월드 라라랜드에서 봄 내내 퍼플을 메인 컬러로 새로운 볼거리 및 다양한 이벤트를 만나러 가요 💜
+					</p>
+					<a href="/Event_view?id=587" class="f14 hstack d-block d-flex justify-content-end">바로가기<i class="fi fi-rr-angle-double-small-right hstack mt-1"></i></a>
+				</div>
+			</div>
+			<div class="item" style="background-image: url(../img/home/moomock.png);">
+				<div class="item-desc w-100">
+					<h3>무목</h3>
+					<p>
+						✔️ 인공폭포가 흐르는 대형 디저트 카페 <br /> 
+						✔️ 한식 디저트로 구성된 ‘무목 正 플레이트’가 시그니처 메뉴 <br /> 
+						✔️ 본관과 별관 사이 야외 중정에서 폭포뷰와 함께 인생샷 가능
 					</p>
 				</div>
 			</div>
-			<div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/winter-3.jpg);">
-				<div class="item-desc">
-					<h3>The Witcher 3</h3>
+			<div class="item" style="background-image: url(../img/home/sweetpark.png);">
+				<div class="item-desc w-100">
+					<h3>스위트파크</h3>
 					<p>
-						The Witcher 3 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.
+						🥛 2023년 5월 새롭게 단장한 식품 테마 체험관<br />
+						🥛 열기구 여행, 스위트파크 견학, 식품연구원 체험 등 다양한 체험 가능<br />
+						🥛 입장 시 주는 선물 교환권은 관람 후 과자선물 박스로 교환 가능
 					</p>
 				</div>
 			</div>
-			<div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/rdr-2.jpg);">
-				<div class="item-desc">
-					<h3>RDR 2</h3>
+			<div class="item" style="background-image: url(../img/home/gimcheon.png);">
+				<div class="item-desc w-100">
+					<h3>김천 연화지</h3>
 					<p>
-						RDR 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.
+						🌸 야간 벚꽃 명소 <br />
+						🌸 개화 시기가 비슷한 개나리꽃과 왕벚꽃을 한 프레임 안에 담을 수 있다
 					</p>
 				</div>
 			</div>
-			<div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/pubg.jpg);">
-				<div class="item-desc">
-					<h3>PUBG Mobile</h3>
+			<div class="item" style="background-image: url(../img/home/neoungsohwa.jpg);">
+				<div class="item-desc w-100">
+					<h3>능소화 축제</h3>
 					<p>
-						PUBG 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.
+						주홍색 꽃비가 내리는 꽃길 속에서 즐기는 능소화축제
 					</p>
+					<a href="/Event_view?id=2663" class="f14 hstack d-block d-flex justify-content-end">바로가기<i class="fi fi-rr-angle-double-small-right hstack mt-1"></i></a>
 				</div>
 			</div>
-			<div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/fortnite.jpg);">
-				<div class="item-desc">
-					<h3>Fortnite</h3>
+			<div class="item" style="background-image: url(../img/home/camp.png);">
+				<div class="item-desc w-100 text-white">
+					<h3>청정 오토 캠핑장</h3>
 					<p>
-						Battle royale where 100 players fight to be the last person standing. which was a community-created mod for Blizzard Entertainment's Warcraft III.
-					</p>
-				</div>
-			</div>
-			<div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/far-cry-5.jpg);">
-				<div class="item-desc text-white">
-					<h3>Far Cry 5</h3>
-					<p>
-						Far Cry 5 is a 2018 first-person shooter game developed by Ubisoft. which was a community-created mod for Blizzard Entertainment's Warcraft III.
+						때 묻지 않은 대한민국 최북단 청정 오토캠핑장<br />파도 소리에 잠들고, <br />시원한 바닷바람에 더위도 사라진다 🌊
 					</p>
 				</div>
 			</div>
