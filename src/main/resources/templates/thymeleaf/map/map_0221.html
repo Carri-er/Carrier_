@@ -28,36 +28,42 @@
                 <div class="map_guide_iconBox ">
                     <div class="map_guide_icon">
                         <ul class="map_guide_icon_list px-0">
-                            <li class="map_guide_icon_item map_icon_near_trip on">
-                                주변여행지
+                            <li class="map_guide_icon_item map_icon_near_trip ">
+                                관광지
                             </li>
                             <li class="map_guide_icon_item map_icon_food">
-                                음식점
+                                맛집
                             </li>
-                            <li class="map_guide_icon_item map_icon_cafe on">
+                            <li class="map_guide_icon_item map_icon_cafe ">
                                 카페
                             </li>
                             <li class="map_guide_icon_item map_icon_hotel">
                                 숙박
                             </li>
-                            <li class="map_guide_icon_item map_icon_park on">
-                                주차장
+                            <li class="map_guide_icon_item map_icon_inside ">
+                               	실내
                             </li>
-                            <li class="map_guide_icon_item map_icon_electric_charg">
-                                전기차충전소
+                            <li class="map_guide_icon_item map_icon_activity ">
+                                액티비티
+                            </li>
+                            <li class="map_guide_icon_item map_icon_themepark ">
+                                테마파크
+                            </li>
+                            <li class="map_guide_icon_item map_icon_event ">
+                                축제
                             </li>
                             <li class="map_guide_icon_item map_icon_recomand_thema">
-                                추천테마
+                                산, 바다
                             </li>
                             <li class="map_guide_icon_item map_icon_trip_course">
                                 여행코스
                             </li>
-                            <li class="map_guide_icon_item map_icon_myTrip">
+                            <!--<li class="map_guide_icon_item map_icon_myTrip">
                                 나의여행
                             </li>
-                            <li class="map_guide_icon_item map_icon_set">
+                             <li class="map_guide_icon_item map_icon_set">
                                 설정
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                   
@@ -83,10 +89,13 @@
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05"></script>
-   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00000000&libraries=clusterer">
-</script>
+   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05&libraries=clusterer"></script>
+   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05&libraries=services,clusterer,drawing"></script>
+
+
 <!-- JavaScript section -->
 <script th:inline="javascript">
+$(document).ready(function() {
     /*<![CDATA[*/
     kakao.maps.load(function () {
         // 마커를 담을 배열입니다
@@ -98,10 +107,11 @@
         // event table에 저장된 데이터
         var mapMarkerList = /*[[${mapMarkerList}]]*/ [];
 		
-        console.log(mapMarkerList);
-        
      	// 현재 위치 변수 선언
         var presentPosition;
+     	
+     // 여러 개의 오버레이를 담을 배열 선언
+        var overlays = [];
         
      	//마커 이미지
      	var markerImg_tour = "https://cdn-icons-png.flaticon.com/128/11020/11020536.png"; // 관광지
@@ -131,11 +141,12 @@
         // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
+    
+        
         // mapMarkerList에 저장된 데이터를 반복하여 마커 생성 및 표시
         mapMarkerList.forEach(function (markerInfo) {
             // 마커의 위치 설정
             var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
-            //console.log(markerInfo.event_category);
              
             // 마커 생성
             if( markerInfo.event_category == '관광지'){
@@ -145,6 +156,13 @@
 					image :  markerImage                   
                 });
           	} else if( markerInfo.event_category == '맛집' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          		
+          	} else if( markerInfo.event_category == '전통시장' ){
           		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
             	var marker = new kakao.maps.Marker({
                     position: markerPosition, // 마커의 위치 설정
@@ -215,11 +233,8 @@
             // 마커 지도에 표시
             marker.setMap(map);
             markers.push(marker);
-
-            // 클릭 이벤트 핸들러 추가
-            addMarkerClickListener(marker, markers.length - 1);
-            
-            var markerInfoContent = '<div>'+ markerInfo.event_name +'</div>';
+    
+            var markerInfoContent = '<div class="text-center text-truncate rounded-5">'+ markerInfo.event_name +'</div>';
             
          	// 마커에 표시할 인포윈도우를 생성합니다 
             var infowindow = new kakao.maps.InfoWindow({
@@ -231,30 +246,78 @@
             
             
             
-         // 커스텀 오버레이에 표시할 컨텐츠 입니다
-         // 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-         // 별도의 이벤트 메소드를 제공하지 않습니다 
-            var overlay_content = '<div class="wrap">' + 
-            '    <div class="info">' + 
-            '        <div class="title">' + 
-            markerInfo.event_name + 
-            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+         	// 커스텀 오버레이에 표시할 컨텐츠 입니다
+         	// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+         	// 별도의 이벤트 메소드를 제공하지 않습니다 
+         	var overlay_img = '<img src="../img/info/'+markerInfo.event_thumbnail +'" class="rounded-4" width="70" height="70">' ;
+            var overlay_content = '<div class="overlay_wrap">' + 
+            '    <div class="overlay_info">' + 
+            '        <div class="overlay_title">' + 
+            			markerInfo.event_name + 
+            '           <div class="overlay_close" onclick=" closeOverlay() " title="닫기"></div>' + 
             '        </div>' + 
-            '        <div class="body">' + 
-            '            <div class="img">' +
-            '                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png" width="73" height="70">' +
-            '           </div>' + 
-            '            <div class="desc">' + 
-            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
-            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+            '        <div class="overlay_body">' + 
+            '            <div class="overlay_img">' +
+            				overlay_img +
+            '            </div>' + 
+            '            <div class="overlay_desc">' + 
+            '                <div class="overlay_ellipsis">'+ markerInfo.event_address +'</div>' + 
+//            '                <div class="overlay_jibun overlay_ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+            '                <div><a href="Event_view?id='+markerInfo.event_num +'" target="_blank" class="overlay_link">자세히 보기</a></div>' + 
             '            </div>' + 
             '        </div>' + 
             '    </div>' +    
             '</div>';
             
-        });
+         // 마커 위에 커스텀오버레이를 표시합니다
+            // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+            var overlay = new kakao.maps.CustomOverlay({
+                content: overlay_content,
+                position: marker.getPosition()
+            });
+         
+         // 클릭 이벤트 핸들러 추가
+            addMarkerClickListener(marker, markers.length - 1, overlay);
+            
+         // 생성된 오버레이를 배열에 추가
+            overlays.push(overlay);
+         
+         // 각 오버레이의 닫기 버튼 클릭 이벤트 핸들러 추가   
+           // addCloseBtnClickListener(overlay);
+        
+        }); // 마커 생성 함수 끝
 		
+     // 각 오버레이의 닫기 버튼 클릭 이벤트 핸들러
+        function addCloseBtnClickListener(overlays, index) {
+        	kakao.maps.event.addListener(overlays[index], 'click', function() {
+                overlays[index].setMap(null); 
+            });
+        	
+        }
+    	function closeOverlay(){
+    		alert("test");
+    	}
+        
+        // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
+        function addMarkerClickListener(marker, index, overlay) {
+        	
+            kakao.maps.event.addListener(marker, 'click', function () {
+                var event = mapMarkerList[index];
+                var markerPosition = marker.getPosition();
+                var distance = getDistance(presentPosition, markerPosition);
+                var eventName = event.event_name;
+                var eventNum = event.event_num;
+                var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
+                //alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
+                
+              	var show_overlay = overlays[index];
+              	show_overlay.setMap(map);
+   	
+            });
+         
+        }
+        
+        
      // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
         function makeOverListener(map, marker, infowindow) {
             return function() {
@@ -268,6 +331,9 @@
                 infowindow.close();
             };
         }
+     
+
+        
 
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
@@ -308,18 +374,7 @@
         }
 
         
-        // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
-        function addMarkerClickListener(marker, index) {
-            kakao.maps.event.addListener(marker, 'click', function () {
-                var event = mapMarkerList[index];
-                var markerPosition = marker.getPosition();
-                var distance = getDistance(presentPosition, markerPosition);
-                var eventName = event.event_name;
-                var eventNum = event.event_num;
-                var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
-                alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
-            });
-        }
+       
 
         // 모든 마커에 대해 현재 위치와의 거리 계산
         function calculateDistances(presentPosition, markers) {
@@ -342,7 +397,8 @@
             sendDataToServer(combinedData);
            	
         }
-
+		
+        //컨트롤러로 데이터 전송
         function sendDataToServer(data) {
             // 데이터가 null이 아닌 경우에만 서버로 전송합니다.
             if (data && data.length > 0) {
@@ -382,7 +438,7 @@
                 html += "</div>";
                 html += "<div class='col-6'>";
                 html += "<h6 class='text-truncate list-inline-item' >[<span>" + item.event.event_category + "</span>] <span >" + item.event.event_name + "</span></h6>"; // distanceList의 객체에서 event_category와 event_name 속성에 접근
-                html += "<p class='f13 text-truncate'>거리 : "+ Math.ceil(item.distance) +" m(미터)</p>"
+                html += "<p class='f13 text-truncate'>거리 : "+ Math.ceil(item.distance) +" m(미터)</p>" ;
                 html += "</div>";
                 html += "</a>";
                 html += "<hr />";
@@ -409,9 +465,33 @@
             var d = R * c; // 거리 (미터 단위)
             return d;
         }
+
+        
     });
     /*]]>*/
+    var icon_list = $("ul.map_guide_icon_list");
+	var icon_list_li = $("ul.map_guide_icon_list>li");
+	
+	//아이콘 리스트 클릭 시 
+	icon_list_li.click(function(){
+		var tg = $(this)
+		var index_num = tg.index();
+		
+		if ( icon_list_li.eq(index_num).hasClass('on') ) {
+			icon_list_li.eq(index_num).removeClass('on');
+		} else if( !( icon_list_li.eq(index_num).hasClass('on') ) ){
+			icon_list_li.removeClass('on');
+			icon_list_li.eq(index_num).addClass('on');
+		}
+		
+		
+		
+	})
+    
+});
 </script>
+
+
 </body>
 
 </html>

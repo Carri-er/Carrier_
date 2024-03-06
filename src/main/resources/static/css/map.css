@@ -39,6 +39,7 @@ li.map_guide_icon_item {
 	box-sizing: border-box;
 	font-size: small;
 	text-align: center;
+	cursor : pointer;
 }
 
 li.map_icon_electric_charg {
@@ -138,24 +139,91 @@ li.map_icon_park.on::before {
 	background-position-y: -144px;
 }
 
-li.map_icon_electric_charg::before {
+li.map_icon_activity::before {
 	content: '';
 	display: block;
 	width: 36px;
 	height: 36px;
-	margin: auto;
-	background: url('../img/map/icon_depth1_menu.png') no-repeat;
-	background-position-y: -180px;
+	margin : auto;
+	background-image : url(https://cdn-icons-png.flaticon.com/128/2853/2853364.png);
+	background-size: 100%;
 }
-li.map_icon_electric_charg.on::before {
+li.map_icon_activity.on::before {
 	content: '';
 	display: block;
 	width: 36px;
 	height: 36px;
-	margin: auto;
-	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
-	background-position-y: -180px;
+	margin : auto;
+	background: url('https://cdn-icons-png.flaticon.com/128/2853/2853386.png') no-repeat;
+	background-size: 100%;
 }
+
+li.map_icon_event::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	background-image : url(https://cdn-icons-png.flaticon.com/512/1753/1753035.png);
+	background-size: 100%;
+}
+li.map_icon_event.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	background: url('https://cdn-icons-png.flaticon.com/512/1753/1753042.png') no-repeat;
+	background-size: 100%;
+}
+
+li.map_icon_inside::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	border : 1px solid #EBE6E5;
+	border-radius : 50%;
+	background-image : url(https://cdn-icons-png.flaticon.com/128/3350/3350372.png);
+	background-size: 100%;
+}
+li.map_icon_inside.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	border : 1px solid #EBE6E5;
+	border-radius : 50%;
+	background: url('https://cdn-icons-png.flaticon.com/512/3350/3350881.png') no-repeat;
+	background-size: 100%;
+}
+
+
+li.map_icon_themepark::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	border : 1px solid #EBE6E5;
+	border-radius : 50%;
+	background-image : url(https://cdn-icons-png.flaticon.com/512/2389/2389500.png);
+	background-size: 100%;
+}
+li.map_icon_themepark.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	border : 1px solid #EBE6E5;
+	border-radius : 50%;
+	background: url('https://cdn-icons-png.flaticon.com/128/2389/2389654.png') no-repeat;
+	background-size: 100%;
+}
+
 
 li.map_icon_recomand_thema::before {
 	content: '';
@@ -294,3 +362,20 @@ div.map_mapSection {
 	font-weight: bold;
 }
 
+/*************************** 
+	카카오 맵 api 오버레이 스타일
+ **************************/
+    .overlay_wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .overlay_wrap * {padding: 0;margin: 0;}
+    .overlay_wrap .overlay_info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .overlay_wrap .overlay_info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .overlay_info .overlay_title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .overlay_info .overlay_close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .overlay_info .overlay_close:hover {cursor: pointer;}
+    .overlay_info .overlay_body {position: relative;overflow: hidden;}
+    .overlay_info .overlay_desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .overlay_desc .overlay_ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .overlay_desc .overlay_jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .overlay_info .overlay_img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .overlay_info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .overlay_info .overlay_link {color: #5085BB;}
