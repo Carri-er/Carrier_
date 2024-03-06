@@ -175,27 +175,27 @@
 					</div>
 					<div class="modal-footer border-0 text-start pt-0 px-3 f15">
 						<p class="me-auto m-0 mb-3">추천 페이지</p>
-						<div class="px-2 w-100 row gap-4">
-							<a href="/map">
+						<div class="w-100 row gap-1 nav-search-recommend">
+							<a href="/map" class="p-3 py-2">
 								<p class="f16 fw-bold mb-1">주변 여행지</p>
-								<span class="f14 px-3 d-block"><span class="text-muted">지도&nbsp;&nbsp;/&nbsp;&nbsp;</span>주변 여행지</span>
+								<span class="f14 d-block"><span class="text-muted">지도&nbsp;&nbsp;/&nbsp;&nbsp;</span>주변 여행지</span>
 							</a>
-							<a href="/aicc">
+							<a href="/aicc" class="p-3 py-2">
 								<p class="f16 fw-bold mb-1">맞춤 여행</p>
-								<span class="f14 px-3 d-block"><span class="text-muted">AI돋보기&nbsp;&nbsp;/&nbsp;&nbsp;</span>원하는 여행 고르기</span>
+								<span class="f14 d-block"><span class="text-muted">AI돋보기&nbsp;&nbsp;/&nbsp;&nbsp;</span>원하는 여행 고르기</span>
 							</a>
-							<a href="/band">
+							<a href="/band" class="p-3 py-2">
 								<p class="f16 fw-bold mb-1">내 밴드</p>
-								<span class="f14 px-3 d-block"><span class="text-muted">밴드&nbsp;&nbsp;/&nbsp;&nbsp;</span>가입한 밴드</span>
+								<span class="f14 d-block"><span class="text-muted">밴드&nbsp;&nbsp;/&nbsp;&nbsp;</span>가입한 밴드</span>
 							</a>
-							<div th:if="${session.Member_Id}==null" onclick="showToast()" style="cursor: pointer;">
+							<div th:if="${session.Member_Id}==null" onclick="showToast()" style="cursor: pointer;" class="p-3 py-2">
 							    <p class="f16 fw-bold mb-1">보관함</p>
-							    <span class="f14 px-3 d-block"><span class="text-muted">마이페이지&nbsp;&nbsp;/&nbsp;&nbsp;</span>보관함</span>
+							    <span class="f14 d-block"><span class="text-muted">마이페이지&nbsp;&nbsp;/&nbsp;&nbsp;</span>보관함</span>
 							</div>
-							<div th:unless="${session.Member_Id}==null">
+							<div th:unless="${session.Member_Id}==null" class="p-3 py-2">
 								<a href="/mypage">
 									<p class="f16 fw-bold mb-1">보관함</p> <span
-									class="f14 px-3 d-block"><span class="text-muted">마이페이지&nbsp;&nbsp;/&nbsp;&nbsp;</span>보관함</span>
+									class="f14 d-block"><span class="text-muted">마이페이지&nbsp;&nbsp;/&nbsp;&nbsp;</span>보관함</span>
 								</a>
 							</div>
 						</div>

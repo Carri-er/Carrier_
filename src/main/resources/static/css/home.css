@@ -4,14 +4,15 @@ div.home_wrapper {
 	width: 100%;
 }
 
-.home_bg{
+.home_bg {
 	background: linear-gradient(to bottom, var(--main) 90%, var(--white) 90%);
 }
 
-.mh-360{
+.mh-360 {
 	min-height: 360px;
 }
-.xh-360{
+
+.xh-360 {
 	max-height: 360px;
 }
 
@@ -33,13 +34,14 @@ div.carousel_bg_whiteBox {
 }
 
 /*캐러셀 이미지 스타일*/
-div.carousel_img{
+div.carousel_img {
 	max-height: 400px;
 	min-height: 400px;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
 }
+
 div.carousel_img>img {
 	display: inline-block;
 	/* position: relative; */
@@ -47,7 +49,6 @@ div.carousel_img>img {
 	z-index: 2;
 	min-width: 430px;
 }
-
 
 /*캐러셀 텍스트 영역 스타일*/
 div.crousel_textArea {
@@ -60,7 +61,7 @@ div.crousel_textArea>em {
 	padding: 0 15px;
 	height: 30px;
 	line-height: 28px;
-	color: #fff;
+	color: var(--white) !important;
 	background: #000;
 	border-radius: 15px 15px 15px 0;
 	font-size: 16px;
@@ -102,17 +103,21 @@ div.crousel_textArea>a::after {
 	background: #908f8f;
 }
 
-
 /* 캐러셀 버튼 부분 */
-.home_carousel_buttons{
+.home_carousel_buttons {
 	position: absolute;
-    margin: 0 auto;
-    width: 16%;
-    height: 20%;
-    top: 50%;
-    left: 0;
-    margin-top: 187px;
-    margin-left: 100px;
+	margin: 0 auto;
+	width: 16%;
+	height: 20%;
+	top: 50%;
+	left: 0;
+	margin-top: 187px;
+	margin-left: 100px;
+}
+
+.carousel-control-next-m, .carousel-control-prev-m{
+	z-index: 5;
+    width: 9%;
 }
 
 /********************************
@@ -603,57 +608,56 @@ div.home_band_recomand_text>span {
 }
 
 /* feed 수정 */
-
-.home-feed-box{
+.home-feed-box {
 	width: 296px !important;
 }
 
-
 /* 검색탭 AD */
 .img-container {
-  width: 100vw;
-  height: 320px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+	width: 100vw;
+	height: 320px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
 }
 
 .img-container img {
-  width: 400px;
-  height: 300px;
-  background-color: #87A0E2;
-  border-radius: 16px;
-  position: absolute;
-  user-select: none;
-  transition-property: transform, opacity, zIndex, ; 
-  transition-duration: 0.3s; 
-  transition-timing-function: ease-out; 
+	width: 400px;
+	height: 300px;
+	background-color: #87A0E2;
+	border-radius: 16px;
+	position: absolute;
+	user-select: none;
+	transition-property: transform, opacity, zIndex,;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-out;
 }
+
 .arrows {
-  width: 900px;
-  height: auto;
-  display: flex;
-  justify-content: space-between;
-  z-index: 100;
+	width: 900px;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	z-index: 100;
 }
+
 .arrows svg {
-  width: 60px;
-  height: 60px;
-  position: relative;
-  fill: white;
-  opacity: 0.8;
-  cursor: pointer;
+	width: 60px;
+	height: 60px;
+	position: relative;
+	fill: white;
+	opacity: 0.8;
+	cursor: pointer;
 }
 
 .arrows svg:active {
-  transform: scale(0.9);
-  opacity: 1;
-  transition-property: transform, opacity; 
-  transition-duration: 0.3s; 
-  transition-timing-function: ease-out; 
+	transform: scale(0.9);
+	opacity: 1;
+	transition-property: transform, opacity;
+	transition-duration: 0.3s;
+	transition-timing-function: ease-out;
 }
-
 
 /*****************************작은 모니터 크기*************/
 @media screen and (min-width:768px) and (max-width:959px) {
@@ -694,5 +698,345 @@ div.home_band_recomand_text>span {
 	}
 	.hotPlace_area_map_ul_mobile {
 		display: block;
+	}
+}
+
+/*********************/
+/******* Fonts Import Start **********/
+@import
+	url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap")
+	;
+/********* Fonts Face CSS End **********/
+
+/******* Common Element CSS Start ******/
+
+.clear {
+	clear: both;
+}
+
+img {
+	max-width: 100%;
+	border: 0px;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	outline: none;
+	transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+}
+
+a:focus, a:active, a:visited, a:hover {
+	text-decoration: none;
+	outline: none;
+}
+
+h2 {
+	margin-bottom: 48px;
+	padding-bottom: 16px;
+	font-size: 20px;
+	line-height: 28px;
+	font-weight: 700;
+	position: relative;
+	text-transform: capitalize;
+}
+
+h3 {
+	margin: 0 0 10px;
+	font-size: 28px;
+	line-height: 36px;
+}
+
+button {
+	outline: none !important;
+}
+/******* Common Element CSS End *********/
+/**
+ * Owl Carousel v2.3.4
+ * Copyright 2013-2018 David Deutsch
+ * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
+ */
+/*
+ * 	Default theme - Owl Carousel CSS File
+ */
+.owl-theme .owl-nav {
+	margin-top: 10px;
+	text-align: center;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.owl-theme .owl-nav [class*='owl-'] {
+	color: #FFF;
+	font-size: 14px;
+	margin: 5px;
+	padding: 4px 7px;
+	background: #D6D6D6;
+	display: inline-block;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+.owl-theme .owl-nav [class*='owl-']:hover {
+	background: #869791;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.owl-theme .owl-nav .disabled {
+	opacity: 0.5;
+	cursor: default;
+}
+
+
+.owl-theme .owl-dots {
+	text-align: center;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.owl-theme .owl-dots .owl-dot {
+	display: inline-block;
+	zoom: 1;
+	display: inline;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+	width: 10px;
+	height: 10px;
+	margin: 5px 7px;
+	background: #D6D6D6;
+	display: block;
+	-webkit-backface-visibility: visible;
+	transition: opacity 200ms ease;
+	border-radius: 30px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span
+	{
+	background: #869791;
+}
+
+button.owl-dot{
+	background-color: transparent !important;
+	border: none;
+}
+
+.owl-nav{
+	display: none;
+}
+
+/* -------- title style ------- */
+.line-title {
+	position: relative;
+	width: 400px;
+}
+
+.line-title::before, .line-title::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 4px;
+	border-radius: 2px;
+}
+
+.line-title::before {
+	width: 100%;
+	background: #f2f2f2;
+}
+
+.line-title::after {
+	width: 32px;
+	background: #e73700;
+}
+
+/******* Middle section CSS Start ******/
+/* -------- Landing page ------- */
+.game-section {
+	padding: 60px 50px;
+}
+
+.game-section .owl-stage {
+	margin-top: 15px;
+	display: flex;
+	display: -webkit-flex;
+}
+
+.game-section .item {
+	margin: 0 15px 60px;
+	width: 320px;
+	height: 400px;
+	display: flex;
+	display: -webkit-flex;
+	align-items: flex-end;
+	-webkit-align-items: flex-end;
+	background: #343434 no-repeat center center/cover;
+	border-radius: 16px;
+	overflow: hidden;
+	position: relative;
+	transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	cursor: pointer;
+}
+
+.game-section .item.active {
+	width: 500px;
+	box-shadow: 12px 20px 40px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow: 12px 20px 40px rgba(0, 0, 0, 0.25);
+	/* box-shadow: 2px 5px 40px 0 rgba(0, 0, 0, .09); */
+}
+
+.game-section .item:after {
+	content: "";
+	display: block;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+
+.game-section .item-desc {
+	padding: 0 24px 12px;
+	color: #fff;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	transform: translateY(calc(100% - 54px));
+	-webkit-transform: translateY(calc(100% - 54px));
+	transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+}
+
+.game-section .item.active .item-desc {
+	transform: none;
+	-webkit-transform: none;
+}
+
+.game-section .item-desc p {
+	opacity: 0;
+	-webkit-transform: translateY(32px);
+	transform: translateY(32px);
+	transition: all 0.4s ease-in-out 0.2s;
+	-webkit-transition: all 0.4s ease-in-out 0.2s;
+}
+
+.game-section .item.active .item-desc p {
+	opacity: 1;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+}
+
+.owl-dots {
+	margin-top: -20px;
+	position: relative;
+	z-index: 5;
+}
+
+.owl-carousel a:hover{
+	color: var(--main) !important;
+}
+
+/******** Middle section CSS End *******/
+
+/***** responsive css Start ******/
+@media ( min-width : 992px) and (max-width: 1199px) {
+	h2 {
+		margin-bottom: 32px;
+	}
+	h3 {
+		margin: 0 0 8px;
+		font-size: 24px;
+		line-height: 32px;
+	}
+
+	/* -------- Landing page ------- */
+	.game-section {
+		padding: 50px 30px;
+	}
+	.game-section .item {
+		margin: 0 12px 60px;
+		width: 260px;
+		height: 360px;
+	}
+	.game-section .item.active {
+		width: 400px;
+	}
+	.game-section .item-desc {
+		transform: translateY(calc(100% - 46px));
+		-webkit-transform: translateY(calc(100% - 46px));
+	}
+}
+
+@media ( min-width : 768px) and (max-width: 991px) {
+	h2 {
+		margin-bottom: 32px;
+	}
+	h3 {
+		margin: 0 0 8px;
+		font-size: 24px;
+		line-height: 32px;
+	}
+	.line-title {
+		width: 330px;
+	}
+
+	/* -------- Landing page ------- */
+	.game-section {
+		padding: 50px 30px 40px;
+	}
+	.game-section .item {
+		margin: 0 12px 60px;
+		width: 240px;
+		height: 330px;
+	}
+	.game-section .item.active {
+		width: 360px;
+	}
+	.game-section .item-desc {
+		transform: translateY(calc(100% - 42px));
+		-webkit-transform: translateY(calc(100% - 42px));
+	}
+}
+
+@media ( max-width : 767px) {
+	body {
+		font-size: 14px;
+	}
+	h2 {
+		margin-bottom: 20px;
+	}
+	h3 {
+		margin: 0 0 8px;
+		font-size: 19px;
+		line-height: 24px;
+	}
+	.line-title {
+		width: 250px;
+	}
+
+	/* -------- Landing page ------- */
+	.game-section {
+		padding: 30px 15px 20px;
+	}
+	.game-section .item {
+		margin: 0 10px 40px;
+		width: 200px;
+		height: 280px;
+	}
+	.game-section .item.active {
+		width: 270px;
+		box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
+		-webkit-box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
+	}
+	.game-section .item-desc {
+		padding: 0 14px 5px;
+		transform: translateY(calc(100% - 42px));
+		-webkit-transform: translateY(calc(100% - 42px));
 	}
 }
