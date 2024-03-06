@@ -15,6 +15,7 @@ public interface IEventDAO {
 	public List<EventDTO> list();
 	public List<EventDTO> hitDESC(@Param("offset") int offset, @Param("pageSize") int pageSize);
 	public List<EventDTO> infoHome();
+	public List<EventDTO> infoHome2();
 	public List<String> getDistinctTags();
 	public List<String> areaTag();
 	public List<String> areaTagselect(String id);

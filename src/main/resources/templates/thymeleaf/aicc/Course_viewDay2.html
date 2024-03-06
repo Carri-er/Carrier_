@@ -18,7 +18,19 @@
 						<h3 class="pgj">
 						<span class="rounded-4 p-3 bg-mainbg text-white">Day-1</span>
 					</h3>
-				
+						</div>
+				<div id="map2" style="height: 600px"
+						class=" mx-auto rounded-4 w-100">
+						<h3 class="pgj">
+						<span class="rounded-4 p-3 bg-mainbg text-white">Day-2</span>
+					</h3></div>
+						
+			</div>
+				<button id="mapday1"
+					class="mapday1 btn rounded-pill bg-white pe-5 shadow">1일차</button>
+				<button id="mapday2"
+					class="mapday2 btn rounded-pill bg-white pe-5 shadow">2일차</button>
+			
 				
 			</div>
 			<div class="col-12 mx-auto my-5">
@@ -92,11 +104,85 @@
 									class="text-center"></span>
 							</a>
 						</div>
+						<div class="col-6 col-md-4 col-lg-2 mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${hotel.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${hotel.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${hotel.get(0).getEvent_name()}"
+									class="text-center"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 2일차 데이터 -->
+			<div class="row mx-auto mx-0 pe-0 pt-0 bg-mainbg p-2 position-relative">
+			<div class="col-12 px-0 mx-0">
+				<div class="position-absolute top-0 start-0 translate-middle text-black ms-3 ps-5 pt-5"> day2</div>
+				<div class="row courseListRow px-0 mx-0 bg-white p-5 ">
+						<div class="col-6 col-md-4 col-lg-2  mx-auto text-truncate px-0 mx-0 text-center">
+							<a th:href="@{'Event_view?id='+ ${aicc3.get(0).getEvent_num()}}" >
+								<img
+								th:src="@{'../img/info/' + ${aicc3.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span class="text-center mt-3" th:text="${aicc3.get(0).getEvent_name()}"></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${aiccFood3.get(0).getEvent_num()}}" class="">
+								<img
+								th:src="@{'../img/info/' + ${aiccFood3.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aiccFood3.get(0).getEvent_name()}"
+									class=" mt-3"></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
+							<a th:href="@{'Event_view?id='+ ${aicc4.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${aicc4.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aicc4.get(0).getEvent_name()}"
+									class="text-center mt-3 "></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${aiccFood4.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${aiccFood4.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aiccFood4.get(0).getEvent_name()}"
+									class="text-center mt-3 "></span>
+							</a>
+						</div>
+						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
+							<a
+								th:href="@{'Event_view?id='+ ${aiccCafe2.get(0).getEvent_num()}}">
+								<img
+								th:src="@{'../img/info/' + ${aiccCafe2.get(0).getEvent_thumbnail()}}"
+								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
+								style="width: 100px; height: 100px;">
+								<span th:text="${aiccCafe2.get(0).getEvent_name()}"
+									class="text-center"></span>
+							</a>
+						</div>
 						
 					</div>
 				</div>
 			</div>
-		
+				
+
+
+			</div>
 			<form action="cours_Save_update" method="post">
 			
 			<div class="row">
@@ -111,11 +197,11 @@
 					<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
 					<input type="hidden" name="num" th:value="${list.get(0).getCourse_num()}" />
 					<div class="col-12 mx-auto my-5 text-center">
-						<button type="button" class="btn btn-dark m-1" th:text="|# ${aiccCafe.get(0).getEvent_category()}|"></button>
-						<button type="button" class="btn btn-light m-1" th:text="|# ${aiccFood.get(0).getEvent_category()}|"></button>
-						<button type="button" class="btn btn-dark m-1" th:text="|# ${aicc2.get(0).getEvent_category()}|"></button>
-						<button type="button" class="btn btn-light m-1" th:text="|# ${aicc.get(0).getEvent_category()}|"></button>
-						<button type="button" class="btn btn-dark m-1" th:text="|# ${aicc.get(0).getEvent_area()}|"></button>
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aiccCafe.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-light mx-1" th:text="|# ${aiccFood.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aicc2.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-light mx-1" th:text="|# ${aicc.get(0).getEvent_category()}|"></button>
+						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aicc.get(0).getEvent_area()}|"></button>
 						
 					</div>
 					<div class="col-12 mx-auto mt-4 text-end">
@@ -130,7 +216,7 @@
 				
 					</div>
 			</form>
-</div>
+
 		</div>
 	</div>
 	<div th:replace="~{footer/footer::footer}"></div>
@@ -233,6 +319,11 @@
 			mapX : /*[[${aiccFood2.get(0).getEvent_mapX()}]]*/0,
 			mapY : /*[[${aiccFood2.get(0).getEvent_mapY()}]]*/0,
 			number : /*[[${aiccFood2.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${hotel.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${hotel.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${hotel.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${hotel.get(0).getEvent_num()}]]*/""
 		} ];
 
 		var positions = events.map(function(event) {
@@ -346,6 +437,150 @@
 
 		}
 	</script>
+	<!-- map2의 스크립트 -->
+	<script th:inline="javascript">
+		var mapContainer2 = document.getElementById('map2'); // 지도를 표시할 div 
+
+		var events2 = [ {
+			name : /*[[${aicc3.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aicc3.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aicc3.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aicc3.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccFood3.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccFood3.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccFood3.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccFood3.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aicc4.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aicc4.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aicc4.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aicc4.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccCafe2.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccCafe2.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccCafe2.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccCafe2.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccFood4.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccFood4.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccFood4.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccFood4.get(0).getEvent_num()}]]*/""
+		} ];
+
+		var positions2 = events2.map(function(event) {
+			return {
+				title : event.name,
+				number : event.number,
+				latlng : new kakao.maps.LatLng(event.mapX, event.mapY)
+			};
+		});
+		// 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
+		mapx = parseFloat(events2[0].mapX);
+		mapy = parseFloat(events2[0].mapY);
+		mapOption2 = {
+			center : new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
+			level : 7
+		// 지도의 확대 레벨
+		};
+
+		var map2 = new kakao.maps.Map(mapContainer2, mapOption2); // 지도를 생성합니다
+		// 마커를 표시할 위치와 title 객체 배열입니다 
+
+		// 마커 이미지의 이미지 주소입니다
+		var imageSrc2 = [
+				"https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지1,
+				"https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점
+				"https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지2
+				"https://cdn-icons-png.flaticon.com/128/11020/11020485.png",//카페
+				"https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점2
+				"https://cdn-icons-png.flaticon.com/128/11020/11020494.png" ];//관광지2
+		for (var i = 0; i < positions2.length; i++) {
+			var content2 = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
+					+ '    <div class="info">'
+					+ '            <a href="Event_view?id='
+					+ positions2[i].number
+					+ '">'
+					+ '        <div class="title">'
+					+ [ i + 1 ]
+					+ ". "
+					+ positions2[i].title
+					+ '        </div>'
+					+ '</a>'
+					+ '    </div>' + '</div>';
+
+			// 마커 이미지의 이미지 크기 입니다
+			var imageSize2 = new kakao.maps.Size(50, 50);
+
+			// 마커 이미지를 생성합니다    
+			var markerImage2 = new kakao.maps.MarkerImage(imageSrc2[i],
+					imageSize2);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				map : map2, // 마커를 표시할 지도
+				position : positions2[i].latlng, // 마커를 표시할 위치
+				title : positions2[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				image : markerImage2
+			// 마커 이미지 
+			});
+			var overlay = new kakao.maps.CustomOverlay({
+				content : content2,
+				map : map2,
+				position : positions2[i].latlng
+			});
+
+		}
+
+		var linePath2;
+		var lineLine2 = new daum.maps.Polyline();
+
+		var distance2;
+
+		var totalDistance2 = 0; // 총 거리를 저장할 변수를 초기화합니다.
+
+		var subtotalDistance = 0;
+		for (var i = 0; i < positions2.length; i++) {
+			if (i != 0 && i < 5) {
+				linePath2 = [ positions2[i - 1].latlng, positions2[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
+			}
+			;
+			lineLine2.setPath(linePath2); // 선을 그릴 라인을 세팅합니다
+
+			var drawLine2 = new daum.maps.Polyline({
+				map : map2, // 선을 표시할 지도입니다 
+				path : linePath2,
+				strokeWeight : 3, // 선의 두께입니다 
+				strokeColor : '#Ef564b', // 선의 색깔입니다
+				strokeOpacity : 0.8, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+				strokeStyle : 'longdash' // 선의 스타일입니다
+			});
+
+			distance2 = Math.round(lineLine2.getLength());
+			displayCircleDot(positions2[i].latlng, distance2);
+			totalDistance2 += distance2;
+		
+
+		}
+
+		function displayCircleDot(position, distance) {
+			if (distance > 0) {
+				// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+				var distanceOverlay = new daum.maps.CustomOverlay({
+					//  content : '<div class="dotOverlay bg-white rounded-4 px-3 mt-5">거리 <span class="number">'
+					//       + distance + '</span>m</div>', 
+					position : position,
+					yAnchor : 1,
+					zIndex : 5
+				});
+
+				// 지도에 표시합니다
+				distanceOverlay.setMap(map);
+			}
+
+		}
+	</script>
+
 	
 </body>
 </html>
