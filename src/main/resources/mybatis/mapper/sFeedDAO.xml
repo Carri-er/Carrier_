@@ -83,7 +83,29 @@
 		ON f.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
 		ORDER BY Feed_uploadday DESC
 	</select>
-	<!--  -->
+	
+	<!-- 마이페이지 좋아요 최신순 불러오기 -->
+	<select id="feedList_mypage" resultType="com.ex.springboot.dto.FeedDTO">
+		SELECT 
+		    f.Feed_num,
+		    f.Member_Id,
+		    f.Feed_heart,
+		    f.Feed_thumbnail,
+		    CASE 
+		        WHEN fh.Member_id IS NULL THEN 0
+		        ELSE 1
+		    END AS Feed_heart_on, Feed_heart_num
+		FROM 
+		    Feed f
+		LEFT JOIN 
+		    carrier_member cm ON f.Member_Id = cm.Member_Id
+		LEFT JOIN 
+		    Feedheart fh ON f.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
+		WHERE 
+		    Feed_heart_on = 1
+		ORDER BY 
+		    fh.Feed_heart_num DESC
+	</select>
 	
 	<!-- 피드 리스트[theme filter] 가져오기 -->
 	<select id="feedList_theme" resultType="com.ex.springboot.dto.FeedDTO">
@@ -249,7 +271,7 @@
 	
 	<!-- 피드 좋아요 누르기 -->
 	<insert id="feedLike">
-		INSERT INTO Feedheart (Feed_num, Member_Id, Feed_heart_on) VALUES (#{Feed_num}, #{Member_Id}, 1)
+		INSERT INTO Feedheart (Feed_num, Member_Id, Feed_heart_on, Feed_heart_num) VALUES (#{Feed_num}, #{Member_Id}, 1, Feed_heart_seq.nextval)
 	</insert>
 	
 	<!-- 피드 좋아요 삭제 -->
