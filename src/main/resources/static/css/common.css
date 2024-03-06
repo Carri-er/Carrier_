@@ -7,6 +7,9 @@
 	padding: 0;
 	list-style: none;
 	box-sizing: border-box;
+}
+
+body{
 	color: var(--black);
 }
 
@@ -47,6 +50,10 @@ a.indent {
 
 .text-pink {
 	color: var(--nottedDeepPink);
+}
+
+.text-blue {
+	color: var(--nottedskyblue);
 }
 
 .highlight {
@@ -179,12 +186,18 @@ a.indent {
 	background-color: var(--white) !important;
 }
 
-.btn-skyb {
+.btn-skyb, .btn-skyb-over:hover {
 	background-color: var(--nottedskyblue) !important;
 }
 .btn-skyD {
 	background-color: var(--nottedDeepblue) !important;
 }
+
+.btn-skyb:hover, .btn-skyb-over {
+	border: 1px solid var(--nottedskyblue) !important;
+	background-color: var(--white) !important;
+}
+
 
 .btn-brown {
 	background-color: var(--nottedbrown) !important;
@@ -201,4 +214,8 @@ a.indent {
 
 .z-5{
 	z-index: 1055;
+}
+
+.letter-spacing{
+	letter-spacing: -0.8px;
 }

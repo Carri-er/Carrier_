@@ -29,11 +29,6 @@ public interface IFeedDAO {
 			@Param("Member_Id") String Member_Id
 	);
 	
-	/*
-	 * //피드 전체 페이지 - login 시 좋아요 개수 가져오기 public Feed_LikeDTO feedLikeList(
-	 * 
-	 * @Param("Feed_num") int Feed_num );
-	 */
 	//피드 전체 페이지 - 홈에서 보일 피드
 	public List<FeedDTO> feedList_random();
 
@@ -64,6 +59,8 @@ public interface IFeedDAO {
 	public FeedDTO feedShow(
 			@Param("Feed_num") int Feed_num
 	);
+	
+	//피드 세부 페이지 - login 시 좋아요 개수 가져오기
 	public FeedDTO feedShow_login(
 			@Param("Member_Id") String Member_Id,
 			@Param("Feed_num") int Feed_num
@@ -83,6 +80,14 @@ public interface IFeedDAO {
 	public int feedDel(
 		@Param("Feed_num") int Feed_num 
 	);
+	
+	
+	public List<FeedDTO> feedList_mypage(
+			@Param("Member_Id") String Member_Id
+			);
+	
+	
+	/////////////////////// 좋아요 /////////////////////// 
 	
 	// 피드 좋아요
 	public int feedLike(

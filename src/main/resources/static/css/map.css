@@ -136,7 +136,9 @@ li.map_icon_set::before {
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
 	background-position-y: -324px;
 }
-
+.map_curr_location_name1 b{
+	color:black;
+}
 /* 맵 출력 아이템 리스트 스타일 */
 div.mapListItemBox{
 	height: 100%;
@@ -226,5 +228,8 @@ h3.pgj{
   }
   div.map_guide{
 	width: 100%;  
-  };
+  }
+ .mapday1,.mapday2,.mapday3{
+ 	display: none;
+ }
 }
