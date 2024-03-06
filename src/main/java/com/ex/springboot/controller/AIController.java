@@ -45,24 +45,103 @@ public class AIController {
 
 	@PostMapping("/cours_Save")
 	public String cours_Save(HttpServletRequest request, Model model) {
-		String cours1 = request.getParameter("cours1");
-		String cours2 = request.getParameter("cours2");
-		String cours3 = request.getParameter("cours3");
-		String cours4 = request.getParameter("cours4");
-		String cours5 = request.getParameter("cours5");
-		String cours6 = request.getParameter("cours6");
+		//day1 파라미터 값
+		String day1aicc = request.getParameter("day1aicc");
+		String day1aiccFood = request.getParameter("day1aiccFood");
+		String day1aicc2 = request.getParameter("day1aicc2");
+		String day1aiccCafe = request.getParameter("day1aiccCafe");
+		String day1aiccFood2 = request.getParameter("day1aiccFood2");
+		String day1aiccTD = request.getParameter("day1aiccTDV");
+		String day1hotel = request.getParameter("day1hotel");
+		//day2 파라미터 값
+		String day2aicc = request.getParameter("day2aicc");
+		String day2aiccFood = request.getParameter("day2aiccFood");
+		String day2aicc2 = request.getParameter("day2aicc2");
+		String day2aiccCafe = request.getParameter("day2aiccCafe");
+		String day2aiccFood2 = request.getParameter("day2aiccFood2");
+		String day2aiccTD = request.getParameter("day2aiccTDV");
+		String day2hotel = request.getParameter("day2hotel");
+		//day3 파라미터 값
+		String day3aicc = request.getParameter("day3aicc");
+		String day3aiccFood = request.getParameter("day3aiccFood");
+		String day3aicc2 = request.getParameter("day3aicc2");
+		String day3aiccCafe = request.getParameter("day3aiccCafe");
+		String day3aiccFood2 = request.getParameter("day3aiccFood2");
+		String day3aiccTD = request.getParameter("day3aiccTDV");
+		
+		
+		
+		
 		String memberId = request.getParameter("memberId");
 		String day = request.getParameter("day");
+		model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
+		model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
+		model.addAttribute("aicc2", AiDAO.listCourse(day1aicc2));
+		model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccCafe));
+		model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccFood2));
+		if(day.equals("1")) {
+			double d1 = Double.parseDouble(day1aiccTD);
+			double d2 = Double.parseDouble(day2aiccTD);
+			
+			double total = d1 + d2;
+			
+			String td = String.format("%.2f", total);
+			model.addAttribute("totalDistance", td);
+			//1일차 보내기
+			model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
+			model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
+			model.addAttribute("aicc2", AiDAO.listCourse(day1aicc2));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccCafe));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccFood2));
+			model.addAttribute("hotel", AiDAO.listCourse(day1hotel));
+			// 2일차 보내기
+			model.addAttribute("aicc3", AiDAO.listCourse(day2aicc));
+			model.addAttribute("aiccFood3", AiDAO.listCourse(day2aiccFood));
+			model.addAttribute("aicc4", AiDAO.listCourse(day2aicc2));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(day2aiccCafe));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(day2aiccFood2));
+			model.addAttribute("memberId", memberId);
+			model.addAttribute("day", day);
+			
+			return "thymeleaf/aicc/saveCourseday2";
+		}
+		if(day.equals("2")) {
+			double d1 = Double.parseDouble(day1aiccTD);
+			double d2 = Double.parseDouble(day2aiccTD);
+			double d3 = Double.parseDouble(day3aiccTD);
+			double total = d1 + d2 + d3;
+			
+			String td = String.format("%.2f", total);
+			model.addAttribute("totalDistance", td);
+			//1일차 보내기
+			model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
+			model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
+			model.addAttribute("aicc2", AiDAO.listCourse(day1aicc2));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccCafe));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccFood2));
+			model.addAttribute("hotel", AiDAO.listCourse(day1hotel));
+			// 2일차 보내기
+			model.addAttribute("aicc3", AiDAO.listCourse(day2aicc));
+			model.addAttribute("aiccFood3", AiDAO.listCourse(day2aiccFood));
+			model.addAttribute("aicc4", AiDAO.listCourse(day2aicc2));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(day2aiccCafe));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(day2aiccFood2));
+			model.addAttribute("hotel2", AiDAO.listCourse(day2hotel));
+			// 3일차 보내기
+			model.addAttribute("aicc5", AiDAO.listCourse(day3aicc));
+			model.addAttribute("aiccFood5", AiDAO.listCourse(day3aiccFood));
+			model.addAttribute("aicc6", AiDAO.listCourse(day3aicc2));
+			model.addAttribute("aiccFood6", AiDAO.listCourse(day3aiccCafe));
+			model.addAttribute("aiccCafe3", AiDAO.listCourse(day3aiccFood2));
+			model.addAttribute("memberId", memberId);
+			model.addAttribute("day", day);
+			return "thymeleaf/aicc/saveCourseday3";
+		}
+	
 		
-		model.addAttribute("aicc", AiDAO.listCourse(cours1));
-		model.addAttribute("aiccFood", AiDAO.listCourse(cours2));
-		model.addAttribute("aicc2", AiDAO.listCourse(cours3));
-		model.addAttribute("aiccFood2", AiDAO.listCourse(cours4));
-		model.addAttribute("aiccCafe", AiDAO.listCourse(cours5));
-		model.addAttribute("totalDistance", cours6);
+		model.addAttribute("totalDistance", day1aiccTD);
 		model.addAttribute("memberId", memberId);
 		model.addAttribute("day", day);
-		
 		return "thymeleaf/aicc/saveCourse";
 	}
 	@GetMapping("/Course_view")
@@ -72,12 +151,61 @@ public class AIController {
 		model.addAttribute("list",AiDAO.Course_view_list(num));
 		String number = AiDAO.Course_view_list(num).get(0).getCourse_number();
 		System.out.println("number"+number);
+		String day =  AiDAO.Course_view_list(num).get(0).getCourse_Interest();
 		String[] values = number.split(",");
 		model.addAttribute("aicc", AiDAO.listCourse(values[0]));
 		model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
 		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
 		model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
 		model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+		if(day.equals("1박2일")) {
+			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+			model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+			model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+			model.addAttribute("hotel", AiDAO.listCourse(values[5]));
+			
+			model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
+			model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));
+			model.addAttribute("aicc4", AiDAO.listCourse(values[8]));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
+			
+			
+			
+			model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+			model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+			
+			return "thymeleaf/aicc/Course_viewDay2";
+		}
+		if(day.equals("2박3일")) {
+			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+			model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+			model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+			model.addAttribute("hotel", AiDAO.listCourse(values[5]));
+			
+			model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
+			model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));
+			model.addAttribute("aicc4", AiDAO.listCourse(values[8]));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
+			model.addAttribute("hotel2", AiDAO.listCourse(values[11]));
+			// 3일차 보내기
+			model.addAttribute("aicc5", AiDAO.listCourse(values[12]));
+			model.addAttribute("aiccFood5", AiDAO.listCourse(values[13]));
+			model.addAttribute("aicc6", AiDAO.listCourse(values[14]));
+			model.addAttribute("aiccFood6", AiDAO.listCourse(values[15]));
+			model.addAttribute("aiccCafe3", AiDAO.listCourse(values[16]));
+			
+			
+			model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+			model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+			
+			return "thymeleaf/aicc/Course_viewDay3";
+		}
 		model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
 		model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
 		
@@ -99,15 +227,33 @@ public class AIController {
 	}
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
-		String cours1 = request.getParameter("cours1");
-		String cours2 = request.getParameter("cours2");
-		String cours3 = request.getParameter("cours3");
-		String cours4 = request.getParameter("cours4");
-		String cours5 = request.getParameter("cours5");
-		String numder=cours1+","+cours2+","+cours3+","+cours4+","+cours5;
+		String day = request.getParameter("day");
+		// day1 파라미터 값
+		String day1aicc = request.getParameter("day1aicc");
+		String day1aiccFood = request.getParameter("day1aiccFood");
+		String day1aicc2 = request.getParameter("day1aicc2");
+		String day1aiccCafe = request.getParameter("day1aiccCafe");
+		String day1aiccFood2 = request.getParameter("day1aiccFood2");
+		String day1hotel = request.getParameter("day1hotel");
+		
+		// day2 파라미터 값
+		String day2aicc = request.getParameter("day2aicc");
+		String day2aiccFood = request.getParameter("day2aiccFood");
+		String day2aicc2 = request.getParameter("day2aicc2");
+		String day2aiccCafe = request.getParameter("day2aiccCafe");
+		String day2aiccFood2 = request.getParameter("day2aiccFood2");
+		String day2hotel = request.getParameter("day2hotel");
+		
+		// day3 파라미터 값
+		String day3aicc = request.getParameter("day3aicc");
+		String day3aiccFood = request.getParameter("day3aiccFood");
+		String day3aicc2 = request.getParameter("day3aicc2");
+		String day3aiccCafe = request.getParameter("day3aiccCafe");
+		String day3aiccFood2 = request.getParameter("day3aiccFood2");
+		String number="";
+		
 		String memberId = request.getParameter("memberId");
 		String img = request.getParameter("img");
-		String day = request.getParameter("day");
 		if (day==null || day.equals("") || day.equals("0")) {
 			day="당일 치기";
 		}else if(day.equals("1")) {
@@ -121,8 +267,23 @@ public class AIController {
 		String Course_Area = request.getParameter("Course_Area");
 		String Course_content = request.getParameter("Course_content");
 		String Course_distance = request.getParameter("Course_distance");
-	
-		System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,numder,img));
+		if(day.equals("2박3일")) {
+			 number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
+					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
+							day3aicc+","+day3aiccFood+","+day3aicc2+","+day3aiccCafe+","+day3aiccFood2;
+			 System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img));
+		}
+		if(day.equals("1박2일")) {
+			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
+					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2;
+			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img));
+		}
+		
+		if(day.equals("당일 치기")) {
+			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
+			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img));
+		}
+		
 		model.addAttribute("memberId", memberId);
 		System.out.println("memberId : " +memberId);
 		String msg = "1";
@@ -139,8 +300,53 @@ public class AIController {
 		String num = request.getParameter("num");
 		model.addAttribute("list",AiDAO.Course_view_list(num));
 		String number = AiDAO.Course_view_list(num).get(0).getCourse_number();
+		String day = AiDAO.Course_view_list(num).get(0).getCourse_Interest();
 		System.out.println("number"+number);
 		String[] values = number.split(",");
+		if(day.equals("2박3일")) {
+			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+			model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+			model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+	model.addAttribute("hotel", AiDAO.listCourse(values[5]));
+			
+			model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
+			model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));
+			model.addAttribute("aicc4", AiDAO.listCourse(values[8]));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
+			model.addAttribute("hotel2", AiDAO.listCourse(values[11]));
+			// 3일차 보내기
+			model.addAttribute("aicc5", AiDAO.listCourse(values[12]));
+			model.addAttribute("aiccFood5", AiDAO.listCourse(values[13]));
+			model.addAttribute("aicc6", AiDAO.listCourse(values[14]));
+			model.addAttribute("aiccFood6", AiDAO.listCourse(values[15]));
+			model.addAttribute("aiccCafe3", AiDAO.listCourse(values[16]));
+			
+			model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+			model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+			return "thymeleaf/aicc/Course_updateDay3";
+		}
+		if(day.equals("1박2일")) {
+			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+			model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+			model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+	model.addAttribute("hotel", AiDAO.listCourse(values[5]));
+			
+			model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
+			model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));
+			model.addAttribute("aicc4", AiDAO.listCourse(values[8]));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
+			
+			
+			model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+			model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+			return "thymeleaf/aicc/Course_updateDay2";
+		}
 		model.addAttribute("aicc", AiDAO.listCourse(values[0]));
 		model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
 		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
@@ -162,8 +368,54 @@ public class AIController {
 		model.addAttribute("list",AiDAO.Course_view_list(num));
 		
 		String number = AiDAO.Course_view_list(num).get(0).getCourse_number();
+		String day = AiDAO.Course_view_list(num).get(0).getCourse_Interest();
+		
 		System.out.println("number"+number);
 		String[] values = number.split(",");
+		if(day.equals("2박3일")) {
+			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+			model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+			model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+			model.addAttribute("hotel", AiDAO.listCourse(values[5]));
+			
+			model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
+			model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));
+			model.addAttribute("aicc4", AiDAO.listCourse(values[8]));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
+			model.addAttribute("hotel2", AiDAO.listCourse(values[11]));
+			// 3일차 보내기
+			model.addAttribute("aicc5", AiDAO.listCourse(values[12]));
+			model.addAttribute("aiccFood5", AiDAO.listCourse(values[13]));
+			model.addAttribute("aicc6", AiDAO.listCourse(values[14]));
+			model.addAttribute("aiccFood6", AiDAO.listCourse(values[15]));
+			model.addAttribute("aiccCafe3", AiDAO.listCourse(values[16]));
+			model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+			model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+			
+			return "redirect:/Course_view?num="+num;
+		}
+		if(day.equals("1박2일")) {
+			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
+			model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
+			model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+			model.addAttribute("hotel", AiDAO.listCourse(values[5]));
+			
+			model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
+			model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));
+			model.addAttribute("aicc4", AiDAO.listCourse(values[8]));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
+			
+			model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
+			model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+			
+			return "redirect:/Course_view?num="+num;
+		}
 		model.addAttribute("aicc", AiDAO.listCourse(values[0]));
 		model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
 		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));

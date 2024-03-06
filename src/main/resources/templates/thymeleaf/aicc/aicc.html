@@ -364,7 +364,7 @@
                      <!--다음에 하기 btn -->
                      <div class="py-4 mt-5">
                         <button type="submit"
-                           class="next-btn btn rounded-pill btn-outline-light ">선택
+                           class="next-btn btn rounded-pill btn-outline-light endbtn">선택
                            완료</button>
                      </div>
                   </div>
@@ -420,29 +420,29 @@
                                  });
                   });
    </script>
-   <script>
-      // 체크박스 선택 개수를 저장하는 변수
-      var checkedCount = 0;
-      // 체크박스 클릭 이벤트 리스너 등록
-      document.querySelectorAll('input[type="checkbox"]').forEach(
-            function(checkbox) {
-               checkbox.addEventListener('click', function() {
-                  // 체크박스가 체크되었는지 확인하고 선택된 체크박스 개수 업데이트
-                  if (this.checked) {
-                     checkedCount++;
-                  } else {
-                     checkedCount--;
-                  }
+<script>
+    // 버튼 클릭 이벤트 리스너 등록
+    document.querySelector('.endbtn').addEventListener('click', function(event) {
+        var checkedCount = 0; // 체크된 개수를 저장하는 변수 초기화
+        // 모든 체크박스에 대해 반복
+        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+            // 체크된 체크박스인 경우 개수 증가
+            if (checkbox.checked) {
+                checkedCount++;
+            }
+        });
 
-                  // 선택된 체크박스 개수가 4개를 초과하면 체크를 해제
-                  if (checkedCount > 4) {
-                     this.checked = false;
-                     checkedCount--;
-                     alert("최대 4개의 테마를 선택할 수 있습니다.");
-                  }
-               });
-            });
-   </script>
+        // 선택된 체크박스 개수가 2개 미만 또는 4개 이상인 경우
+        if (checkedCount < 2 || checkedCount > 4) {
+            event.preventDefault(); // submit 방지
+            if (checkedCount < 2) {
+                alert("최소 2개의 테마를 선택해야 합니다.");
+            } else {
+                alert("최대 4개의 테마를 선택할 수 있습니다.");
+            }
+        }
+    });
+</script>
 <script th:if="${confirmMessage != null}">
     var confirmResult = confirm("[[${confirmMessage}]]");
     if (confirmResult) {

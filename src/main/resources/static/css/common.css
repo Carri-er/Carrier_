@@ -66,6 +66,7 @@ a.indent {
 	--mainbg: #ffe576; /*좀더 진함*/
 	--nottedblue: rgb(59 130 246/ 0.5);
 	--nottedskyblue: #87cefa;
+	--nottedDeepblue: #92bbe9;
 	--nottedpink: #fdfaf7;
 	--nottedpinkD: #f8c9df;
 	--nottedDeepPink: #ffa2cb;
@@ -139,6 +140,9 @@ a.indent {
 .bg-skyb {
 	background-color: var(--nottedskyblue) !important;
 }
+.bg-skyD {
+	background-color: var(--nottedDeepblue) !important;
+}
 
 .bg-brown {
 	background-color: var(--nottedbrown) !important;
@@ -177,6 +181,9 @@ a.indent {
 
 .btn-skyb {
 	background-color: var(--nottedskyblue) !important;
+}
+.btn-skyD {
+	background-color: var(--nottedDeepblue) !important;
 }
 
 .btn-brown {

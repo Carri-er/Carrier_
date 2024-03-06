@@ -30,9 +30,9 @@
 		<div class="row mb-5 px-5">
 			<div class="col text-center " data-aos="fade-up">
 				<h3 class="my-5 ">
-					<span class="highlight"
+					<span class="highlight p-0"
 						th:text="| [ ${view.getEvent_category()} ] |">버튼</span> <span
-						th:text="${view.getEvent_name()}"></span>
+						th:text="${view.getEvent_name()}" class="ms-1"></span>
 				</h3>
 				
 				<img th:src="@{'../img/info/' + ${view.getEvent_thumbnail()}}"
@@ -45,7 +45,7 @@
 				<h4 class="mt-2 mt-lg-5 mb-3 px-lg-3 mx-5" data-aos="fade-up">상세 정보</h4>
 				<hr class="mx-5">
 				<p class="px-lg-5 textcontent mx-5"
-					th:text="${view.getEvent_content()}" data-aos="fade-up">내용 들어가는 곳</p>
+					th:utext="${view.getEvent_content()}" data-aos="fade-up">내용 들어가는 곳</p>
 
 
 				<div class="map_mapSection w-100 my-5 px-5" data-aos="fade-up">

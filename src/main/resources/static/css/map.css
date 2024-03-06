@@ -7,7 +7,7 @@ div.map_all_contentBox {
 }
 /* map guide 영역 */
 div.map_guide {
-	width: 400px;
+	width: 350px;
 	/* height: calc( 100vh - 200px ); */
 	height: 100vh;
 }
@@ -156,21 +156,21 @@ div.map_mapSection {
 .mapday1,.mapday2,.mapday3{
 	position: fixed;	
 	z-index: 5;
-	right: 10px;
+	right: -35px;
 }
 .mapday1{
-	top:100px;
-}
-.mapday2{
 	top:150px;
 }
-.mapday3{
+.mapday2{
 	top:200px;
+}
+.mapday3{
+	top:250px;
 }
 h3.pgj{
 	position: absolute;
 	top:5px;
-	left:15px;
+	right:15px;
 	z-index: 5;
 	
 }
@@ -216,4 +216,15 @@ h3.pgj{
 .loading-message {
 	font-size: 24px;
 	font-weight: bold;
+}
+ .showbtn {
+    display: none;
+  }
+@media screen and (max-width: 760px) {
+  .showbtn {
+    display: block;
+  }
+  div.map_guide{
+	width: 100%;  
+  };
 }
