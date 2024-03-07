@@ -306,24 +306,25 @@
 		<div class="home_dl_content">
 			<!-- 컨텐츠 별 설명 영역 -->
 			<div class="row me-0">
-				<div class="col d-flex justify-content-center py-5 dl_ment ">
+				<div class="col d-flex justify-content-center py-5 dl_ment">
 					<img src="../img/home/main/icon_curation_txt.png" width="22" height="22" alt="#"><span>다양한 취향! 다른사람들의 여행을 함께 구경해요! </span><span>빅데이터 정보로 분석한 지역별 핫한 여행지와 맛집을 소개합니다.</span><span>1분이면 끝! 맞춤형 여행 코스 추천 받아보세요.</span>
 				</div>
 			</div>
 			<!-- 컨텐츠 별 이미지 영역 -->
 			<!-- 피드 컨텐츠 영역 -->
-			<div id="feed" class="row gap-3 gap-md-5 flex-nowrap gap-lg-3 justify-content-around align-items-start pb-4 m-0 row-box home_dl_img_AIcokcok overflow-hidden">
+			<div id="feed" class="row gap-3 gap-md-5 gap-lg-3 justify-content-center justify-content-xl-around align-items-start pb-4 m-0 row-box home_dl_img_AIcokcok overflow-hidden">
 				<!--feed box Start-->
 				<!-- [P] -->
 				<div class="col-12 col-xl-4 m-0 my-3 feed-box home-feed-box px-0 no-gutters" th:each="feed, iterStat : ${feedList}" th:if="${iterStat.index < 3}">
 					<div class="col-12 w-100 position-relative">
 						<!--feed box top-->
-						<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
+						<div class="col-12 hstack feed-box-top p-3 ps-3 z-3 d-md-">
 							<img th:src="@{'../img/member_thumbnail/'+${feed.Member_profileimage}}" class="float-start rounded-circle border me-3" width="50" height="50" alt="">
 							<!--feed box text-->
 							<div class="col px-0">
-								<span class="float-start fw-bold f16" th:text="${feed.Member_Id}">박검지</span><br>
-								<span class="float-start text-muted f13 me-2" th:if="${#strings.contains(feed.Feed_updateday,'전')}">하이라이트</span><span class="float-start text-muted f13" th:text="${feed.Feed_updateday}">시간</span>
+								<span class="float-start fw-bold f16 d-block w-100" th:text="${feed.Member_Id}">박검지</span>
+								<span class="float-start text-muted f13 me-2" th:if="${#strings.contains(feed.Feed_updateday,'전')}">하이라이트</span>
+								<span class="float-start text-muted f13" th:text="${feed.Feed_updateday}">시간</span>
 							</div>
 							<!-- 우측 버튼 -->
 							<div class="col-3 d-flex justify-content-end align-items-center">
@@ -331,7 +332,7 @@
 								<!-- 수정 및 삭제 버튼  -->
 								<div th:if="${session.Member_Id==feed.Member_Id}">
 									<div class="f17 hstack" id="feed-right">
-										<a class="dropdown-toggle text-center m-0 ps-2 pt-1 d-block d-flex justify-content-end" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi fi-rr-menu-dots-vertical"></i>
+										<a class="dropdown-toggle text-center m-0 pt-2 d-block d-flex justify-content-end" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi fi-rr-menu-dots-vertical"></i>
 										</a>
 										<ul class="dropdown-menu dropdown-menu-dark">
 											<li><a class="dropdown-item active" th:href="@{'/delFeed?num='+${feed.Feed_num}}">삭제</a></li>
@@ -365,7 +366,7 @@
 						</div>
 						<!--feed-box-bot | text-->
 						<div class="col-12 feed-box-bot p-4 pt-3 pb-5">
-							<span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span><span class="f13 text-truncate"><span th:text="${feed.Feed_content}"></span><span th:if="${feed.Feed_content}==null">&nbsp;</span></span>
+							<span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span><span class="f13 text-truncate"><span th:utext="${feed.Feed_content}"></span><span th:if="${feed.Feed_content}==null">&nbsp;</span></span>
 						</div>
 						<!--feed box bot | text-->
 						<div class="col-12 feed-box-bot hstack p-3 border-top f13 d-flex hstack">
@@ -436,7 +437,7 @@
                     </div>
  -->
 			<!-- 핫플 이미지 영역 -->
-			<div class="hp_imgBox mb-3 ">
+			<div class="hp_imgBox mb-3 px-5">
 				<div class="hp_img_content col-10 col-md-6 mx-auto" th:each="infoHome:${infoHome2}">
 					<a th:href="@{'Event_view?id='+ ${infoHome.getEvent_num()}}" class="">
 					<div class="hp_img">
@@ -448,62 +449,61 @@
 					</a>
 				</div>
 			</div>
-		</div>
-		<!-- home_dl_img_hotPlace -->
-		<!-- AI콕콕 플래너 영역 -->
-		<!--	<div class="home_dl_img_AIPlaner">
-                    <ul class="aiPlaner_list px-0 ">
-                        <li class="pb-3"><a href="#">
-                                <span class="best"></span>
-                                <div class="aiPlaner_img"></div>
-                                <div class="row aiPlaner_board">
-                                    <em>2박3일</em>
-                                    <div class="col-10 aiPlaner_text">
-                                        <strong>전주김제 2박 3일 여행</strong>
-                                        <p>전북 전주시 ~ 전분 김제시</p>
-                                        <span>만든날짜</span>
-                                        <span>2023. 11. 14.</span>
-                                    </div>
-                                    <div class="col-2 aiPlaner_profile">
-                                        <img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
-                                    </div>
-                                </div>
-                            </a></li>
-                        <li><a href="#">
-                                <span class="best"></span>
-                                <div class="aiPlaner_img"></div>
-                                <div class="row aiPlaner_board">
-                                    <em>2박3일</em>
-                                    <div class="col-8 aiPlaner_text">
-                                        <strong>제주도 여행코스</strong>
-                                        <p>제주</p>
-                                        <span>만든날짜</span>
-                                        <span>2023. 11. 19.</span>
-                                    </div>
-                                    <div class="col-4 aiPlaner_profile">
-                                        <img class="img-fluid" src="../img/home/common/kakao_profile_02.png" alt="">
-                                    </div>
-                                </div>
-                            </a></li>
-                        <li><a href="#">
-                                <span class="best"></span>
-                                <div class="aiPlaner_img"></div>
-                                <div class="row aiPlaner_board">
-                                    <em>2박3일</em>
-                                    <div class="col-8 aiPlaner_text">
-                                        <strong>부산 여행코스</strong>
-                                        <p>부산</p>
-                                        <span>만든날짜</span>
-                                        <span>2023. 11. 21.</span>
-                                    </div>
-                                    <div class="col-4 aiPlaner_profile">
-                                        <img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
-                                    </div>
-                                </div>
-                            </a></li>
-                    </ul>
-                </div>  home_dl_img_AIPlaner -->
-		<div class="f-carousel home_dl_img_AIPlaner " id="myCarousel">
+			<!-- home_dl_img_hotPlace -->
+			<!-- AI콕콕 플래너 영역 -->
+			<!--	<div class="home_dl_img_AIPlaner">
+	                    <ul class="aiPlaner_list px-0 ">
+	                        <li class="pb-3"><a href="#">
+	                                <span class="best"></span>
+	                                <div class="aiPlaner_img"></div>
+	                                <div class="row aiPlaner_board">
+	                                    <em>2박3일</em>
+	                                    <div class="col-10 aiPlaner_text">
+	                                        <strong>전주김제 2박 3일 여행</strong>
+	                                        <p>전북 전주시 ~ 전분 김제시</p>
+	                                        <span>만든날짜</span>
+	                                        <span>2023. 11. 14.</span>
+	                                    </div>
+	                                    <div class="col-2 aiPlaner_profile">
+	                                        <img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
+	                                    </div>
+	                                </div>
+	                            </a></li>
+	                        <li><a href="#">
+	                                <span class="best"></span>
+	                                <div class="aiPlaner_img"></div>
+	                                <div class="row aiPlaner_board">
+	                                    <em>2박3일</em>
+	                                    <div class="col-8 aiPlaner_text">
+	                                        <strong>제주도 여행코스</strong>
+	                                        <p>제주</p>
+	                                        <span>만든날짜</span>
+	                                        <span>2023. 11. 19.</span>
+	                                    </div>
+	                                    <div class="col-4 aiPlaner_profile">
+	                                        <img class="img-fluid" src="../img/home/common/kakao_profile_02.png" alt="">
+	                                    </div>
+	                                </div>
+	                            </a></li>
+	                        <li><a href="#">
+	                                <span class="best"></span>
+	                                <div class="aiPlaner_img"></div>
+	                                <div class="row aiPlaner_board">
+	                                    <em>2박3일</em>
+	                                    <div class="col-8 aiPlaner_text">
+	                                        <strong>부산 여행코스</strong>
+	                                        <p>부산</p>
+	                                        <span>만든날짜</span>
+	                                        <span>2023. 11. 21.</span>
+	                                    </div>
+	                                    <div class="col-4 aiPlaner_profile">
+	                                        <img class="img-fluid" src="../img/home/common/kakao_profile_01.jpg" alt="">
+	                                    </div>
+	                                </div>
+	                            </a></li>
+	                    </ul>
+	                </div>  home_dl_img_AIPlaner -->
+			<div class="f-carousel home_dl_img_AIPlaner px-5" id="myCarousel">
 			<div class="f-carousel__slide" th:each="CourseListHome:${CourseListHome}">
 				<li class="pb-3"><a th:href="@{'Course_view?num='+ ${CourseListHome.getCourse_num()}}" class=""><span class="best"></span><img th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}" alt="" class="aiPlaner_img">
 				<div class="row aiPlaner_board">
@@ -558,6 +558,7 @@
                             </a></li>
                     </div> -->
 		</div>
+		</div>
 	</div>
 	<!-- home_dl_imgBox -->
 	<!-- datalab 컨텐츠 새로고침 버튼 영역 -->
@@ -567,9 +568,9 @@
 				<img class="img-fluid" src="../img/home/main/btn_curation_refresh.png" alt="#"><span>오늘의 피드 추천</span><span>오늘의 핫플 추천</span><span>코스 재추천</span>
 			</div>
 			<div class="dl_more_content hstack">
-				<a href="/feed" class="hstack"><span class="me-2 f14">바로가기 <b> > </b>
-				</span>
-				</a>
+				<a href="/feed" class="hstack goFeed me-2 f14">바로가기 <b> > </b></a>
+				<a href="/info" class="hstack goEvent me-2 f14">바로가기 <b> > </b></a>
+				<a href="/infoCourse" class="hstack goCourse me-2 f14">바로가기 <b> > </b></a>
 			</div>
 		</div>
 	</div>
