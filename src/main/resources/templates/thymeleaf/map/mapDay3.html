@@ -10,7 +10,7 @@
 		<!-- 맵 컨텐츠 전체를 감싸는 영역  -->
 		<div class="map_all_contentBox ">
 			<!-- map 왼쪽 가이드 영역 -->
-			<div class="map_guide overflow-scroll" style="height: 100vh;">
+			<div class="map_guide overflow-scroll">
 
 				<!-- 정보값 출력 영역 day가 0일때-->
 				<th:block th:if="${day}==2">
@@ -37,7 +37,7 @@
 											<b>총 거리</b> <span class="text-black mx-2">|</span> <span
 												class="totalDistanceAll text-black"></span>
 										</p>
-										<p class="px-3">
+										<p class="px-3 text-black">
 											<th:block th:if="${thema!=null and thema != ' '}"># <span
 													th:text="${thema}" class="text-black "></span>
 											</th:block>
@@ -626,8 +626,8 @@
 						</div>
 						<!-- 맛집2 -->
 						<hr class="px-5 text-black-50" />
-						<div class="row" th:each="aiccFood6:${aiccFood6}">
-							<div class="col mb-3">
+						<div class="row mb-3" th:each="aiccFood6:${aiccFood6}">
+							<div class="col mb-5">
 								<a th:href="@{'Event_view?id='+ ${aiccFood6.getEvent_num()}}">
 									<div class="row px-4 Event_contentRow">
 										<div class="col-1 count">
@@ -664,7 +664,7 @@
 			</div>
 			<!-- map_guide -->
 
-			<div class="map_mapSection">
+			<div class="map_mapSection col">
 				<!-- 지도를 표시할 div 입니다 -->
 				<div id="map">
 					<h3 class="pgj">
@@ -1233,10 +1233,9 @@
 			/*[[${aiccFood4[0].getEvent_num()}]]*/,
 			/*[[${aiccFood5[0].getEvent_num()}]]*/,
 			/*[[${aiccFood6[0].getEvent_num()}]]*/,
-			/*[[${hotel[0].getEvent_num()}]]*/
+			/*[[${hotel[0].getEvent_num()}]]*/,
 			/*[[${hotel2[0].getEvent_num()}]]*/
 			];
-
 			var duplicateFound = false;
 
 			// 모든 eventNum 값을 비교하여 같은 값이 있는지 확인

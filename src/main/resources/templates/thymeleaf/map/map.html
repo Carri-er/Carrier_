@@ -26,7 +26,7 @@
                         <div class="col-10 rounded-circle mt-3">
                             <p class="px-3 mb-1 pb-1"><b>여행 지역 </b> <span class="text-black mx-2 ">|</span> <span th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span></p>
                             <p class="px-3 mb-1 pb-1 text-black"><b>총 거리</b> <span class="text-black mx-2">|</span> <span class="totalDistance text-black"></span> </p>
-                            <p class="px-3">
+                            <p class="px-3 text-black">
                             <th:block th:if="${thema!=null and thema != ' '}"># <span th:text="${thema}" class="text-black "></span></th:block>
                             <th:block th:if="${thema1!=null and thema1 != ' '}"># <span th:text="${thema1}" class="text-black "></span></th:block>
                             <th:block th:if="${thema2!=null and thema2 != ' '}"># <span th:text="${thema2}" class="text-black "></span></th:block>
