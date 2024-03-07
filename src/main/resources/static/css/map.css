@@ -318,7 +318,12 @@ li.map_icon_set.on::before {
 
 /* 맵 출력 아이템 리스트 스타일 */
 div.mapListItemBox{
+
    height: calc( 100vh - 150px );
+	overflow : scroll !important;
+	height: calc( 100vh - 150px );
+	width: 400px;
+
 }
 
 /* 카카오 맵 스타일 */
