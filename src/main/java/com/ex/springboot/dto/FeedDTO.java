@@ -17,7 +17,6 @@ public class FeedDTO {
 	private String Feed_area; //지역
 	private String Feed_uploadday; //올린날짜
 	private String Feed_updateday; //수정날짜
-	private String Feed_updateday_time; //n시간 전
 	private int Feed_heart; //하트 수
 	private int Feed_heart_on; //하트 on/off
 	private String Feed_thumbnail; //피드 썸네일 이미지 파일 명
@@ -26,6 +25,4 @@ public class FeedDTO {
 	public void setFeed_updateday(Date date) {
 		this.Feed_updateday = Time.calculateTime(date);
 	}
-	
-
 }

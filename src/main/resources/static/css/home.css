@@ -702,24 +702,18 @@ div.home_band_recomand_text>span {
 }
 
 /*********************/
-/******* Fonts Import Start **********/
-@import
-	url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap")
-	;
-/********* Fonts Face CSS End **********/
-
 /******* Common Element CSS Start ******/
 
 .clear {
 	clear: both;
 }
 
-img {
+.home_search img {
 	max-width: 100%;
 	border: 0px;
 }
 
-ul, ol {
+.home_search ul, .home_search ol {
 	list-style: none;
 }
 
@@ -736,7 +730,7 @@ a:focus, a:active, a:visited, a:hover {
 	outline: none;
 }
 
-h2 {
+.home_search h2 {
 	margin-bottom: 48px;
 	padding-bottom: 16px;
 	font-size: 20px;
@@ -746,13 +740,13 @@ h2 {
 	text-transform: capitalize;
 }
 
-h3 {
+.home_search h3 {
 	margin: 0 0 10px;
 	font-size: 28px;
 	line-height: 36px;
 }
 
-button {
+.home_search button {
 	outline: none !important;
 }
 /******* Common Element CSS End *********/

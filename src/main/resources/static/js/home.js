@@ -5,8 +5,9 @@ $(document).ready(function() {
     let home_dl_img_hotPlace = $(".home_dl_img_hotPlace");
     let home_dl_img_AIPlaner = $(".home_dl_img_AIPlaner");
     let dl_refresh_button = $(".dl_refresh_button span");
+    let dl_more_content = $(".dl_more_content a");
     let clickEl;
-    
+
     // section 2 nav active 추가
     homenavlist.click(function() {
         // 클릭된 요소에만 active 클래스 추가하고 나머지 요소에서는 제거
@@ -14,7 +15,6 @@ $(document).ready(function() {
         $(this).addClass("active");
     });
 
-    
 
     function hideAllElements() {
         dlment.hide();
@@ -22,6 +22,7 @@ $(document).ready(function() {
         home_dl_img_hotPlace.hide();
         home_dl_img_AIPlaner.hide();
         dl_refresh_button.hide();
+        dl_more_content.hide();
     }
 
     function showElementAtIndex(index) {
@@ -39,6 +40,7 @@ $(document).ready(function() {
                 break;
         }
         dl_refresh_button.eq(index).show();
+        dl_more_content.eq(index).show();
     }
 
     homenavlist.on('click', function() {
@@ -51,6 +53,9 @@ $(document).ready(function() {
         location.reload(); // 페이지 새로고침
         hideAllElements(); // 모든 요소 숨기기
         showElementAtIndex(0); // 피드 추천 요소 표시
+        goFeed.show(); 
+        goEvent.hide(); 
+        goCourse.hide(); 
         $('html, body').animate({
             scrollTop: $('#myCarousel').offset().top // myCarousel 위치로 스크롤 이동
         }, 1000); // 스크롤 속도 (밀리초 단위)
@@ -61,6 +66,9 @@ $(document).ready(function() {
         location.reload(); // 페이지 새로고침
         hideAllElements(); // 모든 요소 숨기기
         showElementAtIndex(1); // 코스 추천 요소 표시
+		goFeed.show(); 
+        goEvent.hide(); 
+        goCourse.hide(); 
         $('html, body').animate({
             scrollTop: $('#myCarousel').offset().top // myCarousel 위치로 스크롤 이동
         }, 1000); // 스크롤 속도 (밀리초 단위)
@@ -71,6 +79,9 @@ $(document).ready(function() {
         location.reload(); // 페이지 새로고침
         hideAllElements(); // 모든 요소 숨기기
         showElementAtIndex(2); // 핫플 추천 요소 표시
+        goFeed.show(); 
+        goEvent.hide(); 
+        goCourse.hide(); 
         $('html, body').animate({
             scrollTop: $('.hp_imgBox').offset().top // 스크롤을 hp_imgBox 위치로 이동
         }, 1000); // 스크롤 속도 (밀리초 단위)
