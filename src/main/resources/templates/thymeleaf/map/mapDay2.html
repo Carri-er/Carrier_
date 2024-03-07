@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<div th:replace="~{head/head::head}"></div>
+<body class="overflow-hidden">
+	<div th:replace="~{nav/nav::nav}"></div>
+	<div class="loading-screen">
+		<div class="loading-message">로딩 중...</div>
+	</div>
+	<div class="map_wrapp">
+		<!-- 맵 컨텐츠 전체를 감싸는 영역  -->
+		<div class="map_all_contentBox ">
+			<!-- map 왼쪽 가이드 영역 -->
+			<div class="map_guide overflow-scroll" style="height: 100vh;">
+		
+				<!-- 정보값 출력 영역 day가 1일때-->
+				<th:block th:if="${day}==1">
+					<div class="map_curr_locationBox  py-4 bg-skyb">
+						<div class="col map_curr_location">
+							<div class="map_curr_location_name1 my-3 px-3 text-white">
+								<th:block th:if="${session.Member_Name eq null}">
+									<span>사용자님을 위한 여행코스</span>
+								</th:block>
+								<th:block th:if="${session.Member_Name ne null}">
+									<span th:text="${session.Member_Name}" class="f22 "></span>
+									<span>님을 위한 여행코스</span>
+								</th:block>
+								<div
+									class="col p-3 bg-white mx-auto rounded-4 d-flex align-items-center mt-3">
+									<div class="col-2 bg-skyb rounded-circle f14 dayCircle ">1박2일</div>
+									<div class="col-10 rounded-circle mt-3">
+										<p class="px-3 mb-1 pb-1">
+											<b>여행 지역 </b> <span class="text-black mx-2 ">|</span> <span
+												th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span>
+										</p>
+										<p class="px-3 mb-1 pb-1 text-black">
+											<b>총 거리</b> <span class="text-black mx-2">|</span> <span
+												class="totalDistanceAll text-black"></span>
+										</p>
+										<p class="px-3">
+											<th:block th:if="${thema!=null and thema != ' '}"># <span
+													th:text="${thema}" class="text-black "></span>
+											</th:block>
+											<th:block th:if="${thema1!=null and thema1 != ' '}"># <span
+													th:text="${thema1}" class="text-black "></span>
+											</th:block>
+											<th:block th:if="${thema2!=null and thema2 != ' '}"># <span
+													th:text="${thema2}" class="text-black "></span>
+											</th:block>
+											<th:block th:if="${thema3!=null and thema3 != ' '}"># <span
+													th:text="${thema3}" class="text-black "></span>
+											</th:block>
+											<th:block th:if="${thema4!=null and thema4 != ' '}"># <span
+													th:text="${thema4}" class="text-black "></span>
+											</th:block>
+											<th:block th:if="${thema5!=null and thema5 != ' '}"># <span
+													th:text="${thema5}" class="text-black "></span>
+											</th:block>
+											<th:block th:if="${thema6!=null and thema6 != ' '}"># <span
+													th:text="${thema6}" class="text-black "></span>
+											</th:block>
+											<th:block th:if="${thema7!=null and thema7 != ' '}"># <span
+													th:text="${thema7}" class="text-black "></span>
+											</th:block>
+											<th:block th:if="${thema8!=null and thema8 != ' '}"># <span
+													th:text=" ${thema8}" class="text-black "></span>
+											</th:block>
+										</p>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</th:block>
+				
+				<!-- gps 현재 위치 출력 영역 -->
+				<!-- <div class="map_curr_locationBox">
+               <div class="col map_curr_location d-flex justify-content-between ">
+                  <div class="map_curr_location_name mt-3 px-3">
+                     <span>경기 수원시 권선구</span>
+                  </div>
+                  <div class="map_curr_location_weather d-flex mt-3 px-3">
+                     <span>현재날씨 </span> <em>최고 | 최저</em>
+                  </div>
+               </div>
+            </div> -->
+				<!-- map_curr_locationBox -->
+
+				<!-- map guide 아이콘 영역 -->
+				<div class="map_guide_iconBox">
+					<!-- <div class="map_guide_icon ">
+                  <ul class="map_guide_icon_list px-0">
+                     <li class="map_guide_icon_item map_icon_near_trip">주변여행지</li>
+                     <li class="map_guide_icon_item map_icon_food">음식점</li>
+                     <li class="map_guide_icon_item map_icon_cafe">카페</li>
+                     <li class="map_guide_icon_item map_icon_hotel">숙소</li>
+                     <li class="map_guide_icon_item map_icon_park">주차장</li>
+                     <li class="map_guide_icon_item map_icon_electric_charg">
+                        전기차충전소</li>
+                     <li class="map_guide_icon_item map_icon_recomand_thema">
+                        추천테마</li>
+                     <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+                     <li class="map_guide_icon_item map_icon_myTrip">나의여행</li>
+                     <li class="map_guide_icon_item map_icon_set">설정</li>
+                  </ul>
+               </div> -->
+
+					<!-- 코스 저장 버튼 -->
+					<form action="cours_Save" name="saveBtn" method="post">
+						<div class="text-end me-3 d-flex">
+							<p class="px-3 f20 fw-bold">day 1</p>
+							<button class="btn saveBtn btn-pink ms-auto" type="button">
+								<img
+									src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
+									alt="" style="width: 30px; height: 30px;" /> 코스 저장하기
+							</button>
+						</div>
+						<!-- day1 -->
+						<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="day1aicc"/>
+						<input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="day1aiccFood"/>
+						<input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="day1aicc2"/>
+						<input type="hidden" th:value="${aiccCafe.get(0).getEvent_num()}" name="day1aiccCafe"/>
+						<input type="hidden" th:value="${aiccFood2.get(0).getEvent_num()}" name="day1aiccFood2"/>
+						<input type="hidden" th:value="${hotel.get(0).getEvent_num()}" name="day1hotel"/>
+						
+						<!-- day2 -->
+						<input type="hidden" th:value="${aicc3.get(0).getEvent_num()}" name="day2aicc"/>
+						<input type="hidden" th:value="${aiccFood3.get(0).getEvent_num()}" name="day2aiccFood"/>
+						<input type="hidden" th:value="${aicc4.get(0).getEvent_num()}" name="day2aicc2"/>
+						<input type="hidden" th:value="${aiccCafe2.get(0).getEvent_num()}" name="day2aiccCafe"/>
+						<input type="hidden" th:value="${aiccFood4.get(0).getEvent_num()}" name="day2aiccFood2"/>
+						
+						
+						
+						
+						<!-- 거리 -->
+						<input type="hidden" class="totalDistance" value="" name="day1aiccTD"/>
+						<input type="hidden" class="totalDistance2" value="" name="day2aiccTD"/>
+				
+						
+						<input type="hidden" class="totalDistanceValue" value="" name="day1aiccTDV"/>
+						<input type="hidden" class="totalDistanceValue2" value="" name="day2aiccTDV"/>
+						
+						<input type="hidden" class="day" th:value="${day}" name="day"/>
+						<input type="hidden" name="memberId" th:value="${session.Member_Id}"/>
+						</form>
+						<!-- 반복될 부분 day1 -->
+
+						<!-- 여행지 1 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row" th:each="aicc:${aicc}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aicc.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">1</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aicc.getEvent_category()}"
+												class="badge bg-pinkD px-2 mb-2 py-2"></p>
+											<h5 th:text="${aicc.getEvent_name()} "
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aicc.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<!-- 맛집 -->
+						<hr class="px-5 text-black-50 my-2" />
+						<div class="row" th:each="aiccFood:${aiccFood}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aiccFood.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">2</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aiccFood.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aiccFood.getEvent_category()}"
+												class="badge bg-pinkD px-2 mb-2 py-2"></p>
+											<h5 th:text="${aiccFood.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aiccFood.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<!-- 여행지 2 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row" th:each="aicc2:${aicc2}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aicc2.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">3</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aicc2.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aicc2.getEvent_category()}"
+												class="badge bg-pinkD px-2 mb-2 py-2"></p>
+											<h5 th:text="${aicc2.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aicc2.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<!-- 카페 영역 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row" th:each="aiccCafe:${aiccCafe}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aiccCafe.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">4</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aiccCafe.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aiccCafe.getEvent_category()}"
+												class="badge bg-pinkD px-2 mb-2 py-2"></p>
+											<h5 th:text="${aiccCafe.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aiccCafe.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<!-- 맛집2 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row " th:each="aiccFood2:${aiccFood2}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aiccFood2.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">5</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aiccFood2.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aiccFood2.getEvent_category()}"
+												class="badge bg-pinkD px-2 mb-2 py-2"></p>
+											<h5 th:text="${aiccFood2.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aiccFood2.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+						
+							<!-- 숙소 -->
+							<hr class="px-5 text-black-50" />
+							<div class="row" th:each="hotel:${hotel}">
+								<div class="col">
+									<a th:href="@{'Event_view?id='+ ${hotel.getEvent_num()}}">
+										<div class="row px-4 Event_contentRow">
+											<div class="col-1 count">
+												<p class="text-center f22">6</p>
+											</div>
+											<div class="col-2 count mx-2 px-0">
+												<img
+													th:src="@{'../img/info/' + ${hotel.getEvent_thumbnail()}}"
+													class="img-fluid rounded-circle" alt=""
+													style="width: 60px; height: 60px;">
+											</div>
+											<div class="col-8">
+												<p th:text="${hotel.getEvent_category()}"
+													class="badge bg-pinkD px-2 mb-2 py-2"></p>
+												<h5 th:text="${hotel.getEvent_name()}"
+													class="mb-1 f17 text-truncate"></h5>
+												<p th:text="${hotel.getEvent_content()}"
+													class="text-truncate f14 mb-0"></p>
+											</div>
+											<div class="col"></div>
+										</div>
+									</a>
+								</div>
+							</div>
+						
+				
+					<hr class="px-5 text-black-50" />
+					<!-- 반복될 부분 day1 끝 -->
+					<!-- 반복될 부분 day2 -->
+				
+						<p class="px-3 f20 fw-bold">day 2</p>
+						<!-- 여행지 1 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row mb-5" th:each="aicc3:${aicc3}">
+							<div class="col ">
+								<a th:href="@{'Event_view?id='+ ${aicc3.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">1</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aicc3.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aicc3.getEvent_category()}"
+												class="badge bg-skyb px-2 mb-2 py-2"></p>
+											<h5 th:text="${aicc3.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aicc3.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<!-- 맛집 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row" th:each="aiccFood3:${aiccFood3}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aiccFood3.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">2</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aiccFood3.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aiccFood3.getEvent_category()}"
+												class="badge bg-skyb px-2 mb-2 py-2"></p>
+											<h5 th:text="${aiccFood3.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aiccFood3.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<!-- 여행지 2 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row" th:each="aicc4:${aicc4}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aicc4.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">3</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aicc4.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aicc4.getEvent_category()}"
+												class="badge bg-skyb px-2 mb-2 py-2"></p>
+											<h5 th:text="${aicc4.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aicc4.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<!-- 카페 영역 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row" th:each="aiccCafe2:${aiccCafe2}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aiccCafe2.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">4</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aiccCafe2.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aiccCafe2.getEvent_category()}"
+												class="badge bg-skyb px-2 mb-2 py-2"></p>
+											<h5 th:text="${aiccCafe2.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aiccCafe2.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<!-- 맛집2 -->
+						<hr class="px-5 text-black-50" />
+						<div class="row" th:each="aiccFood4:${aiccFood4}">
+							<div class="col">
+								<a th:href="@{'Event_view?id='+ ${aiccFood4.getEvent_num()}}">
+									<div class="row px-4 Event_contentRow">
+										<div class="col-1 count">
+											<p class="text-center f22">5</p>
+										</div>
+										<div class="col-2 count mx-2 px-0">
+											<img
+												th:src="@{'../img/info/' + ${aiccFood4.getEvent_thumbnail()}}"
+												class="img-fluid rounded-circle" alt=""
+												style="width: 60px; height: 60px;">
+										</div>
+										<div class="col-8">
+											<p th:text="${aiccFood4.getEvent_category()}"
+												class="badge bg-skyb px-2 mb-2 py-2"></p>
+											<h5 th:text="${aiccFood4.getEvent_name()}"
+												class="mb-1 f17 text-truncate"></h5>
+											<p th:text="${aiccFood4.getEvent_content()}"
+												class="text-truncate f14 mb-0"></p>
+										</div>
+										<div class="col"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+
+					
+					<!-- 반복될 부분 day2 끝 -->
+				</div>
+				<!-- 지역별 피드 출력 영역 -->
+				<!-- trip 위치 출력 페이지  -->
+
+
+
+			</div>
+			<!-- map_guide -->
+
+			<div class="map_mapSection col">
+				<!-- 지도를 표시할 div 입니다 -->
+				<div id="map">
+					<h3 class="pgj">
+						<span class="rounded-4 p-3 bg-pinkD text-white">Day-1</span>
+					</h3>
+				</div>
+				<div id="map2">
+					<h3 class="pgj">
+						<span class="rounded-4 p-3 bg-skyb text-white">Day-2</span>
+					</h3>
+				</div>
+			</div>
+			
+				<button id="mapday1"
+					class="mapday1 btn rounded-pill bg-white pe-5 shadow">1일차</button>
+				<button id="mapday2"
+					class="mapday2 btn rounded-pill bg-white pe-5 shadow">2일차</button>
+		</div>
+	</div>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00000000&libraries=clusterer">
+		
+	</script>
+	<script>
+		$(function() {
+			// btn1, btn2, btn3 요소를 가져옵니다.
+			var btn1 = $(".mapday1");
+			var btn2 = $(".mapday2");
+			var btn3 = $(".mapday3");
+
+			// map1, map2, map3 요소를 가져옵니다.
+			var map1 = $("#map");
+			var map2 = $("#map2");
+			var map3 = $("#map3");
+			map2.hide();
+			map3.hide();
+			// btn1을 클릭하면 map1을 보이고, map2와 map3을 숨깁니다.
+			btn1.click(function() {
+				map1.show();
+				map2.hide();
+				map3.hide();
+				btn1.addClass('bg-skyD text-white');
+				btn2.removeClass('bg-skyD text-white');
+				btn3.removeClass('bg-skyD text-white');
+
+			});
+
+			// btn2를 클릭하면 map2를 보이고, map1과 map3을 숨깁니다.
+			btn2.click(function() {
+				map1.hide();
+				map2.show();
+				map3.hide();
+				btn1.removeClass('bg-skyD text-white');
+				btn2.addClass('bg-skyD text-white');
+				btn3.removeClass('bg-skyD text-white');
+
+			});
+
+			// btn3를 클릭하면 map3을 보이고, map1과 map2을 숨깁니다.
+			btn3.click(function() {
+				map1.hide();
+				map2.hide();
+				map3.show();
+				btn1.removeClass('bg-skyD text-white');
+				btn2.removeClass('bg-skyD text-white');
+				btn3.addClass('bg-skyD text-white');
+			});
+		})
+	</script>
+	<!-- map의 스크립트 -->
+	<script th:inline="javascript">
+		var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+
+		var events = [ {
+			name : /*[[${aicc.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aicc.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aicc.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aicc.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccFood.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccFood.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccFood.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccFood.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aicc2.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aicc2.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aicc2.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aicc2.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccCafe.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccCafe.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccCafe.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccCafe.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccFood2.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccFood2.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccFood2.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccFood2.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${hotel.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${hotel.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${hotel.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${hotel.get(0).getEvent_num()}]]*/""
+		} ];
+
+		var positions = events.map(function(event) {
+			return {
+				title : event.name,
+				number : event.number,
+				latlng : new kakao.maps.LatLng(event.mapX, event.mapY)
+			};
+		});
+		// 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
+		mapx = parseFloat(events[0].mapX);
+		mapy = parseFloat(events[0].mapY);
+		mapOption = {
+			center : new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
+			level : 7
+		// 지도의 확대 레벨
+		};
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		// 마커를 표시할 위치와 title 객체 배열입니다 
+
+		// 마커 이미지의 이미지 주소입니다
+		var imageSrc = [
+				"https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지1,
+				"https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점
+				"https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지2
+				"https://cdn-icons-png.flaticon.com/128/11020/11020485.png",//카페
+				"https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점2
+				"https://cdn-icons-png.flaticon.com/128/11020/11020494.png"
+		];//관광지2
+		for (var i = 0; i < positions.length; i++) {
+			var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
+					+ '    <div class="info">'
+					+ '            <a href="Event_view?id='
+					+ positions[i].number
+					+ '">'
+					+ '        <div class="title">'
+					+ [ i + 1 ]
+					+ ". "
+					+ positions[i].title
+					+ '        </div>'
+					+ '</a>'
+					+ '    </div>' + '</div>';
+
+			// 마커 이미지의 이미지 크기 입니다
+			var imageSize = new kakao.maps.Size(50, 50);
+
+			// 마커 이미지를 생성합니다    
+			var markerImage = new kakao.maps.MarkerImage(imageSrc[i], imageSize);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				map : map, // 마커를 표시할 지도
+				position : positions[i].latlng, // 마커를 표시할 위치
+				title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				image : markerImage
+			// 마커 이미지 
+			});
+			var overlay = new kakao.maps.CustomOverlay({
+				content : content,
+				map : map,
+				position : positions[i].latlng
+			});
+
+		}
+
+		var linePath;
+		var lineLine = new daum.maps.Polyline();
+
+		var distance;
+
+		var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
+
+		var subtotalDistance = 0;
+		for (var i = 0; i < positions.length; i++) {
+			if (i != 0) {
+				linePath = [ positions[i - 1].latlng, positions[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
+			}
+			;
+			lineLine.setPath(linePath); // 선을 그릴 라인을 세팅합니다
+
+			var drawLine = new daum.maps.Polyline({
+				map : map, // 선을 표시할 지도입니다 
+				path : linePath,
+				strokeWeight : 3, // 선의 두께입니다 
+				strokeColor : '#Ef564b', // 선의 색깔입니다
+				strokeOpacity : 0.8, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+				strokeStyle : 'longdash' // 선의 스타일입니다
+			});
+
+			distance = Math.round(lineLine.getLength());
+			displayCircleDot(positions[i].latlng, distance);
+			totalDistance += distance;
+			document.querySelector('.totalDistance').innerText = totalDistance
+					.toFixed(2)
+					/ 1000;
+			document.querySelector('.totalDistanceValue').value = (totalDistance / 1000)
+					.toFixed(2);
+
+		}
+
+		function displayCircleDot(position, distance) {
+			if (distance > 0) {
+				// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+				var distanceOverlay = new daum.maps.CustomOverlay({
+					//  content : '<div class="dotOverlay bg-white rounded-4 px-3 mt-5">거리 <span class="number">'
+					//       + distance + '</span>m</div>', 
+					position : position,
+					yAnchor : 1,
+					zIndex : 2
+				});
+
+				// 지도에 표시합니다
+				distanceOverlay.setMap(map);
+			}
+
+		}
+	</script>
+	<!-- map2의 스크립트 -->
+	<script th:inline="javascript">
+		var mapContainer2 = document.getElementById('map2'); // 지도를 표시할 div 
+
+		var events2 = [ {
+			name : /*[[${aicc3.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aicc3.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aicc3.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aicc3.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccFood3.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccFood3.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccFood3.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccFood3.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aicc4.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aicc4.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aicc4.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aicc4.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccCafe2.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccCafe2.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccCafe2.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccCafe2.get(0).getEvent_num()}]]*/""
+		}, {
+			name : /*[[${aiccFood4.get(0).getEvent_name()}]]*/"",
+			mapX : /*[[${aiccFood4.get(0).getEvent_mapX()}]]*/0,
+			mapY : /*[[${aiccFood4.get(0).getEvent_mapY()}]]*/0,
+			number : /*[[${aiccFood4.get(0).getEvent_num()}]]*/""
+		} ];
+
+		var positions2 = events2.map(function(event) {
+			return {
+				title : event.name,
+				number : event.number,
+				latlng : new kakao.maps.LatLng(event.mapX, event.mapY)
+			};
+		});
+		// 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
+		mapx = parseFloat(events2[0].mapX);
+		mapy = parseFloat(events2[0].mapY);
+		mapOption2 = {
+			center : new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
+			level : 7
+		// 지도의 확대 레벨
+		};
+
+		var map2 = new kakao.maps.Map(mapContainer2, mapOption2); // 지도를 생성합니다
+		// 마커를 표시할 위치와 title 객체 배열입니다 
+
+		// 마커 이미지의 이미지 주소입니다
+		var imageSrc2 = [
+				"https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지1,
+				"https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점
+				"https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지2
+				"https://cdn-icons-png.flaticon.com/128/11020/11020485.png",//카페
+				"https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점2
+				"https://cdn-icons-png.flaticon.com/128/11020/11020494.png"
+		];//관광지2
+		for (var i = 0; i < positions2.length; i++) {
+			var content2 = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
+					+ '    <div class="info">'
+					+ '            <a href="Event_view?id='
+					+ positions2[i].number
+					+ '">'
+					+ '        <div class="title">'
+					+ [ i + 1 ]
+					+ ". "
+					+ positions2[i].title
+					+ '        </div>'
+					+ '</a>'
+					+ '    </div>' + '</div>';
+
+			// 마커 이미지의 이미지 크기 입니다
+			var imageSize2 = new kakao.maps.Size(50, 50);
+
+			// 마커 이미지를 생성합니다    
+			var markerImage2 = new kakao.maps.MarkerImage(imageSrc2[i],
+					imageSize2);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				map : map2, // 마커를 표시할 지도
+				position : positions2[i].latlng, // 마커를 표시할 위치
+				title : positions2[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				image : markerImage2
+			// 마커 이미지 
+			});
+			var overlay = new kakao.maps.CustomOverlay({
+				content : content2,
+				map : map2,
+				position : positions2[i].latlng
+			});
+
+		}
+
+		var linePath2;
+		var lineLine2 = new daum.maps.Polyline();
+
+		var distance2;
+
+		var totalDistance2 = 0; // 총 거리를 저장할 변수를 초기화합니다.
+
+		var subtotalDistance = 0;
+		for (var i = 0; i < positions2.length; i++) {
+			if (i != 0 && i < 5) {
+				linePath2 = [ positions2[i - 1].latlng, positions2[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
+			}
+			;
+			lineLine2.setPath(linePath2); // 선을 그릴 라인을 세팅합니다
+
+			var drawLine2 = new daum.maps.Polyline({
+				map : map2, // 선을 표시할 지도입니다 
+				path : linePath2,
+				strokeWeight : 3, // 선의 두께입니다 
+				strokeColor : '#Ef564b', // 선의 색깔입니다
+				strokeOpacity : 0.8, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+				strokeStyle : 'longdash' // 선의 스타일입니다
+			});
+
+			distance2 = Math.round(lineLine2.getLength());
+			displayCircleDot(positions2[i].latlng, distance2);
+			totalDistance2 += distance2;
+			document.querySelector('.totalDistance2').innerText = totalDistance2
+					.toFixed(2)
+					/ 1000 ;
+			document.querySelector('.totalDistanceValue2').value = (totalDistance2 / 1000)
+					.toFixed(2);
+
+		}
+
+		function displayCircleDot(position, distance) {
+			if (distance > 0) {
+				// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+				var distanceOverlay = new daum.maps.CustomOverlay({
+					//  content : '<div class="dotOverlay bg-white rounded-4 px-3 mt-5">거리 <span class="number">'
+					//       + distance + '</span>m</div>', 
+					position : position,
+					yAnchor : 1,
+					zIndex : 5
+				});
+
+				// 지도에 표시합니다
+				distanceOverlay.setMap(map);
+			}
+
+		}
+	</script>
+	<script th:inline="javascript">
+    // 각각의 totalDistance 변수에 대한 값을 가져와서 더합니다.
+    var totalDistanceAll = parseFloat(document.querySelector('.totalDistance').innerText) +
+                           parseFloat(document.querySelector('.totalDistance2').innerText);
+    // totalDistanceAll 클래스를 가진 요소에 값을 할당합니다.
+    document.querySelector('.totalDistanceAll').innerText = totalDistanceAll.toFixed(2) + "km";
+    document.querySelector('.totalDistanceAllValue').value = (totalDistanceAll).toFixed(2);
+</script>
+	
+	
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		function refreshPageIfSameValues() {
+			var eventNums = [
+			/*[[${aicc[0].getEvent_num()}]]*/,
+			/*[[${aicc2[0].getEvent_num()}]]*/,
+			/*[[${aicc3[0].getEvent_num()}]]*/,
+			/*[[${aicc4[0].getEvent_num()}]]*/,
+			/*[[${aiccCafe[0].getEvent_num()}]]*/,
+			/*[[${aiccCafe2[0].getEvent_num()}]]*/,
+			/*[[${aiccFood[0].getEvent_num()}]]*/,
+			/*[[${aiccFood2[0].getEvent_num()}]]*/,
+			/*[[${aiccFood3[0].getEvent_num()}]]*/,
+			/*[[${aiccFood4[0].getEvent_num()}]]*/,
+			/*[[${hotel[0].getEvent_num()}]]*/
+			];
+
+			var duplicateFound = false;
+
+			// 모든 eventNum 값을 비교하여 같은 값이 있는지 확인
+			for (var i = 0; i < eventNums.length; i++) {
+				for (var j = i + 1; j < eventNums.length; j++) {
+					if (eventNums[i] == eventNums[j]) {
+						// 같은 값이 발견되면 duplicateFound를 true로 설정하고 반복문을 종료
+						duplicateFound = true;
+						break;
+					}
+				}
+				if (duplicateFound) {
+					break; // 중복이 발견되었으므로 더 이상 반복할 필요가 없음
+				}
+			}
+
+			// 중복이 발견되면 페이지 새로 고침
+			if (duplicateFound) {
+				location.reload();
+			}
+		}
+
+		// 페이지가 로드될 때 함수 호출
+		window.onload = refreshPageIfSameValues;
+		/*]]>*/
+	</script>
+
+	<script>
+		// 페이지 로딩 후 로딩 화면을 5초 동안 표시한 후 자동으로 숨깁니다.
+		document
+				.addEventListener(
+						'DOMContentLoaded',
+						function() {
+							setTimeout(
+									function() {
+										document
+												.querySelector('.loading-screen').style.display = 'none';
+									}, 1000); // 5초 뒤에 로딩 화면을 숨김
+						});
+	</script>
+	<script>
+		// 버튼 요소를 가져옵니다.
+		var saveButton = document.querySelector('.saveBtn');
+
+		// 버튼을 클릭했을 때 실행될 함수를 정의합니다.
+		saveButton.addEventListener('click', function() {
+			// 저장 여부를 확인하는 메시지를 표시합니다.
+			var confirmMessage = "이 코스를 저장하시겠습니까?";
+			// 사용자가 "예"를 선택했을 때의 처리를 정의합니다.
+			function YesLetMeSubmit() {
+				// 저장하는 코드를 여기에 추가합니다.
+				console.log("코스를 저장합니다.");
+				alert("코스 저장 페이지로 이동합니다.");
+				document.saveBtn.submit();
+			}
+
+			// 사용자에게 확인 메시지를 표시하고, "예"를 선택했을 때 저장 함수를 호출합니다.
+			if (confirm(confirmMessage)) {
+				YesLetMeSubmit();
+			}
+		});
+		 $(document).ready(function() {
+	    	  $(".showbtn").click(function() {
+	    	    $(".map_guide").toggle();
+	    	  });
+	    	});
+	</script>
+
+</body>
+
+</html>

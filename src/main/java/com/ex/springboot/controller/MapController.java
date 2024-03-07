@@ -80,7 +80,7 @@ public class MapController {
 		// 거리를 기준으로 정렬합니다.
 		Collections.sort(distanceList);
 		
-		// 결과를 반환합니다.
+		// 결과를 반환합니다
 		int start_indexNum = 0; 
 		int end_indexNum = 20 ;
 		
