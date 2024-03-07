@@ -10,7 +10,7 @@
 		<!-- 맵 컨텐츠 전체를 감싸는 영역  -->
 		<div class="map_all_contentBox ">
 			<!-- map 왼쪽 가이드 영역 -->
-			<div class="map_guide overflow-scroll" style="height: 100vh;">
+			<div class="map_guide overflow-scroll">
 		
 				<!-- 정보값 출력 영역 day가 1일때-->
 				<th:block th:if="${day}==1">
@@ -36,7 +36,7 @@
 											<b>총 거리</b> <span class="text-black mx-2">|</span> <span
 												class="totalDistanceAll text-black"></span>
 										</p>
-										<p class="px-3">
+										<p class="px-3 text-black">
 											<th:block th:if="${thema!=null and thema != ' '}"># <span
 													th:text="${thema}" class="text-black "></span>
 											</th:block>
@@ -160,7 +160,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc.getEvent_category()}"
@@ -189,7 +189,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood.getEvent_category()}"
@@ -218,7 +218,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc2.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc2.getEvent_category()}"
@@ -246,7 +246,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccCafe.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccCafe.getEvent_category()}"
@@ -274,7 +274,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood2.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood2.getEvent_category()}"
@@ -303,7 +303,7 @@
 												<img
 													th:src="@{'../img/info/' + ${hotel.getEvent_thumbnail()}}"
 													class="img-fluid rounded-circle" alt=""
-													style="width: 60px; height: 60px;">
+													style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 											</div>
 											<div class="col-8">
 												<p th:text="${hotel.getEvent_category()}"
@@ -338,7 +338,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc3.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc3.getEvent_category()}"
@@ -367,7 +367,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood3.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood3.getEvent_category()}"
@@ -396,7 +396,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc4.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc4.getEvent_category()}"
@@ -424,7 +424,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccCafe2.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccCafe2.getEvent_category()}"
@@ -441,8 +441,8 @@
 						</div>
 						<!-- 맛집2 -->
 						<hr class="px-5 text-black-50" />
-						<div class="row" th:each="aiccFood4:${aiccFood4}">
-							<div class="col">
+						<div class="row mb-3" th:each="aiccFood4:${aiccFood4}">
+							<div class="col mb-5">
 								<a th:href="@{'Event_view?id='+ ${aiccFood4.getEvent_num()}}">
 									<div class="row px-4 Event_contentRow">
 										<div class="col-1 count">
@@ -452,7 +452,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood4.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood4.getEvent_category()}"
@@ -494,7 +494,7 @@
 			</div>
 			
 				<button id="mapday1"
-					class="mapday1 btn rounded-pill bg-white pe-5 shadow">1일차</button>
+					class="mapday1 btn rounded-pill bg-white pe-5 shadow bg-skyD text-white">1일차</button>
 				<button id="mapday2"
 					class="mapday2 btn rounded-pill bg-white pe-5 shadow">2일차</button>
 		</div>

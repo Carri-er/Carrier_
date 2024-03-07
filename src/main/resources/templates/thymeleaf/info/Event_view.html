@@ -36,7 +36,7 @@
 				</h3>
 				
 				<img th:src="@{'../img/info/' + ${view.getEvent_thumbnail()}}"
-					alt="" class="img-fluid mx-auto rounded-4" >
+					alt="" class="img-fluid mx-auto rounded-4"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 				<!-- <img class="img-fluid" src="https://korean.visitkorea.or.kr/resources/images/sub/bg_pic_reg.jpg" alt=""> -->
 			</div>
 		</div>

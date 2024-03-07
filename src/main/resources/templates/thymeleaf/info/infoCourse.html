@@ -16,6 +16,7 @@
          <!--board-->
          <!-- 피드목록이 비어있을 때 -->
          <th:block th:if="${getCount} == 0">
+
       <div th:if="${#lists.isEmpty(feedList)}">
          <div class="row">
             <div class="col text-center py-5 my-5">
@@ -56,7 +57,7 @@
                         <div class="col-3 board-left text-center">
                            <img th:src="@{'../img/info/' + ${list.getCourse_img()}}"
                               class="img-fluid rounded-4" alt=""
-                              style="width: 80px; height: 80px;">
+                              style="width: 80px; height: 80px;"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
                         </div>
                         <div class="col">
                            <div class="row">
@@ -105,6 +106,7 @@
                
                   <img src="../img/aicc/img_robot1.png" alt=""
                         class="d-block ms-auto robot m-4 " >
+
                         
                </div>
                
