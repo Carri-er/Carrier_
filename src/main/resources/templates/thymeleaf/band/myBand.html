@@ -135,50 +135,52 @@
                                    <span>작성 시간 <span th:text="${myBandFeedList.getBand_feed_uploadday()}"></span></span>
                                </div>
                                <div class="ms-auto">
-                               		<a class="btn btn-dark d-block" th:href="@{'/bandFeedView?bandUrl='+${myBandFeedList.getBand_code()}+'&feednum='+${myBandFeedList.getBand_feed_num()}}">전체</a>
+                               		<a class="btn btn-dark d-md-inline-block" th:href="@{'/bandFeedView?bandUrl='+${myBandFeedList.getBand_code()}+'&feednum='+${myBandFeedList.getBand_feed_num()}}">전체</a>
+                               		
+                               		 <!-- 수정 및 삭제 버튼  -->
+	                               <th:block th:if="${myBandFeedList.getMember_id() == session.Member_Id}">
+								
+									<div class="f17 hstack ms-auto d-md-inline-block" id="feed-right">
+										<a
+											class="dropdown-toggle text-center m-0 ps-2 pt-1 d-block d-flex justify-content-end"
+											href="#" role="button" id="dropdownMenuLink"
+											data-bs-toggle="dropdown" aria-expanded="false"><i
+											class="fi fi-rr-menu-dots-vertical"></i> </a>
+										<ul class="dropdown-menu dropdown-menu-dark">
+											<li data-bs-toggle="modal" data-bs-target="#feed_del_Modal"><a
+												class="dropdown-item">삭제</a></li>
+											<li>
+												<form action="bandFeedUpdate" method="post">
+													<input type="hidden" name="bandUrl"
+														th:value="${myBandFeedList.getBand_code()}" /> <input
+														type="hidden" name="bandfeednum"
+														th:value="${myBandFeedList.getBand_feed_num()}" /> <input
+														type="hidden" name="member_id"
+														th:value="${session.Member_Id}" /> <input type="hidden"
+														name="feedcontent"
+														th:value="${myBandFeedList.getBand_feed_content()}" /> <input
+														type="submit" class="btn dropdown-item" value="수정" />
+												</form>
+											</li>
+										</ul>
+									</div>
+									
+									<!-- 삭제 모달 -->
+									<div th:replace="~{alert/del_modal::div}" >
+										<div th:fragment="modalButton">
+										</div>
+									</div>
+									<form action="deleteFeed" method="post" id="deleteFeedForm">
+										<input type="hidden" name="bandUrl"
+											th:value="${myBandFeedList.getBand_code()}" /> <input
+											type="hidden" name="bandfeednum"
+											th:value="${myBandFeedList.getBand_feed_num()}" />
+									</form>
+	
+								</th:block>
                                </div>
                             	
-                            <!-- 수정 및 삭제 버튼  -->
-                               <th:block th:if="${myBandFeedList.getMember_id() == session.Member_Id}">
-							
-								<div class="f17 hstack ms-auto" id="feed-right">
-									<a
-										class="dropdown-toggle text-center m-0 ps-2 pt-1 d-block d-flex justify-content-end"
-										href="#" role="button" id="dropdownMenuLink"
-										data-bs-toggle="dropdown" aria-expanded="false"><i
-										class="fi fi-rr-menu-dots-vertical"></i> </a>
-									<ul class="dropdown-menu dropdown-menu-dark">
-										<li data-bs-toggle="modal" data-bs-target="#feed_del_Modal"><a
-											class="dropdown-item">삭제</a></li>
-										<li>
-											<form action="bandFeedUpdate" method="post">
-												<input type="hidden" name="bandUrl"
-													th:value="${myBandFeedList.getBand_code()}" /> <input
-													type="hidden" name="bandfeednum"
-													th:value="${myBandFeedList.getBand_feed_num()}" /> <input
-													type="hidden" name="member_id"
-													th:value="${session.Member_Id}" /> <input type="hidden"
-													name="feedcontent"
-													th:value="${myBandFeedList.getBand_feed_content()}" /> <input
-													type="submit" class="btn dropdown-item" value="수정" />
-											</form>
-										</li>
-									</ul>
-								</div>
-								
-								<!-- 삭제 모달 -->
-								<div th:replace="~{alert/del_modal::div}" >
-									<div th:fragment="modalButton">
-									</div>
-								</div>
-								<form action="deleteFeed" method="post" id="deleteFeedForm">
-									<input type="hidden" name="bandUrl"
-										th:value="${myBandFeedList.getBand_code()}" /> <input
-										type="hidden" name="bandfeednum"
-										th:value="${myBandFeedList.getBand_feed_num()}" />
-								</form>
-
-							</th:block>
+                           
                             
                        
                            </div>
@@ -201,15 +203,15 @@
                         	<!-- 댓글 출력 영역 -->
 							<div class="bandFeedCommentAllBox">
 								<div th:each="bandFeedCommentAll : ${bandFeedCommentAll} "
-									th:unless="${#lists.isEmpty(bandFeedCommentAll) or bandFeedCommentAll.getBand_feed_num() != myBandFeedList.getBand_feed_num()}">
-									<div class="row">
+									th:if="${bandFeedCommentAll.getBand_feed_num() == myBandFeedList.getBand_feed_num()}">
+									<div class="row grid">
 										<div class="col-1">
 											<img class="rounded-circle"
-												th:src="@{'../img/member_thumbnail/'+${bandLoginMemberDto.getMember_profileimage()}}"
+												th:src="@{'../img/member_thumbnail/'+${bandFeedCommentAll.getMember_profileimage()}}"
 												alt="#" style="width: 50px; height: 50px;" />
 										</div>
-										<div class="ms-1 col">
-											<span class="f12" th:text="${bandLoginMemberDto.getMember_Id}"></span>
+										<div class="ms-3 col">
+											<span class="f12" th:text="${bandFeedCommentAll.getMember_Id}"></span>
 											<span class="f12 ms-5" th:text="| 작성 시간 : ${bandFeedCommentAll.getBandFeed_comment_writeTime()} |"></span>
 											<div class="w-100 "></div>
 											<span class="f13 text-truncate " th:text="${bandFeedCommentAll.getBand_feedComment_content()}"></span>

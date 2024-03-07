@@ -54,17 +54,35 @@ public class MapController {
 		
 		
 		String category = request.getParameter("category");
+		String selectCategory = "";
+		
 		
 		if( category == null ) {
 			// 마커를 찍기위한 리스트
 			model.addAttribute("mapMarkerList", mapDao.mapMarkerAllList());
+			selectCategory = "all";
+			model.addAttribute("selectCategory", selectCategory);
 		} else if( category.equals("액티비티")) {
 			model.addAttribute("mapMarkerList", mapDao.mapMarkerCategoryList("레포츠"));
+			selectCategory = "activity";
+			model.addAttribute("selectCategory", selectCategory);
 		} else if( category.equals("산,바다")) {
 			model.addAttribute("mapMarkerList", mapDao.mapMarkerSanBadaList("산", "바다"));
+			selectCategory = "sanBada";
+			model.addAttribute("selectCategory", selectCategory);
 		} else {
-			System.out.println(category);
 			model.addAttribute("mapMarkerList", mapDao.mapMarkerCategoryList(category));
+			
+			if(category.equals("관광지")) { selectCategory = "tour"; } 
+			else if(category.equals("맛집")) { selectCategory = "food"; }
+			else if(category.equals("카페")) { selectCategory = "cafe"; }
+			else if(category.equals("숙박")) { selectCategory = "hotel"; }
+			else if(category.equals("실내")) { selectCategory = "inside"; }
+			else if(category.equals("테마파크")) { selectCategory = "themepark"; }
+			else if(category.equals("테마파크")) { selectCategory = "evnet"; }
+			
+			
+			model.addAttribute("selectCategory", selectCategory);
 		}
 
 		

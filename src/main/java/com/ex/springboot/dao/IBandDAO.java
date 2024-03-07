@@ -82,6 +82,10 @@ public interface IBandDAO {
 	//가입한 밴드 리스트 출력
 	public List<Band_joinMemberDTO> joinBandList(String member_id);
 	
+	//가입한 밴드 리스트 출력
+	public List<Band_joinMemberDTO> mypage_joinBandList(String member_id);
+		
+	
 	//밴드 가입하기
 	public int bandJoinMember(int band_code, String membet_id);
 	
