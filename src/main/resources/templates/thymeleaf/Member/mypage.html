@@ -219,7 +219,7 @@
                                 <a th:href="@{'Course_view?num='+ ${course.getCourse_num()}}">
                                     <div class="my-scrap-box-img rounded-2">
                                         <img th:src="@{'../img/info/' + ${course.getCourse_img()}}" alt=""
-                                             class="img-fluid">
+                                             class="img-fluid" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
                                     </div>
                                     <span class="f12 text-muted mt-2 "
                                           th:text="${course.getCourse_Name()}">사용자지정태그</span><span
