@@ -19,6 +19,11 @@ a {
 	color: var(--black);
 }
 
+a:hover {
+    color: black;
+}
+
+
 .text-muted {
 	color: var(--deepgray) !important;
 }
