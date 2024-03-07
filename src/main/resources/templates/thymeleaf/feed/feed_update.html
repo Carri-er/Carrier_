@@ -50,13 +50,13 @@
 										    <div th:class="${thumbnailStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
 										        <!-- 이미지가 있으면 해당 이미지를 사용하고, 없으면 add-photo.png 이미지를 사용 -->
 											        <img th:if="${thumbnailStat.index == 0 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview1" class="d-block w-100" alt="#">
-											        <img th:if="${thumbnailStat.index == 0 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview1" class="d-block w-100" alt="#">
+											        <img th:if="${thumbnailStat.index == 0 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview1" class="d-block w-100 img-fluid" alt="#">
 											        
 											        <img th:if="${thumbnailStat.index == 1 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview2" class="d-block w-100" alt="#">
-											        <img th:if="${thumbnailStat.index == 1 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview2" class="d-block w-100" alt="#">
+											        <img th:if="${thumbnailStat.index == 1 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview2" class="d-block w-100 img-fluid" alt="#">
 											
 											        <img th:if="${thumbnailStat.index == 2 and not #strings.isEmpty(thumbnail)}" th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" id="preview3" class="d-block w-100" alt="#">
-											        <img th:if="${thumbnailStat.index == 2 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview3" class="d-block w-100" alt="#">
+											        <img th:if="${thumbnailStat.index == 2 and #strings.isEmpty(thumbnail)}" src="../img/feed_thumbnail/add-photo.png" id="preview3" class="d-block w-100 img-fluid" alt="#">
 											
 											        <input th:id="'fileUpload' + ${thumbnailStat.index + 1}" type='file' class="member-fileUpload-form" onchange="readURL(this);" name="Feed_thumbnail" multiple/>
 											        <label th:for="'fileUpload'+${thumbnailStat.index+1}" class="feed-fileUpload bg-light shadow-sm m-auto"></label>

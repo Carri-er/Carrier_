@@ -57,14 +57,14 @@ public class FeedController {
 				feedList = feed_dao.feedList_login(Member_Id);
 			}
 
-		} else if (request.getParameter("Feed_theme") != null && !request.getParameter("Feed_theme").equals("")) {
+		} else if (!request.getParameter("Feed_theme").isEmpty()) {
 			if (Member_Id == null) {
 				feedList = feed_dao.feedList_theme(Feed_theme);
 			} else {
 				feedList = feed_dao.feedList_theme_login(Member_Id, Feed_theme);
 			}
 
-		} else if (request.getParameter("Feed_area") != null && !request.getParameter("Feed_area").equals("")) {
+		} else if (!request.getParameter("Feed_area").isEmpty()) {
 			if (Member_Id == null) {
 				feedList = feed_dao.feedList_area(Feed_area);
 			} else {

@@ -122,31 +122,33 @@
 		    A.Feed_thumbnail FROM Feed A RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id WHERE A.Feed_theme = #{Feed_theme}
 	</select>
 	
-	<!-- 피드 리스트[theme filter] 가져오기 -->
+	<!-- 피드 리스트[theme filter] 가져오기_로그인 -->
 	<select id="feedList_theme_login" resultType="com.ex.springboot.dto.FeedDTO">
 		SELECT 
-		    A.Feed_num,
-		    B.Member_Id,
-		    B.Member_profileimage,  
-		    A.Feed_title,
-		    A.Feed_content,
-		    A.Feed_theme,
-		    A.Feed_area, 
-		    A.Feed_uploadday,
-		    A.Feed_updateday,
-		    A.Feed_thumbnail,
+		    f.Feed_num,
+		    f.Member_Id,
+		    f.Feed_title,
+		    f.Feed_content,
+		    f.Feed_theme,
+		    f.Feed_area,
+		    f.Feed_uploadday,
+		    f.Feed_updateday,
+		    f.Feed_heart,
+		    f.Feed_thumbnail,
+		    cm.Member_profileimage,
 		    CASE 
 		        WHEN fh.Member_id IS NULL THEN 0
 		        ELSE 1
 		    END AS Feed_heart_on
 		FROM 
-		    Feed A 
-		RIGHT OUTER JOIN 
-		    carrier_member B ON A.Member_id = B.Member_id
+		    Feed f
 		LEFT JOIN 
-		    Feedheart fh ON A.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
+		    carrier_member cm ON f.Member_Id = cm.Member_Id
+		LEFT JOIN 
+		    Feedheart fh 
+		ON f.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
 		WHERE 
-		    A.Feed_theme = #{Feed_theme}
+		    f.Feed_theme = #{Feed_theme}
 		ORDER BY Feed_uploadday DESC
 	</select>
 	
@@ -169,28 +171,30 @@
 		<!-- 피드 리스트[area filter] 가져오기 -->
 	<select id="feedList_area_login" resultType="com.ex.springboot.dto.FeedDTO">
 		SELECT 
-		    A.Feed_num,
-		    B.Member_Id,
-		    B.Member_profileimage,  
-		    A.Feed_title,
-		    A.Feed_content,
-		    A.Feed_theme,
-		    A.Feed_area, 
-		    A.Feed_uploadday,
-		    A.Feed_updateday,
-		    A.Feed_thumbnail,
+		    f.Feed_num,
+		    f.Member_Id,
+		    f.Feed_title,
+		    f.Feed_content,
+		    f.Feed_theme,
+		    f.Feed_area,
+		    f.Feed_uploadday,
+		    f.Feed_updateday,
+		    f.Feed_heart,
+		    f.Feed_thumbnail,
+		    cm.Member_profileimage,
 		    CASE 
 		        WHEN fh.Member_id IS NULL THEN 0
 		        ELSE 1
 		    END AS Feed_heart_on
 		FROM 
-		    Feed A 
-		RIGHT OUTER JOIN 
-		    carrier_member B ON A.Member_id = B.Member_id
+		    Feed f
 		LEFT JOIN 
-		    Feedheart fh ON A.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
+		    carrier_member cm ON f.Member_Id = cm.Member_Id
+		LEFT JOIN 
+		    Feedheart fh 
+		ON f.Feed_num = fh.Feed_num AND fh.Member_Id = #{Member_Id}
 		WHERE 
-		    A.Feed_area = #{Feed_area}
+		    f.Feed_area = #{Feed_area}
 		ORDER BY Feed_uploadday DESC
 	</select>
 	
