@@ -369,7 +369,7 @@ public class BandController {
 			bandDao.bandJoinMember(num_band_code, joinMemberId);
 			
 			bandDao.myBand(num_band_code);
-			bandDao.bandMembercount_plus(num_band_code);
+			bandDao.bandMembercount_plus(num_band_code) ;
 			
 			
 			return "redirect:myBand?bandUrl="+str_band_code;
