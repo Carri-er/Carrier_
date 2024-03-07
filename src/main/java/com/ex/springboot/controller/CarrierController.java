@@ -34,6 +34,7 @@ public class CarrierController {
 	     
 	     model.addAttribute("CourseListHome", courseList);
 	     model.addAttribute("infoHome", eventDAO.infoHome());
+	     model.addAttribute("infoHome2", eventDAO.infoHome2());
       return "thymeleaf/home/home";
    }
    
@@ -59,6 +60,7 @@ public class CarrierController {
      
      model.addAttribute("CourseListHome", courseList);
      model.addAttribute("infoHome", eventDAO.infoHome());
+     model.addAttribute("infoHome2", eventDAO.infoHome2());
       
       return "thymeleaf/home/home";
    }

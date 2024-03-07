@@ -40,8 +40,7 @@
 	</select>
 	<select id="areaTagselectarea" resultType="java.lang.String">
 		Select DISTINCT
-		Event_area from Event where #{param1} in (Event_tag, Event_tag2,
-		Event_tag3, Event_tag4, Event_tag5)
+		Event_area from Event where #{param1} in (event_category)
 	</select>
 	<!-- 중복되는 태그 없이 태그 1~5의 값을 전체 불러옴 -->
 	<select id="getDistinctTags" resultType="java.lang.String">
@@ -72,44 +71,7 @@
 	<!-- 태그 클릭시 중복값 없이 태그들 불러옴 -->
 	<select id="EventTagTag" resultType="java.lang.String"
 		parameterType="string">
-		SELECT DISTINCT Event
-		FROM (
-		SELECT Event_tag AS Event
-		FROM Event
-		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3,
-		Event_tag4,
-		Event_tag5)
-
-		UNION ALL
-
-		SELECT Event_tag2 AS Event
-		FROM Event
-		WHERE #{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
-		Event_tag5)
-
-		UNION ALL
-
-		SELECT Event_tag3 AS Event
-		FROM Event
-		WHERE
-		#{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
-		Event_tag5)
-
-		UNION ALL
-
-		SELECT Event_tag4 AS Event
-		FROM Event
-		WHERE
-		#{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
-		Event_tag5)
-
-		UNION ALL
-
-		SELECT Event_tag5 AS Event
-		FROM Event
-		WHERE
-		#{param1} IN (Event_tag, Event_tag2, Event_tag3, Event_tag4,
-		Event_tag5))
+		 SELECT DISTINCT Event_category FROM event
 	</select>
 
 	<!-- 태그 클릭시 파라미터 값으로 정보 리스트를 불러옴 -->
@@ -123,30 +85,11 @@
 	<!-- 태그 클릭시 파라미터 값으로 중복되는 태그없이 태그들을 불러옴 -->
 	<select id="EventTag" resultType="java.lang.String"
 		parameterType="string">
-		SELECT DISTINCT Event_tag
-		FROM Event
-		WHERE Event_area LIKE '%' ||
+		SELECT DISTINCT tag FROM ( 
+SELECT Event_category AS Tag FROM Event 
+where Event_area like '%' ||
 		#{param1} || '%'
-		UNION
-		SELECT Event_tag2
-		FROM Event
-		WHERE Event_area LIKE
-		'%' || #{param1} || '%'
-		UNION
-		SELECT Event_tag3
-		FROM Event
-		WHERE
-		Event_area LIKE '%' || #{param1} || '%'
-		UNION
-		SELECT Event_tag4
-		FROM
-		Event
-		WHERE Event_area LIKE '%' || #{param1} || '%'
-		UNION
-		SELECT
-		Event_tag5
-		FROM Event
-		WHERE Event_area LIKE '%' || #{param1} || '%'
+) all_tags
 	</select>
 
 	<!-- 파라미터 값들을 전송하여 여행 글 작성 -->
@@ -372,6 +315,12 @@
 	<select id="infoHome"
 		resultType="com.ex.springboot.dto.EventDTO">
     SELECT * FROM Event WHERE Event_category NOT IN ('맛집', '카페') AND Event_title IS NOT NULL
+ORDER BY DBMS_RANDOM.RANDOM()
+FETCH FIRST 4 ROWS ONLY 
+	</select>
+	<select id="infoHome2"
+		resultType="com.ex.springboot.dto.EventDTO">
+    SELECT * FROM Event WHERE Event_category NOT IN ('맛집', '카페')
 ORDER BY DBMS_RANDOM.RANDOM()
 FETCH FIRST 4 ROWS ONLY 
 	</select>

@@ -8,16 +8,15 @@
 		select * from event
 	</select>
 	
-	<!-- event 테이블의 Event_category 가 관광지인 리스트 -->
-	<select id="mapMarkertourList" resultType="com.ex.springboot.dto.EventDTO">
-		select * from event where Event_category = '관광지'
+	<!-- event 테이블의 Event_category 가 선택되었을 때 -->
+	<select id="mapMarkerCategoryList" resultType="com.ex.springboot.dto.EventDTO">
+		select * from event where Event_category = #{param1}
 	</select>
 	
-	<!-- event 테이블의 Event_category 가 맛집인 리스트 -->
-	<select id="mapMarkerRestaurantList" resultType="com.ex.springboot.dto.EventDTO">
-		select * from event where Event_category = '맛집'
+	<!-- event 테이블의 Event_category 가 산,바다 선택되었을 때 -->
+	<select id="mapMarkerSanBadaList" resultType="com.ex.springboot.dto.EventDTO">
+		select * from event where Event_category = #{param1} or Event_category = #{param2} 
 	</select>
-	
 	
 
 <!-- 페이징을 위한 이벤트 리스트 조회 -->
