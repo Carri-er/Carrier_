@@ -26,6 +26,7 @@
 								<!--feed box text-->
 								<div class="col flex-grow-1 px-0">
 									<span class="float-start fw-bold f15" th:text="${feedList.getMember_Id()}">사용자명</span><br>
+									<span class="float-start text-muted f13 me-2" th:if="${#strings.contains(feedList.getFeed_updateday,'전')}">하이라이트</span>
 									<span class="float-start text-muted f13" th:text="${feedList.getFeed_updateday()}">올린 날짜</span>
 								</div>
 								<!-- 우측 버튼 -->
@@ -65,7 +66,7 @@
 									<!-- carousel items loop -->
 									<div class="carousel-inner col-12 feed-box-center">
 										<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feedList.getFeed_thumbnail(), ',')}" class="carousel-item p-0 h-100" th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
-											<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block img-fluid" alt="#">
+											<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block img-fluid m-auto w-100" alt="#">
 										</div>
 									</div>
 									<!-- Carousel Prev/Next button -->
