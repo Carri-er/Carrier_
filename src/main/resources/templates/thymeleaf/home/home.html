@@ -440,12 +440,12 @@
 			<div class="hp_imgBox home_dl_img_hotPlace home_dl_img_hotPlace mb-3 px-5 mx-5">
 				<div class="hp_img_content col-10 col-md-6 mx-auto" th:each="infoHome:${infoHome2}">
 					<a th:href="@{'Event_view?id='+ ${infoHome.getEvent_num()}}" class="">
-					<div class="hp_img">
-					</div>
-					<img th:src="@{'../img/info/' + ${infoHome.getEvent_thumbnail()}}" alt="" class="hp_img">
-					<div class="hp_title">
-						<span th:text="${infoHome.getEvent_name()}">해솔리아CC</span>
-					</div>
+						<div class="hp_img_content overflow-hidden m-0 d-flex justify-content">
+							<img th:src="@{'../img/info/' + ${infoHome.getEvent_thumbnail()}}" alt="" class="w-100"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
+						</div>
+						<div class="hp_title">
+							<span th:text="${infoHome.getEvent_name()}">해솔리아CC</span>
+						</div>
 					</a>
 				</div>
 			</div>
