@@ -14,7 +14,7 @@
 			<div class="carousel_bg_whiteBox">
 			</div>
 			<!-- 홈 페이지 메인 캐러샐 영역 -->
-			<div id="carouselExampleControls" class="carousel slide m-auto home_bg" data-bs-ride="carousel">
+			<div id="carouselExampleControls" class="carousel slide w-100 h-100 m-auto home_bg" data-bs-ride="carousel">
 				<div class="carousel-inner container">
 					<div class="carousel-item" th:classappend="${infoStat.index==0} ? 'active' : ''" th:each="info:${infoHome}">
 						<div class="m-auto">
@@ -323,7 +323,7 @@
 							<!--feed box text-->
 							<div class="col px-0">
 								<span class="float-start fw-bold f16" th:text="${feed.Member_Id}">박검지</span><br>
-								<span class="float-start text-muted f13">하이라이트</span><span class="float-start text-muted f13 ms-3">2시간 전</span>
+								<span class="float-start text-muted f13" th:if="${#strings.contains(feed.Feed_updateday,'전')}">하이라이트</span><span class="float-start text-muted f13 ms-3" th:text="${feed.Feed_updateday}">시간</span>
 							</div>
 							<!-- 우측 버튼 -->
 							<div class="col-3 d-flex justify-content-end align-items-center">
@@ -345,9 +345,9 @@
 						<div class="col-12 feed-box-center d-flex justify-content-center align-items-center overflow-hidden">
 							<div th:id="'feedCarousel'+${feed.Feed_num}" class="carousel slide w-100 h-100" data-bs-ride="false">
 								<!-- carousel items loop -->
-								<div class="carousel-inner">
-									<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}" class="w-100 h-100 carousel-item p-0 mh-200 xh-200" th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
-										<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100 object-fit img-center align-self-center" alt="#">
+								<div class="carousel-inner w-100 h-100">
+									<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}" class="carousel-item p-0 mh-200 xh-200 w-100 h-100" th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
+										<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100 object-fit img-center" alt="#">
 									</div>
 								</div>
 								<!-- Carousel Prev/Next button -->
@@ -368,21 +368,21 @@
 							<span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span><span class="f13 text-truncate"><span th:text="${feed.Feed_content}"></span><span th:if="${feed.Feed_content}==null">&nbsp;</span></span>
 						</div>
 						<!--feed box bot | text-->
-						<div class="col-12 feed-box-bot hstack p-3 border-top text-muted f13 d-flex hstack">
+						<div class="col-12 feed-box-bot hstack p-3 border-top f13 d-flex hstack">
 							<div class="col-6 hstack justify-content-center border-end">
 								<a th:href="@{'/feed_show?num='+${feed.Feed_num}}" class="d-flex"><span>댓글</span><i class="fi fi-br-comment-dots hstack px-1"></i>
 								</a>
 							</div>
 							<div class="col-6 hstack justify-content-center">
 								<div th:if="${feed.getFeed_heart_on()==0 or session.Member_Id==null}">
-									<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex"><span>좋아요</span><i class="fi fi-br-heart hstack px-1"></i>
+									<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex"><span>좋아요</span><i class="fi fi-br-heart hstack ps-1"></i>
 									</a>
 								</div>
 								<div th:if="${feed.getFeed_heart_on()}==1">
-									<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex"><span>좋아요</span><i class="fi fi-sr-heart hstack px-1"></i>
+									<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex"><span>좋아요</span><i class="fi fi-sr-heart hstack ps-1"></i>
 									</a>
 								</div>
-								<span class="ms-2" th:text="${feed.getFeed_heart()}" th:if="${session.Member_Id !=null}">999+</span>
+								<!-- <span class="ms-2" th:text="${feed.getFeed_heart()}" th:if="${session.Member_Id !=null}">999+</span> -->
 							</div>
 						</div>
 					</div>
@@ -767,6 +767,7 @@
         }
     });
 </script>
+
 <script>
     $(document).ready(function () {//시간나면 수정
         $(".carousel-inner").on("mousedown", function (e) {
@@ -792,6 +793,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.autoplay.umd.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
 <script>
     new Carousel(document.getElementById("myCarousel"), {
         Autoplay: {
@@ -801,6 +803,7 @@
         Autoplay
     });
 </script>
+
 <script th:if="${confirmMessage !=null}">
     var confirmResult = confirm("[[${confirmMessage}]]");
     if (confirmResult) {
@@ -808,12 +811,14 @@
         window.location.href = "/mypage?id=" + id;
     }
 </script>
+
 <script>
     document.getElementById('searchmove').addEventListener('click', function () {
         // 폼으로 스크롤 이동
         document.getElementById('searchForm').scrollIntoView({behavior: 'smooth'});
     });
 </script>
+
 <script>
 	//페이지가 로드될 때 실행되는 함수
 	window.onload = function() {
@@ -833,6 +838,7 @@
 	    });
 	};
 </script>
+
 <!-- 검색 AD 영역 -->
 <script>
 const imgs = document.querySelectorAll('.search-carousel-img');
@@ -882,6 +888,7 @@ prev.addEventListener('click', ()=>{
 });
 console.log(index);
 </script>
+
 <script>
 $(".custom-carousel").owlCarousel({
 	  autoWidth: true,

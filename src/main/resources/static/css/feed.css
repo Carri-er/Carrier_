@@ -3,6 +3,10 @@
 	min-height: 200px;
 }
 
+.mh-250 {
+	min-height: 250px;
+}
+
 .xh-200 {
 	max-height: 200px;
 }

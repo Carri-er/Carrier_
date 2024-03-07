@@ -9,6 +9,7 @@
 	box-sizing: border-box;
 }
 
+
 body{
 	color: var(--black);
 }
@@ -218,4 +219,17 @@ a.indent {
 
 .letter-spacing{
 	letter-spacing: -0.8px;
+}
+
+
+/*임시*/
+body > *[id]{
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 37px;
+}
+footer{
+  height: 234px;
+  position : relative;
+  transform : translateY(0%);
 }
