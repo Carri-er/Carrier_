@@ -16,7 +16,6 @@
                         <input name="band_thumnail" class="form-control" type="file" id="formFileMultiple"  onchange="readURL(this);" th:value="${updateMyBand.getBand_thumnail()}"  multiple >
 						<img id="blah" th:src="@{'../img/uploadBandThumnail/'+${updateMyBand.getBand_thumnail()}}" alt="#" class="border my-3 mx-auto d-block " width="200" height="200"/>
 						
-						<span th:text="${updateMyBand.getBand_thumnail()}"></span>
 						
 						<div class="form-floating mb-3">
 							<input name="band_name" type="text" class="form-control" id="input_bandName" placeholder="${updateMyBand.getBand_name()}" size="15" th:value="${updateMyBand.getBand_name()}">

@@ -1,3 +1,9 @@
+#index_map{
+	height: 100vh;
+	overflow : hidden;
+}
+
+
 /* 맵 컨텐츠 전체를 감싸는 영역 스타일 */
 div.map_all_contentBox {
 	width: 100%;
@@ -7,15 +13,15 @@ div.map_all_contentBox {
 }
 /* map guide 영역 */
 div.map_guide {
-	width: 350px;
+	width: 400px;
 	/* height: calc( 100vh - 200px ); */
-	height: 100vh;
 }
 
 div.map_curr_locationBox {
 	width: 100%;
 	box-sizing: border-box;
 	margin-bottom: 20px;
+	
 }
 
 /* map_guide_iconBox 스타일 */
@@ -25,6 +31,7 @@ ul.map_guide_icon_list {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	box-sizing: border-box;
+	height: 150px;
 }
 
 li.map_guide_icon_item {
@@ -32,6 +39,7 @@ li.map_guide_icon_item {
 	box-sizing: border-box;
 	font-size: small;
 	text-align: center;
+	cursor : pointer;
 }
 
 li.map_icon_electric_charg {
@@ -46,6 +54,14 @@ li.map_icon_near_trip::before {
 	margin: auto;
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
 }
+li.map_icon_near_trip.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: auto;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
+}
 
 li.map_icon_food::before {
 	content: '';
@@ -54,6 +70,15 @@ li.map_icon_food::before {
 	height: 36px;
 	margin: auto;
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
+	background-position-y: -36px;
+}
+li.map_icon_food.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: auto;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
 	background-position-y: -36px;
 }
 
@@ -66,6 +91,15 @@ li.map_icon_cafe::before {
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
 	background-position-y: -72px;
 }
+li.map_icon_cafe.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: auto;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
+	background-position-y: -72px;
+}
 
 li.map_icon_hotel::before {
 	content: '';
@@ -74,6 +108,15 @@ li.map_icon_hotel::before {
 	height: 36px;
 	margin: auto;
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
+	background-position-y: -108px;
+}
+li.map_icon_hotel.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: auto;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
 	background-position-y: -108px;
 }
 
@@ -86,16 +129,101 @@ li.map_icon_park::before {
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
 	background-position-y: -144px;
 }
-
-li.map_icon_electric_charg::before {
+li.map_icon_park.on::before {
 	content: '';
 	display: block;
 	width: 36px;
 	height: 36px;
 	margin: auto;
-	background: url('../img/map/icon_depth1_menu.png') no-repeat;
-	background-position-y: -180px;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
+	background-position-y: -144px;
 }
+
+li.map_icon_activity::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	background-image : url(https://cdn-icons-png.flaticon.com/128/2853/2853364.png);
+	background-size: 100%;
+}
+li.map_icon_activity.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	background: url('https://cdn-icons-png.flaticon.com/128/2853/2853386.png') no-repeat;
+	background-size: 100%;
+}
+
+li.map_icon_event::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	background-image : url(https://cdn-icons-png.flaticon.com/512/1753/1753035.png);
+	background-size: 100%;
+}
+li.map_icon_event.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	background: url('https://cdn-icons-png.flaticon.com/512/1753/1753042.png') no-repeat;
+	background-size: 100%;
+}
+
+li.map_icon_inside::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	border : 1px solid #EBE6E5;
+	border-radius : 50%;
+	background-image : url(https://cdn-icons-png.flaticon.com/128/3350/3350372.png);
+	background-size: 100%;
+}
+li.map_icon_inside.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	border : 1px solid #EBE6E5;
+	border-radius : 50%;
+	background: url('https://cdn-icons-png.flaticon.com/512/3350/3350881.png') no-repeat;
+	background-size: 100%;
+}
+
+
+li.map_icon_themepark::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	border : 1px solid #EBE6E5;
+	border-radius : 50%;
+	background-image : url(https://cdn-icons-png.flaticon.com/512/2389/2389500.png);
+	background-size: 100%;
+}
+li.map_icon_themepark.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin : auto;
+	border : 1px solid #EBE6E5;
+	border-radius : 50%;
+	background: url('https://cdn-icons-png.flaticon.com/128/2389/2389654.png') no-repeat;
+	background-size: 100%;
+}
+
 
 li.map_icon_recomand_thema::before {
 	content: '';
@@ -104,6 +232,15 @@ li.map_icon_recomand_thema::before {
 	height: 36px;
 	margin: auto;
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
+	background-position-y: -216px;
+}
+li.map_icon_recomand_thema.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: auto;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
 	background-position-y: -216px;
 }
 
@@ -116,6 +253,15 @@ li.map_icon_trip_course::before {
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
 	background-position-y: -252px;
 }
+li.map_icon_trip_course.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: auto;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
+	background-position-y: -252px;
+}
 
 li.map_icon_myTrip::before {
 	content: '';
@@ -124,6 +270,15 @@ li.map_icon_myTrip::before {
 	height: 36px;
 	margin: auto;
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
+	background-position-y: -288px;
+}
+li.map_icon_myTrip.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: auto;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
 	background-position-y: -288px;
 }
 
@@ -136,45 +291,38 @@ li.map_icon_set::before {
 	background: url('../img/map/icon_depth1_menu.png') no-repeat;
 	background-position-y: -324px;
 }
+
+li.map_icon_set.on::before {
+	content: '';
+	display: block;
+	width: 36px;
+	height: 36px;
+	margin: auto;
+	background: url('../img/map/icon_depth1_menu_on.png') no-repeat;
+	background-position-y: -324px;
+}
+
+
 .map_curr_location_name1 b{
 	color:black;
 }
+
 /* 맵 출력 아이템 리스트 스타일 */
 div.mapListItemBox{
-	height: 100%;
-	border : 1px solid red;
-	overflow-y : scroll;
+	overflow : scroll !important;
+	height: calc( 100vh - 150px );
+	width: 400px;
 }
 
 /* 카카오 맵 스타일 */
-div#map,div#map2,div#map3 {
+div#map {
 	width: 100%;
 	height: 100vh;
 }
+
 /* map_mapSection sytle */
 div.map_mapSection {
-	width: calc(100% - 350px);
-}
-.mapday1,.mapday2,.mapday3{
-	position: fixed;	
-	z-index: 5;
-	right: -35px;
-}
-.mapday1{
-	top:150px;
-}
-.mapday2{
-	top:200px;
-}
-.mapday3{
-	top:250px;
-}
-h3.pgj{
-	position: absolute;
-	top:5px;
-	right:15px;
-	z-index: 5;
-	
+	width: calc(100% - 400px);
 }
 
 /*Event_contentRow 데이터 불러온 내용 스타일*/
@@ -219,9 +367,64 @@ h3.pgj{
 	font-size: 24px;
 	font-weight: bold;
 }
+
+
+/*************************** 
+	카카오 맵 api 오버레이 스타일
+ **************************/
+    .overlay_wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .overlay_wrap * {padding: 0;margin: 0;}
+    .overlay_wrap .overlay_info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .overlay_wrap .overlay_info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .overlay_info .overlay_title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .overlay_info .overlay_close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .overlay_info .overlay_close:hover {cursor: pointer;}
+    .overlay_info .overlay_body {position: relative;overflow: hidden;}
+    .overlay_info .overlay_desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .overlay_desc .overlay_ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .overlay_desc .overlay_jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .overlay_info .overlay_img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .overlay_info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .overlay_info .overlay_link {color: #5085BB;}
+
+
  .showbtn {
     display: none;
   }
+  
+ /* 카카오 맵 스타일 */
+div#map,div#map2,div#map3 {
+   width: 100%;
+   height: 100vh;
+}
+/* map_mapSection sytle */
+div.map_mapSection {
+   width: calc(100% - 350px);
+}
+.mapday1,.mapday2,.mapday3{
+   position: fixed;   
+   z-index: 5;
+   right: -35px;
+}
+.mapday1{
+   top:150px;
+}
+.mapday2{
+   top:200px;
+}
+.mapday3{
+   top:250px;
+}
+h3.pgj{
+   position: absolute;
+   top:5px;
+   right:15px;
+   z-index: 5;
+   
+}
+ 
+  
+  
 @media screen and (max-width: 760px) {
   .showbtn {
     display: block;
@@ -233,3 +436,4 @@ h3.pgj{
  	display: none;
  }
 }
+

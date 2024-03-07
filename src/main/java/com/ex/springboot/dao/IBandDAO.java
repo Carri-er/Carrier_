@@ -9,14 +9,21 @@ import org.springframework.stereotype.Repository;
 import com.ex.springboot.dto.BandDTO;
 import com.ex.springboot.dto.BandFeedDTO;
 import com.ex.springboot.dto.Band_chatDTO;
+import com.ex.springboot.dto.Band_commentDTO;
 import com.ex.springboot.dto.Band_joinMemberDTO;
 import com.ex.springboot.dto.MemberDTO;
 
 @Mapper // 인터페이스를 xml로 구현하겠다.
 public interface IBandDAO {
 	
+	//로그인한 멤버 정보 
+	public MemberDTO bandLoginMemberDto(String member_id); 
+	
 	//전체 밴드 리스트 출력 
 	public List<BandDTO> bandList();
+	
+	//밴드 피드 세부 보기
+	public List<BandFeedDTO> bandFeedViewItem(int band_feed_num);
 	
 	//생성된 밴드 랜덤으로 6개 출력 
 	public List<BandDTO> randomBandList();
@@ -135,4 +142,24 @@ public interface IBandDAO {
 	//밴드 피드별 댓글 수
 	public int bandFeedCommentCount(int band_feed_num);
 	
+	//밴드 댓글 전체 리스트
+	public List<Band_commentDTO> bandFeedCommentAll();
+	
+	//밴드 피드 별 댓글 리스트
+	public List<Band_commentDTO> bandFeedCommentList(int band_feed_num);
+	
+	//밴드 피드 별 최신 댓글
+	public List<Band_commentDTO> bandFeedCommentTop(int band_feed_num);
+	
+	public int band_feed_commentWrite(
+				@Param("band_feed_num") int band_feed_num,
+				@Param("Member_Id") String Member_Id,
+				@Param("band_feedComment_content") String band_feedComment_content
+			);
+	
+	//밴드 피드 댓글 삭제
+	public int band_feedComment_del(int band_feedComment_num);
+	
+	//밴드 피드 댓글 수정
+	public int band_fedComment_update(String band_feedComment_content, int band_feedComment_num);
 }

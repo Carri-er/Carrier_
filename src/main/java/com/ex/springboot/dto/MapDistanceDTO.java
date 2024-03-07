@@ -17,4 +17,6 @@ public class MapDistanceDTO implements Comparable<MapDistanceDTO> {
 	        double distance2 = Double.parseDouble(o.getDistance());
 	        return Double.compare(distance1, distance2);
 	    }
+	 
+
 }

@@ -2,15 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <div th:replace="~{head/head::head}"></div>
 
-<body>
+<body id="index_map">
 
 <div th:replace="~{nav/nav::nav}"></div>
     <div class="map_wrapp">
         <!-- 맵 컨텐츠 전체를 감싸는 영역  -->
         <div class="map_all_contentBox">
-                <!-- map 왼쪽 가이드 영역 -->
-            <div class="map_guide">
-                <!-- gps 현재 위치 출력 영역 -->
+        
+            <!-- map 왼쪽 가이드 영역 -->
+            <div class="map_guide py-3">
+                <!-- gps 현재 위치 출력 영역 
                 <div class="map_curr_locationBox">
                     <div class="col map_curr_location d-flex justify-content-between">
                         <div class="map_curr_location_name">
@@ -21,100 +22,57 @@
                             <em>최고 | 최저</em>
                         </div>
                     </div>
-                </div>  <!-- map_curr_locationBox -->
+                </div>   map_curr_locationBox -->
 
                 <!-- map guide 아이콘 영역 -->
-                <div class="map_guide_iconBox">
+                <div class="map_guide_iconBox ">
                     <div class="map_guide_icon">
                         <ul class="map_guide_icon_list px-0">
-                            <li class="map_guide_icon_item map_icon_near_trip">
-                                주변여행지
+                            <li class="map_guide_icon_item map_icon_near_trip ">
+                                관광지
                             </li>
                             <li class="map_guide_icon_item map_icon_food">
-                                음식점
+                                맛집
                             </li>
-                            <li class="map_guide_icon_item map_icon_cafe">
+                            <li class="map_guide_icon_item map_icon_cafe ">
                                 카페
                             </li>
                             <li class="map_guide_icon_item map_icon_hotel">
-                                숙소
+                                숙박
                             </li>
-                            <li class="map_guide_icon_item map_icon_park">
-                                주차장
+                            <li class="map_guide_icon_item map_icon_inside ">
+                               	실내
                             </li>
-                            <li class="map_guide_icon_item map_icon_electric_charg">
-                                전기차충전소
+                            <li class="map_guide_icon_item map_icon_activity ">
+                                액티비티
+                            </li>
+                            <li class="map_guide_icon_item map_icon_themepark ">
+                                테마파크
+                            </li>
+                            <li class="map_guide_icon_item map_icon_event ">
+                                축제
                             </li>
                             <li class="map_guide_icon_item map_icon_recomand_thema">
-                                추천테마
+                                산, 바다
                             </li>
                             <li class="map_guide_icon_item map_icon_trip_course">
                                 여행코스
                             </li>
-                            <li class="map_guide_icon_item map_icon_myTrip">
+                            <!--<li class="map_guide_icon_item map_icon_myTrip">
                                 나의여행
                             </li>
-                            <li class="map_guide_icon_item map_icon_set">
+                             <li class="map_guide_icon_item map_icon_set">
                                 설정
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                   
                 </div> <!-- map_guide_iconBox 끝 div--> 
+                <hr />
                 
-                <!-- 페이징 -->
-                <div class="pagination">
-						<ul class="d-flex">
-							<!-- 이전 버튼 -->
-							<li th:if="${currentPage > 1}" class="mx-2"><a
-								th:href="@{'/map?page=' + ${mPage}}">&laquo;
-									이전</a></li>
-
-							<!-- 페이지 번호 -->
-							<li
-								th:each="pageNum : ${#numbers.sequence((currentPage - 2 > 0 ? currentPage - 2 : 1), 
-                        (currentPage + 2 < totalPages ? currentPage + 2 : totalPages))}"
-								class="mx-2"><a
-								th:href="@{'/map?page=' + ${pageNum}}"
-								th:text="${pageNum}"
-								th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
-							</li>
-
-							<!-- 다음 버튼 -->
-							<li th:if="${currentPage < totalPages}" class="mx-2"><a
-								th:href="@{'/info?page=' + ${pPage} }">다음
-									&raquo;</a></li>
-						</ul>
-					</div>
-				<div id="mapListItemWrapper">
-				</div>					
-                <div class="mapListItemBox">
-                	<!-- 게시글 리스트 출력 -->
-	                <div class="mapListItem row" th:each="paginItemList : ${paginItemList}">
-	                	<a  class="row" th:href="@{'Event_view?id='+ ${paginItemList.getEvent_num()}}">
-		                	<div class="col-3 board-left text-center hstack justify-content-center">
-								<img th:src="@{'../img/info/' + ${paginItemList.getEvent_thumbnail()}}"
-										class="img-fluid rounded-4" alt=""
-										style="width: 80px; height: 80px;">
-							</div>
-							<div class="col">
-								<div class="row">
-									<div class="col">
-										<h6>
-											[<span th:text="${paginItemList.getEvent_category()}"></span>] 
-											<span th:text="${paginItemList.getEvent_name()}"></span>
-										</h6>
-									</div>
-								</div>
-							</div>
-							
-						</a>
-	                </div> <!-- mapListItem 끝-->
+                <div class="mapListItemBox ">
+                	<div id="distanceListContainer"></div>	
                 </div>
-				
-                
-                
-                
             </div> <!-- map_guide -->
 
             <div class="map_mapSection">
@@ -125,25 +83,53 @@
         
     </div>
 
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05"></script>
+   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05&libraries=clusterer"></script>
+   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05&libraries=services,clusterer,drawing"></script>
 
 
-<div th:replace="~{footer/footer::footer}"></div>
-    <script th:inline="javascript">
+<!-- JavaScript section -->
+<script th:inline="javascript">
+$(document).ready(function() {
     /*<![CDATA[*/
     kakao.maps.load(function () {
         // 마커를 담을 배열입니다
         var markers = [];
+        
         // 마커 간의 거리를 담을 배열입니다
         var distances = [];
 
         // event table에 저장된 데이터
         var mapMarkerList = /*[[${mapMarkerList}]]*/ [];
 		
-        console.log(mapMarkerList);
-        
      	// 현재 위치 변수 선언
         var presentPosition;
+     	
+     // 여러 개의 오버레이를 담을 배열 선언
+        var overlays = [];
         
+     	//마커 이미지
+     	var markerImg_tour = "https://cdn-icons-png.flaticon.com/128/11020/11020536.png"; // 관광지
+     	var markerImg_restaurant = "https://cdn-icons-png.flaticon.com/128/11020/11020470.png"; //음식점 
+     	var markerImg_cafe = "https://cdn-icons-png.flaticon.com/128/11020/11020485.png" ; //카페
+     	var markerImg_mountain = "https://cdn-icons-png.flaticon.com/128/11020/11020440.png" ; //산
+     	var markerImg_ocean = "https://cdn-icons-png.flaticon.com/128/11020/11020530.png"; //바다
+     	var markerImg_activity ="https://cdn-icons-png.flaticon.com/128/11020/11020518.png" ; //액티비티
+     	var markerImg_hotel = "https://cdn-icons-png.flaticon.com/128/4705/4705219.png"; //숙소
+     	var markerImg_current = "https://cdn-icons-png.flaticon.com/128/660/660624.png" ; //현재 위치
+     	var markerImg_theme = "https://cdn-icons-png.flaticon.com/128/4705/4705196.png"; // 테마
+     	var markerImg_event = "https://cdn-icons-png.flaticon.com/128/11020/11020585.png"; // 축제
+     	var markerImg_inside = "https://cdn-icons-png.flaticon.com/128/4705/4705261.png"; // 실내
+     	var markerImg_sports = "https://cdn-icons-png.flaticon.com/128/4705/4705257.png"; // 레포츠
+     	
+     	//마커 이미지의 크기
+     	var imageSize = new kakao.maps.Size(40, 40);
+     	
         // 지도를 표시할 div
         var mapContainer = document.getElementById('map');
 
@@ -155,21 +141,197 @@
         // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
+    
+        
         // mapMarkerList에 저장된 데이터를 반복하여 마커 생성 및 표시
         mapMarkerList.forEach(function (markerInfo) {
             // 마커의 위치 설정
             var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
+             
             // 마커 생성
-            var marker = new kakao.maps.Marker({
-                position: markerPosition // 마커의 위치 설정
-            });
+            if( markerInfo.event_category == '관광지'){
+            	var markerImage = new kakao.maps.MarkerImage(markerImg_tour, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '맛집' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          		
+          	} else if( markerInfo.event_category == '전통시장' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          		
+          	} else if( markerInfo.event_category == '카페' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_cafe, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '산' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_mountain, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '바다' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_ocean, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '액티비티' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_activity, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '숙박' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_hotel, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '테마파크' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_theme, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '축제' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_event, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '실내' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_inside, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else if( markerInfo.event_category == '레포츠' ){
+          		var markerImage = new kakao.maps.MarkerImage(markerImg_sports, imageSize);
+            	var marker = new kakao.maps.Marker({
+                    position: markerPosition, // 마커의 위치 설정
+					image :  markerImage                   
+                });
+          	} else {
+          		var marker = new kakao.maps.Marker({
+          			position: markerPosition, // 마커의 위치 설정
+          		});
+          		
+          	}
+            
             // 마커 지도에 표시
             marker.setMap(map);
             markers.push(marker);
-
-            // 클릭 이벤트 핸들러 추가
-            addMarkerClickListener(marker, markers.length - 1);
-        });
+    
+            var markerInfoContent = '<div class="text-center text-truncate rounded-5">'+ markerInfo.event_name +'</div>';
+            
+         	// 마커에 표시할 인포윈도우를 생성합니다 
+            var infowindow = new kakao.maps.InfoWindow({
+                content: markerInfoContent // 인포윈도우에 표시할 내용
+            });
+         	
+            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+            
+            
+            
+         	// 커스텀 오버레이에 표시할 컨텐츠 입니다
+         	// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+         	// 별도의 이벤트 메소드를 제공하지 않습니다 
+         	var overlay_img = '<img src="../img/info/'+markerInfo.event_thumbnail +'" class="rounded-4" width="70" height="70">' ;
+            var overlay_content = '<div class="overlay_wrap">' + 
+            '    <div class="overlay_info">' + 
+            '        <div class="overlay_title">' + 
+            			markerInfo.event_name + 
+            '           <div class="overlay_close" onclick=" closeOverlay() " title="닫기"></div>' + 
+            '        </div>' + 
+            '        <div class="overlay_body">' + 
+            '            <div class="overlay_img">' +
+            				overlay_img +
+            '            </div>' + 
+            '            <div class="overlay_desc">' + 
+            '                <div class="overlay_ellipsis">'+ markerInfo.event_address +'</div>' + 
+//            '                <div class="overlay_jibun overlay_ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+            '                <div><a href="Event_view?id='+markerInfo.event_num +'" target="_blank" class="overlay_link">자세히 보기</a></div>' + 
+            '            </div>' + 
+            '        </div>' + 
+            '    </div>' +    
+            '</div>';
+            
+         // 마커 위에 커스텀오버레이를 표시합니다
+            // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+            var overlay = new kakao.maps.CustomOverlay({
+                content: overlay_content,
+                position: marker.getPosition()
+            });
+         
+         // 클릭 이벤트 핸들러 추가
+            addMarkerClickListener(marker, markers.length - 1, overlay);
+            
+         // 생성된 오버레이를 배열에 추가
+            overlays.push(overlay);
+         
+         // 각 오버레이의 닫기 버튼 클릭 이벤트 핸들러 추가   
+           // addCloseBtnClickListener(overlay);
+        
+        }); // 마커 생성 함수 끝
+		
+     // 각 오버레이의 닫기 버튼 클릭 이벤트 핸들러
+        function addCloseBtnClickListener(overlays, index) {
+        	kakao.maps.event.addListener(overlays[index], 'click', function() {
+                overlays[index].setMap(null); 
+            });
+        	
+        }
+    	function closeOverlay(){
+    		alert("test");
+    	}
+        
+        // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
+        function addMarkerClickListener(marker, index, overlay) {
+        	
+            kakao.maps.event.addListener(marker, 'click', function () {
+                var event = mapMarkerList[index];
+                var markerPosition = marker.getPosition();
+                var distance = getDistance(presentPosition, markerPosition);
+                var eventName = event.event_name;
+                var eventNum = event.event_num;
+                var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
+                //alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
+                
+              	var show_overlay = overlays[index];
+              	show_overlay.setMap(map);
+   	
+            });
+         
+        }
+        
+        
+     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+        function makeOverListener(map, marker, infowindow) {
+            return function() {
+                infowindow.open(map, marker);
+            };
+        }
+        
+     // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+        function makeOutListener(infowindow) {
+            return function() {
+                infowindow.close();
+            };
+        }
+     
 
         
 
@@ -180,11 +342,13 @@
                 var lat = position.coords.latitude; // 위도
                 var lon = position.coords.longitude; // 경도
                 presentPosition = new kakao.maps.LatLng(lat, lon); // geolocation으로 얻어온 좌표
-
+                
+                var markerImage = new kakao.maps.MarkerImage(markerImg_current, imageSize);
                 // 현재 위치 마커 생성
                 var currentPositionMarker = new kakao.maps.Marker({
                     position: presentPosition,
-                    map: map
+                    map: map,
+                    image : markerImage
                 });
                 markers.push(currentPositionMarker); // 마커 배열에 추가
 
@@ -209,18 +373,8 @@
            	calculateDistances(presentPosition, markers);
         }
 
-        // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
-        function addMarkerClickListener(marker, index) {
-            kakao.maps.event.addListener(marker, 'click', function () {
-                var event = mapMarkerList[index];
-                var markerPosition = marker.getPosition();
-                var distance = getDistance(presentPosition, markerPosition);
-                var eventName = event.event_name;
-                var eventNum = event.event_num;
-                var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
-                alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
-            });
-        }
+        
+       
 
         // 모든 마커에 대해 현재 위치와의 거리 계산
         function calculateDistances(presentPosition, markers) {
@@ -243,7 +397,8 @@
             sendDataToServer(combinedData);
            	
         }
-
+		
+        //컨트롤러로 데이터 전송
         function sendDataToServer(data) {
             // 데이터가 null이 아닌 경우에만 서버로 전송합니다.
             if (data && data.length > 0) {
@@ -254,7 +409,7 @@
                     data: JSON.stringify(data), // JSON 형태로 데이터를 변환하여 전송합니다.
                     success: function(response) {
                         // 성공적으로 서버에서 응답을 받았을 때 실행할 코드를 작성합니다.
-                        console.log('서버 응답:', response);
+                    	displayDistanceList(response); // 페이지 관련 정보를 전달하여 함수 호출
                     },
                     error: function(xhr, status, error) {
                         // 서버 요청이 실패했을 때 실행할 코드를 작성합니다.
@@ -264,6 +419,35 @@
             } else {
                 console.log('전송할 데이터가 없습니다.');
             }
+        }
+        
+     
+
+        // Distance List를 화면에 출력하는 함수
+        function displayDistanceList(distanceList) {
+            // distanceList를 HTML에 출력하는 코드
+            var html = "<div class='mapListItem row'>";
+
+
+			console.log(distanceList);
+            for (var i = 0; i < distanceList.length ; i++) {
+                var item = distanceList[i];
+                html += "<a class='row mt-1 mb-3 mx-2' href='Event_view?id=" + item.event.event_num + "'>"; // distanceList의 객체에서 event_num 속성에 접근
+                html += "<div class='col-3 board-left text-center hstack justify-content-center'>";
+                html += "<img src='../img/info/" + item.event.event_thumbnail + "' class='img-fluid rounded-4' alt='' style='width: 80px; height: 80px;'>";
+                html += "</div>";
+                html += "<div class='col-6'>";
+                html += "<h6 class='text-truncate list-inline-item' >[<span>" + item.event.event_category + "</span>] <span >" + item.event.event_name + "</span></h6>"; // distanceList의 객체에서 event_category와 event_name 속성에 접근
+                html += "<p class='f13 text-truncate'>거리 : "+ Math.ceil(item.distance) +" m(미터)</p>" ;
+                html += "</div>";
+                html += "</a>";
+                html += "<hr />";
+            }
+            html += "</div>"; // mapListItem 끝
+
+            
+            // 출력할 HTML 요소에 결과를 추가합니다.
+            $('#distanceListContainer').html(html);
         }
         
         // 두 지점 간의 직선 거리를 계산하는 함수
@@ -281,9 +465,53 @@
             var d = R * c; // 거리 (미터 단위)
             return d;
         }
+
+        
     });
     /*]]>*/
+    var icon_list = $("ul.map_guide_icon_list");
+	var icon_list_li = $("ul.map_guide_icon_list>li");
+	
+	//아이콘 리스트 클릭 시 
+	icon_list_li.click(function(){
+		var tg = $(this)
+		var index_num = tg.index();
+		
+		if ( icon_list_li.eq(index_num).hasClass('on') ) {
+			icon_list_li.eq(index_num).removeClass('on');
+		} else if( !( icon_list_li.eq(index_num).hasClass('on') ) ){
+			icon_list_li.removeClass('on');
+			icon_list_li.eq(index_num).addClass('on');
+		}
+		
+		if(index_num == 0){
+			location.href = "/map?category=관광지" ;
+		} else if(index_num == 1){
+			location.href = "/map?category=맛집" ;
+		} else if(index_num == 2){
+			location.href = "/map?category=카페" ;
+		} else if(index_num == 3){
+			location.href = "/map?category=숙박" ;
+		} else if(index_num == 4){
+			location.href = "/map?category=실내" ;
+		} else if(index_num == 5){
+			location.href = "/map?category=액티비티" ;
+		} else if(index_num == 6){
+			location.href = "/map?category=테마파크" ;
+		}  else if(index_num == 7){
+			location.href = "/map?category=축제" ;
+		}  else if(index_num == 8){
+			location.href = "/map?category=산,바다" ;
+		} 
+		
+		
+		
+	})
+    
+});
 </script>
+
+
 </body>
 
 </html>

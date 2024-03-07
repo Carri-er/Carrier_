@@ -37,7 +37,11 @@
     
 <div th:replace="~{footer/footer::footer}"></div>
     
-    <script>
+    <script th:inline="javascript">
+    var bandList = /*[[${bandList}]]*/ [];
+    
+    console.log(bandList);
+    	
     /* 밴드 대표 이미지 선택 시 출력하는 함수 */
 	    function readURL(input) {
 	        if (input.files && input.files[0]) {
@@ -52,13 +56,30 @@
 	        }
 	    }
 	    
-    
-    	/* 밴드 명이 작성되지 않았을 때 작동하는 함수  */
+	    function validateBandName(input) {
+	    	var regex = /^[가-힣a-zA-Z][가-힣a-zA-Z0-9\s]{1,19}$/;
+	        var specialCharRegex = /[~!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?]/;
+	        var vowelRegex = /[aeiouㄱ-ㅎㅏ-ㅣ]/i; // 모음이 하나라도 있는 경우 거부
+
+	        return !specialCharRegex.test(input) && regex.test(input) && !vowelRegex.test(input);
+	    }
+    	
+	   
+	    
+    	/* 밴드 생성 유효성 검사 */
 	    function func_createBand() {
 	 	   
 	 	  var input_bandName = $('#input_bandName').val();
 	 	  var textarea_bandContent = $('#textarea_bandContent').val();
 	 	  
+	 	 for(var i = 0 ; i < bandList.length ; i++) {
+	 		 if( bandList[i].band_name == input_bandName){
+	 			 alert("동일한 밴드가 존재합니다.");
+	 			 return false;
+	 		 }
+	 		
+	 	 }
+	 	 
 	 	   if(input_bandName.length == 0){
 	 		   alert('밴드 이름을 입력하세요.');
 	 		   
@@ -66,20 +87,38 @@
 	 		 $('#label_bandName').focus();
 	 		  return false;
 	 		  
+	 	   } else if ( !validateBandName(input_bandName) ){
+	 		  alert(' 밴드 이름을 다시 입력해주세요. (2~20) ');
+	 		  $('#label_bandName').focus();
+	 		 return false;
+	 		  
 	 	   } else if(textarea_bandContent.length == 0){
 	 		   
-	 		 alert('밴드 설명을 입력하세요.');
-	 		 
-	 		 textarea_bandContent.focus();
-	 		$('#label_bandContent').focus();
+	 		 	alert('밴드 설명을 입력하세요.');
+	 		 	
+	 		 	textarea_bandContent.focus();
+	 		 	$('#label_bandContent').focus();
+	 		
 	 		 return false; 
 	 		 
-	 	   } else {
+	 	   } else if (textarea_bandContent.length > 50){
+	 		  alert('밴드 설명은 50글자 미만으로 작성해주세요.');
+	 		 	
+	 		 	textarea_bandContent.focus();
+	 		 	$('#label_bandContent').focus();
+	 		
+	 		 return false; 
+	 	   }else { 
 	 		  document.getElementById('form_bandCreate').submit();
+	 		  
 	 	   }
 	 	   
 	 	   
 	 	}
+    	
+	    
+		
+	   
     </script>
 </body>
 </html>
