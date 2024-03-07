@@ -15,7 +15,7 @@ $(document).ready(function() {
         $(this).addClass("active");
     });
 
-
+	// 버튼 클릭 시 숨기기
     function hideAllElements() {
         dlment.hide();
         homedlimgAIcokcok.hide();
@@ -24,7 +24,8 @@ $(document).ready(function() {
         dl_refresh_button.hide();
         dl_more_content.hide();
     }
-
+	
+	// 버튼 클릭 시 보이기
     function showElementAtIndex(index) {
         hideAllElements();
         dlment.eq(index).show();
