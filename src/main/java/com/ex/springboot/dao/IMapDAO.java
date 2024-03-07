@@ -14,10 +14,10 @@ public interface IMapDAO {
 	public List<EventDTO> mapMarkerAllList();
 	
 	//event 테이블의 Event_category 가 관광지인 리스트
-	public List<EventDTO> mapMarkertourList();
+	public List<EventDTO> mapMarkerCategoryList(String category);
 	
-	//event 테이블의 Event_category 가 맛집인 리스트
-	public List<EventDTO> mapMarkerRestaurantList();
+	//event 테이블의 Event_category 가 산, 바다 리스트
+		public List<EventDTO> mapMarkerSanBadaList(String San, String Bada);
 	
 	// 페이지당 출력될 게시글 리스트
 	public List<EventDTO> pageItemList(

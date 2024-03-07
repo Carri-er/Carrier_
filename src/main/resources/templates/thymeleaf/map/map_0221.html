@@ -484,6 +484,26 @@ $(document).ready(function() {
 			icon_list_li.eq(index_num).addClass('on');
 		}
 		
+		if(index_num == 0){
+			location.href = "/map?category=관광지" ;
+		} else if(index_num == 1){
+			location.href = "/map?category=맛집" ;
+		} else if(index_num == 2){
+			location.href = "/map?category=카페" ;
+		} else if(index_num == 3){
+			location.href = "/map?category=숙박" ;
+		} else if(index_num == 4){
+			location.href = "/map?category=실내" ;
+		} else if(index_num == 5){
+			location.href = "/map?category=액티비티" ;
+		} else if(index_num == 6){
+			location.href = "/map?category=테마파크" ;
+		}  else if(index_num == 7){
+			location.href = "/map?category=축제" ;
+		}  else if(index_num == 8){
+			location.href = "/map?category=산,바다" ;
+		} 
+		
 		
 		
 	})

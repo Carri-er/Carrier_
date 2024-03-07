@@ -53,10 +53,21 @@ public class MapController {
 		model.addAttribute("totalPages", totalItemCount);
 		
 		
+		String category = request.getParameter("category");
 		
-		// 마커를 찍기위한 리스트
-		model.addAttribute("mapMarkerList", mapDao.mapMarkertourList());
+		if( category == null ) {
+			// 마커를 찍기위한 리스트
+			model.addAttribute("mapMarkerList", mapDao.mapMarkerAllList());
+		} else if( category.equals("액티비티")) {
+			model.addAttribute("mapMarkerList", mapDao.mapMarkerCategoryList("레포츠"));
+		} else if( category.equals("산,바다")) {
+			model.addAttribute("mapMarkerList", mapDao.mapMarkerSanBadaList("산", "바다"));
+		} else {
+			System.out.println(category);
+			model.addAttribute("mapMarkerList", mapDao.mapMarkerCategoryList(category));
+		}
 
+		
 		return "thymeleaf/map/map_0221";
 	}
 	
