@@ -315,10 +315,10 @@
 			<div id="feed" class="row gap-3 gap-md-5 gap-lg-3 justify-content-center justify-content-xl-around align-items-start pb-4 m-0 row-box home_dl_img_AIcokcok overflow-hidden">
 				<!--feed box Start-->
 				<!-- [P] -->
-				<div class="col-12 col-xl-4 m-0 my-3 feed-box home-feed-box px-0 no-gutters" th:each="feed, iterStat : ${feedList}" th:if="${iterStat.index < 3}">
+				<div class="col-12 col-xl-4 m-0 my-3 feed-box home-feed-box px-0 no-gutters" th:each="feed, iterStat : ${feedList}" th:if="${iterStat.index < 3}" th:classappend="${iterStat.index == 2} ? 'd-md-none d-lg-block' : ''">
 					<div class="col-12 w-100 position-relative">
 						<!--feed box top-->
-						<div class="col-12 hstack feed-box-top p-3 ps-3 z-3 d-md-">
+						<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
 							<img th:src="@{'../img/member_thumbnail/'+${feed.Member_profileimage}}" class="float-start rounded-circle border me-3" width="50" height="50" alt="">
 							<!--feed box text-->
 							<div class="col px-0">
@@ -365,8 +365,8 @@
 							</div>
 						</div>
 						<!--feed-box-bot | text-->
-						<div class="col-12 feed-box-bot p-4 pt-3 pb-5">
-							<span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span><span class="f13 text-truncate"><span th:utext="${feed.Feed_content}"></span><span th:if="${feed.Feed_content}==null">&nbsp;</span></span>
+						<div class="col-12 feed-box-bot p-4 pt-3 pb-5 xh-100">
+							<span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span><span class="f13 text-truncate" th:utext="${feed.Feed_content}"></span><span th:if="${feed.Feed_content}==null">&nbsp;</span></span>
 						</div>
 						<!--feed box bot | text-->
 						<div class="col-12 feed-box-bot hstack p-3 border-top f13 d-flex hstack">
@@ -437,7 +437,7 @@
                     </div>
  -->
 			<!-- 핫플 이미지 영역 -->
-			<div class="hp_imgBox mb-3 px-5">
+			<div class="hp_imgBox home_dl_img_hotPlace home_dl_img_hotPlace mb-3 px-5 mx-5">
 				<div class="hp_img_content col-10 col-md-6 mx-auto" th:each="infoHome:${infoHome2}">
 					<a th:href="@{'Event_view?id='+ ${infoHome.getEvent_num()}}" class="">
 					<div class="hp_img">
@@ -503,7 +503,7 @@
 	                            </a></li>
 	                    </ul>
 	                </div>  home_dl_img_AIPlaner -->
-			<div class="f-carousel home_dl_img_AIPlaner px-5" id="myCarousel">
+			<div class="f-carousel home_dl_img_AIPlaner col-12 col-lg-10 m-auto" id="myCarousel">
 			<div class="f-carousel__slide" th:each="CourseListHome:${CourseListHome}">
 				<li class="pb-3"><a th:href="@{'Course_view?num='+ ${CourseListHome.getCourse_num()}}" class=""><span class="best"></span><img th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}" alt="" class="aiPlaner_img">
 				<div class="row aiPlaner_board">
@@ -564,9 +564,10 @@
 	<!-- datalab 컨텐츠 새로고침 버튼 영역 -->
 	<div class="row dl_refresh_buttonBox py-3 me-0">
 		<div class="col mt-4">
-			<div class="dl_refresh_button mx-auto hstack">
+			<!-- 오늘의 피드 추천 -->
+			<!-- <div class="dl_refresh_button mx-auto hstack">
 				<img class="img-fluid" src="../img/home/main/btn_curation_refresh.png" alt="#"><span>오늘의 피드 추천</span><span>오늘의 핫플 추천</span><span>코스 재추천</span>
-			</div>
+			</div> -->
 			<div class="dl_more_content hstack">
 				<a href="/feed" class="hstack goFeed me-2 f14">바로가기 <b> > </b></a>
 				<a href="/info" class="hstack goEvent me-2 f14">바로가기 <b> > </b></a>
