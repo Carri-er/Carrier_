@@ -180,6 +180,7 @@
                             
                        
                            </div>
+                           <!-- 밴드 피드 content -->
                            <div class="myBand_feedView_content_item_content">
                         	<div th:utext="${myBandFeedList.getBand_feed_content()}"></div>
                            </div>
@@ -204,11 +205,11 @@
 									<div class="row">
 										<div class="col-1">
 											<img class="rounded-circle"
-												th:src="@{'../img/member_thumbnail/'+${bandLoginMemberDto.getMember_profileimage()}}"
+												th:src="@{'../img/member_thumbnail/'+${bandFeedCommentAll.getMember_profileimage()}}"
 												alt="#" style="width: 50px; height: 50px;" />
 										</div>
-										<div class="ms-1 col-9">
-											<span class="f12" th:text="${bandLoginMemberDto.getMember_Id}"></span>
+										<div class="ms-3 col-9">
+											<span class="f12" th:text="${bandFeedCommentAll.getMember_Id}"></span>
 											<span class="f12 ms-5" th:text="| 작성 시간 : ${bandFeedCommentAll.getBandFeed_comment_writeTime()} |"></span>
 											<div class="w-100 "></div>
 											<span class="f13 text-truncate " th:text="${bandFeedCommentAll.getBand_feedComment_content()}"></span>
