@@ -76,73 +76,30 @@
                 <!-- History | Title -->
                 <div class="col-12 align-items-center p-4 border rounded-4 overflow-hidden">
                     <div class="col-12 d-flex justify-content-between h-5 hstack">
-                        <h5>History</h5>
-                        <a href="#" class="gg-dim-txt f13">전체삭제</a>
+                        <h5>동행</h5>
+                        <a href="/band" class="gg-dim-txt f13">모두보기</a>
                     </div>
                     <!-- History | Content -->
                     <div class="col-12 mt-3">
                         <div class="row my-history-wrap">
                             <div class="d-none d-lg-block col-2 f20 m-auto pb-5">
-                                최근 본 여행지
+                                나의 동행
                             </div>
                             <div class="col-12 col-lg-9 me-auto">
                                 <!-- Swiper -->
                                 <div class="swiper mySwiper">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
+                                    	<!-- 가입한 밴드 리스트 출력 -->
+                                        <div class="swiper-slide" th:each="mypage_joinBandList : ${joinBandList}">
                                             <div class="card border-0 my-history-content-card text-center">
-                                                <img src="../img/feed/beer.jpg" class="mb-3" alt="">
-                                                <span class="text-tourist">관광지이름 1</span><span class="f13 text-muted">지역 1</span>
+                                                <img th:src="@{'../img/uploadBandThumnail/'+${mypage_joinBandList.getBand_thumnail()}}" class="mb-3 mypage_bandImg" alt="">
+                                                <span class="text-tourist" th:text="${mypage_joinBandList.getBand_name()}">밴드 명</span>
                                             </div>
                                             <img src="../img/mypage/del.png"
                                                  class="my-del-btn shadow-sm position-absolute" width="24" height="24"
                                                  alt="">
                                         </div>
-                                        <div class="swiper-slide">
-                                            <div class="card border-0 my-history-content-card text-center">
-                                                <img src="../img/feed/cebu.jpg" class="mb-3" alt="">
-                                                <span class="text-tourist">관광지이름 1</span><span class="f13 text-muted">지역 1</span>
-                                            </div>
-                                            <img src="../img/mypage/del.png"
-                                                 class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                                 alt="">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="card border-0 my-history-content-card text-center">
-                                                <img src="../img/feed/oedo.jpg" class="mb-3" alt="">
-                                                <span class="text-tourist">관광지이름 1</span><span class="f13 text-muted">지역 1</span>
-                                            </div>
-                                            <img src="../img/mypage/del.png"
-                                                 class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                                 alt="">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="card border-0 my-history-content-card text-center">
-                                                <img src="../img/feed/beer.jpg" class="mb-3" alt="">
-                                                <span class="text-tourist">관광지이름 1</span><span class="f13 text-muted">지역 1</span>
-                                            </div>
-                                            <img src="../img/mypage/del.png"
-                                                 class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                                 alt="">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="card border-0 my-history-content-card text-center">
-                                                <img src="../img/feed/cebu.jpg" class="mb-3" alt="">
-                                                <span class="text-tourist">관광지이름 1</span><span class="f13 text-muted">지역 1</span>
-                                            </div>
-                                            <img src="../img/mypage/del.png"
-                                                 class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                                 alt="">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="card border-0 my-history-content-card text-center">
-                                                <img src="../img/feed/oedo.jpg" class="mb-3" alt="">
-                                                <span class="text-tourist">관광지이름 1</span><span class="f13 text-muted">지역 1</span>
-                                            </div>
-                                            <img src="../img/mypage/del.png"
-                                                 class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                                 alt="">
-                                        </div>
+                                        
                                     </div>
                                     <div class="row mx-auto">
                                         <div class="swiper-scrollbar">
@@ -228,7 +185,7 @@
                 </div>
                 <!-- 보관함 | 우측의 우측 -->
                 <div class="col-12 col-md w-100 d-flex align-items-stretch border rounded-4 p-4 mt-md-0">
-                    <div class="row p-0 m-auto m-0 w-100">
+                    <div class="row p-0 m-auto m-0 w-100 h-100">
                         <!--보관함-->
                         <div class="col-12 p-0">
                             <div class="d-flex justify-content-between">

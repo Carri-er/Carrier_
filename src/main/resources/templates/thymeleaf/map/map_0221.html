@@ -25,49 +25,207 @@
                 </div>   map_curr_locationBox -->
 
                 <!-- map guide 아이콘 영역 -->
-                <div class="map_guide_iconBox ">
-                    <div class="map_guide_icon">
-                        <ul class="map_guide_icon_list px-0">
-                            <li class="map_guide_icon_item map_icon_near_trip ">
-                                관광지
-                            </li>
-                            <li class="map_guide_icon_item map_icon_food">
-                                맛집
-                            </li>
-                            <li class="map_guide_icon_item map_icon_cafe ">
-                                카페
-                            </li>
-                            <li class="map_guide_icon_item map_icon_hotel">
-                                숙박
-                            </li>
-                            <li class="map_guide_icon_item map_icon_inside ">
-                               	실내
-                            </li>
-                            <li class="map_guide_icon_item map_icon_activity ">
-                                액티비티
-                            </li>
-                            <li class="map_guide_icon_item map_icon_themepark ">
-                                테마파크
-                            </li>
-                            <li class="map_guide_icon_item map_icon_event ">
-                                축제
-                            </li>
-                            <li class="map_guide_icon_item map_icon_recomand_thema">
-                                산, 바다
-                            </li>
-                            <li class="map_guide_icon_item map_icon_trip_course">
-                                여행코스
-                            </li>
-                            <!--<li class="map_guide_icon_item map_icon_myTrip">
-                                나의여행
-                            </li>
-                             <li class="map_guide_icon_item map_icon_set">
-                                설정
-                            </li> -->
-                        </ul>
-                    </div>
-                  
-                </div> <!-- map_guide_iconBox 끝 div--> 
+                	<!-- 전체 리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('all')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip on">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food on">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe on">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel on">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside on">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity on">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark on">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event on">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema on">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block>
+                
+                	<!-- 관광지 리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('tour')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip on">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
+                
+                 <!-- 맛집 리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('food')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food on">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
+                 
+                 <!-- 카페 리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('cafe')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe on">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
+                 
+                 
+                  <!-- 숙박 리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('hotel')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel on">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
+                 
+                  <!-- 실내 리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('inside')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside on">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
+                 
+                   <!--액티비티 리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('activity')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity on">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
+                 
+                 <!-- ㅌㅔ마파크  리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('themepark')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark on">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
+                 
+                 
+                  <!-- 축제  리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('event')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark on ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event on">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
+                 
+                  <!-- 산,바다 리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('sanBada')}">
+	                <div class="map_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema on">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block> 
                 <hr />
                 
                 <div class="mapListItemBox ">
@@ -281,9 +439,7 @@ $(document).ready(function() {
             
          // 생성된 오버레이를 배열에 추가
             overlays.push(overlay);
-         
-         // 각 오버레이의 닫기 버튼 클릭 이벤트 핸들러 추가   
-           // addCloseBtnClickListener(overlay);
+
         
         }); // 마커 생성 함수 끝
 		
@@ -332,8 +488,6 @@ $(document).ready(function() {
             };
         }
      
-
-        
 
         // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
         if (navigator.geolocation) {
@@ -503,8 +657,7 @@ $(document).ready(function() {
 		}  else if(index_num == 8){
 			location.href = "/map?category=산,바다" ;
 		} 
-		
-		
+
 		
 	})
     

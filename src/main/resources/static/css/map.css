@@ -6,6 +6,7 @@
 
 /* 맵 컨텐츠 전체를 감싸는 영역 스타일 */
 div.map_all_contentListBox {
+
    width: 100%;
    display: flex;
    flex-direction: row;

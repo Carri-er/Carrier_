@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,9 @@ public class MemberController {
 
 	@Autowired
 	IFeedDAO feed_dao;
+	
+	@Autowired
+	private com.ex.springboot.dao.IBandDAO bandDao; // 다형성
 	
 	@Autowired
 	private com.ex.springboot.dao.IAiDAO AiDAO;
@@ -219,13 +223,25 @@ public class MemberController {
 	
 	//마이페이지
 	@GetMapping("/mypage")
-	public String mypage(HttpServletRequest request, Model model) {
+	public String mypage(HttpServletRequest request, Model model, HttpSession session) {
 		String id = request.getParameter("id");
 		
 		/*
 		 * if(request.getParameter("id").equals("admin")) { return
 		 * "redirect:/MemberList"; }
 		 */
+		try {
+
+			if( session.getAttribute("Member_Id") != null ) {
+				String loginId = (String) session.getAttribute("Member_Id");
+				model.addAttribute("joinBandList", bandDao.mypage_joinBandList(loginId));
+				System.out.println("로그인 아이디 "+loginId);
+			}
+		} catch( Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		model.addAttribute("loginMember", member_dao.memberList(id));
 		model.addAttribute("feed", feed_dao.feedList_mypage(id));
@@ -235,13 +251,24 @@ public class MemberController {
 	}
 	
 	@GetMapping("/mypageCourseAll")
-	public String mypageCourseAll(HttpServletRequest request, Model model) {
+	public String mypageCourseAll(HttpServletRequest request, Model model, HttpSession session) {
 		String id = request.getParameter("id");
 		
 		/*
 		 * if(request.getParameter("id").equals("admin")) { return
 		 * "redirect:/MemberList"; }
 		 */
+		try {
+
+			if( session.getAttribute("Member_Id") != null ) {
+				String loginId = (String) session.getAttribute("Member_Id");
+				model.addAttribute("joinBandList", bandDao.mypage_joinBandList(loginId));
+				System.out.println("로그인 아이디 "+loginId);
+			}
+		} catch( Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		model.addAttribute("loginMember", member_dao.memberList(id));
 		model.addAttribute("course", AiDAO.Course_select(id));
