@@ -42,7 +42,9 @@ public interface IBandDAO {
 			@Param("band_name") String band_name, 
 			@Param("band_admin") String band_admin, 
 			@Param("band_content") String band_content,
-			@Param("band_thumnail") String band_thumnail
+			@Param("band_thumnail") String band_thumnail,
+			@Param("band_theme") String band_theme,
+			@Param("band_area") String band_area
 			);
 	
 	//밴드 삭제하기
@@ -100,7 +102,10 @@ public interface IBandDAO {
 			@Param("band_thumnail") String band_thumnail,
 			@Param("band_name") String band_name, 
 			@Param("band_content") String band_content,
-			@Param("band_code") int band_code
+			@Param("band_code") int band_code, 
+			@Param("band_theme") String band_theme,
+			@Param("band_area") String band_area
+			
 			);
 	
 	//밴드 가입 시 멤버 수 증가 
