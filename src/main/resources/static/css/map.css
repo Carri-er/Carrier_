@@ -32,6 +32,13 @@ div.map_curr_locationBox {
 }
 
 /* map_guide_iconBox 스타일 */
+.map_guide_iconBox{
+	height: 570px;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
 ul.map_guide_icon_list {
 	display: flex;
 	flex-direction: row;
@@ -430,7 +437,13 @@ h3.pgj{
    
 }
  
-  
+/* 예약 및 코스 저장 버튼 */ 
+.btn-map-step{
+	/* width: 60px; */
+	bottom: 0;
+	bottom: 25px;
+	right: 0;
+}  
   
 @media screen and (max-width: 760px) {
   .showbtn {

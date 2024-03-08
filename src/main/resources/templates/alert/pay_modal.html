@@ -1,7 +1,7 @@
 <!-- Button trigger modal -->
-<div class="m-auto m-5 p-5">
-	<button type="button" class="btn btn-main rounded-pill px-2"
-		data-bs-toggle="modal" data-bs-target="#feed_del_Modal">자세히보기</button>
+<div class="m-auto">
+	<!-- <button type="button" class="btn btn-main rounded-pill px-2"
+		data-bs-toggle="modal" data-bs-target="#feed_del_Modal">자세히보기</button> -->
 
 	<!-- Pay Modal -->
 	<div class="modal fade bg-trans" id="feed_del_Modal" tabindex="-1"
@@ -24,11 +24,26 @@
 									<img src="../img/feed/user_rabbit.jpg" class="img-fluid w-100"
 										alt="" />
 								</div>
-								<span class="f22 d-block my-2">코스의 제목이 오는 곳입니다</span> <span
-									class="f17 d-block my-3">코스의 설명이 오는 곳입니다</span>
-								<div class="btn btn-sm btn-light rounded-pill my-2 f14">예약
-									가능 기간</div>
-								<span><b class="text-pink d-block f20">3,500원</b></span>
+								<!-- 코스의 제목이 오는 곳입니다 -->
+								<span class="f22 d-block my-3 px-5">
+									<th:block th:if="${session.Member_Name eq null}">
+                       					 <span>사용자님의 </span>
+                        			</th:block>
+									<th:block th:unless="${session.Member_Name eq null}">
+                        			<span th:text="|${session.Member_Name}님의|" class="f22 "></span>
+                        			</th:block>
+                        			<span th:text="${aicc.get(0).getEvent_area()}" class="text-black">지역</span>
+                        			<span th:if="${day eq '0'}" th:text="당일여행" class="text-black">기간</span>
+                        			<span th:if="${day eq '1'}" th:text="1박2일" class="text-black">기간</span>
+                        			<span th:if="${day eq '2'}" th:text="2박3일" class="text-black">기간</span>
+                        			<input type="hidden" class="text-black" th:value="${aicc.get(0).getEvent_uploadday()}"></input><!-- 중복 방지용 -->
+                        			<span>코스</span>
+								</span> 
+								
+								<span 
+									class="f16 d-block my-3 px-5">수학여행하면 먼저 떠오르는 경주 ! <br /> 신라의 문화와 역사가 잠들어있는 고고한 도시다.  🌉 <br /> 경주의 밤은 잠들지 않는다. <br /> 밤에 가보면 더 아름다운 첨성대나 계림의 모습은 잊을 수 없는 추억이 될 것이다.</span>
+								<div class="btn btn-sm btn-light rounded-pill my-2 f14">전체 예약 금액</div>
+								<span><b class="text-pink d-block f20">50,000원</b></span>
 							</div>
 							<img src="../img/mypage/bg_detail_pop.png" class="img-fluid p-0"
 								alt="" />
@@ -50,57 +65,6 @@
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
 	integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
 	crossorigin="anonymous"></script>
-	
-<script>
-	Kakao.init('${ce30d47bc7e81ef8da255de3a1dedbeb}'); // 사용하려는 앱의 JavaScript 키 입력
-</script>
-
-
-
-<script>
-	$("#check_module").click(function () {
-		var IMP = window.IMP; // 생략가능
-		IMP.init('가맹점식별코드'); 
-		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
-		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
-		IMP.request_pay({
-			pg: 'kakao',
-			pay_method: 'card',
-			merchant_uid: 'merchant_' + new Date().getTime(),
-			/* 
-			 *  merchant_uid에 경우 
-			 *  https://docs.iamport.kr/implementation/payment
-			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-			 */
-			name: '주문명 : 아메리카노',
-			// 결제창에서 보여질 이름
-			// name: '주문명 : ${auction.a_title}',
-			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-			amount: 2000,
-			// amount: ${bid.b_bid},
-			// 가격 
-			buyer_name: '이름',
-			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
-			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
-			buyer_postcode: '123-456',
-			}, function (rsp) {
-				console.log(rsp);
-			if (rsp.success) {
-				var msg = '결제가 완료되었습니다.';
-				msg += '결제 금액 : ' + rsp.paid_amount;
-				// success.submit();
-				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
-				// 자세한 설명은 구글링으로 보시는게 좋습니다.
-			} else {
-				var msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : ' + rsp.error_msg;
-			}
-			alert(msg);
-		});
-	});
-</script>
-
-
 
 <!-- 결제창 -->
 <!-- <div th:replace="~{alert/pay_modal::div}"></div> -->
