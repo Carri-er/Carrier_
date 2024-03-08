@@ -803,5 +803,35 @@
 
 		}
 	</script>
+	
+	<!-- 코스 리스트 클릭 시 여행정보 팝업창 출력 -->
+<script>
+
+	
+	function func_popEvent(param) {
+		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+		// width  : 팝업창 가로 크기
+	    // height : 팝업창 세로 크기
+	    var popupWidth = 700;
+	    var popupHeight = 600;
+	    
+     	// 브라우저 중앙 위치 계산
+        // window.screenX : 브라우저의 현재 스크린 좌측상단 X좌표
+        // window.screenY : 브라우저의 현재 스크린 좌측상단 Y좌표
+       
+        // window.outerWidth  : 브라우저의 전체 가로 크기
+        // window.outerHeight : 브라우저의 전체 가로 크기
+        var popupX = Math.round(window.screenX + (window.outerWidth/2) - (popupWidth/2));
+        var popupY = Math.round(window.screenY + (window.outerHeight/2) - (popupHeight/2));
+        
+        var featureWindow = "width=" + popupWidth + ", height="+popupHeight
+        + ", left=" + popupX + ", top=" + popupY;
+        
+		window.open('/Event_view?id='+param, '_blank',featureWindow );
+		
+	}
+
+</script>
 </body>
 </html>

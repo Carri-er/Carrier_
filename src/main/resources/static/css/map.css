@@ -40,6 +40,12 @@ div.map_curr_locationBox {
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
+.indexMap_guide_iconBox{
+	height: 150px;
+	width: 100%;
+}
+
+
 
 ul.map_guide_icon_list {
 	display: flex;
