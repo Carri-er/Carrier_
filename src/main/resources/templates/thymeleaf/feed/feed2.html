@@ -211,7 +211,7 @@
 		</div>
 		
 		<!-- 피드목록이 비어있을 때 -->
-		<div th:if="${#lists.isEmpty(feedList)}">
+		<div th:if="${#lists.isEmpty(feedList)}" >
 			<div class="row">
 				<div class="col text-center py-5 my-5">
 					<img src="../img/feed/out-of-stock.png" class="mb-4" width="100"
@@ -230,7 +230,7 @@
 			</div>
 		</div>
 		<!--------------------------------------------feed box Parent------------------------------------------>
-		<div class="m-auto my-5 my-md-3 pb-5">
+		<div class="m-auto my-5 my-md-3 pb-5 pt-5">
 			<div
 				class="card-columns justify-content-center align-items-start m-0 row-box">
 				<!--feed box Start-->

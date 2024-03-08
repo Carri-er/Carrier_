@@ -73,7 +73,7 @@ public class CourseController {
 			System.out.println("====================");
 			System.out.println("list의 area2 사용 -"+area2);
 			model.addAttribute("aicc", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
-			model.addAttribute("aicc2", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
+			model.addAttribute("aicc2", AiDAO.listAll(area, cafe, food,hotel));
 		
 		}
 
@@ -119,7 +119,7 @@ public class CourseController {
 				System.out.println("====================");
 				System.out.println("list의 area2 사용 -"+area2);
 				model.addAttribute("aicc", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
-				model.addAttribute("aicc2", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
+				model.addAttribute("aicc2", AiDAO.listAll(area, cafe, food,hotel));
 				//model.addAttribute("aicc3", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
 				//model.addAttribute("aicc4", AiDAO.list(area2, thema, thema1, thema2, thema3, thema5, thema6, thema8,food,hotel));
 				model.addAttribute("aicc3", AiDAO.listAll(area, cafe, food,hotel));

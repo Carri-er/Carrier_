@@ -6,11 +6,13 @@
 
 /* 맵 컨텐츠 전체를 감싸는 영역 스타일 */
 div.map_all_contentListBox {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	
+
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   
 }
+
 div.map_all_contentBox {
     width: 100%;
     display: flex;
@@ -323,9 +325,12 @@ li.map_icon_set.on::before {
 
 /* 맵 출력 아이템 리스트 스타일 */
 div.mapListItemBox{
+
+   height: calc( 100vh - 150px );
 	overflow : scroll !important;
 	height: calc( 100vh - 150px );
 	width: 400px;
+
 }
 
 /* 카카오 맵 스타일 */
@@ -449,9 +454,9 @@ h3.pgj{
   .showbtn {
     display: block;
   }
-  div.map_guide{
+   div.map_guide{
 	width: 100%;  
-  }
+  } 
  .mapday1,.mapday2,.mapday3{
  	display: none;
  }

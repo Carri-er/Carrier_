@@ -36,7 +36,7 @@
 				</h3>
 				
 				<img th:src="@{'../img/info/' + ${view.getEvent_thumbnail()}}"
-					alt="" class="img-fluid mx-auto rounded-4" >
+					alt="" class="img-fluid mx-auto rounded-4"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 				<!-- <img class="img-fluid" src="https://korean.visitkorea.or.kr/resources/images/sub/bg_pic_reg.jpg" alt=""> -->
 			</div>
 		</div>
@@ -61,21 +61,21 @@
 								<li>• 안내</li>
 							</div>
 							<div class="col-9 ">
-								<li th:text="${view.getEvent_phone()}">041 852 4230
+								<li th:utext="${view.getEvent_phone()}">041 852 4230
 								</li>
 							</div>
 							<div class="col-3  ">
 								<li>• 휴일</li>
 							</div>
 							<div class="col-9 ">
-								<li th:text="${view.getEvent_rest()}">연중무휴</li>
+								<li th:utext="${view.getEvent_rest()}">연중무휴</li>
 							</div>
 							
 							<div class="col-3  ">
 								<li>• 주차</li>
 							</div>
 							<div class="col-9 ">
-								<li th:text="${view.getEvent_parking()}">가능(소형20대)</li>
+								<li th:utext="${view.getEvent_parking()}">가능(소형20대)</li>
 							</div>
 						</div>
 					</div>
@@ -86,7 +86,7 @@
 								<li>• 주소</li>
 							</div>
 							<div class="col-9 ">
-								<li th:text="${view.getEvent_address()}">충청남도 공주시 계룡면
+								<li th:utext="${view.getEvent_address()}">충청남도 공주시 계룡면
 									신원사동길1</li>
 							</div>
 							<div class="col-3  ">
@@ -94,7 +94,7 @@
 							</div>
 							
 							<div class="col-9 ">
-								<li th:text="${view.getEvent_time()}"></li>
+								<li th:utext="${view.getEvent_time()}"></li>
 							</div>
 							
 						</div>

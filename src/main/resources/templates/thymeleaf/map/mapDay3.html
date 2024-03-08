@@ -52,7 +52,7 @@
 											<b>총 거리</b> <span class="text-black mx-2">|</span> <span
 												class="totalDistanceAll text-black"></span>
 										</p>
-										<p class="px-3">
+										<p class="px-3 text-black">
 											<th:block th:if="${thema!=null and thema != ' '}"># <span
 													th:text="${thema}" class="text-black "></span>
 											</th:block>
@@ -184,7 +184,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc.getEvent_category()}"
@@ -213,7 +213,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood.getEvent_category()}"
@@ -242,7 +242,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc2.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc2.getEvent_category()}"
@@ -270,7 +270,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccCafe.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccCafe.getEvent_category()}"
@@ -298,7 +298,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood2.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood2.getEvent_category()}"
@@ -327,7 +327,7 @@
 												<img
 													th:src="@{'../img/info/' + ${hotel.getEvent_thumbnail()}}"
 													class="img-fluid rounded-circle" alt=""
-													style="width: 60px; height: 60px;">
+													style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 											</div>
 											<div class="col-8">
 												<p th:text="${hotel.getEvent_category()}"
@@ -362,7 +362,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc3.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc3.getEvent_category()}"
@@ -391,7 +391,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood3.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood3.getEvent_category()}"
@@ -420,7 +420,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc4.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc4.getEvent_category()}"
@@ -448,7 +448,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccCafe2.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccCafe2.getEvent_category()}"
@@ -476,7 +476,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood4.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood4.getEvent_category()}"
@@ -504,7 +504,7 @@
 											<img
 												th:src="@{'../img/info/' + ${hotel2.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${hotel2.getEvent_category()}"
@@ -538,7 +538,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc5.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc5.getEvent_category()}"
@@ -567,7 +567,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood5.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood5.getEvent_category()}"
@@ -596,7 +596,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aicc6.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aicc6.getEvent_category()}"
@@ -624,7 +624,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccCafe3.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccCafe3.getEvent_category()}"
@@ -641,8 +641,8 @@
 						</div>
 						<!-- 맛집2 -->
 						<hr class="px-5 text-black-50" />
-						<div class="row" th:each="aiccFood6:${aiccFood6}">
-							<div class="col mb-3">
+						<div class="row mb-3" th:each="aiccFood6:${aiccFood6}">
+							<div class="col mb-5">
 								<a th:href="@{'Event_view?id='+ ${aiccFood6.getEvent_num()}}">
 									<div class="row px-4 Event_contentRow">
 										<div class="col-1 count">
@@ -652,7 +652,7 @@
 											<img
 												th:src="@{'../img/info/' + ${aiccFood6.getEvent_thumbnail()}}"
 												class="img-fluid rounded-circle" alt=""
-												style="width: 60px; height: 60px;">
+												style="width: 60px; height: 60px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 										</div>
 										<div class="col-8">
 											<p th:text="${aiccFood6.getEvent_category()}"
@@ -679,7 +679,7 @@
 			</div>
 			<!-- map_guide -->
 
-			<div class="map_mapSection">
+			<div class="map_mapSection col">
 				<!-- 지도를 표시할 div 입니다 -->
 				<div id="map">
 					<h3 class="pgj">
@@ -1248,10 +1248,9 @@
 			/*[[${aiccFood4[0].getEvent_num()}]]*/,
 			/*[[${aiccFood5[0].getEvent_num()}]]*/,
 			/*[[${aiccFood6[0].getEvent_num()}]]*/,
-			/*[[${hotel[0].getEvent_num()}]]*/
+			/*[[${hotel[0].getEvent_num()}]]*/,
 			/*[[${hotel2[0].getEvent_num()}]]*/
 			];
-
 			var duplicateFound = false;
 
 			// 모든 eventNum 값을 비교하여 같은 값이 있는지 확인
