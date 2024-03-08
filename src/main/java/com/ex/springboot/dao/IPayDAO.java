@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.ex.springboot.dto.MemberDTO;
 import com.ex.springboot.dto.PayDTO;
 
 @Mapper

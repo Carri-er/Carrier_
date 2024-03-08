@@ -56,6 +56,9 @@ public class AIController {
 		
 		String memberId = request.getParameter("memberId");
 		String day = request.getParameter("day");
+		String amount = request.getParameter("amount");
+		model.addAttribute("amount", amount);
+		
 		model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
 		model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
 		model.addAttribute("aicc2", AiDAO.listCourse(day1aicc2));
@@ -210,7 +213,7 @@ public class AIController {
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
 		String day = request.getParameter("day");
-		int amount = Integer.parseInt(request.getParameter("amount"));
+		String amount = request.getParameter("amount");
 		
 		// day1 파라미터 값
 		String day1aicc = request.getParameter("day1aicc");
@@ -255,17 +258,17 @@ public class AIController {
 			 number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
 					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
 							day3aicc+","+day3aiccFood+","+day3aicc2+","+day3aiccCafe+","+day3aiccFood2;
-			 System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,0));
+			 System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
 		}
 		if(day.equals("1박2일")) {
 			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
 					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2;
-			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,0));
+			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
 		}
 		
 		if(day.equals("당일 치기")) {
 			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
-			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,0));
+			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
 		}
 		
 		model.addAttribute("memberId", memberId);
