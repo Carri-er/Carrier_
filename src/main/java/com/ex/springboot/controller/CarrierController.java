@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ex.springboot.dao.IFeedDAO;
 import com.ex.springboot.dto.CourseDTO;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping
 public class CarrierController {
@@ -39,14 +41,18 @@ public class CarrierController {
       return "thymeleaf/home/home";
    }
    
-	@GetMapping("/checkout")
-	public String checkout() {
+	@RequestMapping("/checkout")
+	public String checkout(HttpServletRequest request, Model model) {
+		/* String MemberId = request.getParameter(); */
+
 		return "thymeleaf/member/checkout";
 	}
+	
 	@GetMapping("/fail")
 	public String fail() {
 		return "thymeleaf/member/fail";
 	}
+	
 	@GetMapping("/success")
 	public String success() {
 		return "thymeleaf/member/success";

@@ -70,8 +70,6 @@ public class MapController {
 			model.addAttribute("mapMarkerList", mapDao.mapMarkerSanBadaList("산", "바다"));
 			selectCategory = "sanBada";
 			model.addAttribute("selectCategory", selectCategory);
-		} else if(category.equals("여행코스")) {
-			
 		} else {
 			model.addAttribute("mapMarkerList", mapDao.mapMarkerCategoryList(category));
 			
@@ -83,9 +81,9 @@ public class MapController {
 			else if(category.equals("테마파크")) { selectCategory = "themepark"; }
 			else if(category.equals("테마파크")) { selectCategory = "evnet"; }
 			
+			
 			model.addAttribute("selectCategory", selectCategory);
 		}
-		
 
 		
 		return "thymeleaf/map/map_0221";
