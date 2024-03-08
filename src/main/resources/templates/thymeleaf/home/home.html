@@ -23,20 +23,20 @@
 								<!-- 캐러셀 텍스트 영역 -->
 								<div class="col-12 col-lg-4 col-xl-5 d-flex d-lg-block p-0">
 									<div class="crousel_textArea">
-										<em th:text="${info.getEvent_name()}">긴 겨울밤 낭만적인 시간</em>
+										<em th:text="${info.getCourse_Name()}">긴 겨울밤 낭만적인 시간</em>
 										<!-- <strong th:text="${info.getEvent_name()}"> 겨울밤을 빛내주는 전국 야경 명소</strong> -->
-										<strong class="fs-2" th:utext="${info.getEvent_title()}">
+										<strong class="fs-2 text-truncate" th:utext="${info.getCourse_content()}">
 										겨울밤을 빛내주는 전국 야경 명소</strong>
 										<div class="text-truncate w-75">
 											<!-- <span class="f14"
                                                   th:text="${info.getEvent_content()}"> 겨울밤을 빛내주는 전국 야경 명소</span> -->
 										</div>
-										<a th:href="@{'Event_view?id='+ ${info.getEvent_num()}}">자세히 보기</a>
+										<a th:href="@{'Course_view?num='+ ${info.getCourse_num()}}">자세히 보기</a>
 									</div>
 								</div>
 								<!-- 캐러셀 이미지 영역 -->
 								<div class="col-12 col-lg-8 col-xl-7 p-0 carousel_img shadow-sm rounded-2">
-									<img class="w-100" th:src="@{'../img/info/' + ${info.getEvent_thumbnail()}}" alt="겨울밤을 빛내주는 전국 야경 명소">
+									<img class="w-100" th:src="@{'../img/info/' + ${info.getCourse_img()}}" alt="겨울밤을 빛내주는 전국 야경 명소" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
 								</div>
 							</div>
 							<!-- row -->
@@ -298,9 +298,9 @@
 		<!-- Datalab 여행 콕콕 nav바 영역 -->
 		<div class="home_dl_nav p-0 rounded-4 overflow-hidden">
 			<ul class="home_dl_nav_ul p-0 mb-0">
-				<li class="home_dl_nav_list active">피드 돋보기</li>
+				<li class="home_dl_nav_list ">피드 돋보기</li>
 				<li class="home_dl_nav_list">추천지 돋보기</li>
-				<li class="home_dl_nav_list">여행코스 돋보기</li>
+				<li class="home_dl_nav_list active">여행코스 돋보기</li>
 			</ul>
 		</div>
 		<div class="home_dl_content">
@@ -512,9 +512,10 @@
 	                            </a></li>
 	                    </ul>
 	                </div>  home_dl_img_AIPlaner -->
-			<div class="f-carousel home_dl_img_AIPlaner col-12 col-lg-10 m-auto" id="myCarousel">
+			<div class="f-carousel home_dl_img_AIPlaner col-12 col-lg-10 m-auto " id="myCarousel">
 			<div class="f-carousel__slide" th:each="CourseListHome:${CourseListHome}">
-				<li class="pb-3"><a th:href="@{'Course_view?num='+ ${CourseListHome.getCourse_num()}}" class=""><span class="best"></span><img th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}" alt="" class="aiPlaner_img">
+				<li class="pb-3"><a th:href="@{'Course_view?num='+ ${CourseListHome.getCourse_num()}}" class=""><span class="best"></span>
+				<img th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}" alt="" class="aiPlaner_img" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
 				<div class="row aiPlaner_board">
 					<em th:text="${CourseListHome.getCourse_Interest()}">2박3일</em>
 					<div class="col-10 aiPlaner_text">
@@ -757,6 +758,7 @@
 </div>
 <!-- home_wrapper -->
 <!--footer-->
+<div th:replace="~{footer/robot::robot}"></div>
 <div th:replace="~{footer/footer::footer}">
 </div>
 <!-- 알림창 -->

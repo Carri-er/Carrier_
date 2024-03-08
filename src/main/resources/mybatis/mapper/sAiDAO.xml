@@ -112,7 +112,18 @@ FROM (
     FROM Course A
     RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id
     WHERE  A.Course_Name is not null
-    ORDER BY A.Course_num desc
+   ORDER BY DBMS_RANDOM.RANDOM() 
+)
+WHERE ROWNUM &lt;= 3
+	</select>
+	<select id="CourseListHome2" resultType="com.ex.springboot.dto.CourseDTO">
+	SELECT *
+FROM (
+    SELECT A.*, B.Member_profileimage
+    FROM Course A
+    RIGHT OUTER JOIN carrier_member B ON A.Member_id = B.Member_id
+    WHERE  A.Course_Name is not null
+    ORDER BY A.Course_num
 )
 WHERE ROWNUM &lt;= 3
 	</select>
