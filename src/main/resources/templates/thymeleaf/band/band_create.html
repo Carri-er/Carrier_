@@ -15,6 +15,51 @@
                         
 						<img id="blah" src="http://placehold.it/200" alt="#" class="border my-3 mx-auto d-block " width="200" height="200"/>
 						
+						<div class="my-5 row justify-content-center">
+						    <div class="col-md-12">
+							    <label for="input_band_area" class="form-label">모임 활동은 주로 어디서 진행되나요?</label>
+							    <select id="input_band_area" class="form-select" name="band_area">
+							      <option selected value="area_null" >없음</option>
+							      <option value="전국">전국</option>
+							      <option value="서울">서울</option>
+							      <option value="부산">부산</option>
+							      <option value="대구">대구</option>
+							      <option value="인천">인천</option>
+							      <option value="광주">광주</option>
+							      <option value="대전">대전</option>
+							      <option value="울산">울산</option>
+							      <option value="경기">경기</option>
+							      <option value="강원">강원</option>
+							      <option value="충북">충북</option>
+							      <option value="충남">충남</option>
+							      <option value="전북">전북</option>
+							      <option value="전남">전남</option>
+							      <option value="경북">경북</option>
+							      <option value="경남">경남</option>
+							      <option value="제주">제주</option>
+							    </select>
+							  </div>
+						</div>
+						
+						<div class="my-5 row justify-content-center">
+						    <div class="col-md-12">
+							    <label for="input_band_theme" class="form-label">어떤 주제로 활동하는 모임인가요?</label>
+							    <select id="input_band_theme" class="form-select" name="band_theme">
+							      <option selected value="theme_null" >없음</option>
+							      <option value="산">산</option>
+							      <option value="바다">바다</option>
+							      <option value="액티비티">액티비티, 레포츠</option>
+							      <option value="테마파크">테마파크</option>
+							      <option value="카페">카페</option>
+							      <option value="바다">바다</option>
+							      <option value="축제">축제</option>
+							      <option value="맛집">맛집</option>
+							      <option value="전통시장">전통시장</option>
+							    </select>
+							  </div>
+						</div>
+						
+						
 						<div class="form-floating mb-3">
 							<input name="band_name" type="text" class="form-control" id="input_bandName" placeholder="밴드 이름 입력" size="15">
   							<label for="input_bandName">밴드 이름을 입력해주세요.</label>
@@ -71,6 +116,8 @@
 	 	   
 	 	  var input_bandName = $('#input_bandName').val();
 	 	  var textarea_bandContent = $('#textarea_bandContent').val();
+	 	 var input_band_theme = $('#input_band_theme').val();
+	 	 var input_band_area = $('#input_band_area').val();
 	 	  
 	 	 for(var i = 0 ; i < bandList.length ; i++) {
 	 		 if( bandList[i].band_name == input_bandName){
@@ -108,7 +155,17 @@
 	 		 	$('#label_bandContent').focus();
 	 		
 	 		 return false; 
-	 	   }else { 
+	 	   } else if( input_band_theme == 'theme_null' ){
+	 		   alert("모임 활동 지역을 선택해주세요.");
+	 		   input_band_theme.focus();
+	 		   return false;
+	 		  
+	 	   } else if( input_band_area == 'area_null' ){
+	 		   alert("모임 활동 지역을 선택해주세요.");
+       		   document.getElementById('input_band_area').focus();
+		 	   return false;
+		 		  
+		   } else { 
 	 		  document.getElementById('form_bandCreate').submit();
 	 		  
 	 	   }

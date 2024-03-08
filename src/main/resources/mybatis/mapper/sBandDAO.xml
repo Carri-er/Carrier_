@@ -38,8 +38,8 @@
 	<!-- resultType은 리턴되는 값의 타입을 지정, insert와 delete는 결과값이 없으므로 select와 달리 리턴 타입을 지정안함 -->
 	<!-- 밴드 생성 -->
 	<insert id="bandCreateDao">
-		insert into band (band_code, band_name, band_admin, band_memberCount, band_content, band_thumnail, band_day) 
-			values(band_seq.nextval, #{band_name}, #{band_admin}, 1, #{band_content}, #{band_thumnail}, sysdate )
+		insert into band (band_code, band_name, band_admin, band_memberCount, band_content, band_thumnail, band_theme, band_area ,band_day) 
+			values(band_seq.nextval, #{band_name}, #{band_admin}, 1, #{band_content}, #{band_thumnail}, #{band_theme}, #{band_area}, sysdate )
 	</insert>
 	
 	<!-- 밴드 피드 작성 -->
@@ -102,7 +102,7 @@
 	
 	<!-- 밴드 정보 수정하기 -->
 	<update id="bandInfoUpdate">
-		update band set band_thumnail = #{band_thumnail} , band_name = #{band_name} ,band_content = #{band_content} where band_code = #{band_code}
+		update band set band_thumnail = #{band_thumnail} , band_name = #{band_name} ,band_content = #{band_content}, band_theme = #{band_theme}, band_area = #{band_area} where band_code = #{band_code}
 	</update>
 	
 	<!-- 밴드 삭제하기 -->
@@ -126,6 +126,7 @@
 			select * from ( select * from band order by dbms_random.value )where ROWNUM <=  6
 		]]>
 	</select>
+	<!-- index페이지 밴드 랜덤 3개 출력 -->
 	<select id="randomBandList_home" resultType="com.ex.springboot.dto.BandDTO">
 		<![CDATA[
 			select * from ( select * from band order by dbms_random.value )where ROWNUM <=  3

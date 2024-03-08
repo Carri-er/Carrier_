@@ -18,4 +18,6 @@ public class BandDTO {
 	private String band_content; //밴드 상세설명
 	private String band_thumnail;//밴드 썸네일
 	private String band_day; // 밴드 개설일
+	private String band_theme; // 밴드 테마
+	private String band_area; //밴드 지역 
 }
