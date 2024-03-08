@@ -121,7 +121,8 @@ div.crousel_textArea>a::after {
 
 .carousel-control-next-m, .carousel-control-prev-m{
 	z-index: 5;
-    width: 9%;
+    width: 50%;
+    margin-top: 790px;
 }
 
 /********************************

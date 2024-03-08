@@ -315,7 +315,8 @@
 			<div id="feed" class="row gap-3 gap-md-5 gap-lg-3 justify-content-center justify-content-xl-around align-items-start pb-4 m-0 row-box home_dl_img_AIcokcok overflow-hidden">
 				<!--feed box Start-->
 				<!-- [P] -->
-				<div class="col-12 col-xl-4 m-0 my-3 feed-box home-feed-box px-0 no-gutters" th:each="feed, iterStat : ${feedList}" th:if="${iterStat.index < 3}" th:classappend="${iterStat.index == 2} ? 'd-md-none d-lg-block' : ''">
+				<div class="col-12 col-xl-4 m-0 my-3 feed-box home-feed-box px-0 no-gutters" th:each="feed, iterStat : ${feedList}" 
+					th:if="${iterStat.index < 3}" th:classappend="${iterStat.index == 2} ? 'd-md-none d-lg-block' : ''">
 					<div class="col-12 w-100 position-relative">
 						<!--feed box top-->
 						<div class="col-12 hstack feed-box-top p-3 ps-3 z-3">
@@ -332,7 +333,8 @@
 								<!-- 수정 및 삭제 버튼  -->
 								<div th:if="${session.Member_Id==feed.Member_Id}">
 									<div class="f17 hstack" id="feed-right">
-										<a class="dropdown-toggle text-center m-0 pt-2 d-block d-flex justify-content-end" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fi fi-rr-menu-dots-vertical"></i>
+										<a class="dropdown-toggle text-center m-0 pt-2 d-block d-flex justify-content-end" href="#" role="button" id="dropdownMenuLink" 
+											data-bs-toggle="dropdown" aria-expanded="false"><i class="fi fi-rr-menu-dots-vertical"></i>
 										</a>
 										<ul class="dropdown-menu dropdown-menu-dark">
 											<li><a class="dropdown-item active" th:href="@{'/delFeed?num='+${feed.Feed_num}}">삭제</a></li>
@@ -347,7 +349,8 @@
 							<div th:id="'feedCarousel'+${feed.Feed_num}" class="carousel slide w-100 h-100" data-bs-ride="false">
 								<!-- carousel items loop -->
 								<div class="carousel-inner w-100 h-100">
-									<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}" class="carousel-item p-0 mh-200 xh-200 w-100 h-100" th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
+									<div th:each="thumbnail, thumbnailStat : ${#strings.arraySplit(feed.Feed_thumbnail, ',')}" class="carousel-item p-0 mh-200 xh-200 w-100 h-100" 
+										th:classappend="${thumbnailStat.index==0} ? 'active' : ''">
 										<img th:src="@{'../img/feed_thumbnail/' + ${thumbnail}}" class="d-block w-100 object-fit img-center" alt="#">
 									</div>
 								</div>
@@ -366,7 +369,9 @@
 						</div>
 						<!--feed-box-bot | text-->
 						<div class="col-12 feed-box-bot p-4 pt-3 pb-5 xh-100">
-							<span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span><span class="f13 text-truncate" th:utext="${feed.Feed_content}"></span><span th:if="${feed.Feed_content}==null">&nbsp;</span></span>
+							<span class="fw-bold mb-2 d-block" th:text="${feed.Feed_title}">맥주 맛집🍺✨</span>
+							<span class="f13 text-truncate" th:utext="${feed.Feed_content}"></span>
+							<span th:if="${feed.Feed_content}==null">&nbsp;</span></span>
 						</div>
 						<!--feed box bot | text-->
 						<div class="col-12 feed-box-bot hstack p-3 border-top f13 d-flex hstack">
@@ -376,11 +381,15 @@
 							</div>
 							<div class="col-6 hstack justify-content-center">
 								<div th:if="${feed.getFeed_heart_on()==0 or session.Member_Id==null}">
-									<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex"><span>좋아요</span><i class="fi fi-br-heart hstack ps-1"></i>
+									<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex">
+										<span>좋아요</span>
+										<i class="fi fi-br-heart hstack ps-1"></i>
 									</a>
 								</div>
 								<div th:if="${feed.getFeed_heart_on()}==1">
-									<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex"><span>좋아요</span><i class="fi fi-sr-heart hstack ps-1"></i>
+									<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex">
+										<span>좋아요</span>
+										<i class="fi fi-sr-heart hstack ps-1"></i>
 									</a>
 								</div>
 								<!-- <span class="ms-2" th:text="${feed.getFeed_heart()}" th:if="${session.Member_Id !=null}">999+</span> -->
@@ -441,7 +450,7 @@
 				<div class="hp_img_content col-10 col-md-6 mx-auto" th:each="infoHome:${infoHome2}">
 					<a th:href="@{'Event_view?id='+ ${infoHome.getEvent_num()}}" class="">
 						<div class="hp_img_content overflow-hidden m-0 d-flex justify-content">
-							<img th:src="@{'../img/info/' + ${infoHome.getEvent_thumbnail()}}" alt="" class="w-100"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
+							<img th:src="@{'../img/info/' + ${infoHome.getEvent_thumbnail()}}" alt="" class="w-100" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
 						</div>
 						<div class="hp_title">
 							<span th:text="${infoHome.getEvent_name()}">해솔리아CC</span>
