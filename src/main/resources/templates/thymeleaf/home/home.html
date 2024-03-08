@@ -23,11 +23,33 @@
 								<!-- 캐러셀 텍스트 영역 -->
 								<div class="col-12 col-lg-4 col-xl-5 d-flex d-lg-block p-0">
 									<div class="crousel_textArea">
-										<em th:text="${info.getCourse_Name()}">긴 겨울밤 낭만적인 시간</em>
+										<em th:text="${info.getCourse_Name()}" class="">긴 겨울밤 낭만적인 시간</em>
+									<br /><p class="mt-4 mb-1"><span th:text="|#${info.getCourse_Interest()}|" class="  "></span> <span th:text="|#${info.getCourse_Area()}|" class="  "></span> <span th:text="|#${info.getCourse_thema()}|" class="  "></span></p>
 										<!-- <strong th:text="${info.getEvent_name()}"> 겨울밤을 빛내주는 전국 야경 명소</strong> -->
-										<strong class="fs-2 text-truncate" th:utext="${info.getCourse_content()}">
+										<strong class="fs-2 text-truncate mt-1" th:utext="${info.getCourse_content()}">
 										겨울밤을 빛내주는 전국 야경 명소</strong>
-										<div class="text-truncate w-75">
+											<div th:if="${infoStat.index==0}" class="text-truncate mb-3">
+												<span th:text="${text1.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text2.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text3.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text4.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text5.get(0).getEvent_name()}"></span>
+											</div>
+											<div th:if="${infoStat.index==1}" class="text-truncate mb-3">
+												<span th:text="${text11.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text12.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text13.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text14.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text15.get(0).getEvent_name()}"></span>
+											</div>
+											<div th:if="${infoStat.index==2}" class="text-truncate mb-3">
+												<span th:text="${text21.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text22.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text23.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text24.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text25.get(0).getEvent_name()}"></span>
+											</div>
+											<div class="text-truncate w-75">
 											<!-- <span class="f14"
                                                   th:text="${info.getEvent_content()}"> 겨울밤을 빛내주는 전국 야경 명소</span> -->
 										</div>
@@ -273,24 +295,45 @@
 		<!-- home_carouselBox -->
 	</div>
 	<!-- home_carousel -->
-	<div class="w-100 my-5 py-5">
+	<div class="w-100 my-4 py-5">
 	</div>
+	
+	<!-- 여행코스 짜기 배너 -->
+	<div class="pt-2 rounded-1 m-5 mt-2 bg-main bg-opacity-25">
+                <div class=" row bg-white p-2">
+                    
+                    <div class="col ms-5 bg-white rounded-1 p-3">
+                    <h3 class="mt-4">여행 코스 짜기 고민 되시나요?</h3>
+                    
+                    <p class="mb-5">지금 바로 캐리어와 함께해요</p>
+                        <a href="/aicc" class="">
+                            <span class="btn btn-main mt-4">캐리어 참여하기</span>
+                        </a>
+                    </div>
+                    <div class="col text-end bg-white">
+                        <img src="https://english.visitkorea.or.kr/static/front/images/ico/ico_travelBanner_364x280.png" alt="" style="width: 300px;" class="bg-white p-4 rounded-4 mb-5">
+                    </div>
+                </div>
+            </div>
+          <!-- 여백 박스 -->
+<div class="w-100 py-5 my-5">
+</div>  
 	<!-- 여백 박스 -->
 	<!-- home 여행 콕콕 section -->
-	<section id="home_data_lab" class="container px-5 ">
+	<section id="home_data_lab" class="container px-5 mt-5">
 	<div class="home_data_labBox px-2">
 		<!-- 상단 타이틀 영역 -->
-		<div class="home_dl_title">
-			<div class="home_dl_title_img">
-				<a href="aicc">
-				<div class="col-12 d-flex text-dark">
+		<div class="home_dl_title mt-5">
+			<div class="home_dl_title_img mt-5">
+				
+				<div class="col-12 d-flex text-dark mt-5 ">
 					<img src="../img/home/search.png" class="me-2" width="48" height="48" alt=""/>
 					<p class="fs-2">
 						여행돋보기
 					</p>
 					<span class="mt-3 text-muted fw-normal">&nbsp;&nbsp; 돋보이는 여행코스 지금 보여드릴게요</span>
 				</div>
-				</a>
+				
 			</div>
 			<!-- home_dl_title_img -->
 		</div>
@@ -517,7 +560,7 @@
 				<li class="pb-3"><a th:href="@{'Course_view?num='+ ${CourseListHome.getCourse_num()}}" class=""><span class="best"></span>
 				<img th:src="@{'../img/info/' + ${CourseListHome.getCourse_img()}}" alt="" class="aiPlaner_img" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
 				<div class="row aiPlaner_board">
-					<em th:text="${CourseListHome.getCourse_Interest()}">2박3일</em>
+					<em th:text="${CourseListHome.getCourse_Interest()}" class="rounded-2 bg-skyD text-white">2박3일</em>
 					<div class="col-10 aiPlaner_text">
 						<strong th:text="${CourseListHome.getCourse_Name()}">전주김제 2박 3일 여행</strong>
 						<p class="text-truncate" th:text="${CourseListHome.getCourse_content()}">
@@ -615,25 +658,18 @@
 <section class="home_info_data container my-5">
 <div class="row justify-content-around gap-5 home_info_data_wrap text-center m-auto">
 	<div class="col-12 col-lg-5 home_info_data_img p-0 m-0 hstack ms-lg-5">
-		<img src="../img/home/main/home_info_data_img.png" class="img-fluid rounded-4 m-auto ms-lg-auto">
+		<img src="https://img.freepik.com/premium-vector/a-cartoon-of-a-man-and-a-woman-with-a-backpack-and-a-backpack-waving-to-the-camera_390783-238.jpg?size=626&ext=jpg&ga=GA1.1.1767115526.1706740448&semt=ais" class="img-fluid rounded-4 m-auto ms-lg-auto" style="height:350px; ">
 	</div>
 	<!--home_info_data_img-->
-	<div class="col-11 col-lg-5 home_info_data_text text-start m-auto mt-3 mt-md-0">
+	<div class="col-11 col-lg-5 home_info_data_text text-start m-auto mt-3 mt-md-0" >
 		<div class="fs-4 fw-bold">
-			<a href="info" class="text-dark px-2 f22 highlight">오늘의 여행 소식</a>
+			<a href="info" class="text-dark px-2 f22 highlight">동행에 참여 해요</a>
 		</div>
-		<div class="fs-5 my-2 border-bottom py-2">
-			<a href="" class="text-dark ps-3 f17">2024 여행 가는 달 | 대한민국 숙박 세일 페스타</a>
+		<th:block th:each="band:${randomBandList_home}">
+		<div class="fs-5 my-2 border-bottom py-2" >
+			<a href="" class="text-dark ps-3 f17" th:text="${band.getBand_name()}">2024 여행 가는 달 | 대한민국 숙박 세일 페스타</a>
 		</div>
-		<div class="fs-5 my-2 border-bottom py-2">
-			<a href="" class="text-dark ps-3 f17">캐리어 기자단 | '다님' 9기 모집</a>
-		</div>
-		<div class="fs-5 my-2 border-bottom py-2">
-			<a href="" class="text-dark ps-3 f17">캐리어 대학생 기자단 | '트래블리더' 16기 모집</a>
-		</div>
-		<div class="fs-5 my-2 border-bottom py-2">
-			<a href="" class="text-dark ps-3 f17">2024 제9기 영남 알프스 학교 수강생 모집</a>
-		</div>
+		</th:block>
 	</div>
 	<!--home_info_data_text-->
 </div>
