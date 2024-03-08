@@ -326,7 +326,7 @@
 	         20000,15000,16000,30000,25000,19500 
 	      ]
 		
-     	var randomNumber = Math.floor(Math.random() * 6) + 1;
+     	var randomNumber = Math.floor(Math.random() * 6);
 	    randomNumber += 1; 
 	    var amount = 0; // 예상 금액 초기화
 		var discount = 0; // 할인 금액 초기화
@@ -367,6 +367,7 @@
 			document.querySelector('.amount2').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
 			document.querySelector('.amountValue').value = amount;
 			document.querySelector('.discount').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
+			document.querySelector('.discount2').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
 			document.querySelector('.discountValue').value = discount; // 할인 금액 out
 
 		}
@@ -394,34 +395,59 @@
 
 <!-- 비동기로 pay 모달 열기 -->
 <script>
-	$(document).ready(function() {
-	    // #btn-pay 버튼을 클릭했을 때의 동작
-	    $("#btn-pay").click(function() {
-	
-	        // 폼 데이터 가져오기
-	        var formData = $("#myForm").serialize();
+$(document).ready(function() {
+    // #btn-pay 버튼을 클릭했을 때의 동작
+    $("#btn-pay").click(function() {
+        // 코스 명과 코스 내용 가져오기
+        var courseName = $("#Course_name").val();
+        var courseContent = $("#Course_content").val();
+        var formattedAmount = amount.toLocaleString();
+        var formattedDiscount = discount.toLocaleString();
+        
+        // 폼 데이터 가져오기
+        var formData = $("#myForm").serialize();
+        // 코스 명과 코스 내용을 formData에 추가
+        formData += "&courseName=" + courseName;
+        formData += "&courseContent=" + courseContent;
+        formData += "&amount=" + amount;
+        formData += "&discount=" + discount;
 
-	        // 서버로 데이터 전송
-	        $.ajax({
-	            type: "POST",
-	            url: "cours_Save_insert",
-	            data: formData,
-	            success: function(response) {
-	                // 성공적으로 서버에 데이터를 전송한 경우의 동작
-	                console.log("서버로 데이터 전송 성공!");
-	                console.log("서버 응답: ", response);
-	                $('#feed_del_Modal').modal('show');
-	            },
-	            error: function(xhr, status, error) {
-	                // 서버에 데이터 전송이 실패한 경우의 동작
-	                console.error("서버로 데이터 전송 실패!");
-	                console.error("에러: ", error);
-	            }
-	        });
-	    });
-	});
-
+        // 코스 명과 코스 내용을 표시할 요소에 값을 넣음
+        $(".courseNameDisplay").text(courseName);
+        $(".courseContentDisplay").text(courseContent);
+        $(".amountDisplay").text(formattedAmount + "원");
+        $(".discountDisplay").text(formattedDiscount + "원");
+        
+        // 서버로 데이터 전송
+        $.ajax({
+            type: "POST",
+            url: "cours_Save_insert",
+            data: formData,
+            success: function(response) {
+                // 성공적으로 서버에 데이터를 전송한 경우의 동작
+                console.log("서버로 데이터 전송 성공!");
+                console.log("서버 응답: ", response);
+                
+                var courseNum = response.courseNum;
+                $(".courseNum").text(courseNum);
+                
+                // 모달 창 열기
+                $('#feed_del_Modal').modal('show');
+                
+                
+                // 코스 추가 후 리디렉션
+                window.location.href = "/cours_Save_update";
+            },
+            error: function(xhr, status, error) {
+                // 서버에 데이터 전송이 실패한 경우의 동작
+                console.error("서버로 데이터 전송 실패!");
+                console.error("에러: ", error);
+            }
+        });
+    });
+});
 </script>
+
 	
 	
 </body>

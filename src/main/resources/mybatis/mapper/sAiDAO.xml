@@ -60,7 +60,7 @@ FETCH FIRST 1 ROWS ONLY
 	select * from course where Course_num =#{param1}
 	</select>
 	
-	<insert id="save_course_insert">
+	<insert id="save_course_insert" useGeneratedKeys="true" keyProperty="param8.Course_num">
 		insert into Course values(#{param1},Course_seq.nextval,#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10})
 	</insert>
 
