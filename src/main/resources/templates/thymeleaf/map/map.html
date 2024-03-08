@@ -377,12 +377,23 @@
 		var distance;
 
 		var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
+	    var stayPay = [
+	         90000,100000,110000,120000,130000,150000
+	      ]
+	    var foodPay =[
+	         20000,15000,30000,40000,50000,60000
+	      ]
+	   	var beveragePay =[
+	         20000,15000,16000,30000,25000,19500 
+	      ]
 		
-		var oil = 0; // 기름값 초기화
-		var amount = 0; // 예상 금액 초기화
-		var stay = 0; // 숙소 금액
-		var food = 50000; // 맛집 금액
-		var beverage = 20000; // 카페 (음료) 금액
+     	var randomNumber = Math.floor(Math.random() * 6) + 1;
+	    var amount = 0; // 예상 금액 초기화
+		var discount = 0; // 할인 금액 초기화
+	    var oil = 0; // 기름값 초기화
+	    var stay = stayPay[randomNumber]; // 숙소 금액
+	    var food = foodPay[randomNumber]; // 맛집 금액
+	    var beverage = beveragePay[randomNumber]; // 카페 (음료) 금액
 		
 		
 		var subtotalDistance = 0;
@@ -412,11 +423,14 @@
 			
 			
 			// 예상금액 //
-			oil = Math.round((totalDistance / 1000) * 1700); // oil 값 in
+			oil = Math.round((totalDistance / 1000) * 170); // oil 값 in
 			//document.querySelector('.oil').innerText = oil+"원"; // oil 값 out test
 			amount = oil + stay + food + beverage;
+			discount = amount-20000;
+			
 			document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
 			document.querySelector('.amount2').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
+			document.querySelector('.discount').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
 			document.querySelector('.amountValue').value = amount;
 		}
 
