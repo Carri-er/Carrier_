@@ -14,6 +14,16 @@
 					src="../img/mypage/del.png"
 					class="my-del-btn pay-del-btn shadow-sm position-absolute rounded-circle"
 					width="32" height="32" alt="">
+					
+					
+				<!-- hover -->
+				<div>
+					<!-- <span> 예상 경비 | </span>
+					<span class="oil"></span> -->
+					
+				</div>
+				<!-- 모달 -->
+				<form action="/checkout" method="post">
 				<div class="rounded-4 overflow-hidden">
 					<div class="modal-header border-none bg-white"></div>
 					<!-- Modal body -->
@@ -25,12 +35,14 @@
 										alt="" />
 								</div>
 								<!-- 코스의 제목이 오는 곳입니다 -->
+								<div class="my-3">
+								
 								<span class="f22 d-block my-3 px-5">
 									<th:block th:if="${session.Member_Name eq null}">
                        					 <span>사용자님의 </span>
                         			</th:block>
 									<th:block th:unless="${session.Member_Name eq null}">
-                        			<span th:text="|${session.Member_Name}님의|" class="f22 "></span>
+                        			<span th:text="|${session.Member_Name}님의|" class="f22"></span>
                         			</th:block>
                         			<span th:text="${aicc.get(0).getEvent_area()}" class="text-black">지역</span>
                         			<span th:if="${day eq '0'}" th:text="당일여행" class="text-black">기간</span>
@@ -38,23 +50,32 @@
                         			<span th:if="${day eq '2'}" th:text="2박3일" class="text-black">기간</span>
                         			<input type="hidden" class="text-black" th:value="${aicc.get(0).getEvent_uploadday()}"></input><!-- 중복 방지용 -->
                         			<span>코스</span>
+                        			
+                        			
+                        			<input type="hidden" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}" />
+									<input type="hidden" id="Event_area" name="Event_area" th:value="${aicc.get(0).getEvent_area()}" />
+									<input type="hidden" id="day" name="day" th:value="${day}" />
+									<input type="hidden" class="amountValue" value="" name="amount"/>
+                        			
+                        			
 								</span> 
 								
 								<span 
 									class="f16 d-block my-3 px-5">수학여행하면 먼저 떠오르는 경주 ! <br /> 신라의 문화와 역사가 잠들어있는 고고한 도시다.  🌉 <br /> 경주의 밤은 잠들지 않는다. <br /> 밤에 가보면 더 아름다운 첨성대나 계림의 모습은 잊을 수 없는 추억이 될 것이다.</span>
 								<div class="btn btn-sm btn-light rounded-pill my-2 f14">전체 예약 금액</div>
-								<span><b class="text-pink d-block f20">50,000원</b></span>
+								<span><b class="text-pink d-block f20 amount2"></b></span>
+								</div>
 							</div>
 							<img src="../img/mypage/bg_detail_pop.png" class="img-fluid p-0"
 								alt="" />
 						</div>
 					</div>
 					<div class="modal-footer border-none pb-5 bg-white w-100">
-						<a href="/checkout"
-							class="btn btn-pinkD m-auto rounded-pill py-2 px-4">결제하기
-						</a>
+						<button class="btn btn-pinkD m-auto rounded-pill py-2 px-4">결제하기
+						</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
