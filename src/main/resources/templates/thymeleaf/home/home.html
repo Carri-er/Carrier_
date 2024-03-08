@@ -302,7 +302,7 @@
 	<div class="pt-2 rounded-1 m-5 mt-2 bg-main bg-opacity-25">
                 <div class=" row bg-white p-2">
                     
-                    <div class="col ms-5 bg-white rounded-1 p-3">
+                    <div class="col-12 col-lg-5 ms-5 bg-white rounded-1 p-3">
                     <h3 class="mt-4">여행 코스 짜기 고민 되시나요?</h3>
                     
                     <p class="mb-5">지금 바로 캐리어와 함께해요</p>
@@ -310,7 +310,7 @@
                             <span class="btn btn-main mt-4">캐리어 참여하기</span>
                         </a>
                     </div>
-                    <div class="col text-end bg-white">
+                    <div class="col-12 col-lg-6 text-end bg-white">
                         <img src="https://english.visitkorea.or.kr/static/front/images/ico/ico_travelBanner_364x280.png" alt="" style="width: 300px;" class="bg-white p-4 rounded-4 mb-5">
                     </div>
                 </div>
@@ -657,17 +657,22 @@
 <!-- home_data_lab -->
 <section class="home_info_data container my-5">
 <div class="row justify-content-around gap-5 home_info_data_wrap text-center m-auto">
-	<div class="col-12 col-lg-5 home_info_data_img p-0 m-0 hstack ms-lg-5">
-		<img src="https://img.freepik.com/premium-vector/a-cartoon-of-a-man-and-a-woman-with-a-backpack-and-a-backpack-waving-to-the-camera_390783-238.jpg?size=626&ext=jpg&ga=GA1.1.1767115526.1706740448&semt=ais" class="img-fluid rounded-4 m-auto ms-lg-auto" style="height:350px; ">
+	<div class="col-12 col-lg-4 home_info_data_img p-0 m-0 hstack ms-lg-5">
+		<a href="/band"><img src="https://img.freepik.com/premium-vector/a-cartoon-of-a-man-and-a-woman-with-a-backpack-and-a-backpack-waving-to-the-camera_390783-238.jpg?size=626&ext=jpg&ga=GA1.1.1767115526.1706740448&semt=ais" class="img-fluid rounded-4 m-auto ms-lg-auto" style="height:350px; ">
+		</a>
 	</div>
 	<!--home_info_data_img-->
-	<div class="col-11 col-lg-5 home_info_data_text text-start m-auto mt-3 mt-md-0" >
+	<div class="col-11 col-lg-6 home_info_data_text text-start m-auto mt-3 mt-md-0" >
 		<div class="fs-4 fw-bold">
-			<a href="info" class="text-dark px-2 f22 highlight">동행에 참여 해요</a>
+			
+			<a href="info" class="text-dark px-2 f17 ">함께 모여서 소통하는<span class="f22 highlight px-0"> 동행</span> 에 우리 함께 해요</a>
 		</div>
 		<th:block th:each="band:${randomBandList_home}">
 		<div class="fs-5 my-2 border-bottom py-2" >
-			<a href="" class="text-dark ps-3 f17" th:text="${band.getBand_name()}">2024 여행 가는 달 | 대한민국 숙박 세일 페스타</a>
+			<a th:href="@{'myBand?bandUrl='+ ${band.getBand_code()}}" class="text-dark ps-3 f17" >
+			<span th:text="|${band.getBand_area()}|" class="badge bg-pinkD"></span>
+			<span class="fw-bold pt-3" th:text="|[${band.getBand_theme()}]|"></span> 
+			<span th:text="${band.getBand_name()}" class="pt-3"></span> </a>
 		</div>
 		</th:block>
 	</div>

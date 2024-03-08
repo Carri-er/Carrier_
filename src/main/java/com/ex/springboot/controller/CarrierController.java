@@ -72,6 +72,7 @@ public class CarrierController {
 		 model.addAttribute("text13", AiDAO.listCourse(values2[2]));
 		 model.addAttribute("text14", AiDAO.listCourse(values2[3]));
 		 model.addAttribute("text15", AiDAO.listCourse(values2[4]));
+		 model.addAttribute("text15", AiDAO.listCourse(values2[5]));
 		 
 		 String num3 = AiDAO.Course_view_list(numm3).get(0).getCourse_number();
 		 System.out.println("num3의 정체는 "+num3);

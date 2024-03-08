@@ -210,7 +210,7 @@ public class AIController {
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
 		String day = request.getParameter("day");
-		int amount = Integer.parseInt(request.getParameter("amount"));
+		
 		
 		// day1 파라미터 값
 		String day1aicc = request.getParameter("day1aicc");
