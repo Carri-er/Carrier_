@@ -38,8 +38,7 @@
 							<a th:href="@{'Event_view?id='+ ${list.getEvent_num()}}"
 								class="row">
 								<div class="col-3 board-left text-center hstack justify-content-center">
-									<img th:src="@{'../img/info/' + ${list.getEvent_thumbnail()}}" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';"
-										class="img-fluid rounded-4" alt=""
+									<img th:src="@{'../img/info/' + ${list.getEvent_thumbnail()}}" 										class="img-fluid rounded-4" alt=""
 										style="width: 80px; height: 80px;"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 								</div>
 								<div class="col">
