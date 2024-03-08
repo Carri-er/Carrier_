@@ -57,7 +57,7 @@ public class FeedController {
 				feedList = feed_dao.feedList_login(Member_Id);
 			}
 
-		} else if (!request.getParameter("Feed_theme").isEmpty()) {
+		} else if (!(request.getParameter("Feed_theme") == null)) {
 			if (Member_Id == null) {
 				feedList = feed_dao.feedList_theme(Feed_theme);
 			} else {

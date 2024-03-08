@@ -8,13 +8,27 @@
 	</div>
 	<div class="map_wrapp">
 		<!-- 맵 컨텐츠 전체를 감싸는 영역  -->
-		<div class="map_all_contentBox ">
+		<div class="map_all_contentBox">
 			<!-- map 왼쪽 가이드 영역 -->
-			<div class="map_guide overflow-scroll">
-		
+			<div class="map_guide" style="height: 100vh;">
 				<!-- 정보값 출력 영역 day가 1일때-->
 				<th:block th:if="${day}==1">
-					<div class="map_curr_locationBox  py-4 bg-skyb">
+					<div class="map_curr_locationBox py-4 bg-skyb">
+						<!-- 예약 버튼 -->
+					    <div th:replace="~{alert/pay_modal::div}"> </div>   
+					    <div class="p-2 gap-4 d-flex justify-content-center">
+								<button class="btn saveBtn btn-pink rounded-pill btn-map-step hstack" type="button">
+									<img
+										src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
+										alt="" style="width: 36px; height: 36px;" class="me-2" />코스 저장하기
+								</button>
+								<button type="button"
+									class="btn btn-main rounded-pill btn-map-step hstack"
+									data-bs-toggle="modal" data-bs-target="#feed_del_Modal">
+									<img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
+									예약하기
+								</button>
+						</div>
 						<div class="col map_curr_location">
 							<div class="map_curr_location_name1 my-3 px-3 text-white">
 								<th:block th:if="${session.Member_Name eq null}">
@@ -110,11 +124,11 @@
 					<form action="cours_Save" name="saveBtn" method="post">
 						<div class="text-end me-3 d-flex">
 							<p class="px-3 f20 fw-bold">day 1</p>
-							<button class="btn saveBtn btn-pink ms-auto" type="button">
+							<!-- <button class="btn saveBtn btn-pink ms-auto" type="button">
 								<img
 									src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
 									alt="" style="width: 30px; height: 30px;" /> 코스 저장하기
-							</button>
+							</button> -->
 						</div>
 						<!-- day1 -->
 						<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="day1aicc"/>
