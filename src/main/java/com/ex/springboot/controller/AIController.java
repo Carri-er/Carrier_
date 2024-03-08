@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ex.springboot.dto.EventDTO;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -254,6 +256,9 @@ public class AIController {
 		String Course_Area = request.getParameter("Course_Area");
 		String Course_content = request.getParameter("Course_content");
 		String Course_distance = request.getParameter("Course_distance");
+		
+		
+		
 		if(day.equals("2박3일")) {
 			 number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
 					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
@@ -270,6 +275,11 @@ public class AIController {
 			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
 			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
 		}
+		
+		System.out.println("insert 완료");
+		
+		
+
 		
 		model.addAttribute("memberId", memberId);
 		System.out.println("memberId : " +memberId);
@@ -321,7 +331,7 @@ public class AIController {
 			model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
 			model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
 			model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
-	model.addAttribute("hotel", AiDAO.listCourse(values[5]));
+			model.addAttribute("hotel", AiDAO.listCourse(values[5]));
 			
 			model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
 			model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));

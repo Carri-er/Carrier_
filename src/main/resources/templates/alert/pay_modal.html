@@ -37,19 +37,8 @@
 								<!-- 코스의 제목이 오는 곳입니다 -->
 								<div class="my-3">
 								
-								<span class="f22 d-block my-3 px-5">
-									<th:block th:if="${session.Member_Name eq null}">
-                       					 <span>사용자님의 </span>
-                        			</th:block>
-									<th:block th:unless="${session.Member_Name eq null}">
-                        			<span th:text="|${session.Member_Name}님의|" class="f22"></span>
-                        			</th:block>
-                        			<span th:text="${aicc.get(0).getEvent_area()}" class="text-black">지역</span>
-                        			<span th:if="${day eq '0'}" th:text="당일여행" class="text-black">기간</span>
-                        			<span th:if="${day eq '1'}" th:text="1박2일" class="text-black">기간</span>
-                        			<span th:if="${day eq '2'}" th:text="2박3일" class="text-black">기간</span>
-                        			<input type="hidden" class="text-black" th:value="${aicc.get(0).getEvent_uploadday()}"></input><!-- 중복 방지용 -->
-                        			<span>코스</span>
+								<span class="f22 d-block my-3 px-5 courseNameDisplay">
+								</span> 
                         			
                         			
                         			<input type="hidden" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}" />
@@ -57,7 +46,6 @@
 									<input type="hidden" id="day" name="day" th:value="${day}" />
 									<input type="hidden" class="" value="" name="amount"/>
 
-								</span> 
 								
 								<span class="f16 d-block my-3 px-5">Carrier가 추천하는 코스입니다!</span>
 
@@ -100,7 +88,6 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
 
 <!-- 결제창 -->
 <!-- <div th:replace="~{alert/pay_modal::div}"></div> -->

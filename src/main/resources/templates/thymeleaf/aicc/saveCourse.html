@@ -5,8 +5,8 @@
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
-	                  	               	<!-- 예약 버튼 -->
-				    <div th:replace="~{alert/pay_modal::div}"> </div>   
+		                  	               	<!-- 예약 버튼 -->
+				    <div th:replace="~{alert/pay_modal::div}"> </div>  
 	<div class="container px-md-5">
 	<h4 class="text-center my-5">코스 저장하기</h4>
 		<div class="row mx-3 mx-md-5 justify-content-center">
@@ -139,16 +139,12 @@
 					<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
 					<input type="hidden" name="day" th:value="${day}" />
 					<input type="hidden" name="img" th:value="${aicc.get(0).getEvent_thumbnail()}" />
-					<input type="hidden" class="amountValue" name="amount" value="" />
-					
+					<input type="hidden" class="discountValue" name="amount" value="" />
+
 					<div class="col-12 mx-auto mt-4 text-end">
-					<button type="submit"
-						class="btn btn-main rounded-pill btn-map-step hstack"
-						data-bs-toggle="modal" 
-						data-bs-target="#feed_del_Modal" 
-						data-bs-placement="bottom" 
-						data-bs-custom-class="custom-tooltip"
-						data-bs-title="This top tooltip is themed via CSS variables.">
+					<button type="button"
+						id = "btn-pay"
+						class="btn btn-main rounded-pill btn-map-step hstack">
 						<img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
 							코스 저장하고 예약하기
 					</button>
@@ -167,6 +163,12 @@
          window.location.href = "/login?msg=5";
       }
    </script>
+   
+   
+
+	
+   
+   
 <script>
 		$(function() {
 			// btn1, btn2, btn3 요소를 가져옵니다.
@@ -325,6 +327,7 @@
 	      ]
 		
      	var randomNumber = Math.floor(Math.random() * 6) + 1;
+	    randomNumber += 1; 
 	    var amount = 0; // 예상 금액 초기화
 		var discount = 0; // 할인 금액 초기화
 	    var oil = 0; // 기름값 초기화
@@ -362,8 +365,9 @@
 			
 			document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
 			document.querySelector('.amount2').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
-			document.querySelector('.discount').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
 			document.querySelector('.amountValue').value = amount;
+			document.querySelector('.discount').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
+			document.querySelector('.discountValue').value = discount; // 할인 금액 out
 
 		}
 
@@ -384,6 +388,41 @@
 
 		}
 	</script>
+	
+	
+	
+
+<!-- 비동기로 pay 모달 열기 -->
+<script>
+	$(document).ready(function() {
+	    // #btn-pay 버튼을 클릭했을 때의 동작
+	    $("#btn-pay").click(function() {
+	
+	        // 폼 데이터 가져오기
+	        var formData = $("#myForm").serialize();
+
+	        // 서버로 데이터 전송
+	        $.ajax({
+	            type: "POST",
+	            url: "cours_Save_insert",
+	            data: formData,
+	            success: function(response) {
+	                // 성공적으로 서버에 데이터를 전송한 경우의 동작
+	                console.log("서버로 데이터 전송 성공!");
+	                console.log("서버 응답: ", response);
+	                $('#feed_del_Modal').modal('show');
+	            },
+	            error: function(xhr, status, error) {
+	                // 서버에 데이터 전송이 실패한 경우의 동작
+	                console.error("서버로 데이터 전송 실패!");
+	                console.error("에러: ", error);
+	            }
+	        });
+	    });
+	});
+
+</script>
+	
 	
 </body>
 </html>
