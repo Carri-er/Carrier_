@@ -89,17 +89,16 @@
                                 <!-- Swiper -->
                                 <div class="swiper mySwiper">
                                     <div class="swiper-wrapper">
-                                    	<!-- 가입한 밴드 리스트 출력 -->
-                                        <div class="swiper-slide" th:each="mypage_joinBandList : ${joinBandList}">
-                                            <div class="card border-0 my-history-content-card text-center">
-                                                <img th:src="@{'../img/uploadBandThumnail/'+${mypage_joinBandList.getBand_thumnail()}}" class="mb-3 mypage_bandImg" alt="">
-                                                <span class="text-tourist" th:text="${mypage_joinBandList.getBand_name()}">밴드 명</span>
-                                            </div>
-                                            <img src="../img/mypage/del.png"
-                                                 class="my-del-btn shadow-sm position-absolute" width="24" height="24"
-                                                 alt="">
-                                        </div>
-                                        
+
+                                       	<div class="swiper-slide" th:each="mypage_joinBandList : ${joinBandList}">
+                                       		<a th:href="@{'/myBand?bandUrl='+${mypage_joinBandList.getBand_code()}}">
+	                                            <div class="card border-0 my-history-content-card text-center" >
+	                                               <img th:src="@{'../img/uploadBandThumnail/'+${mypage_joinBandList.getBand_thumnail()}}" class="mb-3 mypage_bandImg rounded-4" alt="">
+	                                                <span class="text-tourist" th:text="${mypage_joinBandList.getBand_name()}">밴드 명</span>
+	                                            </div>
+                                            </a>
+                                       	</div>
+
                                     </div>
                                     <div class="row mx-auto">
                                         <div class="swiper-scrollbar">

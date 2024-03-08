@@ -197,8 +197,7 @@ label.member-fileUpload {
 
 /******************
   가입한 밴드 리스트 스타일 
-  ********************/
-  img.mypage_bandImg{
- 	height: 200px;
- 	
-  }
+********************/
+img.mypage_bandImg{
+	height: 100px;
+}

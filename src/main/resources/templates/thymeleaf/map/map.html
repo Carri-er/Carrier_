@@ -117,7 +117,7 @@
                   <hr class="px-5 text-black-50" />
                      <div class="row" th:each="aicc:${aicc}">
                   <div class="col">
-                  <a th:href="@{'Event_view?id='+ ${aicc.getEvent_num()}}">
+                  <a href="#" th:onclick="func_popEvent([[${aicc.getEvent_num()}]])">
                      <div class="row px-4 Event_contentRow">
                         <div class="col-1 count">
                            <p class="text-center f22">1</p>
@@ -143,7 +143,7 @@
                   <hr class="px-5 text-black-50 my-2" />
                      <div class="row" th:each="aiccFood:${aiccFood}">
                   <div class="col">
-                  <a th:href="@{'Event_view?id='+ ${aiccFood.getEvent_num()}}">
+                  <a href="#" th:onclick="func_popEvent([[${aiccFood.getEvent_num()}]])">
                      <div class="row px-4 Event_contentRow">
                         <div class="col-1 count">
                            <p class="text-center f22">2</p>
@@ -169,7 +169,7 @@
             <hr class="px-5 text-black-50" />
                <div class="row" th:each="aicc2:${aicc2}">
                   <div class="col">
-                     <a th:href="@{'Event_view?id='+ ${aicc2.getEvent_num()}}">
+                     <a href="#" th:onclick="func_popEvent([[${aicc2.getEvent_num()}]])">
                      <div class="row px-4 Event_contentRow">
                         <div class="col-1 count">
                            <p class="text-center f22">3</p>
@@ -194,7 +194,7 @@
                   <hr class="px-5 text-black-50" />
                   <div class="row"  th:each="aiccCafe:${aiccCafe}">
                   <div class="col">
-                  <a th:href="@{'Event_view?id='+ ${aiccCafe.getEvent_num()}}">
+                  <a href="#" th:onclick="func_popEvent([[${aiccCafe.getEvent_num()}]])">
                      <div class="row px-4 Event_contentRow">
                         <div class="col-1 count">
                            <p class="text-center f22">4</p>
@@ -219,7 +219,7 @@
                   <hr class="px-5 text-black-50" />
                      <div class="row mb-5" th:each="aiccFood2:${aiccFood2}">
                   <div class="col mb-3">
-                  <a th:href="@{'Event_view?id='+ ${aiccFood2.getEvent_num()}}">
+                  <a href="#" th:onclick="func_popEvent([[${aiccFood2.getEvent_num()}]])">
                      <div class="row px-4 Event_contentRow">
                         <div class="col-1 count">
                            <p class="text-center f22">5</p>
@@ -330,9 +330,7 @@
 		for (var i = 0; i < positions.length; i++) {
 			var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
 					+ '    <div class="info">'
-					+ '            <a href="Event_view?id='
-					+ positions[i].number
-					+ '">'
+					+ '            <a href="#"  onclick="func_popEvent('+positions[i].number+')">'
 					+ '        <div class="title">'
 					+ [ i + 1 ]
 					+ ". "
@@ -475,6 +473,35 @@
         }
     });
 
+
+</script>
+
+<!-- 코스 리스트 클릭 시 여행정보 팝업창 출력 -->
+<script>
+
+	
+	function func_popEvent(param) {
+		
+		// width  : 팝업창 가로 크기
+	    // height : 팝업창 세로 크기
+	    var popupWidth = 700;
+	    var popupHeight = 600;
+	    
+     	// 브라우저 중앙 위치 계산
+        // window.screenX : 브라우저의 현재 스크린 좌측상단 X좌표
+        // window.screenY : 브라우저의 현재 스크린 좌측상단 Y좌표
+       
+        // window.outerWidth  : 브라우저의 전체 가로 크기
+        // window.outerHeight : 브라우저의 전체 가로 크기
+        var popupX = Math.round(window.screenX + (window.outerWidth/2) - (popupWidth/2));
+        var popupY = Math.round(window.screenY + (window.outerHeight/2) - (popupHeight/2));
+        
+        var featureWindow = "width=" + popupWidth + ", height="+popupHeight
+        + ", left=" + popupX + ", top=" + popupY;
+        
+		window.open('/Event_view?id='+param, '_blank',featureWindow );
+		
+	}
 
 </script>
 
