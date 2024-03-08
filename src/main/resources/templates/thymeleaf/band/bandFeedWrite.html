@@ -15,6 +15,13 @@
 <link rel="stylesheet" href="../css/bandFeedWrite.css">
 </head>
 <body>
+<script th:inline="javascript">
+	var loginId = /*[[${session.Member_Id}]]*/ " ";
+	if (loginId == null ){
+		location.href = '/login?msg=5';
+	}
+</script>
+
     <div class="bandFeedWrite_wrapper">
         <div class="bandFeedWrite_form">
             <form method="post" action="writeFeed" onsubmit="return func_writeBandFeed()">				

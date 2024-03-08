@@ -161,6 +161,12 @@ div.myBand_content_item_content img{
 	border-radius: 10px;
 	margin-bottom : 10px;
 }
+div.myBand_feedView_content_item_content img{
+	display : block;
+	width: 100% !important;
+	border-radius: 10px;
+	margin-bottom : 10px;
+}
 .join_band_item{
 	min-width: 220px;
 	}
