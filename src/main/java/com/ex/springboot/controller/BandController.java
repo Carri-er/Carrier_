@@ -163,7 +163,8 @@ public class BandController {
 		
 		try {
 			String band_admin = request.getParameter("band_admin"); //밴드 만든 사람 : 관리자
-			
+			String band_theme = request.getParameter("band_theme"); //밴드 테마
+			String band_area = request.getParameter("band_area"); //밴드 테마 
 			String band_name = request.getParameter("band_name"); // 밴드 이름
 			String band_content = request.getParameter("band_content"); // 밴드 소개
 			//이미지 저장 
@@ -172,7 +173,7 @@ public class BandController {
 			
 			
 			if(file.isEmpty()) {
-				bandDao.bandCreateDao(band_name, band_admin, band_content, "gray_bg.png");
+				bandDao.bandCreateDao(band_name, band_admin, band_content, "gray_bg.png", band_theme, band_area);
 				
 				bandDto = bandDao.bandName_search(band_name);
 				
@@ -194,7 +195,7 @@ public class BandController {
 			model.addAttribute("msg", fileNameAndPath);
 			model.addAttribute("fileName", fileNames); //밴드 대표 이미지 이름 저장.
 			
-			bandDao.bandCreateDao(band_name, band_admin, band_content, fileNames.toString());
+			bandDao.bandCreateDao(band_name, band_admin, band_content, fileNames.toString(), band_theme, band_area );
 
 			bandDto = bandDao.bandName_search(band_name);
 			
@@ -399,6 +400,10 @@ public class BandController {
 			String origin_band_thumnail = request.getParameter("origin_band_thumnail");
 			String band_name = request.getParameter("band_name");
 			String band_content = request.getParameter("band_content");
+			String band_area = request.getParameter("band_area");
+			String band_theme = request.getParameter("band_theme");
+			
+			model.addAttribute("bandList",bandDao.bandList());
 			
 			System.out.println("band_thumnail" + band_thumnail);
 			System.out.println("origin_band_thumnail" + origin_band_thumnail);
@@ -408,7 +413,7 @@ public class BandController {
 			try {
 
 				if ( file.isEmpty() ) {
-					bandDao.bandInfoUpdate(origin_band_thumnail, band_name, band_content, num_band_code);
+					bandDao.bandInfoUpdate(origin_band_thumnail, band_name, band_content, num_band_code, band_theme, band_area);
 					
 					return go;
 				} else {
@@ -427,7 +432,7 @@ public class BandController {
 					model.addAttribute("msg", fileNameAndPath);
 					model.addAttribute("fileName", fileNames); // 밴드 대표 이미지 이름 저장.
 					System.out.println("밴드 수정 - 파일 이름 : "+ fileNames.toString());
-					bandDao.bandInfoUpdate(fileNames.toString(), band_name, band_content, num_band_code);
+					bandDao.bandInfoUpdate(fileNames.toString(), band_name, band_content, num_band_code, band_theme, band_area);
 
 				}
 			} catch (Exception e) {
