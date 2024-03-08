@@ -59,13 +59,13 @@
                               class="img-fluid rounded-4" alt=""
                               style="width: 80px; height: 80px;"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
                         </div>
-                        <div class="col">
-                           <div class="row">
-                              <div class="col ">
-                                 <h5 style="line-height: 80px;">
+                        <div class="col-9 ">
+                           <div class="row ">
+                              <div class="col-12 f20 text-truncate fw-bold"style="line-height: 80px;">
+                                
                                     [<span th:text="${list.getMember_Id()}"></span>] 의 <span
-                                       th:text="|${list.getCourse_Name()} 코스|"> </span>
-                                 </h5>
+                                       th:text="|${list.getCourse_Name()} 코스|" class=""> </span>
+                                
                               </div>
                            </div>
                            
@@ -102,13 +102,7 @@
                   </ul>
                </div>
                         
-               <div class="fixed-bottom ">
-               
-                  <img src="../img/aicc/img_robot1.png" alt=""
-                        class="d-block ms-auto robot m-4 " >
-
-                        
-               </div>
+              
                
                
             <!------------우측 (필터)------------->
@@ -143,12 +137,13 @@
          
          
       </div>
-         <div class="text-end m-4 z-5 position-relative">
+       <!--   <div class="text-end m-4 z-5 position-relative">
                            <a href="aicc"class="text-black ms-auto btn btn-main" >여행 코스짜러가기</a>
-         </div>
+         </div> -->
          </th:block>
    </div>
 </div>
+ <div th:replace="~{footer/robot::robot}"></div>
    <div th:replace="~{footer/footer::footer}"></div>
    <script type="text/javascript">
         $(document).ready(function() {

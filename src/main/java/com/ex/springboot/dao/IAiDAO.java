@@ -30,4 +30,5 @@ public interface IAiDAO {
 	public int Course_update(String name, String content, String num);
 	public int Course_delete(String num);
 	public List<CourseDTO> CourseListHome();
+	public List<CourseDTO> CourseListHome2();
 }

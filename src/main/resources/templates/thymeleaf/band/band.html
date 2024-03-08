@@ -46,8 +46,8 @@
 
         <!-- 밴드 추천 영역 -->
         <div class="band_recomand_wrapper bg-main p-3">
-            <div class="container pb-2">
-				<div class="row m-auto py-3 w-100 ">
+            <div class="container p-5">
+				<div class="row m-auto w-100 ">
 					<div class="col hstack justify-content-between">
 						<span class="f22 float-start band_recomand_txt">이런 동행은 어때요?</span> 
 					</div>
@@ -55,17 +55,17 @@
 				<!-- 밴드 추천 리스트 -->
                 <div class="row band_recomandBox gap-3 my-4 m-auto justify-content-between px-4">
                     <div class="col-12 col-md-5 p-0 band_recomand_item " th:each ="bandList:${randomBandList}">
-	                    <a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="band_recomand_link d-flex text-truncate">
+	                    <a  th:href="@{'myBand?bandUrl='+ ${bandList.getBand_code()}}" class="band_recomand_link d-flex text-truncate p-1">
 	                        <div class="band_recomand_img">
-	                            <img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img" alt="...">
+	                            <img th:src="@{'../img/uploadBandThumnail/'+ ${bandList.getBand_thumnail()}}" class=" join_band_item_img py-2" alt="...">
 	                        </div>
-	                        <div class="band_recomand_text text-truncate">
+	                        <div class="band_recomand_text text-truncate py-3 pe-3">
 	                        	<div class="ms-2 w-100 text-truncate">
-		                            <span class="h5  d-block " th:text="${bandList.getBand_name()}"></span>
-		                            <span th:text="${bandList.getBand_content()}" ></span>
+		                            <span class="h5  d-block  mb-0" th:text="${bandList.getBand_name()}"></span>
+		                            <span class="mb-1"th:text="${bandList.getBand_content()}" ></span>
 	                        	</div>
-	                            <div class="band_more_view  text-center bg-main">
-	                                <span>밴드로 가기 ></span>
+	                            <div class="band_more_view  text-center bg-main my-1">
+	                                <span class="">밴드로 가기 ></span>
 	                            </div>
 	                        </div>
 	                    </a>
@@ -179,6 +179,7 @@
         </div>-->
 			
     </div>  <!-- band_wrapper -->
+     <div th:replace="~{footer/robot::robot}"></div>
     <div th:replace="~{footer/footer::footer}"></div>
 
 </body>

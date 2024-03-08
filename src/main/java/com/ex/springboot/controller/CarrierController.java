@@ -28,12 +28,13 @@ public class CarrierController {
    public String main(Model model) {
 	   
 	    List<CourseDTO> courseList = AiDAO.CourseListHome();
+	    List<CourseDTO> courseList2 = AiDAO.CourseListHome2();
 	      
 	     model.addAttribute("randomBandList_home", bandDao.randomBandList_home());
 	     model.addAttribute("feedList", feed_dao.feedList_random());
 	     
 	     model.addAttribute("CourseListHome", courseList);
-	     model.addAttribute("infoHome", eventDAO.infoHome());
+	     model.addAttribute("infoHome", courseList2);
 	     model.addAttribute("infoHome2", eventDAO.infoHome2());
       return "thymeleaf/home/home";
    }
@@ -59,7 +60,7 @@ public class CarrierController {
      model.addAttribute("feedList", feed_dao.feedList_random());
      
      model.addAttribute("CourseListHome", courseList);
-     model.addAttribute("infoHome", eventDAO.infoHome());
+     model.addAttribute("infoHome", courseList);
      model.addAttribute("infoHome2", eventDAO.infoHome2());
       
       return "thymeleaf/home/home";
