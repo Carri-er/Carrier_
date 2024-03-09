@@ -52,12 +52,16 @@ public class AIController {
 		String day3aiccTD = request.getParameter("day3aiccTDV");
 		
 		
-		
-		
 		String memberId = request.getParameter("memberId");
 		String day = request.getParameter("day");
 		String amount = request.getParameter("amount");
+		String discount = request.getParameter("discount");
 		model.addAttribute("amount", amount);
+		model.addAttribute("discount", discount);
+		
+		Integer courseNum = AiDAO.getCourseNum();
+		model.addAttribute("courseNum", courseNum);
+		System.out.println(courseNum);
 		
 		model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
 		model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
@@ -214,7 +218,7 @@ public class AIController {
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
 		String day = request.getParameter("day");
-		String amount = request.getParameter("amount");
+		String amount = request.getParameter("discount");
 		
 		// day1 파라미터 값
 		String day1aicc = request.getParameter("day1aicc");
@@ -255,25 +259,30 @@ public class AIController {
 		String Course_Area = request.getParameter("Course_Area");
 		String Course_content = request.getParameter("Course_content");
 		String Course_distance = request.getParameter("Course_distance");
+		
+
 		if(day.equals("2박3일")) {
-			 number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
-					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
-							day3aicc+","+day3aiccFood+","+day3aicc2+","+day3aiccCafe+","+day3aiccFood2;
-			 System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
+		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
+		             day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
+		             day3aicc+","+day3aiccFood+","+day3aicc2+","+day3aiccCafe+","+day3aiccFood2;
+		   AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		} else if(day.equals("1박2일")) {
+		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
+		             day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2;
+		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		} else if(day.equals("당일 치기")) {
+		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
+		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
 		}
-		if(day.equals("1박2일")) {
-			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
-					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2;
-			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
-		}
+
 		
-		if(day.equals("당일 치기")) {
-			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
-			System.out.println(AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
-		}
-		
+		// 결제를 위한 코스 번호 불러오기
+		Integer courseNum = AiDAO.getCourseNum();
+		model.addAttribute("courseNum", courseNum);
+		// 결제를 위한 금액 불러오기
+		model.addAttribute("amount", amount);
 		model.addAttribute("memberId", memberId);
-		System.out.println("memberId : " +memberId);
+		
 		String msg = "1";
 	    if (msg != null && msg.equals("1")) {
 	        model.addAttribute("confirmMessage", "코스를 확인하러 마이페이지로 이동하시겠습니까?");
@@ -281,6 +290,8 @@ public class AIController {
 		
 		return "thymeleaf/aicc/aicc";
 	}
+	
+	
 	
 	@PostMapping("/cours_Save_update")
 	public String cours_Save_update(HttpServletRequest request, Model model) {
@@ -322,7 +333,7 @@ public class AIController {
 			model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
 			model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
 			model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
-	model.addAttribute("hotel", AiDAO.listCourse(values[5]));
+			model.addAttribute("hotel", AiDAO.listCourse(values[5]));
 			
 			model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
 			model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));

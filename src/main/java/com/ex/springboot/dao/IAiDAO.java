@@ -1,13 +1,12 @@
 package com.ex.springboot.dao;
 
 
-import java.util.List; 
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.ex.springboot.dto.CourseDTO;
-import com.ex.springboot.dto.EventCommentDTO;
 import com.ex.springboot.dto.EventDTO;
 
 @Mapper
@@ -23,7 +22,7 @@ public interface IAiDAO {
 	public List<EventDTO> listAll(String area, String thema,String thema2,String hotel);
 	public List<EventDTO> listAll2(String area, String thema,String thema2);
 	public List<EventDTO> listCourse(String num);
-	public int save_course_insert(String id, String name, String thema,String area, String content, String distance,String day,String num,String img, String amount);
+	public int save_course_insert(@Param("memberId") String id, @Param("Course_name") String name, @Param("Course_thema") String thema, @Param("Course_Area") String area, @Param("Course_content") String content, @Param("Course_distance") String distance, @Param("day") String day, @Param("number") String num, @Param("img") String img, @Param("amount") String amount);
 	public List<CourseDTO> Course_select(String num);
 	public List<CourseDTO> Course_select4(String num);
 	public List<CourseDTO> Course_view_list(String num);
@@ -31,4 +30,6 @@ public interface IAiDAO {
 	public int Course_delete(String num);
 	public List<CourseDTO> CourseListHome();
 	public List<CourseDTO> CourseListHome2();
+	
+	public int getCourseNum();
 }
