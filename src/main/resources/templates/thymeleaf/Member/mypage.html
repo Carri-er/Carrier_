@@ -6,6 +6,7 @@
 <div th:replace="~{nav/nav::nav}">
 </div>
 <div id="mypage" class="container mt-5 px-0">
+ 
     <div class="row text-center mt-5 m-3 mx-xl-5 d-flex justify-content-between">
         <!-- <<<<<<<<<<<<<<< (좌) <<<<<<<<<<<<<<<< -->
         <aside id="mypage-L" class="col-12 col-md-4 col-xl-3 h-100 sticky-md-top">
@@ -253,6 +254,24 @@
 </div>
 <!--container-->
 <!--footer-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // URL에서 msg 매개변수 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const msg = urlParams.get('msg');
+        
+        // 메시지가 존재할 경우 toast로 표시
+        if (msg == "pay") {
+            let message;
+            if (msg == 1) {
+                message = name + "님 환영합니다 🖐";
+            }
+            // pay모달 보이기
+            $('#feed_del_Modal').show();
+        }
+    });
+</script>
 <script>
     var swiper = new Swiper(".mySwiper", {
         pagination: {

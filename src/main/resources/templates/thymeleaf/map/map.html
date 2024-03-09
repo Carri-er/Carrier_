@@ -116,6 +116,7 @@
                
                <input type="hidden" class="day0" th:value="${day}" name="day"/>
                <input type="hidden" name="memberId" th:value="${session.Member_Id}" />
+               <input type="hidden" class="discountValue" value="" name="discount"/>
                <input type="hidden" class="amountValue" value="" name="amount"/>
                
                <!-- 반복될 부분 day1 -->
@@ -384,7 +385,7 @@
             20000,15000,16000,30000,25000,19500 
          ]
       
-        var randomNumber = Math.floor(Math.random() * 6) + 1;
+        var randomNumber = Math.floor(Math.random() * 6);
        var amount = 0; // 예상 금액 초기화
       var discount = 0; // 할인 금액 초기화
        var oil = 0; // 기름값 초기화
@@ -426,8 +427,7 @@
          discount = amount-20000;
          
          document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
-         document.querySelector('.amount2').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
-         document.querySelector('.discount').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
+         document.querySelector('.discountValue').value = discount; // 할인 금액 out
          document.querySelector('.amountValue').value = amount;
       }
 
