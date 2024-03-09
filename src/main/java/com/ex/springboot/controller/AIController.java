@@ -143,6 +143,7 @@ public class AIController {
 		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
 		model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
 		model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+		
 		if(day.equals("1박2일")) {
 			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
 			model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
