@@ -105,7 +105,7 @@ public class CarrierController {
 		String title = request.getParameter("Course_name");
 		String Course_num = request.getParameter("Course_num");
 		//int amount = Integer.parseInt(request.getParameter("discount"));
-		String amount = request.getParameter("discount");
+		String amount = request.getParameter("amount");
 		// 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -129,7 +129,7 @@ public class CarrierController {
 		model.addAttribute("Course_num", Course_num);
 		
 		
-		System.out.println(orderId+title+amount);
+		System.out.println("주문번호:"+orderId+" 코스제목:"+title+" 결제금액:"+amount);
 		
 		return "thymeleaf/member/checkout";
 	}
@@ -142,12 +142,12 @@ public class CarrierController {
 	@GetMapping("/success")
 	public String success(HttpServletRequest request, Model model, HttpSession session) {
 		
-		String orderId = request.getParameter("orderId");
-		String Course_num = request.getParameter("Course_num");
 		String Member_Id = (String) session.getAttribute("Member_Id");
+		String orderId = request.getParameter("orderId");
+		String Course_num = request.getParameter("courseNum");
 		
+		System.out.println("Member_Id:"+Member_Id+" 코스 번호:"+Course_num+" 주문 번호:"+orderId);
 		pay_dao.payCreate(Member_Id, Course_num, orderId);
-		
 		
 		return "thymeleaf/member/success";
 	}

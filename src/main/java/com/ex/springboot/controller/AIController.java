@@ -58,6 +58,7 @@ public class AIController {
 		String discount = request.getParameter("discount");
 		model.addAttribute("amount", amount);
 		model.addAttribute("discount", discount);
+		
 		Integer courseNum = AiDAO.getCourseNum();
 		model.addAttribute("courseNum", courseNum);
 		System.out.println(courseNum);
@@ -274,9 +275,11 @@ public class AIController {
 		}
 
 		
+		// 결제를 위한 코스 번호 불러오기
 		Integer courseNum = AiDAO.getCourseNum();
 		model.addAttribute("courseNum", courseNum);
-		
+		// 결제를 위한 금액 불러오기
+		model.addAttribute("amount", amount);
 		model.addAttribute("memberId", memberId);
 		
 		String msg = "1";
