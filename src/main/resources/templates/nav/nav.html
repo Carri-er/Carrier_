@@ -55,11 +55,11 @@
 						<li class="nav-item"><a class="nav-link" href="feed">피드</a></li>
 						<th:block th:if="${session.Member_Id == null}">
 							<li class="nav-item d-md-none"><a
-								class="nav-link mb-3 mb-md-0" href="로그인">로그인</a></li>
+								class="nav-link mb-3 mb-md-0" href="login">로그인</a></li>
 						</th:block>
 						<th:block th:unless="${session.Member_Id == null}">
 							<li class="nav-item d-md-none"><a
-								class="nav-link mb-3 mb-md-0" href="마이페이지">마이페이지</a></li>
+								class="nav-link mb-3 mb-md-0" th:href="@{'mypage?id='+${session.Member_Id}}">마이페이지</a></li>
 						</th:block>
 					</ul>
 				</div>
