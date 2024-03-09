@@ -30,11 +30,10 @@
 										<span class="f22 d-block my-3 px-5 courseNameDisplay">
 										</span>
 										<!-- HIDDEN OUT -->
-										 코스이름 <input type="text" class="courseNameValue" name="Course_name"/>
-										사용자명 <input type="text" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}"/>
-										<br/>
-										금액 <input type="text" name="amount" th:value="${discount}"/>
-										코스번호 <input type="text" name="Course_num" th:value="${courseNum}"/>
+										<input type="hidden" class="courseNameValue" name="Course_name"/>
+										<input type="hidden" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}"/>
+										<input type="hidden" name="amount" th:value="${discount}"/>
+										<input type="hidden" name="Course_num" th:value="${courseNum}"/>
 										<span class="f16 d-block my-3 px-5 courseContentDisplay"></span>
 										<span class="text-pink d-block f17 fw-light text-decoration-line-through fw-bold amountDisplay0" th:text="|${amount}원|"></span>
 										<div class="hstack d-flex justify-content-center text-center ">

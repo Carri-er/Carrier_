@@ -10,7 +10,7 @@
 <div class="container mt-3">
 	<div>
 		<input type="hidden" id="coupon-box"/> 
-		<input type="hidden" id="courseNum" th:value="${Course_num}"/>
+		<!-- <input type="hidden" id="courseNum" th:value="${Course_num}"/> -->
 		<label for="coupon-box"></label>
 	</div>
 	<!-- 결제 UI, 이용약관 UI 영역 -->
@@ -75,7 +75,9 @@
 			courseNum : courseNum,
 		});
 	});
-	
+	</script>
+	<script>
+		
 	
 	$.ajax({
 	    type: "POST",

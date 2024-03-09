@@ -50,6 +50,8 @@ public class WidgetController {
 		obj.put("amount", amount);
 		obj.put("paymentKey", paymentKey);
 		obj.put("courseNum", courseNum);
+		
+		System.out.println(courseNum);
 
 		// 토스페이먼츠 API는 시크릿 키를 사용자 ID로 사용하고, 비밀번호는 사용하지 않습니다.
 		// 비밀번호가 없다는 것을 알리기 위해 시크릿 키 뒤에 콜론을 추가합니다.
