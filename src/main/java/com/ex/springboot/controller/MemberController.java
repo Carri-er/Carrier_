@@ -241,7 +241,6 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		
 		model.addAttribute("loginMember", member_dao.memberList(id));
 		model.addAttribute("feed", feed_dao.feedList_mypage(id));
 		model.addAttribute("course", AiDAO.Course_select4(id));

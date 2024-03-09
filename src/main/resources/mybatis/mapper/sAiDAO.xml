@@ -85,9 +85,7 @@
 	</select>
 
 	<insert id="save_course_insert">
-		insert into Course (Member_Id,Course_num,Course_Name,Course_thema,Course_Area,Course_content,Course_distance,Course_Interest, Course_number, Course_img, amount) values
-		(#{memberId},Course_seq.nextval,#{Course_name},#{Course_thema},#{Course_Area},#{Course_content},#{Course_distance},
-		#{day}, #{number}, #{img}, #{amount})
+		insert into Course (Member_Id,Course_num,Course_Name,Course_thema,Course_Area,Course_content,Course_distance,Course_Interest, Course_number, Course_img, amount) values (#{memberId},Course_seq.nextval,#{Course_name},#{Course_thema},#{Course_Area},#{Course_content},#{Course_distance}, #{day}, #{number}, #{img}, #{amount})
 
 	</insert>
 

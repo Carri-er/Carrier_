@@ -30,10 +30,7 @@ public class CarrierController {
    private com.ex.springboot.dao.IAiDAO AiDAO; 
    @Autowired
    private com.ex.springboot.dao.IEventDAO eventDAO;
-   @Autowired
-   private com.ex.springboot.dao.IMemberDAO member_dao;
-   @Autowired
-   private com.ex.springboot.dao.IPayDAO pay_dao;
+
    @GetMapping("/")   
    public String main(Model model) {
 	   
@@ -89,68 +86,7 @@ public class CarrierController {
    }
    
    
-   //결제 하러 갈 때 정보 받기
-	@RequestMapping("/checkout")
-	public String checkout(HttpServletRequest request, Model model, MemberDTO dto) {
-		/* 결제에 필요한 항목 */
-		// 주문번호 = 아이디+시간
-		// 이름
-		// 이메일
-		// 코스 제목
-		// 핸드폰 번호
-		// 결제 금액
-		
-		// 결제 파라미터
-		String Member_Id = request.getParameter("Member_Id");
-		String title = request.getParameter("Course_name");
-		String Course_num = request.getParameter("Course_num");
-		//int amount = Integer.parseInt(request.getParameter("discount"));
-		String amount = request.getParameter("amount");
-		// 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-		String getTime = currentDateTime.format(formatter);
-		String orderId = Member_Id+getTime; // 난수 지정
-		String phone;
-		
-		
-		// 멤버 정보 불러오기
-		dto = member_dao.memberList(Member_Id);
-		phone = dto.getMember_Phone().replace("-","");
-		
-		
-		model.addAttribute("orderId", orderId);
-		model.addAttribute("title", title);
-		model.addAttribute("amount", amount);
-		model.addAttribute("member", dto);
-		model.addAttribute("customerMobilePhone", phone);
-		
-		// 전달
-		model.addAttribute("Course_num", Course_num);
-		
-		
-		System.out.println("주문번호:"+orderId+" 코스제목:"+title+" 결제금액:"+amount);
-		
-		return "thymeleaf/member/checkout";
-	}
-	
-	@GetMapping("/fail")
-	public String fail() {
-		return "thymeleaf/member/fail";
-	}
-	
-	@GetMapping("/success")
-	public String success(HttpServletRequest request, Model model, HttpSession session) {
-		
-		String Member_Id = (String) session.getAttribute("Member_Id");
-		String orderId = request.getParameter("orderId");
-		String Course_num = request.getParameter("courseNum");
-		
-		System.out.println("Member_Id:"+Member_Id+" 코스 번호:"+Course_num+" 주문 번호:"+orderId);
-//		pay_dao.payCreate(Member_Id, Course_num, orderId);
-		
-		return "thymeleaf/member/success";
-	}
+
    
    @GetMapping("/home")
    public String home(Model model) {
