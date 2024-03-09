@@ -16,6 +16,7 @@ import com.ex.springboot.dto.CourseDTO;
 import com.ex.springboot.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping
@@ -31,6 +32,8 @@ public class CarrierController {
    private com.ex.springboot.dao.IEventDAO eventDAO;
    @Autowired
    private com.ex.springboot.dao.IMemberDAO member_dao;
+   @Autowired
+   private com.ex.springboot.dao.IPayDAO pay_dao;
    @GetMapping("/")   
    public String main(Model model) {
 	   
@@ -85,6 +88,8 @@ public class CarrierController {
       return "thymeleaf/home/home";
    }
    
+   
+   //결제 하러 갈 때 정보 받기
 	@RequestMapping("/checkout")
 	public String checkout(HttpServletRequest request, Model model, MemberDTO dto) {
 		/* 결제에 필요한 항목 */
@@ -97,27 +102,34 @@ public class CarrierController {
 		
 		// 결제 파라미터
 		String Member_Id = request.getParameter("Member_Id");
-		String Event_area = request.getParameter("Event_area"); // 코스 제목 뽑기 위함
-		String day = request.getParameter("day"); // 코스 제목 뽑기 위함
-		String title = Member_Id+"님의 "+Event_area+" "+day+"코스";
-		int amount = Integer.parseInt(request.getParameter("amount"));
-		String phone;
-		
-		// 데이터 가공 - 하이픈 제거
+		String title = request.getParameter("Course_name");
+		String Course_num = request.getParameter("Course_num");
+		//int amount = Integer.parseInt(request.getParameter("discount"));
+		String amount = request.getParameter("discount");
+		// 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 		String getTime = currentDateTime.format(formatter);
+		String orderId = Member_Id+getTime; // 난수 지정
+		String phone;
 		
+		
+		// 멤버 정보 불러오기
 		dto = member_dao.memberList(Member_Id);
 		phone = dto.getMember_Phone().replace("-","");
 		
 		
-		model.addAttribute("orderId", Member_Id+getTime);
+		model.addAttribute("orderId", orderId);
 		model.addAttribute("title", title);
 		model.addAttribute("amount", amount);
 		model.addAttribute("member", dto);
 		model.addAttribute("customerMobilePhone", phone);
 		
+		// 전달
+		model.addAttribute("Course_num", Course_num);
+		
+		
+		System.out.println(orderId+title+amount);
 		
 		return "thymeleaf/member/checkout";
 	}
@@ -128,7 +140,13 @@ public class CarrierController {
 	}
 	
 	@GetMapping("/success")
-	public String success(HttpServletRequest request, Model model) {
+	public String success(HttpServletRequest request, Model model, HttpSession session) {
+		
+		String orderId = request.getParameter("orderId");
+		String Course_num = request.getParameter("Course_num");
+		String Member_Id = (String) session.getAttribute("Member_Id");
+		
+		pay_dao.payCreate(Member_Id, Course_num, orderId);
 		
 		
 		return "thymeleaf/member/success";

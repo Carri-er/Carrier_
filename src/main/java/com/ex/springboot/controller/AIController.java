@@ -1,15 +1,11 @@
 package com.ex.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.ex.springboot.dto.CourseDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -56,12 +52,15 @@ public class AIController {
 		String day3aiccTD = request.getParameter("day3aiccTDV");
 		
 		
-		
-		
 		String memberId = request.getParameter("memberId");
 		String day = request.getParameter("day");
 		String amount = request.getParameter("amount");
+		String discount = request.getParameter("discount");
 		model.addAttribute("amount", amount);
+		model.addAttribute("discount", discount);
+		Integer courseNum = AiDAO.getCourseNum();
+		model.addAttribute("courseNum", courseNum);
+		System.out.println(courseNum);
 		
 		model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
 		model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
@@ -217,7 +216,7 @@ public class AIController {
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
 		String day = request.getParameter("day");
-		String amount = request.getParameter("amount");
+		String amount = request.getParameter("discount");
 		
 		// day1 파라미터 값
 		String day1aicc = request.getParameter("day1aicc");
@@ -259,34 +258,27 @@ public class AIController {
 		String Course_content = request.getParameter("Course_content");
 		String Course_distance = request.getParameter("Course_distance");
 		
-		int courseNum;		
-		
+
 		if(day.equals("2박3일")) {
-			 number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
-					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
-							day3aicc+","+day3aiccFood+","+day3aicc2+","+day3aiccCafe+","+day3aiccFood2;
-			 System.out.println(courseNum = AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
-			    model.addAttribute("courseNum", courseNum);
+		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
+		             day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
+		             day3aicc+","+day3aiccFood+","+day3aicc2+","+day3aiccCafe+","+day3aiccFood2;
+		   AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		} else if(day.equals("1박2일")) {
+		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
+		             day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2;
+		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		} else if(day.equals("당일 치기")) {
+		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
+		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
 		}
-		if(day.equals("1박2일")) {
-			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
-					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2;
-			System.out.println(courseNum = AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
-		    model.addAttribute("courseNum", courseNum);
-		}
-		
-		if(day.equals("당일 치기")) {
-			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
-			System.out.println(courseNum = AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount));
-		    model.addAttribute("courseNum", courseNum);
-		}
-		
-		System.out.println("insert 완료");
-			    
 
 		
+		Integer courseNum = AiDAO.getCourseNum();
+		model.addAttribute("courseNum", courseNum);
+		
 		model.addAttribute("memberId", memberId);
-		System.out.println("memberId : " +memberId);
+		
 		String msg = "1";
 	    if (msg != null && msg.equals("1")) {
 	        model.addAttribute("confirmMessage", "코스를 확인하러 마이페이지로 이동하시겠습니까?");
@@ -294,6 +286,8 @@ public class AIController {
 		
 		return "thymeleaf/aicc/aicc";
 	}
+	
+	
 	
 	@PostMapping("/cours_Save_update")
 	public String cours_Save_update(HttpServletRequest request, Model model) {

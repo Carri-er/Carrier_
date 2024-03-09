@@ -11,11 +11,10 @@ import com.ex.springboot.dto.PayDTO;
 public interface IPayDAO {
 	
 	// 결제 
-	public int pay(
+	public int payCreate(
 			@Param("Member_Id") String Member_Id,
-			@Param("Course_num") int Course_num,
-			@Param("orderId") String orderId,
-			@Param("Pay_date") String Pay_date
+			@Param("Course_num") String Course_num,
+			@Param("orderId") String orderId
 			);
 	
 	// 결제정보
@@ -28,5 +27,4 @@ public interface IPayDAO {
 	
 	// 전체 결제정보 - 관리자
 	public List<PayDTO> allPayList();
-	
 }

@@ -36,16 +36,16 @@
 								</div>
 								<!-- 코스의 제목이 오는 곳입니다 -->
 								<div class="my-3">
-								
-								<span class="f22 d-block my-3 px-5 courseNameDisplay">
-								</span> 
+									<span class="f22 d-block my-3 px-5 courseNameDisplay">
+									</span> 
                         			
-                        			
-                        			<input type="hidden" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}" />
-									<input type="hidden" id="Event_area" name="Event_area" th:value="${aicc.get(0).getEvent_area()}" />
-									<input type="hidden" id="day" name="day" th:value="${day}" />
-									<input type="hidden" class="" value="" name="amount"/>
-
+                        			<!-- HIDDEN OUT -->
+									<input type="text" class="courseNameValue" name="Course_name"/>
+                        			<input type="text" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}" />
+									<input type="text" class="discountValue2" value="" name="amount"/>
+									<input type="text" name="Course_num" th:value="${courseNum}" />
+									
+							
 								
 								<span class="f16 d-block my-3 px-5 courseContentDisplay"></span>
 
@@ -66,8 +66,7 @@
 										
 										<div class="hstack d-flex justify-content-center text-center ">
                         				<div class="btn btn-sm btn-light rounded-pill my-2 f14">지금 바로 결제 시</div>
-                        				<span><b class="ms-2 text-pink f20 discountDisplay"></b></span>
-                        				<span class="courseNum"></span>
+                        				<span><b class="ms-2 text-pink f20 discountValue"></b></span>
                         			</div>
 								</div>
 							</div>
