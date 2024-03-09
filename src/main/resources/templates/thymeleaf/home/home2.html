@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/home">
+<div th:replace="~{head/head::head}">
+</div>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400&display=swap");
+:root {
+  --x: 50%;
+  --y: 50%;
+  --blur: 0.7vmax;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  background-color: black;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+  overflow: hidden;
+  /*
+  cursor: none;
+  */
+  user-select: none;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Lexend", serif;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+main {
+  z-index: 1;
+}
+h1 {
+  font-size: max(10vw, 60px);
+  color: #fff;
+  position:relative;
+  z-index: 99;
+}
+#bg,
+#bg_mask {
+  /* ふちボケ対策 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: calc(var(--blur) * -1);
+
+  background: url(https://www.pixelstalk.net/wp-content/uploads/2016/03/Roman-Summer-Wallpaper-HD.jpg)
+    no-repeat center/cover;
+}
+#bg {
+  filter: blur(var(--blur));
+}
+#bg_mask {
+  mask-image: radial-gradient(
+    circle 50vmin at var(--x) var(--y),
+    black 20vmin,
+    transparent
+  );
+}
+
+</style>
+<body>
+<!--
+Focus
+Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/KKJgQXa)
+-->
+<a href="home">
+<div id="bg"></div>
+<div id="bg_mask"></div>
+<main>
+  <h1>Carrier</h1>
+</main>
+</a>
+<!--footer-->
+
+
+<!-- 알림창 -->
+<script>
+/*!
+Focus
+Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/KKJgQXa)
+*/
+"use strict";
+console.clear();
+
+var root = document.querySelector(":root");
+function spotlight(e) {
+  root.style.setProperty("--x", e.pageX + "px");
+  root.style.setProperty("--y", e.pageY + "px");
+}
+window.addEventListener("pointermove", spotlight);
+window.addEventListener("pointerdown", spotlight);
+
+</script>
+</body>
+</html>

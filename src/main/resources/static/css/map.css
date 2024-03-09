@@ -388,6 +388,23 @@ div.map_mapSection {
 }
 
 
+.clip-text {
+  padding:10px;
+  background: url("https://media.giphy.com/media/eBtpLQVJeFEBx92VCy/giphy.gif");
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  color: #00000047; 
+  text-transform:uppercase;
+  font-size: 8rem;
+  font-weight: 900;
+  letter-spacing:1px;
+  user-select:none;
+      border-top: solid 10px #00000057;
+    border-bottom: solid 10px #00000057;
+  text-align:center;
+}
+
 /*************************** 
 	카카오 맵 api 오버레이 스타일
  **************************/
