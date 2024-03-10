@@ -57,7 +57,7 @@ h1 {
   left: 0;
   margin: calc(var(--blur) * -1);
 
-  background: url(https://www.pixelstalk.net/wp-content/uploads/2016/03/Roman-Summer-Wallpaper-HD.jpg)
+  background: url(https://images.unsplash.com/photo-1473625247510-8ceb1760943f?q=80&w=1411&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
     no-repeat center/cover;
 }
 #bg {
@@ -70,7 +70,23 @@ h1 {
     transparent
   );
 }
+ @keyframes fall {
+    0% { transform: translateY(-100px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
 
+  .letter {
+  padding: 0;
+    display: inline-block;
+    animation: fall 0.5s ease forwards;
+    opacity: 0;
+  }
+  
+  
+
+ 
+
+  
 </style>
 <body>
 <!--
@@ -81,7 +97,9 @@ Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/KKJgQXa)
 <div id="bg"></div>
 <div id="bg_mask"></div>
 <main>
-  <h1>Carrier</h1>
+  <h1 class="letter"> 
+	Carrier
+</h1>
 </main>
 </a>
 <!--footer-->
@@ -89,6 +107,7 @@ Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/KKJgQXa)
 
 <!-- 알림창 -->
 <script>
+
 /*!
 Focus
 Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/KKJgQXa)
@@ -103,7 +122,9 @@ function spotlight(e) {
 }
 window.addEventListener("pointermove", spotlight);
 window.addEventListener("pointerdown", spotlight);
-
+setTimeout(function() {
+    window.location.href = "/home";
+  }, 5000); 
 </script>
 </body>
 </html>

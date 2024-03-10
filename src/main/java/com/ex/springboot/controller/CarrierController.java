@@ -16,6 +16,7 @@ import com.ex.springboot.dto.CourseDTO;
 import com.ex.springboot.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping
@@ -31,11 +32,16 @@ public class CarrierController {
    private com.ex.springboot.dao.IEventDAO eventDAO;
    @Autowired
    private com.ex.springboot.dao.IMemberDAO member_dao;
+
    @GetMapping("/home2")   
    public String main2(Model model) {
 	   return "thymeleaf/home/home2";
    
    }
+
+   @Autowired
+   private com.ex.springboot.dao.IPayDAO pay_dao;
+
    @GetMapping("/")   
    public String main(Model model) {
 	   
@@ -91,6 +97,8 @@ public class CarrierController {
       return "thymeleaf/home/home";
    }
    
+   
+   //결제 하러 갈 때 정보 받기
 	@RequestMapping("/checkout")
 	public String checkout(HttpServletRequest request, Model model, MemberDTO dto) {
 		/* 결제에 필요한 항목 */
@@ -101,77 +109,37 @@ public class CarrierController {
 		// 핸드폰 번호
 		// 결제 금액
 		
-		// day1 파라미터 값
-		String day1aicc = request.getParameter("day1aicc");
-		String day1aiccFood = request.getParameter("day1aiccFood");
-		String day1aicc2 = request.getParameter("day1aicc2");
-		String day1aiccCafe = request.getParameter("day1aiccCafe");
-		String day1aiccFood2 = request.getParameter("day1aiccFood2");
-		String day1hotel = request.getParameter("day1hotel");
-		
-		// day2 파라미터 값
-		String day2aicc = request.getParameter("day2aicc");
-		String day2aiccFood = request.getParameter("day2aiccFood");
-		String day2aicc2 = request.getParameter("day2aicc2");
-		String day2aiccCafe = request.getParameter("day2aiccCafe");
-		String day2aiccFood2 = request.getParameter("day2aiccFood2");
-		String day2hotel = request.getParameter("day2hotel");
-		
-		// day3 파라미터 값
-		String day3aicc = request.getParameter("day3aicc");
-		String day3aiccFood = request.getParameter("day3aiccFood");
-		String day3aicc2 = request.getParameter("day3aicc2");
-		String day3aiccCafe = request.getParameter("day3aiccCafe");
-		String day3aiccFood2 = request.getParameter("day3aiccFood2");
-		String number="";
-		
-		String Course_name = request.getParameter("Course_name");
-		String Course_thema = request.getParameter("Course_thema");
-		String Course_Area = request.getParameter("Course_Area");
-		String Course_content = request.getParameter("Course_content");
-		String Course_distance = request.getParameter("Course_distance");
-		String img = request.getParameter("img");
-		
 		// 결제 파라미터
 		String Member_Id = request.getParameter("Member_Id");
-		String Event_area = request.getParameter("Event_area"); // 코스 제목 뽑기 위함
-		String day = request.getParameter("day"); // 코스 제목 뽑기 위함
-		String title = Member_Id+"님의 "+Event_area+" "+day+"코스";
-		int amount = Integer.parseInt(request.getParameter("amount"));
-		String phone;
-		
-		// 데이터 가공 - 하이픈 제거
+		String title = request.getParameter("Course_name");
+		String Course_num = request.getParameter("Course_num");
+		//int amount = Integer.parseInt(request.getParameter("discount"));
+		String amount = request.getParameter("amount");
+		// 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 		String getTime = currentDateTime.format(formatter);
+		String orderId = Member_Id+getTime; // 난수 지정
+		String phone;
 		
+		
+		// 멤버 정보 불러오기
 		dto = member_dao.memberList(Member_Id);
 		phone = dto.getMember_Phone().replace("-","");
 		
 		
-		model.addAttribute("orderId", Member_Id+getTime);
+		model.addAttribute("orderId", orderId);
 		model.addAttribute("title", title);
 		model.addAttribute("amount", amount);
 		model.addAttribute("member", dto);
 		model.addAttribute("customerMobilePhone", phone);
 		
-		if(day.equals("2박3일")) {
-			 number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
-					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
-							day3aicc+","+day3aiccFood+","+day3aicc2+","+day3aiccCafe+","+day3aiccFood2;
-			 System.out.println(AiDAO.save_course_insert(Member_Id,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,0));
-		}
-		if(day.equals("1박2일")) {
-			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
-					day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2;
-			System.out.println(AiDAO.save_course_insert(Member_Id,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,0));
-		}
+		// 전달
+		model.addAttribute("Course_num", Course_num);
 		
-		if(day.equals("당일 치기")) {
-			number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
-			System.out.println(AiDAO.save_course_insert(Member_Id,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,0));
-		}
-
+		
+		System.out.println("주문번호:"+orderId+" 코스제목:"+title+" 결제금액:"+amount);
+		
 		return "thymeleaf/member/checkout";
 	}
 	
@@ -181,8 +149,14 @@ public class CarrierController {
 	}
 	
 	@GetMapping("/success")
-	public String success(HttpServletRequest request, Model model) {
+	public String success(HttpServletRequest request, Model model, HttpSession session) {
 		
+		String Member_Id = (String) session.getAttribute("Member_Id");
+		String orderId = request.getParameter("orderId");
+		String Course_num = request.getParameter("courseNum");
+		
+		System.out.println("Member_Id:"+Member_Id+" 코스 번호:"+Course_num+" 주문 번호:"+orderId);
+//		pay_dao.payCreate(Member_Id, Course_num, orderId);
 		
 		return "thymeleaf/member/success";
 	}

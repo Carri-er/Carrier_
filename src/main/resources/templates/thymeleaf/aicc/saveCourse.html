@@ -5,6 +5,8 @@
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
+		                  	               	<!-- 예약 버튼 -->
+				    <div th:replace="~{alert/pay_modal::div}"> </div>  
 	<div class="container px-md-5">
 	<h4 class="text-center my-5">코스 저장하기</h4>
 		<div class="row mx-3 mx-md-5 justify-content-center">
@@ -18,8 +20,6 @@
 						<span class="rounded-4 p-3 bg-mainbg text-white">Day-1</span>
 					</h3>
 						</div>
-				
-				
 			</div>
 			</div>
 			<!-- 1일차 데이터 -->
@@ -84,8 +84,6 @@
 			</div>
 			
 
-
-
 			</div>
 			<form action="cours_Save_insert" method="post" id="myForm">
 			<div class="row">
@@ -141,7 +139,19 @@
 					<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
 					<input type="hidden" name="day" th:value="${day}" />
 					<input type="hidden" name="img" th:value="${aicc.get(0).getEvent_thumbnail()}" />
+					<input type="hidden" class="discountValue" id="discount" name="discount" value="" />
+					<input type="hidden" class="amountValue" id="amount" name="amount" value="" />
+					
+					<span class="amount text-white"></span>
+					<span class="discount text-white"></span>
+
 					<div class="col-12 mx-auto mt-4 text-end">
+					<button type="button"
+						id = "btn-pay"
+						class="btn btn-main rounded-pill btn-map-step hstack">
+						<img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
+							코스 저장하고 예약하기
+					</button>
 						<button type="submit" class="btn btn-main "> 코스 등록</button>
 					</div>
 					</div>
@@ -157,6 +167,12 @@
          window.location.href = "/login?msg=5";
       }
    </script>
+   
+   
+
+	
+   
+   
 <script>
 		$(function() {
 			// btn1, btn2, btn3 요소를 가져옵니다.
@@ -304,6 +320,25 @@
 		var distance;
 
 		var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
+	    var stayPay = [
+	         90000,100000,110000,120000,130000,150000
+	      ]
+	    var foodPay =[
+	         20000,15000,30000,40000,50000,60000
+	      ]
+	   	var beveragePay =[
+	         20000,15000,16000,30000,25000,19500 
+	      ]
+		
+     	var randomNumber = Math.floor(Math.random() * 6);
+	    randomNumber += 1; 
+	    var amount = 0; // 예상 금액 초기화
+		var discount = 0; // 할인 금액 초기화
+	    var oil = 0; // 기름값 초기화
+	    var stay = stayPay[randomNumber]; // 숙소 금액
+	    var food = foodPay[randomNumber]; // 맛집 금액
+	    var beverage = beveragePay[randomNumber]; // 카페 (음료) 금액
+		
 
 		var subtotalDistance = 0;
 		for (var i = 0; i < positions.length; i++) {
@@ -326,6 +361,16 @@
 			displayCircleDot(positions[i].latlng, distance);
 			totalDistance += distance;
 			
+			// 예상금액 //
+			oil = Math.round((totalDistance / 1000) * 170); // oil 값 in
+			//document.querySelector('.oil').innerText = oil+"원"; // oil 값 out test
+			amount = oil + stay + food + beverage;
+			discount = amount-20000;
+			
+			document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
+			document.querySelector('.amountValue').value = amount;
+			document.querySelector('.discount').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
+			document.querySelector('.discountValue').value = discount; // 할인 금액 out
 
 		}
 
@@ -346,6 +391,61 @@
 
 		}
 	</script>
+	
+
+<!-- 비동기로 pay 모달 열기 -->
+<script>
+$(document).ready(function() {
+    // #btn-pay 버튼을 클릭했을 때의 동작
+    $("#btn-pay").click(function() {
+        var courseName = $("#Course_name").val();
+        var courseContent = $("#Course_content").val();
+
+        var formattedAmount = amount.toLocaleString();
+        var formattedDiscount = discount.toLocaleString();
+        
+        // 폼 데이터 가져오기
+        var formData = $("#myForm").serialize();
+        
+        // 코스 명을 formData에 추가
+        formData += "&courseName=" + courseName;
+        formData += "&courseContent=" + courseContent;
+        formData += "&amount=" + amount;
+        formData += "&discount=" + discount;
+        
+        // 코스 명을 표시할 요소에 courseName 값을 넣음
+        $(".courseNameDisplay").text(courseName);
+        $(".courseContentDisplay").text(courseContent);
+
+        document.querySelector('.courseNameValue').value = courseName; // 코스명 out
+       
+        
+        // 첫 번째 AJAX 요청: 데이터 저장
+        $.ajax({
+            type: "POST",
+            url: "cours_Save_insert",
+            data: formData,
+            success: function(response) {
+                // 데이터 저장에 성공한 경우
+                console.log("데이터 저장 성공!");
+    		    
+                 $('#feed_del_Modal').modal('show');
+                console.log(response.courseNum);
+                  
+            },
+            error: function(xhr, status, error) {
+                // 데이터 저장에 실패한 경우
+                console.error("데이터 저장 실패!");
+                console.error("에러: ", error);
+            }
+        });
+    });
+});
+
+</script>
+
+	
+	
 	
 </body>
 </html>

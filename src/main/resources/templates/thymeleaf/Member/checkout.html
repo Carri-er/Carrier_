@@ -10,6 +10,7 @@
 <div class="container mt-3">
 	<div>
 		<input type="hidden" id="coupon-box"/> 
+		<!-- <input type="hidden" id="courseNum" th:value="${Course_num}"/> -->
 		<label for="coupon-box"></label>
 	</div>
 	<!-- 결제 UI, 이용약관 UI 영역 -->
@@ -29,7 +30,7 @@
 	const customerEmail = /*[[${member.getMember_Email()}]]*/"";
 	const customerName = /*[[${member.getMember_Name()}]]*/"";
 	const customerMobilePhone = /*[[${customerMobilePhone}]]*/"";
-	
+	const courseNum = /*[[${Course_num}]]*/"";
 	const coupon = document.getElementById("coupon-box");
 	const button = document.getElementById("payment-button");
 	const amount = /*[[${amount}]]*/"";
@@ -71,8 +72,36 @@
 			customerEmail : customerEmail,
 			customerName : customerName,
 			customerMobilePhone : customerMobilePhone,
+			courseNum : courseNum,
 		});
 	});
+	</script>
+	<script>
+		
+	
+	$.ajax({
+	    type: "POST",
+	    url: "/confirm?courseNum=" + courseNum,
+	    data: JSON.stringify({
+	        orderId: orderId,
+	        orderName: orderName,
+	        customerEmail: customerEmail,
+	        customerName: customerName,
+	        customerMobilePhone: customerMobilePhone,
+	        amount: amount,
+	        paymentKey: paymentKey
+	    }),
+	    contentType: "application/json",
+	    success: function(response) {
+	        // 성공적으로 서버로부터 응답을 받았을 때의 동작
+	        console.log("결제 확인 성공:", response);
+	    },
+	    error: function(xhr, status, error) {
+	        // 서버와 통신 중 오류가 발생했을 때의 동작
+	        console.error("결제 확인 실패:", error);
+	    }
+	});
+	
 </script>
 </body>
 </html>

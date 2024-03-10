@@ -1,0 +1,106 @@
+<!-- Button trigger modal -->
+<div class="m-auto">
+	<!-- <button type="button" class="btn btn-main rounded-pill px-2"
+		data-bs-toggle="modal" data-bs-target="#feed_del_Modal">자세히보기</button> -->
+
+	<!-- Pay Modal -->
+	<div class="modal fade bg-trans" id="feed_del_Modal" tabindex="-1"
+		aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="mt-5 modal-content rounded-4 border-none bg-trans overflow shadow-s">
+				<!-- X btn -->
+				<img data-bs-dismiss="modal" aria-label="Close"
+					src="../img/mypage/del.png"
+					class="my-del-btn pay-del-btn shadow-sm position-absolute rounded-circle"
+					width="32" height="32" alt="">
+					
+					
+				<!-- hover -->
+				<div>
+					<!-- <span> 예상 경비 | </span>
+					<span class="oil"></span> -->
+					
+				</div>
+				<!-- 모달 -->
+				<form action="/checkout" method="post">
+				<div class="rounded-4 overflow-hidden bg-trans">
+					<div class="modal-header border-none bg-white"></div>
+					<!-- Modal body -->
+					<div class="modal-body text-center p-0 bg-trans">
+						<div class="row p-0 m-auto">
+							<div class="col p-0 text-black bg-white">
+								<div class="w-100 overflow-hidden xh-300 hstack">
+									<img src="../img/feed/user_rabbit.jpg" class="img-fluid w-100"
+										alt="" />
+								</div>
+								<!-- 코스의 제목이 오는 곳입니다 -->
+								<div class="my-3">
+								
+								<span class="f22 d-block my-3 px-5">
+									<th:block th:if="${session.Member_Name eq null}">
+                       					 <span>사용자님의 </span>
+                        			</th:block>
+									<th:block th:unless="${session.Member_Name eq null}">
+                        			<span th:text="|${session.Member_Name}님의|" class="f22"></span>
+                        			</th:block>
+                        			<span th:text="${aicc.get(0).getEvent_area()}" class="text-black">지역</span>
+                        			<span th:if="${day eq '0'}" th:text="당일여행" class="text-black">기간</span>
+                        			<span th:if="${day eq '1'}" th:text="1박2일" class="text-black">기간</span>
+                        			<span th:if="${day eq '2'}" th:text="2박3일" class="text-black">기간</span>
+                        			<input type="hidden" class="text-black" th:value="${aicc.get(0).getEvent_uploadday()}"></input><!-- 중복 방지용 -->
+                        			<span>코스</span>
+                        			
+                        			
+                        			<input type="hidden" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}" />
+									<input type="hidden" id="Event_area" name="Event_area" th:value="${aicc.get(0).getEvent_area()}" />
+									<input type="hidden" id="day" name="day" th:value="${day}" />
+									<input type="hidden" class="" value="" name="amount"/>
+
+								</span> 
+								
+								<span class="f16 d-block my-3 px-5">Carrier가 추천하는 코스입니다!</span>
+
+									<!-- 	<p class="px-3 mb-1 pb-1">
+											<b>여행 지역 </b> <span class="text-black mx-2 ">|</span> <span
+												th:text="${aicc.get(0).getEvent_area()}" class="text-black"></span>
+										</p>
+										<p class="px-3 mb-1 pb-1 text-black">
+											<b>총 거리</b> <span class="text-black mx-2">|</span> <span
+												class="totalDistance text-black"></span> 
+										<p class="px-3 mb-1 pb-1 text-black">
+											<b>예상 금액</b> <span class="text-black mx-2">|</span> <span
+												class="amount text-black"></span> -->
+								
+								
+								<span><b
+												class="text-pink d-block f17 amount2 fw-light text-decoration-line-through"></b></span>
+										
+										<div class="hstack d-flex justify-content-center text-center">
+                        				<div class="btn btn-sm btn-light rounded-pill my-2 f14">지금 바로 결제 시</div>
+                        				<span><b class="ms-2 text-pink f20 discount"></b></span>
+                        			</div>
+								</div>
+							</div>
+							<img src="../img/mypage/bg_detail_pop.png" class="img-fluid p-0"
+								alt="" />
+						</div>
+					</div>
+						<span class="small text-danger d-block text-center bg-white">* 카페와 맛집 가격을 제외한 <b>2인 기준 숙박 결제 금액</b>입니다</span>
+					<div class="modal-footer border-none pb-5 bg-white w-100">
+						<button class="btn btn-pinkD m-auto rounded-pill py-2 px-4">결제하기
+						</button>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+
+<!-- 결제창 -->
+<!-- <div th:replace="~{alert/pay_modal::div}"></div> -->

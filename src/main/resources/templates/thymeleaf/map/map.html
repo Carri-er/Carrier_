@@ -45,25 +45,21 @@
                         </div>
                      </div>
                   </div>
-                  	               	<!-- 예약 버튼 -->
-				    <div th:replace="~{alert/pay_modal::div}"> </div>   
-				    <div class="p-2 gap-4 d-flex justify-content-center">
-							<button type="button"
-								class="btn btn-main rounded-pill btn-map-step hstack"
-								data-bs-toggle="modal" 
-								data-bs-target="#feed_del_Modal" 
-								data-bs-placement="bottom" 
-								data-bs-custom-class="custom-tooltip"
-								data-bs-title="This top tooltip is themed via CSS variables.">
-								<img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
-								예약하기
-							</button>
-							<button class="btn saveBtn btn-pink rounded-pill btn-map-step hstack" type="button">
-								<img
-									src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
-									alt="" style="width: 36px; height: 36px;" class="me-2" />코스 저장하기
-							</button>
-					</div>
+                                       <!-- 예약 버튼 -->
+                <div th:replace="~{alert/pay_modal::div}"> </div>   
+                <div class="p-2 gap-4 d-flex justify-content-center">
+                     <button type="button"
+                        class="btn btn-main saveBtn rounded-pill btn-map-step hstack"
+                        data-bs-custom-class="custom-tooltip">
+                        <img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
+                        예약하기
+                     </button>
+                     <button class="btn saveBtn btn-pink rounded-pill btn-map-step hstack" type="button">
+                        <img
+                           src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
+                           alt="" style="width: 36px; height: 36px;" class="me-2" />코스 저장하기
+                     </button>
+               </div>
                </div>
             </div>
            
@@ -107,10 +103,10 @@
                <div class="text-end me-3 d-flex"><p class="px-3 f20 fw-bold mb-0">day 1</p>
                <!-- <button class="btn saveBtn btn-pink ms-auto" type="button">
                <img
-									src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
-									alt="" style="width: 30px; height: 30px;" /> 
-									코스 저장하기</button> -->
-									</div>
+                           src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
+                           alt="" style="width: 30px; height: 30px;" /> 
+                           코스 저장하기</button> -->
+                           </div>
                <input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="day1aicc"/>
                <input type="hidden" th:value="${aiccFood.get(0).getEvent_num()}" name="day1aiccFood"/>
                <input type="hidden" th:value="${aicc2.get(0).getEvent_num()}" name="day1aicc2"/>
@@ -120,6 +116,8 @@
                
                <input type="hidden" class="day0" th:value="${day}" name="day"/>
                <input type="hidden" name="memberId" th:value="${session.Member_Id}" />
+               <input type="hidden" class="discountValue" value="" name="discount"/>
+               <input type="hidden" class="amountValue" value="" name="amount"/>
                
                <!-- 반복될 부분 day1 -->
                
@@ -262,9 +260,9 @@
          <div class="map_mapSection col w-100 showmap">
             <!-- 지도를 표시할 div 입니다 -->
             <div id="map">
-            	<h3 class="pgj">
-						<span class="rounded-4 p-3 bg-mainbg text-white">Day-1</span>
-				</h3>
+               <h3 class="pgj">
+                  <span class="rounded-4 p-3 bg-mainbg text-white">Day-1</span>
+            </h3>
             </div>
          </div>
       </div>
@@ -280,163 +278,176 @@
    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=00000000&libraries=clusterer">
 </script>
    <!-- map의 스크립트 -->
-	<script th:inline="javascript">
-		var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+   <script th:inline="javascript">
+      var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
 
-		var events = [ {
-			name : /*[[${aicc.get(0).getEvent_name()}]]*/"",
-			mapX : /*[[${aicc.get(0).getEvent_mapX()}]]*/0,
-			mapY : /*[[${aicc.get(0).getEvent_mapY()}]]*/0,
-			number : /*[[${aicc.get(0).getEvent_num()}]]*/""
-		}, {
-			name : /*[[${aiccFood.get(0).getEvent_name()}]]*/"",
-			mapX : /*[[${aiccFood.get(0).getEvent_mapX()}]]*/0,
-			mapY : /*[[${aiccFood.get(0).getEvent_mapY()}]]*/0,
-			number : /*[[${aiccFood.get(0).getEvent_num()}]]*/""
-		}, {
-			name : /*[[${aicc2.get(0).getEvent_name()}]]*/"",
-			mapX : /*[[${aicc2.get(0).getEvent_mapX()}]]*/0,
-			mapY : /*[[${aicc2.get(0).getEvent_mapY()}]]*/0,
-			number : /*[[${aicc2.get(0).getEvent_num()}]]*/""
-		}, {
-			name : /*[[${aiccCafe.get(0).getEvent_name()}]]*/"",
-			mapX : /*[[${aiccCafe.get(0).getEvent_mapX()}]]*/0,
-			mapY : /*[[${aiccCafe.get(0).getEvent_mapY()}]]*/0,
-			number : /*[[${aiccCafe.get(0).getEvent_num()}]]*/""
-		}, {
-			name : /*[[${aiccFood2.get(0).getEvent_name()}]]*/"",
-			mapX : /*[[${aiccFood2.get(0).getEvent_mapX()}]]*/0,
-			mapY : /*[[${aiccFood2.get(0).getEvent_mapY()}]]*/0,
-			number : /*[[${aiccFood2.get(0).getEvent_num()}]]*/""
-		}];
+      var events = [ {
+         name : /*[[${aicc.get(0).getEvent_name()}]]*/"",
+         mapX : /*[[${aicc.get(0).getEvent_mapX()}]]*/0,
+         mapY : /*[[${aicc.get(0).getEvent_mapY()}]]*/0,
+         number : /*[[${aicc.get(0).getEvent_num()}]]*/""
+      }, {
+         name : /*[[${aiccFood.get(0).getEvent_name()}]]*/"",
+         mapX : /*[[${aiccFood.get(0).getEvent_mapX()}]]*/0,
+         mapY : /*[[${aiccFood.get(0).getEvent_mapY()}]]*/0,
+         number : /*[[${aiccFood.get(0).getEvent_num()}]]*/""
+      }, {
+         name : /*[[${aicc2.get(0).getEvent_name()}]]*/"",
+         mapX : /*[[${aicc2.get(0).getEvent_mapX()}]]*/0,
+         mapY : /*[[${aicc2.get(0).getEvent_mapY()}]]*/0,
+         number : /*[[${aicc2.get(0).getEvent_num()}]]*/""
+      }, {
+         name : /*[[${aiccCafe.get(0).getEvent_name()}]]*/"",
+         mapX : /*[[${aiccCafe.get(0).getEvent_mapX()}]]*/0,
+         mapY : /*[[${aiccCafe.get(0).getEvent_mapY()}]]*/0,
+         number : /*[[${aiccCafe.get(0).getEvent_num()}]]*/""
+      }, {
+         name : /*[[${aiccFood2.get(0).getEvent_name()}]]*/"",
+         mapX : /*[[${aiccFood2.get(0).getEvent_mapX()}]]*/0,
+         mapY : /*[[${aiccFood2.get(0).getEvent_mapY()}]]*/0,
+         number : /*[[${aiccFood2.get(0).getEvent_num()}]]*/""
+      }];
 
-		var positions = events.map(function(event) {
-			return {
-				title : event.name,
-				number : event.number,
-				latlng : new kakao.maps.LatLng(event.mapX, event.mapY)
-			};
-		});
-		// 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
-		mapx = parseFloat(events[0].mapX);
-		mapy = parseFloat(events[0].mapY);
-		mapOption = {
-			center : new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
-			level : 7
-		// 지도의 확대 레벨
-		};
+      var positions = events.map(function(event) {
+         return {
+            title : event.name,
+            number : event.number,
+            latlng : new kakao.maps.LatLng(event.mapX, event.mapY)
+         };
+      });
+      // 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
+      mapx = parseFloat(events[0].mapX);
+      mapy = parseFloat(events[0].mapY);
+      mapOption = {
+         center : new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
+         level : 7
+      // 지도의 확대 레벨
+      };
 
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		// 마커를 표시할 위치와 title 객체 배열입니다 
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+      // 마커를 표시할 위치와 title 객체 배열입니다 
 
-		// 마커 이미지의 이미지 주소입니다
-		var imageSrc = [
-				"https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지1,
-				"https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점
-				"https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지2
-				"https://cdn-icons-png.flaticon.com/128/11020/11020485.png",//카페
-				"https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점2
-				"https://cdn-icons-png.flaticon.com/128/11020/11020494.png" ];//관광지2
-		for (var i = 0; i < positions.length; i++) {
-			var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
-					+ '    <div class="info">'
-					+ '            <a href="#"  onclick="func_popEvent('+positions[i].number+')">'
-					+ '        <div class="title">'
-					+ [ i + 1 ]
-					+ ". "
-					+ positions[i].title
-					+ '        </div>'
-					+ '</a>'
-					+ '    </div>' + '</div>';
+      // 마커 이미지의 이미지 주소입니다
+      var imageSrc = [
+            "https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지1,
+            "https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점
+            "https://cdn-icons-png.flaticon.com/128/11020/11020536.png",//관광지2
+            "https://cdn-icons-png.flaticon.com/128/11020/11020485.png",//카페
+            "https://cdn-icons-png.flaticon.com/128/11020/11020470.png",//음식점2
+            "https://cdn-icons-png.flaticon.com/128/11020/11020494.png" ];//관광지2
+      for (var i = 0; i < positions.length; i++) {
+         var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
+               + '    <div class="info">'
+               + '            <a href="#"  onclick="func_popEvent('+positions[i].number+')">'
+               + '        <div class="title">'
+               + [ i + 1 ]
+               + ". "
+               + positions[i].title
+               + '        </div>'
+               + '</a>'
+               + '    </div>' + '</div>';
 
-			// 마커 이미지의 이미지 크기 입니다
-			var imageSize = new kakao.maps.Size(50, 50);
+         // 마커 이미지의 이미지 크기 입니다
+         var imageSize = new kakao.maps.Size(50, 50);
 
-			// 마커 이미지를 생성합니다    
-			var markerImage = new kakao.maps.MarkerImage(imageSrc[i], imageSize);
+         // 마커 이미지를 생성합니다    
+         var markerImage = new kakao.maps.MarkerImage(imageSrc[i], imageSize);
 
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-				map : map, // 마커를 표시할 지도
-				position : positions[i].latlng, // 마커를 표시할 위치
-				title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-				image : markerImage
-			// 마커 이미지 
-			});
-			var overlay = new kakao.maps.CustomOverlay({
-				content : content,
-				map : map,
-				position : positions[i].latlng
-			});
+         // 마커를 생성합니다
+         var marker = new kakao.maps.Marker({
+            map : map, // 마커를 표시할 지도
+            position : positions[i].latlng, // 마커를 표시할 위치
+            title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+            image : markerImage
+         // 마커 이미지 
+         });
+         var overlay = new kakao.maps.CustomOverlay({
+            content : content,
+            map : map,
+            position : positions[i].latlng
+         });
 
-		}
+      }
 
-		var linePath;
-		var lineLine = new daum.maps.Polyline();
+      var linePath;
+      var lineLine = new daum.maps.Polyline();
 
-		var distance;
+      var distance;
 
-		var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
-		
-		var oil = 0; // 기름값 초기화
-		var amount = 0; // 예상 금액 초기화
-		var stay = 0; // 숙소 금액
-		var food = 50000; // 맛집 금액
-		var beverage = 20000; // 카페 (음료) 금액
-		
-		
-		var subtotalDistance = 0;
-		for (var i = 0; i < positions.length; i++) {
-			if (i != 0) {
-				linePath = [ positions[i - 1].latlng, positions[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
-			}
-			;
-			lineLine.setPath(linePath); // 선을 그릴 라인을 세팅합니다
+      var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
+       var stayPay = [
+            90000,100000,110000,120000,130000,150000
+         ]
+       var foodPay =[
+            20000,15000,30000,40000,50000,60000
+         ]
+         var beveragePay =[
+            20000,15000,16000,30000,25000,19500 
+         ]
+      
+        var randomNumber = Math.floor(Math.random() * 6);
+       var amount = 0; // 예상 금액 초기화
+      var discount = 0; // 할인 금액 초기화
+       var oil = 0; // 기름값 초기화
+       var stay = stayPay[randomNumber]; // 숙소 금액
+       var food = foodPay[randomNumber]; // 맛집 금액
+       var beverage = beveragePay[randomNumber]; // 카페 (음료) 금액
+      
+      
+      var subtotalDistance = 0;
+      for (var i = 0; i < positions.length; i++) {
+         if (i != 0) {
+            linePath = [ positions[i - 1].latlng, positions[i].latlng ] //라인을 그리려면 두 점이 있어야하니깐 두 점을 지정했습니다
+         }
+         ;
+         lineLine.setPath(linePath); // 선을 그릴 라인을 세팅합니다
 
-			var drawLine = new daum.maps.Polyline({
-				map : map, // 선을 표시할 지도입니다 
-				path : linePath,
-				strokeWeight : 3, // 선의 두께입니다 
-				strokeColor : '#Ef564b', // 선의 색깔입니다
-				strokeOpacity : 0.8, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-				strokeStyle : 'longdash' // 선의 스타일입니다
-			});
+         var drawLine = new daum.maps.Polyline({
+            map : map, // 선을 표시할 지도입니다 
+            path : linePath,
+            strokeWeight : 3, // 선의 두께입니다 
+            strokeColor : '#Ef564b', // 선의 색깔입니다
+            strokeOpacity : 0.8, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+            strokeStyle : 'longdash' // 선의 스타일입니다
+         });
 
-			distance = Math.round(lineLine.getLength());
-			displayCircleDot(positions[i].latlng, distance);
-			totalDistance += distance;
-			document.querySelector('.totalDistance').innerText = totalDistance
-					.toFixed(2)
-					/ 1000 +"km";
-			document.querySelector('.totalDistanceValue').value = (totalDistance / 1000).toFixed(2);
-			
-			
-			// 예상금액 //
-			oil = Math.round((totalDistance / 1000) * 1700); // oil 값 in
-			//document.querySelector('.oil').innerText = oil+"원"; // oil 값 out test
-			amount = oil + stay + food + beverage;
-			document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
-			document.querySelector('.amount2').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
-			document.querySelector('.amountValue').value = amount;
-		}
+         distance = Math.round(lineLine.getLength());
+         displayCircleDot(positions[i].latlng, distance);
+         totalDistance += distance;
+         document.querySelector('.totalDistance').innerText = totalDistance
+               .toFixed(2)
+               / 1000 +"km";
+         document.querySelector('.totalDistanceValue').value = (totalDistance / 1000).toFixed(2);
+         
+         
+         // 예상금액 //
+         oil = Math.round((totalDistance / 1000) * 170); // oil 값 in
+         //document.querySelector('.oil').innerText = oil+"원"; // oil 값 out test
+         amount = oil + stay + food + beverage;
+         discount = amount-20000;
+         
+         document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
+         document.querySelector('.discountValue').value = discount; // 할인 금액 out
+         document.querySelector('.amountValue').value = amount;
+      }
 
-		function displayCircleDot(position, distance) {
-			if (distance > 0) {
-				// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
-				var distanceOverlay = new daum.maps.CustomOverlay({
-					//  content : '<div class="dotOverlay bg-white rounded-4 px-3 mt-5">거리 <span class="number">'
-					//       + distance + '</span>m</div>', 
-					position : position,
-					yAnchor : 1,
-					zIndex : 2
-				});
+      function displayCircleDot(position, distance) {
+         if (distance > 0) {
+            // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+            var distanceOverlay = new daum.maps.CustomOverlay({
+               //  content : '<div class="dotOverlay bg-white rounded-4 px-3 mt-5">거리 <span class="number">'
+               //       + distance + '</span>m</div>', 
+               position : position,
+               yAnchor : 1,
+               zIndex : 2
+            });
 
-				// 지도에 표시합니다
-				distanceOverlay.setMap(map);
-			}
+            // 지도에 표시합니다
+            distanceOverlay.setMap(map);
+         }
 
-		}
-	</script>
+      }
+   </script>
 <script th:inline="javascript">
     /*<![CDATA[*/
    function refreshPageIfSameValues() {
@@ -503,16 +514,16 @@
 <!-- 코스 리스트 클릭 시 여행정보 팝업창 출력 -->
 <script>
 
-	
-	function func_popEvent(param) {
-		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-		// width  : 팝업창 가로 크기
-	    // height : 팝업창 세로 크기
-	    var popupWidth = 700;
-	    var popupHeight = 600;
-	    
-     	// 브라우저 중앙 위치 계산
+   
+   function func_popEvent(param) {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+      // width  : 팝업창 가로 크기
+       // height : 팝업창 세로 크기
+       var popupWidth = 700;
+       var popupHeight = 600;
+       
+        // 브라우저 중앙 위치 계산
         // window.screenX : 브라우저의 현재 스크린 좌측상단 X좌표
         // window.screenY : 브라우저의 현재 스크린 좌측상단 Y좌표
        
@@ -524,9 +535,9 @@
         var featureWindow = "width=" + popupWidth + ", height="+popupHeight
         + ", left=" + popupX + ", top=" + popupY;
         
-		window.open('/Event_view?id='+param, '_blank',featureWindow );
-		
-	}
+      window.open('/Event_view?id='+param, '_blank',featureWindow );
+      
+   }
 
 </script>
 
