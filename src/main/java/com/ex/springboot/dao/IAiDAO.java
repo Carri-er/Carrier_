@@ -24,7 +24,7 @@ public interface IAiDAO {
 	public List<EventDTO> listCourse(String num);
 	public int save_course_insert(@Param("memberId") String id, @Param("Course_name") String name, @Param("Course_thema") String thema, @Param("Course_Area") String area, @Param("Course_content") String content, @Param("Course_distance") String distance, @Param("day") String day, @Param("number") String num, @Param("img") String img, @Param("amount") String amount);
 	public List<CourseDTO> Course_select(String num);
-	public List<CourseDTO> Course_select_useCk(String num);
+	public CourseDTO Course_select_useCk(String num);
 	public List<CourseDTO> Course_select4(String num);
 	public List<CourseDTO> Course_view_list(String num);
 	public int Course_update(String name, String content, String num);

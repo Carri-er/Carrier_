@@ -51,17 +51,18 @@ public class AIController {
 		String day3aiccFood2 = request.getParameter("day3aiccFood2");
 		String day3aiccTD = request.getParameter("day3aiccTDV");
 		
-		
+	
 		String memberId = request.getParameter("memberId");
 		String day = request.getParameter("day");
 		String amount = request.getParameter("amount");
 		String discount = request.getParameter("discount");
+		String realAmount = request.getParameter("realAmount");
 		model.addAttribute("amount", amount);
+		model.addAttribute("realAmount", realAmount);
 		model.addAttribute("discount", discount);
 		
 		Integer courseNum = AiDAO.getCourseNum();
 		model.addAttribute("courseNum", courseNum+1);
-		System.out.println(courseNum);
 		
 		model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
 		model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
@@ -91,6 +92,10 @@ public class AIController {
 			model.addAttribute("aiccCafe2", AiDAO.listCourse(day2aiccFood2));
 			model.addAttribute("memberId", memberId);
 			model.addAttribute("day", day);
+			model.addAttribute("amount", amount);
+			model.addAttribute("realAmount", realAmount);
+			model.addAttribute("discount", discount);
+			model.addAttribute("courseNum", courseNum+1);
 			
 			return "thymeleaf/aicc/saveCourseday2";
 		}
@@ -124,6 +129,11 @@ public class AIController {
 			model.addAttribute("aiccCafe3", AiDAO.listCourse(day3aiccFood2));
 			model.addAttribute("memberId", memberId);
 			model.addAttribute("day", day);
+			model.addAttribute("amount", amount);
+			model.addAttribute("realAmount", realAmount);
+			model.addAttribute("discount", discount);
+			model.addAttribute("courseNum", courseNum+1);
+			
 			return "thymeleaf/aicc/saveCourseday3";
 		}
 	
@@ -218,7 +228,6 @@ public class AIController {
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
 		String day = request.getParameter("day");
-
 		String amount = request.getParameter("discount");
 
 		

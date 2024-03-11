@@ -27,7 +27,7 @@
 }
 
 /* 순서 정렬 칸막이 */
-.text-end>span:not(:last-child):after{
+#info .text-end>span:not(:last-child):after{
     content: "|";
     color: #797979;
     margin: 3px 8px 3px 10px;
