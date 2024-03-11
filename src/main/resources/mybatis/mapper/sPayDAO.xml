@@ -13,4 +13,13 @@
 		resultType="com.ex.springboot.dto.PayDTO">
 		select * from pay where Member_Id = #{Member_Id}
 	</select>
+	
+	<select id="courseReseveList" resultType="com.ex.springboot.dto.PayDTO">
+		SELECT c.course_name, c.amount , c.course_img ,p.* 
+		FROM Course c 
+		JOIN Pay p ON c.Course_num = p.Course_num 
+		where p.member_id = #{Member_Id}  
+		order by p.pay_date desc 
+	</select>
+	
 </mapper>

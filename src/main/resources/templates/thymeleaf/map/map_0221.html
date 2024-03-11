@@ -438,7 +438,7 @@ $(document).ready(function() {
             '    <div class="overlay_info">' + 
             '        <div class="overlay_title">' + 
             			markerInfo.event_name + 
-            '           <div class="overlay_close" onclick=" closeOverlay() " title="닫기"></div>' + 
+            '           <div class="overlay_close" onClick=" closeOverlay() " title="닫기" style="z-index : 100 ;"></div>' + 
             '        </div>' + 
             '        <div class="overlay_body">' + 
             '            <div class="overlay_img">' +
@@ -465,18 +465,13 @@ $(document).ready(function() {
             
          // 생성된 오버레이를 배열에 추가
             overlays.push(overlay);
-
+         
+            
         
         }); // 마커 생성 함수 끝
-		
-     // 각 오버레이의 닫기 버튼 클릭 이벤트 핸들러
-        function addCloseBtnClickListener(overlays, index) {
-        	kakao.maps.event.addListener(overlays[index], 'click', function() {
-                overlays[index].setMap(null); 
-            });
-        	
-        }
-    
+        
+        
+        
         
         // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
         function addMarkerClickListener(marker, index, overlay) {
@@ -496,6 +491,7 @@ $(document).ready(function() {
             });
          
         }
+        
         
         
      // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 

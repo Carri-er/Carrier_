@@ -10,4 +10,7 @@ public class PayDTO {
 	private int Course_num;
     private String orderId;
     private String Pay_date;
+    private String course_name;
+    private int amount;
+    private String course_img;
 }

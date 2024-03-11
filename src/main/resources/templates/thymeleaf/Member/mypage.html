@@ -8,7 +8,7 @@
 <div id="mypage" class="container mt-5 px-0">
  
     <div class="row text-center mt-5 m-3 mx-xl-5 d-flex justify-content-between">
-        <!-- <<<<<<<<<<<<<<< (좌) <<<<<<<<<<<<<<<< -->
+        <!-- <<<<<<<<<<<<<<< (좌) <<<<<<<<<<<<<<<< --> 
         <aside id="mypage-L" class="col-12 col-md-4 col-xl-3 h-100 sticky-md-top">
             <!-- [<] 내정보란 -->
             <div class="row bg-light border rounded-4 p-5 px-md-3 px-xl-4">
@@ -83,10 +83,8 @@
                     <!-- History | Content -->
                     <div class="col-12 mt-3">
                         <div class="row my-history-wrap">
-                            <div class="d-none d-lg-block col-2 f20 m-auto pb-5">
-                                나의 동행
-                            </div>
-                            <div class="col-12 col-lg-9 me-auto">
+                            
+                            <div class="col-12 col-lg-12 me-auto">
                                 <!-- Swiper -->
                                 <div class="swiper mySwiper">
                                     <div class="swiper-wrapper">
@@ -95,7 +93,7 @@
                                        		<a th:href="@{'/myBand?bandUrl='+${mypage_joinBandList.getBand_code()}}">
 	                                            <div class="card border-0 my-history-content-card text-center" >
 	                                               <img th:src="@{'../img/uploadBandThumnail/'+${mypage_joinBandList.getBand_thumnail()}}" class="mb-3 mypage_bandImg rounded-4" alt="">
-	                                                <span class="text-tourist" th:text="${mypage_joinBandList.getBand_name()}">밴드 명</span>
+	                                                <span class="text-tourist text-truncate" th:text="${mypage_joinBandList.getBand_name()}">밴드 명</span>
 	                                            </div>
                                             </a>
                                        	</div>
@@ -122,19 +120,22 @@
                         <h5>예약 목록</h5>
                     </div>
                     <!-- History | Content -->
-                    <div class="col-12 mt-3">
+                    <div class="col-12 mt-3 ">
                         <div class="row my-history-wrap">
-                            <div class="d-none d-lg-block col-2 f20 m-auto pb-5">
-                               ..
-                            </div>
-                            <div class="col-12 col-lg-9 me-auto">
+                            <div class="col-12 col-lg-12 me-auto">
+                            
                                 <!-- Swiper -->
-                                <div class="swiper mySwiper">
-                                    <div class="swiper-wrapper">
+                               	<div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
 
-                                       	<div class="swiper-slide" th:each="payList : ${payList}">
-                                       		<a th:href="@{'/infoCourse?num='+${payList.getCourse_num()}}">
-	                 <span class="text-tourist" th:text="${payList.getOrderId()}">밴드 명</span>
+                                       	<div class="swiper-slide" th:each="courseReseveList : ${courseReseveList}">
+                                       		<a th:href="@{'/Course_view?num='+${courseReseveList.getCourse_num()}}">
+	                                            <div class="card border-0 my-history-content-card text-center" >
+	                                               <img th:src="@{'../img/info/'+${courseReseveList.getCourse_img()}}" class="mb-3 mypage_bandImg rounded-4" alt="">
+	                                                <span class="text-start text-truncate py-0 my-0" th:text="|코스 : ${courseReseveList.getCourse_name()}|">코스 명</span>
+	                                                <span class="text-start text-truncate py-0 my-0" th:text="|금액 : ${courseReseveList.getAmount()}|">예상금액</span>
+	                                                <span class="text-start text-truncate py-0 my-0" th:text="|결제일 : ${courseReseveList.getPay_date()}|">결제일</span>
+	                                                
 	                                            </div>
                                             </a>
                                        	</div>
@@ -156,7 +157,7 @@
                     </div>
                 </div>
                 <!-- 즐겨찾기 좋아요/팔로잉 -->
-                <div class="col-12 col-lg">
+                <div class="col-12 col-lg mt-4">
                     <div class="row gap-4">
                         <!-- 팔로잉 영역 -->
                         <!-- <div class="col-12 border rounded-4 p-4 pb-3">
