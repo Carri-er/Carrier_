@@ -41,12 +41,14 @@ body {
 main {
   z-index: 1;
 }
-h1 {
+h1,h5 {
   font-size: max(10vw, 60px);
   color: #fff;
   position:relative;
   z-index: 99;
 }
+h5{
+font-size: 40px;}
 #bg,
 #bg_mask {
   /* ふちボケ対策 */
@@ -57,7 +59,7 @@ h1 {
   left: 0;
   margin: calc(var(--blur) * -1);
 
-  background: url(https://images.unsplash.com/photo-1473625247510-8ceb1760943f?q=80&w=1411&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+  background: url(https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
     no-repeat center/cover;
 }
 #bg {
@@ -80,6 +82,8 @@ h1 {
     display: inline-block;
     animation: fall 0.5s ease forwards;
     opacity: 0;
+    border: 10px solid var(--main);
+   
   }
   
   
@@ -97,9 +101,11 @@ Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/KKJgQXa)
 <div id="bg"></div>
 <div id="bg_mask"></div>
 <main>
-  <h1 class="letter"> 
+  <h1 class="letter p-3 rounded-2"> 
 	Carrier
 </h1>
+
+<h5 class="mt-5 highlight">여행 계획 Carrier 와 함께 오늘도 우리는 Carrier</h5>
 </main>
 </a>
 <!--footer-->

@@ -148,12 +148,31 @@ where Event_area like '%' ||
 	<select id="getPostCount2" resultType="int">
 		SELECT COUNT(*) AS
 		Post_Count
-		FROM course
+		FROM course where Course_name is not null
 	</select>
 	<select id="getPostCountSearch" resultType="int">
 		SELECT COUNT(*) AS
 		Post_Count
-		FROM event WHERE Event_content LIKE '%' || #{key} || '%' or Event_area = #{key} or event_title like '%' || #{key} || '%' ORDER BY event_hit DESC
+		 FROM Event
+WHERE Event_name LIKE '%' || #{key1} || '%' OR Event_name LIKE '%' || #{key2} || '%'
+   OR Event_tag LIKE '%' || #{key1} || '%' OR Event_tag LIKE '%' || #{key2} || '%'
+   OR Event_tag2 LIKE '%' || #{key1} || '%' OR Event_tag2 LIKE '%' || #{key2} || '%'
+   OR Event_tag3 LIKE '%' || #{key1} || '%' OR Event_tag3 LIKE '%' || #{key2} || '%'
+   OR Event_tag4 LIKE '%' || #{key1} || '%' OR Event_tag4 LIKE '%' || #{key2} || '%'
+   OR Event_tag5 LIKE '%' || #{key1} || '%' OR Event_tag5 LIKE '%' || #{key2} || '%'
+   OR Event_title LIKE '%' || #{key1} || '%' OR Event_title LIKE '%' || #{key2} || '%'
+   OR Event_content LIKE '%' || #{key1} || '%' OR Event_content LIKE '%' || #{key2} || '%'
+   OR Event_category LIKE '%' || #{key1} || '%' OR Event_category LIKE '%' || #{key2} || '%'
+   OR Event_area LIKE '%' || #{key1} || '%' OR Event_area LIKE '%' || #{key2} || '%'
+   OR Event_area2 LIKE '%' || #{key1} || '%' OR Event_area2 LIKE '%' || #{key2} || '%'
+   OR Event_address LIKE '%' || #{key1} || '%' OR Event_address LIKE '%' || #{key2} || '%'
+   OR Event_time LIKE '%' || #{key1} || '%' OR Event_time LIKE '%' || #{key2} || '%'
+   OR Event_starttime LIKE '%' || #{key1} || '%' OR Event_starttime LIKE '%' || #{key2} || '%'
+   OR Event_endtime LIKE '%' || #{key1} || '%' OR Event_endtime LIKE '%' || #{key2} || '%'
+   OR Event_rest LIKE '%' || #{key1} || '%' OR Event_rest LIKE '%' || #{key2} || '%'
+   OR Event_parking LIKE '%' || #{key1} || '%' OR Event_parking LIKE '%' || #{key2} || '%'
+   OR Event_host LIKE '%' || #{key1} || '%' OR Event_host LIKE '%' || #{key2} || '%'
+   order by Event_num desc
 	</select>
 
 	<!-- 파라미터 값으로 댓글을 가져옴 -->
@@ -250,7 +269,7 @@ where Event_area like '%' ||
         SELECT rownum AS rnum, e.*
         FROM (
             SELECT *
-            FROM Course
+            FROM Course where Course_name is not null
             ORDER BY Course_num DESC
         ) e
         WHERE rownum <= #{pageSize}
@@ -282,10 +301,28 @@ where Event_area like '%' ||
     FROM (
         SELECT rownum AS rnum, e.*
         FROM (
-            SELECT *
-            FROM Event
-            WHERE Event_content LIKE '%' || #{key} || '%' or Event_area =#{key} or event_title like '%' || #{key} || '%'
-            ORDER BY Event_hit DESC
+            
+            	SELECT * FROM Event
+WHERE Event_name LIKE '%' || #{key1} || '%' OR Event_name LIKE '%' || #{key2} || '%'
+   OR Event_tag LIKE '%' || #{key1} || '%' OR Event_tag LIKE '%' || #{key2} || '%'
+   OR Event_tag2 LIKE '%' || #{key1} || '%' OR Event_tag2 LIKE '%' || #{key2} || '%'
+   OR Event_tag3 LIKE '%' || #{key1} || '%' OR Event_tag3 LIKE '%' || #{key2} || '%'
+   OR Event_tag4 LIKE '%' || #{key1} || '%' OR Event_tag4 LIKE '%' || #{key2} || '%'
+   OR Event_tag5 LIKE '%' || #{key1} || '%' OR Event_tag5 LIKE '%' || #{key2} || '%'
+   OR Event_title LIKE '%' || #{key1} || '%' OR Event_title LIKE '%' || #{key2} || '%'
+   OR Event_content LIKE '%' || #{key1} || '%' OR Event_content LIKE '%' || #{key2} || '%'
+   OR Event_category LIKE '%' || #{key1} || '%' OR Event_category LIKE '%' || #{key2} || '%'
+   OR Event_area LIKE '%' || #{key1} || '%' OR Event_area LIKE '%' || #{key2} || '%'
+   OR Event_area2 LIKE '%' || #{key1} || '%' OR Event_area2 LIKE '%' || #{key2} || '%'
+   OR Event_address LIKE '%' || #{key1} || '%' OR Event_address LIKE '%' || #{key2} || '%'
+   OR Event_time LIKE '%' || #{key1} || '%' OR Event_time LIKE '%' || #{key2} || '%'
+   OR Event_starttime LIKE '%' || #{key1} || '%' OR Event_starttime LIKE '%' || #{key2} || '%'
+   OR Event_endtime LIKE '%' || #{key1} || '%' OR Event_endtime LIKE '%' || #{key2} || '%'
+   OR Event_rest LIKE '%' || #{key1} || '%' OR Event_rest LIKE '%' || #{key2} || '%'
+   OR Event_parking LIKE '%' || #{key1} || '%' OR Event_parking LIKE '%' || #{key2} || '%'
+   OR Event_host LIKE '%' || #{key1} || '%' OR Event_host LIKE '%' || #{key2} || '%'
+   order by Event_num desc
+           
         ) e
         WHERE rownum <= #{pageSize}
     )

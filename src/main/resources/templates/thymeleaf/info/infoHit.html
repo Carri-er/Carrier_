@@ -34,7 +34,7 @@
 					<hr>
 					<div class="board row">
 						<!--board-->
-						<div class="row" th:each="list:${list}">
+						<div class="row justify-content-around" th:each="list:${list}">
 							<a th:href="@{'Event_view?id='+ ${list.getEvent_num()}}"
 								class="row">
 								<div class="col-3 board-left text-center hstack justify-content-center">
@@ -68,6 +68,10 @@
 												th:if="${list.getEvent_tag() != null}">#</button>
 										</div>
 									</div>
+								</div>
+								<div class="col-2 text-end" >
+									
+									<p th:text="|❤ ${list.getEvent_hit()} |"></p>
 								</div>
 							</a>
 							<hr class="mt-3 ms-3">

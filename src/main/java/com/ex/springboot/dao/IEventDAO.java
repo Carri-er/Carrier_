@@ -30,14 +30,14 @@ public interface IEventDAO {
 	public List<String> EventTag(String id);
 	public List<String> EventTagTag(String id);
 	public int getPostCount();
-	public int getPostCountSearch(@Param("key")String key);
+	public int getPostCountSearch(@Param("key1")String key1,@Param("key2")String key2);
 	public int getPostCount2();
 	public int getPostCountTag();
 	public int getHitDescCount();
 	// 페이징된 데이터 가져오기
 	public List<EventDTO> listWithPagination(@Param("offset") int offset, @Param("pageSize") int pageSize);
 	public List<CourseDTO> listWithPagination2(@Param("offset") int offset, @Param("pageSize") int pageSize);
-	public List<EventDTO> listWithPaginationSearch(@Param("offset") int offset, @Param("pageSize") int pageSize,@Param("key")String key);
+	public List<EventDTO> listWithPaginationSearch(@Param("offset") int offset, @Param("pageSize") int pageSize,@Param("key1")String key,@Param("key2")String key2);
 	public List<EventDTO> listWithPaginationArea(@Param("offset") int offset, @Param("pageSize") int pageSize,@Param("area")String area);
 	public List<EventDTO> listWithPaginationTag(@Param("offset") int offset, @Param("pageSize") int pageSize,@Param("tag")String tag);
 	public List<EventCommentDTO> EventCommentList(int evnetNum);

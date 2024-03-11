@@ -77,23 +77,29 @@ public class EventController {
    public String info_search(Model model, HttpServletRequest request) {
       String page = request.getParameter("page");
       String key = request.getParameter("key");
-      
+      String[] keyArray = key.split("\\s+");
+      if (keyArray.length >= 2 && (keyArray[1] == null || keyArray[1].trim().isEmpty())) {
+          keyArray[1] = " ";
+      }
+      String key1 = keyArray[0];
+      String key2 = keyArray.length >= 2 ? keyArray[1] : "ㄲ";
       if (page == null || page.isEmpty()) {
          page = "1";
       }
+      
       int pages = Integer.parseInt(page);
       int pageSize = 7; // 페이지당 아이템 수
       int pageSizeR = pageSize * pages;
-      int totalCount = eventDAO.getPostCountSearch(key); // 전체 아이템 수
+      int totalCount = eventDAO.getPostCountSearch(key1,key2); // 전체 아이템 수
       int mPage = pages - 1;
       int pPage = pages + 1;
       // 페이징 계산
       int totalPages = (int) Math.ceil((double) totalCount / pageSize);
       int offset = (pages - 1) * pageSize; // 시작 아이템 인덱스
+      List<EventDTO> events = eventDAO.listWithPaginationSearch(offset, pageSizeR,key1,key2);
       System.out.println("offset" + offset);
       System.out.println("pageSize" + pageSize);
       // DAO에서 페이징된 데이터 가져오기
-      List<EventDTO> events = eventDAO.listWithPaginationSearch(offset, pageSizeR,key);
       model.addAttribute("list", events);
       model.addAttribute("currentPage", pages);
       model.addAttribute("mPage", mPage);
@@ -106,7 +112,7 @@ public class EventController {
 //      System.out.println(eventDAO.getDistinctTags() + "호출");
       model.addAttribute("tags", eventDAO.getDistinctTags());
       model.addAttribute("area", eventDAO.areaTag());
-      model.addAttribute("getCount", eventDAO.getPostCountSearch(key));
+      model.addAttribute("getCount", eventDAO.getPostCountSearch(key1,key2));
       System.out.println(eventDAO.getPostCount() + "개");
       
       return "thymeleaf/info/info";
@@ -180,7 +186,7 @@ public class EventController {
 //      System.out.println(eventDAO.getDistinctTags() + "호출");
    model.addAttribute("tags", eventDAO.getDistinctTags());
    model.addAttribute("area", eventDAO.areaTag());
-      model.addAttribute("getCount", course.size());
+      model.addAttribute("getCount", totalCount);
    System.out.println(eventDAO.getPostCount() + "개");
       
       return "thymeleaf/info/infoCourse";
