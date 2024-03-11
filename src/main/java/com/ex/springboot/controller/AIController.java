@@ -278,7 +278,8 @@ public class AIController {
 		
 		// 결제를 위한 코스 번호 불러오기
 		Integer courseNum = AiDAO.getCourseNum();
-		model.addAttribute("courseNum", courseNum);
+		model.addAttribute("courseNum", courseNum+1);
+		
 		// 결제를 위한 금액 불러오기
 		model.addAttribute("amount", amount);
 		model.addAttribute("memberId", memberId);

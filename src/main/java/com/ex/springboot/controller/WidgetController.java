@@ -158,10 +158,10 @@ public class WidgetController {
 
 		String Member_Id = (String) session.getAttribute("Member_Id");
 		String orderId = request.getParameter("orderId");
-		String Course_num = request.getParameter("courseNum");
+		String Course_num = request.getParameter("num");
 
 		System.out.println("Member_Id:" + Member_Id + " 코스 번호:" + Course_num + " 주문 번호:" + orderId);
-//		pay_dao.payCreate(Member_Id, Course_num, orderId);
+		pay_dao.payCreate(Member_Id, Course_num, orderId);
 
 		return "thymeleaf/member/success";
 	}
