@@ -134,6 +134,8 @@
 						<input type="hidden" class="totalDistanceValue2" value="" name="day2aiccTDV"/>
 						<input type="hidden" class="day" th:value="${day}" name="day"/>
 						<input type="hidden" name="memberId" th:value="${session.Member_Id}"/>
+						
+						<input type="hidden" class="amountValue" value="" name="amount"/>
 						<input type="hidden" class="realAmountValue" value="" name="realAmount"/>
 						<input type="hidden" class="realDiscountValue" value="" name="discount"/>
 					</form>
@@ -650,6 +652,7 @@
 	         amount = oil + stay + food + beverage + stay + food + beverage;
 	         realAmount = stay + stay;
 	         realDiscount = realAmount-discount;
+	         
 	         document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
 	         document.querySelector('.amountValue').value = amount;
 	         document.querySelector('.realAmountValue').value = realAmount;

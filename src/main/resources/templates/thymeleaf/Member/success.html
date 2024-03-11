@@ -32,8 +32,8 @@
 						<img
 							src="../img/mypage/bg_detail_pop.png" alt=""
 							class="img-fluid w-100" />
-					<a href="/home"
-						class="btn btn-main text-center d-block my-3 py-2 rounded-4 col-12 col-lg-5 m-auto">홈으로
+					<a th:href="/myPage?id+${session.Member_Id}"
+						class="btn btn-main text-center d-block my-3 py-2 rounded-4 col-12 col-lg-5 m-auto">예약으로
 						돌아가기</a>
 				</div>
 			</div>
