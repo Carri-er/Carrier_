@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.ex.springboot.dto.CourseDTO;
 import com.ex.springboot.dto.EventDTO;
 
 @Mapper
@@ -17,7 +18,7 @@ public interface IMapDAO {
 	public List<EventDTO> mapMarkerCategoryList(String category);
 	
 	//event 테이블의 Event_category 가 산, 바다 리스트
-		public List<EventDTO> mapMarkerSanBadaList(String San, String Bada);
+	public List<EventDTO> mapMarkerSanBadaList(String San, String Bada);
 	
 	// 페이지당 출력될 게시글 리스트
 	public List<EventDTO> pageItemList(
@@ -25,5 +26,5 @@ public interface IMapDAO {
 				@Param("endItemNum") int endItemNum
 			);
 	
-	
+	public List<CourseDTO> mapCourseList();
 }

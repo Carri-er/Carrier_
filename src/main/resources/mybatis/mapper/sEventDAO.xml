@@ -258,6 +258,23 @@ where Event_area like '%' ||
     WHERE rnum > #{offset}
     ]]>
 	</select>
+	<!-- 저장된 여행 코스 전체 리스트 출력  -->
+	<select id="tripCourseAllList"
+		resultType="com.ex.springboot.dto.CourseDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Course
+            ORDER BY Course_num DESC
+        ) e
+        
+    )
+    
+    ]]>
+	</select>
 	<select id="listWithPaginationSearch"
 		resultType="com.ex.springboot.dto.EventDTO">
     <![CDATA[
