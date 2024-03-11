@@ -33,8 +33,9 @@
 					<span class="highlight p-0"
 						th:text="| [ ${view.getEvent_category()} ] |">버튼</span> <span
 						th:text="${view.getEvent_name()}" class="ms-1"></span>
+						
 				</h3>
-				
+					<p class="text-end text-dark mb-5" th:text="|조회수 ${view.getEvent_hit()}|"></p>
 				<img th:src="@{'../img/info/' + ${view.getEvent_thumbnail()}}"
 					alt="" class="img-fluid mx-auto rounded-4"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
 				<!-- <img class="img-fluid" src="https://korean.visitkorea.or.kr/resources/images/sub/bg_pic_reg.jpg" alt=""> -->

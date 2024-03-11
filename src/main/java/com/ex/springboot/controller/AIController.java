@@ -218,7 +218,9 @@ public class AIController {
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
 		String day = request.getParameter("day");
+
 		String amount = request.getParameter("discount");
+
 		
 		// day1 파라미터 값
 		String day1aicc = request.getParameter("day1aicc");
@@ -273,13 +275,15 @@ public class AIController {
 		} else if(day.equals("당일 치기")) {
 		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
 		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		    System.out.println("실행 순서 확인1");
 		}
 
 		
 		// 결제를 위한 코스 번호 불러오기
 		Integer courseNum = AiDAO.getCourseNum();
-		model.addAttribute("courseNum", courseNum+1);
-		
+		model.addAttribute("courseNum", courseNum);
+		 System.out.println("실행 순서 확인2");
+
 		// 결제를 위한 금액 불러오기
 		model.addAttribute("amount", amount);
 		model.addAttribute("memberId", memberId);
