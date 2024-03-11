@@ -233,8 +233,8 @@
 						<input type="hidden" name="memberId" th:value="${session.Member_Id}" />
 						<input type="hidden" name="day" th:value="${day}" />
 						<input type="hidden" name="img" th:value="${aicc.get(0).getEvent_thumbnail()}" />
-						<input type="hidden" class="discountValue" id="discount" name="discount" value="" />
-						<input type="hidden" class="amountValue" id="amount" name="amount" value="" />
+						<input type="text" id="amount" name="amount" th:value="${realAmount}" />
+						<input type="text" id="discount" name="discount" th:value="${discount}" />
 						
 						<div class="col-12 mx-auto mt-4 text-end d-flex justify-content-between">
 							<button type="button" id="btn-pay" class="btn btn-main rounded-pill btn-map-step hstack">
