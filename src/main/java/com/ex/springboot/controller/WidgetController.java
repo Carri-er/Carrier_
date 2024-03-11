@@ -7,10 +7,10 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
-import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,9 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ex.springboot.dao.IAiDAO;
 import com.ex.springboot.dto.CourseDTO;
-import com.ex.springboot.dto.EventDTO;
 import com.ex.springboot.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -59,12 +57,12 @@ public class WidgetController {
 		Integer courseNum = AiDAO.getCourseNum();
 		String Course_num = String.valueOf(courseNum);
 		model.addAttribute("Course_num", Course_num);
-		List<CourseDTO> DAO= AiDAO.Course_select_useCk(Course_num);
+		CourseDTO DAO= AiDAO.Course_select_useCk(Course_num);
 		String Member_Id = request.getParameter("Member_Id");
 		String title = request.getParameter("Course_name");
 		// int amount = Integer.parseInt(request.getParameter("discount"));
 		System.out.println("widget Course_num : "+Course_num);
-		 int amounttt= DAO.get(0).getAmount();
+		 int amounttt= DAO.getAmount();
 		String amount = String.valueOf(amounttt);
 		// 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
 		LocalDateTime currentDateTime = LocalDateTime.now();
@@ -165,14 +163,22 @@ public class WidgetController {
 
 	@GetMapping("/success")
 	public String success(HttpServletRequest request, Model model, HttpSession session) {
-
+		
 		String Member_Id = (String) session.getAttribute("Member_Id");
 		String orderId = request.getParameter("orderId");
 		String Course_num = request.getParameter("num");
+
+		
 		System.out.println("================================");
 		System.out.println("Member_Id:" + Member_Id + " 코스 번호:" + Course_num + " 주문 번호:" + orderId);
 		System.out.println("================================");
 		pay_dao.payCreate(Member_Id, Course_num, orderId);
+		CourseDTO dto = AiDAO.Course_select_useCk(Course_num);
+		
+		DecimalFormat decFormat = new DecimalFormat("###,###");
+		String amount = decFormat.format(dto.getAmount());
+		model.addAttribute("title", dto.getCourse_Name());
+		model.addAttribute("amount", amount);
 
 		return "thymeleaf/member/success";
 	}

@@ -45,16 +45,9 @@
                         </div>
                      </div>
                   </div>
-                                       <!-- 예약 버튼 -->
-                <div th:replace="~{alert/pay_modal::div}"> </div>   
+                                       <!-- 저장 버튼 -->
                 <div class="p-2 gap-4 d-flex justify-content-center">
-                     <button type="button"
-                        class="btn btn-main saveBtn rounded-pill btn-map-step hstack"
-                        data-bs-custom-class="custom-tooltip">
-                        <img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
-                        예약하기
-                     </button>
-                     <button class="btn saveBtn btn-pink rounded-pill btn-map-step hstack" type="button">
+                     <button type="button" class="btn saveBtn btn-pink rounded-pill btn-map-step hstack">
                         <img
                            src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png"
                            alt="" style="width: 36px; height: 36px;" class="me-2" />코스 저장하기
@@ -116,8 +109,9 @@
                
                <input type="hidden" class="day0" th:value="${day}" name="day"/>
                <input type="hidden" name="memberId" th:value="${session.Member_Id}" />
-               <input type="hidden" class="discountValue" value="" name="discount"/>
-               <input type="hidden" class="amountValue" value="" name="amount"/>
+
+               <input type="hidden" class="realAmountValue" value="" name="amount"/>
+               <input type="hidden" class="realDiscountValue" value="" name="discount"/>
                
                <!-- 반복될 부분 day1 -->
                
@@ -375,6 +369,7 @@
       var distance;
 
       var totalDistance = 0; // 총 거리를 저장할 변수를 초기화합니다.
+      
        var stayPay = [
             90000,100000,110000,120000,130000,150000
          ]
@@ -387,11 +382,13 @@
       
         var randomNumber = Math.floor(Math.random() * 6);
        var amount = 0; // 예상 금액 초기화
-      var discount = 0; // 할인 금액 초기화
+      	var discount = 20000; // 할인 금액
+      	var realAmount = 0;
        var oil = 0; // 기름값 초기화
        var stay = stayPay[randomNumber]; // 숙소 금액
        var food = foodPay[randomNumber]; // 맛집 금액
        var beverage = beveragePay[randomNumber]; // 카페 (음료) 금액
+		
       
       
       var subtotalDistance = 0;
@@ -422,13 +419,14 @@
          
          // 예상금액 //
          oil = Math.round((totalDistance / 1000) * 170); // oil 값 in
-         //document.querySelector('.oil').innerText = oil+"원"; // oil 값 out test
          amount = oil + stay + food + beverage;
-         discount = amount-20000;
+         realAmount = stay;
+         realDiscount = realAmount-discount;
          
          document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
-         document.querySelector('.discountValue').value = discount; // 할인 금액 out
          document.querySelector('.amountValue').value = amount;
+         document.querySelector('.realAmountValue').value = realAmount;
+         document.querySelector('.realDiscountValue').value = realDiscount;
       }
 
       function displayCircleDot(position, distance) {
@@ -476,45 +474,40 @@
 // 페이지가 로드될 때 함수 호출
    window.onload = refreshPageIfSameValues;
        /*]]>*/
-   </script>
 </script>
- <script>
+<script>
         // 페이지 로딩 후 로딩 화면을 5초 동안 표시한 후 자동으로 숨깁니다.
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 document.querySelector('.loading-screen').style.display = 'none';
             }, 1000); // 5초 뒤에 로딩 화면을 숨김
         });
-    </script>
-<script>
-    // 버튼 요소를 가져옵니다.
-    var saveButton = document.querySelector('.saveBtn');
-
-    // 버튼을 클릭했을 때 실행될 함수를 정의합니다.
-    saveButton.addEventListener('click', function() {
-        // 저장 여부를 확인하는 메시지를 표시합니다.
-        var confirmMessage = "이 코스를 저장하시겠습니까?";
-        // 사용자가 "예"를 선택했을 때의 처리를 정의합니다.
-        function YesLetMeSubmit() {
-            // 저장하는 코드를 여기에 추가합니다.
-            console.log("코스를 저장합니다.");
-            alert("코스 저장 페이지로 이동합니다.");
-            document.saveBtn.submit();
-        }
-
-        // 사용자에게 확인 메시지를 표시하고, "예"를 선택했을 때 저장 함수를 호출합니다.
-        if (confirm(confirmMessage)) {
-            YesLetMeSubmit();
-        }
-    });
-
-
 </script>
+	<script>
+		// 버튼 요소를 가져옵니다.
+		var saveButton = document.querySelector('.saveBtn');
+
+		// 버튼을 클릭했을 때 실행될 함수를 정의합니다.
+		saveButton.addEventListener('click', function() {
+			// 저장 여부를 확인하는 메시지를 표시합니다.
+			var confirmMessage = "이 코스를 저장하시겠습니까?";
+			// 사용자가 "예"를 선택했을 때의 처리를 정의합니다.
+			function YesLetMeSubmit() {
+				// 저장하는 코드를 여기에 추가합니다.
+				console.log("코스를 저장합니다.");
+				alert("코스 저장 페이지로 이동합니다.");
+				document.saveBtn.submit();
+			}
+
+			// 사용자에게 확인 메시지를 표시하고, "예"를 선택했을 때 저장 함수를 호출합니다.
+			if (confirm(confirmMessage)) {
+				YesLetMeSubmit();
+			}
+		});
+	</script>
 
 <!-- 코스 리스트 클릭 시 여행정보 팝업창 출력 -->
 <script>
-
-   
    function func_popEvent(param) {
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
       const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

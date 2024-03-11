@@ -22,8 +22,12 @@
 						<p>
 							DATE : <span>2024-03-09</span>
 						</p>
-						<span>결제 코스 : </span><p id="orderId"></p>
-						<span>결제 금액 : </span><p id="amount"></p>
+						<p>
+						결제 코스 : <span th:text="${title}"></span>
+						</p>
+						<p>
+						결제 금액 : <span th:text="|${amount}원|"></span>
+						</p>
 					</div>
 						<img
 							src="../img/mypage/bg_detail_pop.png" alt=""

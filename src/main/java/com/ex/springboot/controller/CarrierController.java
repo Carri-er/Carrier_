@@ -1,8 +1,6 @@
 
 package com.ex.springboot.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ex.springboot.dao.IFeedDAO;
 import com.ex.springboot.dto.CourseDTO;
-import com.ex.springboot.dto.MemberDTO;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping
@@ -31,17 +25,11 @@ public class CarrierController {
    @Autowired
    private com.ex.springboot.dao.IEventDAO eventDAO;
 
-   @Autowired
-   private com.ex.springboot.dao.IMemberDAO member_dao;
-
    @GetMapping("/home2")   
    public String main2(Model model) {
 	   return "thymeleaf/home/home2";
    
    }
-
-   @Autowired
-   private com.ex.springboot.dao.IPayDAO pay_dao;
 
    @GetMapping("/")   
    public String main(Model model) {
