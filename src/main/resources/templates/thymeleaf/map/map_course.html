@@ -254,9 +254,9 @@
                 	
                   
 				<!-- 코스리스트 영역 -->                
-                <div class="mapCourseListBox row overflow-scroll px-0">
-					<div th:each="mapCourseList : ${mapCourseList}" class="row my-2 px-0">
-					<a class="row ms-3" th:href="@{'/map?category=여행코스&num='+${mapCourseList.getCourse_num()}}">
+                <div class="mapCourseListBox row px-0">
+					<div th:each="mapCourseList : ${mapCourseList}" class="row my-2 px-0" th:unless="${mapCourseList.getCourse_Name() eq null}">
+					<a class="row ms-3"  th:href="@{'/map?category=여행코스&num='+${mapCourseList.getCourse_num()}}">
                 		<div class="col-3 board-left text-center ms-1 px-0">
                            <img th:src="@{'../img/info/' + ${mapCourseList.getCourse_img()}}"
                               class="img-fluid rounded-4" alt=""

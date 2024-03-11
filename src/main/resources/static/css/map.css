@@ -342,8 +342,9 @@ div.mapListItemBox{
 div.mapCourseListBox{
 
    height: calc( 100vh - 150px );
-	overflow : scroll !important;
-	height: calc( 100vh - 150px );
+	overflow : hidden; 
+	overflow-y : scroll !important;
+	height: calc( 100vh - 270px );
 	width: 400px;
 
 }
