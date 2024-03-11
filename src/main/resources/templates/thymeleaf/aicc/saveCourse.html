@@ -5,8 +5,8 @@
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
-		                  	               	<!-- 예약 버튼 -->
-				    <div th:replace="~{alert/pay_modal::div}"> </div>  
+	<!-- 예약 버튼 -->
+	<div th:replace="~{alert/pay_modal::div}"> </div>  
 	<div class="container px-md-5">
 	<h4 class="text-center my-5">코스 저장하기</h4>
 		<div class="row mx-3 mx-md-5 justify-content-center">
@@ -19,16 +19,11 @@
 						<h3 class="pgj">
 						<span class="rounded-4 p-3 bg-mainbg text-white">Day-1</span>
 					</h3>
-						</div>
-						
-							<div class="col mx-auto my-5 text-end ">
-					
-						<span> 총 길이  </span><span th:text="${totalDistance}" class="highlight"></span>
-						<p> 총 가격  <span th:text="|${amount} 원|" class="highlight amount"></span></p>
-					
+					</div>
+					<div class="col mx-auto my-5 text-end ">
+						<p>예상 가격 <span th:text="${#numbers.formatDecimal(amount, 3, 'COMMA', 0, 'POINT') + ' 원'}" class="highlight amount"></span></p>
+					</div>
 				</div>
-				
-			</div>
 			</div>
 			<!-- 1일차 데이터 -->
 			<div class="row mx-auto mx-0 ps-0 bg-mainbg p-2 mt-5">
@@ -156,14 +151,14 @@
 				
 					<span class="discount text-white"></span>
 
-					<div class="col-12 mx-auto mt-4 text-end">
+					<div class="col-12 mx-auto mt-4 text-end d-flex justify-content-between">
 					<button type="button"
 						id = "btn-pay"
 						class="btn btn-main rounded-pill btn-map-step hstack">
 						<img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
 							코스 저장하고 예약하기
 					</button>
-						<button type="submit" class="btn btn-main "> 코스 등록</button>
+						<button type="submit" class="btn btn-main rounded-pill px-3"> 코스 등록</button>
 					</div>
 					</div>
 			</form>
@@ -367,21 +362,11 @@
 				strokeOpacity : 0.8, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
 				strokeStyle : 'longdash' // 선의 스타일입니다
 			});
-
+			
 			distance = Math.round(lineLine.getLength());
 			displayCircleDot(positions[i].latlng, distance);
 			totalDistance += distance;
 			
-			// 예상금액 //
-			oil = Math.round((totalDistance / 1000) * 170); // oil 값 in
-			//document.querySelector('.oil').innerText = oil+"원"; // oil 값 out test
-			amount = /*[[${amount}]]*/0
-			discount = amount-20000;
-			
-			
-			
-			document.querySelector('.discount').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
-			document.querySelector('.discountValue').value = discount; // 할인 금액 out
 
 		}
 
@@ -420,6 +405,21 @@ $(document).ready(function() {
         // 폼 데이터 가져오기
         var formData = $("#myForm").serialize();
         
+     	// 유효성 검사를 수행합니다.
+        var courseName = $("#Course_name").val().trim();
+        var courseContent = $("#Course_content").val().trim();   
+     
+        if (courseName === null || courseName === '') {
+            alert('코스 이름을 입력하세요.');
+            event.preventDefault(); // 폼 제출 중지
+            errors.push('코스 명을 입력하세요.');
+        }
+        if (courseContent === null || courseContent === '') {
+            alert('코스 내용을 입력하세요.');
+            event.preventDefault(); // 폼 제출 중지
+            errors.push('코스 내용을 입력하세요.');
+        }
+        
         // 코스 명을 formData에 추가
         formData += "&courseName=" + courseName;
         formData += "&courseContent=" + courseContent;
@@ -440,7 +440,7 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 // 데이터 저장에 성공한 경우
-        console.log("amount 값은 "+amount);
+        		console.log("amount 값은 "+amount);
                 console.log("데이터 저장 성공!");
     		    
                  $('#feed_del_Modal').modal('show');

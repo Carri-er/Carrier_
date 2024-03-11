@@ -35,12 +35,12 @@
 										<input type="hidden" name="amount" th:value="${discount}"/>
 										<input type="hidden" name="Course_num" th:value="${courseNum}"/>
 										<span class="f16 d-block my-3 px-5 courseContentDisplay"></span>
-										<span class="text-pink d-block f17 fw-light text-decoration-line-through fw-bold amountDisplay0" th:text="|${amount}원|"></span>
+										<span class="text-pink d-block f17 fw-light text-decoration-line-through fw-bold amountDisplay0" th:text="${#numbers.formatDecimal(realAmount, 3, 'COMMA', 0, 'POINT') + ' 원'}"></span>
 										<div class="hstack d-flex justify-content-center text-center ">
 											<div class="btn btn-sm btn-light rounded-pill my-2 f14">
 												지금 바로 결제 시
 											</div>
-											<span><b class="ms-2 text-pink f20 discountDisplay0" th:text="|${discount}원|"></b></span>
+											<span><b class="ms-2 text-pink f20 discountDisplay0" th:text="${#numbers.formatDecimal(discount, 3, 'COMMA', 0, 'POINT') + ' 원'}"></b></span>
 										</div>
 									</div>
 								</div>
