@@ -20,6 +20,14 @@
 						<span class="rounded-4 p-3 bg-mainbg text-white">Day-1</span>
 					</h3>
 						</div>
+						
+							<div class="col mx-auto my-5 text-end ">
+					
+						<span> 총 길이  </span><span th:text="${totalDistance}" class="highlight"></span>
+						<p> 총 가격  <span th:text="|${amount} 원|" class="highlight amount"></span></p>
+					
+				</div>
+				
 			</div>
 			</div>
 			<!-- 1일차 데이터 -->
@@ -83,6 +91,9 @@
 				</div>
 			</div>
 			
+			<div>
+			
+			</div>
 
 			</div>
 			<form action="cours_Save_insert" method="post" id="myForm">
@@ -142,7 +153,7 @@
 					<input type="hidden" class="discountValue" id="discount" name="discount" value="" />
 					<input type="hidden" class="amountValue" id="amount" name="amount" value="" />
 					
-					<span class="amount text-white"></span>
+				
 					<span class="discount text-white"></span>
 
 					<div class="col-12 mx-auto mt-4 text-end">
@@ -364,11 +375,11 @@
 			// 예상금액 //
 			oil = Math.round((totalDistance / 1000) * 170); // oil 값 in
 			//document.querySelector('.oil').innerText = oil+"원"; // oil 값 out test
-			amount = oil + stay + food + beverage;
+			amount = /*[[${amount}]]*/0
 			discount = amount-20000;
 			
-			document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out
-			document.querySelector('.amountValue').value = amount;
+			
+			
 			document.querySelector('.discount').innerText = discount.toLocaleString()+"원"; // 할인 금액 out
 			document.querySelector('.discountValue').value = discount; // 할인 금액 out
 
@@ -400,6 +411,7 @@ $(document).ready(function() {
     $("#btn-pay").click(function() {
         var courseName = $("#Course_name").val();
         var courseContent = $("#Course_content").val();
+       
 
         var formattedAmount = amount.toLocaleString();
         var formattedDiscount = discount.toLocaleString();
@@ -427,11 +439,12 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 // 데이터 저장에 성공한 경우
+        console.log("amount 값은 "+amount);
                 console.log("데이터 저장 성공!");
     		    
                  $('#feed_del_Modal').modal('show');
                 console.log(response.courseNum);
-                  
+                document.querySelector('.courseNum').value = response.courseNum;  
             },
             error: function(xhr, status, error) {
                 // 데이터 저장에 실패한 경우
