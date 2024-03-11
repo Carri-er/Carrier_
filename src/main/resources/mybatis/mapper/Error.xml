@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 이매퍼가 어떤 인터페이스와 연관된 매퍼인지를 설정 -->
+<mapper namespace="com.example.dao.ErrorDao">
+    <!-- 404 오류 처리를 위한 매핑 -->
+    <select id="handle404Error" resultType="java.lang.String">
+        <![CDATA[
+        SELECT page_content
+        FROM error_pages
+        WHERE error_code = 404
+        ]]>
+    </select>
+
+    <!-- 500 오류 처리를 위한 매핑 -->
+    <select id="handle500Error" resultType="java.lang.String">
+        <![CDATA[
+        SELECT page_content
+        FROM error_pages
+        WHERE error_code = 500
+        ]]>
+    </select>
+</mapper>
