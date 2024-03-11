@@ -122,7 +122,12 @@ div.band_recomandBox{
 	padding: 50px 0px;
 	border-radius: 30px;
 }
-
+span.band_recommend_refresh{
+	background-color: var(--white);
+}
+span.band_recommend_refresh:hover {
+	background-color: var(--white);
+}
 a.band_recomand_link{
 	display : block;
 	width: 100%;

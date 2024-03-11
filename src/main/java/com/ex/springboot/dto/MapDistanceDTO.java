@@ -9,6 +9,9 @@ import lombok.Data;
 public class MapDistanceDTO implements Comparable<MapDistanceDTO> {
 	private EventDTO event;
 	private String distance;
+	private int offestt;
+	private int limit;
+	private int currentPage;
 	
 	 @Override
 	    public int compareTo(MapDistanceDTO o) {

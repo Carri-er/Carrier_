@@ -53,7 +53,7 @@
 			<div class="position-absolute top-0 start-0 translate-middle text-black ms-3 ps-5 pt-5"> day1</div>
 					<div class="row courseListRow px-0 mx-0 bg-white p-5 ">
 						<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
-							<a th:href="@{'Event_view?id='+ ${aicc.get(0).getEvent_num()}}" >
+							<a href="#" th:onclick="func_popEvent([[${aicc.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aicc.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -62,8 +62,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccFood.get(0).getEvent_num()}}" class="">
+							<a href="#" th:onclick="func_popEvent([[${aiccFood.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccFood.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -83,8 +82,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2 mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccFood2.get(0).getEvent_num()}}">
+							<a href="#" th:onclick="func_popEvent([[${aiccFood2.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -94,8 +92,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2 mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccCafe.get(0).getEvent_num()}}">
+							<a href="#" th:onclick="func_popEvent([[${aiccCafe.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccCafe.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -105,8 +102,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2 mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${hotel.get(0).getEvent_num()}}">
+							<a href="#" th:onclick="func_popEvent([[${hotel.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${hotel.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -124,7 +120,7 @@
 				<div class="position-absolute top-0 start-0 translate-middle text-black ms-3 ps-5 pt-5"> day2</div>
 				<div class="row courseListRow px-0 mx-0 bg-white p-5 ">
 						<div class="col-6 col-md-4 col-lg-2  mx-auto text-truncate px-0 mx-0 text-center">
-							<a th:href="@{'Event_view?id='+ ${aicc3.get(0).getEvent_num()}}" >
+							<a href="#" th:onclick="func_popEvent([[${aicc3.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aicc3.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -133,8 +129,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccFood3.get(0).getEvent_num()}}" class="">
+							<a href="#" th:onclick="func_popEvent([[${aiccFood3.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccFood3.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -144,7 +139,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
-							<a th:href="@{'Event_view?id='+ ${aicc4.get(0).getEvent_num()}}">
+							<a href="#" th:onclick="func_popEvent([[${aicc4.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aicc4.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -154,8 +149,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccFood4.get(0).getEvent_num()}}">
+							<a href="#" th:onclick="func_popEvent([[${aiccFood4.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccFood4.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -165,8 +159,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccCafe2.get(0).getEvent_num()}}">
+							<a href="#" th:onclick="func_popEvent([[${aiccCafe2.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccCafe2.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -356,9 +349,7 @@
 		for (var i = 0; i < positions.length; i++) {
 			var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
 					+ '    <div class="info">'
-					+ '            <a href="Event_view?id='
-					+ positions[i].number
-					+ '">'
+					+ '            <a href="#"  onclick="func_popEvent('+positions[i].number+')">'
 					+ '        <div class="title">'
 					+ [ i + 1 ]
 					+ ". "
@@ -498,9 +489,7 @@
 		for (var i = 0; i < positions2.length; i++) {
 			var content2 = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
 					+ '    <div class="info">'
-					+ '            <a href="Event_view?id='
-					+ positions2[i].number
-					+ '">'
+					+ '            <a href="#"  onclick="func_popEvent('+positions2[i].number+')">'
 					+ '        <div class="title">'
 					+ [ i + 1 ]
 					+ ". "
@@ -580,7 +569,35 @@
 
 		}
 	</script>
+<!-- 코스 리스트 클릭 시 여행정보 팝업창 출력 -->
+<script>
 
+	
+	function func_popEvent(param) {
+		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+		// width  : 팝업창 가로 크기
+	    // height : 팝업창 세로 크기
+	    var popupWidth = 700;
+	    var popupHeight = 600;
+	    
+     	// 브라우저 중앙 위치 계산
+        // window.screenX : 브라우저의 현재 스크린 좌측상단 X좌표
+        // window.screenY : 브라우저의 현재 스크린 좌측상단 Y좌표
+       
+        // window.outerWidth  : 브라우저의 전체 가로 크기
+        // window.outerHeight : 브라우저의 전체 가로 크기
+        var popupX = Math.round(window.screenX + (window.outerWidth/2) - (popupWidth/2));
+        var popupY = Math.round(window.screenY + (window.outerHeight/2) - (popupHeight/2));
+        
+        var featureWindow = "width=" + popupWidth + ", height="+popupHeight
+        + ", left=" + popupX + ", top=" + popupY;
+        
+		window.open('/Event_view?id='+param, '_blank',featureWindow );
+		
+	}
+
+</script>
 	
 </body>
 </html>
