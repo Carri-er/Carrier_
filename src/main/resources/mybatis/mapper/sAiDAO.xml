@@ -91,7 +91,10 @@
 	<select id="getCourseNum" resultType="int">
 		SELECT MAX(Course_num) FROM Course
 	</select>
-
+	<select id="Course_select_useCk"
+		resultType="com.ex.springboot.dto.CourseDTO">
+		select * from Course where Course_num = #{param1}
+		</select>
 	<select id="Course_select"
 		resultType="com.ex.springboot.dto.CourseDTO">
 		select

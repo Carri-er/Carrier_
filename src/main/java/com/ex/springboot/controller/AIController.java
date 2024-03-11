@@ -60,7 +60,7 @@ public class AIController {
 		model.addAttribute("discount", discount);
 		
 		Integer courseNum = AiDAO.getCourseNum();
-		model.addAttribute("courseNum", courseNum);
+		model.addAttribute("courseNum", courseNum+1);
 		System.out.println(courseNum);
 		
 		model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
@@ -282,7 +282,7 @@ public class AIController {
 		// 결제를 위한 코스 번호 불러오기
 		Integer courseNum = AiDAO.getCourseNum();
 		model.addAttribute("courseNum", courseNum);
-		 System.out.println("실행 순서 확인2");
+		 System.out.println("실행 순서 확인2 courseNum: "+courseNum);
 
 		// 결제를 위한 금액 불러오기
 		model.addAttribute("amount", amount);
