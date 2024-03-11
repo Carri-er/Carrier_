@@ -19,11 +19,11 @@
 							class="img-fluid w-100" />
 					<!-- <p id="paymentKey">환불키</p> -->
 					<div class="text-start px-3 px-lg-5">
-						<p>
-							DATE : <span>2024-03-09</span>
+						<p class="f12">
+							DATE : <span th:text="${date}" ></:span>
 						</p>
 						<p>
-						결제 코스 : <span th:text="${title}"></span>
+						결제 코스 : <span th:text="${title}" ></span>
 						</p>
 						<p>
 						결제 금액 : <span th:text="|${amount}원|"></span>
@@ -32,9 +32,9 @@
 						<img
 							src="../img/mypage/bg_detail_pop.png" alt=""
 							class="img-fluid w-100" />
-					<a href="/home"
-						class="btn btn-main text-center d-block my-3 py-2 rounded-4 col-12 col-lg-5 m-auto">홈으로
-						돌아가기</a>
+					
+					<a th:href="@{'mypage?id='+${session.Member_Id}}"
+						class="btn btn-main text-center d-block my-3 py-2 rounded-4 col-12 col-lg-5 m-auto">예약확인하기</a>
 				</div>
 			</div>
 		</div>

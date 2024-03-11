@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ex.springboot.dao.IFeedDAO;
 import com.ex.springboot.dao.IMemberDAO;
+import com.ex.springboot.dao.IPayDAO;
 import com.ex.springboot.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,7 +39,9 @@ public class MemberController {
 	IFeedDAO feed_dao;
 	
 	@Autowired
-	private com.ex.springboot.dao.IBandDAO bandDao; // 다형성
+	private com.ex.springboot.dao.IBandDAO bandDao;
+	@Autowired
+	private com.ex.springboot.dao.IPayDAO payDAO; 
 	
 	@Autowired
 	private com.ex.springboot.dao.IAiDAO AiDAO;
@@ -244,6 +247,8 @@ public class MemberController {
 		model.addAttribute("loginMember", member_dao.memberList(id));
 		model.addAttribute("feed", feed_dao.feedList_mypage(id));
 		model.addAttribute("course", AiDAO.Course_select4(id));
+		model.addAttribute("payList", payDAO.payList(id));
+	
 		System.out.println(AiDAO.Course_select4(id).size() + " --리스트 사이즈"); 
 		return "thymeleaf/Member/mypage";
 	}

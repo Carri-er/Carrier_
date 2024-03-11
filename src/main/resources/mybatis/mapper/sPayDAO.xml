@@ -5,5 +5,12 @@
 	<insert id="payCreate">
 		INSERT INTO Pay (Member_Id, Course_num, orderId, Pay_date) VALUES ( #{Member_Id}, #{Course_num}, #{orderId}, sysdate)
 	</insert>
-	
+	<select id="payOrder"
+		resultType="com.ex.springboot.dto.PayDTO">
+		select * from pay where orderId = #{orderId}
+	</select>
+	<select id="payList"
+		resultType="com.ex.springboot.dto.PayDTO">
+		select * from pay where Member_Id = #{Member_Id}
+	</select>
 </mapper>

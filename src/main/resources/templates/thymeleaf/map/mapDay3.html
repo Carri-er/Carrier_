@@ -6,9 +6,7 @@
 <div th:replace="~{nav/nav::nav}">
 </div>
 <div class="loading-screen">
-	<div class="loading-message">
-		로딩 중...
-	</div>
+	<div class="loading-message clip-text">Road Trip</div>
 </div>
 <div class="map_wrapp">
 	<!-- 맵 컨텐츠 전체를 감싸는 영역  -->
@@ -109,8 +107,7 @@
 						<p class="px-3 f20 fw-bold">
 							day 1
 						</p>
-						<button class="btn saveBtn btn-pink ms-auto" type="button">
-						<img src="https://cdn-icons-png.flaticon.com/128/11071/11071760.png" alt="" style="width: 30px; height: 30px;"/> 코스 저장하기 </button>
+						
 					</div>
 					<!-- day1 -->
 					<input type="hidden" th:value="${aicc.get(0).getEvent_num()}" name="day1aicc"/>
@@ -141,6 +138,7 @@
 					<input type="hidden" class="totalDistanceValue3" value="" name="day3aiccTDV"/>
 					<input type="hidden" class="day" th:value="${day}" name="day"/>
 					<input type="hidden" name="memberId" th:value="${session.Member_Id}"/>
+					
 					<input type="hidden" class="amountValue" value="" name="amount"/>
 					<input type="hidden" class="realAmountValue" value="" name="realAmount"/>
 					<input type="hidden" class="realDiscountValue" value="" name="discount"/>
@@ -596,7 +594,7 @@
 				</div>
 				<!-- 맛집2 -->
 				<hr class="px-5 text-black-50"/>
-				<div class="row mb-3" th:each="aiccFood6:${aiccFood6}">
+				<div class="row mb-5" th:each="aiccFood6:${aiccFood6}">
 					<div class="col mb-5">
 						<a href="#" th:onclick="func_popEvent([[${aiccFood6.getEvent_num()}]])">
 						<div class="row px-4 Event_contentRow">

@@ -9,22 +9,17 @@ import com.ex.springboot.dto.PayDTO;
 
 @Mapper
 public interface IPayDAO {
-	
 	// 결제 
+	public List<PayDTO> payOrder(
+			@Param("orderId") String orderId
+			);
+	public List<PayDTO> payList(
+			@Param("Member_Id") String Member_Id
+			);
 	public int payCreate(
 			@Param("Member_Id") String Member_Id,
 			@Param("Course_num") String Course_num,
 			@Param("orderId") String orderId
 			);
 	
-	// 결제정보
-	public PayDTO payList(
-			@Param("Member_Id") String Member_Id
-	);
-	
-	// 내 전체 결제정보 - 관리자
-	public List<PayDTO> myPayList();
-	
-	// 전체 결제정보 - 관리자
-	public List<PayDTO> allPayList();
 }

@@ -10,7 +10,9 @@ import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ex.springboot.dto.CourseDTO;
 import com.ex.springboot.dto.MemberDTO;
+import com.ex.springboot.dto.PayDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -167,17 +170,24 @@ public class WidgetController {
 		String Member_Id = (String) session.getAttribute("Member_Id");
 		String orderId = request.getParameter("orderId");
 		String Course_num = request.getParameter("num");
-
+		
+		System.out.println(pay_dao.payOrder(orderId));
+		
+		System.out.println(Member_Id);
+		System.out.println(orderId);
+		System.out.println(Course_num);
 		
 		System.out.println("================================");
 		System.out.println("Member_Id:" + Member_Id + " 코스 번호:" + Course_num + " 주문 번호:" + orderId);
 		System.out.println("================================");
 		pay_dao.payCreate(Member_Id, Course_num, orderId);
 		CourseDTO dto = AiDAO.Course_select_useCk(Course_num);
-		
+
 		DecimalFormat decFormat = new DecimalFormat("###,###");
 		String amount = decFormat.format(dto.getAmount());
 		model.addAttribute("title", dto.getCourse_Name());
+		model.addAttribute("date", pay_dao.payOrder(orderId).get(0).getPay_date());
+		
 		model.addAttribute("amount", amount);
 
 		return "thymeleaf/member/success";
