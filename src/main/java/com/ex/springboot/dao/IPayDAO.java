@@ -22,4 +22,6 @@ public interface IPayDAO {
 			@Param("orderId") String orderId
 			);
 	
+	public List<PayDTO> courseReseveList( @Param("Member_Id") String Member_Id );
+	
 }
