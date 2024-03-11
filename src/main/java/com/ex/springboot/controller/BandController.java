@@ -76,7 +76,7 @@ public class BandController {
 		
 		if( session.getAttribute("Member_Id") != null) {
 			String loginId = (String) session.getAttribute("Member_Id");
-			model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+			model.addAttribute("checkMember", bandDao.checkJoinMember(num_band_code, loginId));
 			model.addAttribute("bandLoginMemberDto", bandDao.bandLoginMemberDto(loginId));
 		}
 		
@@ -243,8 +243,17 @@ public class BandController {
 	
 	//	밴드 피드 글쓰기 페이지로 이동
 		@GetMapping("/bandFeedWrite")
-		public String bandFeedWrite(Model model, HttpServletRequest request) {
+		public String bandFeedWrite(Model model, HttpServletRequest request, HttpSession session) {
+			String loginId = (String)session.getAttribute("Member_Id");
+			String str_band_code = request.getParameter("bandUrl");
+			
+			int num_band_code = Integer.parseInt(str_band_code);
+			if( loginId != null) {
+				model.addAttribute("checkJoinMember", bandDao.checkJoinMember(num_band_code, loginId));
+			}
+			
 			model.addAttribute("bandUrl", request.getParameter("bandUrl")); // band_code 데이터
+			
 			return "thymeleaf/band/bandFeedWrite";
 		}
 

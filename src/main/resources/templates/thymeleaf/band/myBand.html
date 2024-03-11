@@ -52,9 +52,14 @@
 	                        </th:block>
 	                     </th:block>
 	                  <div id="myBand_member_countBtn" class="myBand_member_count" onclick="return func_bandMember()">
-	                     <a class="myBandLink" th:href="@{'/mybandMember?bandUrl='+${myBandList.getBand_code()}}">
-	                        <span class="f13" th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
-	                     </a>
+	                     <div th:if="${checkMember eq null}">
+       	                	<span id="myBand_memberBtn" class="f13" th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
+	                     </div>
+	                     <div th:unless="${checkMember eq null}">
+	                     	<a class="myBandLink" th:href="@{'/mybandMember?bandUrl='+${myBandList.getBand_code()}}">
+	                        	<span class="f13" th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
+	                     	</a>
+	                     </div>
 	                  </div>
 	                  <hr />
 	                  <div class="myBand_info">
@@ -69,7 +74,7 @@
 	                           <input name="bandCode" type="hidden" th:value="${myBandList.getBand_code()}" />
 	                           <input name="joinMemberId" type="hidden" th:value="${session.Member_Id}" />
 	                           <a href="javascript:addMember_band.submit();" >
-	                              <span>동행 함께하기</span>
+	                              <span>동행 가입하기</span>
 	                           </a>                        
 	                        </div>      
 	                     </form>
@@ -135,7 +140,7 @@
                                    <span>작성 시간 <span th:text="${myBandFeedList.getBand_feed_uploadday()}"></span></span>
                                </div>
                                <div class="ms-auto">
-                               		<a class="btn btn-dark d-md-inline-block" th:href="@{'/bandFeedView?bandUrl='+${myBandFeedList.getBand_code()}+'&feednum='+${myBandFeedList.getBand_feed_num()}}">전체</a>
+                               		
                                		
                                		 <!-- 수정 및 삭제 버튼  -->
 	                               <th:block th:if="${myBandFeedList.getMember_id() == session.Member_Id}">
@@ -187,13 +192,19 @@
                            <div class="myBand_content_item_content">
                         	<div th:utext="${myBandFeedList.getBand_feed_content()}"></div>
                            </div>
+                           <div class="row justify-content-end">
+                           	<div class="col-2">
+                           		<a class="btn btn-dark d-md-inline-block f13" th:href="@{'/bandFeedView?bandUrl='+${myBandFeedList.getBand_code()}+'&feednum='+${myBandFeedList.getBand_feed_num()}}">게시글 전체보기</a>
+                           	</div>
+                           	
+                           </div>
                         	<!-- 밴드 피드 댓글 -->
                         	<hr />
-                        	<div class="myband_feed_commentWrite row  ">
+                        	<div class="myband_feed_commentWrite row  " th:if="${checkMember ne null}")>
                         		<span ></span>
                         		<form th:action="@{'myband_feed_commentWrite?bandUrl='+${myBandFeedList.getBand_code()}}" method="post" id="bandFeed_commentWriteForm">
 									<div class="input-group mb-3">
-										<input type="text"  name="band_feedComment_content" id="band_feedComment_content"  class="form-control" placeholder="댓글을 작성하세요."  >
+										<input type="text"  name="band_feedComment_content" id="band_feedComment_content"  class="form-control" placeholder="댓글을 입력해주세요."  >
 										<button class="btn btn-outline-secondary" type="button" onclick="func_bandFeed_commentWrite()">글쓰기</button>
 									</div>
 									<input type="hidden" name="commentBandUrl" th:value="${myBandFeedList.getBand_feed_num()}" />
@@ -204,7 +215,7 @@
 							<div class="bandFeedCommentAllBox">
 								<div th:each="bandFeedCommentAll : ${bandFeedCommentAll} "
 									th:if="${bandFeedCommentAll.getBand_feed_num() == myBandFeedList.getBand_feed_num()}">
-									<div class="row grid">
+									<div class="row grid ">
 										<div class="col-1">
 											<img class="rounded-circle"
 												th:src="@{'../img/member_thumbnail/'+${bandFeedCommentAll.getMember_profileimage()}}"
@@ -217,7 +228,7 @@
 											<span class="f13 text-truncate " th:text="${bandFeedCommentAll.getBand_feedComment_content()}"></span>
 										</div>
 									</div>
-	
+									<hr />
 								</div>
 							</div>
 
@@ -286,7 +297,13 @@
              return false;
           }
        }
-
+	//밴드 창의 멤버 클릭 시 멤버 리스트로 이동하는 버튼 
+	document.addEventListener("DOMContentLoaded", function() {
+    	var myBand_memberBtn = document.getElementById("myBand_memberBtn");
+    	myBand_memberBtn.addEventListener("click", function() {
+	        alert("동행 가입시 이용가능합니다.");
+    	});
+	});
        
    </script>
 </body>

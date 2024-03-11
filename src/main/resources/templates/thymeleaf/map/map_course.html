@@ -229,39 +229,61 @@
 	                    </div>
 	                </div> <!-- map_guide_iconBox 끝 div-->
                 </th:block> 
-                <hr />
-                <!-- 페이징 -->
-				<div class="row mx-auto my-auto">
-					<ul class="d-flex">
-						<!-- 이전 버튼 -->
-						<li th:if="${currentPage > 1}" class="mx-2"><a
-							th:href="@{'/map?page=' + ${mPage}}">&laquo;
-								이전</a></li>
-						<!-- 페이지 번호 -->
-						<li
-							th:each="pageNum : ${#numbers.sequence((currentPage - 4 > 0 ? currentPage - 4 : 1), 
-	                       (currentPage + 4 < totalPages ? currentPage + 4 : totalPages))}"
-							class="mx-2"><a
-							th:href="@{'/map?page=' + ${pageNum}}"
-							th:text="${pageNum}"
-							th:class="${currentPage == pageNum} ? 'current-page' : ''"></a>
-						</li>
+                
+                <!-- 여행코스리스트 출력 -->
+                <th:block th:if="${selectCategory.equals('tripCourse')}">
+	                <div class="indexMap_guide_iconBox ">
+	                    <div class="map_guide_icon">
+	                        <ul class="map_guide_icon_list px-0">
+	                            <li class="map_guide_icon_item map_icon_near_trip ">관광지</li>
+	                            <li class="map_guide_icon_item map_icon_food ">맛집</li>
+								<li class="map_guide_icon_item map_icon_cafe ">카페</li>
+	                            <li class="map_guide_icon_item map_icon_hotel ">숙박</li>
+	                            <li class="map_guide_icon_item map_icon_inside ">실내</li>
+	                            <li class="map_guide_icon_item map_icon_activity ">액티비티</li>
+	                            <li class="map_guide_icon_item map_icon_themepark ">테마파크</li>
+	                            <li class="map_guide_icon_item map_icon_event ">축제</li>
+	                            <li class="map_guide_icon_item map_icon_recomand_thema ">산, 바다</li>
+	                            <li class="map_guide_icon_item map_icon_trip_course on">여행코스</li>
+	                        </ul>
+	                    </div>
+	                </div> <!-- map_guide_iconBox 끝 div-->
+                </th:block>
 
-						<!-- 다음 버튼 -->
-						<li th:if="${currentPage < totalPages}" class="mx-2"><a
-							th:href="@{'/map?page=' + ${pPage} }">다음
-								&raquo;</a></li>
-					</ul>
-				</div>
-					
-                <div class="mapListItemBox ">
-                	<div id="distanceListContainer"></div>	
+                <hr />
+                	
+                  
+				<!-- 코스리스트 영역 -->                
+                <div class="mapCourseListBox row">
+					<div th:each="mapCourseList : ${mapCourseList}" class="row my-2">
+                		<div class="col-3 board-left text-center ms-1">
+                           <img th:src="@{'../img/info/' + ${mapCourseList.getCourse_img()}}"
+                              class="img-fluid rounded-4" alt=""
+                              style="width: 80px; height: 80px;"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
+                        </div>
+                        <div class="col-8 ">
+                           <div class="row ">
+                              <div class="col-12 f14 text-truncate fw-bold" >
+                                
+                                   [<span th:text="${mapCourseList.getMember_Id()}"></span>] 의 <br />
+                                     <span
+                                       th:text="${mapCourseList.getCourse_Interest()}" class="highlight px-0"> </span>
+                                    <span
+                                       th:text="|${mapCourseList.getCourse_Name()} 코스|" class=""> </span>
+                              </div>
+                           </div>
+                           
+                        </div>
+                    	<hr class="mt-3 ms-3">    
+                	</div>
+                	                 	
                 </div>
             </div> <!-- map_guide -->
 
             <div class="map_mapSection">
                 <!-- 지도를 표시할 div 입니다 -->
-                <div id="map"></div>
+                <div id="map">
+                </div>
             </div>
         </div>
         
