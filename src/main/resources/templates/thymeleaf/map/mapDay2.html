@@ -551,6 +551,7 @@
 				latlng : new kakao.maps.LatLng(event.mapX, event.mapY)
 			};
 		});
+		
 		// 문자열로 가져온 값을 parseFloat 함수를 사용하여 숫자로 변환
 		mapx = parseFloat(events[0].mapX);
 		mapy = parseFloat(events[0].mapY);
@@ -655,6 +656,7 @@
 	         document.querySelector('.realAmountValue').value = realAmount;
 	         document.querySelector('.realDiscountValue').value = realDiscount;
 		}
+		
 		function displayCircleDot(position, distance) {
 			if (distance > 0) {
 				// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
@@ -666,6 +668,7 @@
 					zIndex : 2
 				});
 				// 지도에 표시합니다
+		alert("test");
 				distanceOverlay.setMap(map);
 			}
 		}

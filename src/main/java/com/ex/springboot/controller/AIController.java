@@ -57,10 +57,8 @@ public class AIController {
 		String amount = request.getParameter("amount");
 		String discount = request.getParameter("discount");
 		String realAmount = request.getParameter("realAmount");
-		model.addAttribute("amount", amount);
-		model.addAttribute("realAmount", realAmount);
 		model.addAttribute("discount", discount);
-		
+		System.out.println("amount 전달 받음"+amount);
 		Integer courseNum = AiDAO.getCourseNum();
 		model.addAttribute("courseNum", courseNum+1);
 		
@@ -96,7 +94,7 @@ public class AIController {
 			model.addAttribute("realAmount", realAmount);
 			model.addAttribute("discount", discount);
 			model.addAttribute("courseNum", courseNum+1);
-			
+			System.out.println("1 amount"+ amount);
 			return "thymeleaf/aicc/saveCourseday2";
 		}
 		if(day.equals("2")) {
@@ -133,11 +131,13 @@ public class AIController {
 			model.addAttribute("realAmount", realAmount);
 			model.addAttribute("discount", discount);
 			model.addAttribute("courseNum", courseNum+1);
-			
+			System.out.println("3 amount"+ amount);
 			return "thymeleaf/aicc/saveCourseday3";
 		}
 	
-		
+		System.out.println("0 amount"+ amount);
+		model.addAttribute("amount", amount);
+		model.addAttribute("realAmount", realAmount);
 		model.addAttribute("totalDistance", day1aiccTD);
 		model.addAttribute("memberId", memberId);
 		model.addAttribute("day", day);
