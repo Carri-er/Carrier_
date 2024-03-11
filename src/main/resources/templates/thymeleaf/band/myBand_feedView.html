@@ -186,7 +186,7 @@
                            </div>
                         	<!-- 밴드 피드 댓글 -->
                         	<hr />
-                        	<div class="myband_feed_commentWrite row  ">
+                        	<div class="myband_feed_commentWrite row  " th:if="${checkMember ne null}")>
                         		<span ></span>
                         		<form th:action="@{'myband_feedView_commentWrite?bandUrl='+${myBandFeedList.getBand_code()}+'&feednum='+${myBandFeedList.getBand_feed_num()}}" method="post" id="bandFeedView_commentWriteForm">
 									<div class="input-group mb-3">

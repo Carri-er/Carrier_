@@ -147,6 +147,7 @@ public class AIController {
 		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
 		model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
 		model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+		
 		if(day.equals("1박2일")) {
 			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
 			model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
@@ -274,12 +275,14 @@ public class AIController {
 		} else if(day.equals("당일 치기")) {
 		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
 		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		    System.out.println("실행 순서 확인1");
 		}
 
 		
 		// 결제를 위한 코스 번호 불러오기
 		Integer courseNum = AiDAO.getCourseNum();
 		model.addAttribute("courseNum", courseNum);
+		 System.out.println("실행 순서 확인2");
 		// 결제를 위한 금액 불러오기
 		model.addAttribute("amount", amount);
 		model.addAttribute("memberId", memberId);

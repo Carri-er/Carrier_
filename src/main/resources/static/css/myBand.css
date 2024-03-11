@@ -243,7 +243,7 @@ div.bandChat_listContent{
 
 /* 밴드 피드 댓글 작성 스타일 */
 div.bandFeedCommentAllBox{
-	height: 50px;
+	max-height: 400px;
 	overflow : hidden;
 }
 

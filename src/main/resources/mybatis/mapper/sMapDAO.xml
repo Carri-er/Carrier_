@@ -35,5 +35,22 @@
 		    WHERE rnum > #{startItemNum}
     	]]>
 	</select>
+	
+	
+	<select id="mapCourseList"
+		resultType="com.ex.springboot.dto.CourseDTO">
+    <![CDATA[
+    SELECT *
+    FROM (
+        SELECT rownum AS rnum, e.*
+        FROM (
+            SELECT *
+            FROM Course
+            ORDER BY Course_num DESC
+        ) e
+    )
+    ]]>
+	</select>
+
 
 </mapper>

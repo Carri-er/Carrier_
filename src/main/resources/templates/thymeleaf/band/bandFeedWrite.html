@@ -16,10 +16,24 @@
 </head>
 <body>
 <script th:inline="javascript">
+/*<![CDATA[*/
 	var loginId = /*[[${session.Member_Id}]]*/ " ";
+	var checkJoinMember = /*[[${checkJoinMember}]]*/ [];
+	var bandUrl = /*[[${bandUrl}]]*/ "";
+	
+	console.log(checkJoinMember);
+	
 	if (loginId == null ){
 		location.href = '/login?msg=5';
 	}
+	
+	if( checkJoinMember == null){
+		alert('동행에 가입하여야 글 작성이 가능합니다.');
+		location.href = '/myBand?bandUrl=' + bandUrl;
+	}
+	
+	
+/*]]>*/
 </script>
 
     <div class="bandFeedWrite_wrapper">
