@@ -254,14 +254,15 @@
                 	
                   
 				<!-- 코스리스트 영역 -->                
-                <div class="mapCourseListBox row">
-					<div th:each="mapCourseList : ${mapCourseList}" class="row my-2">
-                		<div class="col-3 board-left text-center ms-1">
+                <div class="mapCourseListBox row overflow-scroll px-0">
+					<div th:each="mapCourseList : ${mapCourseList}" class="row my-2 px-0">
+					<a class="row ms-3" th:href="@{'/map?category=여행코스&num='+${mapCourseList.getCourse_num()}}">
+                		<div class="col-3 board-left text-center ms-1 px-0">
                            <img th:src="@{'../img/info/' + ${mapCourseList.getCourse_img()}}"
                               class="img-fluid rounded-4" alt=""
                               style="width: 80px; height: 80px;"  onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" >
                         </div>
-                        <div class="col-8 ">
+                        <div class="col-8 ps-3">
                            <div class="row ">
                               <div class="col-12 f14 text-truncate fw-bold" >
                                 
@@ -269,22 +270,51 @@
                                      <span
                                        th:text="${mapCourseList.getCourse_Interest()}" class="highlight px-0"> </span>
                                     <span
-                                       th:text="|${mapCourseList.getCourse_Name()} 코스|" class=""> </span>
+                                       th:text="|${mapCourseList.getCourse_Name()} 코스|" class=""> </span> <br />
+                                    <span th:text="|총 거리 : ${mapCourseList.getCourse_distance()}|"></span>
                               </div>
                            </div>
                            
                         </div>
+                    </a>
                     	<hr class="mt-3 ms-3">    
                 	</div>
                 	                 	
                 </div>
             </div> <!-- map_guide -->
 
-            <div class="map_mapSection">
-                <!-- 지도를 표시할 div 입니다 -->
-                <div id="map">
-                </div>
-            </div>
+            <div class="map_mapSection w-100 ">
+				<!-- 지도를 표시할 div 입니다 -->
+				
+				<th:block th:if="${courseNum eq null}">
+					<div id="map"></div>	
+				</th:block>
+				<th:block th:unless="${courseNum eq null}">
+					<div id="map"></div>	
+				</th:block>
+				<!-- <th:block th:if="${num ne null}">
+					<div id="map1" style="height: 600px" class=" mx-auto rounded-4 w-100">
+						<h3 class="pgj">
+							<span class="rounded-4 p-3 bg-mainbg text-white">Day-1</span>
+						</h3>	
+					</div>
+					<div id="map2" style="height: 600px" class=" mx-auto rounded-4 w-100">
+						<h3 class="pgj">
+							<span class="rounded-4 p-3 bg-mainbg text-white">Day-2</span>
+						</h3>
+					</div>
+					<div id="map3" style="height: 600px" class=" mx-auto rounded-4 w-100">
+						<div id="map3">
+							<h3 class="pgj">	
+								<span class="rounded-4 p-3 bg-mainbg text-white">Day-3</span>
+						</div>
+					</div>
+					<button id="mapday1" class="mapday1 btn rounded-pill bg-white pe-5 shadow">1일차</button>
+					<button id="mapday2" class="mapday2 btn rounded-pill bg-white pe-5 shadow">2일차</button>
+					<button id="mapday3" class="mapday3 btn rounded-pill bg-white pe-5 shadow">3일차</button>
+						
+				</th:block> -->
+			</div>
         </div>
         
     </div>
@@ -299,6 +329,55 @@
    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bceb465ea8b2b4878f8bec64e4f6d05&libraries=services,clusterer,drawing"></script>
 
 
+<script>
+
+		$(function() {
+			// btn1, btn2, btn3 요소를 가져옵니다.
+			var btn1 = $(".mapday1");
+			var btn2 = $(".mapday2");
+			var btn3 = $(".mapday3");
+
+			// map1, map2, map3 요소를 가져옵니다.
+			var map1 = $("#map1");
+			var map2 = $("#map2");
+			var map3 = $("#map3");
+			map2.hide();
+			map3.hide();
+			btn1.addClass('bg-skyD text-white');
+			// btn1을 클릭하면 map1을 보이고, map2와 map3을 숨깁니다.
+			btn1.click(function() {
+				map1.show();
+				map2.hide();
+				map3.hide();
+				btn1.addClass('bg-skyD text-white');
+				btn2.removeClass('bg-skyD text-white');
+				btn3.removeClass('bg-skyD text-white');
+
+			});
+
+			// btn2를 클릭하면 map2를 보이고, map1과 map3을 숨깁니다.
+			btn2.click(function() {
+				map1.hide();
+				map2.show();
+				map3.hide();
+				btn1.removeClass('bg-skyD text-white');
+				btn2.addClass('bg-skyD text-white');
+				btn3.removeClass('bg-skyD text-white');
+
+			});
+
+			// btn3를 클릭하면 map3을 보이고, map1과 map2을 숨깁니다.
+			btn3.click(function() {
+				map1.hide();
+				map2.hide();
+				map3.show();
+				btn1.removeClass('bg-skyD text-white');
+				btn2.removeClass('bg-skyD text-white');
+				btn3.addClass('bg-skyD text-white');
+			});
+		})
+		
+</script>
 <!-- JavaScript section -->
 <script th:inline="javascript">
 $(document).ready(function() {
@@ -313,6 +392,9 @@ $(document).ready(function() {
         // event table에 저장된 데이터
         var mapMarkerList = /*[[${mapMarkerList}]]*/ [];
 		
+        // course에 저장된 eventnum들의 event 정보배열
+        var courseItemList = /*[[${courseItemList}]]*/ [];
+        
      	// 현재 위치 변수 선언
         var presentPosition;
      	
@@ -347,331 +429,575 @@ $(document).ready(function() {
         // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    
+
+       if(courseItemList == null){
+    	   // mapMarkerList에 저장된 데이터를 반복하여 마커 생성 및 표시
+           mapMarkerList.forEach(function (markerInfo) {
+               // 마커의 위치 설정
+               var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
+                
+               // 마커 생성
+               if( markerInfo.event_category == '관광지'){
+               	var markerImage = new kakao.maps.MarkerImage(markerImg_tour, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '맛집' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             		
+             	} else if( markerInfo.event_category == '전통시장' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             		
+             	} else if( markerInfo.event_category == '카페' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_cafe, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '산' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_mountain, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '바다' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_ocean, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '액티비티' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_activity, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '숙박' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_hotel, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '테마파크' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_theme, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '축제' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_event, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '실내' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_inside, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '레포츠' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_sports, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else {
+             		var marker = new kakao.maps.Marker({
+             			position: markerPosition, // 마커의 위치 설정
+             		});
+             		
+             	}
+               
+               // 마커 지도에 표시
+               marker.setMap(map);
+               markers.push(marker);
+       
+               var markerInfoContent = '<div class="text-center text-truncate rounded-5">'+ markerInfo.event_name +'</div>';
+               
+            	// 마커에 표시할 인포윈도우를 생성합니다 
+               var infowindow = new kakao.maps.InfoWindow({
+                   content: markerInfoContent // 인포윈도우에 표시할 내용
+               });
+            	
+               kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+               kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+               
+               
+               
+            	// 커스텀 오버레이에 표시할 컨텐츠 입니다
+            	// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+            	// 별도의 이벤트 메소드를 제공하지 않습니다 
+            	var overlay_img = '<img src="../img/info/'+markerInfo.event_thumbnail +'" class="rounded-4" width="70" height="70">' ;
+               var overlay_content = '<div class="overlay_wrap">' + 
+               '    <div class="overlay_info">' + 
+               '        <div class="overlay_title">' + 
+               			markerInfo.event_name + 
+               '           <div class="overlay_close" onclick=" closeOverlay() " title="닫기"></div>' + 
+               '        </div>' + 
+               '        <div class="overlay_body">' + 
+               '            <div class="overlay_img">' +
+               				overlay_img +
+               '            </div>' + 
+               '            <div class="overlay_desc">' + 
+               '                <div class="overlay_ellipsis">'+ markerInfo.event_address +'</div>' + 
+//               '                <div class="overlay_jibun overlay_ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+               '                <div><a href="Event_view?id='+markerInfo.event_num +'" target="_blank" class="overlay_link">자세히 보기</a></div>' + 
+               '            </div>' + 
+               '        </div>' + 
+               '    </div>' +    
+               '</div>';
+               
+            // 마커 위에 커스텀오버레이를 표시합니다
+               // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+               var overlay = new kakao.maps.CustomOverlay({
+                   content: overlay_content,
+                   position: marker.getPosition()
+               });
+            
+            // 클릭 이벤트 핸들러 추가
+               addMarkerClickListener(marker, markers.length - 1, overlay);
+               
+            // 생성된 오버레이를 배열에 추가
+               overlays.push(overlay);
+
+           
+           }); // 마커 생성 함수 끝
+   		
+        // 각 오버레이의 닫기 버튼 클릭 이벤트 핸들러
+           function addCloseBtnClickListener(overlays, index) {
+           	kakao.maps.event.addListener(overlays[index], 'click', function() {
+                   overlays[index].setMap(null); 
+               });
+           	
+           }
+       	function closeOverlay(){
+       		alert("test");
+       	}
+           
+           // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
+           function addMarkerClickListener(marker, index, overlay) {
+           	
+               kakao.maps.event.addListener(marker, 'click', function () {
+                   var event = mapMarkerList[index];
+                   var markerPosition = marker.getPosition();
+                   var distance = getDistance(presentPosition, markerPosition);
+                   var eventName = event.event_name;
+                   var eventNum = event.event_num;
+                   var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
+                   //alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
+                   
+                 	var show_overlay = overlays[index];
+                 	show_overlay.setMap(map);
+      	
+               });
+            
+           }
+           
+           
+        // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+           function makeOverListener(map, marker, infowindow) {
+               return function() {
+                   infowindow.open(map, marker);
+               };
+           }
+           
+        // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+           function makeOutListener(infowindow) {
+               return function() {
+                   infowindow.close();
+               };
+           }
         
-        // mapMarkerList에 저장된 데이터를 반복하여 마커 생성 및 표시
-        mapMarkerList.forEach(function (markerInfo) {
-            // 마커의 위치 설정
-            var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
-             
+
+           // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+           if (navigator.geolocation) {
+               // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+               navigator.geolocation.getCurrentPosition(function (position) {
+                   var lat = position.coords.latitude; // 위도
+                   var lon = position.coords.longitude; // 경도
+                   presentPosition = new kakao.maps.LatLng(lat, lon); // geolocation으로 얻어온 좌표
+                   
+                   var markerImage = new kakao.maps.MarkerImage(markerImg_current, imageSize);
+                   // 현재 위치 마커 생성
+                   var currentPositionMarker = new kakao.maps.Marker({
+                       position: presentPosition,
+                       map: map,
+                       image : markerImage
+                   });
+                   markers.push(currentPositionMarker); // 마커 배열에 추가
+
+                   // 현재 위치로 지도 중심 변경
+                   map.setCenter(presentPosition);
+
+                   // 모든 마커가 생성되고 현재 위치가 설정된 후에 거리 계산
+                   calculateDistances(presentPosition, markers);
+               });
+           } else { // HTML5의 GeoLocation을 사용할 수 없을때 
+               presentPosition = new kakao.maps.LatLng(37.566826, 126.9786567);
+               alert('현재 위치를 찾을 수 없습니다');
+               // 현재 위치 마커 생성
+               var currentPositionMarker = new kakao.maps.Marker({
+                   position: presentPosition,
+                   map: map
+               });
+               markers.push(currentPositionMarker); // 마커 배열에 추가
+               map.setCenter(presentPosition);
+               
+            // 모든 마커가 생성되고 현재 위치가 설정된 후에 거리 계산
+              	calculateDistances(presentPosition, markers);
+           }
+
+           
+          
+   		var currentPage = /*[[${currentPage}]]*/ 0;
+   		
+           // 모든 마커에 대해 현재 위치와의 거리 계산
+           function calculateDistances(presentPosition, markers) {
+               markers.forEach(function (marker) {
+                   var distance = getDistance(presentPosition, marker.getPosition());
+                   //console.log("거리: " + distance + "m");
+                   distances.push(distance); // 계산된 거리를 배열에 저장
+               });
+
+               // 거리와 해당 인덱스를 묶어 객체로 만든 배열 생성
+               var combinedData = distances.map(function (distance, index) {
+                   return {
+                       distance: distance ,
+                       event : mapMarkerList[index] // 해당 인덱스의 이벤트 정보
+                   };
+               });
+               console.log(combinedData);
+   			
+            	// 데이터를 서버로 전송
+               sendDataToServer(combinedData, currentPage);
+              	
+           }
+           
+		
+       } else { 
+    	 //===============================================   		
+   		//courseItemList 값이 있을 때
+   		//===============================================
+   			
+    	   courseItemList.forEach(function(markerInfo, index){
+    		   
+    		// 마커의 위치 설정
+               var markerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY));
+    		
             // 마커 생성
-            if( markerInfo.event_category == '관광지'){
-            	var markerImage = new kakao.maps.MarkerImage(markerImg_tour, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '맛집' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          		
-          	} else if( markerInfo.event_category == '전통시장' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          		
-          	} else if( markerInfo.event_category == '카페' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_cafe, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '산' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_mountain, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '바다' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_ocean, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '액티비티' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_activity, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '숙박' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_hotel, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '테마파크' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_theme, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '축제' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_event, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '실내' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_inside, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else if( markerInfo.event_category == '레포츠' ){
-          		var markerImage = new kakao.maps.MarkerImage(markerImg_sports, imageSize);
-            	var marker = new kakao.maps.Marker({
-                    position: markerPosition, // 마커의 위치 설정
-					image :  markerImage                   
-                });
-          	} else {
-          		var marker = new kakao.maps.Marker({
-          			position: markerPosition, // 마커의 위치 설정
-          		});
-          		
-          	}
+               if( markerInfo.event_category == '관광지'){
+               	var markerImage = new kakao.maps.MarkerImage(markerImg_tour, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '맛집' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             		
+             	} else if( markerInfo.event_category == '전통시장' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_restaurant, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             		
+             	} else if( markerInfo.event_category == '카페' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_cafe, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '산' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_mountain, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '바다' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_ocean, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '액티비티' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_activity, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '숙박' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_hotel, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '테마파크' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_theme, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '축제' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_event, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '실내' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_inside, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else if( markerInfo.event_category == '레포츠' ){
+             		var markerImage = new kakao.maps.MarkerImage(markerImg_sports, imageSize);
+               	var marker = new kakao.maps.Marker({
+                       position: markerPosition, // 마커의 위치 설정
+   					image :  markerImage                   
+                   });
+             	} else {
+             		var marker = new kakao.maps.Marker({
+             			position: markerPosition, // 마커의 위치 설정
+             		});
+             		
+             	}
             
             // 마커 지도에 표시
-            marker.setMap(map);
-            markers.push(marker);
-    
-            var markerInfoContent = '<div class="text-center text-truncate rounded-5">'+ markerInfo.event_name +'</div>';
-            
-         	// 마커에 표시할 인포윈도우를 생성합니다 
-            var infowindow = new kakao.maps.InfoWindow({
-                content: markerInfoContent // 인포윈도우에 표시할 내용
-            });
-         	
-            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-            
-            
-            
-         	// 커스텀 오버레이에 표시할 컨텐츠 입니다
-         	// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-         	// 별도의 이벤트 메소드를 제공하지 않습니다 
-         	var overlay_img = '<img src="../img/info/'+markerInfo.event_thumbnail +'" class="rounded-4" width="70" height="70">' ;
-            var overlay_content = '<div class="overlay_wrap">' + 
-            '    <div class="overlay_info">' + 
-            '        <div class="overlay_title">' + 
-            			markerInfo.event_name + 
-            '           <div class="overlay_close" onclick=" closeOverlay() " title="닫기"></div>' + 
-            '        </div>' + 
-            '        <div class="overlay_body">' + 
-            '            <div class="overlay_img">' +
-            				overlay_img +
-            '            </div>' + 
-            '            <div class="overlay_desc">' + 
-            '                <div class="overlay_ellipsis">'+ markerInfo.event_address +'</div>' + 
-//            '                <div class="overlay_jibun overlay_ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-            '                <div><a href="Event_view?id='+markerInfo.event_num +'" target="_blank" class="overlay_link">자세히 보기</a></div>' + 
-            '            </div>' + 
-            '        </div>' + 
-            '    </div>' +    
-            '</div>';
-            
-         // 마커 위에 커스텀오버레이를 표시합니다
-            // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-            var overlay = new kakao.maps.CustomOverlay({
-                content: overlay_content,
-                position: marker.getPosition()
-            });
-         
-         // 클릭 이벤트 핸들러 추가
-            addMarkerClickListener(marker, markers.length - 1, overlay);
-            
-         // 생성된 오버레이를 배열에 추가
-            overlays.push(overlay);
+               marker.setMap(map);
+               markers.push(marker);
+               console.log(courseItemList);
+               
+       			var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
+       					+ '    <div class="info">'
+       					+ '            <a href="#"  onclick="func_popEvent('+markerInfo.event_num+')">'
+       					+ '        <div class="title">'
+       					+ [ index + 1 ]
+       					+ ". "
+       					+ markerInfo.event_name
+       					+ '        </div>'
+       					+ '</a>'
+       					+ '    </div>' + '</div>';
 
-        
-        }); // 마커 생성 함수 끝
-		
-     // 각 오버레이의 닫기 버튼 클릭 이벤트 핸들러
-        function addCloseBtnClickListener(overlays, index) {
-        	kakao.maps.event.addListener(overlays[index], 'click', function() {
-                overlays[index].setMap(null); 
-            });
-        	
-        }
-    	function closeOverlay(){
-    		alert("test");
-    	}
-        
-        // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
-        function addMarkerClickListener(marker, index, overlay) {
-        	
-            kakao.maps.event.addListener(marker, 'click', function () {
-                var event = mapMarkerList[index];
-                var markerPosition = marker.getPosition();
-                var distance = getDistance(presentPosition, markerPosition);
-                var eventName = event.event_name;
-                var eventNum = event.event_num;
-                var info = "거리: " + distance.toFixed(2) + "m, 이벤트 이름: " + eventName + " (" + eventNum + ")";
-                //alert(info); // 현 위치의 마커와의 거리 및 이벤트 이름 출력
-                
-              	var show_overlay = overlays[index];
-              	show_overlay.setMap(map);
-   	
-            });
-         
-        }
-        
-        
-     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-        function makeOverListener(map, marker, infowindow) {
-            return function() {
-                infowindow.open(map, marker);
-            };
-        }
-        
-     // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-        function makeOutListener(infowindow) {
-            return function() {
-                infowindow.close();
-            };
-        }
-     
+       			var courseMarkerPosition = new kakao.maps.LatLng(parseFloat(markerInfo.event_mapX), parseFloat(markerInfo.event_mapY)) ;
+       			var overlay = new kakao.maps.CustomOverlay({
+       				content : content,
+       				map : map,
+       				position : courseMarkerPosition
+       			});
+				
+               
+               
+              	
+    	   }) // 마커 생성 함수 끝
+    	   
+    	   var lat = parseFloat(courseItemList[0].event_mapX);
+    	   var lon =  parseFloat(courseItemList[0].event_mapY);
+    	   
+    	   var newCenter = new kakao.maps.LatLng(lat, lon);
+    	   
+    	   map.setCenter(newCenter);
+    	   map.setLevel(7);
+    	   console.log(courseItemList.length);
+    	   //당일치기, 1일차 일 때 줄 긋기
+    	   if(courseItemList.length == 5){
+    		   var courseLinePath = [];
+        	   for (var i = 0; i < courseItemList.length; i++) {
+        		    courseLinePath.push(
+        		        new kakao.maps.LatLng(parseFloat(courseItemList[i].event_mapX), parseFloat(courseItemList[i].event_mapY))
+        		    );
+        		}
 
-        // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
-        if (navigator.geolocation) {
-            // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var lat = position.coords.latitude; // 위도
-                var lon = position.coords.longitude; // 경도
-                presentPosition = new kakao.maps.LatLng(lat, lon); // geolocation으로 얻어온 좌표
-                
-                var markerImage = new kakao.maps.MarkerImage(markerImg_current, imageSize);
-                // 현재 위치 마커 생성
-                var currentPositionMarker = new kakao.maps.Marker({
-                    position: presentPosition,
-                    map: map,
-                    image : markerImage
-                });
-                markers.push(currentPositionMarker); // 마커 배열에 추가
+        		var coursePolyLine = new kakao.maps.Polyline({
+        		    path: courseLinePath,
+        		    strokeWeight: 3,
+        		    strokeColor: '#Ef564b',
+        		    strokeOpacity: 0.8,
+        		    strokeStyle: 'longdash'
+        		});
+        		
+        		coursePolyLine.setMap(map);
+        		
+    	   } else if (courseItemList.length ==  11){
+    		   // 1박 2일, 2일 일 때 선 줄 긋기
+    		   var courseLinePath = [];
+        	   for (var i = 0; i < 5; i++) {
+        		    courseLinePath.push(
+        		        new kakao.maps.LatLng(parseFloat(courseItemList[i].event_mapX), parseFloat(courseItemList[i].event_mapY))
+        		    );
+        		}
 
-                // 현재 위치로 지도 중심 변경
-                map.setCenter(presentPosition);
+        		var coursePolyLine = new kakao.maps.Polyline({
+        		    path: courseLinePath,
+        		    strokeWeight: 2,
+        		    strokeColor: '#Ef564b',
+        		    strokeOpacity: 0.8,
+        		    strokeStyle: 'longdash'
+        		});
+    		   
+        		coursePolyLine.setMap(map);
+        		
+        		var courseLinePath2 = [];
+         	   for (var i = 5; i < courseItemList.length ; i++) {
+         		    courseLinePath2.push(
+         		        new kakao.maps.LatLng(parseFloat(courseItemList[i].event_mapX), parseFloat(courseItemList[i].event_mapY))
+         		    );
+         		}
 
-                // 모든 마커가 생성되고 현재 위치가 설정된 후에 거리 계산
-                calculateDistances(presentPosition, markers);
-            });
-        } else { // HTML5의 GeoLocation을 사용할 수 없을때 
-            presentPosition = new kakao.maps.LatLng(37.566826, 126.9786567);
-            alert('현재 위치를 찾을 수 없습니다');
-            // 현재 위치 마커 생성
-            var currentPositionMarker = new kakao.maps.Marker({
-                position: presentPosition,
-                map: map
-            });
-            markers.push(currentPositionMarker); // 마커 배열에 추가
-            map.setCenter(presentPosition);
-            
-         // 모든 마커가 생성되고 현재 위치가 설정된 후에 거리 계산
-           	calculateDistances(presentPosition, markers);
-        }
+         		var coursePolyLine2 = new kakao.maps.Polyline({
+         		    path: courseLinePath2,
+         		    strokeWeight: 2,
+         		    strokeColor: '#03b6fc',
+         		    strokeOpacity: 0.8,
+         		    strokeStyle: 'longdash'
+         		});
+         		
+         		coursePolyLine2.setMap(map);
+        		
+    	   } else if (courseItemList.length ==  17){
+    		   // 2박 3일, 3일 일 때 선 줄 긋기
+    		   var courseLinePath = [];
+        	   for (var i = 0; i < 5; i++) {
+        		    courseLinePath.push(
+        		        new kakao.maps.LatLng(parseFloat(courseItemList[i].event_mapX), parseFloat(courseItemList[i].event_mapY))
+        		    );
+        		}
 
-        
+        		var coursePolyLine = new kakao.maps.Polyline({
+        		    path: courseLinePath,
+        		    strokeWeight: 1,
+        		    strokeColor: '#Ef564b',
+        		    strokeOpacity: 0.8,
+        		    strokeStyle: 'longdash'
+        		});
+    		   
+        		coursePolyLine.setMap(map);
+        		
+        		var courseLinePath2 = [];
+         	   for (var i = 5; i < courseItemList.length ; i++) {
+         		    courseLinePath2.push(
+         		        new kakao.maps.LatLng(parseFloat(courseItemList[i].event_mapX), parseFloat(courseItemList[i].event_mapY))
+         		    );
+         		}
+
+         		var coursePolyLine2 = new kakao.maps.Polyline({
+         		    path: courseLinePath2,
+         		    strokeWeight: 1,
+         		    strokeColor: '#03b6fc',
+         		    strokeOpacity: 0.8,
+         		    strokeStyle: 'longdash'
+         		});
+         		
+         		coursePolyLine2.setMap(map);
+    	  		
+         		var courseLinePath3 = [];
+          	   for (var i = 11; i < courseItemList.length ; i++) {
+          		    courseLinePath3.push(
+          		        new kakao.maps.LatLng(parseFloat(courseItemList[i].event_mapX), parseFloat(courseItemList[i].event_mapY))
+          		    );
+          		}
+
+          		var coursePolyLine3 = new kakao.maps.Polyline({
+          		    path: courseLinePath3,
+          		    strokeWeight: 1,
+          		    strokeColor: '#fceb03',
+          		    strokeOpacity: 0.8,
+          		    strokeStyle: 'longdash'
+          		});
+          		
+          		coursePolyLine3.setMap(map);
+         		
+    	   }
+    		
+    		
+    		
+       } // else 끝
        
-		var currentPage = /*[[${currentPage}]]*/ 0;
-		
-        // 모든 마커에 대해 현재 위치와의 거리 계산
-        function calculateDistances(presentPosition, markers) {
-            markers.forEach(function (marker) {
-                var distance = getDistance(presentPosition, marker.getPosition());
-                //console.log("거리: " + distance + "m");
-                distances.push(distance); // 계산된 거리를 배열에 저장
-            });
-
-            // 거리와 해당 인덱스를 묶어 객체로 만든 배열 생성
-            var combinedData = distances.map(function (distance, index) {
-                return {
-                    distance: distance ,
-                    event : mapMarkerList[index] // 해당 인덱스의 이벤트 정보
-                };
-            });
-            console.log(combinedData);
-			
-         	// 데이터를 서버로 전송
-            sendDataToServer(combinedData, currentPage);
-           	
-        }
-		
-        //컨트롤러로 데이터 전송
-        function sendDataToServer(data) {
-            // 데이터가 null이 아닌 경우에만 서버로 전송합니다.
-            if (data && data.length > 0) {
-            	            	
-                $.ajax({
-                    url: '/mapDistance', // 서버 엔드포인트 URL
-                    type: 'POST', // 데이터를 보내기 때문에 POST 방식을 사용합니다.
-                    contentType: 'application/json',
-                    data: JSON.stringify(data), // JSON 형태로 데이터를 변환하여 전송합니다.
-                    success: function(response) {
-                        // 성공적으로 서버에서 응답을 받았을 때 실행할 코드를 작성합니다.
-                    	displayDistanceList(response); // 페이지 관련 정보를 전달하여 함수 호출
-                    },
-                    error: function(xhr, status, error) {
-                        // 서버 요청이 실패했을 때 실행할 코드를 작성합니다.
-                        console.error('서버 요청 실패:', error);
-                    }
-                });
-            } else {
-                console.log('전송할 데이터가 없습니다.');
-            }
-        }
-        
-     
-
-        // Distance List를 화면에 출력하는 함수
-        function displayDistanceList(distanceList) {
-            // distanceList를 HTML에 출력하는 코드
-            var html = "<div class='mapListItem row'>";
-
-
-			console.log(distanceList);
-            for (var i = 0; i < distanceList.length ; i++) {
-                var item = distanceList[i];
-                html += "<a class='row mt-1 mb-3 mx-2' href='Event_view?id=" + item.event.event_num + "'>"; // distanceList의 객체에서 event_num 속성에 접근
-                html += "<div class='col-3 board-left text-center hstack justify-content-center'>";
-                html += "<img src='../img/info/" + item.event.event_thumbnail + "' class='img-fluid rounded-4' alt='' style='width: 80px; height: 80px;'>";
-                html += "</div>";
-                html += "<div class='col-6'>";
-                html += "<h6 class='text-truncate list-inline-item' >[<span>" + item.event.event_category + "</span>] <span >" + item.event.event_name + "</span></h6>"; // distanceList의 객체에서 event_category와 event_name 속성에 접근
-                html += "<p class='f13 text-truncate'>거리 : "+ Math.ceil(item.distance) +" m(미터)</p>" ;
-                html += "</div>";
-                html += "</a>";
-                html += "<hr />";
-            }
-            html += "</div>"; // mapListItem 끝
-
-            
-            // 출력할 HTML 요소에 결과를 추가합니다.
-            $('#distanceListContainer').html(html);
-        }
-        
-        // 두 지점 간의 직선 거리를 계산하는 함수
-        function getDistance(p1, p2) {
-            var lat1 = p1.getLat(), lon1 = p1.getLng();
-            var lat2 = p2.getLat(), lon2 = p2.getLng();
-            var R = 6371000; // 지구의 반지름 (미터 단위)
-            var dLat = (lat2 - lat1) * Math.PI / 180;
-            var dLon = (lon2 - lon1) * Math.PI / 180;
-            var a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c; // 거리 (미터 단위)
-            return d;
-        }
-
+       
+     //컨트롤러로 데이터 전송
+       function sendDataToServer(data) {
+           // 데이터가 null이 아닌 경우에만 서버로 전송합니다.
+           if (data && data.length > 0) {
+           	            	
+               $.ajax({
+                   url: '/mapDistance', // 서버 엔드포인트 URL
+                   type: 'POST', // 데이터를 보내기 때문에 POST 방식을 사용합니다.
+                   contentType: 'application/json',
+                   data: JSON.stringify(data), // JSON 형태로 데이터를 변환하여 전송합니다.
+                   success: function(response) {
+                       // 성공적으로 서버에서 응답을 받았을 때 실행할 코드를 작성합니다.
+                   	displayDistanceList(response); // 페이지 관련 정보를 전달하여 함수 호출
+                   },
+                   error: function(xhr, status, error) {
+                       // 서버 요청이 실패했을 때 실행할 코드를 작성합니다.
+                       console.error('서버 요청 실패:', error);
+                   }
+               });
+           } else {
+               console.log('전송할 데이터가 없습니다.');
+           }
+       }
+       
+    
+       
+    // 두 지점 간의 직선 거리를 계산하는 함수
+       function getDistance(p1, p2) {
+           var lat1 = p1.getLat(), lon1 = p1.getLng();
+           var lat2 = p2.getLat(), lon2 = p2.getLng();
+           var R = 6371000; // 지구의 반지름 (미터 단위)
+           var dLat = (lat2 - lat1) * Math.PI / 180;
+           var dLon = (lon2 - lon1) * Math.PI / 180;
+           var a =
+               Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+               Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+               Math.sin(dLon / 2) * Math.sin(dLon / 2);
+           var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+           var d = R * c; // 거리 (미터 단위)
+           return d;
+       }
         
     });
+    
+ // Distance List를 화면에 출력하는 함수
+    function displayDistanceList(distanceList) {
+        // distanceList를 HTML에 출력하는 코드
+        var html = "<div class='mapListItem row'>";
+
+
+		console.log(distanceList);
+        for (var i = 0; i < distanceList.length ; i++) {
+            var item = distanceList[i];
+            html += "<a class='row mt-1 mb-3 mx-2' href='Event_view?id=" + item.event.event_num + "'>"; // distanceList의 객체에서 event_num 속성에 접근
+            html += "<div class='col-3 board-left text-center hstack justify-content-center'>";
+            html += "<img src='../img/info/" + item.event.event_thumbnail + "' class='img-fluid rounded-4' alt='' style='width: 80px; height: 80px;'>";
+            html += "</div>";
+            html += "<div class='col-6'>";
+            html += "<h6 class='text-truncate list-inline-item' >[<span>" + item.event.event_category + "</span>] <span >" + item.event.event_name + "</span></h6>"; // distanceList의 객체에서 event_category와 event_name 속성에 접근
+            html += "<p class='f13 text-truncate'>거리 : "+ Math.ceil(item.distance) +" m(미터)</p>" ;
+            html += "</div>";
+            html += "</a>";
+            html += "<hr />";
+        }
+        html += "</div>"; // mapListItem 끝
+
+        
+        // 출력할 HTML 요소에 결과를 추가합니다.
+        $('#distanceListContainer').html(html);
+    }
+    
  // 닫기 버튼 클릭 시 오버레이 숨기기 함수
     function closeOverlay() {
         // 모든 오버레이를 숨깁니다.
@@ -723,7 +1049,35 @@ $(document).ready(function() {
     
 });
 </script>
+	<!-- 코스 리스트 클릭 시 여행정보 팝업창 출력 -->
+<script>
 
+	
+	function func_popEvent(param) {
+		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+		// width  : 팝업창 가로 크기
+	    // height : 팝업창 세로 크기
+	    var popupWidth = 700;
+	    var popupHeight = 600;
+	    
+     	// 브라우저 중앙 위치 계산
+        // window.screenX : 브라우저의 현재 스크린 좌측상단 X좌표
+        // window.screenY : 브라우저의 현재 스크린 좌측상단 Y좌표
+       
+        // window.outerWidth  : 브라우저의 전체 가로 크기
+        // window.outerHeight : 브라우저의 전체 가로 크기
+        var popupX = Math.round(window.screenX + (window.outerWidth/2) - (popupWidth/2));
+        var popupY = Math.round(window.screenY + (window.outerHeight/2) - (popupHeight/2));
+        
+        var featureWindow = "width=" + popupWidth + ", height="+popupHeight
+        + ", left=" + popupX + ", top=" + popupY;
+        
+		window.open('/Event_view?id='+param, '_blank',featureWindow );
+		
+	}
+
+</script>
 
 </body>
 
