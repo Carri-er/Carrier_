@@ -14,9 +14,9 @@ public class Time {
 
 	public static String calculateTime(Date date) {
 		long curTime = System.currentTimeMillis();
-		System.out.println("현재"+curTime);
+		//System.out.println("현재"+curTime);
 		long regTime = date.getTime();
-		System.out.println("요청"+regTime);
+		//System.out.println("요청"+regTime);
 		long diffTime = (curTime - regTime) / 1000;
 		String msg = null;
 		if (diffTime < TIME_MAXIMUM.SEC) {

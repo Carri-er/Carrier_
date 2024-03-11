@@ -1,19 +1,35 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="~{head/head::head}"></div>
 <script src="https://js.tosspayments.com/v1/payment-widget"></script>
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
-    <h2> 결제 실패 </h2>
-    <p id="code"></p>
-    <p id="message"></p>
+	<div class="container p-5 text-center">
+		<div class=" my-5 w-75 pt-5 m-auto row">
+			<div class="col-12 col-md-7 m-auto p-5 shadow-s rounded-5">
+				<div class="row mt-4 gap-4">
+					<div>
+						<img src="../img/mypage/failed.png" alt="" width="48" height="48" />
+						<span class="h5 d-block m-3">결제 실패</span>
+						<p id="code text-muted"></p>
+						<p id="message text-muted"></p>
+					</div>
+					<a href="/home"
+						class="btn btn-main text-center d-block my-3 py-2 rounded-4 col-12 col-lg-5 m-auto">홈으로
+						돌아가기</a>
+				</div>
+			</div>
+		</div>
+	</div>
 <script>
 	  const urlParams = new URLSearchParams(window.location.search);
 	
 	  const codeElement = document.getElementById("code");
 	  const messageElement = document.getElementById("message");
 	
-	  codeElement.textContent = "에러코드: " + urlParams.get("code");
-	  messageElement.textContent = "실패 사유: " + urlParams.get("message");
+	  codeElement.textContent = "ㄸrror : " + urlParams.get("code");
+	  messageElement.textContent = urlParams.get("message");
 </script>
   </body>
 </html>

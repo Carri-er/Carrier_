@@ -67,12 +67,11 @@
 		paymentWidget.requestPayment({
 			orderId : orderId,
 			orderName : orderName,
-			successUrl : window.location.origin + "/success",
+			successUrl : window.location.origin + "/success?num="+courseNum,
 			failUrl : window.location.origin + "/fail",
 			customerEmail : customerEmail,
 			customerName : customerName,
 			customerMobilePhone : customerMobilePhone,
-			courseNum : courseNum,
 		});
 	});
 	</script>
