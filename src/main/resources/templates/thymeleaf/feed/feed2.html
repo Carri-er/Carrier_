@@ -17,8 +17,8 @@
 	<div th:replace="~{nav/nav::nav}"></div>
 	<!-- 토스트 -->
 	<div th:replace="~{alert/toast::div}"></div>
-
-	<!-- 삭제 모달 -->
+	<div id="feed" class="container-fluid mt-4 mb-5">
+		<!-- 삭제 모달 -->
 	<div th:replace="~{alert/del_modal::div}">
 		<!-- 		
 			<a th:include="~{alert/del_modal::modalLink}" class="dropdown-item active" th:href="@{'/delFeed?num=' + ${feed.Feed_num}}">
@@ -26,8 +26,6 @@
 			</a> 
 		-->
 	</div>
-	
-	<div id="feed" class="container-fluid mt-4 mb-5">
 		<div class="px-2 pt-3">
 			<!--filtering-->
 			<div class="row px-0 hstack">
