@@ -648,8 +648,8 @@
 					.toFixed(2);
 	         // 예상금액 //
 	         oil = Math.round((totalDistance / 1000) * 170); // oil 값 in
-	         amount = oil + stay + food + beverage + stay + food + beverage;
-	         realAmount = stay + stay;
+	         amount = oil + stay + food + beverage + food + food + beverage + food;
+	         realAmount = stay;
 	         realDiscount = realAmount-discount;
 	         
 	         document.querySelector('.amount').innerText = amount.toLocaleString()+"원"; // 최종 금액 out

@@ -8,33 +8,33 @@
 
 	<div class="container p-5 text-center">
 		<div class=" my-5 w-75 pt-5 m-auto row">
-			<div class="col-12 col-md-7 m-auto p-5 shadow-s rounded-5">
+			<div class="col-12 col-md-8 m-auto py-5 shadow-s rounded-5">
 				<div class="row gap-4">
 					<div>
 						<img src="../img/mypage/check.gif" alt="" width="48" height="48" />
-						<span class="h5 d-block m-3">결제 성공!</span> 
+						<span class="h5 d-block m-3">결제 성공!</span>
 					</div>
-						<img
-							src="../img/mypage/bg_detail_pop.png" alt=""
-							class="img-fluid w-100" />
+					<img src="../img/mypage/bg_detail_pop.png" alt=""
+						class="img-fluid w-100" />
 					<!-- <p id="paymentKey">환불키</p> -->
-					<div class="text-start px-3 px-lg-5">
-						<p class="f12">
-							DATE : <span th:text="${date}" ></:span>
+					<div class="text-start px-5 px-lg-5 mx-lg-5">
+						<p>
+							DATE : <span th:text="${date}"></:span>
 						</p>
 						<p>
-						결제 코스 : <span th:text="${title}" ></span>
+							결제 코스 : <span th:text="${title}"></span>
 						</p>
 						<p>
-						결제 금액 : <span th:text="|${amount}원|"></span>
+							결제 금액 : <span th:text="|${amount}원|"></span>
 						</p>
 					</div>
-						<img
-							src="../img/mypage/bg_detail_pop.png" alt=""
-							class="img-fluid w-100" />
-					
-					<a th:href="@{'mypage?id='+${session.Member_Id}}"
-						class="btn btn-main text-center d-block my-3 py-2 rounded-4 col-12 col-lg-5 m-auto">예약확인하기</a>
+					<img src="../img/mypage/bg_detail_pop.png" alt=""
+						class="img-fluid w-100" />
+
+					<div class="text-start px-4 px-lg-5">
+						<a th:href="@{'mypage?id='+${session.Member_Id}}"
+							class="btn btn-main text-center d-block my-3 py-2 rounded-3 col-12 col-lg-7 m-auto">예약확인하기</a>
+					</div>
 				</div>
 			</div>
 		</div>

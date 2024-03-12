@@ -145,7 +145,6 @@ public class AIController {
 	}
 	@GetMapping("/Course_view")
 	public String Course_view(HttpServletRequest request, Model model) {
-		
 		String num = request.getParameter("num");
 		model.addAttribute("list",AiDAO.Course_view_list(num));
 		String number = AiDAO.Course_view_list(num).get(0).getCourse_number();
@@ -157,6 +156,8 @@ public class AIController {
 		model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
 		model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
 		model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
+		model.addAttribute("amount", AiDAO.Course_view_list(num).get(0).getAmount());
+		
 		
 		if(day.equals("1박2일")) {
 			model.addAttribute("aicc", AiDAO.listCourse(values[0]));
@@ -172,10 +173,9 @@ public class AIController {
 			model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
 			model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
 			
-			
-			
 			model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
 			model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+			model.addAttribute("amount", AiDAO.Course_view_list(num).get(0).getAmount());
 			
 			return "thymeleaf/aicc/Course_viewDay2";
 		}
@@ -203,11 +203,13 @@ public class AIController {
 			
 			model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
 			model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+			model.addAttribute("amount", AiDAO.Course_view_list(num).get(0).getAmount());
 			
 			return "thymeleaf/aicc/Course_viewDay3";
 		}
 		model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
 		model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
+		model.addAttribute("amount", AiDAO.Course_view_list(num).get(0).getAmount());
 		
 		return "thymeleaf/aicc/Course_view";
 	}
