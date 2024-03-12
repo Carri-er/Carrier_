@@ -19,6 +19,9 @@
 					<!-- <p id="paymentKey">환불키</p> -->
 					<div class="text-start px-5 px-lg-5 mx-lg-5">
 						<p>
+							주문 번호 : <span th:text="${orderId}"></:span>
+						</p>
+						<p>
 							DATE : <span th:text="${date}"></:span>
 						</p>
 						<p>
@@ -39,6 +42,19 @@
 			</div>
 		</div>
 	</div>
+    <script>
+        window.onkeydown = function (event) {
+            var kcode = event.keyCode;
+            if (kcode == 8 || kcode == 116) event.returnValue = false;
+        }
+
+        window.history.pushState(null, null, window.location.href);
+        window.onpopstate = function () {
+            window.history.go(1);
+        };
+
+    </script>
 
 </body>
+
 </html>
