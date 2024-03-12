@@ -2,15 +2,14 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
 * {
-	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+	font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important;
 	margin: 0;
 	padding: 0;
 	list-style: none;
 	box-sizing: border-box;
 }
 
-
-body{
+body {
 	color: var(--black);
 }
 
@@ -20,9 +19,8 @@ a {
 }
 
 a:hover {
-    color: black;
+	color: black;
 }
-
 
 .text-muted {
 	color: var(--deepgray) !important;
@@ -153,6 +151,7 @@ a.indent {
 .bg-skyb {
 	background-color: var(--nottedskyblue) !important;
 }
+
 .bg-skyD {
 	background-color: var(--nottedDeepblue) !important;
 }
@@ -195,6 +194,7 @@ a.indent {
 .btn-skyb, .btn-skyb-over:hover {
 	background-color: var(--nottedskyblue) !important;
 }
+
 .btn-skyD {
 	background-color: var(--nottedDeepblue) !important;
 }
@@ -203,7 +203,6 @@ a.indent {
 	border: 1px solid var(--nottedskyblue) !important;
 	background-color: var(--white) !important;
 }
-
 
 .btn-brown {
 	background-color: var(--nottedbrown) !important;
@@ -218,23 +217,86 @@ a.indent {
 	color: var(--black);
 }
 
-.z-5{
+.z-5 {
 	z-index: 1055;
 }
 
-.letter-spacing{
+.letter-spacing {
 	letter-spacing: -0.8px;
 }
 
+/*툴팁*/
+.wrap-tooltip {
+	display: inline-flex;
+	list-style: none;
+}
+
+.wrap-tooltip .btn-tooltip {
+	position: relative;
+	background: #ffffff;
+	border-radius: 50%;
+	font-size: 18px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	cursor: pointer;
+	transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrap-tooltip .tooltip {
+	position: absolute;
+	top: 0;
+	width: 250px;
+	margin-top: -70px;
+	font-size: 14px;
+	background: #ffffff;
+	color: #ffffff;
+	padding: 5px 8px;
+	border-radius: 5px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrap-tooltip .tooltip::before {
+	position: absolute;
+	content: "";
+	height: 8px;
+	width: 8px;
+	background: #ffffff;
+	bottom: -3px;
+	left: 50%;
+	transform: translate(-50%) rotate(45deg);
+	transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrap-tooltip .btn-tooltip:hover .tooltip {
+	top: -45px;
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.wrap-tooltip .btn-tooltip:hover span, .wrap-tooltip .btn-tooltip:hover .tooltip
+	{
+	text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrap-tooltip:hover, .wrap-tooltip:hover .tooltip, .wrap-tooltip:hover .tooltip::before
+	{
+	color: var(--black);
+}
 
 /*임시*/
-body > *[id]{
-  height: auto;
-  min-height: 100%;
-  padding-bottom: 37px;
+body>*[id] {
+	height: auto;
+	min-height: 100%;
 }
-footer{
-  height: 234px;
-  position : relative;
-  transform : translateY(0%);
+
+footer {
+	height: 234px;
+	position: relative;
+	transform: translateY(0%);
 }

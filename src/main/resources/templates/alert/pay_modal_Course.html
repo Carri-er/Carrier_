@@ -7,7 +7,7 @@
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="mt-5 modal-content rounded-4 border-none bg-trans overflow shadow-s">
 				<!-- X btn -->
-				<img data-bs-dismiss="modal" aria-label="Close" src="../img/mypage/del.png" class="my-del-btn pay-del-btn shadow-sm position-absolute rounded-circle" width="32" height="32" alt="">
+				<img data-bs-dismiss="modal" aria-label="Close" src="../img/mypage/del.png" class="my-del-btn pay-del-btn shadow-sm position-absolute rounded-circle pointer" width="32" height="32" alt="">
 				<!-- hover -->
 				<!-- 모달 -->
 				<form action="/checkout" method="post">
@@ -19,24 +19,23 @@
 							<div class="row p-0 m-auto">
 								<div class="col p-0 text-black bg-white">
 									<div class="w-100 overflow-hidden xh-300 hstack">
-										<img src="../img/feed/user_rabbit.jpg" class="img-fluid w-100" alt="" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" />
+										<img th:src="@{'../img/info/' + ${aicc.get(0).getEvent_thumbnail()}}" class="img-fluid w-100" alt="" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" />
 									</div>
 									<!-- 코스의 제목이 오는 곳입니다 -->
 									<div class="my-3">
-										<span class="f22 d-block my-3 px-5 courseNameDisplay">
+										<span class="f22 d-block my-3 px-5" name="Course_name" th:text="|${list.get(0).getMember_Id()}의 [${list.get(0).getCourse_Name()}]|">
 										</span>
 										<!-- HIDDEN OUT -->
-										<input type="hidden" class="courseNameValue" name="Course_name"/>
+										<input type="hidden" class="courseNameValue" name="Course_name" th:value="|${list.get(0).getMember_Id()}의 [${list.get(0).getCourse_Name()}]|"/>
 										<input type="hidden" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}"/>
-										<input type="hidden" name="amount" th:value="${discount}"/>
+										<input type="hidden" name="amount" th:value="${amount}"/>
 										<input type="hidden" name="Course_num" th:value="${courseNum}"/>
-										<span class="f16 d-block my-3 px-5 courseContentDisplay"></span>
-										<span class="text-pink d-block f17 fw-light text-decoration-line-through fw-bold amountDisplay0" th:text="${#numbers.formatDecimal(realAmount, 3, 'COMMA', 0, 'POINT') + ' 원'}"></span>
+										<span class="f16 d-block my-3 px-5" th:text="${list.get(0).getCourse_content()}"></span>
 										<div class="hstack d-flex justify-content-center text-center ">
 											<div class="btn btn-sm btn-light rounded-pill my-2 f14">
 												지금 바로 결제 시
 											</div>
-											<span><b class="ms-2 text-pink f20 discountDisplay0" th:text="${#numbers.formatDecimal(discount, 3, 'COMMA', 0, 'POINT') + ' 원'}"></b></span>
+											<span><b class="ms-2 text-pink f20 discountDisplay0" th:text="${#numbers.formatDecimal(amount, 3, 'COMMA', 0, 'POINT') + ' 원'}"></b></span>
 										</div>
 									</div>
 								</div>
