@@ -49,6 +49,14 @@
 												<span th:text="${text24.get(0).getEvent_name()}"></span> ➡ 
 												<span th:text="${text25.get(0).getEvent_name()}"></span>
 											</div>
+											<div th:if="${infoStat.index==3}" class="text-truncate mb-3">
+												<span th:text="${text31.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text32.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text33.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text34.get(0).getEvent_name()}"></span> ➡ 
+												<span th:text="${text35.get(0).getEvent_name()}"></span>
+											</div>
+											
 											<div class="text-truncate w-75">
 											<!-- <span class="f14"
                                                   th:text="${info.getEvent_content()}"> 겨울밤을 빛내주는 전국 야경 명소</span> -->
@@ -299,7 +307,7 @@
 	</div>
 	
 	<!-- 여행코스 짜기 배너 -->
-	<div class="pt-2 rounded-1 m-5 mt-2 bg-main bg-opacity-25">
+	<div class="pt-2 rounded-1 m-5 mt-2 bg-main bg-opacity-25 col-xxl-8 mx-auto overflow-hidden">
                 <div class=" row bg-white p-2 justify-content-around">
                     
                     <div class="col-12 col-md-6 ms-5 bg-white rounded-1 p-3">
@@ -633,7 +641,7 @@
 
 <!-- home_dl_content -->
 <!-- 여백 박스 -->
-<div class="w-100 py-5 my-5">
+<div class="w-100 py-3 my-5">
 </div>
 <!-- 검색 section -->
 <section class="home_search container-fluid p-0 overflow-hidden w-100">
@@ -657,12 +665,12 @@
 <!-- home_data_lab -->
 <section class="home_info_data container my-5">
 <div class="row justify-content-around gap-5 home_info_data_wrap text-center m-auto">
-	<div class="col-12 col-lg-4 home_info_data_img p-0 m-0 hstack ms-lg-5">
+	<div class="col-12 col-lg-4 home_info_data_img p-0 m-0 ms-auto ">
 		<a href="/band"><img src="https://img.freepik.com/premium-vector/a-cartoon-of-a-man-and-a-woman-with-a-backpack-and-a-backpack-waving-to-the-camera_390783-238.jpg?size=626&ext=jpg&ga=GA1.1.1767115526.1706740448&semt=ais" class="img-fluid rounded-4 m-auto ms-lg-auto" style="height:350px; ">
 		</a>
 	</div>
 	<!--home_info_data_img-->
-	<div class="col-11 col-lg-6 home_info_data_text text-start m-auto mt-3 mt-md-0" >
+	<div class="col-10 col-md-8 col-lg-6 home_info_data_text text-start m-auto mt-3 mt-md-0" >
 		<div class="fs-4 fw-bold">
 			
 			<a href="info" class="text-dark px-2 f17 ">함께 모여서 소통하는 <span class="f22 highlight px-0">동행</span> 에 우리 함께 해요</a>

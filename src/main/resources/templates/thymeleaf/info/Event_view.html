@@ -142,7 +142,7 @@
 		</div> -->
 		<div class="row">
 			<div class="col-10 col-md-8 p-3 mx-auto">
-				<b>여행 포스트잇 <span th:text="${commentCount}"></span> 개
+				<b>여행 댓글 <span th:text="${commentCount}"></span> 개
 				</b>
 				<form action="Event_comment" method="post">
 					<div class="">
@@ -155,10 +155,9 @@
 					</div>
 					<div class="col text-end mt-2">
 						<a href="login" class="btn btn-mainbg mb-3"
-							th:if="${session.Member_Id == null }" onclick="alert('로그인해주세요');">한
-							줄 남기기</a>
-						<button class="btn btn-mainbg mb-3"
-							th:if="${session.Member_Id !=null }">한줄 남기기</button>
+							th:if="${session.Member_Id == null }" onclick="alert('로그인해주세요');">댓글 남기기</a>
+						<button type="button" class="btn btn-mainbg mb-3" id="comment_content"
+							th:if="${session.Member_Id !=null }" onclick="validateContent()">댓글 남기기</button>
 					</div>
 				</form>
 				<div th:each="commentlist:${commentlist}"
@@ -288,6 +287,19 @@ var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 	</script>
 	<script>
   AOS.init();
+</script>
+<script type="text/javascript">
+    function validateContent() {
+        var content = document.getElementById('comment_content').value.trim();
+
+        if (content === '') {
+            alert('내용을 입력해주세요.');
+            return false; // submit 막기
+        }
+        
+        // 내용이 있을 때는 true를 반환하여 submit을 허용
+        return true;
+    }
 </script>
 </body>
 </html>

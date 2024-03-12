@@ -121,7 +121,7 @@ yellow;
 							</span> <span class="d-block"> 연령대 : <span
 									th:switch="${list.Member_Age}"> <span th:case="19">19세
 											이하</span> <span th:case="50">50대 이상</span> <span th:case="*"
-										th:text="${list.Member_Age + '대'}"></span>
+										th:text="${list.Member_Age + '세'}"></span>
 								</span>
 							</span> <span class="d-block"> Email : <span
 									th:text="${list.Member_Email}">이메일</span>
@@ -178,7 +178,7 @@ yellow;
 							<td th:text="${list.Member_Id}">아이디</td>
 							<td th:switch="${list.Member_Age}"><span th:case="19">19세
 									이하</span> <span th:case="50">50대 이상</span> <span th:case="*"
-								th:text="${list.Member_Age + '대'}"></span></td>
+								th:text="${list.Member_Age + '세'}"></span></td>
 							<td th:text="${list.Member_Email}">이메일</td>
 							<td th:text="${list.Member_Phone}">핸드폰번호</td>
 							<td><span class="btn-sm btn btn-main rounded-pill"

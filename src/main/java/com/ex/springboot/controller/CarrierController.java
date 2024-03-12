@@ -43,14 +43,9 @@ public class CarrierController {
 
    @GetMapping("/")   
    public String main(Model model) {
-	   
-	  
-		
+
       return "thymeleaf/home/home2";
    }
-   
-   
-
    
    @GetMapping("/home")
    public String home(Model model) {
@@ -71,6 +66,8 @@ public class CarrierController {
 	     String numm2 = String.valueOf(number2);
 	     int number3 = courseList2.get(2).getCourse_num();
 	     String numm3 = String.valueOf(number3);
+	     int number4 = courseList2.get(3).getCourse_num();
+	     String numm4 = String.valueOf(number4);
 	     
 	     System.out.println("number값 확인 : "+number);
 	     System.out.println("number2값 확인 : "+number2);
@@ -99,6 +96,15 @@ public class CarrierController {
 		 model.addAttribute("text23", AiDAO.listCourse(values3[2]));
 		 model.addAttribute("text24", AiDAO.listCourse(values3[3]));
 		 model.addAttribute("text25", AiDAO.listCourse(values3[4]));
+		 
+		 String num4 = AiDAO.Course_view_list(numm4).get(0).getCourse_number();
+		 System.out.println("num4의 정체는 "+num3);
+	     String[] values4 = num4.split(",");
+	     model.addAttribute("text31", AiDAO.listCourse(values4[0]));
+		 model.addAttribute("text32", AiDAO.listCourse(values4[1]));
+		 model.addAttribute("text33", AiDAO.listCourse(values4[2]));
+		 model.addAttribute("text34", AiDAO.listCourse(values4[3]));
+		 model.addAttribute("text35", AiDAO.listCourse(values4[4]));
       
       return "thymeleaf/home/home";
    }

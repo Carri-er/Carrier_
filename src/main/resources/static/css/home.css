@@ -79,12 +79,10 @@ div.crousel_textArea>strong {
 	display: block;
 	margin: 20px 0 23px;
 	font-size: 34px;
-	font-weight: 700;
-	line-height: 50px;
 	letter-spacing: -3px;
 	color: #3d3d3d;
 	overflow: hidden;
-	max-height: 150px;
+	max-height: 45px;
 	display: box;
 	word-break: keep-all;
 	text-overflow: ellipsis;
@@ -122,8 +120,8 @@ div.crousel_textArea>a::after {
 
 .carousel-control-next-m, .carousel-control-prev-m{
 	z-index: 5;
-    width: 50%;
-    margin-top: 790px;
+    width: 70%;
+    margin-top: 800px;
 }
 
 /********************************
