@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/home">
+<div th:replace="~{head/head::head}">
+</div>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400&display=swap");
+:root {
+  --x: 50%;
+  --y: 50%;
+  --blur: 0.7vmax;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  background-color: black;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+  overflow: hidden;
+  /*
+  cursor: none;
+  */
+  user-select: none;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+main {
+  z-index: 1;
+}
+h1,h5 {
+  font-size: max(10vw, 60px);
+  color: #fff;
+  position:relative;
+  z-index: 99;
+}
+h5{
+font-size: 40px;}
+#bg,
+#bg_mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: calc(var(--blur) * -1);
+  background: url(https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+    no-repeat center/cover;
+}
+#bg {
+  filter: blur(var(--blur));
+}
+#bg_mask {
+  mask-image: radial-gradient(
+    circle 50vmin at var(--x) var(--y),
+    black 20vmin,
+    transparent
+  );
+}
+ @keyframes fall {
+    0% { transform: translateY(-100px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .letter {
+  padding: 0;
+    display: inline-block;
+    animation: fall 0.5s ease forwards;
+    opacity: 0;
+    border: 10px solid var(--main);
+  }
+</style>
+<body>
+<!--
+Focus
+Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/KKJgQXa)
+-->
+<a href="home">
+<div id="bg">
+</div>
+<div id="bg_mask">
+</div>
+<main>
+<h1 class="letter p-3 rounded-2"> Carrier </h1>
+<h5 class="mt-5">여행 계획 Carrier 와 함께</h5>
+<span class="btn btn-outline-light">
+go to carrier
+</span>
+</main>
+</a>
+<!--footer-->
+<!-- 알림창 -->
+<script>
+/*!
+Focus
+Copyright (c) 2023 by Wakana Y.K. (https://codepen.io/wakana-k/pen/KKJgQXa)
+*/
+"use strict";
+console.clear();
+var root = document.querySelector(":root");
+function spotlight(e) {
+  root.style.setProperty("--x", e.pageX + "px");
+  root.style.setProperty("--y", e.pageY + "px");
+}
+window.addEventListener("pointermove", spotlight);
+window.addEventListener("pointerdown", spotlight);
+setTimeout(function() {
+    window.location.href = "/home";
+  }, 5000); 
+</script>
+</body>
+</html>

@@ -5,8 +5,7 @@
 	<div th:replace="~{nav/nav::nav}"></div>
 	<!-- 토스트 -->
 	<div th:replace="~{alert/toast::div}"></div>
-	<!-- 삭제 모달 -->
-	<div th:replace="~{alert/del_modal::div}"></div>
+
 	<div id="feedShow" class="container-fluid mt-4 mb-5 p-0">
 	<!-- 뒤로가기 버튼 -->
 	<a href="/feed" class="sticky-top feed-btn me-auto ms-4 rounded-circle d-flex">
@@ -14,6 +13,8 @@
 	</a>
 	<!--------------------------------------------feed box Parent------------------------------------------>
 	<div class="row m-auto my-2 mt-lg-1 mb-5 pt-md-0">
+	<!-- 삭제 모달 -->
+	<div th:replace="~{alert/del_modal::div}"></div>
 		<div class="col-10 col-xl-7 mt-3 feed-box m-0 mx-auto">
 			<div class="row">
 				<!-- 좌측 | 피드 -->
@@ -158,7 +159,7 @@
 										<i class="fi fi-br-heart px-2"></i>
 									</a>
 								</th:block>
-								<th:block th:if="${comment.getFeed_comment_like()}==1">w
+								<th:block th:if="${comment.getFeed_comment_like()}==1">
 									<a class="dropdown-item" th:href="@{'/feed_comment_like?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}+'&on=0'}">
 										<i class="fi fi-sr-heart px-2"></i>
 									</a>
@@ -175,13 +176,13 @@
 			                           			</i>
 											</a>
 										<ul class="dropdown-menu dropdown-menu-dark">
-		                                    <li data-bs-toggle="modal" data-bs-target="#feed_del_Modal"><a class="dropdown-item">삭제</a></li>
+		                                    <li data-bs-toggle="modal" data-bs-target="#feed_del_comment_Modal"><a class="dropdown-item">삭제</a></li>
 		                                    <li><a class="dropdown-item" th:href="@{'/feed_comment_update?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">수정</a></li>
 		                                </ul>
 		                            </div>
 		                            
 									<!-- DEL Modal -->
-									<div class="modal fade" id="feed_del_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
+									<div class="modal fade" id="feed_del_comment_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
 									  <div class="modal-dialog modal-dialog-centered">
 									    <div class="modal-content">
 									      <div class="modal-header border-none">
@@ -192,7 +193,14 @@
 									      </div>
 									      <div class="modal-footer border-none">
 									        <button type="button" class="btn btn-light text-dark rounded-pill px-3" data-bs-dismiss="modal">취소</button>
-									        <button type="button" class="btn btn-main rounded-pill px-3"><a class="dropdown-item active" th:href="@{'/feed_comment_del?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">삭제</a></button>
+									        
+									        <form action="/feed_comment_del" id="deleteFeedCommentForm">
+												<input type="hidden" name="num" th:value="${feedList.getFeed_num()}"/>
+												<input type="hidden" name="comment_num" th:value="${comment.getFeed_comment_num()}"/>
+											</form>
+									        <button type="button" class="btn btn-main rounded-pill px-3" id="comment_del_btn">
+									        	<a class="dropdown-item active" th:href="@{'/feed_comment_del?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">삭제</a>
+									        </button>
 									      </div>
 									    </div>
 									  </div>
@@ -235,11 +243,5 @@
 		});
 	</script>
 
-	<!-- DEL모달 -->
-	<script>
-		function func_delModalBtn() {
-			document.getElementById('deleteFeedForm').submit();
-		}
-	</script>
 </body>
 </html>
