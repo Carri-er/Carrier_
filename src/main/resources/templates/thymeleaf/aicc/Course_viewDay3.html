@@ -68,8 +68,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccFood.get(0).getEvent_num()}}" class="">
+							<a href="#" th:onclick="func_popEvent([[${aiccFood.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccFood.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"

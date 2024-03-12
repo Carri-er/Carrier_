@@ -13,7 +13,7 @@
                     	<input name="band_admin" type="hidden" th:value="${session.Member_Id}"/>
                     	<input id="bandUrl" name="bandUrl" type="hidden" th:value="${updateMyBand.getBand_code()}" />
                     	<input id="origin_band_thumnail" name="origin_band_thumnail" type="hidden" th:value="${updateMyBand.getBand_thumnail()}" />
-                        <p class="h4 text-center">밴드 정보 수정</p>
+                        <p class="h4 text-center">동행 정보 수정</p>
                         <input name="band_thumnail" class="form-control" type="file" id="formFileMultiple"  onchange="readURL(this);" th:value="${updateMyBand.getBand_thumnail()}"  multiple >
 						<img id="blah" th:src="@{'../img/uploadBandThumnail/'+${updateMyBand.getBand_thumnail()}}" alt="#" class="border my-3 mx-auto d-block " width="200" height="200"/>
 						
@@ -64,21 +64,21 @@
 						
 						<div class="form-floating mb-3">
 							<input name="band_name" type="text" class="form-control" id="input_bandName" placeholder="${updateMyBand.getBand_name()}" size="15" th:value="${updateMyBand.getBand_name()}">
-  							<label for="input_bandName" th:text="${updateMyBand.getBand_name()}">밴드 이름을 입력해주세요.</label>
+  							<label for="input_bandName" th:text="${updateMyBand.getBand_name()}">동행 이름을 입력해주세요.</label>
 						</div>
                         
 
 						<div class="form-floating">
 							<textarea name="band_content" class="form-control" placeholder="${updateMyBand.getBand_content()}"
 								id="textarea_bandContent" style="height: 200px" th:text="${updateMyBand.getBand_content()}"></textarea>
-							<label for="textarea_bandContent">밴드 소개글을 입력해주세요. <br />
+							<label for="textarea_bandContent">동행 소개글을 입력해주세요. <br />
 							</label>
 						</div>
                         
                         <div class="row">
                         	<div class="col-5 mx-auto">
-                        		<input type="button" value="밴드 수정" onclick="return func_updateBand()" class="btn btn-main w-100 p-3 rounded-pill mt-5"/>
-                        		<input type="button" value="밴드 삭제" onclick="return func_deleteBand()" class="btn btn-main w-100 p-3 rounded-pill mt-3"/>	
+                        		<input type="button" value="동행 수정" onclick="return func_updateBand()" class="btn btn-main w-100 p-3 rounded-pill mt-5"/>
+                        		<input type="button" value="동행 삭제" onclick="return func_deleteBand()" class="btn btn-main w-100 p-3 rounded-pill mt-3"/>	
                         	</div>
                         </div>
                         
@@ -128,19 +128,19 @@
     	/* 밴드 수정 유효성 함수  */
 	    function func_updateBand() {
 	 	   
-	 	  var input_bandName = $('#input_bandName').val();
-	 	  var textarea_bandContent = $('#textarea_bandContent').val();
-	 	  var input_band_theme = $('#input_band_theme').val();
-	 	 var input_band_area = $('#input_band_area').val();
+	 	  	var input_bandName = $('#input_bandName').val();
+	 	  	var textarea_bandContent = $('#textarea_bandContent').val();
+	 	  	var input_band_theme = $('#input_band_theme').val();
+	 		var input_band_area = $('#input_band_area').val();
 	 	  
 	 	  
-	 	for(var i = 0 ; i < bandList.length ; i++) {
-	 		 if( bandList[i].band_name == input_bandName){
-	 			 alert("동일한 밴드가 존재합니다.");
-	 			 return false;
-	 		 }
-	 		
-	 	 }
+		 	for(var i = 0 ; i < bandList.length ; i++) {
+		 		 if( bandList[i].band_name == input_bandName){
+		 			 alert("동일한 밴드가 존재합니다.");
+		 			 return false;
+		 		 }
+		 		
+		 	 }
 	 	 
 	 	   if(input_bandName.length == 0){
 	 		   alert('밴드 이름을 입력하세요.');
