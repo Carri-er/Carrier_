@@ -10,9 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
+import java.util.Random;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ex.springboot.dto.CourseDTO;
 import com.ex.springboot.dto.MemberDTO;
-import com.ex.springboot.dto.PayDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -70,8 +68,11 @@ public class WidgetController {
 		// 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-		String getTime = currentDateTime.format(formatter);
-		String orderId = Member_Id + getTime; // 난수 지정
+		String getTime = currentDateTime.format(formatter).substring(1);
+		Random random = new Random();
+	    int randomNumber = random.nextInt(8); // 0부터 8까지의 무작위 정수
+		String orderId = (randomNumber+1) + getTime; // 난수 지정
+		System.out.println(orderId);
 		String phone;
 
 		// 멤버 정보 불러오기
@@ -187,6 +188,7 @@ public class WidgetController {
 		String amount = decFormat.format(dto.getAmount());
 		model.addAttribute("title", dto.getCourse_Name());
 		model.addAttribute("date", pay_dao.payOrder(orderId).get(0).getPay_date());
+		model.addAttribute("orderId", orderId);
 		
 		model.addAttribute("amount", amount);
 
