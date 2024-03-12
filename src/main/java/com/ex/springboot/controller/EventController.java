@@ -496,7 +496,7 @@ public class EventController {
       } catch (Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/info";
+      return "redirect:/Event_view?id="+num;
    }
 
 }

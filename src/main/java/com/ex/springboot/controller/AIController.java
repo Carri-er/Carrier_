@@ -225,7 +225,7 @@ public class AIController {
 	        model.addAttribute("confirmMessage", "코스 삭제가 완료되었습니다.");
 	    }
 		
-		return "redirect:/mypage?id="+id;
+		return "redirect:/infoCourse";
 	}
 	@PostMapping("/cours_Save_insert")
 	public String cours_Save_insert(HttpServletRequest request, Model model) {

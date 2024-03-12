@@ -162,6 +162,6 @@
 		WHERE A.Course_Name is not null
 		ORDER BY A.Course_num
 		)
-		WHERE ROWNUM &lt;= 3
+		WHERE ROWNUM &lt;= 4
 	</select>
 </mapper>
