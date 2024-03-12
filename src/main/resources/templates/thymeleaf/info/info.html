@@ -34,7 +34,7 @@
 					<hr>
 					<div class="board row">
 						<!--board-->
-						<div class="row mx-0 justify-content-around" th:each="list:${list}">
+						<div class="row justify-content-around" th:each="list:${list}">
 							<a th:href="@{'Event_view?id='+ ${list.getEvent_num()}}"
 								class="row">
 								<div class="col-3 board-left text-center hstack justify-content-center">

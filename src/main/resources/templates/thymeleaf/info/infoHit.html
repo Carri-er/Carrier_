@@ -28,7 +28,7 @@
 							총 <span class="blue-text text-bold" th:text="${getCount}"></span>건
 						</div>
 						<div class="col-12 col-md-7 text-end mt-2 mt-md-0">
-							<a href="info">최신순</a>  <span ></span>  <a href="hitDESC" class="active">인기순</a>
+							<a href="info">최신순</a><span></span> <a href="hitDESC" class="active">인기순</a>
 						</div>
 					</div>
 					<hr>
@@ -55,15 +55,15 @@
 										<div class="col">
 
 											<button type="button"
-												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
+												class="btn btn-sm rounded-pill px-3 btn-light f12 mb-1"
 												th:text="${list.getEvent_area()}"
 												th:if="${list.getEvent_area() != null}"></button>
 											<button type="button"
-												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
+												class="btn btn-sm rounded-pill px-3 btn-light f12 mb-1"
 												th:text="${list.getEvent_area2()}"
 												th:if="${list.getEvent_area2() != null}"></button>
 											<button type="button"
-												class="btn btn-sm rounded-pill px-3 btn-light f14 mb-1"
+												class="btn btn-sm rounded-pill px-3 btn-light f12 mb-1"
 												th:text="${list.getEvent_tag()}"
 												th:if="${list.getEvent_tag() != null}">#</button>
 										</div>
@@ -212,7 +212,7 @@
 		</div>
 
 	</div>
-
+	<div th:replace="~{footer/robot::robot}"></div>
 	<div th:replace="~{footer/footer::footer}"></div>
 	<script type="text/javascript">
         $(document).ready(function() {

@@ -5,8 +5,7 @@
 
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
-	<!-- 예약 버튼 -->
-	<div th:replace="~{alert/pay_modal::div}"> </div>  
+
 	<div class="container px-md-5">
 	<h4 class="text-center my-5">코스 저장하기</h4>
 		<div class="row mx-3 mx-md-5 justify-content-center">
@@ -152,12 +151,17 @@
 					<span class="discount text-white"></span>
 
 					<div class="col-12 mx-auto mt-4 text-end d-flex justify-content-between">
-					<button type="button"
-						id = "btn-pay"
-						class="btn btn-main rounded-pill btn-map-step hstack">
-						<img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
-							코스 저장하고 예약하기
-					</button>
+					<div class="flex-grow-1 wrap-tooltip">
+						<div class="btn-tooltip">
+							<span class="tooltip text-dark mb-5">* 카페와 맛집 가격을 제외한 2인 기준 숙박 결제 금액 입니다.<br /><b>1박 2일과 2박 3일 코스</b>에서 사용 가능합니다</span>
+							<button type="button"
+								id = "btn-pay"
+								class="btn btn-main-over rounded-pill btn-map-step hstack">
+								<img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt="" />
+									예약하기
+							</button>
+						</div>
+					</div>
 						<button type="submit" class="btn btn-main rounded-pill px-3"> 코스 등록</button>
 					</div>
 					</div>
@@ -409,16 +413,6 @@ $(document).ready(function() {
         var courseName = $("#Course_name").val().trim();
         var courseContent = $("#Course_content").val().trim();   
      
-        if (courseName === null || courseName === '') {
-            alert('코스 이름을 입력하세요.');
-            event.preventDefault(); // 폼 제출 중지
-            errors.push('코스 명을 입력하세요.');
-        }
-        if (courseContent === null || courseContent === '') {
-            alert('코스 내용을 입력하세요.');
-            event.preventDefault(); // 폼 제출 중지
-            errors.push('코스 내용을 입력하세요.');
-        }
         
         // 코스 명을 formData에 추가
         formData += "&courseName=" + courseName;

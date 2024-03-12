@@ -72,10 +72,11 @@
     margin-top: -15px;
     margin-right: -15px;
     z-index: 1;
+    cursor: pointer;
 }
 
 
-#feed_del_Modal .modal-content{
+#feed_del_Modal .modal-content, #pay_modal .modal-content, #pay_modal_Course .modal-content{
 	overflow: unset;
 }
 
