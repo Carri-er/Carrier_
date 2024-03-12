@@ -5,8 +5,7 @@
 	<div th:replace="~{nav/nav::nav}"></div>
 	<!-- 토스트 -->
 	<div th:replace="~{alert/toast::div}"></div>
-	<!-- 삭제 모달 -->
-	<div th:replace="~{alert/del_modal::div}"></div>
+
 	<div id="feedShow" class="container-fluid mt-4 mb-5 p-0">
 	<!-- 뒤로가기 버튼 -->
 	<a href="/feed" class="sticky-top feed-btn me-auto ms-4 rounded-circle d-flex">
@@ -14,6 +13,8 @@
 	</a>
 	<!--------------------------------------------feed box Parent------------------------------------------>
 	<div class="row m-auto my-2 mt-lg-1 mb-5 pt-md-0">
+	<!-- 삭제 모달 -->
+	<div th:replace="~{alert/del_modal::div}"></div>
 		<div class="col-10 col-xl-7 mt-3 feed-box m-0 mx-auto">
 			<div class="row">
 				<!-- 좌측 | 피드 -->
@@ -175,13 +176,13 @@
 			                           			</i>
 											</a>
 										<ul class="dropdown-menu dropdown-menu-dark">
-		                                    <li data-bs-toggle="modal" data-bs-target="#feed_del_Modal"><a class="dropdown-item">삭제</a></li>
+		                                    <li data-bs-toggle="modal" data-bs-target="#feed_del_comment_Modal"><a class="dropdown-item">삭제</a></li>
 		                                    <li><a class="dropdown-item" th:href="@{'/feed_comment_update?num='+${feedList.getFeed_num()}+'&comment_num='+${comment.getFeed_comment_num()}}">수정</a></li>
 		                                </ul>
 		                            </div>
 		                            
 									<!-- DEL Modal -->
-									<div class="modal fade" id="feed_del_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
+									<div class="modal fade" id="feed_del_comment_Modal" tabindex="-1" aria-labelledby="feed_del_ModalLabel" aria-hidden="true">
 									  <div class="modal-dialog modal-dialog-centered">
 									    <div class="modal-content">
 									      <div class="modal-header border-none">
@@ -242,35 +243,5 @@
 		});
 	</script>
 
-	<!-- DEL모달 -->
-	<script>
-		function func_delModalBtn() {
-			document.getElementById('deleteFeedForm').submit();
-		}
-		/* function func_delModalBtn_comment() {
-			document.getElementById('deleteFeedCommentForm').submit();
-		} */
-
-		// #btn-pay 버튼을 클릭했을 때의 동작
-		$("#comment_del_btn").click(function() {
-			$('#feed_del_Modal').modal('show');
-
-			$.ajax({
-				type : "POST",
-				url : "feed_comment_del",
-				data : formData,
-				success : function(response) {
-					// 데이터 저장에 성공한 경우
-					console.log("데이터 저장 성공!");
-					console.log(response.courseNum);
-				},
-				error : function(xhr, status, error) {
-					// 데이터 저장에 실패한 경우
-					console.error("데이터 저장 실패!");
-					console.error("에러: ", error);
-				}
-			});
-		});
-	</script>
 </body>
 </html>
