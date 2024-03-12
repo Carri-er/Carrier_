@@ -38,7 +38,6 @@ public class CarrierController {
    @GetMapping("/home4")   
    public String home4(Model model) {
 	   return "thymeleaf/home/home4";
-	   
    }
 
    @GetMapping("/")   
