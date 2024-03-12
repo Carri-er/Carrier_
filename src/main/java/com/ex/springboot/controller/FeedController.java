@@ -422,7 +422,7 @@ public class FeedController {
 		return "redirect:/feed_show?num=" + Feed_num;
 	}
 
-	// 피드 좋아요 - action
+	// 피드 Home에서 좋아요 - action _ Feed home으로 돌아가기
 	@GetMapping("/feed_like")
 	public String feed_like(HttpServletRequest request, Model model) {
 		int Feed_num = Integer.parseInt(request.getParameter("num"));
@@ -448,7 +448,7 @@ public class FeedController {
 		return "redirect:/feed";
 	}
 
-	// 피드 좋아요 - action
+	// 피드 Show에서 좋아요 - action _ Feed show로 돌아가기
 	@GetMapping("/feed_show_like")
 	public String feed_show_like(HttpServletRequest request, Model model) {
 		int Feed_num = Integer.parseInt(request.getParameter("num"));

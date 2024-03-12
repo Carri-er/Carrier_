@@ -3,18 +3,18 @@
 function reset_Pw(){
 	var passwordValidate = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,16}$/;
 		/* 비번 유효성 검사 */
-	if (passwordValidate.test(addMember.Member_Pw.value)) {
-		if (addMember.Member_Pw.value.length === addMember.passwordCK.value.length) {
-			message ="사용하실 수 있는 비밀번호 입니다.";
+	if (passwordValidate.test(passwordReset.password.value)) {
+		if (passwordReset.password.value.length === passwordReset.passwordCK.value.length) {
+			document.getElementById('passwordReset').submit();
 
 		} else {
-			message = "비밀번호가 일치하지 않습니다";
-			addMember.passwordCK.focus();
+			alert("비밀번호가 일치하지 않습니다");
+			passwordReset.passwordCK.focus();
 			return false;
 		}
 	} else {
-		message = "비밀번호는 영문, 숫자, 특수문자 ( ! @ # $ % ^ & * ? _ ) 를 포함하여 최소 8자~16자 이내로 설정 가능합니다";
-		addMember.Member_Pw.focus();
+		alert("비밀번호는 영문, 숫자, 특수문자 ( ! @ # $ % ^ & * ? _ ) 를 포함하여 최소 8자~16자 이내로 설정 가능합니다");
+		passwordReset.password.focus();
 		return false;
 	}
 }
