@@ -29,7 +29,7 @@
 				<div class="col-12 px-0 mx-0">
 					<div class="row courseListRow px-0 mx-0 bg-white p-3 ">
 						<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
-							<a th:href="@{'Event_view?id='+ ${aicc.get(0).getEvent_num()}}" >
+							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aicc.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aicc.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -38,8 +38,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccFood.get(0).getEvent_num()}}" class="">
+							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aiccFood.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccFood.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -49,7 +48,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2  mx-auto  text-truncate px-0 mx-0 text-center">
-							<a th:href="@{'Event_view?id='+ ${aicc2.get(0).getEvent_num()}}">
+							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aicc2.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aicc2.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -59,8 +58,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2 mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccFood2.get(0).getEvent_num()}}">
+							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aiccFood2.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -70,8 +68,7 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2 mx-auto  text-truncate px-0 mx-0 text-center">
-							<a
-								th:href="@{'Event_view?id='+ ${aiccCafe.get(0).getEvent_num()}}">
+							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aiccCafe.get(0).getEvent_num()}]])">
 								<img
 								th:src="@{'../img/info/' + ${aiccCafe.get(0).getEvent_thumbnail()}}"
 								alt="" class="img-fluid mx-auto rounded-4 d-block my-3"
@@ -80,6 +77,8 @@
 									class="text-center"></span>
 							</a>
 						</div>
+						
+						
 						
 					</div>
 				</div>
@@ -291,9 +290,7 @@
 		for (var i = 0; i < positions.length; i++) {
 			var content = '<div class="bg-pink px-3 p-1 rounded-pill border border-dark text-black" style="position: relative;left:0px;bottom: 65px;font-size: 12px; margin:0 auto;z-index:3;">'
 					+ '    <div class="info">'
-					+ '            <a href="Event_view?id='
-					+ positions[i].number
-					+ '">'
+					+ '            <a class="course_view_popupLink" href="#"  onclick="func_popEvent('+positions[i].number+')">'
 					+ '        <div class="title">'
 					+ [ i + 1 ]
 					+ ". "
@@ -451,7 +448,39 @@ $(document).ready(function() {
 });
 
 </script>
-
+<!-- 코스 리스트 클릭 시 여행정보 팝업창 출력 -->
+<script>
+	function func_popEvent(param) {
+		const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+		const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+		// width  : 팝업창 가로 크기
+	    // height : 팝업창 세로 크기
+	    var popupWidth = 700;
+	    var popupHeight = 600;
+     	// 브라우저 중앙 위치 계산
+        // window.screenX : 브라우저의 현재 스크린 좌측상단 X좌표
+        // window.screenY : 브라우저의 현재 스크린 좌측상단 Y좌표
+        // window.outerWidth  : 브라우저의 전체 가로 크기
+        // window.outerHeight : 브라우저의 전체 가로 크기
+        var popupX = Math.round(window.screenX + (window.outerWidth/2) - (popupWidth/2));
+        var popupY = Math.round(window.screenY + (window.outerHeight/2) - (popupHeight/2));
+        var featureWindow = "width=" + popupWidth + ", height="+popupHeight
+        + ", left=" + popupX + ", top=" + popupY;
+		window.open('/Event_view?id='+param, '_blank',featureWindow );
+	}
+</script>
+<script>
+    // Prevent default scrolling behavior when clicking on links
+    document.addEventListener('DOMContentLoaded', function() {
+        var links = document.querySelectorAll('.course_view_popupLink');
+        links.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                console.log('Clicked link:', link.getAttribute('href'));
+            });
+        });
+    });
+</script>
 	
 	
 	
