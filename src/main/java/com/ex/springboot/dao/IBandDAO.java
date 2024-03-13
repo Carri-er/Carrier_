@@ -84,6 +84,7 @@ public interface IBandDAO {
 	//가입한 밴드 리스트 출력
 	public List<Band_joinMemberDTO> joinBandList(String member_id);
 	
+	
 	//가입한 밴드 리스트 출력
 	public List<Band_joinMemberDTO> mypage_joinBandList(String member_id);
 		
@@ -94,8 +95,14 @@ public interface IBandDAO {
 	//가입한 밴드인지 확인
 	public Band_joinMemberDTO checkJoinMember(int band_code, String membet_id);
 	
+
+		
+	
 	//밴드에 가입한 멤버 출력
 	public List<Band_joinMemberDTO> joinMemberList(int band_code);
+	
+	//밴드 별 멤버 검색
+	public List<Band_joinMemberDTO> searchBandjoinMemberList(int band_code, String member_id);
 	
 	//밴드 정보 수정
 	public int bandInfoUpdate(
@@ -171,4 +178,9 @@ public interface IBandDAO {
 	
 	//밴드 피드 댓글 수정
 	public int band_fedComment_update(String band_feedComment_content, int band_feedComment_num);
+	
+	//본인 밴드를 뺀 밴드 리스트 출력 
+	public List<BandDTO> band_updateList(int band_code);
+	
+
 }
