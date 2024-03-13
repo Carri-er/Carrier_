@@ -10,7 +10,7 @@
             <form action="band_update" method="post" enctype="multipart/form-data" id="form_bandUpdate">
                 <div class="row my-5">
                     <div class="col-md-8 col-lg-7 col-xl-7 mx-auto my-5">
-                    	<input name="band_admin" type="hidden" th:value="${session.Member_Id}"/>
+                    	<input name="band_admin" type="hidden" th:value="${updateMyBand.getBand_admin()}"/>
                     	<input id="bandUrl" name="bandUrl" type="hidden" th:value="${updateMyBand.getBand_code()}" />
                     	<input id="origin_band_thumnail" name="origin_band_thumnail" type="hidden" th:value="${updateMyBand.getBand_thumnail()}" />
                         <p class="h4 text-center">동행 정보 수정</p>
@@ -163,8 +163,8 @@
 	 		 $('#label_bandContent').focus();
 	 		 return false; 
 	 		 
-	 	   } else if (textarea_bandContent.length > 50){
-		 		  alert('밴드 설명은 50글자 미만으로 작성해주세요.');
+	 	   } else if (textarea_bandContent.length > 100){
+		 		  alert('밴드 설명은 100글자 미만으로 작성해주세요.');
 		 		 	
 		 		 	textarea_bandContent.focus();
 		 		 	$('#label_bandContent').focus();
