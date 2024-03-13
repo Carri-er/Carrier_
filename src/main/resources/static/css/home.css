@@ -16,6 +16,9 @@ div.home_wrapper {
 .xh-100 {
 	max-height: 100px;
 }
+.xh-120 {
+	max-height: 108px;
+}
 
 .xh-360 {
 	max-height: 360px;
@@ -384,9 +387,9 @@ div.aiPlaner_board>em {
 	color: black;
 	background: #fcf3eb;
 	z-index: 10;
-	height: 30px;
+	height: 29px;
 	width: 100px;
-	line-height: 30px;
+	line-height: 29px;
 	text-align: center;
 	font-size: 15px;
 	letter-spacing: -0.5px;
@@ -417,7 +420,7 @@ div.aiPlaner_text>strong {
 
 div.aiPlaner_text>p {
 	color: #666666;
-	height: 18px;
+	height: 17px;
 	line-height: 16px;
 	font-size: 14px;
 	margin-bottom: 0px;
