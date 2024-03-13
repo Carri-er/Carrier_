@@ -44,8 +44,58 @@ public class WidgetController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// 결제 하러 갈 때 정보 받기
-	@RequestMapping("/checkout")
-	public String checkout(HttpServletRequest request, Model model, MemberDTO dto) {
+	// 결제 하러 갈 때 정보 받기
+	   @RequestMapping("/checkout")
+	   public String checkout(HttpServletRequest request, Model model, MemberDTO dto) {
+	      /* 결제에 필요한 항목 */
+	      // 주문번호 = 아이디+시간
+	      // 이름
+	      // 이메일
+	      // 코스 제목
+	      // 핸드폰 번호
+	      // 결제 금액
+
+	      // 결제 파라미터
+	      Integer courseNum = AiDAO.getCourseNum();
+	      String Course_num = String.valueOf(courseNum);
+	      model.addAttribute("Course_num", Course_num);
+	      CourseDTO DAO= AiDAO.Course_select_useCk(Course_num);
+	      String Member_Id = request.getParameter("Member_Id");
+	      String title = request.getParameter("Course_name");
+	      // int amount = Integer.parseInt(request.getParameter("discount"));
+	      System.out.println("widget Course_num : "+Course_num);
+	       int amounttt= DAO.getAmount();
+	      String amount = String.valueOf(amounttt);
+	      // 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
+	      LocalDateTime currentDateTime = LocalDateTime.now();
+	      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+	      String getTime = currentDateTime.format(formatter).substring(1);
+	      Random random = new Random();
+	       int randomNumber = random.nextInt(8); // 0부터 8까지의 무작위 정수
+	      String orderId = (randomNumber+1) + getTime; // 난수 지정
+	      System.out.println(orderId);
+	      String phone;
+
+	      // 멤버 정보 불러오기
+	      dto = member_dao.memberList(Member_Id);
+	      phone = dto.getMember_Phone().replace("-", "");
+
+	      model.addAttribute("orderId", orderId);
+	      model.addAttribute("title", title);
+	      model.addAttribute("amount", amount);
+	      model.addAttribute("member", dto);
+	      model.addAttribute("customerMobilePhone", phone);
+
+	      // 전달
+	      model.addAttribute("Course_num", Course_num);
+
+	      System.out.println("주문번호:" + orderId + " 코스제목:" + title + " 결제금액:" + amount);
+
+	      return "thymeleaf/member/checkout";
+	   }
+
+	@RequestMapping("/checkout2")
+	public String checkout2(HttpServletRequest request, Model model, MemberDTO dto) {
 		/* 결제에 필요한 항목 */
 		// 주문번호 = 아이디+시간
 		// 이름
@@ -53,43 +103,47 @@ public class WidgetController {
 		// 코스 제목
 		// 핸드폰 번호
 		// 결제 금액
-
+		
 		// 결제 파라미터
-		Integer courseNum = AiDAO.getCourseNum();
-		String Course_num = String.valueOf(courseNum);
-		model.addAttribute("Course_num", Course_num);
-		CourseDTO DAO= AiDAO.Course_select_useCk(Course_num);
+		String number = request.getParameter("Course_num");
+		String amount = request.getParameter("amount");
+		int amt = Integer.parseInt(amount);
+		amt = (amt/2);
+		amount = String.valueOf(amt);
+		CourseDTO DAO= AiDAO.Course_select_useCk(number);
 		String Member_Id = request.getParameter("Member_Id");
 		String title = request.getParameter("Course_name");
 		// int amount = Integer.parseInt(request.getParameter("discount"));
-		System.out.println("widget Course_num : "+Course_num);
-		 int amounttt= DAO.getAmount();
-		String amount = String.valueOf(amounttt);
+		System.out.println("widget Course_num : "+number);
+		
+//		 int amounttt= AiDAO.Course_view_list(number).get(0).getAmount();
+//		String amount = String.valueOf(amounttt);
+		System.out.println("어마운트는 : "+amount);
 		// 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 		String getTime = currentDateTime.format(formatter).substring(1);
 		Random random = new Random();
-	    int randomNumber = random.nextInt(8); // 0부터 8까지의 무작위 정수
+		int randomNumber = random.nextInt(8); // 0부터 8까지의 무작위 정수
 		String orderId = (randomNumber+1) + getTime; // 난수 지정
 		System.out.println(orderId);
 		String phone;
-
+		
 		// 멤버 정보 불러오기
 		dto = member_dao.memberList(Member_Id);
 		phone = dto.getMember_Phone().replace("-", "");
-
+		
 		model.addAttribute("orderId", orderId);
 		model.addAttribute("title", title);
 		model.addAttribute("amount", amount);
 		model.addAttribute("member", dto);
 		model.addAttribute("customerMobilePhone", phone);
-
+		
 		// 전달
-		model.addAttribute("Course_num", Course_num);
-
+		model.addAttribute("Course_num", number);
+		
 		System.out.println("주문번호:" + orderId + " 코스제목:" + title + " 결제금액:" + amount);
-
+		
 		return "thymeleaf/member/checkout";
 	}
 
@@ -185,7 +239,7 @@ public class WidgetController {
 		CourseDTO dto = AiDAO.Course_select_useCk(Course_num);
 
 		DecimalFormat decFormat = new DecimalFormat("###,###");
-		String amount = decFormat.format(dto.getAmount());
+		String amount = request.getParameter("amount");
 		model.addAttribute("title", dto.getCourse_Name());
 		model.addAttribute("date", pay_dao.payOrder(orderId).get(0).getPay_date());
 		model.addAttribute("orderId", orderId);

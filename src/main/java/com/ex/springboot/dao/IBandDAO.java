@@ -182,5 +182,8 @@ public interface IBandDAO {
 	//본인 밴드를 뺀 밴드 리스트 출력 
 	public List<BandDTO> band_updateList(int band_code);
 	
-
+	
+	//밴드 회원 추방
+	public int bandMemberDelete(int band_code, String Member_id);
+	
 }

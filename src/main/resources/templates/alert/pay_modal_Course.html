@@ -10,7 +10,7 @@
 				<img data-bs-dismiss="modal" aria-label="Close" src="../img/mypage/del.png" class="my-del-btn pay-del-btn shadow-sm position-absolute rounded-circle pointer" width="32" height="32" alt="">
 				<!-- hover -->
 				<!-- 모달 -->
-				<form action="/checkout" method="post">
+				<form action="/checkout2" method="post">
 					<div class="rounded-4 overflow-hidden bg-trans">
 						<div class="modal-header border-none bg-white">
 						</div>
@@ -29,13 +29,13 @@
 										<input type="hidden" class="courseNameValue" name="Course_name" th:value="|${list.get(0).getMember_Id()}의 [${list.get(0).getCourse_Name()}]|"/>
 										<input type="hidden" id="Member_Id" name="Member_Id" th:value="${session.Member_Id}"/>
 										<input type="hidden" name="amount" th:value="${amount}"/>
-										<input type="hidden" name="Course_num" th:value="${courseNum}"/>
-										<span class="f16 d-block my-3 px-5" th:text="${list.get(0).getCourse_content()}"></span>
+										<input type="hidden" name="Course_num" th:value="${list.get(0).getCourse_num()}"/>
+										<span class="f16 d-block my-3 px-5 xh-200 text-truncate" th:utext="${list.get(0).getCourse_content()}" ></span>
 										<div class="hstack d-flex justify-content-center text-center ">
 											<div class="btn btn-sm btn-light rounded-pill my-2 f14">
 												지금 바로 결제 시
 											</div>
-											<span><b class="ms-2 text-pink f20 discountDisplay0" th:text="${#numbers.formatDecimal(amount, 3, 'COMMA', 0, 'POINT') + ' 원'}"></b></span>
+											<span><b class="ms-2 text-pink f20 discountDisplay0" th:text="${#numbers.formatDecimal(amount / 2, 3, 'COMMA', 0, 'POINT') + ' 원'}"></b></span>
 										</div>
 									</div>
 								</div>
@@ -44,7 +44,7 @@
 						</div>
 						<span class="small text-danger d-block text-center bg-white">* 카페와 맛집 가격을 제외한 <b>2인 기준 숙박 결제 금액</b>입니다</span>
 						<div class="modal-footer border-none pb-5 bg-white w-100">
-							<button class="btn btn-pinkD m-auto rounded-pill py-2 px-4">결제하기 </button>
+							<button type="submit" class="btn btn-pinkD m-auto rounded-pill py-2 px-4">결제하기 </button>
 						</div>
 					</div>
 				</form>

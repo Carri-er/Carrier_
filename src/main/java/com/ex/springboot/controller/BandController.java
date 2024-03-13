@@ -122,7 +122,7 @@ public class BandController {
 	}
 	
 	//밴드 가입한 멤버리스트 페이지로 이동
-		@GetMapping("/mybandMember")
+	@RequestMapping("/mybandMember")
 		public String myBandMember(Model model, HttpServletRequest request,HttpSession session) {
 			String searchTxt = request.getParameter("searchTxt");
 			
@@ -151,6 +151,53 @@ public class BandController {
 			
 			return "thymeleaf/band/myBand_member";
 		}
+		
+		//밴드 가입한 멤버리스트 페이지로 이동
+	@RequestMapping("/bandDelmember")
+		public String bandDelmember(Model model, HttpServletRequest request,HttpSession session) {
+			String searchTxt = request.getParameter("searchTxt");
+			String delMember_id = request.getParameter("delMemberId");
+			
+			String band_code = request.getParameter("bandUrl");
+			int num_band_code = Integer.parseInt(band_code);
+			
+			
+			
+			if( session.getAttribute("Member_Id") != null) {
+				String loginId = (String) session.getAttribute("Member_Id");
+				model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
+			}
+			
+			
+			
+			model.addAttribute("myBandList",bandDao.myBand(num_band_code));
+			
+			model.addAttribute("myBandFeedList",bandDao.bandFeedList(band_code));
+			
+			if(searchTxt == null) {
+				model.addAttribute("joinMemberList",bandDao.joinMemberList(num_band_code));
+			} else {
+				model.addAttribute("joinMemberList",bandDao.searchBandjoinMemberList(num_band_code, searchTxt));
+			}
+			
+			
+			model.addAttribute("bandUrl", band_code);
+			
+			if(!(delMember_id == null)) {
+				String bandAdminId = bandDao.myBand(num_band_code).getBand_admin();
+				
+				if( delMember_id.equals("admin") || delMember_id.equals(bandAdminId)) {
+					
+					return "redirect:/mybandMember?bandUrl="+band_code;
+				}
+			}
+			
+			//밴드 멤버 추방 
+			bandDao.bandMemberDelete(num_band_code, delMember_id);
+			bandDao.bandMembercount_minus(num_band_code);
+			return "redirect:/mybandMember?bandUrl="+band_code;
+		}
+		
 		
 //	밴드 만들기 페이지로 이동
 	@RequestMapping("/bandCreate")
@@ -235,7 +282,7 @@ public class BandController {
 	}
 	
 	//밴드 삭제하기 
-	@RequestMapping("deleteBand")
+	@RequestMapping("/deleteBand")
 	public String deleteBand(Model model, HttpServletRequest request) {
 		String band_code_str = request.getParameter("bandUrl");
 		

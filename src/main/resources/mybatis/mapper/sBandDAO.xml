@@ -242,4 +242,9 @@
 		select A.band_code, A.Member_id, B.Member_profileimage from  band_joinMember A right outer join carrier_member B on A.Member_id = B.Member_id where band_code = #{param1}  AND A.member_id LIKE '%' ||#{param2}|| '%'
 	</select>
 	
+	<!-- 밴드 회원 추방 -->
+	<delete id="bandMemberDelete">
+		delete from band_joinMember where band_code = #{param1} and member_id = #{param2}
+	</delete>
+	
 </mapper>

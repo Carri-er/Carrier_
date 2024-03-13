@@ -6,7 +6,9 @@
 <body>
 	<div th:replace="~{nav/nav::nav}"></div>
 	<div class="container">
-	
+	<!-- 예약 모달 -->
+	<div th:replace="~{alert/pay_modal_Course::div}">
+	</div>
 	<h4 class="text-center my-5" ><span th:text="${list.get(0).getMember_Id()}"></span> 의 <span th:text="|[${list.get(0).getCourse_Name()}]|"></span></h4>
 		<div class="row mx-0 justify-content-center">
 			<div class="row">
@@ -48,7 +50,8 @@
 				<div class="col mx-auto my-5 text-end ">
 					
 						<span> 총 길이  </span><span th:text="${totalDistance}" class="highlight"></span>
-					
+						<br />
+					<span> 예상 금액 </span><span th:text="${#numbers.formatDecimal(amount, 3, 'COMMA', 0, 'POINT') + ' 원'}" class="highlight"></span>
 				</div>
 				
 			</div>
@@ -273,6 +276,13 @@
 						<button type="button" class="btn btn-dark mx-1" th:text="|# ${aicc.get(0).getEvent_area()}|"></button>
 						
 					</div>
+					<div class="flex-grow-1 wrap-tooltip">
+				<div class="btn-tooltip">
+					<button type="button" id="btn-pay" data-bs-toggle="modal" data-bs-target="#pay_modal" class="btn btn-main-over rounded-pill btn-map-step hstack">
+					<img src="../img/mypage/coin.png" width="36" height="36" class="me-2" alt=""/>
+					예약하기 </button>
+				</div>
+			</div>
 					<div class="col-12 mx-auto mt-4 text-end">
 						<th:block
 							th:if="${session.Member_Id==list.get(0).getMember_Id()||session.Member_Id=='admin'}">
