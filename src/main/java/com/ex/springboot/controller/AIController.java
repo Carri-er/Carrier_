@@ -65,8 +65,8 @@ public class AIController {
 		model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
 		model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
 		model.addAttribute("aicc2", AiDAO.listCourse(day1aicc2));
-		model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccCafe));
-		model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccFood2));
+		model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccFood2));
+		model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccCafe));
 		if(day.equals("1")) {
 			double d1 = Double.parseDouble(day1aiccTD);
 			double d2 = Double.parseDouble(day2aiccTD);
@@ -79,15 +79,15 @@ public class AIController {
 			model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
 			model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
 			model.addAttribute("aicc2", AiDAO.listCourse(day1aicc2));
-			model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccCafe));
-			model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccFood2));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccFood2));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccCafe));
 			model.addAttribute("hotel", AiDAO.listCourse(day1hotel));
 			// 2일차 보내기
 			model.addAttribute("aicc3", AiDAO.listCourse(day2aicc));
 			model.addAttribute("aiccFood3", AiDAO.listCourse(day2aiccFood));
 			model.addAttribute("aicc4", AiDAO.listCourse(day2aicc2));
-			model.addAttribute("aiccFood4", AiDAO.listCourse(day2aiccCafe));
-			model.addAttribute("aiccCafe2", AiDAO.listCourse(day2aiccFood2));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(day2aiccFood2));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(day2aiccCafe));
 			model.addAttribute("memberId", memberId);
 			model.addAttribute("day", day);
 			model.addAttribute("amount", amount);
@@ -109,22 +109,22 @@ public class AIController {
 			model.addAttribute("aicc", AiDAO.listCourse(day1aicc));
 			model.addAttribute("aiccFood", AiDAO.listCourse(day1aiccFood));
 			model.addAttribute("aicc2", AiDAO.listCourse(day1aicc2));
-			model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccCafe));
-			model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccFood2));
+			model.addAttribute("aiccFood2", AiDAO.listCourse(day1aiccFood2));
+			model.addAttribute("aiccCafe", AiDAO.listCourse(day1aiccCafe));
 			model.addAttribute("hotel", AiDAO.listCourse(day1hotel));
 			// 2일차 보내기
 			model.addAttribute("aicc3", AiDAO.listCourse(day2aicc));
 			model.addAttribute("aiccFood3", AiDAO.listCourse(day2aiccFood));
 			model.addAttribute("aicc4", AiDAO.listCourse(day2aicc2));
-			model.addAttribute("aiccFood4", AiDAO.listCourse(day2aiccCafe));
-			model.addAttribute("aiccCafe2", AiDAO.listCourse(day2aiccFood2));
+			model.addAttribute("aiccFood4", AiDAO.listCourse(day2aiccFood2));
+			model.addAttribute("aiccCafe2", AiDAO.listCourse(day2aiccCafe));
 			model.addAttribute("hotel2", AiDAO.listCourse(day2hotel));
 			// 3일차 보내기
 			model.addAttribute("aicc5", AiDAO.listCourse(day3aicc));
 			model.addAttribute("aiccFood5", AiDAO.listCourse(day3aiccFood));
 			model.addAttribute("aicc6", AiDAO.listCourse(day3aicc2));
-			model.addAttribute("aiccFood6", AiDAO.listCourse(day3aiccCafe));
-			model.addAttribute("aiccCafe3", AiDAO.listCourse(day3aiccFood2));
+			model.addAttribute("aiccFood6", AiDAO.listCourse(day3aiccFood2));
+			model.addAttribute("aiccCafe3", AiDAO.listCourse(day3aiccCafe));
 			model.addAttribute("memberId", memberId);
 			model.addAttribute("day", day);
 			model.addAttribute("amount", amount);
