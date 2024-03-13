@@ -19,7 +19,7 @@
 							<div class="row p-0 m-auto">
 								<div class="col p-0 text-black bg-white">
 									<div class="w-100 overflow-hidden xh-300 hstack">
-										<img src="../img/feed/user_rabbit.jpg" class="img-fluid w-100" alt="" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" />
+										<img th:src="@{'../img/info/' + ${aicc.get(0).getEvent_thumbnail()}}" class="img-fluid w-100" alt="" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';" />
 									</div>
 									<!-- 코스의 제목이 오는 곳입니다 -->
 									<div class="my-3">
