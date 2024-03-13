@@ -39,23 +39,28 @@
 	                  <!-- 로그인 아이디와 밴드 관리자 아이디가 같을 때 -->
 	                     <th:block th:if="${session.Member_Id ne null}">
 	                        <th:block
-	                           th:if="${ session.Member_Id eq myBandList.getBand_admin() }">
+	                           th:if="${ session.Member_Id eq myBandList.getBand_admin() || session.Member_Id eq 'admin' }">
 	                           <a
 	                              th:href="@{'setMyBand?bandUrl='+${myBandList.getBand_code()}}"
-	                              class="myBand_adminBandSet py-1 hstack d-flex float-end"><span class="hstack">밴드 설정</span></a>
+	                              class="myBand_adminBandSet py-1 hstack d-flex float-end"><span class="hstack">동행 설정</span></a>
 	                        </th:block>
 	                        <th:block
-	                           th:if="${ session.Member_Id ne myBandList.getBand_admin() and  checkMember ne null}">
+	                           th:if="${ session.Member_Id ne myBandList.getBand_admin() and  checkMember ne null && session.Member_Id ne 'admin' }">
 	                           <a
 	                              th:href="@{'withdrawalMyBand?bandUrl='+${myBandList.getBand_code()}}"
 	                              class="myBand_memberBandSet py-1 hstack d-flex float-end"
-	                              onclick="return func_bandWithdrawal() ">밴드 탈퇴하기</a>
+	                              onclick="return func_bandWithdrawal() ">동행 탈퇴하기</a>
 	                        </th:block>
 	                     </th:block>
 	                  <div id="myBand_member_countBtn" class="myBand_member_count" onclick="return func_bandMember()">
-	                     <a class="myBandLink" th:href="@{'/mybandMember?bandUrl='+${myBandList.getBand_code()}}">
-	                        <span class="f13" th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
-	                     </a>
+	                     <div th:if="${checkMember eq null && session.Member_Id ne 'admin'}">
+       	                	<span id="myBand_memberBtn" class="f13" th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
+	                     </div>
+	                     <div th:if="${checkMember ne null || session.Member_id == 'admin'}">
+	                     	<a class="myBandLink" th:href="@{'/mybandMember?bandUrl='+${myBandList.getBand_code()}}">
+	                        	<span class="f13" th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
+	                     	</a>
+	                     </div>
 	                  </div>
 	                  <hr />
 	                  <div class="myBand_info">
@@ -129,27 +134,26 @@
 						<!-- 밴드를 가입한 멤버 출력 영역 -->
 						<div class="px-3">
 							<p class="fw_bold">멤버</p>
-							<div class="myBand_memberList_item p-3 d-flex flex-row"
-								th:each="joinMemberList : ${joinMemberList}">
+							<div class="myBand_memberList_item p-3 d-flex flex-row" th:each="joinMemberList : ${joinMemberList}">
 								<div class="myBand_memberList_item_img">
-									<img
-										th:src="@{'../img/member_thumbnail/'+${joinMemberList.getMember_profileimage()}}"
-										alt="멤버 이미지" />
+									<img th:src="@{'../img/member_thumbnail/'+${joinMemberList.getMember_profileimage()}}" alt="멤버 이미지" />
 								</div>
 								<div class="myBand_memberList_item_id ms-3 f20 my-auto  float-end">
 									<span th:text="${joinMemberList.getMember_Id()}" th:data-memberid="${joinMemberList.getMember_Id()}"></span>
 								</div>
-								<div class="myBand_memberList_item_chat my-auto">
-									<th:block
-										th:if="${session.Member_Id ne joinMemberList.getMember_Id()}">
-										<div
-											class="band_chat_startBtn btn float-end  bg-mainbg" >
+								<div class="myBand_memberList_item_chat my-auto ">
+									<th:block th:if="${session.Member_Id ne joinMemberList.getMember_Id()}">
+										<div class="band_chat_startBtn me-5 btn bg-mainbg my-auto" >
 											<form action="/bandChat" method="post" id="bandChatForm">
 												<input name="bandUrl" type="hidden" th:value="${joinMemberList.getBand_code()}" />
 												<input name="partnerId" type="hidden" th:value="${joinMemberList.getMember_Id()}"/>
 												<input type="submit" value="1:1 대화" class="btn p-0" />
 											</form>
-											
+										</div>
+									</th:block>
+									<th:block th:if="${session.Member_Id eq myBandList.getBand_admin() || session.Member_Id eq 'admin'}">
+										<div class="band_chat_startBtn btn bg-danger mb-2 p-0 my-auto" >
+											<input id="delMemberIdBtn" type="button" value="강퇴" th:onclick="func_bandDelMember([[${joinMemberList.getMember_Id()}]], [[${joinMemberList.getBand_code()}]])" class="btn p-0"  />
 										</div>
 									</th:block>
 								</div>
@@ -170,7 +174,7 @@
     <div th:replace="~{footer/footer::footer}"></div>
 	
     
-    <script>
+   <script th:inline="javascript">
 
 	    function func_deleteFeed(){
 	        var del_confirm = confirm("게시글을 정말 삭제하시겠습니까?");
@@ -194,10 +198,15 @@
 	    		return false;
 	    	}
 	    }
-	    
+			    
+        function func_bandDelMember(member_id, band_code){
+			var result = confirm("동행에서 해당 멤버를 추방시키시겠습니까?");
+			
+			if(result){
+				location.href="/bandDelmember?bandUrl="+band_code+"&delMemberId="+member_id;
+			}
+		} 
 		
-		
-	   
 	</script>
 	
 	<script th:inline="javascript">
@@ -211,13 +220,17 @@
             
 	            // 입력값이 유효하지 않은 경우
 	            if(memberSearchVal === "") {
-	                
+	            	location.href = "/mybandMember?bandUrl="+bandUrl;
 	            } else {
 	                // 유효한 경우, 쿼리 매개변수를 포함하여 동일한 페이지로 이동
 	                location.href = "/mybandMember?bandUrl="+bandUrl+"&searchTxt=" + memberSearchVal;
 	            }
 	        });
+	        
+	        
 	    });
+	 
+	
 	 /*]]>*/
 	</script>
 	

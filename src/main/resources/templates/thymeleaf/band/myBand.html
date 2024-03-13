@@ -38,24 +38,24 @@
 	                  <!-- 로그인 아이디와 밴드 관리자 아이디가 같을 때 -->
 	                     <th:block th:if="${session.Member_Id ne null}">
 	                        <th:block
-	                           th:if="${ session.Member_Id eq myBandList.getBand_admin() }">
+	                           th:if="${ session.Member_Id eq myBandList.getBand_admin() || session.Member_Id eq 'admin' }">
 	                           <a
 	                              th:href="@{'setMyBand?bandUrl='+${myBandList.getBand_code()}}"
-	                              class="myBand_adminBandSet py-1 hstack d-flex float-end"><span class="hstack">밴드 설정</span></a>
+	                              class="myBand_adminBandSet py-1 hstack d-flex float-end"><span class="hstack">동행 설정</span></a>
 	                        </th:block>
 	                        <th:block
-	                           th:if="${ session.Member_Id ne myBandList.getBand_admin() and  checkMember ne null}">
+	                           th:if="${ session.Member_Id ne myBandList.getBand_admin() and  checkMember ne null && session.Member_Id ne 'admin' }">
 	                           <a
 	                              th:href="@{'withdrawalMyBand?bandUrl='+${myBandList.getBand_code()}}"
 	                              class="myBand_memberBandSet py-1 hstack d-flex float-end"
-	                              onclick="return func_bandWithdrawal() ">밴드 탈퇴하기</a>
+	                              onclick="return func_bandWithdrawal() ">동행 탈퇴하기</a>
 	                        </th:block>
 	                     </th:block>
 	                  <div id="myBand_member_countBtn" class="myBand_member_count" onclick="return func_bandMember()">
-	                     <div th:if="${checkMember eq null}">
+	                     <div th:if="${checkMember eq null && session.Member_Id ne 'admin'}">
        	                	<span id="myBand_memberBtn" class="f13" th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
 	                     </div>
-	                     <div th:unless="${checkMember eq null}">
+	                     <div th:if="${checkMember ne null || session.Member_id == 'admin'}">
 	                     	<a class="myBandLink" th:href="@{'/mybandMember?bandUrl='+${myBandList.getBand_code()}}">
 	                        	<span class="f13" th:text="|멤버  ${myBandList.getBand_memberCount()} 명|"></span>
 	                     	</a>
