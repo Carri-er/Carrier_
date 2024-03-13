@@ -57,17 +57,18 @@
 								</a>
 							</div>
 							<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
-								<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aiccFood2.get(0).getEvent_num()}]])">
-								<img th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}" alt="" class="img-fluid mx-auto rounded-4 d-block my-3" style="width: 100px; height: 100px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
-								<span th:text="${aiccFood2.get(0).getEvent_name()}" class="text-center mt-3 "></span>
-								</a>
-							</div>
-							<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
 								<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aiccCafe.get(0).getEvent_num()}]])">
 								<img th:src="@{'../img/info/' + ${aiccCafe.get(0).getEvent_thumbnail()}}" alt="" class="img-fluid mx-auto rounded-4 d-block my-3" style="width: 100px; height: 100px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
 								<span th:text="${aiccCafe.get(0).getEvent_name()}" class="text-center"></span>
 								</a>
 							</div>
+							<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
+								<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aiccFood2.get(0).getEvent_num()}]])">
+								<img th:src="@{'../img/info/' + ${aiccFood2.get(0).getEvent_thumbnail()}}" alt="" class="img-fluid mx-auto rounded-4 d-block my-3" style="width: 100px; height: 100px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
+								<span th:text="${aiccFood2.get(0).getEvent_name()}" class="text-center mt-3 "></span>
+								</a>
+							</div>
+							
 							
 							<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
 								<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${hotel.get(0).getEvent_num()}]])">
@@ -95,17 +96,18 @@
 							</a>
 						</div>
 						<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
-							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aicc4.get(0).getEvent_num()}]])">
-							<img th:src="@{'../img/info/' + ${aicc4.get(0).getEvent_thumbnail()}}" alt="" class="img-fluid mx-auto rounded-4 d-block my-3" style="width: 100px; height: 100px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
-							<span th:text="${aicc4.get(0).getEvent_name()}" class="text-center mt-3 "></span>
-							</a>
-						</div>
-						<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
 							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aiccFood4.get(0).getEvent_num()}]])">
 							<img th:src="@{'../img/info/' + ${aiccFood4.get(0).getEvent_thumbnail()}}" alt="" class="img-fluid mx-auto rounded-4 d-block my-3" style="width: 100px; height: 100px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
 							<span th:text="${aiccFood4.get(0).getEvent_name()}" class="text-center mt-3 "></span>
 							</a>
 						</div>
+						<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
+							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aicc4.get(0).getEvent_num()}]])">
+							<img th:src="@{'../img/info/' + ${aicc4.get(0).getEvent_thumbnail()}}" alt="" class="img-fluid mx-auto rounded-4 d-block my-3" style="width: 100px; height: 100px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
+							<span th:text="${aicc4.get(0).getEvent_name()}" class="text-center mt-3 "></span>
+							</a>
+						</div>
+						
 						<div class="col-6 col-md-4 col-lg-2 mx-auto text-truncate px-0 mx-0 text-center">
 							<a class="course_view_popupLink" href="#" th:onclick="func_popEvent([[${aiccCafe2.get(0).getEvent_num()}]])">
 							<img th:src="@{'../img/info/' + ${aiccCafe2.get(0).getEvent_thumbnail()}}" alt="" class="img-fluid mx-auto rounded-4 d-block my-3" style="width: 100px; height: 100px;" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
