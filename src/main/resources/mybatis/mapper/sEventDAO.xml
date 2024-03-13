@@ -146,9 +146,8 @@ where Event_area like '%' ||
 		FROM event order by Event_hit desc
 	</select>
 	<select id="getPostCount2" resultType="int">
-		SELECT COUNT(*) AS
-		Post_Count
-		FROM course where Course_name is not null
+		SELECT COUNT(DISTINCT Course_name) AS course_count
+FROM Course
 	</select>
 	<select id="getPostCountSearch" resultType="int">
 		SELECT COUNT(*) AS
@@ -268,9 +267,13 @@ WHERE Event_name LIKE '%' || #{key1} || '%' OR Event_name LIKE '%' || #{key2} ||
     FROM (
         SELECT rownum AS rnum, e.*
         FROM (
-            SELECT *
-            FROM Course where Course_name is not null
-            ORDER BY Course_num DESC
+            SELECT DISTINCT *
+FROM Course c1
+WHERE Course_num = (
+    SELECT MAX(c2.Course_num)
+    FROM Course c2
+    WHERE c1.Course_name = c2.Course_name
+)
         ) e
         WHERE rownum <= #{pageSize}
     )
