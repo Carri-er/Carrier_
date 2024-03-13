@@ -159,13 +159,6 @@
 <script>
 	/* 각각 input & multiple */
  	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#preview1').attr('src', e.target.result);
-			};
-			reader.readAsDataURL(input.files[0]);
-		}
 		if (input.files && input.files[1]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
@@ -179,6 +172,15 @@
 				$('#preview3').attr('src', e.target.result);
 			};
 			reader.readAsDataURL(input.files[2]);
+		}
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			var previewId = '#'
+					+ $(input).attr('id').replace('fileUpload', 'preview');
+			reader.onload = function(e) {
+				$(previewId).attr('src', e.target.result);
+			};
+			reader.readAsDataURL(input.files[0]);
 		}
 
 /* 		if (input.files && input.files[0]) {
