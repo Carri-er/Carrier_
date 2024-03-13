@@ -10,7 +10,7 @@
                 <div class="row my-5">
                     <div class="col-md-8 col-lg-7 col-xl-7 mx-auto my-5">
                     	<input name="band_admin" type="hidden" th:value="${session.Member_Id}"/>
-                        <p class="h4 text-center">밴드 대표사진을 설정해주세요.</p>
+                        <p class="h4 text-center">동행 대표사진을 설정해주세요.</p>
                         <input name="band_thumnail" class="form-control" type="file" id="formFileMultiple"  onchange="readURL(this);" multiple >
                         
 						<img id="blah" src="http://placehold.it/200" alt="#" class="border my-3 mx-auto d-block " width="200" height="200"/>
@@ -61,18 +61,18 @@
 						
 						
 						<div class="form-floating mb-3">
-							<input name="band_name" type="text" class="form-control" id="input_bandName" placeholder="밴드 이름 입력" size="15">
-  							<label for="input_bandName">밴드 이름을 입력해주세요.</label>
+							<input name="band_name" type="text" class="form-control" id="input_bandName" placeholder="동행 이름 입력" size="15">
+  							<label for="input_bandName">동행 이름을 입력해주세요.</label>
 						</div>
                         
 
 						<div class="form-floating">
 							<textarea name="band_content" class="form-control" placeholder=""
 								id="textarea_bandContent" style="height: 200px"></textarea>
-							<label for="textarea_bandContent">밴드 소개글을 입력해주세요.</label>
+							<label for="textarea_bandContent">동행 소개글을 입력해주세요.</label>
 						</div>
                         
-                        <input type="button" value="밴드 생성" onclick="return func_createBand()" class="btn btn-main w-100 p-3 rounded-pill mt-5"/>
+                        <input type="button" value="동행 생성하기" onclick="return func_createBand()" class="btn btn-main w-100 p-3 rounded-pill mt-5"/>
                     </div>
                 </div>
             </form>
@@ -87,7 +87,7 @@
     
     console.log(bandList);
     	
-    /* 밴드 대표 이미지 선택 시 출력하는 함수 */
+    /* 동행 대표 이미지 선택 시 출력하는 함수 */
 	    function readURL(input) {
 	        if (input.files && input.files[0]) {
 	            var reader = new FileReader();
@@ -121,27 +121,27 @@
 	 	  
 	 	 for(var i = 0 ; i < bandList.length ; i++) {
 	 		 if( bandList[i].band_name == input_bandName){
-	 			 alert("동일한 밴드가 존재합니다.");
+	 			 alert("동일한 동행이 존재합니다.");
 	 			 return false;
 	 		 }
 	 		
 	 	 }
 	 	 
 	 	   if(input_bandName.length == 0){
-	 		   alert('밴드 이름을 입력하세요.');
+	 		   alert('동행 이름을 입력하세요.');
 	 		   
 	 		  input_bandName.focus();
 	 		 $('#label_bandName').focus();
 	 		  return false;
 	 		  
 	 	   } else if ( !validateBandName(input_bandName) ){
-	 		  alert(' 밴드 이름을 다시 입력해주세요. (2~20) ');
+	 		  alert(' 동행 이름을 다시 입력해주세요. (2~20) ');
 	 		  $('#label_bandName').focus();
 	 		 return false;
 	 		  
 	 	   } else if(textarea_bandContent.length == 0){
 	 		   
-	 		 	alert('밴드 설명을 입력하세요.');
+	 		 	alert('동행 소개글을 입력해주세요.');
 	 		 	
 	 		 	textarea_bandContent.focus();
 	 		 	$('#label_bandContent').focus();
@@ -149,14 +149,14 @@
 	 		 return false; 
 	 		 
 	 	   } else if (textarea_bandContent.length > 50){
-	 		  alert('밴드 설명은 50글자 미만으로 작성해주세요.');
+	 		  alert('동행 설명은 50글자 미만으로 작성해주세요.');
 	 		 	
 	 		 	textarea_bandContent.focus();
 	 		 	$('#label_bandContent').focus();
 	 		
 	 		 return false; 
 	 	   } else if( input_band_theme == 'theme_null' ){
-	 		   alert("모임 활동 지역을 선택해주세요.");
+	 		   alert("동행의 주제를 선택해주세요.");
 	 		   input_band_theme.focus();
 	 		   return false;
 	 		  

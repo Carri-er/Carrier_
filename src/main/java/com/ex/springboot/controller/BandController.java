@@ -124,8 +124,7 @@ public class BandController {
 	//밴드 가입한 멤버리스트 페이지로 이동
 		@GetMapping("/mybandMember")
 		public String myBandMember(Model model, HttpServletRequest request,HttpSession session) {
-			
-			
+			String searchTxt = request.getParameter("searchTxt");
 			
 			String band_code = request.getParameter("bandUrl");
 			int num_band_code = Integer.parseInt(band_code);
@@ -135,11 +134,18 @@ public class BandController {
 				model.addAttribute("checkMember",bandDao.checkJoinMember(num_band_code, loginId));
 			}
 			
+			
+			
 			model.addAttribute("myBandList",bandDao.myBand(num_band_code));
 			
 			model.addAttribute("myBandFeedList",bandDao.bandFeedList(band_code));
 			
-			model.addAttribute("joinMemberList",bandDao.joinMemberList(num_band_code));
+			if(searchTxt == null) {
+				model.addAttribute("joinMemberList",bandDao.joinMemberList(num_band_code));
+			} else {
+				model.addAttribute("joinMemberList",bandDao.searchBandjoinMemberList(num_band_code, searchTxt));
+			}
+			
 			
 			model.addAttribute("bandUrl", band_code);
 			
@@ -394,6 +400,7 @@ public class BandController {
 			
 			model.addAttribute("updateMyBand", bandDao.myBand(num_band_code));
 			
+			model.addAttribute("bandList", bandDao.band_updateList(num_band_code));
 			
 			return "thymeleaf/band/band_update";
 			

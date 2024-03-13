@@ -80,10 +80,7 @@
 		select * from band_joinMember where band_code = #{param1} and Member_Id = #{param2}
 	</select>
 	
-	<!-- 밴드 가입한 멤버 리스트 출력 -->
-	<select id="joinMemberList" resultType="com.ex.springboot.dto.Band_joinMemberDTO">
-		select A.band_code, A.Member_id, B.Member_profileimage from  band_joinMember A right outer join carrier_member B on A.Member_id = B.Member_id where band_code = #{param1} 
-	</select>
+	
 	
 	<!-- 밴드 가입하기 -->
 	<insert id="bandJoinMember">
@@ -227,5 +224,22 @@
 	<update id="band_fedComment_update">
 		update band_feedComment set band_feedComment_content = #{param1} where band_feedComment_num = #{param2}
 	</update>
+	
+	<!-- 수정하는 밴드를 제외한 밴드 리스트 출력  -->
+	<select id="band_updateList" resultType="com.ex.springboot.dto.BandDTO">
+		<![CDATA[
+			SELECT * FROM band WHERE band_code <> #{param1}
+		]]> 
+	</select>
+	
+	<!-- 밴드 가입한 멤버 리스트 출력 -->
+	<select id="joinMemberList" resultType="com.ex.springboot.dto.Band_joinMemberDTO">
+		select A.band_code, A.Member_id, B.Member_profileimage from  band_joinMember A right outer join carrier_member B on A.Member_id = B.Member_id where band_code = #{param1} 
+	</select>
+	
+	<!-- 밴드별 멤버 검색 -->
+	<select id="searchBandjoinMemberList" resultType="com.ex.springboot.dto.Band_joinMemberDTO">
+		select A.band_code, A.Member_id, B.Member_profileimage from  band_joinMember A right outer join carrier_member B on A.Member_id = B.Member_id where band_code = #{param1}  AND A.member_id LIKE '%' ||#{param2}|| '%'
+	</select>
 	
 </mapper>
