@@ -53,7 +53,6 @@
 							      <option value="레포츠">액티비티, 레포츠</option>
 							      <option value="테마파크">테마파크</option>
 							      <option value="카페">카페</option>
-							      <option value="바다">바다</option>
 							      <option value="축제">축제</option>
 							      <option value="맛집">맛집</option>
 							      <option value="전통시장">전통시장</option>
@@ -127,13 +126,15 @@
     	
     	/* 밴드 수정 유효성 함수  */
 	    function func_updateBand() {
-	 	   
+	 	  	
 	 	  	var input_bandName = $('#input_bandName').val();
+	 	  	
 	 	  	var textarea_bandContent = $('#textarea_bandContent').val();
+	 	  	
 	 	  	var input_band_theme = $('#input_band_theme').val();
 	 		var input_band_area = $('#input_band_area').val();
 	 	  
-	 	  
+	 		
 		 	for(var i = 0 ; i < bandList.length ; i++) {
 		 		 if( bandList[i].band_name == input_bandName){
 		 			 alert("동일한 밴드가 존재합니다.");
@@ -141,7 +142,7 @@
 		 		 }
 		 		
 		 	 }
-	 	 
+		 	
 	 	   if(input_bandName.length == 0){
 	 		   alert('밴드 이름을 입력하세요.');
 	 		   
@@ -170,7 +171,7 @@
 		 		
 		 		 return false; 
 		 	   } else if( input_band_theme == 'theme_null' ){
-	 		   alert("모임 활동 지역을 선택해주세요.");
+	 		   alert("동행 테마를 선택해주세요.");
 	 		   input_band_theme.focus();
 	 		   return false;
 	 		  

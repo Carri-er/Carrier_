@@ -146,7 +146,7 @@
 				</b>
 				<form action="Event_comment" method="post">
 					<div class="">
-						<textarea class="form-control my-3" id="" cols="30" rows="5"
+						<textarea class="form-control my-3" id="comment_content1" cols="30" rows="5"
 							name="Eventcomment_content"></textarea>
 						<input type="hidden" name="Event_num"
 							th:value="${view.getEvent_num()}" /> <input type="hidden"
@@ -290,14 +290,17 @@ var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 </script>
 <script type="text/javascript">
     function validateContent() {
-        var content = document.getElementById('comment_content').value.trim();
-
-        if (content === '') {
+        var content = document.getElementById('comment_content1').value;
+var button = document.getElementById('comment_content');
+        
+        if (content == '') {
             alert('내용을 입력해주세요.');
+            button.type = 'button'; // submit을 button으로 변경
             return false; // submit 막기
         }
         
-        // 내용이 있을 때는 true를 반환하여 submit을 허용
+        // 내용이 있을 때는 submit으로 설정하여 허용
+        button.type = 'submit';
         return true;
     }
 </script>

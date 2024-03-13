@@ -119,8 +119,8 @@
 									th:text="${myBandList.getBand_memberCount()}"></span>
 							</div>
 							<div class="myBandMember_memberSearch">
-								<input type="search" class="w-100 my-3 ps-3 py-1 f17" placeholder="멤버 검색" /> 
-								<button class="nav-right-btn navbar-search-lg float-end" type="submit">Search</button>
+								<input type="search" class="w-100 my-3 ps-3 py-1 f17" id="memberSearchVal" placeholder="멤버 검색" /> 
+								<button class="nav-right-btn navbar-search-lg float-end" id="memberSearchBtn" type="submit">Search</button>
 							</div>
 						</div>
 						<hr class="mt-0" />
@@ -195,10 +195,31 @@
 	    	}
 	    }
 	    
-
-	
+		
+		
+	   
 	</script>
 	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	 $(document).ready(function() {
+	    	var bandUrl = /*[[${myBandList.getBand_code()}]]*/ 0;
+	    	
+	        $('#memberSearchBtn').click(function() {
+	        	
+	            var memberSearchVal = $('#memberSearchVal').val().trim();
+            
+	            // 입력값이 유효하지 않은 경우
+	            if(memberSearchVal === "") {
+	                
+	            } else {
+	                // 유효한 경우, 쿼리 매개변수를 포함하여 동일한 페이지로 이동
+	                location.href = "/mybandMember?bandUrl="+bandUrl+"&searchTxt=" + memberSearchVal;
+	            }
+	        });
+	    });
+	 /*]]>*/
+	</script>
 	
 </body>
 </html>
