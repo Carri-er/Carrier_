@@ -70,10 +70,10 @@
 			<!--hstack-->
 		</div>
 		<hr>
-		<div class="container feed-filter position-absolute px-3 ms-sm-2">
+		<div class="feed-filter position-relative m-auto px-3">
 			<div class="row">
-				<div class="col-12 col-md-12">
-					<div class="tab-content position-relative pb-2" id="nav-tabContent">
+				<div class="col-10 col-md-10 position-relative">
+					<div class="tab-content " id="nav-tabContent">
 						<!--테마 측 해시태그-->
 						<div class="tab-pane fade" id="feed-theme" role="tabpanel"
 							aria-labelledby="feed-theme-tag"
@@ -197,16 +197,17 @@
 						</div>
 					</div>
 				</div>
+						<!-- 글쓰기 버튼 -->
+				<div
+					class="sticky-top feed-btn feed-write-btn ms-auto rounded-circle d-flex"
+					th:if="${session.Member_Id!=null}">
+					<a href="/feed_write" class="m-auto text-center"><img
+						src="../img/feed/edit.png" alt="" class="m-auto text-center"
+						width="21" height="21" /> </a>
+				</div>
 			</div>
 		</div>
-		<!-- 글쓰기 버튼 -->
-		<div
-			class="sticky-top feed-btn feed-write-btn ms-auto rounded-circle d-flex"
-			th:if="${session.Member_Id!=null}">
-			<a href="/feed_write" class="m-auto text-center"><img
-				src="../img/feed/edit.png" alt="" class="m-auto text-center"
-				width="21" height="21" /> </a>
-		</div>
+
 		
 		<!-- 피드목록이 비어있을 때 -->
 		<div th:if="${#lists.isEmpty(feedList)}" >
@@ -228,7 +229,7 @@
 			</div>
 		</div>
 		<!--------------------------------------------feed box Parent------------------------------------------>
-		<div class="m-auto my-5 my-md-3 pb-5 pt-5">
+		<div class="m-auto ">
 			<div
 				class="card-columns justify-content-center align-items-start m-0 row-box">
 				<!--feed box Start-->
