@@ -337,7 +337,7 @@
 							</div>
 							<!-- 로그인 + 좋아요 안 누른 상태 -->
 							<div th:if="${feed.getFeed_heart_on()}==0 and ${session.Member_Id}!=null">
-								<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1'}" class="d-flex">
+								<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=1#feedId'+${feed.getFeed_num()}}" class="d-flex">
 								<span>좋아요</span>
 								<i class="fi fi-br-heart hstack px-1"></i>
 								<span class="ms-2 heartSort" th:text="${feed.getFeed_heart()}" th:if="${session.Member_Id !=null}">999+</span>
@@ -345,7 +345,7 @@
 							</div>
 							<!-- 로그인 + 좋아요 누른 상태 -->
 							<div th:if="${feed.getFeed_heart_on()}==1 and ${session.Member_Id}!=null">
-								<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0'}" class="d-flex">
+								<a th:href="@{'/feed_like?num='+${feed.Feed_num}+'&id='+${session.Member_Id}+'&on=0#feedId'+${feed.getFeed_num()}}" class="d-flex">
 								<span>좋아요</span><i class="fi fi-sr-heart hstack px-1"></i>
 								<span class="ms-2 heartSort" th:text="${feed.getFeed_heart()}" th:if="${session.Member_Id !=null}">999+</span>
 								</a>
