@@ -140,11 +140,11 @@
 				<button class="btn btn-light">별로에요버튼</button>
 			</div>
 		</div> -->
-		<div class="row">
+		<div id="eventCommentSection" class="row">
 			<div class="col-10 col-md-8 p-3 mx-auto">
 				<b>여행 댓글 <span th:text="${commentCount}"></span> 개
 				</b>
-				<form action="Event_comment" method="post">
+				<form action="/Event_comment#eventCommentSection" method="post">
 					<div class="">
 						<textarea class="form-control my-3" id="comment_content1" cols="30" rows="5"
 							name="Eventcomment_content"></textarea>
@@ -291,7 +291,7 @@ var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 <script type="text/javascript">
     function validateContent() {
         var content = document.getElementById('comment_content1').value;
-var button = document.getElementById('comment_content');
+		var button = document.getElementById('comment_content');
         
         if (content == '') {
             alert('내용을 입력해주세요.');
