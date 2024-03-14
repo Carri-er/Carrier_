@@ -199,10 +199,19 @@ public class MemberController {
 		if(request.getParameterMap().containsKey("id")) {
 			Member_id = request.getParameter("id");
 			
+			if(Member_id.equals("admin")){
+				return "redirect:/MemberList?msg=2";
+			} else {
+				
+			
+			//밴드 댓글 / 코스 / 피드 / 피드코멘트 / 
+			member_dao.delMember_Eventcomment(Member_id);
+			member_dao.delMember_Course(Member_id);
 			member_dao.delMember(Member_id);
 			session.invalidate();
 			
 			System.out.println("회원삭제");
+			}
 			
 			try {
 				String encodedMemberName = URLEncoder.encode(Member_id, "UTF-8");

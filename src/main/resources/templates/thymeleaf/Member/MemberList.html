@@ -83,19 +83,20 @@ yellow;
 }
 </style> -->
 <body>
+
 	<div th:replace="~{nav/nav::nav}"></div>
-	<!-- 토스트 -->
-	<div th:replace="~{alert/toast::div}"></div>
-
-
+		<!-- 토스트 -->
+				<div th:replace="~{alert/toast::div}"></div>
 	<!-- MemberList 시작 -->
 	<div class="container-fluid p-0 p-md-5">
+
 		<h5 class="m-4 text-center p-3">
 			<span class="rounded-pill bg-pinkD p-2 px-4 f20">전체 회원 목록</span>
 		</h5>
 		<!-- [M] -->
 		<div
 			class="d-xl-none table-responsive bg-pink border rounded-4 p-2 px-3 mx-2">
+
 			<table class="table table-hover">
 				<thead class="">
 					<tr>
@@ -136,9 +137,10 @@ yellow;
 									th:text="${list.Member_joinDate}">가입일</span>
 							</span></td>
 							<td class="m-2">
-								<button type="button"
-									class="btn btn-close btn-pinkD rounded-circle p-2"
-									aria-label="Close"></button>
+								<a
+								th:href="'/delMember?id='+${list.Member_Id}"
+								class="btn btn-close btn-pinkD rounded-circle p-2"
+								></a>
 							</td>
 						</tr>
 					</tbody>
@@ -178,7 +180,7 @@ yellow;
 							<td th:text="${list.Member_Id}">아이디</td>
 							<td th:switch="${list.Member_Age}"><span th:case="19">19세
 									이하</span> <span th:case="50">50대 이상</span> <span th:case="*"
-								th:text="${list.Member_Age + '세'}"></span></td>
+								th:text="${list.Member_Age + '대'}"></span></td>
 							<td th:text="${list.Member_Email}">이메일</td>
 							<td th:text="${list.Member_Phone}">핸드폰번호</td>
 							<td><span class="btn-sm btn btn-main rounded-pill"
@@ -189,7 +191,7 @@ yellow;
 							<td class="m-2"><a
 								th:href="'/delMember?id='+${list.Member_Id}"
 								class="btn btn-close btn-pinkD rounded-circle p-2"
-								aria-label="Close"></a></td>
+								></a></td>
 						</tr>
 					</tbody>
 				</th:block>
@@ -197,6 +199,7 @@ yellow;
 
 		</div>
 	</div>
+	<div th:replace="~{footer/footer::footer}"></div>
 	<!-- 알림창 -->
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -209,7 +212,12 @@ yellow;
 			if (msg !== null && msg !== "") {
 				let message;
 				if (msg == 1) {
+					//alert(name + "님의 정보가 삭제 되었습니다 🖐");
 					message = name + "님의 정보가 삭제 되었습니다 🖐";
+				}
+				if (msg == 2) {
+					//alert(name + "관리자는 못 떠나요!");
+					message = "관리자는 못 떠나요!";
 				}
 
 				// 부트스트랩 toast 트리거
