@@ -100,63 +100,7 @@ public class MapController {
 				
 				model.addAttribute("courseItemList", courseItem);
 				
-				if(day.equals("2박3일")) {
-					model.addAttribute("aicc", AiDAO.listCourse(values[0]));
-					model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
-					model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
-					model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
-					model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
-					model.addAttribute("hotel", AiDAO.listCourse(values[5]));
-					
-					model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
-					model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));
-					model.addAttribute("aicc4", AiDAO.listCourse(values[8]));
-					model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
-					model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
-					model.addAttribute("hotel2", AiDAO.listCourse(values[11]));
-					// 3일차 보내기
-					model.addAttribute("aicc5", AiDAO.listCourse(values[12]));
-					model.addAttribute("aiccFood5", AiDAO.listCourse(values[13]));
-					model.addAttribute("aicc6", AiDAO.listCourse(values[14]));
-					model.addAttribute("aiccFood6", AiDAO.listCourse(values[15]));
-					model.addAttribute("aiccCafe3", AiDAO.listCourse(values[16]));
-					model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
-					model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
-					
-					model.addAttribute("courseDay", day);
-					
-				} else if(day.equals("1박2일")) {
-					model.addAttribute("aicc", AiDAO.listCourse(values[0]));
-					model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
-					model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
-					model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
-					model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
-					model.addAttribute("hotel", AiDAO.listCourse(values[5]));
-					
-					model.addAttribute("aicc3", AiDAO.listCourse(values[6]));
-					model.addAttribute("aiccFood3", AiDAO.listCourse(values[7]));
-					model.addAttribute("aicc4", AiDAO.listCourse(values[8]));
-					model.addAttribute("aiccFood4", AiDAO.listCourse(values[9]));
-					model.addAttribute("aiccCafe2", AiDAO.listCourse(values[10]));
-					
-					model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
-					model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
-					
-					model.addAttribute("courseDay", day);
-					
-				} else {
-					model.addAttribute("aicc", AiDAO.listCourse(values[0]));
-					model.addAttribute("aiccFood", AiDAO.listCourse(values[1]));
-					model.addAttribute("aicc2", AiDAO.listCourse(values[2]));
-					model.addAttribute("aiccFood2", AiDAO.listCourse(values[3]));
-					model.addAttribute("aiccCafe", AiDAO.listCourse(values[4]));
-					model.addAttribute("totalDistance", AiDAO.Course_view_list(num).get(0).getCourse_distance());
-					model.addAttribute("memberId", AiDAO.Course_view_list(num).get(0).getMember_Id());
-					
-					model.addAttribute("courseDay", day);
-				}
 			}
-			
 			
 			
 			
