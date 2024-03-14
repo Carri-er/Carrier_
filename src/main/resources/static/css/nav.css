@@ -136,6 +136,7 @@ nav .navbar-toggler {
 
 #nav {
 	z-index: 9999 !important;
+	height: 70px;
 }
 #nav .dropdown-menu{
 	z-index: 9999 !important;
