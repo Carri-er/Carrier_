@@ -239,7 +239,7 @@
 							<input type="hidden" name="num" th:value="${feed.Feed_num}" />
 						</form>
 					<!--feed box top-->
-					<div class="col-12 hstack feed-box-top py-3 px-3 z-3">
+					<div th:id="'feedId'+${feed.getFeed_num()}" class="col-12 hstack feed-box-top py-3 px-3 z-3">
 						<img
 							th:src="@{'../img/member_thumbnail/'+${feed.getMember_profileimage()}}"
 							class="float-start rounded-circle border me-3" width="50"

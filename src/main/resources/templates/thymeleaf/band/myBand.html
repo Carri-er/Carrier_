@@ -33,7 +33,9 @@
 	                        class="img-fluid join_band_item_img" alt="...">
 	                  </div>
 	                  <div class="myBand_title_name d-flex justify-content-between text-truncate">
-	                     <h3 th:text="${myBandList.getBand_name()}" class="text-truncate my-3 h4"></h3>
+	                  	<a th:href="@{'/myBand?bandUrl='+${myBandList.getBand_code()}}">
+	                  		<h3 th:text="${myBandList.getBand_name()}" class="text-truncate my-3 h4"></h3>
+	                  	</a>
 		              </div>
 	                  <!-- 로그인 아이디와 밴드 관리자 아이디가 같을 때 -->
 	                     <th:block th:if="${session.Member_Id ne null}">
@@ -128,10 +130,10 @@
                         <img class="search_img" src="../img/common/btn_header_search.png" alt="">
                         <span th:text="${feedwriterImg.getMember_profileimage()}"></span>
                     </div> -->
-                    <div class="myBand_content_item rounded-4 shadow-s my-3 p-4" th:each="myBandFeedList:${myBandFeedList}" >
+                    <div  class="myBand_content_item rounded-4 shadow-s my-3 p-4" th:each="myBandFeedList:${myBandFeedList}" >
                     
                         
-                          <div class="myBand_content_item_writer d-flex flex-row">
+                          <div th:id="'bandFeed'+${myBandFeedList.getBand_feed_num()}" class="myBand_content_item_writer d-flex flex-row">
                      <!--  <a th:href="@{'/bandFeedView?bandUrl='+${myBandFeedList.getBand_code()}+'&conNum='+${myBandFeedList.getBand_feed_num()}}" class="row band_feed_list_link d-block"> -->
                                <img class="myBand_content_item_writer_profile" th:src="@{'../img/member_thumbnail/'+${myBandFeedList.getMember_profileimage()}}"  alt="#">
                                
@@ -199,12 +201,12 @@
                            </div>
                         	<!-- 밴드 피드 댓글 -->
                         	<hr />
-                        	<div class="myband_feed_commentWrite row  " th:if="${checkMember ne null}")>
+                        	<div class="myband_feed_commentWrite row  " th:if="${checkMember ne null}">
                         		<span ></span>
-                        		<form th:action="@{'myband_feed_commentWrite?bandUrl='+${myBandFeedList.getBand_code()}}" method="post" id="bandFeed_commentWriteForm">
+                        		<form th:action="@{'myband_feed_commentWrite?bandUrl='+${myBandFeedList.getBand_code()}+'#bandFeed'+${myBandFeedList.getBand_feed_num()}}" method="post" id="bandFeed_commentWriteForm" onsubmit="func_bandFeed_commentWrite(); return false;">
 									<div class="input-group mb-3">
-										<input type="text"  name="band_feedComment_content" id="band_feedComment_content"  class="form-control" placeholder="댓글을 입력해주세요."  >
-										<button class="btn btn-outline-secondary" type="button" onclick="func_bandFeed_commentWrite()">글쓰기</button>
+										<input th:id="'band_feedComment_content'+${myBandFeedList.getBand_feed_num()}" type="text"  name="band_feedComment_content"   class="form-control " placeholder="댓글을 입력해주세요."  >
+										<button th:id="'myBandFeedCommentWriteBtn'+${myBandFeedList.getBand_feed_num()}" class="btn btn-outline-secondary " type="submit" >글쓰기</button>
 									</div>
 									<input type="hidden" name="commentBandUrl" th:value="${myBandFeedList.getBand_feed_num()}" />
                         		</form>
@@ -246,12 +248,17 @@
     <div th:replace="~{footer/footer::footer}"></div>
    
     
-    <script>
+    <script th:inline="javascript">
 	    
-	    
+	$('button[id^="myBandFeedCommentWriteBtn"]').click(function() {
+	    var buttonId = $(this).attr('id');
+	    console.log('Clicked button ID:', buttonId);
+	});
 	    function func_bandFeed_commentWrite(){
-	    	var band_feedComment_content = $('#band_feedComment_content').val();
 	    	
+	    	
+	    	var band_feedComment_content = $('#band_feedComment_content').val();
+	    	alert(band_feedComment_content);
 			if(loginId == null || loginId.trim() == ''){
 				alert("로그인 후 작성하실 수 있습니다.");
 				return false;
@@ -265,6 +272,19 @@
 			
 			
 		}
+	    
+	 // Enter 키 입력 시도 채팅 메시지 전송
+		$('button[id^="myBandFeedCommentWriteBtn"]').keypress(function(event) {
+		    if (event.which === 13) {
+		    	var buttonId = $(this).attr('id');
+		 	    console.log('Clicked button ID:', buttonId);
+		    	func_bandFeed_commentWrite();
+		        
+		    }
+		});
+	 
+	
+	 
     </script>
     
     <script th:inline="javascript">
