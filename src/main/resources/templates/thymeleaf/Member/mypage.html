@@ -132,7 +132,7 @@
                                        	<div class="swiper-slide" th:each="courseReseveList : ${courseReseveList}">
                                        		<a th:href="@{'/Course_view?num='+${courseReseveList.getCourse_num()}}">
 	                                            <div class="card border-0 my-history-content-card text-center" >
-	                                               <img th:src="@{'../img/info/'+${courseReseveList.getCourse_img()}}" class="mb-3 mypage_bandImg rounded-4" alt="">
+	                                               <img th:src="@{'../img/info/'+${courseReseveList.getCourse_img()}}" class="mb-3 mypage_bandImg rounded-4" alt="" onerror="this.onerror=null; this.src='../img/info/img_noimg.png';">
 	                                                <span class="text-start text-truncate py-0 my-0" th:text="|코스 : ${courseReseveList.getCourse_name()}|">코스 명</span>
 	                                                <span class="text-start text-truncate py-0 my-0" th:text="|금액 : ${courseReseveList.getAmount() / 2}|">예상금액</span>
 	                                                <span class="text-start text-truncate py-0 my-0" th:text="|결제일 : ${courseReseveList.getPay_date()}|">결제일</span>

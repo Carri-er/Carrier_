@@ -33,7 +33,9 @@
 	                        class="img-fluid join_band_item_img" alt="...">
 	                  </div>
 	                  <div class="myBand_title_name d-flex justify-content-between text-truncate">
-	                     <h3 th:text="${myBandList.getBand_name()}" class="text-truncate my-3 h4"></h3>
+	                     <a th:href="@{'/myBand?bandUrl='+${myBandList.getBand_code()}}">
+	                  		<h3 th:text="${myBandList.getBand_name()}" class="text-truncate my-3 h4"></h3>
+	                  	</a>
 		              </div>
 	                 <!-- 로그인 아이디와 밴드 관리자 아이디가 같을 때 -->
 	                     <th:block th:if="${session.Member_Id ne null}">
