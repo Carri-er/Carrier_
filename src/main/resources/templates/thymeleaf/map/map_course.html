@@ -273,10 +273,12 @@
                                        th:text="|${mapCourseList.getCourse_Name()} 코스|" class=""> </span> <br />
                                     <span th:text="|총 거리 : ${mapCourseList.getCourse_distance()}|"></span>
                               </div>
+                              
                            </div>
                            
                         </div>
                     </a>
+                    <a class=" col-4 btn bg-mainbg p-0 ms-auto" th:href="@{'/Course_view?num='+ ${mapCourseList.getCourse_num()}}">코스 바로가기 &raquo;</a>
                     	<hr class="mt-3 ms-3">    
                 	</div>
                 	                 	
