@@ -45,6 +45,13 @@ public interface IMemberDAO {
 	public int delMember(
 			String Member_Id
 	);
+	public int delMember_Eventcomment(
+			String Member_Id
+	);
+	public int delMember_Course(
+			String Member_Id
+	);
+	
 	
 	// 로그인
 	public MemberDTO login(

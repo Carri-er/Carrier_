@@ -62,10 +62,10 @@ function feed_write_check(){
 	
 	//alert(imgFile1+imgFile2+imgFile3);
 	
-	if((imgFile1 == "" && imgFile2 == "" && imgFile3 == "") || (imgFile1.match(fileForm)) && (imgFile2.match(fileForm))&& (imgFile3.match(fileForm))) {
-		alert("이미지 파일을 업로드 해주세요!");
-    	return false;
-	}
+if (imgFile1.length === 0 && imgFile2.length === 0 && imgFile3.length === 0) {
+    alert("이미지 파일을 업로드 해주세요!");
+    return false;
+}
 
 	document.getElementById('feedWriteForm').submit();
 
