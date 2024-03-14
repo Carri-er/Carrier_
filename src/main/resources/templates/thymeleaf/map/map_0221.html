@@ -438,7 +438,7 @@ $(document).ready(function() {
             '    <div class="overlay_info">' + 
             '        <div class="overlay_title">' + 
             			markerInfo.event_name + 
-            '           <div class="overlay_close" onClick=" closeOverlay() " title="닫기" style="z-index : 100 ;"></div>' + 
+            '           <div id="map_overlayCloseBtn" class="overlay_close" onClick=" closeOverlay() " title="닫기" style="z-index : 100 ;"></div>' + 
             '        </div>' + 
             '        <div class="overlay_body">' + 
             '            <div class="overlay_img">' +
@@ -470,8 +470,10 @@ $(document).ready(function() {
         
         }); // 마커 생성 함수 끝
         
+       
+        	
         
-        
+     
         
         // 각 마커에 클릭 이벤트 핸들러 추가하는 함수
         function addMarkerClickListener(marker, index, overlay) {
