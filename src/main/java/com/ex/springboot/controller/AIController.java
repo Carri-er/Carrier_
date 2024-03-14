@@ -231,6 +231,7 @@ public class AIController {
 	public String cours_Save_insert(HttpServletRequest request, Model model) {
 		String day = request.getParameter("day");
 		String amount = request.getParameter("discount");
+		String amountQ = request.getParameter("amountQ");
 
 		
 		// day1 파라미터 값
@@ -278,14 +279,14 @@ public class AIController {
 		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
 		             day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2+","+day2hotel+","+
 		             day3aicc+","+day3aiccFood+","+day3aicc2+","+day3aiccCafe+","+day3aiccFood2;
-		   AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		   AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amountQ);
 		} else if(day.equals("1박2일")) {
 		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2+","+day1hotel+","+
 		             day2aicc+","+day2aiccFood+","+day2aicc2+","+day2aiccCafe+","+day2aiccFood2;
-		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amountQ);
 		} else if(day.equals("당일 치기")) {
 		    number = day1aicc+","+day1aiccFood+","+day1aicc2+","+day1aiccCafe+","+day1aiccFood2;
-		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amount);
+		    AiDAO.save_course_insert(memberId,Course_name,Course_thema,Course_Area,Course_content,Course_distance,day,number,img,amountQ);
 		    System.out.println("실행 순서 확인1");
 		}
 

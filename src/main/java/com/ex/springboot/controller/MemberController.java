@@ -257,6 +257,7 @@ public class MemberController {
 		model.addAttribute("feed", feed_dao.feedList_mypage(id));
 		model.addAttribute("course", AiDAO.Course_select4(id));
 		model.addAttribute("payList", payDAO.payList(id));
+
 		
 		model.addAttribute("courseReseveList", payDAO.courseReseveList(id));
 		

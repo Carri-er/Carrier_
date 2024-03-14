@@ -65,7 +65,7 @@ public class WidgetController {
 	      // int amount = Integer.parseInt(request.getParameter("discount"));
 	      System.out.println("widget Course_num : "+Course_num);
 	       int amounttt= DAO.getAmount();
-	      String amount = String.valueOf(amounttt);
+	      String amount = request.getParameter("amount");
 	      // 난수 지정을 위한 날짜 가져오기 / 데이터 가공 - 하이픈 제거
 	      LocalDateTime currentDateTime = LocalDateTime.now();
 	      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -110,7 +110,6 @@ public class WidgetController {
 		int amt = Integer.parseInt(amount);
 		amt = (amt/2);
 		amount = String.valueOf(amt);
-		CourseDTO DAO= AiDAO.Course_select_useCk(number);
 		String Member_Id = request.getParameter("Member_Id");
 		String title = request.getParameter("Course_name");
 		// int amount = Integer.parseInt(request.getParameter("discount"));
