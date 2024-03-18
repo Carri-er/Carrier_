@@ -225,6 +225,7 @@ public class MemberController {
 		Member_id = request.getParameter("memberId");
 
 		member_dao.delMember(Member_id);
+		
 		session.invalidate();
 
 		System.out.println("회원삭제");
